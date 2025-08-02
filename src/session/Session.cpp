@@ -34,11 +34,18 @@
 #include <KNotification>
 #include <KProcess>
 #include <KSelectAction>
+#include <KWindowSystem>
 
 #ifndef Q_OS_WIN
 #include <KPtyDevice>
 #endif
 #include <KShell>
+
+// wayland window activation
+#define HAVE_WAYLAND __has_include(<KWaylandExtras>)
+#if HAVE_WAYLAND
+#include <KWaylandExtras>
+#endif
 
 // Konsole
 #if HAVE_DBUS
@@ -2159,6 +2166,51 @@ void Session::runCommandFromLayout(const QString &command) const
     }
 
     _emulation->sendText(command + QLatin1Char('\n'));
+}
+
+QString Session::activationToken(const QString &shellSessionIdForRequest) const
+{
+    // safety check, only work if the caller knows our id
+    // they will read it from the SHELL_SESSION_ID env var inside this session
+    if (shellSessionIdForRequest != shellSessionId()) {
+        return {};
+    }
+
+#if HAVE_DBUS && HAVE_WAYLAND
+    // no window active, no token
+    // same if we don't run wayland
+    const auto window = qApp->activeWindow();
+    if (!window || !window->window() || !KWindowSystem::isPlatformWayland()) {
+        return {};
+    }
+
+    // we will respond delayed, as the token needs to arrive
+    Q_ASSERT(calledFromDBus());
+    const auto msg = message();
+    setDelayedReply(true);
+
+    // we need to filter the response with the request serial
+    const int launchedSerial = KWaylandExtras::self()->lastInputSerial(window->window()->windowHandle());
+    connect(
+        KWaylandExtras::self(),
+        &KWaylandExtras::xdgActivationTokenArrived,
+        this,
+        [msg, launchedSerial](int tokenSerial, QString token) {
+            // if wrong token, ignore it, but we must always reply to not stall the caller
+            // we use here a SingleShotConnection, we will just be called once!
+            if (tokenSerial != launchedSerial) {
+                token.clear();
+            }
+            auto reply = msg.createReply(token);
+            QDBusConnection::sessionBus().send(reply);
+        },
+        Qt::SingleShotConnection);
+
+    KWaylandExtras::requestXdgActivationToken(window->window()->windowHandle(), launchedSerial, {});
+
+#endif
+
+    return {};
 }
 
 #include "moc_Session.cpp"
