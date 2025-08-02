@@ -34,11 +34,18 @@
 #include <KNotification>
 #include <KProcess>
 #include <KSelectAction>
+#include <KWindowSystem>
 
 #ifndef Q_OS_WIN
 #include <KPtyDevice>
 #endif
 #include <KShell>
+
+// wayland window activation
+#define HAVE_WAYLAND __has_include(<KWaylandExtras>)
+#if HAVE_WAYLAND
+#include <KWaylandExtras>
+#endif
 
 // Konsole
 #if HAVE_DBUS
@@ -2159,6 +2166,44 @@ void Session::runCommandFromLayout(const QString &command) const
     }
 
     _emulation->sendText(command + QLatin1Char('\n'));
+}
+
+QString Session::activationToken(const QString &shellSessionIdForRequest) const
+{
+    // safety check, only work if the caller knows our id
+    // they will read it from the SHELL_SESSION_ID env var inside this session
+    if (shellSessionIdForRequest != shellSessionId()) {
+        return {};
+    }
+
+#if HAVE_DBUS && HAVE_WAYLAND
+    Q_ASSERT(calledFromDBus());
+
+    // no window active, no token
+    // same if we don't run wayland
+    const auto window = qApp->activeWindow();
+    if (!window || !KWindowSystem::isPlatformWayland()) {
+        return {};
+    }
+
+    const int launchedSerial = KWaylandExtras::self()->lastInputSerial(window->window()->windowHandle());
+
+    const auto msg = message();
+    setDelayedReply(true);
+
+    connect(KWaylandExtras::self(), &KWaylandExtras::xdgActivationTokenArrived, this, [msg, launchedSerial](int tokenSerial, const QString &token) {
+        if (tokenSerial == launchedSerial) {
+            auto reply = msg.createReply(token);
+
+            QDBusConnection::sessionBus().send(reply);
+        }
+    });
+
+    KWaylandExtras::requestXdgActivationToken(window->window()->windowHandle(), launchedSerial, {});
+
+#endif
+
+    return {};
 }
 
 #include "moc_Session.cpp"
