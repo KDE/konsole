@@ -28,7 +28,6 @@ using namespace Konsole;
 IncrementalSearchBar::IncrementalSearchBar(QWidget *parent)
     : QWidget(parent)
     , _searchEdit(nullptr)
-    , _caseSensitive(nullptr)
     , _regExpression(nullptr)
     , _highlightMatches(nullptr)
     , _reverseSearch(nullptr)
@@ -36,6 +35,7 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget *parent)
     , _findNextButton(nullptr)
     , _findPreviousButton(nullptr)
     , _searchFromButton(nullptr)
+    , _caseSensitiveButton(nullptr)
     , _searchTimer(nullptr)
 {
     setPalette(qApp->palette());
@@ -93,6 +93,19 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget *parent)
     _searchFromButton->installEventFilter(this);
     connect(_searchFromButton, &QToolButton::clicked, this, &Konsole::IncrementalSearchBar::searchFromClicked);
 
+    _caseSensitiveButton = new QToolButton(this);
+    // Gnome does not seem to have all icons we want, so we use fall-back icons for those that are missing.
+    const QIcon caseSensitiveIcon = QIcon::fromTheme(QStringLiteral("format-text-superscript"), QIcon::fromTheme(QStringLiteral("format-text-bold")));
+    _caseSensitiveButton->setIcon(caseSensitiveIcon);
+    _caseSensitiveButton->setObjectName(QStringLiteral("find-next-button"));
+    _caseSensitiveButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
+    _caseSensitiveButton->setText(i18nc("@action:button", "Case sensitive"));
+    _caseSensitiveButton->setToolTip(i18nc("@info:tooltip", "Sets whether the search is case sensitive"));
+    _caseSensitiveButton->setAutoRaise(true);
+    _caseSensitiveButton->setCheckable(true);
+    _caseSensitiveButton->installEventFilter(this);
+    connect(_caseSensitiveButton, &QToolButton::clicked, this, &Konsole::IncrementalSearchBar::matchCaseToggled);
+
     auto optionsButton = new QToolButton(this);
     optionsButton->setObjectName(QStringLiteral("find-options-button"));
     optionsButton->setCheckable(false);
@@ -114,11 +127,6 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget *parent)
     // Fill the options menu
     auto optionsMenu = new QMenu(this);
     optionsButton->setMenu(optionsMenu);
-
-    _caseSensitive = optionsMenu->addAction(i18nc("@item:inmenu", "Case sensitive"));
-    _caseSensitive->setCheckable(true);
-    _caseSensitive->setToolTip(i18nc("@info:tooltip", "Sets whether the search is case sensitive"));
-    connect(_caseSensitive, &QAction::toggled, this, &Konsole::IncrementalSearchBar::matchCaseToggled);
 
     _regExpression = optionsMenu->addAction(i18nc("@item:inmenu", "Match regular expression"));
     _regExpression->setCheckable(true);
@@ -153,6 +161,7 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget *parent)
     barLayout->addWidget(_findNextButton);
     barLayout->addWidget(_findPreviousButton);
     barLayout->addWidget(_searchFromButton);
+    barLayout->addWidget(_caseSensitiveButton);
     barLayout->addWidget(optionsButton);
     barLayout->addWidget(closeButton);
     barLayout->setContentsMargins(4, 4, 4, 4);
@@ -282,7 +291,7 @@ void IncrementalSearchBar::focusLineEdit()
 const QBitArray IncrementalSearchBar::optionsChecked()
 {
     QBitArray options(5, false);
-    options.setBit(MatchCase, _caseSensitive->isChecked());
+    options.setBit(MatchCase, _caseSensitiveButton->isChecked());
     options.setBit(RegExp, _regExpression->isChecked());
     options.setBit(HighlightMatches, _highlightMatches->isChecked());
     options.setBit(ReverseSearch, _reverseSearch->isChecked());
@@ -292,7 +301,7 @@ const QBitArray IncrementalSearchBar::optionsChecked()
 
 void IncrementalSearchBar::setOptions()
 {
-    _caseSensitive->setChecked(KonsoleSettings::searchCaseSensitive());
+    _caseSensitiveButton->setChecked(KonsoleSettings::searchCaseSensitive());
     _regExpression->setChecked(KonsoleSettings::searchRegExpression());
     _highlightMatches->setChecked(KonsoleSettings::searchHighlightMatches());
     _reverseSearch->setChecked(KonsoleSettings::searchReverseSearch());
