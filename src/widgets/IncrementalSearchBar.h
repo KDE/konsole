@@ -151,7 +151,6 @@ private:
     Q_DISABLE_COPY(IncrementalSearchBar)
 
     QLineEdit *_searchEdit;
-    QAction *_caseSensitive;
     QAction *_regExpression;
     QAction *_highlightMatches;
     QAction *_reverseSearch;
@@ -159,6 +158,7 @@ private:
     QToolButton *_findNextButton;
     QToolButton *_findPreviousButton;
     QToolButton *_searchFromButton;
+    QToolButton *_caseSensitiveButton;
     QTimer *_searchTimer;
 };
 }
