@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-03 00:46+0000\n"
-"PO-Revision-Date: 2025-07-31 18:23+0400\n"
+"PO-Revision-Date: 2025-08-03 15:16+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -2291,12 +2291,12 @@ msgstr "اضبط التمرير الخلفي..."
 #: session/SessionController.cpp:760
 #, kde-format
 msgid "Clear Scrollback"
-msgstr "امسح التمرير الخلفي"
+msgstr "امحُ التمرير الخلفي"
 
 #: session/SessionController.cpp:764
 #, kde-format
 msgid "Clear Scrollback and Reset"
-msgstr "امح التمرير الخلفي و أعد الضبط"
+msgstr "امحُ التمرير الخلفي و أعد الضبط"
 
 #: session/SessionController.cpp:775
 #, kde-format
@@ -2316,7 +2316,7 @@ msgstr "بدِّل الوَضع"
 #: session/SessionController.cpp:808
 #, kde-format
 msgid "Set &Encoding"
-msgstr "عيّن ال&تشفير"
+msgstr "عيّن ال&ترميز"
 
 #: session/SessionController.cpp:828
 #, kde-format
@@ -3790,7 +3790,7 @@ msgstr "&ترميز المحارف المبدئي:"
 #: widgets/EditProfileAdvancedPage.ui:242
 #, kde-format
 msgid "Shortcut for peeking the primary screen:"
-msgstr "اختصار لإلقاء نظرة خاطفة على الشاشة الرئيسية:"
+msgstr "اختصار لإلقاء نظرة خاطفة على الشاشة الرئيسة:"
 
 #. i18n: ectx: property (text), widget (QLabel, autoSaveIntervalLabel)
 #: widgets/EditProfileAdvancedPage.ui:255
