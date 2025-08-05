@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-03 00:46+0000\n"
-"PO-Revision-Date: 2025-08-03 15:16+0400\n"
+"PO-Revision-Date: 2025-08-04 15:10+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -132,7 +132,7 @@ msgstr "ضع دليل عمل مبدئي للسان الجديد أو الناف�
 #, kde-format
 msgctxt "@info:shell"
 msgid "Do not close the initial session automatically when it ends."
-msgstr "لا تغلق الجلسة الابتدائية آلية عندما تنتهي."
+msgstr "لا تغلق الجلسة الابتدائية آليّة عندما تنتهي."
 
 #: Application.cpp:61
 #, kde-format
@@ -170,25 +170,25 @@ msgstr "نفِّذ في عملية منفصلة"
 #, kde-format
 msgctxt "@info:shell"
 msgid "Show the menubar, overriding the default setting"
-msgstr "أظهر شريط القوائم، متجاوزًا الإعداد الافتراضي"
+msgstr "أظهر شريط القوائم، متجاوزًا الإعداد المبدئي"
 
 #: Application.cpp:67
 #, kde-format
 msgctxt "@info:shell"
 msgid "Hide the menubar, overriding the default setting"
-msgstr "أخفِ شريط القوائم، متجاوزًا الإعداد الافتراضي"
+msgstr "أخفِ شريط القوائم، متجاوزًا الإعداد المبدئي"
 
 #: Application.cpp:68
 #, kde-format
 msgctxt "@info:shell"
 msgid "Show the tabbar, overriding the default setting"
-msgstr "أظهر شريط الألسنة، متجاوزًا الإعداد الافتراضي"
+msgstr "أظهر شريط الألسنة، متجاوزًا الإعداد المبدئي"
 
 #: Application.cpp:69
 #, kde-format
 msgctxt "@info:shell"
 msgid "Hide the tabbar, overriding the default setting"
-msgstr "أخفِ شريط الألسنة، متجاوزًا الإعداد الافتراضي"
+msgstr "أخفِ شريط الألسنة، متجاوزًا الإعداد المبدئي"
 
 #: Application.cpp:70
 #, kde-format
@@ -512,8 +512,8 @@ msgid ""
 "settings.\n"
 "To see any effect, set colors with saturation value greater than 0."
 msgstr ""
-"تختار قيم تدرج اللون والتشبع للألوان الافتراضية للمقدمة والخلفية بشكل "
-"عشوائي. قد تستخدم بعض تشكيلات الألوان إعدادات عشوائية. \n"
+"تختار قيم تدرج اللون والتشبع للألوان المبدئية للمقدمة والخلفية بشكل عشوائي. "
+"قد تستخدم بعض تشكيلات الألوان إعدادات عشوائية. \n"
 "لمشاهدة أي تأثير ، اضبط الألوان بقيمة تشبع أكبر من 0 ."
 
 #. i18n: ectx: property (text), widget (QCheckBox, randomizedBackgroundCheck)
@@ -1677,7 +1677,7 @@ msgstr "انقر مزدوجًا لتغيير اسم المجلد"
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:445
 #, kde-format
 msgid "You can't delete an automatically added entry."
-msgstr "لا يمكنك حذف مدخلة مضافة آليا."
+msgstr "لا يمكنك حذف مدخلة مضافة آليّا."
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:445
 #, kde-format
@@ -1892,7 +1892,7 @@ msgstr "المضمّنة"
 #: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:539
 #, kde-format
 msgid "Default profile"
-msgstr "التشكيلة الافتراضية"
+msgstr "التشكيلة المبدئية"
 
 #: profile/ProfileManager.cpp:280
 #, kde-format
@@ -1961,24 +1961,23 @@ msgstr "العنوان %1 غير صالح ، لا يمكن حفظ المخرجا
 #: SaveHistoryAutoTask.cpp:88
 #, kde-format
 msgid "Failed to create autosave file at %1."
-msgstr "فشل في إنشاء ملف الحفظ الآلي في  %1."
+msgstr "فشل في إنشاء ملف الحفظ الآليّ في  %1."
 
 #: SaveHistoryAutoTask.cpp:102
 #, kde-format
 msgid "Stopping autosave due to switching of screens."
-msgstr "إيقاف الحفظ التلقائي بسبب تبديل الشاشات."
+msgstr "إيقاف الحفظ الآليّ بسبب تبديل الشاشات."
 
 #: SaveHistoryAutoTask.cpp:115
 #, kde-format
 msgid ""
 "Autosave file has been modified externally, preventing further autosaves."
-msgstr ""
-"عُدل ملف الحفظ التلقائي خارجيًا، مما يمنع عمليات الحفظ التلقائي الإضافية."
+msgstr "عُدل ملف الحفظ الآليّ خارجيًا، مما يمنع عمليات الحفظ الآليّ الإضافية."
 
 #: SaveHistoryAutoTask.cpp:172
 #, kde-format
 msgid "Failed to update autosave state on output changes."
-msgstr "فشل في تحديث حالة الحفظ التلقائي لتغييرات الإخراج."
+msgstr "فشل في تحديث حالة الحفظ الآليّ لتغييرات الإخراج."
 
 #: SaveHistoryTask.cpp:173
 #, kde-format
@@ -2057,7 +2056,7 @@ msgstr "أبيض على أسود"
 #: schemas.cpp:14
 #, kde-format
 msgid "Default (XFree 4)"
-msgstr "افتراضي (XFree 4)"
+msgstr "مبدئي (XFree 4)"
 
 #: schemas.cpp:15
 #, kde-format
@@ -2271,12 +2270,12 @@ msgstr "احفظ ال&مخرجات كـ ..."
 #: session/SessionController.cpp:744
 #, kde-format
 msgid "Auto Save Output As..."
-msgstr "احفظ المخرجات آليا كـ..."
+msgstr "احفظ المخرجات آليّا كـ..."
 
 #: session/SessionController.cpp:748
 #, kde-format
 msgid "Stop Auto Save"
-msgstr "أوقف الحفظ تلقائي"
+msgstr "أوقف الحفظ آليّ"
 
 #: session/SessionController.cpp:752
 #, kde-format
@@ -2296,7 +2295,7 @@ msgstr "امحُ التمرير الخلفي"
 #: session/SessionController.cpp:764
 #, kde-format
 msgid "Clear Scrollback and Reset"
-msgstr "امحُ التمرير الخلفي و أعد الضبط"
+msgstr "امحُ التمرير الخلفي و صفّر"
 
 #: session/SessionController.cpp:775
 #, kde-format
@@ -2662,7 +2661,7 @@ msgstr "العملية والنافذة:"
 #: settings/GeneralSettings.ui:206
 #, kde-format
 msgid "Notifications:"
-msgstr "الإخطارات:"
+msgstr "الإشعارات:"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, enableAllMessagesButton)
 #: settings/GeneralSettings.ui:224
@@ -2994,13 +2993,13 @@ msgstr "أ&زل"
 #: settings/ProfileSettings.ui:90
 #, kde-format
 msgid "Set the selected profile as the default for new terminal sessions"
-msgstr "اضبط التشكيلة المحددة على أنها الافتراضية لجلسات الطرفية الجديدة"
+msgstr "اضبط التشكيلة المحددة على أنها المبدئية لجلسات الطرفية الجديدة"
 
 #. i18n: ectx: property (text), widget (QPushButton, setAsDefaultButton)
 #: settings/ProfileSettings.ui:93
 #, kde-format
 msgid "&Set as Default"
-msgstr "ا&جعلها الافتراضية"
+msgstr "ا&جعلها المبدئية"
 
 #. i18n: ectx: attribute (title), widget (QWidget, appearanceTab)
 #: settings/TabBarSettings.ui:39
@@ -3458,7 +3457,7 @@ msgstr "افصل العرض فوق/تحت"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically"
-msgstr "افصل العرض آلياً"
+msgstr "افصل العرض آليّاً"
 
 #: ViewManager.cpp:153
 #, kde-format
@@ -3476,7 +3475,7 @@ msgstr "افصل العرض فوق/تحت من اللسان التالي"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
-msgstr "افصل العرض آلياً من اللسان التالي"
+msgstr "افصل العرض آليّاً من اللسان التالي"
 
 #: ViewManager.cpp:179
 #, kde-format
@@ -3796,7 +3795,7 @@ msgstr "اختصار لإلقاء نظرة خاطفة على الشاشة الر
 #: widgets/EditProfileAdvancedPage.ui:255
 #, kde-format
 msgid "Set interval between autosaves:"
-msgstr "عيّن الفاصل الزمني بين الحفظ التلقائي:"
+msgstr "عيّن الفاصل الزمني بين الحفظ الآليّ:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, autoSaveIntervalWidget)
 #: widgets/EditProfileAdvancedPage.ui:262
@@ -3877,7 +3876,7 @@ msgstr "احذف المخطط اللوني المحدد"
 #: widgets/EditProfileAppearancePage.ui:99
 #, kde-format
 msgid "Reset the selected color scheme settings to the default values"
-msgstr "أعد تعيين إعدادات تشكيلة الألوان المحددة إلى القيم المبدئية"
+msgstr "صفّر إعدادات تشكيلة الألوان المحددة إلى القيم المبدئية"
 
 #. i18n: ectx: property (text), widget (QPushButton, resetKeyBindingsButton)
 #. i18n: ectx: property (text), widget (QPushButton, resetColorSchemeButton)
@@ -4449,7 +4448,7 @@ msgstr "جرس النظام"
 #: widgets/EditProfileDialog.cpp:528
 #, kde-format
 msgid "System Notifications"
-msgstr "إخطارات النّظام"
+msgstr "إشعارات النّظام"
 
 #: widgets/EditProfileDialog.cpp:528
 #, kde-format
@@ -4464,7 +4463,7 @@ msgstr "تجاهل أحداث الجرس"
 #: widgets/EditProfileDialog.cpp:537
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
-msgstr "التشكيلة الافتراضية لجلسات الطرفية الجديدة في %1"
+msgstr "التشكيلة المبدئية لجلسات الطرفية الجديدة في %1"
 
 #: widgets/EditProfileDialog.cpp:642
 #, kde-format
@@ -4518,7 +4517,7 @@ msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
 "Konsole to see transparent background."
 msgstr ""
-"بدء كونسول قبل أن تُفعّل تأثيرات سطح المكتب. عليك إعادة تشغيل كونسول لتعيين "
+"بدء كونسول قبل أن تُمكّن تأثيرات سطح المكتب. عليك إعادة تشغيل كونسول لتعيين "
 "خلفية شفّافة."
 
 #: widgets/EditProfileDialog.cpp:1934
@@ -4589,7 +4588,7 @@ msgstr "اسم اللاحة"
 #: widgets/EditProfileGeneralPage.ui:94
 #, kde-format
 msgid "Default Profile"
-msgstr "التشكيلة الافتراضية"
+msgstr "التشكيلة المبدئية"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: widgets/EditProfileGeneralPage.ui:125
@@ -4810,7 +4809,7 @@ msgstr "احذف تشكيلة ربط المفاتيح المحددة"
 #: widgets/EditProfileKeyboardPage.ui:90
 #, kde-format
 msgid "Reset the selected key bindings scheme to its default values"
-msgstr "أعد تعيين تشكيلة ربط المفاتيح المحددة إلى قيمه المبدئية"
+msgstr "صفّر تشكيلة ربط المفاتيح المحددة إلى قيمه المبدئية"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab)
 #: widgets/EditProfileMousePage.ui:36
@@ -4882,7 +4881,7 @@ msgstr "خيارات النسخ:"
 #: widgets/EditProfileMousePage.ui:196
 #, kde-format
 msgid "Automatically copy selected text into clipboard"
-msgstr "نسخ النص تلقائيًّا إلى الحافظة"
+msgstr "نسخ النص آليًّا إلى الحافظة"
 
 #. i18n: ectx: property (text), widget (QCheckBox, copyTextToClipboardButton)
 #: widgets/EditProfileMousePage.ui:199
@@ -5094,7 +5093,7 @@ msgid ""
 "Some terminal applications have mouse support, this allows them to get it by "
 "default. It can be toggled on/off while running as well."
 msgstr ""
-"بعض تطبيقات الطرفية تدعم الفأرة، هذا الخيار سيسمح تمكينها بشكل افتراضي. يمكن "
+"بعض تطبيقات الطرفية تدعم الفأرة، هذا الخيار سيسمح تمكينها بشكل مبدئي. يمكن "
 "تشغيل أو تعطيل هذه الميزة أثناء التشغيل أيضا."
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowMouseTrackingButton)
