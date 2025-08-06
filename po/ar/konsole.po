@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-03 00:46+0000\n"
-"PO-Revision-Date: 2025-08-04 15:10+0400\n"
+"PO-Revision-Date: 2025-08-05 18:30+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -78,7 +78,7 @@ msgstr "الإعدادات"
 #: ../desktop/konsoleui.rc:54
 #, kde-format
 msgid "Plugins"
-msgstr "القوابس"
+msgstr "الملحقات"
 
 #. i18n: ectx: Menu (help)
 #: ../desktop/konsoleui.rc:57
@@ -114,7 +114,7 @@ msgstr "اسم تشكيلة  لتستخدمها نسخة كونسول الجدي
 #, kde-format
 msgctxt "@info:shell"
 msgid "json layoutfile to be loaded to use for new Konsole instance"
-msgstr "ملف json layoutfile ليتم تحميله لاستخدامه لنسخة كونسول جديدة"
+msgstr "ملف json layoutfile لم يُحمل لاستخدامه لنسخة كونسول جديدة"
 
 #: Application.cpp:55
 #, kde-format
@@ -451,8 +451,8 @@ msgid ""
 "The background transparency setting will not be used because your desktop "
 "does not appear to support transparent windows."
 msgstr ""
-"لن يتم استخدام إعدادات الخلفية الشفافة بسبب أن سطح  مكتبك لا يدعم النوافذ "
-"الشفافة فيما يبدو."
+"لن تُستخدم إعدادات الخلفية الشفافة بسبب أن سطح  مكتبك لا يدعم النوافذ الشفافة "
+"فيما يبدو."
 
 #: colorscheme/ColorSchemeEditor.cpp:188
 #, kde-format
@@ -596,7 +596,7 @@ msgstr "ممدد"
 #: colorscheme/ColorSchemeEditor.ui:183
 #, kde-format
 msgid "Crop"
-msgstr "مقتص"
+msgstr "اقتصّ"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
 #: colorscheme/ColorSchemeEditor.ui:188
@@ -1124,7 +1124,7 @@ msgstr "Warwick Allison"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Schema and text selection improvements"
-msgstr "تحسينات في المخططات و إنتقاء النص"
+msgstr "تحسينات في المخططات و تحديد النص"
 
 #: main.cpp:405
 #, kde-format
@@ -2667,7 +2667,7 @@ msgstr "الإشعارات:"
 #: settings/GeneralSettings.ui:224
 #, kde-format
 msgid "All dialogs will be shown again"
-msgstr "سيتم عرض كل الحوارات مرة أخرى"
+msgstr "ستُعرض كل الحوارات مرة أخرى"
 
 #. i18n: ectx: property (text), widget (QPushButton, enableAllMessagesButton)
 #: settings/GeneralSettings.ui:227
@@ -2706,7 +2706,7 @@ msgstr "دون لف"
 #: settings/konsole.kcfg:18
 #, kde-format
 msgid "Show window title set by escape sequence on the titlebar"
-msgstr "أظهر عنوان النافذة الذي تم تعيينه بواسطة تسلسل الهروب على شريط العنوان"
+msgstr "أظهر عنوان النافذة الذي المعين بواسطة تسلسل الهروب على شريط العنوان"
 
 #. i18n: ectx: tooltip, entry (AllowMenuAccelerators), group (KonsoleWindow)
 #: settings/konsole.kcfg:23
@@ -4089,7 +4089,7 @@ msgstr "دائما اعكس ألوان النص المحدد"
 #: widgets/EditProfileAppearancePage.ui:510
 #, kde-format
 msgid "Darkening strength:"
-msgstr "شدة التقتيم:"
+msgstr "شدة التعتيم:"
 
 #. i18n: ectx: property (text), widget (QLabel, borderLabel)
 #: widgets/EditProfileAppearancePage.ui:543
@@ -4133,7 +4133,7 @@ msgstr "تباعد الأسطر:"
 #: widgets/EditProfileAppearancePage.ui:631
 #, kde-format
 msgid "The number of pixels between two lines"
-msgstr "عدد البكلسات بين كل سطرين"
+msgstr "عدد البكسلات بين كل سطرين"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, lineSpacingSpinner)
 #. i18n: ectx: property (suffix), widget (QSpinBox, marginsSpinner)
@@ -4166,7 +4166,7 @@ msgstr "حدد ما إذا كانت النافذة نشطة عن طريق تعت
 #: widgets/EditProfileAppearancePage.ui:746
 #, kde-format
 msgid "Darken"
-msgstr "تقتيم"
+msgstr "تعتم"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:753
@@ -4582,7 +4582,7 @@ msgstr "اسم وصفي للتشكيلة"
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Profile name"
-msgstr "اسم اللاحة"
+msgstr "اسم التشكيلة"
 
 #. i18n: ectx: property (text), widget (QCheckBox, setAsDefaultButton)
 #: widgets/EditProfileGeneralPage.ui:94
@@ -5077,8 +5077,7 @@ msgstr "اسمح لعجلة التمرير ومفتاح Ctrl بالتحكم بح
 msgid ""
 "When positioning the mouse over a hexadecimal color it will be displayed in "
 "a frame next to the mouse pointer"
-msgstr ""
-"عند وضع الفأرة فوق لون سداسي عشري ، سيتم عرضه في إطار بجوار مؤشر الفأرة"
+msgstr "عند وضع الفأرة فوق لون سداسي عشري ، سيُعرض في إطار بجوار مؤشر الفأرة"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowColorFilters)
 #: widgets/EditProfileMousePage.ui:438
@@ -5275,8 +5274,8 @@ msgid ""
 "choose a huge value, your system may run out of free RAM and cause serious "
 "issues with your system."
 msgstr ""
-"عند استخدام هذا الخيار ، سيتم حفظ بيانات التمرير في ذاكرة الوصول العشوائي. "
-"إذا اخترت قيمة كبيرة، فقد ينفد نظامك من ذاكرة الوصول العشوائي المتاحة ويسبب "
+"عند استخدام هذا الخيار، ستُحفظ بيانات التمرير في ذاكرة الوصول العشوائي. إذا "
+"اخترت قيمة كبيرة، فقد ينفد نظامك من ذاكرة الوصول العشوائي المتاحة ويسبب "
 "مشكلات خطيرة في نظامك."
 
 #: widgets/HistorySizeWidget.cpp:69
@@ -5310,7 +5309,7 @@ msgstr "حجم &ثابت:"
 #: widgets/HistorySizeWidget.ui:73
 #, kde-format
 msgid "Number of lines of output to remember"
-msgstr "عدد الأسطر التي سيتم تذكرها من المخرجات"
+msgstr "عدد الأسطر التي ستتذكرها من المخرجات"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, unlimitedHistoryButton)
 #: widgets/HistorySizeWidget.ui:134
