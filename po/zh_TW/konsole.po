@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-03 00:46+0000\n"
-"PO-Revision-Date: 2025-05-01 17:27+0900\n"
+"PO-Revision-Date: 2025-08-08 01:36+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -4913,13 +4913,13 @@ msgstr "被認為是檔案、連結或電子郵件地址的文字，在滑鼠點
 #: widgets/EditProfileMousePage.ui:338
 #, kde-format
 msgid "Open files/links by direct click"
-msgstr "直接點選底線文字即開啟檔案/連結"
+msgstr "直接點選檔案/連結來開啟它們"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowLinkEscapeSequenceButton)
 #: widgets/EditProfileMousePage.ui:349
 #, kde-format
 msgid "Allow escape sequences for links"
-msgstr "允許連結中的跳脫字元"
+msgstr "允許跳脫字元建立連結"
 
 #. i18n: ectx: property (text), widget (QLabel, allowLinkEscapeSequenceButtonWarning)
 #: widgets/EditProfileMousePage.ui:356
