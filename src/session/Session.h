@@ -9,6 +9,8 @@
 #ifndef SESSION_H
 #define SESSION_H
 
+#include "config-konsole.h"
+
 // Qt
 #include <QHash>
 #include <QLoggingCategory>
@@ -18,6 +20,10 @@
 #include <QUrl>
 #include <QUuid>
 #include <QWidget>
+
+#if HAVE_DBUS
+#include <QDBusContext>
+#endif
 
 // Konsole
 #include "Shortcut_p.h"
@@ -51,7 +57,11 @@ class SessionController;
  * or send input to the program in the terminal in the form of keypresses and mouse
  * activity.
  */
+#if HAVE_DBUS
+class KONSOLEPRIVATE_EXPORT Session : public QObject, protected QDBusContext
+#else
 class KONSOLEPRIVATE_EXPORT Session : public QObject
+#endif
 {
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", "org.kde.konsole.Session")
@@ -727,6 +737,14 @@ public Q_SLOTS:
      * getDisplayedTextList(0, 0)
      */
     Q_SCRIPTABLE QStringList getDisplayedTextList(int startLineOffset, int endLineOffset);
+
+    /**
+     * DBus slot to get an XDG activation token.
+     * Will check if the passed shellSessionId is the current one for safety.
+     * Will try to generate a token and pass it back.
+     * Can only be called from DBus, will answer delayed.
+     */
+    Q_SCRIPTABLE QString activationToken(const QString &shellSessionIdForRequest) const;
 
 Q_SIGNALS:
 
