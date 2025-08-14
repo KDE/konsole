@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-03 00:46+0000\n"
-"PO-Revision-Date: 2025-08-06 18:13+0400\n"
+"PO-Revision-Date: 2025-08-13 22:43+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -200,7 +200,7 @@ msgstr "ابدأ كونسول في وضع ملء الشاشة"
 #, kde-format
 msgctxt "@info:shell"
 msgid "Disable transparent backgrounds, even if the system supports them."
-msgstr "عطل الخلفية الشفافة ، حتى ولو كان النظام يدعمها."
+msgstr "عطل الخلفية الشفافة، حتى ولو كان النظام يدعمها."
 
 #: Application.cpp:72
 #, kde-format
@@ -237,7 +237,7 @@ msgid ""
 "Force re-using the existing instance even if it breaks functionality, e. g. "
 "--new-tab. Mostly for debugging."
 msgstr ""
-"فرض إعادة استخدام المثيل الحالي حتى إذا ضيعت الوظائف، على سبيل المثال.‏--new-"
+"فرض إعادة استخدام النسخة الحالية حتى لو ضيعت الوظائف، على سبيل المثال.‏--new-"
 "tab. في الغالب من أجل التنقيح. "
 
 #: Application.cpp:86
@@ -514,7 +514,7 @@ msgid ""
 msgstr ""
 "تختار قيم تدرج اللون والتشبع للألوان المبدئية للمقدمة والخلفية بشكل عشوائي. "
 "قد تستخدم بعض تشكيلات الألوان إعدادات عشوائية. \n"
-"لمشاهدة أي تأثير ، اضبط الألوان بقيمة تشبع أكبر من 0 ."
+"لمشاهدة أي تأثير، اضبط الألوان بقيمة تشبع أكبر من 0 ."
 
 #. i18n: ectx: property (text), widget (QCheckBox, randomizedBackgroundCheck)
 #: colorscheme/ColorSchemeEditor.ui:53
@@ -705,7 +705,7 @@ msgid ""
 "Could not open file with the text editor specified in the profile settings;\n"
 "it will be opened with the system default editor."
 msgstr ""
-"تعذر فتح الملف باستخدام محرر النصوص المحدد في إعدادات ملف التشكيلة ؛ \n"
+"تعذر فتح الملف باستخدام محرر النصوص المحدد في إعدادات ملف التشكيلة؛ \n"
 "سيفتح باستخدام محرر النظام المبدئي."
 
 #: filterHotSpots/FileFilterHotspot.cpp:172
@@ -758,9 +758,9 @@ msgid ""
 "equal width (monospace). Any non monospaced font may cause display issues. "
 "This should not be necessary except in rare cases."
 msgstr ""
-"يتطلب البرنامج الطرفي ، بحكم طبيعته ، أحرف خط متساوية العرض (مسافة أحادية). "
-"قد يتسبب أي خط غير أحادي المسافة في حدوث مشكلات في العرض.لا ينبغي أن يكون "
-"هذا ضروريًا إلا في حالات نادرة."
+"يتطلب البرنامج الطرفي، بحكم طبيعته، أحرف خط متساوية العرض (مسافة أحادية). قد "
+"يتسبب أي خط غير أحادي المسافة في حدوث مشكلات في العرض.لا ينبغي أن يكون هذا "
+"ضروريًا إلا في حالات نادرة."
 
 #: HistorySizeDialog.cpp:25
 #, kde-format
@@ -1280,7 +1280,7 @@ msgstr "أ&غلق اللسان الحالي"
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
-msgstr "يوجد %1 طرفيات مفتوحة ، هل أنت متأكد أنك تريد الخروج؟"
+msgstr "يوجد %1 طرفيات مفتوحة، هل أنت متأكد أنك تريد الخروج؟"
 
 #: MainWindow.cpp:877 Part.cpp:298
 #, kde-format
@@ -1642,7 +1642,7 @@ msgstr "الاسم مفقود"
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:391
 #, kde-format
 msgid "If Use Ssh Config is set, do not specify sshkey or username."
-msgstr "إذا عُيّن استخدام Ssh Config ، فلا تحدد مفتاح ssh أو اسم المستخدم."
+msgstr "إذا عُيّن استخدام Ssh Config، فلا تحدد مفتاح ssh أو اسم المستخدم."
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:396
 #, kde-format
@@ -1776,8 +1776,8 @@ msgid ""
 "If this is set, we don't rely on the SSH key set above, but on the "
 "configuration on ~/.ssh/config"
 msgstr ""
-"إذا مكنت هذه ؛ فلن نعتمد على مفتاح SSH المعين في الأعلى، لكن سنعتمد على "
-"الضبط الموجود في ‎~/.ssh/config"
+"إذا مكنت هذه؛ فلن نعتمد على مفتاح SSH المعين في الأعلى، لكن سنعتمد على الضبط "
+"الموجود في ‎~/.ssh/config"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useSshConfig)
 #: plugins/SSHManager/sshwidget.ui:170
@@ -1874,7 +1874,7 @@ msgstr "خيارات الإخراج"
 #: PrintOptions.ui:39 settings/konsole.kcfg:190
 #, kde-format
 msgid "Printer &friendly mode (black text, no background)"
-msgstr "نمط الا&قتصادي (كتابة بالأسود ، لا خلفية )"
+msgstr "نمط الا&قتصادي (كتابة بالأسود، لا خلفية )"
 
 #. i18n: ectx: property (text), widget (QCheckBox, scaleOutput)
 #. i18n: ectx: label, entry (ScaleOutput), group (PrintOptions)
@@ -1956,7 +1956,7 @@ msgstr "احفظ مخرجات من %1"
 #: SaveHistoryAutoTask.cpp:75 SaveHistoryTask.cpp:83
 #, kde-format
 msgid "%1 is an invalid URL, the output could not be saved."
-msgstr "العنوان %1 غير صالح ، لا يمكن حفظ المخرجات."
+msgstr "العنوان %1 غير صالح، لا يمكن حفظ المخرجات."
 
 #: SaveHistoryAutoTask.cpp:88
 #, kde-format
@@ -2142,9 +2142,9 @@ msgid ""
 "warning will only show once for this Konsole instance.</p>"
 msgstr ""
 "استخدمت طريقة D-Bus sendText / runCommand للتو. هناك مخاوف أمنية بشأن السماح "
-"بأن تكون هذه الأساليب عامة. إذا رغبت في ذلك ، يمكن تغيير هذه الطرق إلى "
+"بأن تكون هذه الأساليب عامة. إذا رغبت في ذلك، يمكن تغيير هذه الطرق إلى "
 "الاستخدام الداخلي فقط عن طريق إعادة تجميع كونسول. <p> سيظهر هذا التحذير مرة "
-"واحدة فقط لمثيل كونسول هذا. </p>"
+"واحدة فقط لنسخة كونسول هذا. </p>"
 
 #: session/Session.cpp:1064
 #, kde-format
@@ -2523,8 +2523,8 @@ msgid ""
 "software was found on this system.</p><p>You may wish to install the 'rzsz' "
 "or 'lrzsz' package.</p>"
 msgstr ""
-"<p>اكتشفت محالة لنقل ملف  ZModem ؛ ولكن لا يوجد برنامج ZModem مناسب في "
-"النظام.</p><p>قد ترغب في تثبيت حزمة  'rzsz' أو 'lrzsz' .</p>"
+"<p>اكتشفت محالة لنقل ملف  ZModem؛ ولكن لا يوجد برنامج ZModem مناسب في النظام."
+"</p><p>قد ترغب في تثبيت حزمة  'rzsz' أو 'lrzsz' .</p>"
 
 #: session/SessionController.cpp:2195
 #, kde-format
@@ -2616,7 +2616,7 @@ msgstr "طابق باستخدام التعابير النمطية"
 #: settings/GeneralSettings.ui:118 settings/konsole.kcfg:33
 #, kde-format
 msgid "When launching Konsole re-use existing process if possible"
-msgstr "عند بدء تشغيل كونسول ، أعد استخدام العملية الحالية إن أمكن"
+msgstr "عند بدء تشغيل كونسول، أعد استخدام العملية الحالية إن أمكن"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSingleInstance)
 #. i18n: ectx: label, entry (UseSingleInstance), group (KonsoleWindow)
@@ -2788,8 +2788,7 @@ msgstr "سيتوقف البحث عوضا عن اللف"
 #, kde-format
 msgid "Control whether child cgroups are created for individual tabs"
 msgstr ""
-"التحكم فيما إذا كان سينشئ مجموعات التحكم الفرعية cgroups لعلامات التبويب "
-"الفردية"
+"التحكم فيما إذا كان سينشئ مجموعات التحكم الفرعية cgroups للألسنة المفردة"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
 #: settings/konsole.kcfg:94
@@ -2827,7 +2826,7 @@ msgstr "تحكم بالشكل المرئي لشريط الألسنة"
 #: settings/konsole.kcfg:143
 #, kde-format
 msgid "Use a user-defined .css file for the tab bar"
-msgstr "استخدم ملف .css معرّف من قبل المستخدم لشريط علامات التبويب"
+msgstr "استخدم ملف .css مُعرّف من قبل المستخدم لشريط الألسنة"
 
 #. i18n: ectx: label, entry (TabBarUserStyleSheetFile), group (TabBar)
 #: settings/konsole.kcfg:147
@@ -2875,25 +2874,25 @@ msgstr "وسع عرض اللسان"
 #: settings/konsole.kcfg:200
 #, kde-format
 msgid "For scrollback files, use system-wide folder location"
-msgstr "بالنسبة لملفات التمرير ، استخدم موقع المجلد على مستوى النظام"
+msgstr "بالنسبة لملفات التمرير، استخدم موقع المجلد على مستوى النظام"
 
 #. i18n: ectx: label, entry (scrollbackUseCacheLocation), group (FileLocation)
 #: settings/konsole.kcfg:204
 #, kde-format
 msgid "For scrollback files, use user's specific folder location"
-msgstr "بالنسبة لملفات التمرير ، استخدم موقع خاص بالمستخدم"
+msgstr "بالنسبة لملفات التمرير، استخدم موقع خاص بالمستخدم"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocation), group (FileLocation)
 #: settings/konsole.kcfg:208
 #, kde-format
 msgid "For scrollback files, use specified folder location"
-msgstr "بالنسبة لملفات التمرير ، استخدم موقع مجلد مخصص"
+msgstr "بالنسبة لملفات التمرير، استخدم موقع مجلد مخصص"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocationDirectory), group (FileLocation)
 #: settings/konsole.kcfg:212
 #, kde-format
 msgid "For scrollback files, use this folder"
-msgstr "بالنسبة لملفات التمرير ، استخدم هذا المجلد"
+msgstr "بالنسبة لملفات التمرير، استخدم هذا المجلد"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableMemoryMonitoring)
 #: settings/MemorySettings.ui:17
@@ -4550,7 +4549,7 @@ msgstr ""
 "التي يدعمها المحرر الذي ترغب به؛ على سبيل المثال:\n"
 "gedit +السطر:العمود المسار\n"
 "\n"
-"إذا لم يكن المسار أو السطر موجودا في الأمر ؛ فإن هذه الإعدادات\n"
+"إذا لم يكن المسار أو السطر موجودا في الأمر؛ فإن هذه الإعدادات\n"
 "ستتجاهل ويفتح الملف بالمحرر النصي\n"
 "المبدئي."
 
@@ -4777,7 +4776,7 @@ msgid ""
 msgstr ""
 "تتحكم روابط المفاتيح في كيفية تحويل مجموعات ضغطات المفاتيح في النافذة "
 "الطرفية إلى دفق الأحرف الذي يرسل بعد ذلك إلى برنامج المحطة الطرفية الحالي. "
-"لمزيد من المعلومات حول كيفية تخصيص روابط المفاتيح ، راجع دليل كونسول."
+"لمزيد من المعلومات حول كيفية تخصيص روابط المفاتيح، راجع دليل كونسول."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newKeyBindingsButton)
 #: widgets/EditProfileKeyboardPage.ui:60
@@ -5076,7 +5075,7 @@ msgstr "اسمح لعجلة التمرير ومفتاح Ctrl بالتحكم بح
 msgid ""
 "When positioning the mouse over a hexadecimal color it will be displayed in "
 "a frame next to the mouse pointer"
-msgstr "عند وضع الفأرة فوق لون سداسي عشري ، سيُعرض في إطار بجوار مؤشر الفأرة"
+msgstr "عند وضع الفأرة فوق لون سداسي عشري، سيُعرض في إطار بجوار مؤشر الفأرة"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowColorFilters)
 #: widgets/EditProfileMousePage.ui:438
