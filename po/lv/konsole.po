@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-03 00:46+0000\n"
+"POT-Creation-Date: 2025-08-14 00:45+0000\n"
 "PO-Revision-Date: 2025-06-21 13:10+0300\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -2085,28 +2085,28 @@ msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"
 msgstr "Ierakstiet meklējamās cilnes nosaukumu"
 
-#: session/Session.cpp:109
+#: session/Session.cpp:116
 #, kde-format
 msgid "Bell in '%1' (Session '%2')"
 msgstr "Zvans „%1“ (sesija „%2“)"
 
-#: session/Session.cpp:404
+#: session/Session.cpp:411
 #, kde-format
 msgid "Could not find binary: "
 msgstr "Neizdevās atrast izpildāmu datni: "
 
-#: session/Session.cpp:413
+#: session/Session.cpp:420
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Brīdinājums: "
 
-#: session/Session.cpp:508
+#: session/Session.cpp:515
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "Neizdevās atrast interaktīvu čaulu, ko palaist."
 
-#: session/Session.cpp:514 session/Session.cpp:517
+#: session/Session.cpp:521 session/Session.cpp:524
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2114,17 +2114,17 @@ msgid ""
 msgstr ""
 "Neizdevās atrast „%1“, tā vietā palaiž „%2“. Pārbaudiet profila iestatījumus."
 
-#: session/Session.cpp:582
+#: session/Session.cpp:589
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Neizdevās palaist programmu „%1“ ar parametriem „%2“."
 
-#: session/Session.cpp:739
+#: session/Session.cpp:746
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Klusums „%1“ (sesija „%2“)"
 
-#: session/Session.cpp:740 session/Session.cpp:2079
+#: session/Session.cpp:747 session/Session.cpp:2086
 #: session/SessionController.cpp:361 session/SessionController.cpp:1887
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1210
 #: Vt102Emulation.cpp:1465
@@ -2132,7 +2132,7 @@ msgstr "Klusums „%1“ (sesija „%2“)"
 msgid "Show session"
 msgstr "Parādīt sesiju"
 
-#: session/Session.cpp:1024
+#: session/Session.cpp:1031
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2145,28 +2145,28 @@ msgstr ""
 "tikai iekšējai lietošanai, pārkompilējot „Konsole“.<p>Šis brīdinājums šajā "
 "„Konsole“ instancē būs redzams tikai vienu reizi.</p>"
 
-#: session/Session.cpp:1064
+#: session/Session.cpp:1071
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Pabeigts"
 
-#: session/Session.cpp:1078 session/Session.cpp:1094
+#: session/Session.cpp:1085 session/Session.cpp:1101
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Programma „%1“ avarēja."
 
-#: session/Session.cpp:1080
+#: session/Session.cpp:1087
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "Programma „%1“ beidza darbu ar statusu „%2“."
 
-#: session/Session.cpp:1606
+#: session/Session.cpp:1613
 #, kde-format
 msgid "ZModem Progress"
 msgstr "„ZModem“ progress"
 
-#: session/Session.cpp:2078
+#: session/Session.cpp:2085
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Aktivitāte „%1“ (sesija „%2“)"

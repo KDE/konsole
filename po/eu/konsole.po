@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-03 00:46+0000\n"
+"POT-Creation-Date: 2025-08-14 00:45+0000\n"
 "PO-Revision-Date: 2025-05-01 15:20+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -2100,28 +2100,28 @@ msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"
 msgstr "Sartu hemen bilatu beharreko fitxaren izena"
 
-#: session/Session.cpp:109
+#: session/Session.cpp:116
 #, kde-format
 msgid "Bell in '%1' (Session '%2')"
 msgstr "Txirrina «%1»(e)an («%2» saioa)"
 
-#: session/Session.cpp:404
+#: session/Session.cpp:411
 #, kde-format
 msgid "Could not find binary: "
 msgstr "Ezin izan da bitarra aurkitu:"
 
-#: session/Session.cpp:413
+#: session/Session.cpp:420
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Abisua:"
 
-#: session/Session.cpp:508
+#: session/Session.cpp:515
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "Ezin izan da hasteko shell elkarreragile bat aurkitu."
 
-#: session/Session.cpp:514 session/Session.cpp:517
+#: session/Session.cpp:521 session/Session.cpp:524
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2130,17 +2130,17 @@ msgstr ""
 "Ezin izan da '%1' aurkitu, horren ordez '%2' abiarazten. Egiaztatu zure "
 "profilaren ezarpenak."
 
-#: session/Session.cpp:582
+#: session/Session.cpp:589
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Ezin izan da '%1' programa '%2' argumentuekin abiarazi."
 
-#: session/Session.cpp:739
+#: session/Session.cpp:746
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Isiltasuna «%1»(e)an (Saioa «%2»)"
 
-#: session/Session.cpp:740 session/Session.cpp:2079
+#: session/Session.cpp:747 session/Session.cpp:2086
 #: session/SessionController.cpp:361 session/SessionController.cpp:1887
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1210
 #: Vt102Emulation.cpp:1465
@@ -2148,7 +2148,7 @@ msgstr "Isiltasuna «%1»(e)an (Saioa «%2»)"
 msgid "Show session"
 msgstr "Erakutsi saioa"
 
-#: session/Session.cpp:1024
+#: session/Session.cpp:1031
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2162,28 +2162,28 @@ msgstr ""
 "Konsole bir-konpilatuta. <p>Abisua behin baino ez da erakutsiko Konsoleren "
 "instantzia honentzat.</p>"
 
-#: session/Session.cpp:1064
+#: session/Session.cpp:1071
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Amaituta"
 
-#: session/Session.cpp:1078 session/Session.cpp:1094
+#: session/Session.cpp:1085 session/Session.cpp:1101
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "'%1' programa kraskatu egin da"
 
-#: session/Session.cpp:1080
+#: session/Session.cpp:1087
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "'%1' programa %2 egoerarekin amaituta."
 
-#: session/Session.cpp:1606
+#: session/Session.cpp:1613
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem-aren aurrerapena"
 
-#: session/Session.cpp:2078
+#: session/Session.cpp:2085
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "«%1»(e)ko jarduera («%2» saioa)"

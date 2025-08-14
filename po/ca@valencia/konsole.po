@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-03 00:46+0000\n"
+"POT-Creation-Date: 2025-08-14 00:45+0000\n"
 "PO-Revision-Date: 2025-04-30 10:21+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -2100,28 +2100,28 @@ msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"
 msgstr "Introduïu ací un nom de pestanya que s'ha de buscar"
 
-#: session/Session.cpp:109
+#: session/Session.cpp:116
 #, kde-format
 msgid "Bell in '%1' (Session '%2')"
 msgstr "Timbre a «%1» (Sessió «%2»)"
 
-#: session/Session.cpp:404
+#: session/Session.cpp:411
 #, kde-format
 msgid "Could not find binary: "
 msgstr "No s'ha pogut trobar l'executable: "
 
-#: session/Session.cpp:413
+#: session/Session.cpp:420
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Avís: "
 
-#: session/Session.cpp:508
+#: session/Session.cpp:515
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "No s'ha trobat cap intèrpret d'ordres interactiu per a iniciar."
 
-#: session/Session.cpp:514 session/Session.cpp:517
+#: session/Session.cpp:521 session/Session.cpp:524
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2130,17 +2130,17 @@ msgstr ""
 "No s'ha pogut trobar «%1», en el seu lloc s'ha iniciat «%2». Comproveu els "
 "paràmetres del vostre perfil."
 
-#: session/Session.cpp:582
+#: session/Session.cpp:589
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "No s'ha pogut iniciar el programa «%1» amb els arguments «%2»."
 
-#: session/Session.cpp:739
+#: session/Session.cpp:746
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Silenci a «%1» (Sessió «%2»)"
 
-#: session/Session.cpp:740 session/Session.cpp:2079
+#: session/Session.cpp:747 session/Session.cpp:2086
 #: session/SessionController.cpp:361 session/SessionController.cpp:1887
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1210
 #: Vt102Emulation.cpp:1465
@@ -2148,7 +2148,7 @@ msgstr "Silenci a «%1» (Sessió «%2»)"
 msgid "Show session"
 msgstr "Mostra la sessió"
 
-#: session/Session.cpp:1024
+#: session/Session.cpp:1031
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2162,28 +2162,28 @@ msgstr ""
 "<p>Este avís només es mostrarà una vegada per a esta instància de Konsole.</"
 "p>"
 
-#: session/Session.cpp:1064
+#: session/Session.cpp:1071
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Finalitzada"
 
-#: session/Session.cpp:1078 session/Session.cpp:1094
+#: session/Session.cpp:1085 session/Session.cpp:1101
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "El programa «%1» ha fallat."
 
-#: session/Session.cpp:1080
+#: session/Session.cpp:1087
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "El programa «%1» ha acabat amb l'estat %2."
 
-#: session/Session.cpp:1606
+#: session/Session.cpp:1613
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Progrés ZModem"
 
-#: session/Session.cpp:2078
+#: session/Session.cpp:2085
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Activitat a «%1» (Sessió «%2»)"

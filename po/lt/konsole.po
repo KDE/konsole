@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-03 00:46+0000\n"
+"POT-Creation-Date: 2025-08-14 00:45+0000\n"
 "PO-Revision-Date: 2017-10-02 10:32+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -2179,29 +2179,29 @@ msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"
 msgstr "Įrašykite ieškomą frazę čia"
 
-#: session/Session.cpp:109
+#: session/Session.cpp:116
 #, fuzzy, kde-format
 #| msgid "Bell in session '%1'"
 msgid "Bell in '%1' (Session '%2')"
 msgstr "Skambutis sesijoje „%1“"
 
-#: session/Session.cpp:404
+#: session/Session.cpp:411
 #, kde-format
 msgid "Could not find binary: "
 msgstr "Nerastas dvejetainis failas: "
 
-#: session/Session.cpp:413
+#: session/Session.cpp:420
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Dėmesio: "
 
-#: session/Session.cpp:508
+#: session/Session.cpp:515
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "Nepavyko rasti ir paleisti interaktyvaus apvalkalo."
 
-#: session/Session.cpp:514 session/Session.cpp:517
+#: session/Session.cpp:521 session/Session.cpp:524
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2209,18 +2209,18 @@ msgid ""
 msgstr ""
 "Nepavyko rasti „%1“, todėl paleidžiama „%2“. Patikrinkite profilio parinktis."
 
-#: session/Session.cpp:582
+#: session/Session.cpp:589
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Nepavyko paleisti programos „%1“ su parametrais „%2“."
 
-#: session/Session.cpp:739
+#: session/Session.cpp:746
 #, fuzzy, kde-format
 #| msgid "Silence in session '%1'"
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Jokios veiklos sesijoje „%1“"
 
-#: session/Session.cpp:740 session/Session.cpp:2079
+#: session/Session.cpp:747 session/Session.cpp:2086
 #: session/SessionController.cpp:361 session/SessionController.cpp:1887
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1210
 #: Vt102Emulation.cpp:1465
@@ -2229,7 +2229,7 @@ msgstr "Jokios veiklos sesijoje „%1“"
 msgid "Show session"
 msgstr "Uždaryti langą"
 
-#: session/Session.cpp:1024
+#: session/Session.cpp:1031
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2238,28 +2238,28 @@ msgid ""
 "warning will only show once for this Konsole instance.</p>"
 msgstr ""
 
-#: session/Session.cpp:1064
+#: session/Session.cpp:1071
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Baigta"
 
-#: session/Session.cpp:1078 session/Session.cpp:1094
+#: session/Session.cpp:1085 session/Session.cpp:1101
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Programa „%1“ nulūžo."
 
-#: session/Session.cpp:1080
+#: session/Session.cpp:1087
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "Programa „%1“ baigė darbą ir pranešė kodą „%2“."
 
-#: session/Session.cpp:1606
+#: session/Session.cpp:1613
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem eiga"
 
-#: session/Session.cpp:2078
+#: session/Session.cpp:2085
 #, fuzzy, kde-format
 #| msgid "Activity in session '%1'"
 msgid "Activity in '%1' (Session '%2')"

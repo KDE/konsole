@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-03 00:46+0000\n"
+"POT-Creation-Date: 2025-08-14 00:45+0000\n"
 "PO-Revision-Date: 2022-09-27 18:12+0700\n"
 "Last-Translator: Wantoyèk <wantoyek@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -2088,28 +2088,28 @@ msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"
 msgstr "Masukkan teks untuk dicari dari sini"
 
-#: session/Session.cpp:109
+#: session/Session.cpp:116
 #, kde-format
 msgid "Bell in '%1' (Session '%2')"
 msgstr "Bel di '%1' (Sesi '%2')"
 
-#: session/Session.cpp:404
+#: session/Session.cpp:411
 #, kde-format
 msgid "Could not find binary: "
 msgstr "Tak dapat menemukan biner: "
 
-#: session/Session.cpp:413
+#: session/Session.cpp:420
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Peringatan: "
 
-#: session/Session.cpp:508
+#: session/Session.cpp:515
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "Tak dapat menemukan sebuah shell interaktif untuk dijalankan."
 
-#: session/Session.cpp:514 session/Session.cpp:517
+#: session/Session.cpp:521 session/Session.cpp:524
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2117,17 +2117,17 @@ msgid ""
 msgstr ""
 "Tak dapat menemukan '%1', memulai '%2'. Silakan cek pengaturan profil anda."
 
-#: session/Session.cpp:582
+#: session/Session.cpp:589
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Tak dapat menjalankan program '%1' dengan argumen '%2'."
 
-#: session/Session.cpp:739
+#: session/Session.cpp:746
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Diam di '%1' (Sesi '%2')"
 
-#: session/Session.cpp:740 session/Session.cpp:2079
+#: session/Session.cpp:747 session/Session.cpp:2086
 #: session/SessionController.cpp:361 session/SessionController.cpp:1887
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1210
 #: Vt102Emulation.cpp:1465
@@ -2136,7 +2136,7 @@ msgstr "Diam di '%1' (Sesi '%2')"
 msgid "Show session"
 msgstr "&Tutup Sesi"
 
-#: session/Session.cpp:1024
+#: session/Session.cpp:1031
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2145,28 +2145,28 @@ msgid ""
 "warning will only show once for this Konsole instance.</p>"
 msgstr ""
 
-#: session/Session.cpp:1064
+#: session/Session.cpp:1071
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Selesai"
 
-#: session/Session.cpp:1078 session/Session.cpp:1094
+#: session/Session.cpp:1085 session/Session.cpp:1101
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Program '%1' mogok."
 
-#: session/Session.cpp:1080
+#: session/Session.cpp:1087
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "Program '%1' keluar dengan status %2."
 
-#: session/Session.cpp:1606
+#: session/Session.cpp:1613
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Progres ZModem"
 
-#: session/Session.cpp:2078
+#: session/Session.cpp:2085
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Aktivitas di '%1' (Sesi '%2')"

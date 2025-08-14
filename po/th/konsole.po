@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-03 00:46+0000\n"
+"POT-Creation-Date: 2025-08-14 00:45+0000\n"
 "PO-Revision-Date: 2025-03-17 21:03+0700\n"
 "Last-Translator: Atirut Wattanamongkol <atirut.wattanamongkol@gmailcom>\n"
 "Language-Team: Thai\n"
@@ -2231,29 +2231,29 @@ msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"
 msgstr "ป้อนข้อความที่จะค้นหาที่นี่"
 
-#: session/Session.cpp:109
+#: session/Session.cpp:116
 #, fuzzy, kde-format
 #| msgid "Bell in session '%1'"
 msgid "Bell in '%1' (Session '%2')"
 msgstr "มีออดเตือนในวาระ '%1'"
 
-#: session/Session.cpp:404
+#: session/Session.cpp:411
 #, kde-format
 msgid "Could not find binary: "
 msgstr "ไม่สามารถค้นหาไฟล์ไบนารีได้: "
 
-#: session/Session.cpp:413
+#: session/Session.cpp:420
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "แจ้งเตือน: "
 
-#: session/Session.cpp:508
+#: session/Session.cpp:515
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "ไม่สามารถค้นหาเชลล์ที่จะสั่งทำงานได้"
 
-#: session/Session.cpp:514 session/Session.cpp:517
+#: session/Session.cpp:521 session/Session.cpp:524
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2261,18 +2261,18 @@ msgid ""
 msgstr ""
 "ไม่สามารถค้นหา '%1' ได้, กำลังเริ่ม '%2' เพื่อใช้งานแทน  โปรดตรวจสอบการตั้งค่าโปรไฟล์ของคุณ"
 
-#: session/Session.cpp:582
+#: session/Session.cpp:589
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "ไม่สามารถเริ่มการทำงานโปรแกรม '%1' ด้วยอาร์กิวเมนต์ '%2' ได้"
 
-#: session/Session.cpp:739
+#: session/Session.cpp:746
 #, fuzzy, kde-format
 #| msgid "Silence in session '%1'"
 msgid "Silence in '%1' (Session '%2')"
 msgstr "ไม่มีกิจกรรมใด ๆ เกิดขึ้นในวาระ '%1'"
 
-#: session/Session.cpp:740 session/Session.cpp:2079
+#: session/Session.cpp:747 session/Session.cpp:2086
 #: session/SessionController.cpp:361 session/SessionController.cpp:1887
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1210
 #: Vt102Emulation.cpp:1465
@@ -2281,7 +2281,7 @@ msgstr "ไม่มีกิจกรรมใด ๆ เกิดขึ้น�
 msgid "Show session"
 msgstr "คอนโซล-K"
 
-#: session/Session.cpp:1024
+#: session/Session.cpp:1031
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2290,28 +2290,28 @@ msgid ""
 "warning will only show once for this Konsole instance.</p>"
 msgstr ""
 
-#: session/Session.cpp:1064
+#: session/Session.cpp:1071
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "เสร็จสิ้น"
 
-#: session/Session.cpp:1078 session/Session.cpp:1094
+#: session/Session.cpp:1085 session/Session.cpp:1101
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "โปรแกรม '%1' ทำงานข้ดข้อง"
 
-#: session/Session.cpp:1080
+#: session/Session.cpp:1087
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "โปรแกรม '%1' ออกจากการทำงานด้วยสถานะ %2"
 
-#: session/Session.cpp:1606
+#: session/Session.cpp:1613
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ความคืบหน้าของ ZModem"
 
-#: session/Session.cpp:2078
+#: session/Session.cpp:2085
 #, fuzzy, kde-format
 #| msgid "Activity in session '%1'"
 msgid "Activity in '%1' (Session '%2')"
