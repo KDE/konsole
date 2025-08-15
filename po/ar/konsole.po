@@ -2530,7 +2530,7 @@ msgstr ""
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
-msgstr "<p>الجلسة الحالية تحوي على عملية نقل ملف ZModem بالفعل.</p>"
+msgstr "<p>الجلسة الحالية تحوي على عملية نقل ملف ZModem فعلًا.</p>"
 
 #: session/SessionController.cpp:2208
 #, kde-format
@@ -4376,7 +4376,7 @@ msgstr "اسم التشكيلة كان فارغًا؛ يرجى تعيين اسم
 #, kde-format
 msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
-msgstr "يوجد تشكيلة باسم \"%1\" بالفعل."
+msgstr "يوجد تشكيلة باسم \"%1\" فعلًا."
 
 #: widgets/EditProfileDialog.cpp:344
 #, kde-format
