@@ -740,11 +740,11 @@ public Q_SLOTS:
 
     /**
      * DBus slot to get an XDG activation token.
-     * Will check if the passed shellSessionId is the current one for safety.
+     * Will check if the passed cookieForRequest is the m_activationCookie one for safety.
      * Will try to generate a token and pass it back.
      * Can only be called from DBus, will answer delayed.
      */
-    Q_SCRIPTABLE QString activationToken(const QString &shellSessionIdForRequest) const;
+    Q_SCRIPTABLE QString activationToken(const QString &cookieForRequest) const;
 
 Q_SIGNALS:
 
@@ -978,6 +978,12 @@ private:
     QString _currentHostName;
 
     bool _selectMode = false;
+
+    /**
+     * secret cookie for activationToken, shall be only exposed to shell
+     * environment as KONSOLE_DBUS_ACTIVATION_COOKIE
+     */
+    const QString m_activationCookie;
 };
 
 }

@@ -20,10 +20,12 @@
 
 // Qt
 #include <QApplication>
+#include <QByteArray>
 #include <QColor>
 #include <QDir>
 #include <QFile>
 #include <QKeyEvent>
+#include <QRandomGenerator>
 #include <QThread>
 
 // KDE
@@ -87,8 +89,20 @@ static bool show_disallow_certain_dbus_methods_message = true;
 
 static const int ZMODEM_BUFFER_SIZE = 1048576; // 1 Mb
 
+// compute a securely random cookie used for activationToken
+static QString computeRandomCookie()
+{
+    // get good random data
+    quint32 array[8];
+    QRandomGenerator::global()->fillRange(array);
+
+    // convert to string usable for env var KONSOLE_DBUS_ACTIVATION_COOKIE
+    return QString::fromUtf8(QByteArray(reinterpret_cast<const char *>(array), sizeof(array)).toBase64());
+}
+
 Session::Session(QObject *parent)
     : QObject(parent)
+    , m_activationCookie(computeRandomCookie())
 {
     _uniqueIdentifier = QUuid::createUuid();
 
@@ -562,18 +576,24 @@ void Session::run()
 
     addEnvironmentEntry(QStringLiteral("WINDOWID=%1").arg(QString::number(windowId())));
 
+    // env vars we shall not expose e.g. over dbus
+    QStringList secretEnv;
+
 #if HAVE_DBUS
     const QString dbusService = QDBusConnection::sessionBus().baseService();
     addEnvironmentEntry(QStringLiteral("KONSOLE_DBUS_SERVICE=%1").arg(dbusService));
 
     const QString dbusObject = QStringLiteral("/Sessions/%1").arg(QString::number(_sessionId));
     addEnvironmentEntry(QStringLiteral("KONSOLE_DBUS_SESSION=%1").arg(dbusObject));
+
+    // secret cookie to trigger activationToken via dbus
+    secretEnv << QStringLiteral("KONSOLE_DBUS_ACTIVATION_COOKIE=%1").arg(m_activationCookie);
 #endif
 
 #ifndef Q_OS_WIN
     const auto originalEnvironment = _shellProcess->environment();
     _shellProcess->setProgram(exec);
-    _shellProcess->setEnvironment(originalEnvironment + _environment);
+    _shellProcess->setEnvironment(originalEnvironment + _environment + secretEnv);
     const auto context = KSandbox::makeHostContext(*_shellProcess);
     arguments = postProcessArgs(context.arguments, arguments);
     _shellProcess->setEnvironment(originalEnvironment);
@@ -2168,11 +2188,11 @@ void Session::runCommandFromLayout(const QString &command) const
     _emulation->sendText(command + QLatin1Char('\n'));
 }
 
-QString Session::activationToken(const QString &shellSessionIdForRequest) const
+QString Session::activationToken(const QString &cookieForRequest) const
 {
     // safety check, only work if the caller knows our id
     // they will read it from the SHELL_SESSION_ID env var inside this session
-    if (shellSessionIdForRequest != shellSessionId()) {
+    if (cookieForRequest != m_activationCookie) {
         return {};
     }
 
