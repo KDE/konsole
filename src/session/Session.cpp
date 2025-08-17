@@ -2231,7 +2231,16 @@ bool Session::isCalledViaDbusAndForbidden() const
 {
 #if HAVE_DBUS
     // we can check if this is called via dbus and then consult the config
-    return calledFromDBus() && !Konsole::KonsoleSettings::enableSecuritySensitiveDBusAPI();
+    if (calledFromDBus() && !Konsole::KonsoleSettings::enableSecuritySensitiveDBusAPI()) {
+        // trigger error reply
+        setDelayedReply(true);
+        auto reply = message().createErrorReply(QDBusError::AccessDenied, i18n("Security sensitive DBus API is disabled in the settings."));
+        QDBusConnection::sessionBus().send(reply);
+
+        // forbid call
+        return true;
+    }
+    return false;
 #else
     // no dbus, just allow it
     return false;
