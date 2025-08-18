@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-14 00:45+0000\n"
+"POT-Creation-Date: 2025-08-18 00:45+0000\n"
 "PO-Revision-Date: 2024-08-04 17:18+0700\n"
 "Last-Translator: OIS <mistresssilvara@hotmail.com>\n"
 "Language-Team: Interlingue <>\n"
@@ -5263,79 +5263,80 @@ msgctxt "@info:tooltip"
 msgid "Find the previous match for the current search phrase"
 msgstr "Cluder li panel de sercha"
 
-#: widgets/IncrementalSearchBar.cpp:101
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Display the options menu"
-msgstr "Monstrar li menú de parametres"
-
-#: widgets/IncrementalSearchBar.cpp:108
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Close the search bar"
-msgstr "Cluder li panel de sercha"
-
-#: widgets/IncrementalSearchBar.cpp:118
-#, kde-format
-msgctxt "@item:inmenu"
+#: widgets/IncrementalSearchBar.cpp:102
+#, fuzzy, kde-format
+#| msgid "Case sensitive"
+msgctxt "@action:button"
 msgid "Case sensitive"
 msgstr "Atenter a MAJ/min"
 
-#: widgets/IncrementalSearchBar.cpp:120
+#: widgets/IncrementalSearchBar.cpp:103
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether the search is case sensitive"
 msgstr "Cluder li panel de sercha"
 
-#: widgets/IncrementalSearchBar.cpp:123
+#: widgets/IncrementalSearchBar.cpp:114
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Display the options menu"
+msgstr "Monstrar li menú de parametres"
+
+#: widgets/IncrementalSearchBar.cpp:121
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Close the search bar"
+msgstr "Cluder li panel de sercha"
+
+#: widgets/IncrementalSearchBar.cpp:131
 #, fuzzy, kde-format
 msgctxt "@item:inmenu"
 msgid "Match regular expression"
 msgstr "Al sequent corespondentie"
 
-#: widgets/IncrementalSearchBar.cpp:127
+#: widgets/IncrementalSearchBar.cpp:135
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Highlight all matches"
 msgstr "Colorar omni correspondenties"
 
-#: widgets/IncrementalSearchBar.cpp:129
+#: widgets/IncrementalSearchBar.cpp:137
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether matching text should be highlighted"
 msgstr "Comande del redactor de textus: "
 
-#: widgets/IncrementalSearchBar.cpp:132
+#: widgets/IncrementalSearchBar.cpp:140
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Search backwards"
 msgstr "Serchar retro"
 
-#: widgets/IncrementalSearchBar.cpp:134
+#: widgets/IncrementalSearchBar.cpp:142
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should start from the bottom"
 msgstr "Cluder li panel de sercha"
 
-#: widgets/IncrementalSearchBar.cpp:139
+#: widgets/IncrementalSearchBar.cpp:147
 #, fuzzy, kde-format
 msgctxt "@item:inmenu"
 msgid "No wrap"
 msgstr "No"
 
-#: widgets/IncrementalSearchBar.cpp:141
+#: widgets/IncrementalSearchBar.cpp:149
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should stop instead of wrapping"
 msgstr "Cluder li panel de sercha"
 
-#: widgets/IncrementalSearchBar.cpp:175
+#: widgets/IncrementalSearchBar.cpp:184
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the bottom"
 msgstr "Cluder li panel de sercha"
 
-#: widgets/IncrementalSearchBar.cpp:180
+#: widgets/IncrementalSearchBar.cpp:189
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the top"
@@ -5516,6 +5517,10 @@ msgstr "&Configurar o renominar li carte..."
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "Cluder li carte"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "Case sensitive"
+#~ msgstr "Atenter a MAJ/min"
 
 #~ msgctxt "Do not save any lines to the scrollback history"
 #~ msgid "None"

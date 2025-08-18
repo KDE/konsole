@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-14 00:45+0000\n"
+"POT-Creation-Date: 2025-08-18 00:45+0000\n"
 "PO-Revision-Date: 2025-05-01 16:52+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -5500,67 +5500,68 @@ msgid "Find the previous match for the current search phrase"
 msgstr ""
 "Trouver la précédente correspondance pour la phrase actuellement recherchée"
 
-#: widgets/IncrementalSearchBar.cpp:101
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Display the options menu"
-msgstr "Afficher le menu des options"
-
-#: widgets/IncrementalSearchBar.cpp:108
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Close the search bar"
-msgstr "Fermer la barre de recherche"
-
-#: widgets/IncrementalSearchBar.cpp:118
-#, kde-format
-msgctxt "@item:inmenu"
+#: widgets/IncrementalSearchBar.cpp:102
+#, fuzzy, kde-format
+#| msgid "Case sensitive"
+msgctxt "@action:button"
 msgid "Case sensitive"
 msgstr "Sensible à la casse"
 
-#: widgets/IncrementalSearchBar.cpp:120
+#: widgets/IncrementalSearchBar.cpp:103
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether the search is case sensitive"
 msgstr "Définit si la recherche doit tenir compte de la casse"
 
-#: widgets/IncrementalSearchBar.cpp:123
+#: widgets/IncrementalSearchBar.cpp:114
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Display the options menu"
+msgstr "Afficher le menu des options"
+
+#: widgets/IncrementalSearchBar.cpp:121
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Close the search bar"
+msgstr "Fermer la barre de recherche"
+
+#: widgets/IncrementalSearchBar.cpp:131
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Match regular expression"
 msgstr "Correspond à une expression rationnelle"
 
-#: widgets/IncrementalSearchBar.cpp:127
+#: widgets/IncrementalSearchBar.cpp:135
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Highlight all matches"
 msgstr "Mettre en valeur toutes les correspondances"
 
-#: widgets/IncrementalSearchBar.cpp:129
+#: widgets/IncrementalSearchBar.cpp:137
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether matching text should be highlighted"
 msgstr "Définit si le texte en correspondance doit être mis en évidence"
 
-#: widgets/IncrementalSearchBar.cpp:132
+#: widgets/IncrementalSearchBar.cpp:140
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Search backwards"
 msgstr "Chercher en arrière"
 
-#: widgets/IncrementalSearchBar.cpp:134
+#: widgets/IncrementalSearchBar.cpp:142
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should start from the bottom"
 msgstr "Définit si la recherche doit se faire ou non à partir du bas"
 
-#: widgets/IncrementalSearchBar.cpp:139
+#: widgets/IncrementalSearchBar.cpp:147
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "No wrap"
 msgstr "Aucun retour à la ligne"
 
-#: widgets/IncrementalSearchBar.cpp:141
+#: widgets/IncrementalSearchBar.cpp:149
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should stop instead of wrapping"
@@ -5568,13 +5569,13 @@ msgstr ""
 "Définit si la recherche doit se terminer plutôt que de continuer sur la "
 "ligne suivante"
 
-#: widgets/IncrementalSearchBar.cpp:175
+#: widgets/IncrementalSearchBar.cpp:184
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the bottom"
 msgstr "Recherchez la phrase actuelle de recherche à partir du bas"
 
-#: widgets/IncrementalSearchBar.cpp:180
+#: widgets/IncrementalSearchBar.cpp:189
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the top"
@@ -5753,6 +5754,10 @@ msgstr "&Configurer ou renommer l'onglet..."
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "Fermer l'onglet"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "Case sensitive"
+#~ msgstr "Sensible à la casse"
 
 #~ msgctxt "Do not save any lines to the scrollback history"
 #~ msgid "None"

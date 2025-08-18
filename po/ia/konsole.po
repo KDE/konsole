@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-14 00:45+0000\n"
+"POT-Creation-Date: 2025-08-18 00:45+0000\n"
 "PO-Revision-Date: 2025-05-09 17:15+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -5406,25 +5406,14 @@ msgctxt "@info:tooltip"
 msgid "Find the previous match for the current search phrase"
 msgstr "Trova le previe correspondentia pro le currente phrase de recerca"
 
-#: widgets/IncrementalSearchBar.cpp:101
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Display the options menu"
-msgstr "Monstra le menu de optiones"
-
-#: widgets/IncrementalSearchBar.cpp:108
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Close the search bar"
-msgstr "Claude le barra de recerca"
-
-#: widgets/IncrementalSearchBar.cpp:118
-#, kde-format
-msgctxt "@item:inmenu"
+#: widgets/IncrementalSearchBar.cpp:102
+#, fuzzy, kde-format
+#| msgid "Case sensitive"
+msgctxt "@action:button"
 msgid "Case sensitive"
 msgstr "Sensibile al differentia inter majusculas e minusculas"
 
-#: widgets/IncrementalSearchBar.cpp:120
+#: widgets/IncrementalSearchBar.cpp:103
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether the search is case sensitive"
@@ -5432,55 +5421,67 @@ msgstr ""
 "Il fixa si le recerca es sensibile al differentia inter majusculas e "
 "minusculas"
 
-#: widgets/IncrementalSearchBar.cpp:123
+#: widgets/IncrementalSearchBar.cpp:114
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Display the options menu"
+msgstr "Monstra le menu de optiones"
+
+#: widgets/IncrementalSearchBar.cpp:121
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Close the search bar"
+msgstr "Claude le barra de recerca"
+
+#: widgets/IncrementalSearchBar.cpp:131
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Match regular expression"
 msgstr "Corresponde (cerca) expressiones regular"
 
-#: widgets/IncrementalSearchBar.cpp:127
+#: widgets/IncrementalSearchBar.cpp:135
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Highlight all matches"
 msgstr "Evidentia omne coincidentias"
 
-#: widgets/IncrementalSearchBar.cpp:129
+#: widgets/IncrementalSearchBar.cpp:137
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether matching text should be highlighted"
 msgstr "Il fixa si le texto correspondente debe esser evidentiate"
 
-#: widgets/IncrementalSearchBar.cpp:132
+#: widgets/IncrementalSearchBar.cpp:140
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Search backwards"
 msgstr "Cerca de retro"
 
-#: widgets/IncrementalSearchBar.cpp:134
+#: widgets/IncrementalSearchBar.cpp:142
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should start from the bottom"
 msgstr "Fixa si le cerca deberea initiar ab le fin"
 
-#: widgets/IncrementalSearchBar.cpp:139
+#: widgets/IncrementalSearchBar.cpp:147
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "No wrap"
 msgstr "Non inveloppa"
 
-#: widgets/IncrementalSearchBar.cpp:141
+#: widgets/IncrementalSearchBar.cpp:149
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should stop instead of wrapping"
 msgstr "Assigna si le cerca deberea stoppar in loco de inveloppar"
 
-#: widgets/IncrementalSearchBar.cpp:175
+#: widgets/IncrementalSearchBar.cpp:184
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the bottom"
 msgstr "Cerca le currente phrase de recerca ab le fin"
 
-#: widgets/IncrementalSearchBar.cpp:180
+#: widgets/IncrementalSearchBar.cpp:189
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the top"
@@ -5659,6 +5660,10 @@ msgstr "&Configura o Renomina Scheda..."
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "Claude scheda"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "Case sensitive"
+#~ msgstr "Sensibile al differentia inter majusculas e minusculas"
 
 #~ msgctxt "Do not save any lines to the scrollback history"
 #~ msgid "None"

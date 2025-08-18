@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-14 00:45+0000\n"
+"POT-Creation-Date: 2025-08-18 00:45+0000\n"
 "PO-Revision-Date: 2013-09-08 07:04+0900\n"
 "Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -5587,25 +5587,15 @@ msgctxt "@info:tooltip"
 msgid "Find the previous match for the current search phrase"
 msgstr "ھازىرقى ئىبارىگە ماس كېلىدىغان ئالدىنقى ماسلىقنى ئىزدەيدۇ"
 
-#: widgets/IncrementalSearchBar.cpp:101
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Display the options menu"
-msgstr "تاللانما تىزىملىكىنى كۆرسىتىدۇ"
-
-#: widgets/IncrementalSearchBar.cpp:108
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Close the search bar"
-msgstr "ئىزدەش بالدىقىنى ياپىدۇ"
-
-#: widgets/IncrementalSearchBar.cpp:118
-#, kde-format
-msgctxt "@item:inmenu"
+#: widgets/IncrementalSearchBar.cpp:102
+#, fuzzy, kde-format
+#| msgctxt "@item:inmenu"
+#| msgid "Case sensitive"
+msgctxt "@action:button"
 msgid "Case sensitive"
 msgstr "چوڭ كىچىك يېزىلىشنى پەرقلەندۈر"
 
-#: widgets/IncrementalSearchBar.cpp:120
+#: widgets/IncrementalSearchBar.cpp:103
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether the search is case sensitive"
@@ -5613,43 +5603,55 @@ msgstr ""
 "ئىزدىگەندە ھەرپلەرنىڭ چوڭ كىچىك يېزىلىشىغا قارايدىغان قارىمايدىغانلىقىنى "
 "بېكىتىدۇ"
 
-#: widgets/IncrementalSearchBar.cpp:123
+#: widgets/IncrementalSearchBar.cpp:114
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Display the options menu"
+msgstr "تاللانما تىزىملىكىنى كۆرسىتىدۇ"
+
+#: widgets/IncrementalSearchBar.cpp:121
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Close the search bar"
+msgstr "ئىزدەش بالدىقىنى ياپىدۇ"
+
+#: widgets/IncrementalSearchBar.cpp:131
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Match regular expression"
 msgstr "مۇنتىزىم ئىپادە بويىچە ماسلاشتۇر"
 
-#: widgets/IncrementalSearchBar.cpp:127
+#: widgets/IncrementalSearchBar.cpp:135
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Highlight all matches"
 msgstr "ماس كەلگەن تۈرنى يورۇت"
 
-#: widgets/IncrementalSearchBar.cpp:129
+#: widgets/IncrementalSearchBar.cpp:137
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether matching text should be highlighted"
 msgstr "ماس كەلگەن تېكىستنى يورۇتۇپ كۆرسىتەمدۇ قانداق بەلگىلەيدۇ"
 
-#: widgets/IncrementalSearchBar.cpp:132
+#: widgets/IncrementalSearchBar.cpp:140
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Search backwards"
 msgstr ""
 
-#: widgets/IncrementalSearchBar.cpp:134
+#: widgets/IncrementalSearchBar.cpp:142
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should start from the bottom"
 msgstr ""
 
-#: widgets/IncrementalSearchBar.cpp:139
+#: widgets/IncrementalSearchBar.cpp:147
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "No wrap"
 msgstr ""
 
-#: widgets/IncrementalSearchBar.cpp:141
+#: widgets/IncrementalSearchBar.cpp:149
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid "Sets whether the search is case sensitive"
@@ -5659,7 +5661,7 @@ msgstr ""
 "ئىزدىگەندە ھەرپلەرنىڭ چوڭ كىچىك يېزىلىشىغا قارايدىغان قارىمايدىغانلىقىنى "
 "بېكىتىدۇ"
 
-#: widgets/IncrementalSearchBar.cpp:175
+#: widgets/IncrementalSearchBar.cpp:184
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid "Find the next match for the current search phrase"
@@ -5667,7 +5669,7 @@ msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the bottom"
 msgstr "ھازىرقى ئىبارىگە ماس كېلىدىغان كېيىنكى ماسلىقنى ئىزدەيدۇ"
 
-#: widgets/IncrementalSearchBar.cpp:180
+#: widgets/IncrementalSearchBar.cpp:189
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid "Find the next match for the current search phrase"
@@ -5868,6 +5870,10 @@ msgstr "بەتكۈچ ئاتىنى ئۆزگەرت(&R)"
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "بەتكۈچنى ياپ(&C)"
+
+#~ msgctxt "@item:inmenu"
+#~ msgid "Case sensitive"
+#~ msgstr "چوڭ كىچىك يېزىلىشنى پەرقلەندۈر"
 
 #, fuzzy
 #~| msgctxt "@action:inmenu Do not select any tabs"

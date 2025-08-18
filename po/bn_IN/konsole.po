@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-14 00:45+0000\n"
+"POT-Creation-Date: 2025-08-18 00:45+0000\n"
 "PO-Revision-Date: 2008-12-29 15:34+0530\n"
 "Last-Translator: Runa Bhattacharjee <runab@redhat.com>\n"
 "Language-Team: Bengali INDIA <fedora-trans-bn_IN@redhat.com>\n"
@@ -5611,87 +5611,88 @@ msgctxt "@info:tooltip"
 msgid "Find the previous match for the current search phrase"
 msgstr "চিহ্নিত তথ্যের পূর্ববর্তী উপস্থিতি অনুসন্ধান করুন"
 
-#: widgets/IncrementalSearchBar.cpp:101
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Display the options menu"
-msgstr ""
-
-#: widgets/IncrementalSearchBar.cpp:108
+#: widgets/IncrementalSearchBar.cpp:102
 #, fuzzy, kde-format
-#| msgid "Close the search bar"
-msgctxt "@info:tooltip"
-msgid "Close the search bar"
-msgstr "অনুসন্ধানের বার বন্ধ করুন"
-
-#: widgets/IncrementalSearchBar.cpp:118
-#, kde-format
-msgctxt "@item:inmenu"
+#| msgid "Sets whether the search is case sensitive"
+msgctxt "@action:button"
 msgid "Case sensitive"
-msgstr ""
+msgstr "হরফের ছাঁদ মেলানো হবে কি না নির্ধারণ করতে ব্যবহৃত হয়"
 
-#: widgets/IncrementalSearchBar.cpp:120
+#: widgets/IncrementalSearchBar.cpp:103
 #, fuzzy, kde-format
 #| msgid "Sets whether the search is case sensitive"
 msgctxt "@info:tooltip"
 msgid "Sets whether the search is case sensitive"
 msgstr "হরফের ছাঁদ মেলানো হবে কি না নির্ধারণ করতে ব্যবহৃত হয়"
 
-#: widgets/IncrementalSearchBar.cpp:123
+#: widgets/IncrementalSearchBar.cpp:114
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Display the options menu"
+msgstr ""
+
+#: widgets/IncrementalSearchBar.cpp:121
+#, fuzzy, kde-format
+#| msgid "Close the search bar"
+msgctxt "@info:tooltip"
+msgid "Close the search bar"
+msgstr "অনুসন্ধানের বার বন্ধ করুন"
+
+#: widgets/IncrementalSearchBar.cpp:131
 #, fuzzy, kde-format
 #| msgid "Match regular expression"
 msgctxt "@item:inmenu"
 msgid "Match regular expression"
 msgstr "রেগুলার এক্সপ্রেশন মেলানো হবে"
 
-#: widgets/IncrementalSearchBar.cpp:127
+#: widgets/IncrementalSearchBar.cpp:135
 #, fuzzy, kde-format
 #| msgid "Highlight all"
 msgctxt "@item:inmenu"
 msgid "Highlight all matches"
 msgstr "সকল উপস্থিতি উজ্জ্বল করা হবে"
 
-#: widgets/IncrementalSearchBar.cpp:129
+#: widgets/IncrementalSearchBar.cpp:137
 #, fuzzy, kde-format
 #| msgid "Sets whether matching text should be highlighted"
 msgctxt "@info:tooltip"
 msgid "Sets whether matching text should be highlighted"
 msgstr "চিহ্নিত তথ্যের সকল উপস্থিতি উজ্জ্বলিত করা হবে কি না নির্ধারণ করা হয়"
 
-#: widgets/IncrementalSearchBar.cpp:132
+#: widgets/IncrementalSearchBar.cpp:140
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Search backwards"
 msgstr ""
 
-#: widgets/IncrementalSearchBar.cpp:134
+#: widgets/IncrementalSearchBar.cpp:142
 #, fuzzy, kde-format
 #| msgid "Find the next match for the current search phrase"
 msgctxt "@info:tooltip"
 msgid "Sets whether search should start from the bottom"
 msgstr "চিহ্নিত তথ্যের পরবর্তী উপস্থিতি অনুসন্ধান করুন"
 
-#: widgets/IncrementalSearchBar.cpp:139
+#: widgets/IncrementalSearchBar.cpp:147
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "No wrap"
 msgstr ""
 
-#: widgets/IncrementalSearchBar.cpp:141
+#: widgets/IncrementalSearchBar.cpp:149
 #, fuzzy, kde-format
 #| msgid "Find the next match for the current search phrase"
 msgctxt "@info:tooltip"
 msgid "Sets whether search should stop instead of wrapping"
 msgstr "চিহ্নিত তথ্যের পরবর্তী উপস্থিতি অনুসন্ধান করুন"
 
-#: widgets/IncrementalSearchBar.cpp:175
+#: widgets/IncrementalSearchBar.cpp:184
 #, fuzzy, kde-format
 #| msgid "Find the next match for the current search phrase"
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the bottom"
 msgstr "চিহ্নিত তথ্যের পরবর্তী উপস্থিতি অনুসন্ধান করুন"
 
-#: widgets/IncrementalSearchBar.cpp:180
+#: widgets/IncrementalSearchBar.cpp:189
 #, fuzzy, kde-format
 #| msgid "Find the next match for the current search phrase"
 msgctxt "@info:tooltip"

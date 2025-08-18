@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-14 00:45+0000\n"
+"POT-Creation-Date: 2025-08-18 00:45+0000\n"
 "PO-Revision-Date: 2021-10-15 10:45+0200\n"
 "Last-Translator: Prof. Dr. Eduard Werner <e.werner@rz.uni-leipzig.de>\n"
 "Language-Team: Upper Sorbian\n"
@@ -5339,82 +5339,82 @@ msgctxt "@info:tooltip"
 msgid "Find the previous match for the current search phrase"
 msgstr ""
 
-#: widgets/IncrementalSearchBar.cpp:101
+#: widgets/IncrementalSearchBar.cpp:102
+#, fuzzy, kde-format
+#| msgid "C&lose Session"
+msgctxt "@action:button"
+msgid "Case sensitive"
+msgstr "Interpreter &zakónčić"
+
+#: widgets/IncrementalSearchBar.cpp:103
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Sets whether the search is case sensitive"
+msgstr ""
+
+#: widgets/IncrementalSearchBar.cpp:114
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Display the options menu"
 msgstr ""
 
-#: widgets/IncrementalSearchBar.cpp:108
+#: widgets/IncrementalSearchBar.cpp:121
 #, fuzzy, kde-format
 #| msgid "C&lose Session"
 msgctxt "@info:tooltip"
 msgid "Close the search bar"
 msgstr "Interpreter &zakónčić"
 
-#: widgets/IncrementalSearchBar.cpp:118
-#, fuzzy, kde-format
-#| msgid "C&lose Session"
-msgctxt "@item:inmenu"
-msgid "Case sensitive"
-msgstr "Interpreter &zakónčić"
-
-#: widgets/IncrementalSearchBar.cpp:120
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Sets whether the search is case sensitive"
-msgstr ""
-
-#: widgets/IncrementalSearchBar.cpp:123
+#: widgets/IncrementalSearchBar.cpp:131
 #, fuzzy, kde-format
 #| msgid "As &regular expression"
 msgctxt "@item:inmenu"
 msgid "Match regular expression"
 msgstr "Jako &prawidłowny wuraz"
 
-#: widgets/IncrementalSearchBar.cpp:127
+#: widgets/IncrementalSearchBar.cpp:135
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Highlight all matches"
 msgstr ""
 
-#: widgets/IncrementalSearchBar.cpp:129
+#: widgets/IncrementalSearchBar.cpp:137
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether matching text should be highlighted"
 msgstr ""
 
-#: widgets/IncrementalSearchBar.cpp:132
+#: widgets/IncrementalSearchBar.cpp:140
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Search backwards"
 msgstr ""
 
-#: widgets/IncrementalSearchBar.cpp:134
+#: widgets/IncrementalSearchBar.cpp:142
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should start from the bottom"
 msgstr ""
 
-#: widgets/IncrementalSearchBar.cpp:139
+#: widgets/IncrementalSearchBar.cpp:147
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "No wrap"
 msgstr ""
 
-#: widgets/IncrementalSearchBar.cpp:141
+#: widgets/IncrementalSearchBar.cpp:149
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should stop instead of wrapping"
 msgstr ""
 
-#: widgets/IncrementalSearchBar.cpp:175
+#: widgets/IncrementalSearchBar.cpp:184
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the bottom"
 msgstr ""
 
-#: widgets/IncrementalSearchBar.cpp:180
+#: widgets/IncrementalSearchBar.cpp:189
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the top"
@@ -5609,6 +5609,12 @@ msgstr "Proces za&kónčić"
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "Interpreter &zakónčić"
+
+#, fuzzy
+#~| msgid "C&lose Session"
+#~ msgctxt "@item:inmenu"
+#~ msgid "Case sensitive"
+#~ msgstr "Interpreter &zakónčić"
 
 #, fuzzy
 #~| msgid "Save File"

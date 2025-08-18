@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-14 00:45+0000\n"
+"POT-Creation-Date: 2025-08-18 00:45+0000\n"
 "PO-Revision-Date: 2009-09-13 16:45+0100\n"
 "Last-Translator: Berend Ytsma <berendy@gmail.com>\n"
 "Language-Team: Frysk <kde-i18n-fry@kde.org>\n"
@@ -5794,29 +5794,16 @@ msgctxt "@info:tooltip"
 msgid "Find the previous match for the current search phrase"
 msgstr "Gean nei de foarige oerienkomst op it aktive sykterm"
 
-#: widgets/IncrementalSearchBar.cpp:101
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Display the options menu"
-msgstr ""
-
-#: widgets/IncrementalSearchBar.cpp:108
-#, fuzzy, kde-format
-#| msgid "Close the search bar"
-msgctxt "@info:tooltip"
-msgid "Close the search bar"
-msgstr "De sykbalke slute"
-
 # msgid "C&lose Session"
-#: widgets/IncrementalSearchBar.cpp:118
+#: widgets/IncrementalSearchBar.cpp:102
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu Close Active View"
 #| msgid "Close Active"
-msgctxt "@item:inmenu"
+msgctxt "@action:button"
 msgid "Case sensitive"
 msgstr "Aktive slúte"
 
-#: widgets/IncrementalSearchBar.cpp:120
+#: widgets/IncrementalSearchBar.cpp:103
 #, fuzzy, kde-format
 #| msgid "Sets whether the search is case sensitive"
 msgctxt "@info:tooltip"
@@ -5825,62 +5812,75 @@ msgstr ""
 "Beskiede of der by it sykjen ûnderskied makke wurde moat tusken haad- en "
 "lytse letters."
 
+#: widgets/IncrementalSearchBar.cpp:114
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Display the options menu"
+msgstr ""
+
+#: widgets/IncrementalSearchBar.cpp:121
+#, fuzzy, kde-format
+#| msgid "Close the search bar"
+msgctxt "@info:tooltip"
+msgid "Close the search bar"
+msgstr "De sykbalke slute"
+
 # msgid "As &regular expression"
-#: widgets/IncrementalSearchBar.cpp:123
+#: widgets/IncrementalSearchBar.cpp:131
 #, fuzzy, kde-format
 #| msgid "Match regular expression"
 msgctxt "@item:inmenu"
 msgid "Match regular expression"
 msgstr "Oerienkomme mei reguliere ekspresje"
 
-#: widgets/IncrementalSearchBar.cpp:127
+#: widgets/IncrementalSearchBar.cpp:135
 #, fuzzy, kde-format
 #| msgid "Highlight all"
 msgctxt "@item:inmenu"
 msgid "Highlight all matches"
 msgstr "Alles markearje"
 
-#: widgets/IncrementalSearchBar.cpp:129
+#: widgets/IncrementalSearchBar.cpp:137
 #, fuzzy, kde-format
 #| msgid "Sets whether matching text should be highlighted"
 msgctxt "@info:tooltip"
 msgid "Sets whether matching text should be highlighted"
 msgstr "Beskiede of oerienkommende tekst markearre wurde moat"
 
-#: widgets/IncrementalSearchBar.cpp:132
+#: widgets/IncrementalSearchBar.cpp:140
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Search backwards"
 msgstr ""
 
-#: widgets/IncrementalSearchBar.cpp:134
+#: widgets/IncrementalSearchBar.cpp:142
 #, fuzzy, kde-format
 #| msgid "Find the next match for the current search phrase"
 msgctxt "@info:tooltip"
 msgid "Sets whether search should start from the bottom"
 msgstr "Gean nei de folgjende oerienkomst op it aktive sykterm"
 
-#: widgets/IncrementalSearchBar.cpp:139
+#: widgets/IncrementalSearchBar.cpp:147
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "No wrap"
 msgstr ""
 
-#: widgets/IncrementalSearchBar.cpp:141
+#: widgets/IncrementalSearchBar.cpp:149
 #, fuzzy, kde-format
 #| msgid "Find the next match for the current search phrase"
 msgctxt "@info:tooltip"
 msgid "Sets whether search should stop instead of wrapping"
 msgstr "Gean nei de folgjende oerienkomst op it aktive sykterm"
 
-#: widgets/IncrementalSearchBar.cpp:175
+#: widgets/IncrementalSearchBar.cpp:184
 #, fuzzy, kde-format
 #| msgid "Find the next match for the current search phrase"
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the bottom"
 msgstr "Gean nei de folgjende oerienkomst op it aktive sykterm"
 
-#: widgets/IncrementalSearchBar.cpp:180
+#: widgets/IncrementalSearchBar.cpp:189
 #, fuzzy, kde-format
 #| msgid "Find the next match for the current search phrase"
 msgctxt "@info:tooltip"
@@ -6102,6 +6102,14 @@ msgstr "L&jepper omneame"
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "Ljepper s&lute"
+
+# msgid "C&lose Session"
+#, fuzzy
+#~| msgctxt "@action:inmenu Close Active View"
+#~| msgid "Close Active"
+#~ msgctxt "@item:inmenu"
+#~ msgid "Case sensitive"
+#~ msgstr "Aktive slúte"
 
 #, fuzzy
 #~| msgid "Open Link"

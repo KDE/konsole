@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole trunk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-14 00:45+0000\n"
+"POT-Creation-Date: 2025-08-18 00:45+0000\n"
 "PO-Revision-Date: 2020-02-05 14:49+0000\n"
 "Last-Translator: Subin Siby <subins2000@gmail.com>\n"
 "Language-Team: SMC <smc.org.in>\n"
@@ -5339,79 +5339,79 @@ msgctxt "@info:tooltip"
 msgid "Find the previous match for the current search phrase"
 msgstr "ഇപ്പോള്‍ നല്‍കിയ വാചകത്തിന്റെ മുമ്പത്തെ പൊരുത്തം കണ്ടുപിടിയ്ക്കുക"
 
-#: widgets/IncrementalSearchBar.cpp:101
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Display the options menu"
-msgstr ""
-
-#: widgets/IncrementalSearchBar.cpp:108
+#: widgets/IncrementalSearchBar.cpp:102
 #, fuzzy, kde-format
-msgctxt "@info:tooltip"
-msgid "Close the search bar"
-msgstr "തെരയാനുള്ള പട്ട അടയ്ക്കുക"
-
-#: widgets/IncrementalSearchBar.cpp:118
-#, fuzzy, kde-format
-msgctxt "@item:inmenu"
+msgctxt "@action:button"
 msgid "Case sensitive"
 msgstr "സജീവമായതടയ്ക്കുക"
 
-#: widgets/IncrementalSearchBar.cpp:120
+#: widgets/IncrementalSearchBar.cpp:103
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether the search is case sensitive"
 msgstr "തെരയുമ്പോള്‍ വലിയക്ഷര-ചെറിയക്ഷര വ്യത്യാസം പരിഗണിയ്ക്കുക"
 
-#: widgets/IncrementalSearchBar.cpp:123
+#: widgets/IncrementalSearchBar.cpp:114
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Display the options menu"
+msgstr ""
+
+#: widgets/IncrementalSearchBar.cpp:121
+#, fuzzy, kde-format
+msgctxt "@info:tooltip"
+msgid "Close the search bar"
+msgstr "തെരയാനുള്ള പട്ട അടയ്ക്കുക"
+
+#: widgets/IncrementalSearchBar.cpp:131
 #, fuzzy, kde-format
 msgctxt "@item:inmenu"
 msgid "Match regular expression"
 msgstr "റെഗുലര്‍ എക്സ്‌പ്രഷന്‍ വച്ചു് പൊരുത്തം നോക്കുക"
 
-#: widgets/IncrementalSearchBar.cpp:127
+#: widgets/IncrementalSearchBar.cpp:135
 #, fuzzy, kde-format
 msgctxt "@item:inmenu"
 msgid "Highlight all matches"
 msgstr "എല്ലാം എടുത്തു് കാണിയ്ക്കുക"
 
-#: widgets/IncrementalSearchBar.cpp:129
+#: widgets/IncrementalSearchBar.cpp:137
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether matching text should be highlighted"
 msgstr "പൊരുത്തമുള്ള പദാവലി എടുത്തു് കാണിയ്ക്കണമോ എന്നു് സജ്ജീകരിയ്ക്കുന്നു"
 
-#: widgets/IncrementalSearchBar.cpp:132
+#: widgets/IncrementalSearchBar.cpp:140
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Search backwards"
 msgstr ""
 
-#: widgets/IncrementalSearchBar.cpp:134
+#: widgets/IncrementalSearchBar.cpp:142
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should start from the bottom"
 msgstr "ഇപ്പോള്‍ നല്‍കിയ വാചകത്തിന്റെ അടുത്ത പൊരുത്തം കണ്ടുപിടിയ്ക്കുക"
 
-#: widgets/IncrementalSearchBar.cpp:139
+#: widgets/IncrementalSearchBar.cpp:147
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "No wrap"
 msgstr ""
 
-#: widgets/IncrementalSearchBar.cpp:141
+#: widgets/IncrementalSearchBar.cpp:149
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should stop instead of wrapping"
 msgstr "ഇപ്പോള്‍ നല്‍കിയ വാചകത്തിന്റെ അടുത്ത പൊരുത്തം കണ്ടുപിടിയ്ക്കുക"
 
-#: widgets/IncrementalSearchBar.cpp:175
+#: widgets/IncrementalSearchBar.cpp:184
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the bottom"
 msgstr "ഇപ്പോള്‍ നല്‍കിയ വാചകത്തിന്റെ അടുത്ത പൊരുത്തം കണ്ടുപിടിയ്ക്കുക"
 
-#: widgets/IncrementalSearchBar.cpp:180
+#: widgets/IncrementalSearchBar.cpp:189
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the top"
@@ -5595,6 +5595,11 @@ msgstr "കിളിവാതിലിന്റെ പേരു് മാറ്�
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "കിളിവാതില്‍ &അടയ്ക്കുക"
+
+#, fuzzy
+#~ msgctxt "@item:inmenu"
+#~ msgid "Case sensitive"
+#~ msgstr "സജീവമായതടയ്ക്കുക"
 
 #, fuzzy
 #~ msgctxt "Do not save any lines to the scrollback history"

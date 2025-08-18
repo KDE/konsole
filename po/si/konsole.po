@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-14 00:45+0000\n"
+"POT-Creation-Date: 2025-08-18 00:45+0000\n"
 "PO-Revision-Date: 2011-08-14 00:07+0530\n"
 "Last-Translator: Danishka Navin <danishka@gmail.com>\n"
 "Language-Team: Sinhala <danishka@gmail.com>\n"
@@ -5697,89 +5697,89 @@ msgctxt "@info:tooltip"
 msgid "Find the previous match for the current search phrase"
 msgstr "වත්මන් සවුම් වදනට පෙර ගැලපුම් සොයන්න"
 
-#: widgets/IncrementalSearchBar.cpp:101
-#, fuzzy, kde-format
-#| msgid "Display the options menu"
-msgctxt "@info:tooltip"
-msgid "Display the options menu"
-msgstr "අභිප්‍රේත මෙනුව පෙන්වන්න"
-
-#: widgets/IncrementalSearchBar.cpp:108
-#, fuzzy, kde-format
-#| msgid "Close the search bar"
-msgctxt "@info:tooltip"
-msgid "Close the search bar"
-msgstr "සෙවුම් තීරුව වසන්න"
-
-#: widgets/IncrementalSearchBar.cpp:118
+#: widgets/IncrementalSearchBar.cpp:102
 #, fuzzy, kde-format
 #| msgid "Case sensitive"
-msgctxt "@item:inmenu"
+msgctxt "@action:button"
 msgid "Case sensitive"
 msgstr "අක්‍ෂර සංවේදී"
 
-#: widgets/IncrementalSearchBar.cpp:120
+#: widgets/IncrementalSearchBar.cpp:103
 #, fuzzy, kde-format
 #| msgid "Sets whether the search is case sensitive"
 msgctxt "@info:tooltip"
 msgid "Sets whether the search is case sensitive"
 msgstr "සෙවුම අක්‍ෂර සංවේදී දැයි සකසන්න"
 
-#: widgets/IncrementalSearchBar.cpp:123
+#: widgets/IncrementalSearchBar.cpp:114
+#, fuzzy, kde-format
+#| msgid "Display the options menu"
+msgctxt "@info:tooltip"
+msgid "Display the options menu"
+msgstr "අභිප්‍රේත මෙනුව පෙන්වන්න"
+
+#: widgets/IncrementalSearchBar.cpp:121
+#, fuzzy, kde-format
+#| msgid "Close the search bar"
+msgctxt "@info:tooltip"
+msgid "Close the search bar"
+msgstr "සෙවුම් තීරුව වසන්න"
+
+#: widgets/IncrementalSearchBar.cpp:131
 #, fuzzy, kde-format
 #| msgid "Match regular expression"
 msgctxt "@item:inmenu"
 msgid "Match regular expression"
 msgstr "සාමාන්‍ය ප්‍රකාශන සසඳන්න"
 
-#: widgets/IncrementalSearchBar.cpp:127
+#: widgets/IncrementalSearchBar.cpp:135
 #, fuzzy, kde-format
 #| msgid "Highlight all matches"
 msgctxt "@item:inmenu"
 msgid "Highlight all matches"
 msgstr "සියලු ගැලපුම් උද්දීපනය කරන්න"
 
-#: widgets/IncrementalSearchBar.cpp:129
+#: widgets/IncrementalSearchBar.cpp:137
 #, fuzzy, kde-format
 #| msgid "Sets whether matching text should be highlighted"
 msgctxt "@info:tooltip"
 msgid "Sets whether matching text should be highlighted"
 msgstr "Sets whether matching text should be highlighted"
 
-#: widgets/IncrementalSearchBar.cpp:132
+#: widgets/IncrementalSearchBar.cpp:140
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Search backwards"
 msgstr ""
 
-#: widgets/IncrementalSearchBar.cpp:134
+#: widgets/IncrementalSearchBar.cpp:142
 #, fuzzy, kde-format
 #| msgid "Find the next match for the current search phrase"
 msgctxt "@info:tooltip"
 msgid "Sets whether search should start from the bottom"
 msgstr "Find the next match for the current search phrase"
 
-#: widgets/IncrementalSearchBar.cpp:139
+#: widgets/IncrementalSearchBar.cpp:147
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "No wrap"
 msgstr ""
 
-#: widgets/IncrementalSearchBar.cpp:141
+#: widgets/IncrementalSearchBar.cpp:149
 #, fuzzy, kde-format
 #| msgid "Find the next match for the current search phrase"
 msgctxt "@info:tooltip"
 msgid "Sets whether search should stop instead of wrapping"
 msgstr "Find the next match for the current search phrase"
 
-#: widgets/IncrementalSearchBar.cpp:175
+#: widgets/IncrementalSearchBar.cpp:184
 #, fuzzy, kde-format
 #| msgid "Find the next match for the current search phrase"
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the bottom"
 msgstr "Find the next match for the current search phrase"
 
-#: widgets/IncrementalSearchBar.cpp:180
+#: widgets/IncrementalSearchBar.cpp:189
 #, fuzzy, kde-format
 #| msgid "Find the next match for the current search phrase"
 msgctxt "@info:tooltip"
@@ -5980,6 +5980,12 @@ msgstr "ටැබයේ නම වෙනස් (&R)"
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "ටැබය වසන්න (&C)"
+
+#, fuzzy
+#~| msgid "Case sensitive"
+#~ msgctxt "@item:inmenu"
+#~ msgid "Case sensitive"
+#~ msgstr "අක්‍ෂර සංවේදී"
 
 #, fuzzy
 #~| msgctxt "@action:inmenu Do not select any tabs"

@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-14 00:45+0000\n"
+"POT-Creation-Date: 2025-08-18 00:45+0000\n"
 "PO-Revision-Date: 2011-07-11 13:50+0530\n"
 "Last-Translator: Shankar Prasad <svenkate@redhat.com>\n"
 "Language-Team: Kannada <en@li.org>\n"
@@ -5705,89 +5705,89 @@ msgctxt "@info:tooltip"
 msgid "Find the previous match for the current search phrase"
 msgstr "ಹಾಲಿ ಪದಪುಂಜದ ಹಿಂದಿನ ತಾಳೆಯನ್ನು ಕಂಡುಹಿಡಿ"
 
-#: widgets/IncrementalSearchBar.cpp:101
-#, fuzzy, kde-format
-#| msgid "Display the options menu"
-msgctxt "@info:tooltip"
-msgid "Display the options menu"
-msgstr "ಆಯ್ಕೆ ಪರಿವಿಡಿಯನ್ನು ತೋರಿಸು"
-
-#: widgets/IncrementalSearchBar.cpp:108
-#, fuzzy, kde-format
-#| msgid "Close the search bar"
-msgctxt "@info:tooltip"
-msgid "Close the search bar"
-msgstr "ಹುಡುಕು ಪಟ್ಟಿಯನ್ನು ಮುಚ್ಚು"
-
-#: widgets/IncrementalSearchBar.cpp:118
+#: widgets/IncrementalSearchBar.cpp:102
 #, fuzzy, kde-format
 #| msgid "Case sensitive"
-msgctxt "@item:inmenu"
+msgctxt "@action:button"
 msgid "Case sensitive"
 msgstr "ಅಕ್ಷರಸ್ತರ ಸಂವೇದಿ"
 
-#: widgets/IncrementalSearchBar.cpp:120
+#: widgets/IncrementalSearchBar.cpp:103
 #, fuzzy, kde-format
 #| msgid "Sets whether the search is case sensitive"
 msgctxt "@info:tooltip"
 msgid "Sets whether the search is case sensitive"
 msgstr "ಹುಡುಕು ಅಕ್ಷರಸ್ತರ ಸಂವೇದಿಯೇ ಅಲ್ಲವೇ ಎಂಬುದನ್ನು ನಿಗದಿಗೊಳಿಸುತ್ತದೆ"
 
-#: widgets/IncrementalSearchBar.cpp:123
+#: widgets/IncrementalSearchBar.cpp:114
+#, fuzzy, kde-format
+#| msgid "Display the options menu"
+msgctxt "@info:tooltip"
+msgid "Display the options menu"
+msgstr "ಆಯ್ಕೆ ಪರಿವಿಡಿಯನ್ನು ತೋರಿಸು"
+
+#: widgets/IncrementalSearchBar.cpp:121
+#, fuzzy, kde-format
+#| msgid "Close the search bar"
+msgctxt "@info:tooltip"
+msgid "Close the search bar"
+msgstr "ಹುಡುಕು ಪಟ್ಟಿಯನ್ನು ಮುಚ್ಚು"
+
+#: widgets/IncrementalSearchBar.cpp:131
 #, fuzzy, kde-format
 #| msgid "Match regular expression"
 msgctxt "@item:inmenu"
 msgid "Match regular expression"
 msgstr "ನಿಯತ ಕ್ರಮೋಕ್ತಿಯನ್ನು (ಎಕ್ಸ್ಪ್ರೆಷನ್) ಹೊಂದಿಸು"
 
-#: widgets/IncrementalSearchBar.cpp:127
+#: widgets/IncrementalSearchBar.cpp:135
 #, fuzzy, kde-format
 #| msgid "Highlight all matches"
 msgctxt "@item:inmenu"
 msgid "Highlight all matches"
 msgstr "ತಾಳೆಯಾದ ಎಲ್ಲವನ್ನೂ ಪ್ರಶಸ್ತಗೊಳಿಸು"
 
-#: widgets/IncrementalSearchBar.cpp:129
+#: widgets/IncrementalSearchBar.cpp:137
 #, fuzzy, kde-format
 #| msgid "Sets whether matching text should be highlighted"
 msgctxt "@info:tooltip"
 msgid "Sets whether matching text should be highlighted"
 msgstr "ಸರಿಹೊಂದುವ ಪಠ್ಯವನ್ನು ಪ್ರಶಸ್ತಗೊಳಿಸಬೇಕೆ ಬೇಡವೆ ಎಂಬುದನ್ನು ನಿಗದಿಗೊಳಿಸುತ್ತದೆ"
 
-#: widgets/IncrementalSearchBar.cpp:132
+#: widgets/IncrementalSearchBar.cpp:140
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Search backwards"
 msgstr ""
 
-#: widgets/IncrementalSearchBar.cpp:134
+#: widgets/IncrementalSearchBar.cpp:142
 #, fuzzy, kde-format
 #| msgid "Find the next match for the current search phrase"
 msgctxt "@info:tooltip"
 msgid "Sets whether search should start from the bottom"
 msgstr "ಹಾಲಿ ಪದಪುಂಜದ ಮುಂದಿನ ತಾಳೆಯನ್ನು ಕಂಡುಹಿಡಿ"
 
-#: widgets/IncrementalSearchBar.cpp:139
+#: widgets/IncrementalSearchBar.cpp:147
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "No wrap"
 msgstr ""
 
-#: widgets/IncrementalSearchBar.cpp:141
+#: widgets/IncrementalSearchBar.cpp:149
 #, fuzzy, kde-format
 #| msgid "Find the next match for the current search phrase"
 msgctxt "@info:tooltip"
 msgid "Sets whether search should stop instead of wrapping"
 msgstr "ಹಾಲಿ ಪದಪುಂಜದ ಮುಂದಿನ ತಾಳೆಯನ್ನು ಕಂಡುಹಿಡಿ"
 
-#: widgets/IncrementalSearchBar.cpp:175
+#: widgets/IncrementalSearchBar.cpp:184
 #, fuzzy, kde-format
 #| msgid "Find the next match for the current search phrase"
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the bottom"
 msgstr "ಹಾಲಿ ಪದಪುಂಜದ ಮುಂದಿನ ತಾಳೆಯನ್ನು ಕಂಡುಹಿಡಿ"
 
-#: widgets/IncrementalSearchBar.cpp:180
+#: widgets/IncrementalSearchBar.cpp:189
 #, fuzzy, kde-format
 #| msgid "Find the next match for the current search phrase"
 msgctxt "@info:tooltip"
@@ -6004,6 +6004,12 @@ msgstr "ಹಾಳೆಯನ್ನು &ಮರುಹೆಸರಿಸು..."
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "ಹಾಳೆ&ಯನ್ನುಮುಚ್ಚು"
+
+#, fuzzy
+#~| msgid "Case sensitive"
+#~ msgctxt "@item:inmenu"
+#~ msgid "Case sensitive"
+#~ msgstr "ಅಕ್ಷರಸ್ತರ ಸಂವೇದಿ"
 
 #, fuzzy
 #~| msgctxt "@action:inmenu Do not select any tabs"
