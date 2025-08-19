@@ -5283,8 +5283,7 @@ msgid "Find the previous match for the current search phrase"
 msgstr "查找前一个和搜索字串匹配的文本"
 
 #: widgets/IncrementalSearchBar.cpp:102
-#, fuzzy, kde-format
-#| msgid "Case sensitive"
+#, kde-format
 msgctxt "@action:button"
 msgid "Case sensitive"
 msgstr "区分大小写"
@@ -5532,7 +5531,3 @@ msgstr "配置或者重命名标签页(&C)..."
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "关闭标签页"
-
-#~ msgctxt "@item:inmenu"
-#~ msgid "Case sensitive"
-#~ msgstr "区分大小写"
