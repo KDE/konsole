@@ -188,7 +188,7 @@
           <string comment="Characters for drawing lines for a frame or box in TUI programs. Not a row of characters.">Use the selected font for line characters instead of the builtin code</string>
          </property>
          <property name="text">
-          <string comment="Characters for drawing lines for a frame or box in TUI programs. Not a row of characters.">>Use line characters contained in font</string>
+          <string comment="Characters for drawing lines for a frame or box in TUI programs. Not a row of characters.">Use line characters contained in font</string>
          </property>
         </widget>
        </item>
