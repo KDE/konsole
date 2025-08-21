@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-18 00:45+0000\n"
-"PO-Revision-Date: 2025-08-13 22:43+0400\n"
+"POT-Creation-Date: 2025-08-21 00:46+0000\n"
+"PO-Revision-Date: 2025-08-20 18:35+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -1749,7 +1749,7 @@ msgstr "المنفذ"
 #: plugins/SSHManager/sshwidget.ui:123
 #, kde-format
 msgid "The port of the server, 22 is the default for ssh connections"
-msgstr "منفذ الخادوم، 22 هو المنفذ المبدئي لاتصالات ssh"
+msgstr "منفذ الخادم، 22 هو المنفذ المبدئي لاتصالات ssh"
 
 #. i18n: ectx: property (text), widget (QLineEdit, port)
 #: plugins/SSHManager/sshwidget.ui:126
@@ -3921,11 +3921,15 @@ msgstr "استخدم الخط المحدد محارف السطر بدلاً من
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:191
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "Characters for drawing lines for a frame or box in TUI programs. Not a "
+#| "row of characters."
+#| msgid ">Use line characters contained in font"
 msgctxt ""
 "Characters for drawing lines for a frame or box in TUI programs. Not a row "
 "of characters."
-msgid ">Use line characters contained in font"
+msgid "Use line characters contained in font"
 msgstr ">استخدم محارف السطر المضمنة في الخط"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontBrailleCharactersButton)
@@ -5372,8 +5376,7 @@ msgid "Find the previous match for the current search phrase"
 msgstr "أعثر على المتطابقة السابقة لعبارة البحث الحالية"
 
 #: widgets/IncrementalSearchBar.cpp:102
-#, fuzzy, kde-format
-#| msgid "Case sensitive"
+#, kde-format
 msgctxt "@action:button"
 msgid "Case sensitive"
 msgstr "حسّاس لحالة الأحرف"

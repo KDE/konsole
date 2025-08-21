@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-18 00:45+0000\n"
+"POT-Creation-Date: 2025-08-21 00:46+0000\n"
 "PO-Revision-Date: 2025-06-21 13:10+0300\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -3927,11 +3927,15 @@ msgstr "Atlasīto fontu izmantot līniju rakstzīmēm iebūvētā koda vietā"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:191
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "Characters for drawing lines for a frame or box in TUI programs. Not a "
+#| "row of characters."
+#| msgid ">Use line characters contained in font"
 msgctxt ""
 "Characters for drawing lines for a frame or box in TUI programs. Not a row "
 "of characters."
-msgid ">Use line characters contained in font"
+msgid "Use line characters contained in font"
 msgstr ">Izmantot fontā ietvertās līniju rakstzīmes"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontBrailleCharactersButton)

@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-18 00:45+0000\n"
+"POT-Creation-Date: 2025-08-21 00:46+0000\n"
 "PO-Revision-Date: 2025-08-18 19:41+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -3886,11 +3886,15 @@ msgstr "使用選定的字型來顯示線條字元而不是內建的代碼"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:191
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "Characters for drawing lines for a frame or box in TUI programs. Not a "
+#| "row of characters."
+#| msgid ">Use line characters contained in font"
 msgctxt ""
 "Characters for drawing lines for a frame or box in TUI programs. Not a row "
 "of characters."
-msgid ">Use line characters contained in font"
+msgid "Use line characters contained in font"
 msgstr ">使用包含在字型內的線條字元"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontBrailleCharactersButton)
