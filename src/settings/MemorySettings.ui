@@ -21,11 +21,7 @@
    <item row="1" column="0" colspan="2">
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>Changes will take effect upon restart. If enabled, sustained memory consumption by Konsole
-exceeding the specified value will cause systemd-oomd to eliminate the tab(s)
-containing the memory-intensive process(es). Note: enabling
-might cause greater slowdowns during high memory consumption and specifying
-excessively low values might still cause Konsole to be killed.</string>
+           <string>Changes will take effect upon restart. If enabled, sustained memory consumption by Konsole exceeding the specified value will cause systemd-oomd to eliminate the tab(s) containing the memory-intensive process(es). Note: enabling might cause greater slowdowns during high memory consumption and specifying excessively low values might still cause Konsole to be killed.</string>
      </property>
      <property name="wordWrap">
       <bool>true</bool>
