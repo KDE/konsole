@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-03 00:46+0000\n"
-"PO-Revision-Date: 2025-08-13 22:43+0400\n"
+"PO-Revision-Date: 2025-08-20 18:35+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -1749,7 +1749,7 @@ msgstr "المنفذ"
 #: plugins/SSHManager/sshwidget.ui:123
 #, kde-format
 msgid "The port of the server, 22 is the default for ssh connections"
-msgstr "منفذ الخادوم، 22 هو المنفذ المبدئي لاتصالات ssh"
+msgstr "منفذ الخادم، 22 هو المنفذ المبدئي لاتصالات ssh"
 
 #. i18n: ectx: property (text), widget (QLineEdit, port)
 #: plugins/SSHManager/sshwidget.ui:126
