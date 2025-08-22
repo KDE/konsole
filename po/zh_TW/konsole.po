@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-21 00:46+0000\n"
+"POT-Creation-Date: 2025-08-22 00:46+0000\n"
 "PO-Revision-Date: 2025-08-18 19:41+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -2063,53 +2063,53 @@ msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"
 msgstr "在此輸入要搜尋的分頁名稱"
 
-#: session/Session.cpp:116
+#: session/Session.cpp:130
 #, kde-format
 msgid "Bell in '%1' (Session '%2')"
 msgstr "工作階段「%2」的響鈴 %1"
 
-#: session/Session.cpp:411
+#: session/Session.cpp:425
 #, kde-format
 msgid "Could not find binary: "
 msgstr "找不到執行檔："
 
-#: session/Session.cpp:420
+#: session/Session.cpp:434
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "警告："
 
-#: session/Session.cpp:515
+#: session/Session.cpp:529
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "找不到要啟動的互動式 shell。"
 
-#: session/Session.cpp:521 session/Session.cpp:524
+#: session/Session.cpp:535 session/Session.cpp:538
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
 "settings."
 msgstr "找不到 %1，改啟動 %2。請檢查您的設定檔。"
 
-#: session/Session.cpp:589
+#: session/Session.cpp:609
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "無法啟動程式 %1，參數為 %2。"
 
-#: session/Session.cpp:746
+#: session/Session.cpp:766
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "分頁 %1 目前靜默中（於工作階段 %2）"
 
-#: session/Session.cpp:747 session/Session.cpp:2086
+#: session/Session.cpp:767 session/Session.cpp:2106
 #: session/SessionController.cpp:361 session/SessionController.cpp:1887
-#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1210
-#: Vt102Emulation.cpp:1465
+#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1213
+#: Vt102Emulation.cpp:1468
 #, kde-format
 msgid "Show session"
 msgstr "顯示工作階段"
 
-#: session/Session.cpp:1031
+#: session/Session.cpp:1051
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2121,28 +2121,28 @@ msgstr ""
 "要的話，這些方法只能由重新編譯 Konsole 來變更為內部使用。<p>這個警告將只會在"
 "這個Konsole 實體中顯示一次。</p>"
 
-#: session/Session.cpp:1071
+#: session/Session.cpp:1091
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "已完成"
 
-#: session/Session.cpp:1085 session/Session.cpp:1101
+#: session/Session.cpp:1105 session/Session.cpp:1121
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "程式 %1 當掉了。"
 
-#: session/Session.cpp:1087
+#: session/Session.cpp:1107
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "程式 %1 以 %2 狀態結束。"
 
-#: session/Session.cpp:1613
+#: session/Session.cpp:1633
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem 進度"
 
-#: session/Session.cpp:2085
+#: session/Session.cpp:2105
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "分頁 %1 目前活躍中（於工作階段 %2）"
@@ -2874,16 +2874,23 @@ msgid "Enable memory monitoring:"
 msgstr "啟用記憶體監控："
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: settings/MemorySettings.ui:28
-#, kde-format
+#: settings/MemorySettings.ui:24
+#, fuzzy, kde-format
+#| msgid ""
+#| "Changes will take effect upon restart. If enabled, sustained memory "
+#| "consumption by Konsole\n"
+#| "exceeding the specified value will cause systemd-oomd to eliminate the "
+#| "tab(s)\n"
+#| "containing the memory-intensive process(es). Note: enabling\n"
+#| "might cause greater slowdowns during high memory consumption and "
+#| "specifying\n"
+#| "excessively low values might still cause Konsole to be killed."
 msgid ""
 "Changes will take effect upon restart. If enabled, sustained memory "
-"consumption by Konsole\n"
-"exceeding the specified value will cause systemd-oomd to eliminate the "
-"tab(s)\n"
-"containing the memory-intensive process(es). Note: enabling\n"
-"might cause greater slowdowns during high memory consumption and specifying\n"
-"excessively low values might still cause Konsole to be killed."
+"consumption by Konsole exceeding the specified value will cause systemd-oomd "
+"to eliminate the tab(s) containing the memory-intensive process(es). Note: "
+"enabling might cause greater slowdowns during high memory consumption and "
+"specifying excessively low values might still cause Konsole to be killed."
 msgstr ""
 "變更將在重新啟動後生效。若啟用，Konsole 持續使用超過指定量的記憶體時將會使 "
 "systemd-oomd \n"
@@ -2892,13 +2899,13 @@ msgstr ""
 "並且若是指定的數值太低 Konsole 本身可能還是會被強制中止。"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: settings/MemorySettings.ui:41
+#: settings/MemorySettings.ui:37
 #, kde-format
 msgid "Memory limit:"
 msgstr "記憶體限制："
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_MemoryLimitValue)
-#: settings/MemorySettings.ui:48
+#: settings/MemorySettings.ui:44
 #, kde-format
 msgid " MB"
 msgstr " MB"
@@ -3659,7 +3666,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "載入分頁佈局"
 
-#: Vt102Emulation.cpp:2824
+#: Vt102Emulation.cpp:2827
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
@@ -4615,31 +4622,31 @@ msgstr ""
 "</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, terminalBellLabel)
-#: widgets/EditProfileGeneralPage.ui:359
+#: widgets/EditProfileGeneralPage.ui:362
 #, kde-format
 msgid "&Terminal bell mode:"
 msgstr "終端機響鈴模式(&T)："
 
 #. i18n: ectx: attribute (title), widget (QWidget, semantic)
-#: widgets/EditProfileGeneralPage.ui:377
+#: widgets/EditProfileGeneralPage.ui:380
 #, kde-format
 msgid "Semantic Integration"
 msgstr "語意整合"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticUpDown)
-#: widgets/EditProfileGeneralPage.ui:383
+#: widgets/EditProfileGeneralPage.ui:386
 #, kde-format
 msgid "Up/Down Arrows emulation"
 msgstr "上/下方向鍵模擬"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticInputClick)
-#: widgets/EditProfileGeneralPage.ui:390
+#: widgets/EditProfileGeneralPage.ui:393
 #, kde-format
 msgid "Mouse click in input line moves cursor"
 msgstr "滑鼠點擊輸入行移動游標"
 
 #. i18n: ectx: property (text), widget (QLabel, label_8)
-#: widgets/EditProfileGeneralPage.ui:403
+#: widgets/EditProfileGeneralPage.ui:406
 #, kde-format
 msgid "Semantic hints:"
 msgstr "語意提示："
@@ -4649,9 +4656,9 @@ msgstr "語意提示："
 #. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundNever)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsNever)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundNever)
-#: widgets/EditProfileGeneralPage.ui:413 widgets/EditProfileGeneralPage.ui:459
-#: widgets/EditProfileGeneralPage.ui:505 widgets/EditProfileGeneralPage.ui:551
-#: widgets/EditProfileGeneralPage.ui:597
+#: widgets/EditProfileGeneralPage.ui:416 widgets/EditProfileGeneralPage.ui:462
+#: widgets/EditProfileGeneralPage.ui:508 widgets/EditProfileGeneralPage.ui:554
+#: widgets/EditProfileGeneralPage.ui:600
 #, kde-format
 msgctxt "Never"
 msgid "Never"
@@ -4662,9 +4669,9 @@ msgstr "永不"
 #. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundURL)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsURL)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundURL)
-#: widgets/EditProfileGeneralPage.ui:423 widgets/EditProfileGeneralPage.ui:469
-#: widgets/EditProfileGeneralPage.ui:515 widgets/EditProfileGeneralPage.ui:561
-#: widgets/EditProfileGeneralPage.ui:607
+#: widgets/EditProfileGeneralPage.ui:426 widgets/EditProfileGeneralPage.ui:472
+#: widgets/EditProfileGeneralPage.ui:518 widgets/EditProfileGeneralPage.ui:564
+#: widgets/EditProfileGeneralPage.ui:610
 #, kde-format
 msgctxt "When showing URL hints"
 msgid "When URL hints show"
@@ -4675,34 +4682,34 @@ msgstr "當 URL 提示顯示時"
 #. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundAlways)
-#: widgets/EditProfileGeneralPage.ui:433 widgets/EditProfileGeneralPage.ui:479
-#: widgets/EditProfileGeneralPage.ui:525 widgets/EditProfileGeneralPage.ui:571
-#: widgets/EditProfileGeneralPage.ui:617
+#: widgets/EditProfileGeneralPage.ui:436 widgets/EditProfileGeneralPage.ui:482
+#: widgets/EditProfileGeneralPage.ui:528 widgets/EditProfileGeneralPage.ui:574
+#: widgets/EditProfileGeneralPage.ui:620
 #, kde-format
 msgctxt "Always"
 msgid "Always"
 msgstr "永遠"
 
 #. i18n: ectx: property (text), widget (QLabel, label_20)
-#: widgets/EditProfileGeneralPage.ui:449
+#: widgets/EditProfileGeneralPage.ui:452
 #, kde-format
 msgid "Red error bars:"
 msgstr "紅色錯誤列："
 
 #. i18n: ectx: property (text), widget (QLabel, label_30)
-#: widgets/EditProfileGeneralPage.ui:495
+#: widgets/EditProfileGeneralPage.ui:498
 #, kde-format
 msgid "Red error background:"
 msgstr "紅色錯誤背景："
 
 #. i18n: ectx: property (text), widget (QLabel, label_40)
-#: widgets/EditProfileGeneralPage.ui:541
+#: widgets/EditProfileGeneralPage.ui:544
 #, kde-format
 msgid "Alternating bars:"
 msgstr "交錯列："
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
-#: widgets/EditProfileGeneralPage.ui:587
+#: widgets/EditProfileGeneralPage.ui:590
 #, kde-format
 msgid "Alternating background:"
 msgstr "交錯背景："

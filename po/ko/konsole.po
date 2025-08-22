@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-21 00:46+0000\n"
+"POT-Creation-Date: 2025-08-22 00:46+0000\n"
 "PO-Revision-Date: 2025-06-10 23:16+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -2066,28 +2066,28 @@ msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"
 msgstr "검색할 탭 이름 문자열 입력"
 
-#: session/Session.cpp:116
+#: session/Session.cpp:130
 #, kde-format
 msgid "Bell in '%1' (Session '%2')"
 msgstr "'%1'에서 알림(세션 '%2')"
 
-#: session/Session.cpp:411
+#: session/Session.cpp:425
 #, kde-format
 msgid "Could not find binary: "
 msgstr "바이너리를 찾을 수 없음: "
 
-#: session/Session.cpp:420
+#: session/Session.cpp:434
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "경고: "
 
-#: session/Session.cpp:515
+#: session/Session.cpp:529
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "시작할 인터랙티브 셸을 찾을 수 없습니다."
 
-#: session/Session.cpp:521 session/Session.cpp:524
+#: session/Session.cpp:535 session/Session.cpp:538
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2096,25 +2096,25 @@ msgstr ""
 "'%1'을(를) 찾을 수 없어서 '%2'을(를) 대신 시작합니다. 프로필 설정을 확인하십"
 "시오."
 
-#: session/Session.cpp:589
+#: session/Session.cpp:609
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "프로그램 '%1'을(를) 인자 '%2'을(를) 사용하여 시작할 수 없습니다."
 
-#: session/Session.cpp:746
+#: session/Session.cpp:766
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "'%1'에서 응답 없음(세션 '%2')"
 
-#: session/Session.cpp:747 session/Session.cpp:2086
+#: session/Session.cpp:767 session/Session.cpp:2106
 #: session/SessionController.cpp:361 session/SessionController.cpp:1887
-#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1210
-#: Vt102Emulation.cpp:1465
+#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1213
+#: Vt102Emulation.cpp:1468
 #, kde-format
 msgid "Show session"
 msgstr "세션 표시"
 
-#: session/Session.cpp:1031
+#: session/Session.cpp:1051
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2127,31 +2127,31 @@ msgstr ""
 "드를 내부에서만 사용할 수 있도록 변경할 수 있습니다.<p>이 경고는 Konsole 인스"
 "턴스에서 한 번만 표시됩니다.</p>"
 
-#: session/Session.cpp:1071
+#: session/Session.cpp:1091
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "완료됨"
 
-#: session/Session.cpp:1085 session/Session.cpp:1101
+#: session/Session.cpp:1105 session/Session.cpp:1121
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr ""
 "프로그램 '%1'이(가) 충돌했습니다.|/|프로그램 '%1'$[이가 %1] 충돌했습니다."
 
-#: session/Session.cpp:1087
+#: session/Session.cpp:1107
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr ""
 "프로그램 '%1'이(가) 상태 %2(으)로 끝났습니다.|/|프로그램 '%1'$[이가 %1] 상태 "
 "%2$[으 %2]로 끝났습니다."
 
-#: session/Session.cpp:1613
+#: session/Session.cpp:1633
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem 진행 상황"
 
-#: session/Session.cpp:2085
+#: session/Session.cpp:2105
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "'%1'의 활동(세션 '%2')"
@@ -2887,16 +2887,23 @@ msgid "Enable memory monitoring:"
 msgstr "메모리 모니터링 활성화:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: settings/MemorySettings.ui:28
-#, kde-format
+#: settings/MemorySettings.ui:24
+#, fuzzy, kde-format
+#| msgid ""
+#| "Changes will take effect upon restart. If enabled, sustained memory "
+#| "consumption by Konsole\n"
+#| "exceeding the specified value will cause systemd-oomd to eliminate the "
+#| "tab(s)\n"
+#| "containing the memory-intensive process(es). Note: enabling\n"
+#| "might cause greater slowdowns during high memory consumption and "
+#| "specifying\n"
+#| "excessively low values might still cause Konsole to be killed."
 msgid ""
 "Changes will take effect upon restart. If enabled, sustained memory "
-"consumption by Konsole\n"
-"exceeding the specified value will cause systemd-oomd to eliminate the "
-"tab(s)\n"
-"containing the memory-intensive process(es). Note: enabling\n"
-"might cause greater slowdowns during high memory consumption and specifying\n"
-"excessively low values might still cause Konsole to be killed."
+"consumption by Konsole exceeding the specified value will cause systemd-oomd "
+"to eliminate the tab(s) containing the memory-intensive process(es). Note: "
+"enabling might cause greater slowdowns during high memory consumption and "
+"specifying excessively low values might still cause Konsole to be killed."
 msgstr ""
 "변경 사항은 다시 시작한 후에 적용됩니다. 이 옵션을 사용하면 Konsole에서\n"
 "메모리 사용량이 지정한 값을 초과할 때 systemd-oomd에 메모리를 많이 사용하는\n"
@@ -2905,13 +2912,13 @@ msgstr ""
 "Konsole이 예상하지 못하게 종료될 수도 있습니다."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: settings/MemorySettings.ui:41
+#: settings/MemorySettings.ui:37
 #, kde-format
 msgid "Memory limit:"
 msgstr "메모리 제한:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_MemoryLimitValue)
-#: settings/MemorySettings.ui:48
+#: settings/MemorySettings.ui:44
 #, kde-format
 msgid " MB"
 msgstr " MB"
@@ -3673,7 +3680,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "탭 레이아웃 불러오기"
 
-#: Vt102Emulation.cpp:2824
+#: Vt102Emulation.cpp:2827
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
@@ -4636,31 +4643,31 @@ msgstr ""
 "body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, terminalBellLabel)
-#: widgets/EditProfileGeneralPage.ui:359
+#: widgets/EditProfileGeneralPage.ui:362
 #, kde-format
 msgid "&Terminal bell mode:"
 msgstr "터미널 벨 모드(&T):"
 
 #. i18n: ectx: attribute (title), widget (QWidget, semantic)
-#: widgets/EditProfileGeneralPage.ui:377
+#: widgets/EditProfileGeneralPage.ui:380
 #, kde-format
 msgid "Semantic Integration"
 msgstr "시맨틱 통합"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticUpDown)
-#: widgets/EditProfileGeneralPage.ui:383
+#: widgets/EditProfileGeneralPage.ui:386
 #, kde-format
 msgid "Up/Down Arrows emulation"
 msgstr "위/아래 화살표 에뮬레이션"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticInputClick)
-#: widgets/EditProfileGeneralPage.ui:390
+#: widgets/EditProfileGeneralPage.ui:393
 #, kde-format
 msgid "Mouse click in input line moves cursor"
 msgstr "입력 줄에 마우스 클릭 시 커서 이동"
 
 #. i18n: ectx: property (text), widget (QLabel, label_8)
-#: widgets/EditProfileGeneralPage.ui:403
+#: widgets/EditProfileGeneralPage.ui:406
 #, kde-format
 msgid "Semantic hints:"
 msgstr "시맨틱 힌트:"
@@ -4670,9 +4677,9 @@ msgstr "시맨틱 힌트:"
 #. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundNever)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsNever)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundNever)
-#: widgets/EditProfileGeneralPage.ui:413 widgets/EditProfileGeneralPage.ui:459
-#: widgets/EditProfileGeneralPage.ui:505 widgets/EditProfileGeneralPage.ui:551
-#: widgets/EditProfileGeneralPage.ui:597
+#: widgets/EditProfileGeneralPage.ui:416 widgets/EditProfileGeneralPage.ui:462
+#: widgets/EditProfileGeneralPage.ui:508 widgets/EditProfileGeneralPage.ui:554
+#: widgets/EditProfileGeneralPage.ui:600
 #, kde-format
 msgctxt "Never"
 msgid "Never"
@@ -4683,9 +4690,9 @@ msgstr "하지 않음"
 #. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundURL)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsURL)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundURL)
-#: widgets/EditProfileGeneralPage.ui:423 widgets/EditProfileGeneralPage.ui:469
-#: widgets/EditProfileGeneralPage.ui:515 widgets/EditProfileGeneralPage.ui:561
-#: widgets/EditProfileGeneralPage.ui:607
+#: widgets/EditProfileGeneralPage.ui:426 widgets/EditProfileGeneralPage.ui:472
+#: widgets/EditProfileGeneralPage.ui:518 widgets/EditProfileGeneralPage.ui:564
+#: widgets/EditProfileGeneralPage.ui:610
 #, kde-format
 msgctxt "When showing URL hints"
 msgid "When URL hints show"
@@ -4696,34 +4703,34 @@ msgstr "URL 힌트 표시"
 #. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundAlways)
-#: widgets/EditProfileGeneralPage.ui:433 widgets/EditProfileGeneralPage.ui:479
-#: widgets/EditProfileGeneralPage.ui:525 widgets/EditProfileGeneralPage.ui:571
-#: widgets/EditProfileGeneralPage.ui:617
+#: widgets/EditProfileGeneralPage.ui:436 widgets/EditProfileGeneralPage.ui:482
+#: widgets/EditProfileGeneralPage.ui:528 widgets/EditProfileGeneralPage.ui:574
+#: widgets/EditProfileGeneralPage.ui:620
 #, kde-format
 msgctxt "Always"
 msgid "Always"
 msgstr "항상"
 
 #. i18n: ectx: property (text), widget (QLabel, label_20)
-#: widgets/EditProfileGeneralPage.ui:449
+#: widgets/EditProfileGeneralPage.ui:452
 #, kde-format
 msgid "Red error bars:"
 msgstr "빨간 오류 표시줄:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_30)
-#: widgets/EditProfileGeneralPage.ui:495
+#: widgets/EditProfileGeneralPage.ui:498
 #, kde-format
 msgid "Red error background:"
 msgstr "빨간 오류 배경:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_40)
-#: widgets/EditProfileGeneralPage.ui:541
+#: widgets/EditProfileGeneralPage.ui:544
 #, kde-format
 msgid "Alternating bars:"
 msgstr "전환되는 표시줄:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
-#: widgets/EditProfileGeneralPage.ui:587
+#: widgets/EditProfileGeneralPage.ui:590
 #, kde-format
 msgid "Alternating background:"
 msgstr "전환되는 배경:"

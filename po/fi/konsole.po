@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-21 00:46+0000\n"
+"POT-Creation-Date: 2025-08-22 00:46+0000\n"
 "PO-Revision-Date: 2025-07-10 22:37+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -2103,28 +2103,28 @@ msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"
 msgstr "Kirjoita etsittävän välilehden nimi tähän"
 
-#: session/Session.cpp:116
+#: session/Session.cpp:130
 #, kde-format
 msgid "Bell in '%1' (Session '%2')"
 msgstr "Äänimerkki päätteessä ”%1” (istunto ”%2”)"
 
-#: session/Session.cpp:411
+#: session/Session.cpp:425
 #, kde-format
 msgid "Could not find binary: "
 msgstr "Ohjelmaa ei löytynyt:"
 
-#: session/Session.cpp:420
+#: session/Session.cpp:434
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Varoitus: "
 
-#: session/Session.cpp:515
+#: session/Session.cpp:529
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "Ei löytynyt vuorovaikutteista komentotulkkia, jota käynnistää."
 
-#: session/Session.cpp:521 session/Session.cpp:524
+#: session/Session.cpp:535 session/Session.cpp:538
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2133,25 +2133,25 @@ msgstr ""
 "Ohjelmaa ”%1” ei löytynyt, käynnistetään ”%2” sen sijasta. Tarkasta "
 "profiilisi asetukset."
 
-#: session/Session.cpp:589
+#: session/Session.cpp:609
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Ohjelmaa ”%1” ei voitu käynnistää parametrein ”%2”."
 
-#: session/Session.cpp:746
+#: session/Session.cpp:766
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Hiljaisuus päätteessä ”%1” (istunto ”%2”)"
 
-#: session/Session.cpp:747 session/Session.cpp:2086
+#: session/Session.cpp:767 session/Session.cpp:2106
 #: session/SessionController.cpp:361 session/SessionController.cpp:1887
-#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1210
-#: Vt102Emulation.cpp:1465
+#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1213
+#: Vt102Emulation.cpp:1468
 #, kde-format
 msgid "Show session"
 msgstr "Näytä istunto"
 
-#: session/Session.cpp:1031
+#: session/Session.cpp:1051
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2164,29 +2164,29 @@ msgstr ""
 "käytettäviksi vain koostamalla Konsole uudelleen. <p>Tämä varoitus näytetään "
 "vain kerran tälle Konsolen ilmentymälle.</p>"
 
-#: session/Session.cpp:1071
+#: session/Session.cpp:1091
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Valmis"
 
 # ei-ASCII-lainausmerkit eivät näkyneet oikein
-#: session/Session.cpp:1085 session/Session.cpp:1101
+#: session/Session.cpp:1105 session/Session.cpp:1121
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Ohjelma ”%1” kaatui."
 
-#: session/Session.cpp:1087
+#: session/Session.cpp:1107
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "Ohjelma ”%1” päättyi paluuarvoon %2."
 
-#: session/Session.cpp:1613
+#: session/Session.cpp:1633
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem-tiedonsiirron edistyminen"
 
-#: session/Session.cpp:2085
+#: session/Session.cpp:2105
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Aktiivisuutta päätteessä ”%1” (istunto ”%2”)"
@@ -2927,16 +2927,23 @@ msgid "Enable memory monitoring:"
 msgstr "Käytä muistinvalvontaa:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: settings/MemorySettings.ui:28
-#, kde-format
+#: settings/MemorySettings.ui:24
+#, fuzzy, kde-format
+#| msgid ""
+#| "Changes will take effect upon restart. If enabled, sustained memory "
+#| "consumption by Konsole\n"
+#| "exceeding the specified value will cause systemd-oomd to eliminate the "
+#| "tab(s)\n"
+#| "containing the memory-intensive process(es). Note: enabling\n"
+#| "might cause greater slowdowns during high memory consumption and "
+#| "specifying\n"
+#| "excessively low values might still cause Konsole to be killed."
 msgid ""
 "Changes will take effect upon restart. If enabled, sustained memory "
-"consumption by Konsole\n"
-"exceeding the specified value will cause systemd-oomd to eliminate the "
-"tab(s)\n"
-"containing the memory-intensive process(es). Note: enabling\n"
-"might cause greater slowdowns during high memory consumption and specifying\n"
-"excessively low values might still cause Konsole to be killed."
+"consumption by Konsole exceeding the specified value will cause systemd-oomd "
+"to eliminate the tab(s) containing the memory-intensive process(es). Note: "
+"enabling might cause greater slowdowns during high memory consumption and "
+"specifying excessively low values might still cause Konsole to be killed."
 msgstr ""
 "Muutokset tulevat voimaan uudelleenkäynnistettäessä. Jos käytössä, Konsolen "
 "jatkuva arvon\n"
@@ -2949,13 +2956,13 @@ msgstr ""
 "lopetetaan."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: settings/MemorySettings.ui:41
+#: settings/MemorySettings.ui:37
 #, kde-format
 msgid "Memory limit:"
 msgstr "Muistirajoitus:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_MemoryLimitValue)
-#: settings/MemorySettings.ui:48
+#: settings/MemorySettings.ui:44
 #, kde-format
 msgid " MB"
 msgstr " Mt"
@@ -3718,7 +3725,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Lataa välilehtiasettelu"
 
-#: Vt102Emulation.cpp:2824
+#: Vt102Emulation.cpp:2827
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
@@ -4693,31 +4700,31 @@ msgstr ""
 "käytöstä, jotta nämä kohdat toimisivat.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, terminalBellLabel)
-#: widgets/EditProfileGeneralPage.ui:359
+#: widgets/EditProfileGeneralPage.ui:362
 #, kde-format
 msgid "&Terminal bell mode:"
 msgstr "Järjestelmän &äänimerkin tyyli:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, semantic)
-#: widgets/EditProfileGeneralPage.ui:377
+#: widgets/EditProfileGeneralPage.ui:380
 #, kde-format
 msgid "Semantic Integration"
 msgstr "Semanttinen integrointi"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticUpDown)
-#: widgets/EditProfileGeneralPage.ui:383
+#: widgets/EditProfileGeneralPage.ui:386
 #, kde-format
 msgid "Up/Down Arrows emulation"
 msgstr "Ylös- ja Alas-nuoliemulointi"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticInputClick)
-#: widgets/EditProfileGeneralPage.ui:390
+#: widgets/EditProfileGeneralPage.ui:393
 #, kde-format
 msgid "Mouse click in input line moves cursor"
 msgstr "Hiiren napsautus syöterivillä siirtää kohdistinta"
 
 #. i18n: ectx: property (text), widget (QLabel, label_8)
-#: widgets/EditProfileGeneralPage.ui:403
+#: widgets/EditProfileGeneralPage.ui:406
 #, kde-format
 msgid "Semantic hints:"
 msgstr "Semanttiset vihjeet:"
@@ -4727,9 +4734,9 @@ msgstr "Semanttiset vihjeet:"
 #. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundNever)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsNever)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundNever)
-#: widgets/EditProfileGeneralPage.ui:413 widgets/EditProfileGeneralPage.ui:459
-#: widgets/EditProfileGeneralPage.ui:505 widgets/EditProfileGeneralPage.ui:551
-#: widgets/EditProfileGeneralPage.ui:597
+#: widgets/EditProfileGeneralPage.ui:416 widgets/EditProfileGeneralPage.ui:462
+#: widgets/EditProfileGeneralPage.ui:508 widgets/EditProfileGeneralPage.ui:554
+#: widgets/EditProfileGeneralPage.ui:600
 #, kde-format
 msgctxt "Never"
 msgid "Never"
@@ -4740,9 +4747,9 @@ msgstr "ei koskaan"
 #. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundURL)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsURL)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundURL)
-#: widgets/EditProfileGeneralPage.ui:423 widgets/EditProfileGeneralPage.ui:469
-#: widgets/EditProfileGeneralPage.ui:515 widgets/EditProfileGeneralPage.ui:561
-#: widgets/EditProfileGeneralPage.ui:607
+#: widgets/EditProfileGeneralPage.ui:426 widgets/EditProfileGeneralPage.ui:472
+#: widgets/EditProfileGeneralPage.ui:518 widgets/EditProfileGeneralPage.ui:564
+#: widgets/EditProfileGeneralPage.ui:610
 #, kde-format
 msgctxt "When showing URL hints"
 msgid "When URL hints show"
@@ -4753,34 +4760,34 @@ msgstr "näytettäessä osoitevihjeitä"
 #. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundAlways)
-#: widgets/EditProfileGeneralPage.ui:433 widgets/EditProfileGeneralPage.ui:479
-#: widgets/EditProfileGeneralPage.ui:525 widgets/EditProfileGeneralPage.ui:571
-#: widgets/EditProfileGeneralPage.ui:617
+#: widgets/EditProfileGeneralPage.ui:436 widgets/EditProfileGeneralPage.ui:482
+#: widgets/EditProfileGeneralPage.ui:528 widgets/EditProfileGeneralPage.ui:574
+#: widgets/EditProfileGeneralPage.ui:620
 #, kde-format
 msgctxt "Always"
 msgid "Always"
 msgstr "aina"
 
 #. i18n: ectx: property (text), widget (QLabel, label_20)
-#: widgets/EditProfileGeneralPage.ui:449
+#: widgets/EditProfileGeneralPage.ui:452
 #, kde-format
 msgid "Red error bars:"
 msgstr "Punaiset virhepalkit:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_30)
-#: widgets/EditProfileGeneralPage.ui:495
+#: widgets/EditProfileGeneralPage.ui:498
 #, kde-format
 msgid "Red error background:"
 msgstr "Punainen virhetausta:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_40)
-#: widgets/EditProfileGeneralPage.ui:541
+#: widgets/EditProfileGeneralPage.ui:544
 #, kde-format
 msgid "Alternating bars:"
 msgstr "Vuorottelevat palkit:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
-#: widgets/EditProfileGeneralPage.ui:587
+#: widgets/EditProfileGeneralPage.ui:590
 #, kde-format
 msgid "Alternating background:"
 msgstr "Vuorotteleva tausta:"
