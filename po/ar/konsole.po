@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-03 00:46+0000\n"
-"PO-Revision-Date: 2025-08-20 18:35+0400\n"
+"PO-Revision-Date: 2025-08-21 10:16+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -900,7 +900,7 @@ msgstr "المؤلّف الأصلي"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Ahmad Samir"
-msgstr "Ahmad Samir"
+msgstr "أحمد سمير"
 
 #: main.cpp:351 main.cpp:354 main.cpp:357 main.cpp:360
 #, kde-format
@@ -1022,19 +1022,19 @@ msgstr "Francesco Cecconi"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Stephan Kulow"
-msgstr "Stephan Kulow"
+msgstr "ستيفن كولو"
 
 #: main.cpp:381
 #, kde-format
 msgctxt "@info:credit"
 msgid "Solaris support and history"
-msgstr "دعم سولاريس والتاريخ"
+msgstr "النقل إلى نظام سولاريس وميزة التاريخ"
 
 #: main.cpp:382
 #, kde-format
 msgctxt "@info:credit"
 msgid "Alexander Neundorf"
-msgstr "Alexander Neundorf"
+msgstr "ألكسندر نيوندورف"
 
 #: main.cpp:383
 #, kde-format
@@ -1074,7 +1074,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:credit"
 msgid "David Faure"
-msgstr "David Faure"
+msgstr "ديفيد فور"
 
 #: main.cpp:393
 #, kde-format
@@ -1102,7 +1102,7 @@ msgstr "تأثيرات مرئية"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Matthias Ettrich"
-msgstr "Matthias Ettrich"
+msgstr "ماتياس إتريش"
 
 #: main.cpp:399
 #, kde-format
@@ -1130,7 +1130,7 @@ msgstr "تحسينات في المخططات و تحديد النص"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Dan Pilone"
-msgstr "Dan Pilone"
+msgstr "دان بيلوني"
 
 #: main.cpp:405
 #, kde-format
@@ -1142,7 +1142,7 @@ msgstr "النقل إلى SGI"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Kevin Street"
-msgstr "Kevin Street"
+msgstr "كيفن ستريت"
 
 #: main.cpp:406
 #, kde-format
@@ -1154,7 +1154,7 @@ msgstr "النقل إلى FreeBSD"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Sven Fischer"
-msgstr "Sven Fischer"
+msgstr "سفين فيشر"
 
 #: main.cpp:408
 #, kde-format
@@ -1166,7 +1166,7 @@ msgstr "Dale M. Flaven"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Martin Jones"
-msgstr "Martin Jones"
+msgstr "مارتن جونز"
 
 #: main.cpp:410
 #, kde-format
