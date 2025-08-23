@@ -590,19 +590,22 @@ void Session::run()
     secretEnv << QStringLiteral("KONSOLE_DBUS_ACTIVATION_COOKIE=%1").arg(m_activationCookie);
 #endif
 
+    // stuff set via addEnvironmentEntry and the secret parts
+    const QStringList fullEnv = _environment + secretEnv;
+
 #ifndef Q_OS_WIN
     const auto originalEnvironment = _shellProcess->environment();
     _shellProcess->setProgram(exec);
-    _shellProcess->setEnvironment(originalEnvironment + _environment + secretEnv);
+    _shellProcess->setEnvironment(originalEnvironment + fullEnv);
     const auto context = KSandbox::makeHostContext(*_shellProcess);
     arguments = postProcessArgs(context.arguments, arguments);
     _shellProcess->setEnvironment(originalEnvironment);
-    const auto result = _shellProcess->start(context.program, arguments, _environment);
+    const auto result = _shellProcess->start(context.program, arguments, fullEnv);
 #else // Q_OS_WIN
     const auto size = _emulation->imageSize();
     const int lines = size.height();
     const int cols = size.width();
-    int result = _shellProcess->start(exec, arguments, _initialWorkingDir.isEmpty() ? QDir::currentPath() : _initialWorkingDir, _environment, cols, lines);
+    int result = _shellProcess->start(exec, arguments, _initialWorkingDir.isEmpty() ? QDir::currentPath() : _initialWorkingDir, fullEnv, cols, lines);
 #endif
 
     if (result < 0) {
