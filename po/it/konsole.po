@@ -11,15 +11,15 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-22 00:46+0000\n"
-"PO-Revision-Date: 2025-05-24 17:16+0200\n"
-"Last-Translator: Paolo Zamponi <feus73@gmail.com>\n"
+"PO-Revision-Date: 2025-08-22 15:47+0200\n"
+"Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.04.1\n"
+"X-Generator: Lokalize 25.08.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2938,16 +2938,7 @@ msgstr "Abilita il controllo della memoria:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:24
-#, fuzzy, kde-format
-#| msgid ""
-#| "Changes will take effect upon restart. If enabled, sustained memory "
-#| "consumption by Konsole\n"
-#| "exceeding the specified value will cause systemd-oomd to eliminate the "
-#| "tab(s)\n"
-#| "containing the memory-intensive process(es). Note: enabling\n"
-#| "might cause greater slowdowns during high memory consumption and "
-#| "specifying\n"
-#| "excessively low values might still cause Konsole to be killed."
+#, kde-format
 msgid ""
 "Changes will take effect upon restart. If enabled, sustained memory "
 "consumption by Konsole exceeding the specified value will cause systemd-oomd "
@@ -2956,13 +2947,11 @@ msgid ""
 "specifying excessively low values might still cause Konsole to be killed."
 msgstr ""
 "Le modifiche avranno effetto al riavvio. Se abilitata, il consumo sostenuto "
-"di memoria da parte di Konsole\n"
-"che supera il valore specificato farà sì che systemd-oomd elimini le schede\n"
-"contenente i processi ad uso intensivo di memoria. Nota: l'abilitazione\n"
-"potrebbe causare rallentamenti maggiori durante un consumo elevato di "
-"memoria e l'impostazione\n"
-"di valori eccessivamente bassi potrebbe comunque causare la chiusura di "
-"Konsole."
+"di memoria da parte di Konsole che supera il valore specificato farà sì che "
+"systemd-oomd elimini le schede contenenti i processi ad uso intensivo di "
+"memoria. Nota: l'abilitazione potrebbe causare rallentamenti maggiori "
+"durante un consumo elevato di memoria e l'impostazione di valori "
+"eccessivamente bassi potrebbe comunque causare la chiusura di Konsole."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:37
@@ -3973,16 +3962,12 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:191
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Characters for drawing lines for a frame or box in TUI programs. Not a "
-#| "row of characters."
-#| msgid ">Use line characters contained in font"
+#, kde-format
 msgctxt ""
 "Characters for drawing lines for a frame or box in TUI programs. Not a row "
 "of characters."
 msgid "Use line characters contained in font"
-msgstr ">Utilizza i caratteri di riga contenuti nel carattere"
+msgstr "Utilizza i caratteri di linea contenuti nel carattere"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:198
@@ -5446,8 +5431,7 @@ msgid "Find the previous match for the current search phrase"
 msgstr "Trova la corrispondenza precedente della chiave di ricerca attuale"
 
 #: widgets/IncrementalSearchBar.cpp:102
-#, fuzzy, kde-format
-#| msgid "Case sensitive"
+#, kde-format
 msgctxt "@action:button"
 msgid "Case sensitive"
 msgstr "Distingui le maiuscole"

@@ -2871,16 +2871,7 @@ msgstr "启用内存监视："
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:24
-#, fuzzy, kde-format
-#| msgid ""
-#| "Changes will take effect upon restart. If enabled, sustained memory "
-#| "consumption by Konsole\n"
-#| "exceeding the specified value will cause systemd-oomd to eliminate the "
-#| "tab(s)\n"
-#| "containing the memory-intensive process(es). Note: enabling\n"
-#| "might cause greater slowdowns during high memory consumption and "
-#| "specifying\n"
-#| "excessively low values might still cause Konsole to be killed."
+#, kde-format
 msgid ""
 "Changes will take effect upon restart. If enabled, sustained memory "
 "consumption by Konsole exceeding the specified value will cause systemd-oomd "
@@ -2888,11 +2879,6 @@ msgid ""
 "enabling might cause greater slowdowns during high memory consumption and "
 "specifying excessively low values might still cause Konsole to be killed."
 msgstr ""
-"更改将在重启后生效。\n"
-"启用此项时，如果 Konsole 的持续内存消耗超过指定上限，\n"
-"systemd-oomd 将清理包含消耗大量内存的进程的标签页。\n"
-"注意：启用此项时，高内存消耗时可能造成更严重的拖慢。\n"
-"如果上限太低，可能导致 Konsole 本身被系统终止。"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:37
