@@ -29,9 +29,12 @@
 #include <KCrash>
 #include <KIconTheme>
 #include <KLocalizedString>
+#include <KWindowSystem>
 
 #if HAVE_DBUS
 #include <KDBusService>
+#include <QDBusConnection>
+#include <QDBusMessage>
 #endif
 
 #define HAVE_STYLE_MANAGER __has_include(<KStyleManager>)
@@ -209,6 +212,31 @@ int main(int argc, char *argv[])
     about.processCommandLine(parser.data());
 
 #if HAVE_DBUS
+    // on wayland: init token if we are launched by Konsole and have none
+    if (KWindowSystem::isPlatformWayland() && qEnvironmentVariable("XDG_ACTIVATION_TOKEN").isEmpty() && QDBusConnection::sessionBus().interface()) {
+        // can we ask Konsole for a token?
+        const auto konsoleService = qEnvironmentVariable("KONSOLE_DBUS_SERVICE");
+        const auto konsoleSession = qEnvironmentVariable("KONSOLE_DBUS_SESSION");
+        const auto konsoleActivationCookie = qEnvironmentVariable("KONSOLE_DBUS_ACTIVATION_COOKIE");
+        if (!konsoleService.isEmpty() && !konsoleSession.isEmpty() && !konsoleActivationCookie.isEmpty()) {
+            // we ask the current shell session
+            QDBusMessage m =
+                QDBusMessage::createMethodCall(konsoleService, konsoleSession, QStringLiteral("org.kde.konsole.Session"), QStringLiteral("activationToken"));
+
+            // use the cookie from the environment
+            m.setArguments({konsoleActivationCookie});
+
+            // get the token, if possible and export it to environment for later use
+            const auto tokenAnswer = QDBusConnection::sessionBus().call(m);
+            if (tokenAnswer.type() == QDBusMessage::ReplyMessage && !tokenAnswer.arguments().isEmpty()) {
+                const auto token = tokenAnswer.arguments().first().toString();
+                if (!token.isEmpty()) {
+                    qputenv("XDG_ACTIVATION_TOKEN", token.toUtf8());
+                }
+            }
+        }
+    }
+
     /// ! DON'T TOUCH THIS ! ///
     const KDBusService::StartupOption startupOption =
         Konsole::KonsoleSettings::useSingleInstance() && !needNewProcess ? KDBusService::Unique : KDBusService::Multiple;
