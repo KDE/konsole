@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-22 00:46+0000\n"
+"POT-Creation-Date: 2025-08-24 00:45+0000\n"
 "PO-Revision-Date: 2025-08-22 22:01+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -2127,25 +2127,25 @@ msgstr ""
 "Не вдалося знайти «%1», замість неї запущено «%2». Будь ласка, перевірте "
 "параметри вашого профілю."
 
-#: session/Session.cpp:609
+#: session/Session.cpp:612
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Не вдалося запустити програму «%1» з параметрами «%2»."
 
-#: session/Session.cpp:766
+#: session/Session.cpp:778
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Тиша у «%1» (сеанс «%2»)"
 
-#: session/Session.cpp:767 session/Session.cpp:2106
+#: session/Session.cpp:779 session/Session.cpp:2118
 #: session/SessionController.cpp:361 session/SessionController.cpp:1887
-#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1213
-#: Vt102Emulation.cpp:1468
+#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1214
+#: Vt102Emulation.cpp:1469
 #, kde-format
 msgid "Show session"
 msgstr "Показати сеанс"
 
-#: session/Session.cpp:1051
+#: session/Session.cpp:1063
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2159,28 +2159,28 @@ msgstr ""
 "використання (internal) перезбиранням Konsole. <p>Для цього екземпляра "
 "Konsole це попередження буде показано лише одного разу.</p>"
 
-#: session/Session.cpp:1091
+#: session/Session.cpp:1103
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Завершено"
 
-#: session/Session.cpp:1105 session/Session.cpp:1121
+#: session/Session.cpp:1117 session/Session.cpp:1133
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Програма «%1» завершила роботу у аварійному режимі."
 
-#: session/Session.cpp:1107
+#: session/Session.cpp:1119
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "Програма «%1» завершилась зі станом %2."
 
-#: session/Session.cpp:1633
+#: session/Session.cpp:1645
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Поступ ZModem"
 
-#: session/Session.cpp:2105
+#: session/Session.cpp:2117
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Діяльність у «%1» (сеанс «%2»)"
@@ -3716,7 +3716,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Завантаження компонування вкладок"
 
-#: Vt102Emulation.cpp:2827
+#: Vt102Emulation.cpp:2828
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "

@@ -18,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-22 00:46+0000\n"
-"PO-Revision-Date: 2025-08-19 16:47+0300\n"
+"POT-Creation-Date: 2025-08-24 00:45+0000\n"
+"PO-Revision-Date: 2025-08-23 17:31+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -27,7 +27,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.04.3\n"
+"X-Generator: Lokalize 25.08.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2118,25 +2118,25 @@ msgstr ""
 "“%1” bulunamadı, onun yerine “%2” başlatılıyor. Lütfen profil ayarlarınızı "
 "denetleyin."
 
-#: session/Session.cpp:609
+#: session/Session.cpp:612
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "“%1” uygulaması “%2” argümanıyla başlatılamadı."
 
-#: session/Session.cpp:766
+#: session/Session.cpp:778
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "“%1” içinde Sessizlik (Oturum “%2”)"
 
-#: session/Session.cpp:767 session/Session.cpp:2106
+#: session/Session.cpp:779 session/Session.cpp:2118
 #: session/SessionController.cpp:361 session/SessionController.cpp:1887
-#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1213
-#: Vt102Emulation.cpp:1468
+#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1214
+#: Vt102Emulation.cpp:1469
 #, kde-format
 msgid "Show session"
 msgstr "Oturumu göster"
 
-#: session/Session.cpp:1051
+#: session/Session.cpp:1063
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2150,28 +2150,28 @@ msgstr ""
 "değiştirilebilir.<p>Bu uyarı yalnızca bu Konsole örneği için bir kez "
 "gösterilecek.</p>"
 
-#: session/Session.cpp:1091
+#: session/Session.cpp:1103
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Bitti"
 
-#: session/Session.cpp:1105 session/Session.cpp:1121
+#: session/Session.cpp:1117 session/Session.cpp:1133
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "“%1” uygulaması çöktü."
 
-#: session/Session.cpp:1107
+#: session/Session.cpp:1119
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "“%1” uygulamasından %2 durumu ile çıkıldı."
 
-#: session/Session.cpp:1633
+#: session/Session.cpp:1645
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem İlerlemesi"
 
-#: session/Session.cpp:2105
+#: session/Session.cpp:2117
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "“%1” içinde Etkinlik (Oturum “%2”)"
@@ -2911,16 +2911,7 @@ msgstr "Bellek izlemeyi etkinleştir:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:24
-#, fuzzy, kde-format
-#| msgid ""
-#| "Changes will take effect upon restart. If enabled, sustained memory "
-#| "consumption by Konsole\n"
-#| "exceeding the specified value will cause systemd-oomd to eliminate the "
-#| "tab(s)\n"
-#| "containing the memory-intensive process(es). Note: enabling\n"
-#| "might cause greater slowdowns during high memory consumption and "
-#| "specifying\n"
-#| "excessively low values might still cause Konsole to be killed."
+#, kde-format
 msgid ""
 "Changes will take effect upon restart. If enabled, sustained memory "
 "consumption by Konsole exceeding the specified value will cause systemd-oomd "
@@ -2929,14 +2920,11 @@ msgid ""
 "specifying excessively low values might still cause Konsole to be killed."
 msgstr ""
 "Değişiklikler yeniden başlatıldığında etkili olacaktır. Etkinleştirilirse "
-"Konsole’nin\n"
-"belirtilen değeri aşan sürekli bellek tüketimi, systemd-oomd’un bellek yoğun "
-"işlemleri\n"
-"içeren sekmeleri ortadan kaldırmasına neden olur. Not: Etkinleştirme, yüksek "
-"bellek\n"
-"tüketimi sırasında daha büyük yavaşlamalara neden olabilir ve aşırı düşük "
-"değerlerin\n"
-"belirtilmesi yine de Konsole’nin sonlandırılmasına neden olabilir."
+"Konsole’nin belirtilen değeri aşan sürekli bellek tüketimi, systemd-oomd’un "
+"bellek yoğun işlemleri içeren sekmeleri ortadan kaldırmasına neden olur. "
+"Not: Etkinleştirme, yüksek bellek tüketimi sırasında daha büyük "
+"yavaşlamalara neden olabilir ve aşırı düşük değerlerin belirtilmesi yine de "
+"Konsole’nin sonlandırılmasına neden olabilir."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:37
@@ -3710,7 +3698,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Sekme Yerleşimi Yükle"
 
-#: Vt102Emulation.cpp:2827
+#: Vt102Emulation.cpp:2828
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
@@ -3939,16 +3927,12 @@ msgstr "Yerleşik kod yerine satır karakterleri için seçili yazıtipini kulla
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:191
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Characters for drawing lines for a frame or box in TUI programs. Not a "
-#| "row of characters."
-#| msgid ">Use line characters contained in font"
+#, kde-format
 msgctxt ""
 "Characters for drawing lines for a frame or box in TUI programs. Not a row "
 "of characters."
 msgid "Use line characters contained in font"
-msgstr "Yazıtipindeki satır karakterlerini kullan"
+msgstr "Yazıtipindeki çizgi karakterlerini kullan"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:198

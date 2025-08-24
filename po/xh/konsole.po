@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-22 00:46+0000\n"
+"POT-Creation-Date: 2025-08-24 00:45+0000\n"
 "PO-Revision-Date: 2002-11-04 09:23SAST\n"
 "Last-Translator: Lwandle Mgidlana <lwandle@translate.org.za>\n"
 "Language-Team: Xhosa <xhosa@translate.org.za>\n"
@@ -2174,26 +2174,26 @@ msgid ""
 "settings."
 msgstr ""
 
-#: session/Session.cpp:609
+#: session/Session.cpp:612
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr ""
 
-#: session/Session.cpp:766
+#: session/Session.cpp:778
 #, fuzzy, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Tshintsha Kwisiqendu 1"
 
-#: session/Session.cpp:767 session/Session.cpp:2106
+#: session/Session.cpp:779 session/Session.cpp:2118
 #: session/SessionController.cpp:361 session/SessionController.cpp:1887
-#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1213
-#: Vt102Emulation.cpp:1468
+#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1214
+#: Vt102Emulation.cpp:1469
 #, fuzzy, kde-format
 #| msgid "New Session"
 msgid "Show session"
 msgstr "Intlanganiso Entsha"
 
-#: session/Session.cpp:1051
+#: session/Session.cpp:1063
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2202,31 +2202,31 @@ msgid ""
 "warning will only show once for this Konsole instance.</p>"
 msgstr ""
 
-#: session/Session.cpp:1091
+#: session/Session.cpp:1103
 #, fuzzy, kde-format
 #| msgid "<Finished>"
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "<Igqityiwe>"
 
-#: session/Session.cpp:1105 session/Session.cpp:1121
+#: session/Session.cpp:1117 session/Session.cpp:1133
 #, fuzzy, kde-format
 #| msgctxt "NAME OF TRANSLATORS"
 #| msgid "Your names"
 msgid "Program '%1' crashed."
 msgstr "Lwandle Mgidlana"
 
-#: session/Session.cpp:1107
+#: session/Session.cpp:1119
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr ""
 
-#: session/Session.cpp:1633
+#: session/Session.cpp:1645
 #, kde-format
 msgid "ZModem Progress"
 msgstr ""
 
-#: session/Session.cpp:2105
+#: session/Session.cpp:2117
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr ""
@@ -3759,7 +3759,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr ""
 
-#: Vt102Emulation.cpp:2827
+#: Vt102Emulation.cpp:2828
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-22 00:46+0000\n"
+"POT-Creation-Date: 2025-08-24 00:45+0000\n"
 "PO-Revision-Date: 2025-08-22 09:40+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -2130,25 +2130,25 @@ msgstr ""
 "No s'ha pogut trobar «%1», en el seu lloc s'ha engegat «%2». Comproveu els "
 "paràmetres del vostre perfil."
 
-#: session/Session.cpp:609
+#: session/Session.cpp:612
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "No s'ha pogut iniciar el programa «%1» amb els arguments «%2»."
 
-#: session/Session.cpp:766
+#: session/Session.cpp:778
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Silenci a «%1» (Sessió «%2»)"
 
-#: session/Session.cpp:767 session/Session.cpp:2106
+#: session/Session.cpp:779 session/Session.cpp:2118
 #: session/SessionController.cpp:361 session/SessionController.cpp:1887
-#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1213
-#: Vt102Emulation.cpp:1468
+#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1214
+#: Vt102Emulation.cpp:1469
 #, kde-format
 msgid "Show session"
 msgstr "Mostra la sessió"
 
-#: session/Session.cpp:1051
+#: session/Session.cpp:1063
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2162,28 +2162,28 @@ msgstr ""
 "<p>Aquest avís només es mostrarà una vegada per a aquesta instància del "
 "Konsole.</p>"
 
-#: session/Session.cpp:1091
+#: session/Session.cpp:1103
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Finalitzada"
 
-#: session/Session.cpp:1105 session/Session.cpp:1121
+#: session/Session.cpp:1117 session/Session.cpp:1133
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "El programa «%1» ha fallat."
 
-#: session/Session.cpp:1107
+#: session/Session.cpp:1119
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "El programa «%1» ha acabat amb l'estat %2."
 
-#: session/Session.cpp:1633
+#: session/Session.cpp:1645
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Progrés ZModem"
 
-#: session/Session.cpp:2105
+#: session/Session.cpp:2117
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Activitat a «%1» (Sessió «%2»)"
@@ -3731,7 +3731,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Carrega la disposició de les pestanyes"
 
-#: Vt102Emulation.cpp:2827
+#: Vt102Emulation.cpp:2828
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "

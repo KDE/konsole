@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-22 00:46+0000\n"
+"POT-Creation-Date: 2025-08-24 00:45+0000\n"
 "PO-Revision-Date: 2025-07-08 22:18+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -2120,25 +2120,25 @@ msgstr ""
 "„%1” nem található, „%2” indul el helyette. Ellenőrizze a profil "
 "beállításait."
 
-#: session/Session.cpp:609
+#: session/Session.cpp:612
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Nem sikerült elindítani: „%1” (argumentumok: „%2”)."
 
-#: session/Session.cpp:766
+#: session/Session.cpp:778
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Üresjárat - „%1” („%2” munkamenet)"
 
-#: session/Session.cpp:767 session/Session.cpp:2106
+#: session/Session.cpp:779 session/Session.cpp:2118
 #: session/SessionController.cpp:361 session/SessionController.cpp:1887
-#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1213
-#: Vt102Emulation.cpp:1468
+#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1214
+#: Vt102Emulation.cpp:1469
 #, kde-format
 msgid "Show session"
 msgstr "Munkamenet megjelenítése"
 
-#: session/Session.cpp:1051
+#: session/Session.cpp:1063
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2152,28 +2152,28 @@ msgstr ""
 "módosíthatók. <p>Ez figyelmeztetés csak egyszer jelenik meg ebben a Konsole "
 "példányban.</p>"
 
-#: session/Session.cpp:1091
+#: session/Session.cpp:1103
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Befejezve"
 
-#: session/Session.cpp:1105 session/Session.cpp:1121
+#: session/Session.cpp:1117 session/Session.cpp:1133
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "A(z) „%1” program összeomlott."
 
-#: session/Session.cpp:1107
+#: session/Session.cpp:1119
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "A(z) „%1” program %2 állapotkóddal fejeződött be."
 
-#: session/Session.cpp:1633
+#: session/Session.cpp:1645
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem-állapot"
 
-#: session/Session.cpp:2105
+#: session/Session.cpp:2117
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Aktivitás - „%1” („%2” munkamenet)"
@@ -3717,7 +3717,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Lapelrendezés betöltése"
 
-#: Vt102Emulation.cpp:2827
+#: Vt102Emulation.cpp:2828
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
