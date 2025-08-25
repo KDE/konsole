@@ -291,7 +291,7 @@ int Screen::selSetSelectionEnd(int mode)
         }
     }
     setSelectionEnd(x, y, false);
-    Q_EMIT _currentTerminalDisplay->screenWindow()->selectionChanged();
+    Q_EMIT currentTerminalDisplay()->screenWindow()->selectionChanged();
     return 0;
 }
 
@@ -639,10 +639,10 @@ void Screen::resizeImage(int new_lines, int new_columns)
 
     if (_enableReflowLines && new_columns != _columns) {
         int cursorLineCorrection = 0;
-        if (_currentTerminalDisplay) {
+        if (currentTerminalDisplay()) {
             // The 'zsh' works different from other shells when writing the command line.
             // It needs to identify the 'zsh' and calculate the new command line.
-            auto sessionController = _currentTerminalDisplay->sessionController();
+            auto sessionController = currentTerminalDisplay()->sessionController();
             auto terminal = sessionController->session()->foregroundProcessName();
             if (terminal == QLatin1String("zsh")) {
                 while (cursorLine + cursorLineCorrection > 0 && (linePropertiesAt(cursorLine + cursorLineCorrection).flags.f.prompt_start) == 0) {
@@ -967,7 +967,7 @@ void Screen::reset(bool softReset, bool preservePrompt)
             _cuY = 0;
             if (_hasGraphics) {
                 delPlacements();
-                _currentTerminalDisplay->update();
+                currentTerminalDisplay()->update();
             }
         } else {
             clearEntireScreen();
@@ -1640,7 +1640,7 @@ void Screen::clearEntireScreen()
     clearImage(loc(0, 0), loc(_columns - 1, _lines - 1), ' ');
     if (_hasGraphics) {
         delPlacements();
-        _currentTerminalDisplay->update();
+        currentTerminalDisplay()->update();
     }
 }
 
@@ -1912,7 +1912,7 @@ void Screen::selectReplContigious(const int x, const int y)
     if (_replMode == REPL_INPUT && _replModeStart <= std::pair(y, x) && std::pair(y, x) <= _replModeEnd) {
         setSelectionStart(_replModeStart.second, _replModeStart.first, false);
         setSelectionEnd(_replModeEnd.second, _replModeEnd.first, true);
-        Q_EMIT _currentTerminalDisplay->screenWindow()->selectionChanged();
+        Q_EMIT currentTerminalDisplay()->screenWindow()->selectionChanged();
         return;
     }
     int col = x;
@@ -1985,7 +1985,7 @@ void Screen::selectReplContigious(const int x, const int y)
     }
     setSelectionStart(startX, startY, false);
     setSelectionEnd(endX, endY, true);
-    Q_EMIT _currentTerminalDisplay->screenWindow()->selectionChanged();
+    Q_EMIT currentTerminalDisplay()->screenWindow()->selectionChanged();
 }
 
 QString Screen::selectedText(const DecodingOptions options) const
@@ -2379,7 +2379,7 @@ void Screen::addHistLine()
         if (newHistLines <= oldHistLines) {
             _droppedLines += oldHistLines - newHistLines + 1;
 
-            _currentTerminalDisplay->removeLines(oldHistLines - newHistLines + 1);
+            currentTerminalDisplay()->removeLines(oldHistLines - newHistLines + 1);
             // We removed some lines, we need to verify if we need to remove a URL.
             if (_escapeSequenceUrlExtractor) {
                 _escapeSequenceUrlExtractor->historyLinesRemoved(oldHistLines - newHistLines + 1);
@@ -2440,7 +2440,7 @@ void Screen::setScroll(const HistoryType &t, bool copyPreviousScroll)
         // As 't' can be '_history' pointer, move it to a temporary smart pointer
         // making _history = nullptr
         auto oldHistory = std::move(_history);
-        _currentTerminalDisplay->removeLines(oldHistory->getLines());
+        currentTerminalDisplay()->removeLines(oldHistory->getLines());
         t.scroll(_history);
     }
     _graphicsPlacements.clear();
@@ -2491,7 +2491,7 @@ void Screen::setReplMode(int mode)
         }
         if (mode == REPL_PROMPT) {
             if (_replHadOutput) {
-                _currentTerminalDisplay->sessionController()->notifyPrompt();
+                currentTerminalDisplay()->sessionController()->notifyPrompt();
                 _replHadOutput = false;
             }
         }
@@ -2505,9 +2505,9 @@ void Screen::setReplMode(int mode)
     if (mode != REPL_None) {
         if (!_hasRepl) {
             _hasRepl = true;
-            _currentTerminalDisplay->sessionController()->setVisible(QStringLiteral("monitor-prompt"), true);
+            currentTerminalDisplay()->sessionController()->setVisible(QStringLiteral("monitor-prompt"), true);
         }
-        Q_EMIT _currentTerminalDisplay->screenWindow()->selectionChanged(); // Enable copy action
+        Q_EMIT currentTerminalDisplay()->screenWindow()->selectionChanged(); // Enable copy action
         setLineProperty(LINE_PROMPT_START << (mode - REPL_PROMPT), true);
     }
 }
@@ -2587,10 +2587,10 @@ void Screen::addPlacement(QPixmap pixmap,
         col = _cuX;
     }
     if (rows == -1) {
-        rows = (pixmap.height() - 1) / _currentTerminalDisplay->terminalFont()->fontHeight() + 1;
+        rows = (pixmap.height() - 1) / currentTerminalDisplay()->terminalFont()->fontHeight() + 1;
     }
     if (cols == -1) {
-        cols = (pixmap.width() - 1) / _currentTerminalDisplay->terminalFont()->fontWidth() + 1;
+        cols = (pixmap.width() - 1) / currentTerminalDisplay()->terminalFont()->fontWidth() + 1;
     }
 
     p->pixmap = pixmap;
@@ -2757,4 +2757,14 @@ void Screen::delPlacements(int del, qint64 id, qint64 pid, int x, int y, int z)
             i++;
         }
     }
+}
+
+void Screen::setCurrentTerminalDisplay(TerminalDisplay *display)
+{
+    _currentTerminalDisplay = display;
+}
+
+TerminalDisplay *Screen::currentTerminalDisplay()
+{
+    return static_cast<TerminalDisplay *>(_currentTerminalDisplay.data());
 }

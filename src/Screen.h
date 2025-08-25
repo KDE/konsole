@@ -13,6 +13,7 @@
 
 // Qt
 #include <QBitArray>
+#include <QPointer>
 #include <QRect>
 #include <QSet>
 #include <QVarLengthArray>
@@ -649,15 +650,9 @@ public:
      */
     static void fillWithDefaultChar(Character *dest, int count);
 
-    void setCurrentTerminalDisplay(TerminalDisplay *display)
-    {
-        _currentTerminalDisplay = display;
-    }
+    void setCurrentTerminalDisplay(TerminalDisplay *display);
 
-    TerminalDisplay *currentTerminalDisplay()
-    {
-        return _currentTerminalDisplay;
-    }
+    TerminalDisplay *currentTerminalDisplay();
 
     QSet<uint> usedExtendedChars() const
     {
@@ -754,7 +749,9 @@ private:
     void scrollDown(int from, int n);
 
     // when we handle scroll commands, we need to know which screenwindow will scroll
-    TerminalDisplay *_currentTerminalDisplay;
+    // use QPointer to track life time of this object, see crashes in bug 508721
+    // via Konsole::Vt102Emulation::resetMode that checks for currentTerminalDisplay()
+    QPointer<QWidget> _currentTerminalDisplay;
 
     void addHistLine();
     // add lines from _screen to _history and remove from _screen the added lines (used to resize lines and columns)
