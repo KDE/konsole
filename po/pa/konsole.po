@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-24 00:45+0000\n"
+"POT-Creation-Date: 2025-08-25 00:45+0000\n"
 "PO-Revision-Date: 2024-01-19 07:50-0600\n"
 "Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -823,67 +823,67 @@ msgstr "ਇੰਪੁੱਟ:"
 msgid "Output:"
 msgstr "ਆਉਟਪੁੱਟ:"
 
-#: main.cpp:186
+#: main.cpp:189
 #, kde-format
 msgctxt "@title"
 msgid "Konsole"
 msgstr "ਕੇਨਸੋਲ"
 
-#: main.cpp:188
+#: main.cpp:191
 #, kde-format
 msgctxt "@title"
 msgid "Terminal emulator"
 msgstr "ਟਰਮੀਨਲ ਈਮੂਲੇਟਰ"
 
-#: main.cpp:190
+#: main.cpp:193
 #, kde-format
 msgctxt "@info:credit"
 msgid "(c) 1997-2022, The Konsole Developers"
 msgstr ""
 
-#: main.cpp:341
+#: main.cpp:369
 #, kde-format
 msgctxt "@info:credit"
 msgid "Kurt Hindenburg"
 msgstr ""
 
-#: main.cpp:343
+#: main.cpp:371
 #, kde-format
 msgctxt "@info:credit"
 msgid "General maintainer, bug fixes and general improvements"
 msgstr "ਪ੍ਰਬੰਧਕ, ਬੱਗ ਸਥਿਰ ਕੀਤੇ ਅਤੇ ਆਮ ਸੁਧਾਰ"
 
-#: main.cpp:346
+#: main.cpp:374
 #, kde-format
 msgctxt "@info:credit"
 msgid "Robert Knight"
 msgstr "ਰਾਬਰਟ ਨਾਈਟ"
 
-#: main.cpp:347
+#: main.cpp:375
 #, kde-format
 msgctxt "@info:credit"
 msgid "Previous maintainer, ported to KDE4"
 msgstr ""
 
-#: main.cpp:349
+#: main.cpp:377
 #, kde-format
 msgctxt "@info:credit"
 msgid "Lars Doelle"
 msgstr "ਲਾਰਸ ਡੂਇੱਲੇ"
 
-#: main.cpp:349
+#: main.cpp:377
 #, kde-format
 msgctxt "@info:credit"
 msgid "Original author"
 msgstr "ਅਸਲੀ ਲੇਖਕ"
 
-#: main.cpp:350
+#: main.cpp:378
 #, kde-format
 msgctxt "@info:credit"
 msgid "Ahmad Samir"
 msgstr ""
 
-#: main.cpp:351 main.cpp:354 main.cpp:357 main.cpp:360
+#: main.cpp:379 main.cpp:382 main.cpp:385 main.cpp:388
 #, fuzzy, kde-format
 #| msgctxt "@info:credit"
 #| msgid "General maintainer, bug fixes and general improvements"
@@ -891,56 +891,56 @@ msgctxt "@info:credit"
 msgid "Major refactoring, bug fixes and major improvements"
 msgstr "ਪ੍ਰਬੰਧਕ, ਬੱਗ ਸਥਿਰ ਕੀਤੇ ਅਤੇ ਆਮ ਸੁਧਾਰ"
 
-#: main.cpp:353
+#: main.cpp:381
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carlos Alves"
 msgstr ""
 
-#: main.cpp:356
+#: main.cpp:384
 #, kde-format
 msgctxt "@info:credit"
 msgid "Tomaz Canabrava"
 msgstr ""
 
-#: main.cpp:359
+#: main.cpp:387
 #, kde-format
 msgctxt "@info:credit"
 msgid "Gustavo Carneiro"
 msgstr ""
 
-#: main.cpp:362
+#: main.cpp:390
 #, kde-format
 msgctxt "@info:credit"
 msgid "Edwin Pujols"
 msgstr ""
 
-#: main.cpp:363 main.cpp:366 main.cpp:368 main.cpp:373 main.cpp:375
-#: main.cpp:376 main.cpp:377
+#: main.cpp:391 main.cpp:394 main.cpp:396 main.cpp:401 main.cpp:403
+#: main.cpp:404 main.cpp:405
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes and general improvements"
 msgstr "ਬੱਗ ਸਥਿਰ ਕੀਤੇ ਅਤੇ ਆਮ ਸੁਧਾਰ"
 
-#: main.cpp:365
+#: main.cpp:393
 #, kde-format
 msgctxt "@info:credit"
 msgid "Martin T. H. Sandsmark"
 msgstr ""
 
-#: main.cpp:368
+#: main.cpp:396
 #, kde-format
 msgctxt "@info:credit"
 msgid "Nate Graham"
 msgstr ""
 
-#: main.cpp:369
+#: main.cpp:397
 #, kde-format
 msgctxt "@info:credit"
 msgid "Mariusz Glebocki"
 msgstr ""
 
-#: main.cpp:370
+#: main.cpp:398
 #, fuzzy, kde-format
 #| msgctxt "@info:credit"
 #| msgid "Bug fixes and general improvements"
@@ -948,104 +948,104 @@ msgctxt "@info:credit"
 msgid "Bug fixes and major improvements"
 msgstr "ਬੱਗ ਸਥਿਰ ਕੀਤੇ ਅਤੇ ਆਮ ਸੁਧਾਰ"
 
-#: main.cpp:372
+#: main.cpp:400
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thomas Surrel"
 msgstr ""
 
-#: main.cpp:375
+#: main.cpp:403
 #, kde-format
 msgctxt "@info:credit"
 msgid "Jekyll Wu"
 msgstr ""
 
-#: main.cpp:376
+#: main.cpp:404
 #, kde-format
 msgctxt "@info:credit"
 msgid "Waldo Bastian"
 msgstr "ਵਾਲਡੋ ਬਾਸਟਿਨ"
 
-#: main.cpp:377
+#: main.cpp:405
 #, kde-format
 msgctxt "@info:credit"
 msgid "Stephan Binner"
 msgstr "ਸਟੀਫਨ ਬਿੱਨੀਰ"
 
-#: main.cpp:378
+#: main.cpp:406
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thomas Dreibholz"
 msgstr ""
 
-#: main.cpp:378
+#: main.cpp:406
 #, kde-format
 msgctxt "@info:credit"
 msgid "General improvements"
 msgstr "ਆਮ ਸੁਧਾਰ"
 
-#: main.cpp:379
+#: main.cpp:407
 #, kde-format
 msgctxt "@info:credit"
 msgid "Chris Machemer"
 msgstr "ਕਰਿਸ ਮਾਚੀਮੀਰ"
 
-#: main.cpp:379 main.cpp:380 main.cpp:407 main.cpp:408 main.cpp:409
-#: main.cpp:410
+#: main.cpp:407 main.cpp:408 main.cpp:435 main.cpp:436 main.cpp:437
+#: main.cpp:438
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes"
 msgstr "ਬੱਗ ਸਥਿਰ"
 
-#: main.cpp:380
+#: main.cpp:408
 #, kde-format
 msgctxt "@info:credit"
 msgid "Francesco Cecconi"
 msgstr ""
 
-#: main.cpp:381
+#: main.cpp:409
 #, kde-format
 msgctxt "@info:credit"
 msgid "Stephan Kulow"
 msgstr "ਸਟੀਫਨ ਕੋਲੋ"
 
-#: main.cpp:381
+#: main.cpp:409
 #, kde-format
 msgctxt "@info:credit"
 msgid "Solaris support and history"
 msgstr "Solaris ਸਹਾਇਤਾ ਅਤੇ ਅਤੀਤ"
 
-#: main.cpp:382
+#: main.cpp:410
 #, kde-format
 msgctxt "@info:credit"
 msgid "Alexander Neundorf"
 msgstr "Alexander Neundorf"
 
-#: main.cpp:383
+#: main.cpp:411
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes and improved startup performance"
 msgstr "ਬੱਗ ਫਿਕਸ ਅਤੇ ਸ਼ੁਰੂਆਤੀ ਕਾਰਗੁਜ਼ਾਰੀ ਸੁਧਾਰ"
 
-#: main.cpp:385
+#: main.cpp:413
 #, kde-format
 msgctxt "@info:credit"
 msgid "Peter Silva"
 msgstr "ਪੀਟਰ ਸੀਲਵਾ"
 
-#: main.cpp:385
+#: main.cpp:413
 #, kde-format
 msgctxt "@info:credit"
 msgid "Marking improvements"
 msgstr "ਸੁਧਾਰ ਕੀਤੇ"
 
-#: main.cpp:386
+#: main.cpp:414
 #, kde-format
 msgctxt "@info:credit"
 msgid "Lotzi Boloni"
 msgstr "ਲੁਟਜ਼ੀ ਬੋਲੋਨੀ"
 
-#: main.cpp:388
+#: main.cpp:416
 #, kde-format
 msgctxt "@info:credit"
 msgid ""
@@ -1055,13 +1055,13 @@ msgstr ""
 "ਸ਼ਾਮਲ ਕਨਸੋਂਲ\n"
 "ਟੂਲਬਾਰ ਅਤੇ ਸ਼ੈਸ਼ਨ ਨਾਂ"
 
-#: main.cpp:391
+#: main.cpp:419
 #, kde-format
 msgctxt "@info:credit"
 msgid "David Faure"
 msgstr "ਡੇਵਿਡ ਫਾਉਰੀ"
 
-#: main.cpp:393
+#: main.cpp:421
 #, kde-format
 msgctxt "@info:credit"
 msgid ""
@@ -1071,25 +1071,25 @@ msgstr ""
 "ਇੰਬੈੱਡ ਕਨਸੋਲ\n"
 "ਆਮ ਸੁਧਾਰ"
 
-#: main.cpp:396
+#: main.cpp:424
 #, kde-format
 msgctxt "@info:credit"
 msgid "Antonio Larrosa"
 msgstr "ਐਂਟੋਨੀਓ ਲਾਰੋਸਾ"
 
-#: main.cpp:396
+#: main.cpp:424
 #, kde-format
 msgctxt "@info:credit"
 msgid "Visual effects"
 msgstr "ਦਿੱਖ ਪਰਭਾਵ"
 
-#: main.cpp:397
+#: main.cpp:425
 #, kde-format
 msgctxt "@info:credit"
 msgid "Matthias Ettrich"
 msgstr "ਮੈਥੂਸ ਇੱਟਰਿਚ"
 
-#: main.cpp:399
+#: main.cpp:427
 #, kde-format
 msgctxt "@info:credit"
 msgid ""
@@ -1099,67 +1099,67 @@ msgstr ""
 "kvt ਪ੍ਰੋਜੈਕਟ ਤੋਂ ਕੋਡ\n"
 "ਆਮ ਸੁਧਾਰ"
 
-#: main.cpp:402
+#: main.cpp:430
 #, kde-format
 msgctxt "@info:credit"
 msgid "Warwick Allison"
 msgstr "ਵਾਵਿਕ ਐਲੀਸਨ"
 
-#: main.cpp:403
+#: main.cpp:431
 #, kde-format
 msgctxt "@info:credit"
 msgid "Schema and text selection improvements"
 msgstr "ਸਕੀਮਾਂ ਅਤੇ ਪਾਠ ਚੋਣ ਸੁਧਾਰ"
 
-#: main.cpp:405
+#: main.cpp:433
 #, kde-format
 msgctxt "@info:credit"
 msgid "Dan Pilone"
 msgstr "ਡੇਨ ਪਾਲੋਨ"
 
-#: main.cpp:405
+#: main.cpp:433
 #, kde-format
 msgctxt "@info:credit"
 msgid "SGI port"
 msgstr "SGI ਪੋਰਟ"
 
-#: main.cpp:406
+#: main.cpp:434
 #, kde-format
 msgctxt "@info:credit"
 msgid "Kevin Street"
 msgstr "ਕੇਵਿਨ ਸਟਰੀਟ"
 
-#: main.cpp:406
+#: main.cpp:434
 #, kde-format
 msgctxt "@info:credit"
 msgid "FreeBSD port"
 msgstr "FreeBSD ਪੋਰਟ"
 
-#: main.cpp:407
+#: main.cpp:435
 #, kde-format
 msgctxt "@info:credit"
 msgid "Sven Fischer"
 msgstr "ਸਵੀਨ ਫਿਸਚੀਰ"
 
-#: main.cpp:408
+#: main.cpp:436
 #, kde-format
 msgctxt "@info:credit"
 msgid "Dale M. Flaven"
 msgstr "ਡਲੀ ਐਂਮ. ਫਲਾਵਿਨ"
 
-#: main.cpp:409
+#: main.cpp:437
 #, kde-format
 msgctxt "@info:credit"
 msgid "Martin Jones"
 msgstr "ਮਾਰਤਿਨ ਜੋਨਜ਼"
 
-#: main.cpp:410
+#: main.cpp:438
 #, kde-format
 msgctxt "@info:credit"
 msgid "Lars Knoll"
 msgstr "ਲਾਰਸ ਕਨੱਲ"
 
-#: main.cpp:411
+#: main.cpp:439
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
