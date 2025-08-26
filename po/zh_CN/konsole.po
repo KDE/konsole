@@ -2211,7 +2211,7 @@ msgstr "复制命令输出"
 #: session/SessionController.cpp:713
 #, kde-format
 msgid "Paste Selection"
-msgstr "粘贴选中范围"
+msgstr "粘贴选中内容"
 
 #: session/SessionController.cpp:720
 #, kde-format
@@ -3875,7 +3875,7 @@ msgctxt ""
 "Characters for drawing lines for a frame or box in TUI programs. Not a row "
 "of characters."
 msgid "Use the selected font for line characters instead of the builtin code"
-msgstr "使用选中字体的行字符而不是内置代码"
+msgstr "使用所选字体来显示线条字符，而非内置代码"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:191
@@ -3884,7 +3884,7 @@ msgctxt ""
 "Characters for drawing lines for a frame or box in TUI programs. Not a row "
 "of characters."
 msgid ">Use line characters contained in font"
-msgstr "使用字体中包含的画线字符"
+msgstr "使用字体中包含的线条字符"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:198
@@ -4014,7 +4014,7 @@ msgstr "已启用"
 #, kde-format
 msgctxt "Items that do not fit in other categories"
 msgid "Miscellaneous"
-msgstr "杂项"
+msgstr "其他"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: widgets/EditProfileAppearancePage.ui:484
@@ -4757,7 +4757,7 @@ msgstr "双击选择时，被当作词的一部分的非字母表字符。"
 #: widgets/EditProfileMousePage.ui:53
 #, kde-format
 msgid "Word characters:"
-msgstr "文字字符："
+msgstr "单词字符："
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileMousePage.ui:94
@@ -4787,13 +4787,13 @@ msgstr "中键单击粘贴："
 #: widgets/EditProfileMousePage.ui:150
 #, kde-format
 msgid "From clipboard"
-msgstr "从剪贴板"
+msgstr "来自剪贴板"
 
 #. i18n: ectx: property (text), widget (QRadioButton, pasteFromX11SelectionButton)
 #: widgets/EditProfileMousePage.ui:160
 #, kde-format
 msgid "From selection"
-msgstr "从选区"
+msgstr "来自选中的内容"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: widgets/EditProfileMousePage.ui:186
