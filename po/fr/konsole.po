@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-25 00:45+0000\n"
-"PO-Revision-Date: 2025-05-01 16:52+0200\n"
+"PO-Revision-Date: 2025-08-23 14:16+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -32,7 +32,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Accelerator-Marker: &\n"
 "X-Environment: kde\n"
-"X-Generator: Lokalize 24.12.3\n"
+"X-Generator: Lokalize 25.08.0\n"
 "X-Text-Markup: kde4\n"
 
 #, kde-format
@@ -2977,16 +2977,7 @@ msgstr "Activer la surveillance de la mémoire :"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:24
-#, fuzzy, kde-format
-#| msgid ""
-#| "Changes will take effect upon restart. If enabled, sustained memory "
-#| "consumption by Konsole\n"
-#| "exceeding the specified value will cause systemd-oomd to eliminate the "
-#| "tab(s)\n"
-#| "containing the memory-intensive process(es). Note: enabling\n"
-#| "might cause greater slowdowns during high memory consumption and "
-#| "specifying\n"
-#| "excessively low values might still cause Konsole to be killed."
+#, kde-format
 msgid ""
 "Changes will take effect upon restart. If enabled, sustained memory "
 "consumption by Konsole exceeding the specified value will cause systemd-oomd "
@@ -2995,15 +2986,13 @@ msgid ""
 "specifying excessively low values might still cause Konsole to be killed."
 msgstr ""
 "Les modifications prendront effet au redémarrage. Si cette option est "
-"activée, la consommation de mémoire prise en\n"
-" compte par Konsole dépassant la valeur spécifiée conduira le module "
-"« systemd-oomd » a fermé les onglets\n"
+"activée, la consommation de mémoire prise en compte par Konsole dépassant la "
+"valeur spécifiée conduira le module « systemd-oomd » a fermé les onglets "
 "contenant le ou les processus(s) nécessitant beaucoup de mémoire. Remarque : "
-"activation de cette option\n"
-"peut provoquer des ralentissements plus importants lors d'une consommation "
-"de mémoire élevée et la définition\n"
-" de valeurs excessivement basses pourraient ensuite provoquer la fermeture "
-"de Konsole."
+"l'activation de cette option peut provoquer des ralentissements plus "
+"importants lors d'une consommation de mémoire élevée et la définition de "
+"valeurs excessivement basses pourraient ensuite provoquer la fermeture de "
+"Konsole."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:37
@@ -4016,11 +4005,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:191
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Characters for drawing lines for a frame or box in TUI programs. Not a "
-#| "row of characters."
-#| msgid ">Use line characters contained in font"
+#, kde-format
 msgctxt ""
 "Characters for drawing lines for a frame or box in TUI programs. Not a row "
 "of characters."
@@ -5512,8 +5497,7 @@ msgstr ""
 "Trouver la précédente correspondance pour la phrase actuellement recherchée"
 
 #: widgets/IncrementalSearchBar.cpp:102
-#, fuzzy, kde-format
-#| msgid "Case sensitive"
+#, kde-format
 msgctxt "@action:button"
 msgid "Case sensitive"
 msgstr "Sensible à la casse"

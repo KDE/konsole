@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-25 00:45+0000\n"
-"PO-Revision-Date: 2025-08-20 09:27-0300\n"
+"PO-Revision-Date: 2025-08-25 23:13-0300\n"
 "Last-Translator: Geraldo Simiao <geraldosimiao@fedoraproject.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -2937,16 +2937,7 @@ msgstr "Habilita o monitoramento de memória:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:24
-#, fuzzy, kde-format
-#| msgid ""
-#| "Changes will take effect upon restart. If enabled, sustained memory "
-#| "consumption by Konsole\n"
-#| "exceeding the specified value will cause systemd-oomd to eliminate the "
-#| "tab(s)\n"
-#| "containing the memory-intensive process(es). Note: enabling\n"
-#| "might cause greater slowdowns during high memory consumption and "
-#| "specifying\n"
-#| "excessively low values might still cause Konsole to be killed."
+#, kde-format
 msgid ""
 "Changes will take effect upon restart. If enabled, sustained memory "
 "consumption by Konsole exceeding the specified value will cause systemd-oomd "
@@ -2955,14 +2946,11 @@ msgid ""
 "specifying excessively low values might still cause Konsole to be killed."
 msgstr ""
 "As alterações entrarão em vigor após a reinicialização. Se habilitado, o "
-"consumo sustentado de memória pelo Konsole\n"
-" excedendo o valor especificado fará com que o systemd-oomd elimine a(s) "
-"aba(s)\n"
-" contendo o(s) processo(s) que consomem muita memória. Observação: "
-"habilitar\n"
-" pode causar lentidão maior durante alto consumo de memória e especificar\n"
-" valores excessivamente baixos ainda pode fazer com que o Konsole seja "
-"encerrado."
+"consumo sustentado de memória pelo Konsole excedendo o valor especificado "
+"fará com que o systemd-oomd elimine a(s) aba(s) contendo o(s) processo(s) "
+"que consomem muita memória. Observação: habilitar pode causar lentidão maior "
+"durante alto consumo de memória e especificar valores excessivamente baixos "
+"ainda pode fazer com que o Konsole seja encerrado."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:37
@@ -3970,16 +3958,12 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:191
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Characters for drawing lines for a frame or box in TUI programs. Not a "
-#| "row of characters."
-#| msgid ">Use line characters contained in font"
+#, kde-format
 msgctxt ""
 "Characters for drawing lines for a frame or box in TUI programs. Not a row "
 "of characters."
 msgid "Use line characters contained in font"
-msgstr ">Usar caracteres de linha contidos na fonte"
+msgstr "Usar caracteres de linha contidos na fonte"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:198
