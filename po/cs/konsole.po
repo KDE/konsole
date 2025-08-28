@@ -5277,11 +5277,10 @@ msgid "Find the previous match for the current search phrase"
 msgstr "Najít předchozí výskyt hledané fráze"
 
 #: widgets/IncrementalSearchBar.cpp:102
-#, fuzzy, kde-format
-#| msgid "Case sensitive"
+#, kde-format
 msgctxt "@action:button"
 msgid "Case sensitive"
-msgstr "Rozlišovat VELKÁ/malá"
+msgstr ""
 
 #: widgets/IncrementalSearchBar.cpp:103
 #, kde-format
@@ -5529,7 +5528,3 @@ msgstr "Nas&tavit nebo přejmenovat kartu..."
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "Zavřít kartu"
-
-#~ msgctxt "@item:inmenu"
-#~ msgid "Case sensitive"
-#~ msgstr "Rozlišovat velká/malá"
