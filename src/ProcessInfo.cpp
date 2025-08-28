@@ -607,10 +607,20 @@ private:
         return ok;
     }
 
-    QDBusMessage callSmdDBus(const QString &objectPath, const QString &interfaceName, const QString &methodName, const QList<QVariant> &args)
+    QDBusMessage callSmdDBus(const QString &objectPath,
+                             const QString &interfaceName,
+                             const QString &methodName,
+                             const QList<QVariant> &args,
+                             const QString &interfacePrefix = QString{})
     {
         const QString service(QStringLiteral("org.freedesktop.systemd1"));
-        const QString interface(service + QLatin1Char('.') + interfaceName);
+        QString interface;
+        if (interfacePrefix.isEmpty()) {
+            interface = service + u"." + interfaceName;
+        } else {
+            interface = interfacePrefix + u"." + interfaceName;
+        }
+
         auto methodCall = QDBusMessage::createMethodCall(service, objectPath, interface, methodName);
         methodCall.setArguments(args);
 
@@ -653,13 +663,7 @@ private:
         // get created app cgroup path
         QString newAppCGroupPath = getProcCGroup(selfPid);
         if (newAppCGroupPath == oldAppCGroupPath) {
-            // FIXME, find a better way to do this
-            QThread::msleep(5); // wait for new unit to be created.
-            newAppCGroupPath = getProcCGroup(selfPid);
-
-            if (newAppCGroupPath == oldAppCGroupPath) {
-                return false;
-            }
+            return false;
         }
 
         _createdAppCGroupPath = newAppCGroupPath;
@@ -715,10 +719,41 @@ private:
 
     bool createSystemdUnit(const QString &name, const VariantList &propList)
     {
-        const QList<QVariant> args({name, QStringLiteral("fail"), QVariant::fromValue(propList), QVariant::fromValue(EmptyArray())});
+        using namespace Qt::StringLiterals;
 
-        return callSmdDBus(QStringLiteral("/org/freedesktop/systemd1"), QStringLiteral("Manager"), QStringLiteral("StartTransientUnit"), args).type()
-            != QDBusMessage::ErrorMessage;
+        const QList<QVariant> args({name, u"fail"_s, QVariant::fromValue(propList), QVariant::fromValue(EmptyArray())});
+
+        auto message = callSmdDBus(u"/org/freedesktop/systemd1"_s, u"Manager"_s, u"StartTransientUnit"_s, args);
+        if (message.type() == QDBusMessage::ErrorMessage) {
+            return false;
+        }
+
+        auto reply = QDBusReply<QDBusObjectPath>(message);
+        if (!reply.isValid()) {
+            return false;
+        }
+
+        auto path = reply.value();
+
+        // Wait for the job to finish
+        // We really should be listening for the "JobRemoved" signal of systemd's Manager object,
+        // but that is hard as it makes things async, so instead just wait for the job object to
+        // disappear and if it does, assume the job finished successfully.
+        int tries = 10;
+        bool jobExists = true;
+        while (tries > 0) {
+            const auto jobArgs = QList<QVariant>{u"org.freedesktop.systemd1.Job"_s, u"State"_s};
+            auto jobReply = callSmdDBus(path.path(), u"Properties"_s, u"Get"_s, jobArgs, u"org.freedesktop.DBus"_s);
+            if (jobReply.type() == QDBusMessage::ErrorMessage) {
+                jobExists = false;
+                break;
+            }
+
+            QThread::sleep(std::chrono::milliseconds(10));
+            tries--;
+        }
+
+        return !jobExists;
     }
 
     bool createCGroup(const QString &name, int initialPid)
