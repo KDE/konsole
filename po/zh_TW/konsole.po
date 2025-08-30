@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-25 00:45+0000\n"
-"PO-Revision-Date: 2025-08-18 19:41+0900\n"
+"PO-Revision-Date: 2025-08-29 19:59+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 25.07.70\n"
+"X-Generator: Lokalize 25.11.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2875,16 +2875,7 @@ msgstr "啟用記憶體監控："
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:24
-#, fuzzy, kde-format
-#| msgid ""
-#| "Changes will take effect upon restart. If enabled, sustained memory "
-#| "consumption by Konsole\n"
-#| "exceeding the specified value will cause systemd-oomd to eliminate the "
-#| "tab(s)\n"
-#| "containing the memory-intensive process(es). Note: enabling\n"
-#| "might cause greater slowdowns during high memory consumption and "
-#| "specifying\n"
-#| "excessively low values might still cause Konsole to be killed."
+#, kde-format
 msgid ""
 "Changes will take effect upon restart. If enabled, sustained memory "
 "consumption by Konsole exceeding the specified value will cause systemd-oomd "
@@ -2893,10 +2884,9 @@ msgid ""
 "specifying excessively low values might still cause Konsole to be killed."
 msgstr ""
 "變更將在重新啟動後生效。若啟用，Konsole 持續使用超過指定量的記憶體時將會使 "
-"systemd-oomd \n"
-"強制中止包含使用大量記憶體的程序的分頁。\n"
-"請注意：啟用這個選項可能會在記憶體用量大的時候造成更嚴重的效能下降，\n"
-"並且若是指定的數值太低 Konsole 本身可能還是會被強制中止。"
+"systemd-oomd 強制中止包含使用大量記憶體的程序的分頁。請注意：啟用這個選項可能"
+"會在記憶體用量大的時候造成更嚴重的效能下降，並且若是指定的數值太低 Konsole 本"
+"身可能還是會被強制中止。"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:37
@@ -3893,16 +3883,12 @@ msgstr "使用選定的字型來顯示線條字元而不是內建的代碼"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:191
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Characters for drawing lines for a frame or box in TUI programs. Not a "
-#| "row of characters."
-#| msgid ">Use line characters contained in font"
+#, kde-format
 msgctxt ""
 "Characters for drawing lines for a frame or box in TUI programs. Not a row "
 "of characters."
 msgid "Use line characters contained in font"
-msgstr ">使用包含在字型內的線條字元"
+msgstr "使用包含在字型內的線條字元"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:198
