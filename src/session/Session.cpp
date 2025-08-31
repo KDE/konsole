@@ -289,7 +289,8 @@ void Session::setInitialWorkingDirectory(const QString &dir)
 
 QString Session::currentWorkingDirectory()
 {
-    if (_reportedWorkingUrl.isValid() && _reportedWorkingUrl.isLocalFile() && (_reportedWorkingUrl.host().length() == 0 || _reportedWorkingUrl.host().compare(QSysInfo::machineHostName(), Qt::CaseInsensitive) == 0)) {
+    if (_reportedWorkingUrl.isValid() && _reportedWorkingUrl.isLocalFile()
+        && (_reportedWorkingUrl.host().length() == 0 || _reportedWorkingUrl.host().compare(QSysInfo::machineHostName(), Qt::CaseInsensitive) == 0)) {
         return _reportedWorkingUrl.path();
     }
 
@@ -1224,7 +1225,30 @@ void Session::updateSessionProcessInfo()
     // return 0
     if ((_sessionProcessInfo == nullptr) || (processId() != 0 && processId() != _sessionProcessInfo->pid(&ok))) {
         delete _sessionProcessInfo;
-        _sessionProcessInfo = ProcessInfo::newInstance(processId());
+
+        int sessionPid = processId();
+        if (KSandbox::isFlatpak()) {
+            QProcess proc;
+            proc.setProgram(QStringLiteral("ps"));
+            proc.setArguments({QStringLiteral("-o"),
+                               QStringLiteral("pid"),
+                               QStringLiteral("-t"),
+                               QStringLiteral("%1").arg(_shellProcess->pty()->ttyName()),
+                               QStringLiteral("--no-headers")});
+            KSandbox::startHostProcess(proc, QProcess::ReadOnly);
+            if (proc.waitForStarted() && proc.waitForFinished()) {
+                proc.setReadChannel(QProcess::StandardOutput);
+                quint8 buffer[256];
+                auto line = proc.readLineInto(buffer).trimmed();
+                bool ok;
+                auto pid = line.toInt(&ok);
+                if (ok) {
+                    sessionPid = pid;
+                }
+            }
+        }
+
+        _sessionProcessInfo = ProcessInfo::newInstance(sessionPid, -1, _shellProcess->pty()->ttyName());
         _sessionProcessInfo->setUserHomeDir();
     }
     _sessionProcessInfo->update();
@@ -1237,7 +1261,7 @@ bool Session::updateForegroundProcessInfo()
     const int foregroundPid = _shellProcess->foregroundProcessGroup();
     if (foregroundPid != _foregroundPid) {
         delete _foregroundProcessInfo;
-        _foregroundProcessInfo = ProcessInfo::newInstance(foregroundPid, processId());
+        _foregroundProcessInfo = ProcessInfo::newInstance(foregroundPid, processId(), _shellProcess->pty()->ttyName());
         _foregroundPid = foregroundPid;
     }
 

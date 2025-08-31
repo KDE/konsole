@@ -35,6 +35,7 @@
 
 // KDE
 #include <KConfigGroup>
+#include <KSandbox>
 #include <KSharedConfig>
 #include <KUser>
 
@@ -787,6 +788,84 @@ private:
 QString LinuxProcessInfo::_createdAppCGroupPath = QString();
 bool LinuxProcessInfo::_cGroupCreationFailed = false;
 
+class FlatpakProcessInfo : public ProcessInfo
+{
+public:
+    FlatpakProcessInfo(int pid, QByteArrayView tty)
+        : ProcessInfo(pid)
+    {
+        QProcess proc;
+        proc.setProgram(QStringLiteral("ps"));
+        proc.setArguments({
+            QStringLiteral("-o"),
+            QStringLiteral("%U\t%p\t%c"),
+            QStringLiteral("--tty"),
+            QString::fromLatin1(tty.data()),
+            QStringLiteral("--no-headers"),
+        });
+
+        KSandbox::startHostProcess(proc, QProcess::ReadOnly);
+
+        proc.waitForStarted();
+        proc.waitForFinished();
+
+        const QString out = QString::fromUtf8(proc.readAllStandardOutput());
+        for (QStringView line : QStringTokenizer(out, u'\n', Qt::SkipEmptyParts)) {
+            using Container = QVarLengthArray<QStringView, 4>;
+            const Container tokens = QStringTokenizer(line, u'\t', Qt::SkipEmptyParts).toContainer<Container>();
+            if (tokens[1].toInt() == pid) {
+                setUserName(tokens[0].trimmed().toString());
+                setPid(tokens[1].trimmed().toInt());
+                setName(tokens[2].trimmed().toString());
+            }
+        }
+    }
+
+    void readProcessInfo(int) override
+    {
+        /* done in ctor */
+    }
+
+    bool readProcessName(int) override
+    {
+        return true;
+    }
+
+    bool readCurrentDir(int) override
+    {
+        bool ok = false;
+        QString pidString = QString::number(pid(&ok));
+        if (!ok) {
+            return false;
+        }
+
+        QProcess proc;
+        proc.setProgram(QStringLiteral("pwdx"));
+        proc.setArguments({pidString});
+        KSandbox::startHostProcess(proc, QProcess::ReadOnly);
+        if (proc.waitForStarted() && proc.waitForFinished()) {
+            proc.setReadChannel(QProcess::StandardOutput);
+            quint8 buffer[4096];
+            auto line = proc.readLineInto(buffer).trimmed();
+            if (int colon = line.indexOf(": "); colon != -1) {
+                setCurrentDir(QString::fromUtf8(line.mid(colon + 2)));
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool readArguments(int) override
+    {
+        return false;
+    }
+
+    void readUserName(void) override
+    {
+        /* done in ctor */
+    }
+};
+
 #elif defined(Q_OS_FREEBSD)
 class FreeBSDProcessInfo : public UnixProcessInfo
 {
@@ -1311,11 +1390,19 @@ private:
 };
 #endif
 
-ProcessInfo *ProcessInfo::newInstance(int pid, int sessionPid)
+ProcessInfo *ProcessInfo::newInstance(int pid, int sessionPid, QByteArrayView tty)
 {
     ProcessInfo *info;
 #if defined(Q_OS_LINUX)
-    info = new LinuxProcessInfo(pid, sessionPid);
+    if (KSandbox::isFlatpak()) {
+        if (tty.isEmpty()) {
+            info = new NullProcessInfo(pid);
+        } else {
+            info = new FlatpakProcessInfo(pid, tty);
+        }
+    } else {
+        info = new LinuxProcessInfo(pid, sessionPid);
+    }
 #elif defined(Q_OS_SOLARIS)
     info = new SolarisProcessInfo(pid);
 #elif defined(Q_OS_MACOS)

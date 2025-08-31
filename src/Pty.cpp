@@ -23,6 +23,7 @@
 
 // KDE
 #include <KPtyDevice>
+#include <KSandbox>
 
 using Konsole::Pty;
 
@@ -303,6 +304,36 @@ void Pty::closePty()
 
 int Pty::foregroundProcessGroup() const
 {
+    if (KSandbox::isFlatpak()) {
+        QProcess proc;
+        proc.setProgram(QStringLiteral("ps"));
+        proc.setArguments({QStringLiteral("-o"),
+                           QStringLiteral("%p\t"),
+                           QStringLiteral("-o"),
+                           QStringLiteral("stat"),
+                           QStringLiteral("-t"),
+                           QStringLiteral("%1").arg(pty()->ttyName()),
+                           QStringLiteral("--no-headers")});
+
+        KSandbox::startHostProcess(proc, QProcess::ReadOnly);
+        if (proc.waitForStarted() && proc.waitForFinished()) {
+            while (proc.canReadLine()) {
+                quint8 buffer[256];
+                const QByteArrayView line = proc.readLineInto(buffer);
+                int i = line.indexOf('\t');
+                if (i == -1) {
+                    return 0;
+                }
+                QByteArrayView pid = line.mid(0, i);
+                QByteArrayView stat = line.mid(i + 1);
+                if (stat.contains("+")) {
+                    return pid.trimmed().toInt();
+                }
+            }
+        }
+        return 0;
+    }
+
     const int master_fd = pty()->masterFd();
 
     if (master_fd >= 0) {
