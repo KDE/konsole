@@ -8,7 +8,7 @@
     "tags": ["nightly"],
     "desktop-file-name-suffix": " (Nightly)",
     "finish-args": [
-        "--device=dri",
+        "--device=all",
         "--share=ipc",
         "--share=network",
         "--socket=wayland",
