@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-25 00:45+0000\n"
-"PO-Revision-Date: 2025-04-30 07:47+0200\n"
+"PO-Revision-Date: 2025-08-31 23:58+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -2937,16 +2937,7 @@ msgstr "Активиране на мониториране на паметта:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:24
-#, fuzzy, kde-format
-#| msgid ""
-#| "Changes will take effect upon restart. If enabled, sustained memory "
-#| "consumption by Konsole\n"
-#| "exceeding the specified value will cause systemd-oomd to eliminate the "
-#| "tab(s)\n"
-#| "containing the memory-intensive process(es). Note: enabling\n"
-#| "might cause greater slowdowns during high memory consumption and "
-#| "specifying\n"
-#| "excessively low values might still cause Konsole to be killed."
+#, kde-format
 msgid ""
 "Changes will take effect upon restart. If enabled, sustained memory "
 "consumption by Konsole exceeding the specified value will cause systemd-oomd "
@@ -2955,13 +2946,11 @@ msgid ""
 "specifying excessively low values might still cause Konsole to be killed."
 msgstr ""
 "Промените ще влязат в сила при рестартиране. Ако е активирано, при "
-"надвишаване посочената стойност на използваната памет  от Konsole\n"
-" systemd-oomd да премахне разделите\n"
-"съдържащи процеси, които отнемат памет. Забележка: включването на тази "
-"опция\n"
-"може да доведе до по-голямо забавяне на работата по време на висока "
-"консумация на памет, а задаването на\n"
-"на твърде ниски стойности може да доведе до спиране на работата на Konsole."
+"надвишаване посочената стойност на използваната памет  от Konsole  systemd-"
+"oomd да премахне разделите съдържащи процеси, които отнемат памет. "
+"Забележка: включването на тази опция може да доведе до по-голямо забавяне на "
+"работата по време на висока консумация на памет, а задаването на твърде "
+"ниски стойности може да доведе до спиране на работата на Konsole."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:37
@@ -3967,11 +3956,7 @@ msgstr "Използване на избрания шрифт за символ�
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:191
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Characters for drawing lines for a frame or box in TUI programs. Not a "
-#| "row of characters."
-#| msgid ">Use line characters contained in font"
+#, kde-format
 msgctxt ""
 "Characters for drawing lines for a frame or box in TUI programs. Not a row "
 "of characters."
@@ -5446,8 +5431,7 @@ msgid "Find the previous match for the current search phrase"
 msgstr "Предишно съвпадение на търсения израз"
 
 #: widgets/IncrementalSearchBar.cpp:102
-#, fuzzy, kde-format
-#| msgid "Case sensitive"
+#, kde-format
 msgctxt "@action:button"
 msgid "Case sensitive"
 msgstr "С отчитане на регистъра"
