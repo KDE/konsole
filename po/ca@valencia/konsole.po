@@ -461,7 +461,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Select wallpaper image file"
-msgstr "Selecciona un fitxer d'imatge de fons de pantalla"
+msgstr "Tria un fitxer d'imatge de fons de pantalla"
 
 #: colorscheme/ColorSchemeEditor.cpp:190
 #, kde-format
@@ -748,7 +748,7 @@ msgstr "Copia l'adreça de correu"
 #, kde-format
 msgctxt "@title:window"
 msgid "Select font"
-msgstr "Seleccioneu la lletra"
+msgstr "Trieu la lletra"
 
 #: FontDialog.cpp:37
 #, kde-format
@@ -2241,7 +2241,7 @@ msgstr "Dividix la vista superior-inferior"
 #: session/SessionController.cpp:686
 #, kde-format
 msgid "Copy except prompts"
-msgstr "Copia excepte els indicatius"
+msgstr "Copia excepte els indicadors"
 
 #: session/SessionController.cpp:692
 #, kde-format
@@ -2276,7 +2276,7 @@ msgstr "&Mode de selecció"
 #: session/SessionController.cpp:735
 #, kde-format
 msgid "Select &Line"
-msgstr "Seleccioneu la &línia"
+msgstr "Trieu la &línia"
 
 #: session/SessionController.cpp:738
 #, kde-format
@@ -2385,7 +2385,7 @@ msgstr "Monitors d'una sola vegada"
 #: session/SessionController.cpp:893
 #, kde-format
 msgid "Monitor for &Prompt"
-msgstr "Monitor per a l'&indicatiu"
+msgstr "Monitor per a l'&indicador"
 
 #: session/SessionController.cpp:900
 #, kde-format
@@ -2528,7 +2528,7 @@ msgstr "Mata el programa"
 #: session/SessionController.cpp:1886
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
-msgstr "L'indicatiu de l'intèrpret d'ordres es mostra en la sessió «%1»"
+msgstr "L'indicador de l'intèrpret d'ordres es mostra en la sessió «%1»"
 
 #: session/SessionController.cpp:2105
 #, kde-format
@@ -2570,7 +2570,7 @@ msgstr ""
 #: session/SessionController.cpp:2213
 #, kde-format
 msgid "Select Files for ZModem Upload"
-msgstr "Seleccioneu els fitxers per a l'enviament per ZModem"
+msgstr "Trieu els fitxers per a l'enviament per ZModem"
 
 #: session/SessionListModel.cpp:89
 #, kde-format
@@ -3946,7 +3946,7 @@ msgstr "Lletra:"
 #, kde-format
 msgctxt "@action:button open a dialog with list of fonts"
 msgid "Choose..."
-msgstr "Seleccioneu…"
+msgstr "Tria…"
 
 #. i18n: ectx: property (text), widget (QCheckBox, antialiasTextButton)
 #: widgets/EditProfileAppearancePage.ui:174
@@ -4070,7 +4070,7 @@ msgstr "Cursor:"
 #: widgets/EditProfileAppearancePage.ui:373
 #, kde-format
 msgid "Select the color used to draw the cursor"
-msgstr "Seleccioneu el color utilitzat per a dibuixar el cursor"
+msgstr "Trieu el color utilitzat per a dibuixar el cursor"
 
 #. i18n: ectx: property (text), widget (QLabel, customCursorTextColorLabel)
 #: widgets/EditProfileAppearancePage.ui:393
@@ -4082,8 +4082,7 @@ msgstr "Text:"
 #: widgets/EditProfileAppearancePage.ui:406
 #, kde-format
 msgid "Select the color used to draw the character underneath the cursor"
-msgstr ""
-"Seleccioneu el color utilitzat per a dibuixar el caràcter baix el cursor"
+msgstr "Trieu el color utilitzat per a dibuixar el caràcter baix el cursor"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: widgets/EditProfileAppearancePage.ui:431
@@ -4158,7 +4157,7 @@ msgstr "Color:"
 #: widgets/EditProfileAppearancePage.ui:559
 #, kde-format
 msgid "Select the color used to draw the border"
-msgstr "Seleccioneu el color utilitzat per a dibuixar la vora"
+msgstr "Trieu el color utilitzat per a dibuixar la vora"
 
 #. i18n: ectx: property (text), widget (QLabel, label_10)
 #: widgets/EditProfileAppearancePage.ui:581
@@ -4536,7 +4535,7 @@ msgstr[1] " segons"
 #: widgets/EditProfileDialog.cpp:788
 #, kde-format
 msgid "Select Initial Directory"
-msgstr "Seleccioneu el directori inicial"
+msgstr "Trieu el directori inicial"
 
 #: widgets/EditProfileDialog.cpp:948
 #, kde-format
@@ -4616,7 +4615,7 @@ msgstr "Configuració general"
 #: widgets/EditProfileGeneralPage.ui:66
 #, kde-format
 msgid "Select the icon displayed on tabs using this profile"
-msgstr "Seleccioneu la icona mostrada a les pestanyes utilitzant este perfil"
+msgstr "Trieu la icona mostrada a les pestanyes utilitzant este perfil"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, profileNameEdit)
 #: widgets/EditProfileGeneralPage.ui:84
@@ -4684,7 +4683,7 @@ msgstr "/home/nom_usuari"
 #: widgets/EditProfileGeneralPage.ui:183
 #, kde-format
 msgid "Choose the initial directory"
-msgstr "Seleccioneu el directori inicial"
+msgstr "Trieu el directori inicial"
 
 #. i18n: ectx: property (text), widget (QCheckBox, startInSameDirButton)
 #: widgets/EditProfileGeneralPage.ui:193
@@ -5605,7 +5604,7 @@ msgstr "Amfitrió local: %h"
 
 #: widgets/TabTitleFormatButton.cpp:28
 msgid "User's Bourne prompt sigil: %B"
-msgstr "Secretisme de l'indicatiu de Bourne de l'usuari: %B"
+msgstr "Secretisme de l'indicador de Bourne de l'usuari: %B"
 
 #: widgets/TabTitleFormatButton.cpp:35
 msgid "User Name@ (if given): %U"
