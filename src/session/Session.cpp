@@ -1227,6 +1227,7 @@ void Session::updateSessionProcessInfo()
         delete _sessionProcessInfo;
 
         int sessionPid = processId();
+#ifndef Q_OS_WIN
         if (KSandbox::isFlatpak()) {
             QProcess proc;
             proc.setProgram(QStringLiteral("ps"));
@@ -1247,8 +1248,11 @@ void Session::updateSessionProcessInfo()
                 }
             }
         }
-
         _sessionProcessInfo = ProcessInfo::newInstance(sessionPid, -1, _shellProcess->pty()->ttyName());
+#else
+        _sessionProcessInfo = ProcessInfo::newInstance(sessionPid, -1);
+#endif
+
         _sessionProcessInfo->setUserHomeDir();
     }
     _sessionProcessInfo->update();
@@ -1261,7 +1265,11 @@ bool Session::updateForegroundProcessInfo()
     const int foregroundPid = _shellProcess->foregroundProcessGroup();
     if (foregroundPid != _foregroundPid) {
         delete _foregroundProcessInfo;
+#ifndef Q_OS_WIN
         _foregroundProcessInfo = ProcessInfo::newInstance(foregroundPid, processId(), _shellProcess->pty()->ttyName());
+#else
+        _foregroundProcessInfo = ProcessInfo::newInstance(foregroundPid, processId());
+#endif
         _foregroundPid = foregroundPid;
     }
 
