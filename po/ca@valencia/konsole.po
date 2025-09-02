@@ -690,7 +690,7 @@ msgstr "Filtre:"
 #: CopyInputDialog.ui:46
 #, kde-format
 msgid "Select All"
-msgstr "Tria-ho tot"
+msgstr "Selecciona-ho tot"
 
 #. i18n: ectx: property (text), widget (QPushButton, deselectAllButton)
 #: CopyInputDialog.ui:53
@@ -2266,7 +2266,7 @@ msgstr "Busca en la web"
 #: session/SessionController.cpp:726
 #, kde-format
 msgid "&Select All"
-msgstr "&Tria-ho tot"
+msgstr "&Selecciona-ho tot"
 
 #: session/SessionController.cpp:730
 #, kde-format
@@ -3942,7 +3942,7 @@ msgstr "Lletra:"
 #, kde-format
 msgctxt "@action:button open a dialog with list of fonts"
 msgid "Choose..."
-msgstr "Trieu…"
+msgstr "Tria…"
 
 #. i18n: ectx: property (text), widget (QCheckBox, antialiasTextButton)
 #: widgets/EditProfileAppearancePage.ui:174
