@@ -64,7 +64,6 @@ Name[ta]=கான்சோலில் இயக்கு
 Name[th]=เรียกใช้ใน Konsole
 Name[tr]=Konsole’da Çalıştır
 Name[uk]=Запустити у Konsole
-Name[x-test]=xxRun In Konsolexx
 Name[zh_CN]=在 Konsole 中运行
 Name[zh_TW]=在 Konsole 中執行
 
@@ -118,6 +117,5 @@ Comment[sv]=Kör i Terminal
 Comment[ta]=கான்சோலுக்குள் இயக்கு
 Comment[tr]=Konsol İçinde Çalıştır
 Comment[uk]=Запустити у Konsole
-Comment[x-test]=xxRun within Konsolexx
 Comment[zh_CN]=在 Konsole 中运行
 Comment[zh_TW]=在 Konsole 中執行
