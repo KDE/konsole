@@ -9,15 +9,15 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-25 00:45+0000\n"
-"PO-Revision-Date: 2025-05-18 21:08+0530\n"
+"PO-Revision-Date: 2025-09-07 18:47+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
-"Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
+"Language-Team: Tamil <kde-l10n-ta@kde.org>\n"
 "Language: ta\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.04.1\n"
+"X-Generator: Lokalize 25.08.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2902,16 +2902,7 @@ msgstr "நினைவக பயன்பாட்டை கண்காணி:
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:24
-#, fuzzy, kde-format
-#| msgid ""
-#| "Changes will take effect upon restart. If enabled, sustained memory "
-#| "consumption by Konsole\n"
-#| "exceeding the specified value will cause systemd-oomd to eliminate the "
-#| "tab(s)\n"
-#| "containing the memory-intensive process(es). Note: enabling\n"
-#| "might cause greater slowdowns during high memory consumption and "
-#| "specifying\n"
-#| "excessively low values might still cause Konsole to be killed."
+#, kde-format
 msgid ""
 "Changes will take effect upon restart. If enabled, sustained memory "
 "consumption by Konsole exceeding the specified value will cause systemd-oomd "
@@ -2919,12 +2910,11 @@ msgid ""
 "enabling might cause greater slowdowns during high memory consumption and "
 "specifying excessively low values might still cause Konsole to be killed."
 msgstr ""
-"மீள்துவக்கியபின் மாற்றங்கள் செயல்படும். இது இயக்கப்பட்டிருக்கும்போது குறிப்பிட்ட வரம்புக்கு\n"
-"மேல் கான்சோல் நினைவைப் பயன்படுத்தினால், அதிக நினைவப் பயன்படுத்தும் கீற்றுகளை systemd-"
-"oomd\n"
-"கட்டாயமாக மூடும். குறிப்பு: இதை இயக்குவது,\n"
-"அதிக நினைவைப் பயன்படுத்தும்போது கணினியின் வேகத்தை பாதிக்கலாம்.\n"
-"மாறாக, வரம்பை மிக‍க்குறைவாக அமைத்தால் கான்சோலே கட்டாயமாக நிறுத்தப்படலாம்."
+"மீள்துவக்கியபின் மாற்றங்கள் செயல்படும். இது இயக்கப்பட்டிருக்கும்போது குறிப்பிட்ட வரம்புக்குமேல் "
+"கான்சோல் நினைவைப் பயன்படுத்தினால், அதிக நினைவப் பயன்படுத்தும் கீற்றுகளை systemd-"
+"oomdகட்டாயமாக மூடும். குறிப்பு: இதை இயக்குவது,அதிக நினைவைப் பயன்படுத்தும்போது "
+"கணினியின் வேகத்தை பாதிக்கலாம்.மாறாக, வரம்பை மிக‍க்குறைவாக அமைத்தால் கான்சோலே கட்டாயமாக "
+"நிறுத்தப்படலாம்."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:37
@@ -3929,16 +3919,12 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:191
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Characters for drawing lines for a frame or box in TUI programs. Not a "
-#| "row of characters."
-#| msgid ">Use line characters contained in font"
+#, kde-format
 msgctxt ""
 "Characters for drawing lines for a frame or box in TUI programs. Not a row "
 "of characters."
 msgid "Use line characters contained in font"
-msgstr ">கொடுகளுக்கு எழுத்துருவிலுள்ள குறிகளையேப் பயன்படுத்து"
+msgstr "கொடுகளுக்கு எழுத்துருவிலுள்ள குறிகளையேப் பயன்படுத்து"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:198
@@ -5379,8 +5365,7 @@ msgid "Find the previous match for the current search phrase"
 msgstr "தற்போதைய வினாவிற்கான முந்தைய பொருத்தத்தை கண்டுபிடிக்கும்"
 
 #: widgets/IncrementalSearchBar.cpp:102
-#, fuzzy, kde-format
-#| msgid "Case sensitive"
+#, kde-format
 msgctxt "@action:button"
 msgid "Case sensitive"
 msgstr "எழுத்து வகையை (பெரிது/சிறிது) பொருட்படுத்து"
