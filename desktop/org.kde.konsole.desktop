@@ -51,7 +51,6 @@ Keywords[ta]=terminal;console;script;run;execute;command;command-line;commandlin
 Keywords[th]=เทอร์มินัล;คอนโซล;สคริป;เรียกใช้;คำสั่่ง;บรรทัดคำสั่ง;cli;bash;sh;เชลล์;zsh;cmd;พร้อมท์คำสั่ง
 Keywords[tr]=uçbirim;terminal;konsol;betik;yürüt;komut;komut-satırı;komut satırı;cli;bash;sh;kabuk;shell;zsh;cmd;komut istemi;çalıştır;yürüt;run;execute;cmd;command
 Keywords[uk]=terminal;console;script;run;execute;command;command-line;commandline;cli;bash;sh;shell;zsh;cmd;command prompt;термінал;консоль;скрипт;сценарій;виконати;запустити;команда;командний рядок;клі;командний інтерфейс;баш;оболонка;шел;зш;кмд;командний запит
-Keywords[x-test]=xxterminalxx;xxconsolexx;xxscriptxx;xxrunxx;xxexecutexx;xxcommandxx;xxcommand-linexx;xxcommandlinexx;xxclixx;xxbashxx;xxshxx;xxshellxx;xxzshxx;xxcmdxx;xxcommand promptxx
 Keywords[zh_CN]=terminal;console;script;run;execute;command;command-line;commandline;cli;bash;sh;shell;zsh;终端;控制台;脚本;执行;运行;命令;命令行;命令行界面;外壳;命令行提示;zhongduan;kongzhitai;jiaoben;zhixing;yunxing;mingling;minglinghang;minglinghangjiemian;minglinghangtishi
 Keywords[zh_TW]=terminal;console;script;run;execute;command;command-line;commandline;cli;bash;sh;shell;zsh;cmd;command prompt
 
@@ -146,7 +145,6 @@ Name[uz@cyrillic]=Konsole
 Name[vi]=Konsole
 Name[wa]=Konsole
 Name[xh]=Konsole
-Name[x-test]=xxKonsolexx
 Name[zh_CN]=Konsole 终端
 Name[zh_TW]=Konsole
 
@@ -235,7 +233,6 @@ GenericName[uk]=Термінал
 GenericName[uz]=Terminal
 GenericName[uz@cyrillic]=Терминал
 GenericName[wa]=Terminå
-GenericName[x-test]=xxTerminalxx
 GenericName[zh_CN]=终端
 GenericName[zh_TW]=終端機
 
@@ -289,7 +286,6 @@ Comment[sv]=Åtkomst till kommandorad
 Comment[ta]=கட்டளை வரியை அணுக உதவும்
 Comment[tr]=Komut satırı erişimi
 Comment[uk]=Доступ до командного рядка
-Comment[x-test]=xxCommand line accessxx
 Comment[zh_CN]=命令行访问
 Comment[zh_TW]=指令列
 
@@ -348,7 +344,6 @@ Name[ta]=புதிய சாளரத்தை திற
 Name[th]=เปิดหน้าต่างใหม่
 Name[tr]=Yeni Pencere Aç
 Name[uk]=Відкрити нове вікно
-Name[x-test]=xxOpen a New Windowxx
 Name[zh_CN]=打开新窗口
 Name[zh_TW]=開啟新視窗
 Icon=window-new
@@ -406,7 +401,6 @@ Name[ta]=புதிய கீற்றை திற
 Name[th]=เปิดแท็บใหม่
 Name[tr]=Yeni Sekme Aç
 Name[uk]=Відкрити нову вкладку
-Name[x-test]=xxOpen a New Tabxx
 Name[zh_CN]=打开新的标签页
 Name[zh_TW]=開啟新分頁
 Icon=tab-new
