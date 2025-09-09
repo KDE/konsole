@@ -43,7 +43,6 @@
         "Name[ta]": "விரை கட்டளைகள்",
         "Name[tr]": "Tez Komutlar",
         "Name[uk]": "Швидкі команди",
-        "Name[x-test]": "xxQuick Commandsxx",
         "Name[zh_CN]": "快速命令",
         "Name[zh_TW]": "快速命令",
         "Version": "@RELEASE_SERVICE_VERSION@"
