@@ -1239,8 +1239,9 @@ void Session::updateSessionProcessInfo()
             KSandbox::startHostProcess(proc, QProcess::ReadOnly);
             if (proc.waitForStarted() && proc.waitForFinished()) {
                 proc.setReadChannel(QProcess::StandardOutput);
-                quint8 buffer[256];
-                auto line = proc.readLineInto(buffer).trimmed();
+                char buffer[256];
+                int readCount = proc.readLine(buffer, sizeof(buffer));
+                auto line = readCount > 0 ? QByteArrayView(buffer, readCount).trimmed() : QByteArrayView();
                 bool ok;
                 auto pid = line.toInt(&ok);
                 if (ok) {

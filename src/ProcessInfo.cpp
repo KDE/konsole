@@ -845,8 +845,9 @@ public:
         KSandbox::startHostProcess(proc, QProcess::ReadOnly);
         if (proc.waitForStarted() && proc.waitForFinished()) {
             proc.setReadChannel(QProcess::StandardOutput);
-            quint8 buffer[4096];
-            auto line = proc.readLineInto(buffer).trimmed();
+            char buffer[4096];
+            int readCount = proc.readLine(buffer, sizeof(buffer));
+            auto line = readCount > 0 ? QByteArrayView(buffer, readCount).trimmed() : QByteArrayView();
             if (int colon = line.indexOf(": "); colon != -1) {
                 setCurrentDir(QString::fromUtf8(line.mid(colon + 2)));
                 return true;

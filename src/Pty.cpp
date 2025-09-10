@@ -311,15 +311,16 @@ int Pty::foregroundProcessGroup() const
                            QStringLiteral("%p\t"),
                            QStringLiteral("-o"),
                            QStringLiteral("stat"),
-                           QStringLiteral("-t"),
-                           QStringLiteral("%1").arg(pty()->ttyName()),
+                           QStringLiteral("--tty"),
+                           QString::fromLatin1(pty()->ttyName()),
                            QStringLiteral("--no-headers")});
 
         KSandbox::startHostProcess(proc, QProcess::ReadOnly);
         if (proc.waitForStarted() && proc.waitForFinished()) {
             while (proc.canReadLine()) {
-                quint8 buffer[256];
-                const QByteArrayView line = proc.readLineInto(buffer);
+                char buffer[256];
+                int readCount = proc.readLine(buffer, sizeof(buffer));
+                auto line = readCount > 0 ? QByteArrayView(buffer, readCount) : QByteArrayView();
                 int i = line.indexOf('\t');
                 if (i == -1) {
                     return 0;
