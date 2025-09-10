@@ -931,7 +931,7 @@ void Session::sendSignal(int signal)
 
 void Session::reportColor(SessionAttributes r, const QColor &c, uint terminator)
 {
-#define to65k(a) (QStringLiteral("%1").arg(int(((a)*0xFFFF)), 4, 16, QLatin1Char('0')))
+#define to65k(a) (QStringLiteral("%1").arg(int(((a) * 0xFFFF)), 4, 16, QLatin1Char('0')))
     QString msg = QStringLiteral("\033]%1;rgb:").arg(r) + to65k(c.redF()) + QLatin1Char('/') + to65k(c.greenF()) + QLatin1Char('/') + to65k(c.blueF());
 
     // Match termination of OSC reply to termination of OSC request.
@@ -957,11 +957,12 @@ void Session::reportBackgroundColor(const QColor &c, uint terminator)
 bool Session::kill(int signal)
 {
 #ifndef Q_OS_WIN
-    if (processId() <= 0) {
+    const int pid = KSandbox::isFlatpak() ? _shellProcess->flatpakSpawnProcessId() : processId();
+    if (pid <= 0) {
         return false;
     }
 
-    int result = ::kill(processId(), signal);
+    int result = ::kill(pid, signal);
 
     if (result == 0) {
         return _shellProcess->waitForFinished(1000);
@@ -1228,27 +1229,6 @@ void Session::updateSessionProcessInfo()
 
         int sessionPid = processId();
 #ifndef Q_OS_WIN
-        if (KSandbox::isFlatpak()) {
-            QProcess proc;
-            proc.setProgram(QStringLiteral("ps"));
-            proc.setArguments({QStringLiteral("-o"),
-                               QStringLiteral("pid"),
-                               QStringLiteral("-t"),
-                               QStringLiteral("%1").arg(_shellProcess->pty()->ttyName()),
-                               QStringLiteral("--no-headers")});
-            KSandbox::startHostProcess(proc, QProcess::ReadOnly);
-            if (proc.waitForStarted() && proc.waitForFinished()) {
-                proc.setReadChannel(QProcess::StandardOutput);
-                char buffer[256];
-                int readCount = proc.readLine(buffer, sizeof(buffer));
-                auto line = readCount > 0 ? QByteArrayView(buffer, readCount).trimmed() : QByteArrayView();
-                bool ok;
-                auto pid = line.toInt(&ok);
-                if (ok) {
-                    sessionPid = pid;
-                }
-            }
-        }
         _sessionProcessInfo = ProcessInfo::newInstance(sessionPid, -1, _shellProcess->pty()->ttyName());
 #else
         _sessionProcessInfo = ProcessInfo::newInstance(sessionPid, -1);
@@ -1784,7 +1764,7 @@ void Session::setPreferredSize(const QSize &size)
 
 int Session::processId() const
 {
-    return _shellProcess->processId();
+    return _shellProcess->shellProcessId();
 }
 
 void Session::setTitle(int role, const QString &title)

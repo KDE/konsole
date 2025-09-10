@@ -1964,24 +1964,27 @@ void SessionController::updateReadOnlyActionStates()
 void SessionController::appendHamburgerMenuIfNeeded(QMenu *menu)
 {
     const QString hambugerMenuName = KStandardAction::name(KStandardAction::HamburgerMenu);
-    const QList<QAction*> actions = menu->actions();
-    const bool hamburgerMenuFound = std::find_if(actions.begin(), actions.end(), [&hambugerMenuName] (const QAction *action) {
-        return action && action->objectName() == hambugerMenuName;
-    }) != actions.end();
+    const QList<QAction *> actions = menu->actions();
+    const bool hamburgerMenuFound = std::find_if(actions.begin(),
+                                                 actions.end(),
+                                                 [&hambugerMenuName](const QAction *action) {
+                                                     return action && action->objectName() == hambugerMenuName;
+                                                 })
+        != actions.end();
     if (hamburgerMenuFound) {
         return;
     }
 
-    auto* hamburger = static_cast<KHamburgerMenu *>(actionCollection()->action(hambugerMenuName));
+    auto *hamburger = static_cast<KHamburgerMenu *>(actionCollection()->action(hambugerMenuName));
     if (hamburger) {
         hamburger->addToMenu(menu);
 
         // Add the object name to be able to find it in the list afterwards.
-        const QList<QAction*> actions = menu->actions();
+        const QList<QAction *> actions = menu->actions();
         Q_ASSERT(!actions.isEmpty());
 
         if (!actions.isEmpty()) {
-            QAction* hamburgerMenuAction = menu->actions().last();
+            QAction *hamburgerMenuAction = menu->actions().last();
             hamburgerMenuAction->setObjectName(KStandardAction::name(KStandardAction::HamburgerMenu));
         }
     }

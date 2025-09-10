@@ -27,6 +27,30 @@
 
 using Konsole::Pty;
 
+static int getShellProcessId(QLatin1String tty)
+{
+    if (!KSandbox::isFlatpak()) {
+        qFatal("Shouldn't be called in non flatpak world");
+    }
+    QProcess proc;
+    proc.setProgram(QStringLiteral("ps"));
+    proc.setArguments({QStringLiteral("-o"), QStringLiteral("pid"), QStringLiteral("-t"), QStringLiteral("%1").arg(tty), QStringLiteral("--no-headers")});
+    KSandbox::startHostProcess(proc, QProcess::ReadOnly);
+    if (proc.waitForStarted() && proc.waitForFinished()) {
+        proc.setReadChannel(QProcess::StandardOutput);
+        char buffer[256];
+        int readCount = proc.readLine(buffer, sizeof(buffer));
+        auto line = readCount > 0 ? QByteArrayView(buffer, readCount).trimmed() : QByteArrayView();
+        bool ok;
+        auto pid = line.toInt(&ok);
+        if (ok) {
+            return pid;
+        }
+    }
+    qWarning("Unable to get shell process id");
+    return 0;
+}
+
 Pty::Pty(QObject *aParent)
     : Pty(-1, aParent)
 {
@@ -273,6 +297,9 @@ int Pty::start(const QString &programName, const QStringList &programArguments, 
     KProcess::start();
 
     if (waitForStarted()) {
+        if (KSandbox::isFlatpak()) {
+            _shellProcessId = getShellProcessId(QLatin1String(pty()->ttyName()));
+        }
         return 0;
     } else {
         return -1;
@@ -350,6 +377,20 @@ int Pty::foregroundProcessGroup() const
     qWarning(KonsoleDebug, "foregroundProcessGroup master_fd < 0");
 
     return 0;
+}
+
+int Pty::shellProcessId() const
+{
+    return KSandbox::isFlatpak() ? _shellProcessId : processId();
+}
+
+int Pty::flatpakSpawnProcessId() const
+{
+    if (KSandbox::isFlatpak()) {
+        return processId();
+    }
+    qFatal("Shouldn't be called, we are not in flatpak");
+    return processId();
 }
 
 #else // Windows backend
@@ -487,6 +528,14 @@ void Pty::closePty()
 
 int Pty::foregroundProcessGroup() const
 {
+    return 0;
+}
+
+int Pty::shellProcessId() const
+{
+    if (m_proc && m_proc->isAvailable()) {
+        return m_proc->pid();
+    }
     return 0;
 }
 

@@ -154,18 +154,18 @@ public:
      */
     void closePty();
 
+    /**
+     * Returns the shell process id
+     */
+    int shellProcessId() const;
+
+    int flatpakSpawnProcessId() const;
+
 #ifdef Q_OS_WIN
-    int processId() const
-    {
-        if (m_proc && m_proc->isAvailable()) {
-            return m_proc->pid();
-        }
-        return 0;
-    }
 
     bool isRunning() const
     {
-        return processId() > 0;
+        return shellProcessId() > 0;
     }
 
     QString errorString() const
@@ -237,8 +237,12 @@ private:
     char _eraseChar;
     bool _xon;
     bool _utf8;
+    int _shellProcessId = 0;
 #ifdef Q_OS_WIN
     std::unique_ptr<IPtyProcess> m_proc;
+#else
+    // Use shellProcessId() instead
+    using ParentClass::processId;
 #endif
 };
 }
