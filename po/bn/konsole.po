@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-25 00:45+0000\n"
+"POT-Creation-Date: 2025-09-11 00:45+0000\n"
 "PO-Revision-Date: 2010-05-30 02:09-0700\n"
 "Last-Translator: Deepayan Sarkar <deepayan.sarkar@gmail.com>\n"
 "Language-Team: Bengali <kde-translation@bengalinux.org>\n"
@@ -2253,23 +2253,23 @@ msgstr "এখানে অনুসন্ধান পংক্তি লেখ
 msgid "Bell in '%1' (Session '%2')"
 msgstr "সেশন '%1'-এ ঘণ্টা"
 
-#: session/Session.cpp:425
+#: session/Session.cpp:426
 #, kde-format
 msgid "Could not find binary: "
 msgstr "বাইনারি খুঁজে পাওয়া যায়নি:"
 
-#: session/Session.cpp:434
+#: session/Session.cpp:435
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "সতর্কবার্তা: "
 
-#: session/Session.cpp:529
+#: session/Session.cpp:530
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "শুরু করার জন্য কোন interactive shell খুঁজে পাওয়া যায়নি।"
 
-#: session/Session.cpp:535 session/Session.cpp:538
+#: session/Session.cpp:536 session/Session.cpp:539
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2278,18 +2278,18 @@ msgstr ""
 "'%1' খুঁজে পাওয়া যায়নি, তার বদলে '%2' শুরু করা হচ্ছে। অনুগ্রহ করে আপনার প্রোফাইল "
 "সেটিংস পরীক্ষা করুন।"
 
-#: session/Session.cpp:612
+#: session/Session.cpp:613
 #, fuzzy, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "প্রেরিত মান '%2'এর সঙ্গে প্রোগ্রাম কি '%1' শুরু করতে পারে না।"
 
-#: session/Session.cpp:778
+#: session/Session.cpp:779
 #, fuzzy, kde-format
 #| msgid "Silence in session '%1'"
 msgid "Silence in '%1' (Session '%2')"
 msgstr "সেশন '%1' চুপচাপ"
 
-#: session/Session.cpp:779 session/Session.cpp:2118
+#: session/Session.cpp:780 session/Session.cpp:2131
 #: session/SessionController.cpp:361 session/SessionController.cpp:1887
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1214
 #: Vt102Emulation.cpp:1469
@@ -2298,7 +2298,7 @@ msgstr "সেশন '%1' চুপচাপ"
 msgid "Show session"
 msgstr "নতুন সেশন"
 
-#: session/Session.cpp:1063
+#: session/Session.cpp:1065
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2307,28 +2307,28 @@ msgid ""
 "warning will only show once for this Konsole instance.</p>"
 msgstr ""
 
-#: session/Session.cpp:1103
+#: session/Session.cpp:1105
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "শেষ"
 
-#: session/Session.cpp:1117 session/Session.cpp:1133
+#: session/Session.cpp:1119 session/Session.cpp:1135
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "প্রোগ্রাম '%1' ক্র্যাশ করেছে।"
 
-#: session/Session.cpp:1119
+#: session/Session.cpp:1121
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "প্রোগ্রাম '%1'-এর %2 স্ট্যাটাস সমেত সমাপ্তি।"
 
-#: session/Session.cpp:1645
+#: session/Session.cpp:1658
 #, kde-format
 msgid "ZModem Progress"
 msgstr "জি-মোডেম অগ্রগতি"
 
-#: session/Session.cpp:2117
+#: session/Session.cpp:2130
 #, fuzzy, kde-format
 #| msgid "Activity in session '%1'"
 msgid "Activity in '%1' (Session '%2')"
@@ -2699,18 +2699,18 @@ msgstr ""
 msgid "The shell prompt is displayed in session '%1'"
 msgstr ""
 
-#: session/SessionController.cpp:2105
+#: session/SessionController.cpp:2108
 #, kde-format
 msgid "Open Current Folder With"
 msgstr ""
 
-#: session/SessionController.cpp:2175
+#: session/SessionController.cpp:2178
 #, fuzzy, kde-format
 #| msgid "Save ZModem Download to..."
 msgid "Save ZModem Download to..."
 msgstr "জি-মোডে&ম ডাউনলোড এখানে সংরক্ষণ করো..."
 
-#: session/SessionController.cpp:2185
+#: session/SessionController.cpp:2188
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2721,13 +2721,13 @@ msgstr ""
 "সফটওয়্যার পাওয়া যাচ্ছে না।</p><p>আপনি 'rzsz' অথবা 'lrzsz' প্যাকেজটি ইনস্টল করে "
 "দেখতে পারেন।</p>"
 
-#: session/SessionController.cpp:2195
+#: session/SessionController.cpp:2198
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>বর্তমান সেশনে একটি জি-মোডেম ফাইল ট্রান্সফার আগে থেকেই চলছে।</p>"
 
-#: session/SessionController.cpp:2208
+#: session/SessionController.cpp:2211
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2736,7 +2736,7 @@ msgstr ""
 "<p>সিস্টেমে কোনো মানানসই জি-মোডেম সফটওয়ার পাওয়া যায়নি।</p><p>আপনি 'rzsz' বা "
 "'lrzsz' প্যাকেজগুলি ইনস্টল করে দেখতে পারেন।</p>"
 
-#: session/SessionController.cpp:2213
+#: session/SessionController.cpp:2216
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "জি-মোডেম আপলোড করার জন্য ফাইল বেছে নিন"

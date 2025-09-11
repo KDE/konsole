@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-25 00:45+0000\n"
+"POT-Creation-Date: 2025-09-11 00:45+0000\n"
 "PO-Revision-Date: 2025-06-21 13:10+0300\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -2090,23 +2090,23 @@ msgstr "Ierakstiet meklējamās cilnes nosaukumu"
 msgid "Bell in '%1' (Session '%2')"
 msgstr "Zvans „%1“ (sesija „%2“)"
 
-#: session/Session.cpp:425
+#: session/Session.cpp:426
 #, kde-format
 msgid "Could not find binary: "
 msgstr "Neizdevās atrast izpildāmu datni: "
 
-#: session/Session.cpp:434
+#: session/Session.cpp:435
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Brīdinājums: "
 
-#: session/Session.cpp:529
+#: session/Session.cpp:530
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "Neizdevās atrast interaktīvu čaulu, ko palaist."
 
-#: session/Session.cpp:535 session/Session.cpp:538
+#: session/Session.cpp:536 session/Session.cpp:539
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2114,17 +2114,17 @@ msgid ""
 msgstr ""
 "Neizdevās atrast „%1“, tā vietā palaiž „%2“. Pārbaudiet profila iestatījumus."
 
-#: session/Session.cpp:612
+#: session/Session.cpp:613
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Neizdevās palaist programmu „%1“ ar parametriem „%2“."
 
-#: session/Session.cpp:778
+#: session/Session.cpp:779
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Klusums „%1“ (sesija „%2“)"
 
-#: session/Session.cpp:779 session/Session.cpp:2118
+#: session/Session.cpp:780 session/Session.cpp:2131
 #: session/SessionController.cpp:361 session/SessionController.cpp:1887
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1214
 #: Vt102Emulation.cpp:1469
@@ -2132,7 +2132,7 @@ msgstr "Klusums „%1“ (sesija „%2“)"
 msgid "Show session"
 msgstr "Parādīt sesiju"
 
-#: session/Session.cpp:1063
+#: session/Session.cpp:1065
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2145,28 +2145,28 @@ msgstr ""
 "tikai iekšējai lietošanai, pārkompilējot „Konsole“.<p>Šis brīdinājums šajā "
 "„Konsole“ instancē būs redzams tikai vienu reizi.</p>"
 
-#: session/Session.cpp:1103
+#: session/Session.cpp:1105
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Pabeigts"
 
-#: session/Session.cpp:1117 session/Session.cpp:1133
+#: session/Session.cpp:1119 session/Session.cpp:1135
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Programma „%1“ avarēja."
 
-#: session/Session.cpp:1119
+#: session/Session.cpp:1121
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "Programma „%1“ beidza darbu ar statusu „%2“."
 
-#: session/Session.cpp:1645
+#: session/Session.cpp:1658
 #, kde-format
 msgid "ZModem Progress"
 msgstr "„ZModem“ progress"
 
-#: session/Session.cpp:2117
+#: session/Session.cpp:2130
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Aktivitāte „%1“ (sesija „%2“)"
@@ -2508,17 +2508,17 @@ msgstr "Nobeigt programmu"
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "Čaulas uzvedne ir parādīta sesijā „%1“"
 
-#: session/SessionController.cpp:2105
+#: session/SessionController.cpp:2108
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "Atvērt pašreizējo mapi ar"
 
-#: session/SessionController.cpp:2175
+#: session/SessionController.cpp:2178
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Saglabāt „ZModem“ lejupielādi..."
 
-#: session/SessionController.cpp:2185
+#: session/SessionController.cpp:2188
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2529,13 +2529,13 @@ msgstr ""
 "atrasta derīga „ZModem“ programmatūra.</p><p>Iespējams, ir jāinstalē „rzsz“ "
 "vai „lrzsz“ pakotne.</p>"
 
-#: session/SessionController.cpp:2195
+#: session/SessionController.cpp:2198
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>Aktīvajā sesijā jau notiek „ZModem“ datņu pārsūtīšana.</p>"
 
-#: session/SessionController.cpp:2208
+#: session/SessionController.cpp:2211
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2544,7 +2544,7 @@ msgstr ""
 "<p>Šajā datorā nav atrasta piemērota „ZModem“ programmatūra.</"
 "p><p>Iespējams, jāinstalē „rzsz“ vai „lrzsz“ pakotne.</p>"
 
-#: session/SessionController.cpp:2213
+#: session/SessionController.cpp:2216
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Izvēlieties datnes, ko augšupielādēt ar „ZModem“"

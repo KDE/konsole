@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-25 00:45+0000\n"
+"POT-Creation-Date: 2025-09-11 00:45+0000\n"
 "PO-Revision-Date: 2025-08-31 23:58+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -2102,23 +2102,23 @@ msgstr "Въведете името на раздела за търсене ту
 msgid "Bell in '%1' (Session '%2')"
 msgstr "Звуков сигнал в „%1“ (Сесия „%2“)"
 
-#: session/Session.cpp:425
+#: session/Session.cpp:426
 #, kde-format
 msgid "Could not find binary: "
 msgstr "Неуспех при намиране на двоичен файл: "
 
-#: session/Session.cpp:434
+#: session/Session.cpp:435
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Предупреждение: "
 
-#: session/Session.cpp:529
+#: session/Session.cpp:530
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "Не е открита интерактивна обвивка за зареждане."
 
-#: session/Session.cpp:535 session/Session.cpp:538
+#: session/Session.cpp:536 session/Session.cpp:539
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2127,17 +2127,17 @@ msgstr ""
 "\"Не можа да се намери  „%1“, вместо това се стартира „%2“ . Моля, проверете "
 "настройките на вашия профил."
 
-#: session/Session.cpp:612
+#: session/Session.cpp:613
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Не може да се стартира програма „%1“ с аргументи „%2“."
 
-#: session/Session.cpp:778
+#: session/Session.cpp:779
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Пасивност в „%1“ (Сесия „%2“)"
 
-#: session/Session.cpp:779 session/Session.cpp:2118
+#: session/Session.cpp:780 session/Session.cpp:2131
 #: session/SessionController.cpp:361 session/SessionController.cpp:1887
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1214
 #: Vt102Emulation.cpp:1469
@@ -2145,7 +2145,7 @@ msgstr "Пасивност в „%1“ (Сесия „%2“)"
 msgid "Show session"
 msgstr "Показване на сесия"
 
-#: session/Session.cpp:1063
+#: session/Session.cpp:1065
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2159,28 +2159,28 @@ msgstr ""
 "употреба само чрез прекомпилиране на Konsole.<p>Това предупреждение ще бъде "
 "показано само веднъж за тази инстанция на Konsole.</p>"
 
-#: session/Session.cpp:1103
+#: session/Session.cpp:1105
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Завършено"
 
-#: session/Session.cpp:1117 session/Session.cpp:1133
+#: session/Session.cpp:1119 session/Session.cpp:1135
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Програмата „%1“ блокира."
 
-#: session/Session.cpp:1119
+#: session/Session.cpp:1121
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "Програмата „%1“ беше спряна - %2."
 
-#: session/Session.cpp:1645
+#: session/Session.cpp:1658
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Индикатор на прогреса на качването"
 
-#: session/Session.cpp:2117
+#: session/Session.cpp:2130
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Активност в „%1“ (Сесия „%2“)"
@@ -2526,17 +2526,17 @@ msgstr "Прекратяване на програмата"
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "Курсорът на обвивката се показва в сесия „%1“"
 
-#: session/SessionController.cpp:2105
+#: session/SessionController.cpp:2108
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "Отваряне на текущата папка с"
 
-#: session/SessionController.cpp:2175
+#: session/SessionController.cpp:2178
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Запазване на ZModem изтегляния в..."
 
-#: session/SessionController.cpp:2185
+#: session/SessionController.cpp:2188
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2547,14 +2547,14 @@ msgstr ""
 "не е намерен подходящ софтуер на ZModem.</p><p> Може да искате да "
 "инсталирате пакета 'rzsz' или 'lrzsz'.</p>"
 
-#: session/SessionController.cpp:2195
+#: session/SessionController.cpp:2198
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr ""
 "<p>Текущата сесия вече има стартиран процес за обмен на файл (ZModem).</p>"
 
-#: session/SessionController.cpp:2208
+#: session/SessionController.cpp:2211
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2563,7 +2563,7 @@ msgstr ""
 "<p> В тази система не бе намерен подходящ софтуер ZModem.</p><p> Може да "
 "пожелаете да инсталирате пакета 'rzsz' или 'lrzsz'.</p>"
 
-#: session/SessionController.cpp:2213
+#: session/SessionController.cpp:2216
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Избор на файлове за качване на ZModem"
