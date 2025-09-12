@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-11 00:45+0000\n"
+"POT-Creation-Date: 2025-09-12 00:46+0000\n"
 "PO-Revision-Date: 2025-07-10 22:37+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -1980,7 +1980,7 @@ msgstr "Automaattitallennustiedoston ”%1” luominen epäonnistui."
 msgid "Stopping autosave due to switching of screens."
 msgstr "Näytönvaihdon vuoksi lopetetaan automaattitallennus."
 
-#: SaveHistoryAutoTask.cpp:115
+#: SaveHistoryAutoTask.cpp:116
 #, kde-format
 msgid ""
 "Autosave file has been modified externally, preventing further autosaves."
@@ -1988,14 +1988,14 @@ msgstr ""
 "Automaattitallennustiedostoa on ulkoisesti muutettu, mikä estää sen "
 "jatkamisen."
 
-#: SaveHistoryAutoTask.cpp:172
+#: SaveHistoryAutoTask.cpp:173
 #, kde-format
 msgid "Failed to update autosave state on output changes."
 msgstr ""
 "Ulostulomuutosten takia automaattitallennuksen tilan päivittäminen "
 "epäonnistui."
 
-#: SaveHistoryTask.cpp:173
+#: SaveHistoryTask.cpp:174
 #, kde-format
 msgid ""
 "A problem occurred when saving the output.\n"
@@ -2144,7 +2144,7 @@ msgid "Silence in '%1' (Session '%2')"
 msgstr "Hiljaisuus päätteessä ”%1” (istunto ”%2”)"
 
 #: session/Session.cpp:780 session/Session.cpp:2131
-#: session/SessionController.cpp:361 session/SessionController.cpp:1887
+#: session/SessionController.cpp:361 session/SessionController.cpp:1892
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1214
 #: Vt102Emulation.cpp:1469
 #, kde-format
@@ -2524,22 +2524,22 @@ msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "Tapa ohjelma"
 
-#: session/SessionController.cpp:1886
+#: session/SessionController.cpp:1891
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "Istunnossa ”%1” näytetään komentokehote"
 
-#: session/SessionController.cpp:2108
+#: session/SessionController.cpp:2113
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "Avaa nykyinen kansio ohjelmalla"
 
-#: session/SessionController.cpp:2178
+#: session/SessionController.cpp:2183
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Tallenna ZModem-lataus kohteeseen…"
 
-#: session/SessionController.cpp:2188
+#: session/SessionController.cpp:2193
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2550,13 +2550,13 @@ msgstr ""
 "ei löytynyt järjestelmästä.</p><p>Saatat haluta asentaa rzsz- tai lrzsz-"
 "paketin.</p>"
 
-#: session/SessionController.cpp:2198
+#: session/SessionController.cpp:2203
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>Nykyisessä istunnossa on jo ZModem-tiedostonsiirto käynnissä.</p>"
 
-#: session/SessionController.cpp:2211
+#: session/SessionController.cpp:2216
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2565,7 +2565,7 @@ msgstr ""
 "<p>Järjestelmästä ei löytynyt sopivaa ZModem-ohjelmistoa.</p><p>Haluat "
 "luultavasti asentaa rzsz- tai lrzsz-paketin.</p>"
 
-#: session/SessionController.cpp:2216
+#: session/SessionController.cpp:2221
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Valitse ZModem-lähetettävät tiedostot"

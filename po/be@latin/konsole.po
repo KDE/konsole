@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 86ff119b1606fcaa910d6b44fc14b611\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-11 00:45+0000\n"
+"POT-Creation-Date: 2025-09-12 00:46+0000\n"
 "PO-Revision-Date: 2022-09-04 10:59+0300\n"
 "Last-Translator: Zmicier <zmicerturok@gmail.com>\n"
 "Language-Team: Belarusian <kde-i18n-doc@kde.org>\n"
@@ -1999,18 +1999,18 @@ msgstr "Niemahčyma zapisać u fajl."
 msgid "Stopping autosave due to switching of screens."
 msgstr ""
 
-#: SaveHistoryAutoTask.cpp:115
+#: SaveHistoryAutoTask.cpp:116
 #, kde-format
 msgid ""
 "Autosave file has been modified externally, preventing further autosaves."
 msgstr ""
 
-#: SaveHistoryAutoTask.cpp:172
+#: SaveHistoryAutoTask.cpp:173
 #, kde-format
 msgid "Failed to update autosave state on output changes."
 msgstr ""
 
-#: SaveHistoryTask.cpp:173
+#: SaveHistoryTask.cpp:174
 #, kde-format
 msgid ""
 "A problem occurred when saving the output.\n"
@@ -2167,7 +2167,7 @@ msgid "Silence in '%1' (Session '%2')"
 msgstr "Biazdziejnasć u \"%1\" (sieans \"%2\")"
 
 #: session/Session.cpp:780 session/Session.cpp:2131
-#: session/SessionController.cpp:361 session/SessionController.cpp:1887
+#: session/SessionController.cpp:361 session/SessionController.cpp:1892
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1214
 #: Vt102Emulation.cpp:1469
 #, kde-format
@@ -2571,22 +2571,22 @@ msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "Zniščyć praces prahramy"
 
-#: session/SessionController.cpp:1886
+#: session/SessionController.cpp:1891
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr ""
 
-#: session/SessionController.cpp:2108
+#: session/SessionController.cpp:2113
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "Adkryć &biahučy kataloh z dapamohaj"
 
-#: session/SessionController.cpp:2178
+#: session/SessionController.cpp:2183
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Zachavać spampavanyja z dapamohaj pratakola ZModem fajly u..."
 
-#: session/SessionController.cpp:2188
+#: session/SessionController.cpp:2193
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>A ZModem file transfer attempt has been detected, but no suitable "
@@ -2601,7 +2601,7 @@ msgstr ""
 "hetaj sistemie nie znojdziena adpaviednaha prahramnaha zabiespiačennia "
 "ZModem.</p><p>Vy možacie ŭstaliavać pakunak \"rzsz\" abo \"lrzsz\".</p>"
 
-#: session/SessionController.cpp:2198
+#: session/SessionController.cpp:2203
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
@@ -2609,7 +2609,7 @@ msgstr ""
 "<p>U biahučym sieansie ŭžo vykonvajecca praces pieradačy fajlaŭ pa "
 "pratakolie ZModem.</p>"
 
-#: session/SessionController.cpp:2211
+#: session/SessionController.cpp:2216
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>No suitable ZModem software was found on this system.</p><p>You may "
@@ -2622,7 +2622,7 @@ msgstr ""
 "ZModem.</p><p>Mahčyma, vy zachočacie ŭstaliavać pakunak \"rzsz\" abo \"lrzsz"
 "\".</p>"
 
-#: session/SessionController.cpp:2216
+#: session/SessionController.cpp:2221
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Abiarycie fajly dlia zapampoŭvannia z dapamohaj pratakola ZModem"

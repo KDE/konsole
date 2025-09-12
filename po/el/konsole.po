@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-11 00:45+0000\n"
+"POT-Creation-Date: 2025-09-12 00:46+0000\n"
 "PO-Revision-Date: 2024-09-05 12:59+0300\n"
 "Last-Translator: Αντώνης Γέραλης <capoiosct@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -1983,7 +1983,7 @@ msgstr "Αποτυχία δημιουργίας αρχείου αυτόματη�
 msgid "Stopping autosave due to switching of screens."
 msgstr "Διακοπή αυτόματης αποθήκευσης λόγω αλλαγής οθονών."
 
-#: SaveHistoryAutoTask.cpp:115
+#: SaveHistoryAutoTask.cpp:116
 #, kde-format
 msgid ""
 "Autosave file has been modified externally, preventing further autosaves."
@@ -1991,13 +1991,13 @@ msgstr ""
 "Το αρχείο αυτόματης αποθήκευσης έχει τροποποιηθεί εξωτερικά, εμποδίζοντας "
 "περαιτέρω αυτόματες αποθηκεύσεις."
 
-#: SaveHistoryAutoTask.cpp:172
+#: SaveHistoryAutoTask.cpp:173
 #, kde-format
 msgid "Failed to update autosave state on output changes."
 msgstr ""
 "Αποτυχία ενημέρωσης της κατάστασης αυτόματης αποθήκευσης σε αλλαγές εξόδου."
 
-#: SaveHistoryTask.cpp:173
+#: SaveHistoryTask.cpp:174
 #, kde-format
 msgid ""
 "A problem occurred when saving the output.\n"
@@ -2146,7 +2146,7 @@ msgid "Silence in '%1' (Session '%2')"
 msgstr "Σιγή στην '%1' (Συνεδρία '%2')"
 
 #: session/Session.cpp:780 session/Session.cpp:2131
-#: session/SessionController.cpp:361 session/SessionController.cpp:1887
+#: session/SessionController.cpp:361 session/SessionController.cpp:1892
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1214
 #: Vt102Emulation.cpp:1469
 #, kde-format
@@ -2533,22 +2533,22 @@ msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "Διακοπή προγράμματος"
 
-#: session/SessionController.cpp:1886
+#: session/SessionController.cpp:1891
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "Η προτροπή του κελύφους εμφανίζεται στη συνεδρία '%1'"
 
-#: session/SessionController.cpp:2108
+#: session/SessionController.cpp:2113
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "Άνοιγμα τρέχοντος φακέλου με"
 
-#: session/SessionController.cpp:2178
+#: session/SessionController.cpp:2183
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Αποθήκευση της ZModem λήψης σε..."
 
-#: session/SessionController.cpp:2188
+#: session/SessionController.cpp:2193
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2559,14 +2559,14 @@ msgstr ""
 "υπάρχουν κατάλληλα λογισμικά ZModem σε αυτό το σύστημα.</p><p>Ίσως "
 "επιθυμείτε να εγκαταστήσετε το 'rzsz' ή το πακέτο 'lrzsz'.</p>"
 
-#: session/SessionController.cpp:2198
+#: session/SessionController.cpp:2203
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr ""
 "<p>Η τρέχουσα συνεδρία έχει ήδη μία μεταφορά αρχείου ZModem σε εξέλιξη.</p>"
 
-#: session/SessionController.cpp:2211
+#: session/SessionController.cpp:2216
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2575,7 +2575,7 @@ msgstr ""
 "<p>Κανένα κατάλληλο λογισμικό ZModem δεν βρέθηκε σε αυτό το σύστημα.</"
 "p><p>Ίσως επιθυμείτε να εγκαταστήσετε το 'rzsz' ή το πακέτο 'lrzsz'.</p>"
 
-#: session/SessionController.cpp:2216
+#: session/SessionController.cpp:2221
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Επιλογή αρχείων για αποστολή ZModem"

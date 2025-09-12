@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-11 00:45+0000\n"
+"POT-Creation-Date: 2025-09-12 00:46+0000\n"
 "PO-Revision-Date: 2008-06-04 01:01+0200\n"
 "Last-Translator: Mashrab Kuvatov <kmashrab@uni-bremen.de>\n"
 "Language-Team: Uzbek <floss-uz-l10n@googlegroups.com>\n"
@@ -2049,18 +2049,18 @@ msgstr "Файлга ёзиб бўлмади."
 msgid "Stopping autosave due to switching of screens."
 msgstr ""
 
-#: SaveHistoryAutoTask.cpp:115
+#: SaveHistoryAutoTask.cpp:116
 #, kde-format
 msgid ""
 "Autosave file has been modified externally, preventing further autosaves."
 msgstr ""
 
-#: SaveHistoryAutoTask.cpp:172
+#: SaveHistoryAutoTask.cpp:173
 #, kde-format
 msgid "Failed to update autosave state on output changes."
 msgstr ""
 
-#: SaveHistoryTask.cpp:173
+#: SaveHistoryTask.cpp:174
 #, kde-format
 msgid ""
 "A problem occurred when saving the output.\n"
@@ -2210,7 +2210,7 @@ msgid "Silence in '%1' (Session '%2')"
 msgstr ""
 
 #: session/Session.cpp:780 session/Session.cpp:2131
-#: session/SessionController.cpp:361 session/SessionController.cpp:1887
+#: session/SessionController.cpp:361 session/SessionController.cpp:1892
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1214
 #: Vt102Emulation.cpp:1469
 #, fuzzy, kde-format
@@ -2608,23 +2608,23 @@ msgctxt "@action:button"
 msgid "Kill Program"
 msgstr ""
 
-#: session/SessionController.cpp:1886
+#: session/SessionController.cpp:1891
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr ""
 
-#: session/SessionController.cpp:2108
+#: session/SessionController.cpp:2113
 #, kde-format
 msgid "Open Current Folder With"
 msgstr ""
 
-#: session/SessionController.cpp:2178
+#: session/SessionController.cpp:2183
 #, fuzzy, kde-format
 #| msgid "&ZModem Upload..."
 msgid "Save ZModem Download to..."
 msgstr "ZModem ё&зиб қўйиш"
 
-#: session/SessionController.cpp:2188
+#: session/SessionController.cpp:2193
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>A ZModem file transfer attempt has been detected, but no suitable "
@@ -2639,7 +2639,7 @@ msgstr ""
 "топилмади.\n"
 "<p>\"rzsz\" ёки \"lrzsz\" дастурини ўрнатишингиз керак.\n"
 
-#: session/SessionController.cpp:2198
+#: session/SessionController.cpp:2203
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>The current session already has a ZModem file transfer in progress."
@@ -2647,7 +2647,7 @@ msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>Жорий сеансда ZModem файл узатиши аллақачон давом этаяпти."
 
-#: session/SessionController.cpp:2211
+#: session/SessionController.cpp:2216
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>No suitable ZModem software was found on the system.\n"
@@ -2659,7 +2659,7 @@ msgstr ""
 "<p>Тизимда керак бўлган ZModem дастури топилмади.\n"
 "<p>\"rzsz\" ёки \"lrzsz\" дастурини ўрнатишингиз керак.\n"
 
-#: session/SessionController.cpp:2216
+#: session/SessionController.cpp:2221
 #, fuzzy, kde-format
 #| msgid "Select Files to Upload"
 msgid "Select Files for ZModem Upload"

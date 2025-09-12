@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-11 00:45+0000\n"
+"POT-Creation-Date: 2025-09-12 00:46+0000\n"
 "PO-Revision-Date: 2025-02-23 13:36+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -1967,7 +1967,7 @@ msgstr "Malsukcesis krei aŭtokonservan dosieron ĉe %1."
 msgid "Stopping autosave due to switching of screens."
 msgstr "Haltigante aŭtokonservon pro ŝanĝado de ekranoj."
 
-#: SaveHistoryAutoTask.cpp:115
+#: SaveHistoryAutoTask.cpp:116
 #, kde-format
 msgid ""
 "Autosave file has been modified externally, preventing further autosaves."
@@ -1975,12 +1975,12 @@ msgstr ""
 "Aŭtokonserva dosiero estos modifita de ekstere, preventante pluajn "
 "aŭtokonservojn."
 
-#: SaveHistoryAutoTask.cpp:172
+#: SaveHistoryAutoTask.cpp:173
 #, kde-format
 msgid "Failed to update autosave state on output changes."
 msgstr "Malsukcesis ĝisdatigi aŭtokonservan staton pri eligaj ŝanĝoj."
 
-#: SaveHistoryTask.cpp:173
+#: SaveHistoryTask.cpp:174
 #, kde-format
 msgid ""
 "A problem occurred when saving the output.\n"
@@ -2127,7 +2127,7 @@ msgid "Silence in '%1' (Session '%2')"
 msgstr "Silento en '%1' (Seanco '%2')"
 
 #: session/Session.cpp:780 session/Session.cpp:2131
-#: session/SessionController.cpp:361 session/SessionController.cpp:1887
+#: session/SessionController.cpp:361 session/SessionController.cpp:1892
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1214
 #: Vt102Emulation.cpp:1469
 #, kde-format
@@ -2509,22 +2509,22 @@ msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "Mortigi Programon"
 
-#: session/SessionController.cpp:1886
+#: session/SessionController.cpp:1891
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "La ŝelinvito estas montrata en seanco '%1'"
 
-#: session/SessionController.cpp:2108
+#: session/SessionController.cpp:2113
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "Malfermi Nunan Dosierujon Kun"
 
-#: session/SessionController.cpp:2178
+#: session/SessionController.cpp:2183
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Konservi ZModem Elŝutu al..."
 
-#: session/SessionController.cpp:2188
+#: session/SessionController.cpp:2193
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2535,13 +2535,13 @@ msgstr ""
 "taŭga ZModem-programaro estis trovita en ĉi tiu sistemo.</p><p>Vi eble volu "
 "instali la pakaĵon 'rzsz' aŭ 'lrzsz'.</p>"
 
-#: session/SessionController.cpp:2198
+#: session/SessionController.cpp:2203
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>La nuna seanco jam havas ZModem-dosiertransdonon en progreso.</p>"
 
-#: session/SessionController.cpp:2211
+#: session/SessionController.cpp:2216
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2550,7 +2550,7 @@ msgstr ""
 "<p>Neniu taŭga ZModem-programaro estis trovita en ĉi tiu sistemo.</p><p>Vi "
 "eble volu instali la pakaĵon 'rzsz' aŭ 'lrzsz'.</p>"
 
-#: session/SessionController.cpp:2216
+#: session/SessionController.cpp:2221
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Elekti Dosieroj por ZModem Alŝuto"

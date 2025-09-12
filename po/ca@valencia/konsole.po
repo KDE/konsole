@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-11 00:45+0000\n"
+"POT-Creation-Date: 2025-09-12 00:46+0000\n"
 "PO-Revision-Date: 2025-08-22 09:40+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -1979,7 +1979,7 @@ msgstr "No s'ha pogut crear el fitxer de guardada automàtica a %1."
 msgid "Stopping autosave due to switching of screens."
 msgstr "S'ha parat la guardada automàtica pel canvi de pantalles."
 
-#: SaveHistoryAutoTask.cpp:115
+#: SaveHistoryAutoTask.cpp:116
 #, kde-format
 msgid ""
 "Autosave file has been modified externally, preventing further autosaves."
@@ -1987,14 +1987,14 @@ msgstr ""
 "El fitxer de guardada automàtica s'ha modificat externament. S'evitaran els "
 "guardades automàtiques posteriors."
 
-#: SaveHistoryAutoTask.cpp:172
+#: SaveHistoryAutoTask.cpp:173
 #, kde-format
 msgid "Failed to update autosave state on output changes."
 msgstr ""
 "No s'ha pogut actualitzar l'estat de la guardada automàtica en els canvis de "
 "l'eixida."
 
-#: SaveHistoryTask.cpp:173
+#: SaveHistoryTask.cpp:174
 #, kde-format
 msgid ""
 "A problem occurred when saving the output.\n"
@@ -2141,7 +2141,7 @@ msgid "Silence in '%1' (Session '%2')"
 msgstr "Silenci a «%1» (Sessió «%2»)"
 
 #: session/Session.cpp:780 session/Session.cpp:2131
-#: session/SessionController.cpp:361 session/SessionController.cpp:1887
+#: session/SessionController.cpp:361 session/SessionController.cpp:1892
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1214
 #: Vt102Emulation.cpp:1469
 #, kde-format
@@ -2525,22 +2525,22 @@ msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "Mata el programa"
 
-#: session/SessionController.cpp:1886
+#: session/SessionController.cpp:1891
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "L'indicador de l'intèrpret d'ordres es mostra en la sessió «%1»"
 
-#: session/SessionController.cpp:2108
+#: session/SessionController.cpp:2113
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "Obri la carpeta actual amb"
 
-#: session/SessionController.cpp:2178
+#: session/SessionController.cpp:2183
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Guarda la baixada de ZModem a…"
 
-#: session/SessionController.cpp:2188
+#: session/SessionController.cpp:2193
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2551,14 +2551,14 @@ msgstr ""
 "s'ha trobat cap programari adequat per al ZModem en este sistema.</"
 "p><p>Potser hauríeu d'instal·lar el paquet «rzsz» o «lrzsz».</p>"
 
-#: session/SessionController.cpp:2198
+#: session/SessionController.cpp:2203
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr ""
 "<p>La sessió actual ja té una transferència de fitxer en curs del ZModem.</p>"
 
-#: session/SessionController.cpp:2211
+#: session/SessionController.cpp:2216
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2567,7 +2567,7 @@ msgstr ""
 "<p>No s'ha trobat cap programari adequat al ZModem en este sistema.</"
 "p><p>Potser hauríeu d'instal·lar el paquet «rzsz» o «lrzsz».</p>"
 
-#: session/SessionController.cpp:2216
+#: session/SessionController.cpp:2221
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Trieu els fitxers per a l'enviament per ZModem"

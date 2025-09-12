@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-11 00:45+0000\n"
+"POT-Creation-Date: 2025-09-12 00:46+0000\n"
 "PO-Revision-Date: 2025-08-22 07:43+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -1967,7 +1967,7 @@ msgstr "Datoteke za samodejno shranjevanje ni bilo mogoče ustvariti na %1."
 msgid "Stopping autosave due to switching of screens."
 msgstr "Ustavitev samodejnega shranjevanja zaradi preklapljanja zaslonov."
 
-#: SaveHistoryAutoTask.cpp:115
+#: SaveHistoryAutoTask.cpp:116
 #, kde-format
 msgid ""
 "Autosave file has been modified externally, preventing further autosaves."
@@ -1975,13 +1975,13 @@ msgstr ""
 "Datoteka za samodejno shranjevanje je bila spremenjena od zunaj, kar "
 "preprečuje nadaljnje samodejno shranjevanje."
 
-#: SaveHistoryAutoTask.cpp:172
+#: SaveHistoryAutoTask.cpp:173
 #, kde-format
 msgid "Failed to update autosave state on output changes."
 msgstr ""
 "Posodobitev stanja samodejnega shranjevanja ob spremembah izhoda ni uspela."
 
-#: SaveHistoryTask.cpp:173
+#: SaveHistoryTask.cpp:174
 #, kde-format
 msgid ""
 "A problem occurred when saving the output.\n"
@@ -2128,7 +2128,7 @@ msgid "Silence in '%1' (Session '%2')"
 msgstr "Tišina v »%1« (Seja »%2«)"
 
 #: session/Session.cpp:780 session/Session.cpp:2131
-#: session/SessionController.cpp:361 session/SessionController.cpp:1887
+#: session/SessionController.cpp:361 session/SessionController.cpp:1892
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1214
 #: Vt102Emulation.cpp:1469
 #, kde-format
@@ -2510,22 +2510,22 @@ msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "Ubij program"
 
-#: session/SessionController.cpp:1886
+#: session/SessionController.cpp:1891
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "Shellov poziv je prikazan v seji »%1«"
 
-#: session/SessionController.cpp:2108
+#: session/SessionController.cpp:2113
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "Odpri trenutno mapo z"
 
-#: session/SessionController.cpp:2178
+#: session/SessionController.cpp:2183
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Shrani prejem prek ZModema v …"
 
-#: session/SessionController.cpp:2188
+#: session/SessionController.cpp:2193
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2536,13 +2536,13 @@ msgstr ""
 "ni bilo mogoče najti ustreznega programa za ZModem.</p><p>Morda bi želeli "
 "namestiti paket »rzsz« ali »lrzsz«.</p>"
 
-#: session/SessionController.cpp:2198
+#: session/SessionController.cpp:2203
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>V trenutni seji že poteka datotečni prenos prek ZModema.</p>"
 
-#: session/SessionController.cpp:2211
+#: session/SessionController.cpp:2216
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2551,7 +2551,7 @@ msgstr ""
 "<p>Na tem sistemu ni bilo mogoče najti ustreznega programa za ZModem.</"
 "p><p>Morda bi  želeli namestiti paket »rzsz« ali »lrzsz«.</p>"
 
-#: session/SessionController.cpp:2216
+#: session/SessionController.cpp:2221
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Izberite datoteke za pošiljanje prek ZModema"

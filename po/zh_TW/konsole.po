@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-11 00:45+0000\n"
+"POT-Creation-Date: 2025-09-12 00:46+0000\n"
 "PO-Revision-Date: 2025-08-29 19:59+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -1946,18 +1946,18 @@ msgstr "無法於 %1 建立自動儲存檔案。"
 msgid "Stopping autosave due to switching of screens."
 msgstr "自動儲存因切換螢幕而停止中。"
 
-#: SaveHistoryAutoTask.cpp:115
+#: SaveHistoryAutoTask.cpp:116
 #, kde-format
 msgid ""
 "Autosave file has been modified externally, preventing further autosaves."
 msgstr "自動儲存檔案已由外部修改，而無法進行更多自動儲存。"
 
-#: SaveHistoryAutoTask.cpp:172
+#: SaveHistoryAutoTask.cpp:173
 #, kde-format
 msgid "Failed to update autosave state on output changes."
 msgstr "在輸出更新後更新自動儲存狀態時失敗。"
 
-#: SaveHistoryTask.cpp:173
+#: SaveHistoryTask.cpp:174
 #, kde-format
 msgid ""
 "A problem occurred when saving the output.\n"
@@ -2102,7 +2102,7 @@ msgid "Silence in '%1' (Session '%2')"
 msgstr "分頁 %1 目前靜默中（於工作階段 %2）"
 
 #: session/Session.cpp:780 session/Session.cpp:2131
-#: session/SessionController.cpp:361 session/SessionController.cpp:1887
+#: session/SessionController.cpp:361 session/SessionController.cpp:1892
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1214
 #: Vt102Emulation.cpp:1469
 #, kde-format
@@ -2475,22 +2475,22 @@ msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "砍除程式"
 
-#: session/SessionController.cpp:1886
+#: session/SessionController.cpp:1891
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "shell 提示字元會顯示在工作階段「%1」"
 
-#: session/SessionController.cpp:2108
+#: session/SessionController.cpp:2113
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "以…開啟目前資料夾"
 
-#: session/SessionController.cpp:2178
+#: session/SessionController.cpp:2183
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "儲存 ZModem 下載檔到..."
 
-#: session/SessionController.cpp:2188
+#: session/SessionController.cpp:2193
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2500,13 +2500,13 @@ msgstr ""
 "<p>偵測到要使用 ZModem 做檔案傳輸，但是此系統上找不到適合的 ZModem 軟體。</"
 "p><p>您可能需要安裝 rzsz 或 lrzsz 等軟體包。</p>"
 
-#: session/SessionController.cpp:2198
+#: session/SessionController.cpp:2203
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>目前的工作階段已經有一個 ZModem 檔案傳輸在進行中。</p>"
 
-#: session/SessionController.cpp:2211
+#: session/SessionController.cpp:2216
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2515,7 +2515,7 @@ msgstr ""
 "<p>此系統上找不到適合的 ZModem 軟體。</p><p>您可能需要安裝 rzsz 或 lrzsz 等軟"
 "體包。</p>"
 
-#: session/SessionController.cpp:2216
+#: session/SessionController.cpp:2221
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "選擇要用 ZModem 上傳的檔案"
