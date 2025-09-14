@@ -1657,7 +1657,7 @@ msgstr ""
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:396
 #, kde-format
 msgid "At least Username or SSHKey must be set"
-msgstr "Com a mínim cal definir el nom d'usuari o la clau SSH"
+msgstr "Com a mínim cal establir el nom d'usuari o la clau SSH"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:402
 #, kde-format
@@ -2286,7 +2286,7 @@ msgstr "Anomena i gu&arda l'eixida…"
 #: session/SessionController.cpp:744
 #, kde-format
 msgid "Auto Save Output As..."
-msgstr "Guarda l'eixida automàtica com a…"
+msgstr "Anomena i guarda l'eixida automàtica…"
 
 #: session/SessionController.cpp:748
 #, kde-format
