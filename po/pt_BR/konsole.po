@@ -5,7 +5,7 @@
 # Lisiane Sztoltz <lisiane@conectiva.com.br>, 2002, 2003.
 # Henrique Pinto <stampede@coltec.ufmg.br>, 2003.
 # Lisiane Sztoltz Teixeira <lisiane@conectiva.com.br>, 2004.
-# Marcus Gama <marcus.gama@gmail.com>, 2004.
+# SPDX-FileCopyrightText: 2004, 2025 Marcus Gama <marcus.gama@gmail.com>
 # Lisiane Sztoltz Teixeira <lisiane@kdemail.net>, 2005.
 # doutor.zero <doutor.zero@gmail.com>, 2007.
 # Diniz Bortolotto <diniz.bortolotto@gmail.com>, 2007, 2008.
@@ -22,15 +22,15 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-12 00:46+0000\n"
-"PO-Revision-Date: 2025-08-25 23:13-0300\n"
-"Last-Translator: Geraldo Simiao <geraldosimiao@fedoraproject.org>\n"
+"PO-Revision-Date: 2025-09-14 08:48-0300\n"
+"Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.08.0\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -202,7 +202,7 @@ msgstr "Ocultar a barra de abas, sobrepondo-se à configuração padrão"
 #, kde-format
 msgctxt "@info:shell"
 msgid "Start Konsole in fullscreen mode"
-msgstr "Iniciar o Konsole no modo de tela inteira"
+msgstr "Iniciar o Konsole no modo de tela cheia"
 
 #: Application.cpp:71
 #, kde-format
