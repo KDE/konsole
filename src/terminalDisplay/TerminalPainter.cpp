@@ -24,6 +24,7 @@
 #include <QDebug>
 #include <QElapsedTimer>
 #include <QPainter>
+#include <QPainterPath>
 #include <QPen>
 #include <QRect>
 #include <QRegion>
@@ -915,24 +916,30 @@ void TerminalPainter::drawAboveText(QPainter &painter,
                         painter.drawLine(QLineF(x1, y, x2, y));
                     if (underline == RE_UNDERLINE_DOUBLE || underline == RE_UNDERLINE_CURL) {
                         const int fontHeight = m_parentDisplay->terminalFont()->fontHeight();
-                        const int amplitude = fontHeight / 8;
+                        const qreal amplitude = fontHeight / 8;
                         if (underline == RE_UNDERLINE_DOUBLE) {
                             if (amplitude)
                                 painter.drawLine(x1, y - amplitude, x2, y - amplitude);
                         } else {
-                            y = std::max(static_cast<qreal>(0), y - amplitude);
+                            y = std::max(static_cast<qreal>(0), y - amplitude / 2);
                             assert(underline == RE_UNDERLINE_CURL);
                             const int len = x2 - x1;
                             if (len > 0) {
-                                const int halfPeriodsPerGlyph = 2;
-                                const int numHalfPeriods = len * halfPeriodsPerGlyph / fontWidth;
-                                for (int j = 0; j < numHalfPeriods; j++) {
-                                    const int begin = j * len / numHalfPeriods;
-                                    const int end = (j + 1) * len / numHalfPeriods;
-                                    const qreal angle1 = 0.0;
-                                    const qreal angle2 = 360.0 * 16.0 * ((j % 2 == 0) ? 0.5 : -0.5);
-                                    painter.drawArc(x1 + begin, y, end-begin, amplitude, angle1, angle2);
-                                }
+                                const qreal desiredWavelength = fontWidth / 1.2;
+                                const int cycles = std::max(1, static_cast<int>(len / desiredWavelength));
+                                const qreal wavelength = static_cast<qreal>(len) / cycles;
+                                const qreal halfWavelength = wavelength / 2.0;
+                                const qreal quarterWavelength = halfWavelength / 2.0;
+                                const qreal threeQuarterWavelength = 3 * quarterWavelength;
+                                QPainterPath segment;
+                                segment.moveTo(0, 0);
+                                segment.quadTo(quarterWavelength, -amplitude, halfWavelength, 0);
+                                segment.quadTo(threeQuarterWavelength, amplitude, wavelength, 0);
+                                QPainterPath path;
+                                path.moveTo(x1, y);
+                                for (int i = 0; i < cycles; ++i)
+                                    path.addPath(segment.translated(x1 + i * wavelength, y));
+                                painter.drawPath(path);
                             }
                         }
                     }
