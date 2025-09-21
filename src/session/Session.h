@@ -569,20 +569,15 @@ public Q_SLOTS:
      */
     void sendTextToTerminal(const QString &text, const QChar &eol = QChar()) const;
 
-#if REMOVE_SENDTEXT_RUNCOMMAND_DBUS_METHODS
-    void sendText(const QString &text) const;
-#else
+    /**
+     * Sends @p text to the current foreground terminal program.
+     */
     Q_SCRIPTABLE void sendText(const QString &text) const;
-#endif
 
     /**
      * Sends @p command to the current foreground terminal program.
      */
-#if REMOVE_SENDTEXT_RUNCOMMAND_DBUS_METHODS
-    void runCommand(const QString &command) const;
-#else
     Q_SCRIPTABLE void runCommand(const QString &command) const;
-#endif
 
     /**
      * Sends a mouse event of type @p eventType emitted by button
@@ -894,6 +889,8 @@ private Q_SLOTS:
     void sessionAttributeRequest(int id, uint terminator);
 
 private:
+    bool isCalledViaDbusAndForbidden() const;
+
     Q_DISABLE_COPY(Session)
 
     void updateTerminalSize();

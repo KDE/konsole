@@ -33,6 +33,11 @@
       <tooltip>When launching Konsole re-use existing process if possible</tooltip>
       <default>false</default>
     </entry>
+    <entry name="EnableSecuritySensitiveDBusAPI" type="Bool">
+      <label>Enable the security sensitive parts of the DBus API</label>
+      <tooltip>DBus API like runCommand will be enabled</tooltip>
+      <default>false</default>
+    </entry>
   </group>
   <group name="ThumbnailsSettings">
      <entry name="EnableThumbnails" type="Bool">

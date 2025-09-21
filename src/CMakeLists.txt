@@ -22,10 +22,6 @@ if(BUILD_TESTING)
         add_subdirectory(tests)
 endif()
 
-
-### Security concerns about sendText and runCommand dbus methods being public
-option(REMOVE_SENDTEXT_RUNCOMMAND_DBUS_METHODS "Konsole: remove sendText and runCommand dbus methods" OFF)
-
 ### Security concerns about reading arbitrary screen positions
 option(ENABLE_DECRQCRA "Konsole: enable DEC request checksum rectangular area" OFF)
 

@@ -54,6 +54,7 @@
 #include <sessionadaptor.h>
 #endif
 
+#include "KonsoleSettings.h"
 #include "Pty.h"
 #include "SSHProcessInfo.h"
 #include "SessionController.h"
@@ -84,8 +85,6 @@
 #endif // Q_OS_WIN
 
 using namespace Konsole;
-
-static bool show_disallow_certain_dbus_methods_message = true;
 
 static const int ZMODEM_BUFFER_SIZE = 1048576; // 1 Mb
 
@@ -1054,21 +1053,10 @@ void Session::sendTextToTerminal(const QString &text, const QChar &eol) const
 // Only D-Bus calls this function (via SendText or runCommand)
 void Session::sendText(const QString &text) const
 {
-    if (isReadOnly()) {
+    // avoid that we expose this if not wanted by the user
+    if (isCalledViaDbusAndForbidden() || isReadOnly()) {
         return;
     }
-
-#if !REMOVE_SENDTEXT_RUNCOMMAND_DBUS_METHODS
-    if (show_disallow_certain_dbus_methods_message) {
-        KNotification::event(KNotification::Warning,
-                             QStringLiteral("Konsole D-Bus Warning"),
-                             i18n("The D-Bus methods sendText/runCommand were just used.  There are security concerns about allowing these methods to be "
-                                  "public.  If desired, these methods can be changed to internal use only by re-compiling Konsole. <p>This warning will only "
-                                  "show once for this Konsole instance.</p>"));
-
-        show_disallow_certain_dbus_methods_message = false;
-    }
-#endif
 
     _emulation->sendText(text);
 }
@@ -1076,7 +1064,8 @@ void Session::sendText(const QString &text) const
 // Only D-Bus calls this function
 void Session::runCommand(const QString &command) const
 {
-    if (isReadOnly()) {
+    // avoid that we expose this if not wanted by the user
+    if (isCalledViaDbusAndForbidden() || isReadOnly()) {
         return;
     }
 
@@ -1085,7 +1074,8 @@ void Session::runCommand(const QString &command) const
 
 void Session::sendMouseEvent(int buttons, int column, int line, int eventType)
 {
-    if (isReadOnly()) {
+    // avoid that we expose this if not wanted by the user
+    if (isCalledViaDbusAndForbidden() || isReadOnly()) {
         return;
     }
 
@@ -1156,7 +1146,8 @@ QStringList Session::environment() const
 
 void Session::setEnvironment(const QStringList &environment)
 {
-    if (isReadOnly()) {
+    // avoid that we expose this if not wanted by the user
+    if (isCalledViaDbusAndForbidden() || isReadOnly()) {
         return;
     }
 
@@ -2256,6 +2247,26 @@ QString Session::activationToken(const QString &cookieForRequest) const
 #endif
 
     return {};
+}
+
+bool Session::isCalledViaDbusAndForbidden() const
+{
+#if HAVE_DBUS
+    // we can check if this is called via dbus and then consult the config
+    if (calledFromDBus() && !Konsole::KonsoleSettings::enableSecuritySensitiveDBusAPI()) {
+        // trigger error reply
+        setDelayedReply(true);
+        auto reply = message().createErrorReply(QDBusError::AccessDenied, i18n("Security sensitive DBus API is disabled in the settings."));
+        QDBusConnection::sessionBus().send(reply);
+
+        // forbid call
+        return true;
+    }
+    return false;
+#else
+    // no dbus, just allow it
+    return false;
+#endif
 }
 
 #include "moc_Session.cpp"

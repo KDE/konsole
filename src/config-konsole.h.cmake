@@ -7,9 +7,6 @@
 
 #cmakedefine01 HAVE_DBUS
 
-/* If defined, remove public access to dbus sendInput/runCommand */
-#cmakedefine01 REMOVE_SENDTEXT_RUNCOMMAND_DBUS_METHODS
-
 /* If defined, can checksum rectangular areas of the screen */
 #cmakedefine01 ENABLE_DECRQCRA
 
