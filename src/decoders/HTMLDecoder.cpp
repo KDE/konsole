@@ -94,11 +94,14 @@ void HTMLDecoder::decodeLine(const Character *const characters, int count, LineP
             }
 
             style.append(QStringLiteral("color:%1;").arg(_lastForeColor.color(_colorTable).name()));
-
             style.append(QStringLiteral("background-color:%1;").arg(_lastBackColor.color(_colorTable).name()));
 
+            _style = style;
             // open the span with the current style
-            openSpan(text, style);
+            openSpan(text, _style);
+            _innerSpanOpen = true;
+        } else if (i == 0) {
+            openSpan(text, _style);
             _innerSpanOpen = true;
         }
 

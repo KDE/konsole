@@ -41,6 +41,7 @@ private:
     RenditionFlags _lastRendition;
     CharacterColor _lastForeColor;
     CharacterColor _lastBackColor;
+    QString _style;
 };
 }
 
