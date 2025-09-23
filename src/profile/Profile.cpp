@@ -20,7 +20,6 @@
 #include <QFontDatabase>
 
 // Konsole
-#include "Enumeration.h"
 #include "ProfileGroup.h"
 #include "config-konsole.h"
 

@@ -8,8 +8,6 @@
 #include <QFile>
 #include <QFileInfo>
 #include <QMutexLocker>
-#include <QThread>
-#include <QTimer>
 #include <sstream>
 
 #define READ_INTERVAL_MSEC 500
