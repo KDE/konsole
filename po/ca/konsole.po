@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-12 00:46+0000\n"
+"POT-Creation-Date: 2025-09-23 00:46+0000\n"
 "PO-Revision-Date: 2025-08-22 09:40+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -1882,14 +1882,14 @@ msgstr "Opcions de sortida"
 
 #. i18n: ectx: property (text), widget (QCheckBox, printerFriendly)
 #. i18n: ectx: label, entry (PrinterFriendly), group (PrintOptions)
-#: PrintOptions.ui:39 settings/konsole.kcfg:190
+#: PrintOptions.ui:39 settings/konsole.kcfg:195
 #, kde-format
 msgid "Printer &friendly mode (black text, no background)"
 msgstr "Mode d'i&mpressió fàcil d'emprar (text negre, sense fons)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, scaleOutput)
 #. i18n: ectx: label, entry (ScaleOutput), group (PrintOptions)
-#: PrintOptions.ui:46 settings/konsole.kcfg:194
+#: PrintOptions.ui:46 settings/konsole.kcfg:199
 #, kde-format
 msgid "&Scale output"
 msgstr "E&scala de la sortida"
@@ -2100,28 +2100,28 @@ msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"
 msgstr "Introduïu aquí un nom de pestanya a cercar"
 
-#: session/Session.cpp:130
+#: session/Session.cpp:129
 #, kde-format
 msgid "Bell in '%1' (Session '%2')"
 msgstr "Timbre a «%1» (Sessió «%2»)"
 
-#: session/Session.cpp:426
+#: session/Session.cpp:425
 #, kde-format
 msgid "Could not find binary: "
 msgstr "No s'ha pogut trobar l'executable: "
 
-#: session/Session.cpp:435
+#: session/Session.cpp:434
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Avís: "
 
-#: session/Session.cpp:530
+#: session/Session.cpp:529
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "No s'ha pogut trobar cap intèrpret d'ordres interactiu per a iniciar."
 
-#: session/Session.cpp:536 session/Session.cpp:539
+#: session/Session.cpp:535 session/Session.cpp:538
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2130,17 +2130,17 @@ msgstr ""
 "No s'ha pogut trobar «%1», en el seu lloc s'ha engegat «%2». Comproveu els "
 "paràmetres del vostre perfil."
 
-#: session/Session.cpp:613
+#: session/Session.cpp:612
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "No s'ha pogut iniciar el programa «%1» amb els arguments «%2»."
 
-#: session/Session.cpp:779
+#: session/Session.cpp:778
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Silenci a «%1» (Sessió «%2»)"
 
-#: session/Session.cpp:780 session/Session.cpp:2131
+#: session/Session.cpp:779 session/Session.cpp:2122
 #: session/SessionController.cpp:361 session/SessionController.cpp:1892
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1214
 #: Vt102Emulation.cpp:1469
@@ -2148,45 +2148,36 @@ msgstr "Silenci a «%1» (Sessió «%2»)"
 msgid "Show session"
 msgstr "Mostra la sessió"
 
-#: session/Session.cpp:1065
-#, kde-format
-msgid ""
-"The D-Bus methods sendText/runCommand were just used.  There are security "
-"concerns about allowing these methods to be public.  If desired, these "
-"methods can be changed to internal use only by re-compiling Konsole. <p>This "
-"warning will only show once for this Konsole instance.</p>"
-msgstr ""
-"S'usen els mètodes «sendText/runCommand» del D-Bus. Hi ha problemes de "
-"seguretat per a permetre que aquests mètodes siguin públics. Si es desitja, "
-"aquests mètodes es poden canviar a ús intern només recompilant el Konsole. "
-"<p>Aquest avís només es mostrarà una vegada per a aquesta instància del "
-"Konsole.</p>"
-
-#: session/Session.cpp:1105
+#: session/Session.cpp:1095
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Finalitzada"
 
-#: session/Session.cpp:1119 session/Session.cpp:1135
+#: session/Session.cpp:1109 session/Session.cpp:1125
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "El programa «%1» ha fallat."
 
-#: session/Session.cpp:1121
+#: session/Session.cpp:1111
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "El programa «%1» ha acabat amb l'estat %2."
 
-#: session/Session.cpp:1658
+#: session/Session.cpp:1649
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Progrés ZModem"
 
-#: session/Session.cpp:2130
+#: session/Session.cpp:2121
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Activitat a «%1» (Sessió «%2»)"
+
+#: session/Session.cpp:2259
+#, kde-format
+msgid "Security sensitive DBus API is disabled in the settings."
+msgstr ""
 
 #: session/SessionController.cpp:142
 #, kde-format
@@ -2590,143 +2581,150 @@ msgctxt "@title:window"
 msgid "Configure"
 msgstr "Configura"
 
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: settings/GeneralSettings.ui:43
-#, kde-format
-msgctxt "@item:intext Search options"
-msgid "Search:"
-msgstr "Cerca:"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_AllowMenuAccelerators)
-#. i18n: ectx: label, entry (AllowMenuAccelerators), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:56 settings/konsole.kcfg:22
-#, kde-format
-msgid "Enable menu accelerators"
-msgstr "Activa els acceleradors del menú"
-
-#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_RememberWindowSize)
-#: settings/GeneralSettings.ui:69
-#, kde-format
-msgid "If enabled, profile settings will be ignored"
-msgstr "Si està actiu, s'ignorarà l'arranjament del perfil"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RememberWindowSize)
-#: settings/GeneralSettings.ui:72
-#, kde-format
-msgid "Remember window size"
-msgstr "Recorda la mida de la finestra"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowWindowTitleOnTitleBar)
-#. i18n: ectx: label, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:85 settings/konsole.kcfg:17
-#, kde-format
-msgid "Show window title on the titlebar"
-msgstr "Mostra el títol de la finestra a la barra de títol"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_FocusFollowsMouse)
-#. i18n: ectx: label, entry (FocusFollowsMouse), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:92 settings/konsole.kcfg:13
-#, kde-format
-msgid "Focus terminals when the mouse pointer is moved over them"
-msgstr "Dona focus als terminals quan el punter del ratolí es mogui sobre ells"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchRegExpression)
-#. i18n: ectx: label, entry (SearchRegExpression), group (SearchSettings)
-#: settings/GeneralSettings.ui:105 settings/konsole.kcfg:69
-#, kde-format
-msgid "Match using regular expressions"
-msgstr "Coincidència usant expressions regulars"
-
-#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_UseSingleInstance)
-#. i18n: ectx: tooltip, entry (UseSingleInstance), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:118 settings/konsole.kcfg:33
-#, kde-format
-msgid "When launching Konsole re-use existing process if possible"
-msgstr "En llançar el Konsole reutilitzarà el procés existent, si és possible"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSingleInstance)
-#. i18n: ectx: label, entry (UseSingleInstance), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:121 settings/konsole.kcfg:32
-#, kde-format
-msgid "Run all Konsole windows in a single process"
-msgstr "Executa totes les finestres del Konsole en un procés únic"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchHighlightMatches)
-#: settings/GeneralSettings.ui:134
-#, kde-format
-msgid "Highlight all matches"
-msgstr "Ressalta totes les coincidències"
-
-#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchCaseSensitive)
-#. i18n: ectx: tooltip, entry (SearchCaseSensitive), group (SearchSettings)
-#: settings/GeneralSettings.ui:163 settings/konsole.kcfg:65
-#, kde-format
-msgid "Sets whether the search is case sensitive"
-msgstr "Estableix si la cerca distingeix entre les majúscules i les minúscules"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchCaseSensitive)
-#: settings/GeneralSettings.ui:166
-#, kde-format
-msgid "Case sensitive"
-msgstr "Distingeix entre majúscules i minúscules"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RemoveWindowTitleBarAndFrame)
-#. i18n: ectx: label, entry (RemoveWindowTitleBarAndFrame), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:173 settings/konsole.kcfg:9
-#, kde-format
-msgid "Remove window titlebar and frame"
-msgstr "Elimina la barra de títol i el marc de la finestra"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: settings/GeneralSettings.ui:196
-#, kde-format
-msgid "Process and window:"
-msgstr "Procés i finestra:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_3)
-#: settings/GeneralSettings.ui:206
-#, kde-format
-msgid "Notifications:"
-msgstr "Notificacions:"
-
-#. i18n: ectx: property (toolTip), widget (QPushButton, enableAllMessagesButton)
-#: settings/GeneralSettings.ui:224
-#, kde-format
-msgid "All dialogs will be shown again"
-msgstr "Es tornaran a mostrar tots els diàlegs"
-
-#. i18n: ectx: property (text), widget (QPushButton, enableAllMessagesButton)
-#: settings/GeneralSettings.ui:227
-#, kde-format
-msgid "Enable all \"Don't Ask Again\" messages"
-msgstr "Activa tots els missatges «No ho tornis a preguntar»"
-
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchReverseSearch)
 #. i18n: ectx: tooltip, entry (SearchReverseSearch), group (SearchSettings)
-#: settings/GeneralSettings.ui:255 settings/konsole.kcfg:79
+#: settings/GeneralSettings.ui:49 settings/konsole.kcfg:84
 #, kde-format
 msgid "Sets whether search should start from the bottom"
 msgstr "Estableix si la cerca s'ha d'iniciar des de baix"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchReverseSearch)
 #. i18n: ectx: label, entry (SearchReverseSearch), group (SearchSettings)
-#: settings/GeneralSettings.ui:258 settings/konsole.kcfg:78
+#: settings/GeneralSettings.ui:52 settings/konsole.kcfg:83
 #, kde-format
 msgid "Search backwards"
 msgstr "Cerca enrere"
 
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableSecuritySensitiveDBusAPI)
+#. i18n: ectx: label, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:59 settings/konsole.kcfg:37
+#, kde-format
+msgid "Enable the security sensitive parts of the DBus API"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: settings/GeneralSettings.ui:66
+#, kde-format
+msgctxt "@item:intext Search options"
+msgid "Search:"
+msgstr "Cerca:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchRegExpression)
+#. i18n: ectx: label, entry (SearchRegExpression), group (SearchSettings)
+#: settings/GeneralSettings.ui:79 settings/konsole.kcfg:74
+#, kde-format
+msgid "Match using regular expressions"
+msgstr "Coincidència usant expressions regulars"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RemoveWindowTitleBarAndFrame)
+#. i18n: ectx: label, entry (RemoveWindowTitleBarAndFrame), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:86 settings/konsole.kcfg:9
+#, kde-format
+msgid "Remove window titlebar and frame"
+msgstr "Elimina la barra de títol i el marc de la finestra"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_AllowMenuAccelerators)
+#. i18n: ectx: label, entry (AllowMenuAccelerators), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:99 settings/konsole.kcfg:22
+#, kde-format
+msgid "Enable menu accelerators"
+msgstr "Activa els acceleradors del menú"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_UseSingleInstance)
+#. i18n: ectx: tooltip, entry (UseSingleInstance), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:112 settings/konsole.kcfg:33
+#, kde-format
+msgid "When launching Konsole re-use existing process if possible"
+msgstr "En llançar el Konsole reutilitzarà el procés existent, si és possible"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSingleInstance)
+#. i18n: ectx: label, entry (UseSingleInstance), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:115 settings/konsole.kcfg:32
+#, kde-format
+msgid "Run all Konsole windows in a single process"
+msgstr "Executa totes les finestres del Konsole en un procés únic"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_RememberWindowSize)
+#: settings/GeneralSettings.ui:128
+#, kde-format
+msgid "If enabled, profile settings will be ignored"
+msgstr "Si està actiu, s'ignorarà l'arranjament del perfil"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RememberWindowSize)
+#: settings/GeneralSettings.ui:131
+#, kde-format
+msgid "Remember window size"
+msgstr "Recorda la mida de la finestra"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: settings/GeneralSettings.ui:138
+#, kde-format
+msgid "Notifications:"
+msgstr "Notificacions:"
+
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchNoWrap)
 #. i18n: ectx: tooltip, entry (SearchNoWrap), group (SearchSettings)
-#: settings/GeneralSettings.ui:271 settings/konsole.kcfg:84
+#: settings/GeneralSettings.ui:151 settings/konsole.kcfg:89
 #, kde-format
 msgid "Sets whether search should stop instead of wrapping"
 msgstr "Estableix si la cerca s'ha d'aturar en lloc de tornar a començar"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchNoWrap)
-#: settings/GeneralSettings.ui:274
+#: settings/GeneralSettings.ui:154
 #, kde-format
 msgid "No wrap"
 msgstr "Sense tornar a començar"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowWindowTitleOnTitleBar)
+#. i18n: ectx: label, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:167 settings/konsole.kcfg:17
+#, kde-format
+msgid "Show window title on the titlebar"
+msgstr "Mostra el títol de la finestra a la barra de títol"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_FocusFollowsMouse)
+#. i18n: ectx: label, entry (FocusFollowsMouse), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:174 settings/konsole.kcfg:13
+#, kde-format
+msgid "Focus terminals when the mouse pointer is moved over them"
+msgstr "Dona focus als terminals quan el punter del ratolí es mogui sobre ells"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchCaseSensitive)
+#. i18n: ectx: tooltip, entry (SearchCaseSensitive), group (SearchSettings)
+#: settings/GeneralSettings.ui:187 settings/konsole.kcfg:70
+#, kde-format
+msgid "Sets whether the search is case sensitive"
+msgstr "Estableix si la cerca distingeix entre les majúscules i les minúscules"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchCaseSensitive)
+#: settings/GeneralSettings.ui:190
+#, kde-format
+msgid "Case sensitive"
+msgstr "Distingeix entre majúscules i minúscules"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: settings/GeneralSettings.ui:197
+#, kde-format
+msgid "Process and window:"
+msgstr "Procés i finestra:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchHighlightMatches)
+#: settings/GeneralSettings.ui:213
+#, kde-format
+msgid "Highlight all matches"
+msgstr "Ressalta totes les coincidències"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, enableAllMessagesButton)
+#: settings/GeneralSettings.ui:231
+#, kde-format
+msgid "All dialogs will be shown again"
+msgstr "Es tornaran a mostrar tots els diàlegs"
+
+#. i18n: ectx: property (text), widget (QPushButton, enableAllMessagesButton)
+#: settings/GeneralSettings.ui:234
+#, kde-format
+msgid "Enable all \"Don't Ask Again\" messages"
+msgstr "Activa tots els missatges «No ho tornis a preguntar»"
 
 #. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:18
@@ -2756,72 +2754,78 @@ msgstr "Usa la mida actual de la finestra en l'inici següent"
 msgid "The window size will be saved upon exiting Konsole"
 msgstr "La mida de la finestra es desarà en sortir del Konsole"
 
+#. i18n: ectx: tooltip, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
+#: settings/konsole.kcfg:38
+#, kde-format
+msgid "DBus API like runCommand will be enabled"
+msgstr ""
+
 #. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
-#: settings/konsole.kcfg:42
+#: settings/konsole.kcfg:47
 #, kde-format
 msgid "Thumbnail Width"
 msgstr "Amplada de la miniatura"
 
 #. i18n: ectx: tooltip, entry (ThumbnailSize), group (ThumbnailsSettings)
-#: settings/konsole.kcfg:43
+#: settings/konsole.kcfg:48
 #, kde-format
 msgid "Sets the width of the thumbnail"
 msgstr "Estableix l'amplada de la miniatura"
 
 #. i18n: ectx: label, entry (ThumbnailShift), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailShift), group (ThumbnailsSettings)
-#: settings/konsole.kcfg:47 settings/konsole.kcfg:48
+#: settings/konsole.kcfg:52 settings/konsole.kcfg:53
 #, kde-format
 msgid "Use Shift to display a thumbnail"
 msgstr "Useu Majúscules per a mostrar una miniatura"
 
 #. i18n: ectx: label, entry (ThumbnailAlt), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailAlt), group (ThumbnailsSettings)
-#: settings/konsole.kcfg:52 settings/konsole.kcfg:53
+#: settings/konsole.kcfg:57 settings/konsole.kcfg:58
 #, kde-format
 msgid "Use Alt to display a thumbnail"
 msgstr "Useu Alt per a mostrar una miniatura"
 
 #. i18n: ectx: label, entry (ThumbnailCtrl), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailCtrl), group (ThumbnailsSettings)
-#: settings/konsole.kcfg:57 settings/konsole.kcfg:58
+#: settings/konsole.kcfg:62 settings/konsole.kcfg:63
 #, kde-format
 msgid "Use Ctrl to display a thumbnail"
 msgstr "Useu Ctrl per a mostrar una miniatura"
 
 #. i18n: ectx: label, entry (SearchCaseSensitive), group (SearchSettings)
-#: settings/konsole.kcfg:64
+#: settings/konsole.kcfg:69
 #, kde-format
 msgid "Search is case sensitive"
 msgstr "La cerca distingeix entre majúscules i minúscules"
 
 #. i18n: ectx: label, entry (SearchHighlightMatches), group (SearchSettings)
-#: settings/konsole.kcfg:73
+#: settings/konsole.kcfg:78
 #, kde-format
 msgid "Highlight all search matches"
 msgstr "Ressalta totes les coincidències de la cerca"
 
 #. i18n: ectx: tooltip, entry (SearchHighlightMatches), group (SearchSettings)
-#: settings/konsole.kcfg:74
+#: settings/konsole.kcfg:79
 #, kde-format
 msgid "Sets whether matching text should be highlighted"
 msgstr "Estableix quan s'hauria de ressaltar el text coincident"
 
 #. i18n: ectx: label, entry (SearchNoWrap), group (SearchSettings)
-#: settings/konsole.kcfg:83
+#: settings/konsole.kcfg:88
 #, kde-format
 msgid "Search stops instead of wrapping"
 msgstr "La cerca s'atura en lloc de tornar a començar"
 
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
-#: settings/konsole.kcfg:90
+#: settings/konsole.kcfg:95
 #, kde-format
 msgid "Control whether child cgroups are created for individual tabs"
 msgstr ""
 "Controla si els «cgroups» fills es creen per a les pestanyes individuals"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
-#: settings/konsole.kcfg:94
+#: settings/konsole.kcfg:99
 #, kde-format
 msgid ""
 "Determines the memory consumption level above which throttling will start"
@@ -2831,81 +2835,81 @@ msgstr ""
 
 #. i18n: ectx: label, entry (SplitViewVisibility), group (SplitView)
 #. i18n: ectx: label, entry (TabBarVisibility), group (TabBar)
-#: settings/konsole.kcfg:100 settings/konsole.kcfg:120
+#: settings/konsole.kcfg:105 settings/konsole.kcfg:125
 #, kde-format
 msgid "Control the visibility of the whole tab bar"
 msgstr "Controla la visibilitat de tota la barra de pestanyes"
 
 #. i18n: ectx: label, entry (SplitDragHandleSize), group (SplitView)
-#: settings/konsole.kcfg:109
+#: settings/konsole.kcfg:114
 #, kde-format
 msgid "Control the size of the handle between panels"
 msgstr "Controla la mida de la maneta entre els plafons"
 
 #. i18n: ectx: label, entry (TabBarPosition), group (TabBar)
-#: settings/konsole.kcfg:129
+#: settings/konsole.kcfg:134
 #, kde-format
 msgid "Control the position of the tab bar"
 msgstr "Controla la posició de la barra de pestanyes"
 
 #. i18n: ectx: label, entry (TabBarStyleSheet), group (TabBar)
-#: settings/konsole.kcfg:139
+#: settings/konsole.kcfg:144
 #, kde-format
 msgid "Control the visual style of the tab bar"
 msgstr "Controla l'estil visual de la barra de pestanyes"
 
 #. i18n: ectx: label, entry (TabBarUseUserStyleSheet), group (TabBar)
-#: settings/konsole.kcfg:143
+#: settings/konsole.kcfg:148
 #, kde-format
 msgid "Use a user-defined .css file for the tab bar"
 msgstr "Usa un fitxer .css definit per l'usuari per a la barra de pestanyes"
 
 #. i18n: ectx: label, entry (TabBarUserStyleSheetFile), group (TabBar)
-#: settings/konsole.kcfg:147
+#: settings/konsole.kcfg:152
 #, kde-format
 msgid "The .css file to use for the tab bar style"
 msgstr "El fitxer .css a usar per a l'estil de la barra de pestanyes"
 
 #. i18n: ectx: label, entry (CloseTabOnMiddleMouseButton), group (TabBar)
-#: settings/konsole.kcfg:151
+#: settings/konsole.kcfg:156
 #, kde-format
 msgid "Allow middle-clicking on open tabs to close them"
 msgstr "Permetre el clic del mig sobre les pestanyes obertes per a tancar-les"
 
 #. i18n: ectx: label, entry (NewTabButton), group (TabBar)
-#: settings/konsole.kcfg:155
+#: settings/konsole.kcfg:160
 #, kde-format
 msgid "Control the visibility of 'New Tab' button on the tab bar"
 msgstr ""
 "Controla la visibilitat del botó «Pestanya nova» a la barra de pestanyes"
 
 #. i18n: ectx: label, entry (SearchTabsButton), group (TabBar)
-#: settings/konsole.kcfg:159
+#: settings/konsole.kcfg:164
 #, kde-format
 msgid "Control the visibility of 'Search Tabs' button on the tab bar"
 msgstr ""
 "Controla la visibilitat del botó «Cerca pestanyes» a la barra de pestanyes"
 
 #. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
-#: settings/konsole.kcfg:167
+#: settings/konsole.kcfg:172
 #, kde-format
 msgid "Control where the \"Close tab\" button will be displayed"
 msgstr "Controla a on es mostrarà el botó «Tanca la pestanya»"
 
 #. i18n: ectx: label, entry (NewTabBehavior), group (TabBar)
-#: settings/konsole.kcfg:176
+#: settings/konsole.kcfg:181
 #, kde-format
 msgid "Control where to put the new tab"
 msgstr "Controla on situar la pestanya nova"
 
 #. i18n: ectx: label, entry (ExpandTabWidth), group (TabBar)
-#: settings/konsole.kcfg:184
+#: settings/konsole.kcfg:189
 #, kde-format
 msgid "Expand the tab widths"
 msgstr "Amplia les amplades de les pestanyes"
 
 #. i18n: ectx: label, entry (scrollbackUseSystemLocation), group (FileLocation)
-#: settings/konsole.kcfg:200
+#: settings/konsole.kcfg:205
 #, kde-format
 msgid "For scrollback files, use system-wide folder location"
 msgstr ""
@@ -2913,7 +2917,7 @@ msgstr ""
 "sistema"
 
 #. i18n: ectx: label, entry (scrollbackUseCacheLocation), group (FileLocation)
-#: settings/konsole.kcfg:204
+#: settings/konsole.kcfg:209
 #, kde-format
 msgid "For scrollback files, use user's specific folder location"
 msgstr ""
@@ -2921,14 +2925,14 @@ msgstr ""
 "l'usuari"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocation), group (FileLocation)
-#: settings/konsole.kcfg:208
+#: settings/konsole.kcfg:213
 #, kde-format
 msgid "For scrollback files, use specified folder location"
 msgstr ""
 "Per als fitxers de l'historial, usa la ubicació de la carpeta especificada"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocationDirectory), group (FileLocation)
-#: settings/konsole.kcfg:212
+#: settings/konsole.kcfg:217
 #, kde-format
 msgid "For scrollback files, use this folder"
 msgstr "Per als fitxers de l'historial, usa aquesta carpeta"
@@ -5693,6 +5697,18 @@ msgstr "&Configura o reanomena la pestanya..."
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "Tanca la pestanya"
+
+#~ msgid ""
+#~ "The D-Bus methods sendText/runCommand were just used.  There are security "
+#~ "concerns about allowing these methods to be public.  If desired, these "
+#~ "methods can be changed to internal use only by re-compiling Konsole. "
+#~ "<p>This warning will only show once for this Konsole instance.</p>"
+#~ msgstr ""
+#~ "S'usen els mètodes «sendText/runCommand» del D-Bus. Hi ha problemes de "
+#~ "seguretat per a permetre que aquests mètodes siguin públics. Si es "
+#~ "desitja, aquests mètodes es poden canviar a ús intern només recompilant "
+#~ "el Konsole. <p>Aquest avís només es mostrarà una vegada per a aquesta "
+#~ "instància del Konsole.</p>"
 
 #~ msgctxt "@item:inmenu"
 #~ msgid "Case sensitive"

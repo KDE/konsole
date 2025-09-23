@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-12 00:46+0000\n"
+"POT-Creation-Date: 2025-09-23 00:46+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -1845,14 +1845,14 @@ msgstr "输出选项"
 
 #. i18n: ectx: property (text), widget (QCheckBox, printerFriendly)
 #. i18n: ectx: label, entry (PrinterFriendly), group (PrintOptions)
-#: PrintOptions.ui:39 settings/konsole.kcfg:190
+#: PrintOptions.ui:39 settings/konsole.kcfg:195
 #, kde-format
 msgid "Printer &friendly mode (black text, no background)"
 msgstr "打印友好模式，黑文本、无背景(&F)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, scaleOutput)
 #. i18n: ectx: label, entry (ScaleOutput), group (PrintOptions)
-#: PrintOptions.ui:46 settings/konsole.kcfg:194
+#: PrintOptions.ui:46 settings/konsole.kcfg:199
 #, kde-format
 msgid "&Scale output"
 msgstr "缩放输出(&S)"
@@ -2059,45 +2059,45 @@ msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"
 msgstr "在此输入要搜索的标签页名称"
 
-#: session/Session.cpp:130
+#: session/Session.cpp:129
 #, kde-format
 msgid "Bell in '%1' (Session '%2')"
 msgstr "“%1”中的系统提示 (会话“%2”)"
 
-#: session/Session.cpp:426
+#: session/Session.cpp:425
 #, kde-format
 msgid "Could not find binary: "
 msgstr "找不到二进制文件："
 
-#: session/Session.cpp:435
+#: session/Session.cpp:434
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "警告："
 
-#: session/Session.cpp:530
+#: session/Session.cpp:529
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "找不到可启动的交互式 shell。"
 
-#: session/Session.cpp:536 session/Session.cpp:539
+#: session/Session.cpp:535 session/Session.cpp:538
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
 "settings."
 msgstr "找不到“%1”，已使用“%2”替代启动。请检查配置方案的设置。"
 
-#: session/Session.cpp:613
+#: session/Session.cpp:612
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "无法以参数“%2”启动程序“%1”。"
 
-#: session/Session.cpp:779
+#: session/Session.cpp:778
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "“%1“中的静止 (会话”%2“)"
 
-#: session/Session.cpp:780 session/Session.cpp:2131
+#: session/Session.cpp:779 session/Session.cpp:2122
 #: session/SessionController.cpp:361 session/SessionController.cpp:1892
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1214
 #: Vt102Emulation.cpp:1469
@@ -2105,43 +2105,36 @@ msgstr "“%1“中的静止 (会话”%2“)"
 msgid "Show session"
 msgstr "显示会话"
 
-#: session/Session.cpp:1065
-#, kde-format
-msgid ""
-"The D-Bus methods sendText/runCommand were just used.  There are security "
-"concerns about allowing these methods to be public.  If desired, these "
-"methods can be changed to internal use only by re-compiling Konsole. <p>This "
-"warning will only show once for this Konsole instance.</p>"
-msgstr ""
-"D-Bus 的 sendText/runCommand 方法刚刚被使用。允许这些方法成为公开方法将导致安"
-"全风险。如果愿意，可以重新编译 Konsole ，将这些方法更改为只允许内部使用。<p>"
-"此警告在此 Konsole 实例中只显示一次。</p>"
-
-#: session/Session.cpp:1105
+#: session/Session.cpp:1095
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "已完成"
 
-#: session/Session.cpp:1119 session/Session.cpp:1135
+#: session/Session.cpp:1109 session/Session.cpp:1125
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "程序“%1”崩溃。"
 
-#: session/Session.cpp:1121
+#: session/Session.cpp:1111
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "程序“%1”以状态 %2 退出。"
 
-#: session/Session.cpp:1658
+#: session/Session.cpp:1649
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem 进度"
 
-#: session/Session.cpp:2130
+#: session/Session.cpp:2121
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "“%1“中的活动 (会话”%2“)"
+
+#: session/Session.cpp:2259
+#, kde-format
+msgid "Security sensitive DBus API is disabled in the settings."
+msgstr ""
 
 #: session/SessionController.cpp:142
 #, kde-format
@@ -2534,143 +2527,150 @@ msgctxt "@title:window"
 msgid "Configure"
 msgstr "配置"
 
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: settings/GeneralSettings.ui:43
-#, kde-format
-msgctxt "@item:intext Search options"
-msgid "Search:"
-msgstr "搜索："
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_AllowMenuAccelerators)
-#. i18n: ectx: label, entry (AllowMenuAccelerators), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:56 settings/konsole.kcfg:22
-#, kde-format
-msgid "Enable menu accelerators"
-msgstr "启用菜单快捷键"
-
-#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_RememberWindowSize)
-#: settings/GeneralSettings.ui:69
-#, kde-format
-msgid "If enabled, profile settings will be ignored"
-msgstr "如果启用，配置方案中的设置将被忽略"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RememberWindowSize)
-#: settings/GeneralSettings.ui:72
-#, kde-format
-msgid "Remember window size"
-msgstr "记住窗口大小"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowWindowTitleOnTitleBar)
-#. i18n: ectx: label, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:85 settings/konsole.kcfg:17
-#, kde-format
-msgid "Show window title on the titlebar"
-msgstr "在标题栏显示窗口标题"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_FocusFollowsMouse)
-#. i18n: ectx: label, entry (FocusFollowsMouse), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:92 settings/konsole.kcfg:13
-#, kde-format
-msgid "Focus terminals when the mouse pointer is moved over them"
-msgstr "鼠标光标途径终端时获取焦点"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchRegExpression)
-#. i18n: ectx: label, entry (SearchRegExpression), group (SearchSettings)
-#: settings/GeneralSettings.ui:105 settings/konsole.kcfg:69
-#, kde-format
-msgid "Match using regular expressions"
-msgstr "匹配正则表达式"
-
-#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_UseSingleInstance)
-#. i18n: ectx: tooltip, entry (UseSingleInstance), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:118 settings/konsole.kcfg:33
-#, kde-format
-msgid "When launching Konsole re-use existing process if possible"
-msgstr "当启动 Konsole 尽量重用已有进程"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSingleInstance)
-#. i18n: ectx: label, entry (UseSingleInstance), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:121 settings/konsole.kcfg:32
-#, kde-format
-msgid "Run all Konsole windows in a single process"
-msgstr "在同一个进程内运行所有 Konsole 窗口"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchHighlightMatches)
-#: settings/GeneralSettings.ui:134
-#, kde-format
-msgid "Highlight all matches"
-msgstr "高亮全部匹配"
-
-#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchCaseSensitive)
-#. i18n: ectx: tooltip, entry (SearchCaseSensitive), group (SearchSettings)
-#: settings/GeneralSettings.ui:163 settings/konsole.kcfg:65
-#, kde-format
-msgid "Sets whether the search is case sensitive"
-msgstr "设定搜索是否区分大小写"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchCaseSensitive)
-#: settings/GeneralSettings.ui:166
-#, kde-format
-msgid "Case sensitive"
-msgstr "区分大小写"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RemoveWindowTitleBarAndFrame)
-#. i18n: ectx: label, entry (RemoveWindowTitleBarAndFrame), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:173 settings/konsole.kcfg:9
-#, kde-format
-msgid "Remove window titlebar and frame"
-msgstr "移除窗口标题栏和框架"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: settings/GeneralSettings.ui:196
-#, kde-format
-msgid "Process and window:"
-msgstr "进程和窗口："
-
-#. i18n: ectx: property (text), widget (QLabel, label_3)
-#: settings/GeneralSettings.ui:206
-#, kde-format
-msgid "Notifications:"
-msgstr "通知："
-
-#. i18n: ectx: property (toolTip), widget (QPushButton, enableAllMessagesButton)
-#: settings/GeneralSettings.ui:224
-#, kde-format
-msgid "All dialogs will be shown again"
-msgstr "全部对话框都会重新显示"
-
-#. i18n: ectx: property (text), widget (QPushButton, enableAllMessagesButton)
-#: settings/GeneralSettings.ui:227
-#, kde-format
-msgid "Enable all \"Don't Ask Again\" messages"
-msgstr "启用所有设置为“不再询问”的消息"
-
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchReverseSearch)
 #. i18n: ectx: tooltip, entry (SearchReverseSearch), group (SearchSettings)
-#: settings/GeneralSettings.ui:255 settings/konsole.kcfg:79
+#: settings/GeneralSettings.ui:49 settings/konsole.kcfg:84
 #, kde-format
 msgid "Sets whether search should start from the bottom"
 msgstr "设置搜索是否从末尾开始"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchReverseSearch)
 #. i18n: ectx: label, entry (SearchReverseSearch), group (SearchSettings)
-#: settings/GeneralSettings.ui:258 settings/konsole.kcfg:78
+#: settings/GeneralSettings.ui:52 settings/konsole.kcfg:83
 #, kde-format
 msgid "Search backwards"
 msgstr "反向查找"
 
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableSecuritySensitiveDBusAPI)
+#. i18n: ectx: label, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:59 settings/konsole.kcfg:37
+#, kde-format
+msgid "Enable the security sensitive parts of the DBus API"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: settings/GeneralSettings.ui:66
+#, kde-format
+msgctxt "@item:intext Search options"
+msgid "Search:"
+msgstr "搜索："
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchRegExpression)
+#. i18n: ectx: label, entry (SearchRegExpression), group (SearchSettings)
+#: settings/GeneralSettings.ui:79 settings/konsole.kcfg:74
+#, kde-format
+msgid "Match using regular expressions"
+msgstr "匹配正则表达式"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RemoveWindowTitleBarAndFrame)
+#. i18n: ectx: label, entry (RemoveWindowTitleBarAndFrame), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:86 settings/konsole.kcfg:9
+#, kde-format
+msgid "Remove window titlebar and frame"
+msgstr "移除窗口标题栏和框架"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_AllowMenuAccelerators)
+#. i18n: ectx: label, entry (AllowMenuAccelerators), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:99 settings/konsole.kcfg:22
+#, kde-format
+msgid "Enable menu accelerators"
+msgstr "启用菜单快捷键"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_UseSingleInstance)
+#. i18n: ectx: tooltip, entry (UseSingleInstance), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:112 settings/konsole.kcfg:33
+#, kde-format
+msgid "When launching Konsole re-use existing process if possible"
+msgstr "当启动 Konsole 尽量重用已有进程"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSingleInstance)
+#. i18n: ectx: label, entry (UseSingleInstance), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:115 settings/konsole.kcfg:32
+#, kde-format
+msgid "Run all Konsole windows in a single process"
+msgstr "在同一个进程内运行所有 Konsole 窗口"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_RememberWindowSize)
+#: settings/GeneralSettings.ui:128
+#, kde-format
+msgid "If enabled, profile settings will be ignored"
+msgstr "如果启用，配置方案中的设置将被忽略"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RememberWindowSize)
+#: settings/GeneralSettings.ui:131
+#, kde-format
+msgid "Remember window size"
+msgstr "记住窗口大小"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: settings/GeneralSettings.ui:138
+#, kde-format
+msgid "Notifications:"
+msgstr "通知："
+
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchNoWrap)
 #. i18n: ectx: tooltip, entry (SearchNoWrap), group (SearchSettings)
-#: settings/GeneralSettings.ui:271 settings/konsole.kcfg:84
+#: settings/GeneralSettings.ui:151 settings/konsole.kcfg:89
 #, kde-format
 msgid "Sets whether search should stop instead of wrapping"
 msgstr "设置查找是否应该在到达末尾后停止而不是从头开始查找"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchNoWrap)
-#: settings/GeneralSettings.ui:274
+#: settings/GeneralSettings.ui:154
 #, kde-format
 msgid "No wrap"
 msgstr "不从头开始查找"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowWindowTitleOnTitleBar)
+#. i18n: ectx: label, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:167 settings/konsole.kcfg:17
+#, kde-format
+msgid "Show window title on the titlebar"
+msgstr "在标题栏显示窗口标题"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_FocusFollowsMouse)
+#. i18n: ectx: label, entry (FocusFollowsMouse), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:174 settings/konsole.kcfg:13
+#, kde-format
+msgid "Focus terminals when the mouse pointer is moved over them"
+msgstr "鼠标光标途径终端时获取焦点"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchCaseSensitive)
+#. i18n: ectx: tooltip, entry (SearchCaseSensitive), group (SearchSettings)
+#: settings/GeneralSettings.ui:187 settings/konsole.kcfg:70
+#, kde-format
+msgid "Sets whether the search is case sensitive"
+msgstr "设定搜索是否区分大小写"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchCaseSensitive)
+#: settings/GeneralSettings.ui:190
+#, kde-format
+msgid "Case sensitive"
+msgstr "区分大小写"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: settings/GeneralSettings.ui:197
+#, kde-format
+msgid "Process and window:"
+msgstr "进程和窗口："
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchHighlightMatches)
+#: settings/GeneralSettings.ui:213
+#, kde-format
+msgid "Highlight all matches"
+msgstr "高亮全部匹配"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, enableAllMessagesButton)
+#: settings/GeneralSettings.ui:231
+#, kde-format
+msgid "All dialogs will be shown again"
+msgstr "全部对话框都会重新显示"
+
+#. i18n: ectx: property (text), widget (QPushButton, enableAllMessagesButton)
+#: settings/GeneralSettings.ui:234
+#, kde-format
+msgid "Enable all \"Don't Ask Again\" messages"
+msgstr "启用所有设置为“不再询问”的消息"
 
 #. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:18
@@ -2696,71 +2696,77 @@ msgstr "下次启动时使用当前窗口大小"
 msgid "The window size will be saved upon exiting Konsole"
 msgstr "退出时将保存窗口大小"
 
+#. i18n: ectx: tooltip, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
+#: settings/konsole.kcfg:38
+#, kde-format
+msgid "DBus API like runCommand will be enabled"
+msgstr ""
+
 #. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
-#: settings/konsole.kcfg:42
+#: settings/konsole.kcfg:47
 #, kde-format
 msgid "Thumbnail Width"
 msgstr "缩略图宽度"
 
 #. i18n: ectx: tooltip, entry (ThumbnailSize), group (ThumbnailsSettings)
-#: settings/konsole.kcfg:43
+#: settings/konsole.kcfg:48
 #, kde-format
 msgid "Sets the width of the thumbnail"
 msgstr "设置缩略图宽度"
 
 #. i18n: ectx: label, entry (ThumbnailShift), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailShift), group (ThumbnailsSettings)
-#: settings/konsole.kcfg:47 settings/konsole.kcfg:48
+#: settings/konsole.kcfg:52 settings/konsole.kcfg:53
 #, kde-format
 msgid "Use Shift to display a thumbnail"
 msgstr "使用 Shift 来显示缩略图"
 
 #. i18n: ectx: label, entry (ThumbnailAlt), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailAlt), group (ThumbnailsSettings)
-#: settings/konsole.kcfg:52 settings/konsole.kcfg:53
+#: settings/konsole.kcfg:57 settings/konsole.kcfg:58
 #, kde-format
 msgid "Use Alt to display a thumbnail"
 msgstr "使用 Alt 来显示缩略图"
 
 #. i18n: ectx: label, entry (ThumbnailCtrl), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailCtrl), group (ThumbnailsSettings)
-#: settings/konsole.kcfg:57 settings/konsole.kcfg:58
+#: settings/konsole.kcfg:62 settings/konsole.kcfg:63
 #, kde-format
 msgid "Use Ctrl to display a thumbnail"
 msgstr "使用 Ctrl 来显示缩略图"
 
 #. i18n: ectx: label, entry (SearchCaseSensitive), group (SearchSettings)
-#: settings/konsole.kcfg:64
+#: settings/konsole.kcfg:69
 #, kde-format
 msgid "Search is case sensitive"
 msgstr "搜索区分大小写"
 
 #. i18n: ectx: label, entry (SearchHighlightMatches), group (SearchSettings)
-#: settings/konsole.kcfg:73
+#: settings/konsole.kcfg:78
 #, kde-format
 msgid "Highlight all search matches"
 msgstr "高亮全部搜索匹配"
 
 #. i18n: ectx: tooltip, entry (SearchHighlightMatches), group (SearchSettings)
-#: settings/konsole.kcfg:74
+#: settings/konsole.kcfg:79
 #, kde-format
 msgid "Sets whether matching text should be highlighted"
 msgstr "设置匹配的文本是否被高亮显示"
 
 #. i18n: ectx: label, entry (SearchNoWrap), group (SearchSettings)
-#: settings/konsole.kcfg:83
+#: settings/konsole.kcfg:88
 #, kde-format
 msgid "Search stops instead of wrapping"
 msgstr "查找在到达末尾后停止而不是从头开始查找"
 
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
-#: settings/konsole.kcfg:90
+#: settings/konsole.kcfg:95
 #, kde-format
 msgid "Control whether child cgroups are created for individual tabs"
 msgstr "控制是否为单独的标签页创建子 cgroups"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
-#: settings/konsole.kcfg:94
+#: settings/konsole.kcfg:99
 #, kde-format
 msgid ""
 "Determines the memory consumption level above which throttling will start"
@@ -2768,97 +2774,97 @@ msgstr "指定内存消耗级别上限，超过此上限则开始限流。"
 
 #. i18n: ectx: label, entry (SplitViewVisibility), group (SplitView)
 #. i18n: ectx: label, entry (TabBarVisibility), group (TabBar)
-#: settings/konsole.kcfg:100 settings/konsole.kcfg:120
+#: settings/konsole.kcfg:105 settings/konsole.kcfg:125
 #, kde-format
 msgid "Control the visibility of the whole tab bar"
 msgstr "控制整个标签页栏的显示/隐藏状态"
 
 #. i18n: ectx: label, entry (SplitDragHandleSize), group (SplitView)
-#: settings/konsole.kcfg:109
+#: settings/konsole.kcfg:114
 #, kde-format
 msgid "Control the size of the handle between panels"
 msgstr "控制面板之间拖拽柄的大小"
 
 #. i18n: ectx: label, entry (TabBarPosition), group (TabBar)
-#: settings/konsole.kcfg:129
+#: settings/konsole.kcfg:134
 #, kde-format
 msgid "Control the position of the tab bar"
 msgstr "控制标签页栏的位置"
 
 #. i18n: ectx: label, entry (TabBarStyleSheet), group (TabBar)
-#: settings/konsole.kcfg:139
+#: settings/konsole.kcfg:144
 #, kde-format
 msgid "Control the visual style of the tab bar"
 msgstr "控制标签页栏的外观样式"
 
 #. i18n: ectx: label, entry (TabBarUseUserStyleSheet), group (TabBar)
-#: settings/konsole.kcfg:143
+#: settings/konsole.kcfg:148
 #, kde-format
 msgid "Use a user-defined .css file for the tab bar"
 msgstr "标签页栏使用用户自定义的 .css 文件"
 
 #. i18n: ectx: label, entry (TabBarUserStyleSheetFile), group (TabBar)
-#: settings/konsole.kcfg:147
+#: settings/konsole.kcfg:152
 #, kde-format
 msgid "The .css file to use for the tab bar style"
 msgstr "标签页栏的外观样式使用的 .css 文件"
 
 #. i18n: ectx: label, entry (CloseTabOnMiddleMouseButton), group (TabBar)
-#: settings/konsole.kcfg:151
+#: settings/konsole.kcfg:156
 #, kde-format
 msgid "Allow middle-clicking on open tabs to close them"
 msgstr "允许中键点击关闭已打开的标签页"
 
 #. i18n: ectx: label, entry (NewTabButton), group (TabBar)
-#: settings/konsole.kcfg:155
+#: settings/konsole.kcfg:160
 #, kde-format
 msgid "Control the visibility of 'New Tab' button on the tab bar"
 msgstr "控制标签页栏上“新建标签页”按钮的显示/隐藏状态"
 
 #. i18n: ectx: label, entry (SearchTabsButton), group (TabBar)
-#: settings/konsole.kcfg:159
+#: settings/konsole.kcfg:164
 #, kde-format
 msgid "Control the visibility of 'Search Tabs' button on the tab bar"
 msgstr "控制标签页栏上“搜索标签页”按钮的显示/隐藏状态"
 
 #. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
-#: settings/konsole.kcfg:167
+#: settings/konsole.kcfg:172
 #, kde-format
 msgid "Control where the \"Close tab\" button will be displayed"
 msgstr "控制“关闭标签页”按钮的显示位置"
 
 #. i18n: ectx: label, entry (NewTabBehavior), group (TabBar)
-#: settings/konsole.kcfg:176
+#: settings/konsole.kcfg:181
 #, kde-format
 msgid "Control where to put the new tab"
 msgstr "控制新标签页的位置"
 
 #. i18n: ectx: label, entry (ExpandTabWidth), group (TabBar)
-#: settings/konsole.kcfg:184
+#: settings/konsole.kcfg:189
 #, kde-format
 msgid "Expand the tab widths"
 msgstr "扩展标签页宽度"
 
 #. i18n: ectx: label, entry (scrollbackUseSystemLocation), group (FileLocation)
-#: settings/konsole.kcfg:200
+#: settings/konsole.kcfg:205
 #, kde-format
 msgid "For scrollback files, use system-wide folder location"
 msgstr "回滚历史文件保存到系统全局文件夹位置"
 
 #. i18n: ectx: label, entry (scrollbackUseCacheLocation), group (FileLocation)
-#: settings/konsole.kcfg:204
+#: settings/konsole.kcfg:209
 #, kde-format
 msgid "For scrollback files, use user's specific folder location"
 msgstr "回滚历史文件使用用户指定文件夹"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocation), group (FileLocation)
-#: settings/konsole.kcfg:208
+#: settings/konsole.kcfg:213
 #, kde-format
 msgid "For scrollback files, use specified folder location"
 msgstr "回滚历史文件保存到指定的文件夹"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocationDirectory), group (FileLocation)
-#: settings/konsole.kcfg:212
+#: settings/konsole.kcfg:217
 #, kde-format
 msgid "For scrollback files, use this folder"
 msgstr "回滚历史文件保存到此文件夹"
@@ -5527,3 +5533,13 @@ msgstr "配置或者重命名标签页(&C)..."
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "关闭标签页"
+
+#~ msgid ""
+#~ "The D-Bus methods sendText/runCommand were just used.  There are security "
+#~ "concerns about allowing these methods to be public.  If desired, these "
+#~ "methods can be changed to internal use only by re-compiling Konsole. "
+#~ "<p>This warning will only show once for this Konsole instance.</p>"
+#~ msgstr ""
+#~ "D-Bus 的 sendText/runCommand 方法刚刚被使用。允许这些方法成为公开方法将导"
+#~ "致安全风险。如果愿意，可以重新编译 Konsole ，将这些方法更改为只允许内部使"
+#~ "用。<p>此警告在此 Konsole 实例中只显示一次。</p>"

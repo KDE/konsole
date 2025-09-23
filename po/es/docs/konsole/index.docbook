@@ -239,7 +239,7 @@
 ><guimenu
 >Preferencias</guimenu
 ><guimenuitem
->Editar perfil actual...</guimenuitem
+>Editar perfil actual…</guimenuitem
 ></menuchoice
 > para abrir dicha ventana). </para>
 
@@ -335,7 +335,7 @@
 ><guimenu
 >Preferencias</guimenu
 ><guimenuitem
->Administrar perfiles...</guimenuitem
+>Administrar perfiles…</guimenuitem
 > </menuchoice
 ></para
 ></listitem>
@@ -350,7 +350,7 @@
 <listitem
 ><para
 >Pulse el botón <guibutton
->Nuevo perfil...</guibutton
+>Nuevo perfil…</guibutton
 >.</para
 ></listitem>
 
@@ -384,7 +384,7 @@
 >Pulse el botón <guibutton
 >Aceptar</guibutton
 >. La nueva sesión estará disponible en el diálogo <guilabel
->Administrar perfiles...</guilabel
+>Administrar perfiles…</guilabel
 >. </para
 ></listitem>
 
@@ -512,7 +512,7 @@
 <listitem
 ><para
 ><guimenuitem
->Ajustar el historial...</guimenuitem
+>Ajustar el historial…</guimenuitem
 ></para
 ></listitem>
 <listitem
@@ -530,7 +530,7 @@
 <listitem
 ><para
 ><guimenuitem
->Editar el perfil actual...</guimenuitem
+>Editar el perfil actual…</guimenuitem
 ></para
 ></listitem>
 <listitem
@@ -991,7 +991,7 @@
 > <guimenu
 >Archivo</guimenu
 > <guimenuitem
->Guardar salida como...</guimenuitem
+>Guardar salida como…</guimenuitem
 ></menuchoice
 ></term>
 <listitem
@@ -1014,7 +1014,7 @@
 > <guimenu
 >Archivo</guimenu
 > <guimenuitem
->Imprimir pantalla ...</guimenuitem
+>Imprimir pantalla …</guimenuitem
 ></menuchoice
 ></term>
 <listitem
@@ -1203,7 +1203,7 @@
 > <guimenuitem
 >Copiar entrada a</guimenuitem
 ><guimenuitem
->Seleccionar pestañas...</guimenuitem
+>Seleccionar pestañas…</guimenuitem
 ></menuchoice
 ></term>
 <listitem
@@ -1350,7 +1350,7 @@
 > <guimenu
 >Editar</guimenu
 ><guimenuitem
->Configurar las preferencias de las pestañas...</guimenuitem
+>Configurar las preferencias de las pestañas…</guimenuitem
 ></menuchoice
 ></term>
 <listitem
@@ -1375,7 +1375,7 @@
 > <guimenu
 >Editar</guimenu
 ><guimenuitem
->Carga de ZModem...</guimenuitem
+>Carga de ZModem…</guimenuitem
 ></menuchoice
 ></term>
 <listitem
@@ -1398,7 +1398,7 @@
 > <guimenu
 >Editar</guimenu
 ><guimenuitem
->Buscar...</guimenuitem
+>Buscar…</guimenuitem
 ></menuchoice
 ></term>
 <listitem
@@ -2071,7 +2071,7 @@ Various search improvements
 ><guimenu
 >Marcadores</guimenu
 ><guimenuitem
->Pestañas de marcadores como carpeta...</guimenuitem
+>Pestañas de marcadores como carpeta…</guimenuitem
 ></menuchoice
 ></term>
 <listitem
@@ -2090,7 +2090,7 @@ Various search improvements
 ><guimenu
 >Marcadores</guimenu
 ><guimenuitem
->Nueva carpeta de marcador...</guimenuitem
+>Nueva carpeta de marcador…</guimenuitem
 ></menuchoice
 ></term>
 <listitem
@@ -2161,7 +2161,7 @@ Various search improvements
 ><guimenu
 >Preferencias</guimenu
 ><guimenuitem
->Editar perfil actual...</guimenuitem
+>Editar perfil actual…</guimenuitem
 ></menuchoice
 ></term>
 <listitem
@@ -2195,7 +2195,7 @@ Various search improvements
 ><guimenu
 >Preferencias</guimenu
 ><guimenuitem
->Administrar perfiles...</guimenuitem
+>Administrar perfiles…</guimenuitem
 ></menuchoice
 ></term>
 <listitem
@@ -2286,7 +2286,7 @@ Various search improvements
 ><guimenu
 >Preferencias</guimenu
 ><guimenuitem
->Configurar idioma... </guimenuitem
+>Configurar idioma… </guimenuitem
 ></menuchoice
 ></term>
 <listitem
@@ -2303,7 +2303,7 @@ Various search improvements
 ><guimenu
 >Preferencias</guimenu
 ><guimenuitem
->Configurar los atajos de teclado...</guimenuitem
+>Configurar los atajos de teclado…</guimenuitem
 ></menuchoice
 ></term>
 <listitem
@@ -2391,7 +2391,7 @@ Various search improvements
 ><guimenu
 >Preferencias</guimenu
 ><guimenuitem
->Configurar las barras de herramientas...</guimenuitem
+>Configurar las barras de herramientas…</guimenuitem
 ></menuchoice
 ></term>
 <listitem
@@ -2410,7 +2410,7 @@ Various search improvements
 ><guimenu
 >Preferencias</guimenu
 ><guimenuitem
->Configurar las notificaciones...</guimenuitem
+>Configurar las notificaciones…</guimenuitem
 ></menuchoice
 ></term>
 <listitem
@@ -2427,7 +2427,7 @@ Various search improvements
 ><guimenu
 >Preferencias</guimenu
 ><guimenuitem
->Configurar &konsole;...</guimenuitem
+>Configurar &konsole;…</guimenuitem
 ></menuchoice
 ></term>
 <listitem
@@ -2511,7 +2511,7 @@ Various search improvements
 ><guimenu
 >Preferencias</guimenu
 ><guimenuitem
->Editar el perfil actual...</guimenuitem
+>Editar el perfil actual…</guimenuitem
 ><guimenuitem
 >Ratón</guimenuitem
 ><guimenuitem
@@ -3717,7 +3717,7 @@ QTabBar::tab {
 <para
 ><programlisting
 >[ProcessInfo]
-CommonDirNames=name1,name2,name3...
+CommonDirNames=name1,name2,name3…
 </programlisting>
 
 <note
@@ -3850,7 +3850,9 @@ CommonDirNames=name1,name2,name3...
 >traducciones@rociogallego.com</email
 >, Pablo de Vicente <email
 >vicentea@oan.es</email
->, Marcos Fouces Lago <email
+>, Carlos García Argos <email
+>garcia@ieee.org</email
+> Marcos Fouces Lago <email
 >mfouces@yahoo.es</email
 > y Santiago Fernández Sancho <email
 >santi@kde-es.org</email

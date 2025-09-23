@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-12 00:46+0000\n"
+"POT-Creation-Date: 2025-09-23 00:46+0000\n"
 "PO-Revision-Date: 2017-12-31 22:42+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -1948,14 +1948,14 @@ msgstr "Опције излаза"
 
 #. i18n: ectx: property (text), widget (QCheckBox, printerFriendly)
 #. i18n: ectx: label, entry (PrinterFriendly), group (PrintOptions)
-#: PrintOptions.ui:39 settings/konsole.kcfg:190
+#: PrintOptions.ui:39 settings/konsole.kcfg:195
 #, kde-format
 msgid "Printer &friendly mode (black text, no background)"
 msgstr "&Наклоњено штампачу (црн текст, без позадине)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, scaleOutput)
 #. i18n: ectx: label, entry (ScaleOutput), group (PrintOptions)
-#: PrintOptions.ui:46 settings/konsole.kcfg:194
+#: PrintOptions.ui:46 settings/konsole.kcfg:199
 #, kde-format
 msgid "&Scale output"
 msgstr "&Скалирај излаз"
@@ -2175,29 +2175,29 @@ msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"
 msgstr "Унесите текст који треба потражити."
 
-#: session/Session.cpp:130
+#: session/Session.cpp:129
 #, fuzzy, kde-format
 #| msgid "Bell in session '%1'"
 msgid "Bell in '%1' (Session '%2')"
 msgstr "Звоно у сесији „%1“"
 
-#: session/Session.cpp:426
+#: session/Session.cpp:425
 #, kde-format
 msgid "Could not find binary: "
 msgstr "Не могу да нађем наредбу: "
 
-#: session/Session.cpp:435
+#: session/Session.cpp:434
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Упозорење: "
 
-#: session/Session.cpp:530
+#: session/Session.cpp:529
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "Не могу да нађем интерактивну шкољку за покретање."
 
-#: session/Session.cpp:536 session/Session.cpp:539
+#: session/Session.cpp:535 session/Session.cpp:538
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2205,18 +2205,18 @@ msgid ""
 msgstr ""
 "Не могу да нађем %1, покрећем %2 уместо тога. Проверите поставке профила."
 
-#: session/Session.cpp:613
+#: session/Session.cpp:612
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Не могу да извршим наредбу %1 са аргументима „%2“."
 
-#: session/Session.cpp:779
+#: session/Session.cpp:778
 #, fuzzy, kde-format
 #| msgid "Silence in session '%1'"
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Тишина у сесији „%1“"
 
-#: session/Session.cpp:780 session/Session.cpp:2131
+#: session/Session.cpp:779 session/Session.cpp:2122
 #: session/SessionController.cpp:361 session/SessionController.cpp:1892
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1214
 #: Vt102Emulation.cpp:1469
@@ -2225,46 +2225,37 @@ msgstr "Тишина у сесији „%1“"
 msgid "Show session"
 msgstr "&Затвори сесију"
 
-#: session/Session.cpp:1065
-#, kde-format
-msgid ""
-"The D-Bus methods sendText/runCommand were just used.  There are security "
-"concerns about allowing these methods to be public.  If desired, these "
-"methods can be changed to internal use only by re-compiling Konsole. <p>This "
-"warning will only show once for this Konsole instance.</p>"
-msgstr ""
-"<p>Управо је употребљен д‑бус метод <tt>sendText</tt> или <tt>runCommand</"
-"tt>.  Из безбедносних разлога, можда не желите да ови методи буду јавни. У "
-"том случају можете поново изградити Конзолу тако да су ови методи унутрашњи."
-"</p><p>Ово упозорење ће бити приказано само једном за овај примерак Конзоле."
-"</p>"
-
-#: session/Session.cpp:1105
+#: session/Session.cpp:1095
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Завршено"
 
-#: session/Session.cpp:1119 session/Session.cpp:1135
+#: session/Session.cpp:1109 session/Session.cpp:1125
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Програм „%1“ се срушио."
 
-#: session/Session.cpp:1121
+#: session/Session.cpp:1111
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "Програм „%1“ завршио је стањем %2."
 
-#: session/Session.cpp:1658
+#: session/Session.cpp:1649
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Напредак з‑модема"
 
-#: session/Session.cpp:2130
+#: session/Session.cpp:2121
 #, fuzzy, kde-format
 #| msgid "Activity in session '%1'"
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Активност у сесији „%1“"
+
+#: session/Session.cpp:2259
+#, kde-format
+msgid "Security sensitive DBus API is disabled in the settings."
+msgstr ""
 
 #: session/SessionController.cpp:142
 #, kde-format
@@ -2696,150 +2687,157 @@ msgctxt "@title:window"
 msgid "Configure"
 msgstr "Потврда затварања"
 
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: settings/GeneralSettings.ui:43
-#, fuzzy, kde-format
-#| msgid "Web Search"
-msgctxt "@item:intext Search options"
-msgid "Search:"
-msgstr "Веб претрага"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_AllowMenuAccelerators)
-#. i18n: ectx: label, entry (AllowMenuAccelerators), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:56 settings/konsole.kcfg:22
-#, kde-format
-msgid "Enable menu accelerators"
-msgstr "Активирај убрзиваче у менију"
-
-#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_RememberWindowSize)
-#: settings/GeneralSettings.ui:69
-#, kde-format
-msgid "If enabled, profile settings will be ignored"
-msgstr "Ако је укључено, игноришу се поставке профила."
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RememberWindowSize)
-#: settings/GeneralSettings.ui:72
-#, kde-format
-msgid "Remember window size"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowWindowTitleOnTitleBar)
-#. i18n: ectx: label, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:85 settings/konsole.kcfg:17
-#, kde-format
-msgid "Show window title on the titlebar"
-msgstr "Прикажи наслов прозор на насловној траци"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_FocusFollowsMouse)
-#. i18n: ectx: label, entry (FocusFollowsMouse), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:92 settings/konsole.kcfg:13
-#, kde-format
-msgid "Focus terminals when the mouse pointer is moved over them"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchRegExpression)
-#. i18n: ectx: label, entry (SearchRegExpression), group (SearchSettings)
-#: settings/GeneralSettings.ui:105 settings/konsole.kcfg:69
-#, kde-format
-msgid "Match using regular expressions"
-msgstr "Поклапај регуларним изразима"
-
-#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_UseSingleInstance)
-#. i18n: ectx: tooltip, entry (UseSingleInstance), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:118 settings/konsole.kcfg:33
-#, kde-format
-msgid "When launching Konsole re-use existing process if possible"
-msgstr "Употреби постојећи процес за покретање Конзоле ако је могуће"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSingleInstance)
-#. i18n: ectx: label, entry (UseSingleInstance), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:121 settings/konsole.kcfg:32
-#, kde-format
-msgid "Run all Konsole windows in a single process"
-msgstr "Свих прозори Конзоле у једном процесу"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchHighlightMatches)
-#: settings/GeneralSettings.ui:134
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu"
-#| msgid "Highlight all matches"
-msgid "Highlight all matches"
-msgstr "Истакни сва поклапања"
-
-#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchCaseSensitive)
-#. i18n: ectx: tooltip, entry (SearchCaseSensitive), group (SearchSettings)
-#: settings/GeneralSettings.ui:163 settings/konsole.kcfg:65
-#, kde-format
-msgid "Sets whether the search is case sensitive"
-msgstr "Да ли претрага разликује величину слова."
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchCaseSensitive)
-#: settings/GeneralSettings.ui:166
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu"
-#| msgid "Case sensitive"
-msgid "Case sensitive"
-msgstr "Разликуј величину слова"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RemoveWindowTitleBarAndFrame)
-#. i18n: ectx: label, entry (RemoveWindowTitleBarAndFrame), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:173 settings/konsole.kcfg:9
-#, kde-format
-msgid "Remove window titlebar and frame"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: settings/GeneralSettings.ui:196
-#, kde-format
-msgid "Process and window:"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QLabel, label_3)
-#: settings/GeneralSettings.ui:206
-#, fuzzy, kde-format
-#| msgid "Notifications"
-msgid "Notifications:"
-msgstr "Обавештења"
-
-#. i18n: ectx: property (toolTip), widget (QPushButton, enableAllMessagesButton)
-#: settings/GeneralSettings.ui:224
-#, kde-format
-msgid "All dialogs will be shown again"
-msgstr "Сви дијалози ће бити поново приказивани."
-
-#. i18n: ectx: property (text), widget (QPushButton, enableAllMessagesButton)
-#: settings/GeneralSettings.ui:227
-#, kde-format
-msgid "Enable all \"Don't Ask Again\" messages"
-msgstr "Активирај све поруке „не питај више“"
-
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchReverseSearch)
 #. i18n: ectx: tooltip, entry (SearchReverseSearch), group (SearchSettings)
-#: settings/GeneralSettings.ui:255 settings/konsole.kcfg:79
+#: settings/GeneralSettings.ui:49 settings/konsole.kcfg:84
 #, kde-format
 msgid "Sets whether search should start from the bottom"
 msgstr "Треба ли тражити почев од дна."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchReverseSearch)
 #. i18n: ectx: label, entry (SearchReverseSearch), group (SearchSettings)
-#: settings/GeneralSettings.ui:258 settings/konsole.kcfg:78
+#: settings/GeneralSettings.ui:52 settings/konsole.kcfg:83
 #, kde-format
 msgid "Search backwards"
 msgstr "Тражи уназад"
 
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableSecuritySensitiveDBusAPI)
+#. i18n: ectx: label, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:59 settings/konsole.kcfg:37
+#, kde-format
+msgid "Enable the security sensitive parts of the DBus API"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: settings/GeneralSettings.ui:66
+#, fuzzy, kde-format
+#| msgid "Web Search"
+msgctxt "@item:intext Search options"
+msgid "Search:"
+msgstr "Веб претрага"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchRegExpression)
+#. i18n: ectx: label, entry (SearchRegExpression), group (SearchSettings)
+#: settings/GeneralSettings.ui:79 settings/konsole.kcfg:74
+#, kde-format
+msgid "Match using regular expressions"
+msgstr "Поклапај регуларним изразима"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RemoveWindowTitleBarAndFrame)
+#. i18n: ectx: label, entry (RemoveWindowTitleBarAndFrame), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:86 settings/konsole.kcfg:9
+#, kde-format
+msgid "Remove window titlebar and frame"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_AllowMenuAccelerators)
+#. i18n: ectx: label, entry (AllowMenuAccelerators), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:99 settings/konsole.kcfg:22
+#, kde-format
+msgid "Enable menu accelerators"
+msgstr "Активирај убрзиваче у менију"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_UseSingleInstance)
+#. i18n: ectx: tooltip, entry (UseSingleInstance), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:112 settings/konsole.kcfg:33
+#, kde-format
+msgid "When launching Konsole re-use existing process if possible"
+msgstr "Употреби постојећи процес за покретање Конзоле ако је могуће"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSingleInstance)
+#. i18n: ectx: label, entry (UseSingleInstance), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:115 settings/konsole.kcfg:32
+#, kde-format
+msgid "Run all Konsole windows in a single process"
+msgstr "Свих прозори Конзоле у једном процесу"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_RememberWindowSize)
+#: settings/GeneralSettings.ui:128
+#, kde-format
+msgid "If enabled, profile settings will be ignored"
+msgstr "Ако је укључено, игноришу се поставке профила."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RememberWindowSize)
+#: settings/GeneralSettings.ui:131
+#, kde-format
+msgid "Remember window size"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: settings/GeneralSettings.ui:138
+#, fuzzy, kde-format
+#| msgid "Notifications"
+msgid "Notifications:"
+msgstr "Обавештења"
+
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchNoWrap)
 #. i18n: ectx: tooltip, entry (SearchNoWrap), group (SearchSettings)
-#: settings/GeneralSettings.ui:271 settings/konsole.kcfg:84
+#: settings/GeneralSettings.ui:151 settings/konsole.kcfg:89
 #, fuzzy, kde-format
 #| msgid "Sets whether search should start from the bottom"
 msgid "Sets whether search should stop instead of wrapping"
 msgstr "Треба ли тражити почев од дна."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchNoWrap)
-#: settings/GeneralSettings.ui:274
+#: settings/GeneralSettings.ui:154
 #, kde-format
 msgid "No wrap"
 msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowWindowTitleOnTitleBar)
+#. i18n: ectx: label, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:167 settings/konsole.kcfg:17
+#, kde-format
+msgid "Show window title on the titlebar"
+msgstr "Прикажи наслов прозор на насловној траци"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_FocusFollowsMouse)
+#. i18n: ectx: label, entry (FocusFollowsMouse), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:174 settings/konsole.kcfg:13
+#, kde-format
+msgid "Focus terminals when the mouse pointer is moved over them"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchCaseSensitive)
+#. i18n: ectx: tooltip, entry (SearchCaseSensitive), group (SearchSettings)
+#: settings/GeneralSettings.ui:187 settings/konsole.kcfg:70
+#, kde-format
+msgid "Sets whether the search is case sensitive"
+msgstr "Да ли претрага разликује величину слова."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchCaseSensitive)
+#: settings/GeneralSettings.ui:190
+#, fuzzy, kde-format
+#| msgctxt "@item:inmenu"
+#| msgid "Case sensitive"
+msgid "Case sensitive"
+msgstr "Разликуј величину слова"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: settings/GeneralSettings.ui:197
+#, kde-format
+msgid "Process and window:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchHighlightMatches)
+#: settings/GeneralSettings.ui:213
+#, fuzzy, kde-format
+#| msgctxt "@item:inmenu"
+#| msgid "Highlight all matches"
+msgid "Highlight all matches"
+msgstr "Истакни сва поклапања"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, enableAllMessagesButton)
+#: settings/GeneralSettings.ui:231
+#, kde-format
+msgid "All dialogs will be shown again"
+msgstr "Сви дијалози ће бити поново приказивани."
+
+#. i18n: ectx: property (text), widget (QPushButton, enableAllMessagesButton)
+#: settings/GeneralSettings.ui:234
+#, kde-format
+msgid "Enable all \"Don't Ask Again\" messages"
+msgstr "Активирај све поруке „не питај више“"
 
 #. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:18
@@ -2865,71 +2863,77 @@ msgstr "Тренутна величина прозора по следећем �
 msgid "The window size will be saved upon exiting Konsole"
 msgstr "Величина прозора ће бити сачувана по напуштању Конзоле."
 
+#. i18n: ectx: tooltip, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
+#: settings/konsole.kcfg:38
+#, kde-format
+msgid "DBus API like runCommand will be enabled"
+msgstr ""
+
 #. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
-#: settings/konsole.kcfg:42
+#: settings/konsole.kcfg:47
 #, kde-format
 msgid "Thumbnail Width"
 msgstr ""
 
 #. i18n: ectx: tooltip, entry (ThumbnailSize), group (ThumbnailsSettings)
-#: settings/konsole.kcfg:43
+#: settings/konsole.kcfg:48
 #, kde-format
 msgid "Sets the width of the thumbnail"
 msgstr ""
 
 #. i18n: ectx: label, entry (ThumbnailShift), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailShift), group (ThumbnailsSettings)
-#: settings/konsole.kcfg:47 settings/konsole.kcfg:48
+#: settings/konsole.kcfg:52 settings/konsole.kcfg:53
 #, kde-format
 msgid "Use Shift to display a thumbnail"
 msgstr ""
 
 #. i18n: ectx: label, entry (ThumbnailAlt), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailAlt), group (ThumbnailsSettings)
-#: settings/konsole.kcfg:52 settings/konsole.kcfg:53
+#: settings/konsole.kcfg:57 settings/konsole.kcfg:58
 #, kde-format
 msgid "Use Alt to display a thumbnail"
 msgstr ""
 
 #. i18n: ectx: label, entry (ThumbnailCtrl), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailCtrl), group (ThumbnailsSettings)
-#: settings/konsole.kcfg:57 settings/konsole.kcfg:58
+#: settings/konsole.kcfg:62 settings/konsole.kcfg:63
 #, kde-format
 msgid "Use Ctrl to display a thumbnail"
 msgstr ""
 
 #. i18n: ectx: label, entry (SearchCaseSensitive), group (SearchSettings)
-#: settings/konsole.kcfg:64
+#: settings/konsole.kcfg:69
 #, kde-format
 msgid "Search is case sensitive"
 msgstr "Претрага разликује величину слова"
 
 #. i18n: ectx: label, entry (SearchHighlightMatches), group (SearchSettings)
-#: settings/konsole.kcfg:73
+#: settings/konsole.kcfg:78
 #, kde-format
 msgid "Highlight all search matches"
 msgstr "Истакни све поклопљено претрагом"
 
 #. i18n: ectx: tooltip, entry (SearchHighlightMatches), group (SearchSettings)
-#: settings/konsole.kcfg:74
+#: settings/konsole.kcfg:79
 #, kde-format
 msgid "Sets whether matching text should be highlighted"
 msgstr "Треба ли истицати нађени текст."
 
 #. i18n: ectx: label, entry (SearchNoWrap), group (SearchSettings)
-#: settings/konsole.kcfg:83
+#: settings/konsole.kcfg:88
 #, kde-format
 msgid "Search stops instead of wrapping"
 msgstr ""
 
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
-#: settings/konsole.kcfg:90
+#: settings/konsole.kcfg:95
 #, kde-format
 msgid "Control whether child cgroups are created for individual tabs"
 msgstr ""
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
-#: settings/konsole.kcfg:94
+#: settings/konsole.kcfg:99
 #, kde-format
 msgid ""
 "Determines the memory consumption level above which throttling will start"
@@ -2937,100 +2941,100 @@ msgstr ""
 
 #. i18n: ectx: label, entry (SplitViewVisibility), group (SplitView)
 #. i18n: ectx: label, entry (TabBarVisibility), group (TabBar)
-#: settings/konsole.kcfg:100 settings/konsole.kcfg:120
+#: settings/konsole.kcfg:105 settings/konsole.kcfg:125
 #, kde-format
 msgid "Control the visibility of the whole tab bar"
 msgstr "Управљање видљивошћу целе траке језичака"
 
 #. i18n: ectx: label, entry (SplitDragHandleSize), group (SplitView)
-#: settings/konsole.kcfg:109
+#: settings/konsole.kcfg:114
 #, fuzzy, kde-format
 #| msgid "Control the visibility of the whole tab bar"
 msgid "Control the size of the handle between panels"
 msgstr "Управљање видљивошћу целе траке језичака"
 
 #. i18n: ectx: label, entry (TabBarPosition), group (TabBar)
-#: settings/konsole.kcfg:129
+#: settings/konsole.kcfg:134
 #, kde-format
 msgid "Control the position of the tab bar"
 msgstr "Управљање положајем траке језичака"
 
 #. i18n: ectx: label, entry (TabBarStyleSheet), group (TabBar)
-#: settings/konsole.kcfg:139
+#: settings/konsole.kcfg:144
 #, kde-format
 msgid "Control the visual style of the tab bar"
 msgstr "Управљање визуелним стилом траке језичака"
 
 #. i18n: ectx: label, entry (TabBarUseUserStyleSheet), group (TabBar)
-#: settings/konsole.kcfg:143
+#: settings/konsole.kcfg:148
 #, kde-format
 msgid "Use a user-defined .css file for the tab bar"
 msgstr "Кориснички дефинисан ЦСС фајл за траку језичака"
 
 #. i18n: ectx: label, entry (TabBarUserStyleSheetFile), group (TabBar)
-#: settings/konsole.kcfg:147
+#: settings/konsole.kcfg:152
 #, kde-format
 msgid "The .css file to use for the tab bar style"
 msgstr "ЦСС фајл за стил траке језичака"
 
 #. i18n: ectx: label, entry (CloseTabOnMiddleMouseButton), group (TabBar)
-#: settings/konsole.kcfg:151
+#: settings/konsole.kcfg:156
 #, kde-format
 msgid "Allow middle-clicking on open tabs to close them"
 msgstr ""
 
 #. i18n: ectx: label, entry (NewTabButton), group (TabBar)
-#: settings/konsole.kcfg:155
+#: settings/konsole.kcfg:160
 #, fuzzy, kde-format
 #| msgid "Control the visibility of quick buttons on the tab bar"
 msgid "Control the visibility of 'New Tab' button on the tab bar"
 msgstr "Управљање видљивошћу брзих дугмади на траци језичака"
 
 #. i18n: ectx: label, entry (SearchTabsButton), group (TabBar)
-#: settings/konsole.kcfg:159
+#: settings/konsole.kcfg:164
 #, fuzzy, kde-format
 #| msgid "Control the visibility of quick buttons on the tab bar"
 msgid "Control the visibility of 'Search Tabs' button on the tab bar"
 msgstr "Управљање видљивошћу брзих дугмади на траци језичака"
 
 #. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
-#: settings/konsole.kcfg:167
+#: settings/konsole.kcfg:172
 #, kde-format
 msgid "Control where the \"Close tab\" button will be displayed"
 msgstr ""
 
 #. i18n: ectx: label, entry (NewTabBehavior), group (TabBar)
-#: settings/konsole.kcfg:176
+#: settings/konsole.kcfg:181
 #, kde-format
 msgid "Control where to put the new tab"
 msgstr "Управљање смештањем новог језичка"
 
 #. i18n: ectx: label, entry (ExpandTabWidth), group (TabBar)
-#: settings/konsole.kcfg:184
+#: settings/konsole.kcfg:189
 #, kde-format
 msgid "Expand the tab widths"
 msgstr ""
 
 #. i18n: ectx: label, entry (scrollbackUseSystemLocation), group (FileLocation)
-#: settings/konsole.kcfg:200
+#: settings/konsole.kcfg:205
 #, kde-format
 msgid "For scrollback files, use system-wide folder location"
 msgstr "Користи системску локацију за фајлове преписа"
 
 #. i18n: ectx: label, entry (scrollbackUseCacheLocation), group (FileLocation)
-#: settings/konsole.kcfg:204
+#: settings/konsole.kcfg:209
 #, kde-format
 msgid "For scrollback files, use user's specific folder location"
 msgstr "Користи локацију према кориснику за фајлове преписа"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocation), group (FileLocation)
-#: settings/konsole.kcfg:208
+#: settings/konsole.kcfg:213
 #, kde-format
 msgid "For scrollback files, use specified folder location"
 msgstr "Користи задату локацију фасцикле за фајлове преписа"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocationDirectory), group (FileLocation)
-#: settings/konsole.kcfg:212
+#: settings/konsole.kcfg:217
 #, kde-format
 msgid "For scrollback files, use this folder"
 msgstr "Користи ову фасциклу за фајлове преписа"
@@ -6009,6 +6013,18 @@ msgstr "&Преименуј језичак..."
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "&Затвори језичак"
+
+#~ msgid ""
+#~ "The D-Bus methods sendText/runCommand were just used.  There are security "
+#~ "concerns about allowing these methods to be public.  If desired, these "
+#~ "methods can be changed to internal use only by re-compiling Konsole. "
+#~ "<p>This warning will only show once for this Konsole instance.</p>"
+#~ msgstr ""
+#~ "<p>Управо је употребљен д‑бус метод <tt>sendText</tt> или <tt>runCommand</"
+#~ "tt>.  Из безбедносних разлога, можда не желите да ови методи буду јавни. "
+#~ "У том случају можете поново изградити Конзолу тако да су ови методи "
+#~ "унутрашњи.</p><p>Ово упозорење ће бити приказано само једном за овај "
+#~ "примерак Конзоле.</p>"
 
 #~ msgctxt "@item:inmenu"
 #~ msgid "Case sensitive"
