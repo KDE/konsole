@@ -94,6 +94,17 @@ void TerminalCharacterDecoderTest::testHTMLDecoder_data()
     QTest::newRow("text with &")
         << "hello &there" << QVector<RenditionFlags>(6).fill(DEFAULT_RENDITION)
         << R"(<span style="font-family:monospace"><span style="color:#000000;background-color:#ffffff;">hello &amp;there</span><br></span>)";
+
+    // In test input, '\n' marks line breaks to represent multi-line cases.
+    QString inputLine1 = QString(40, QLatin1Char('A'));
+    QString inputLine2 = QString(10, QLatin1Char('B'));
+    QString inputText = inputLine1 + QLatin1Char('\n') + inputLine2;
+
+    QTest::newRow("multi-line with bold style")
+        << inputText << QVector<RenditionFlags>(51).fill(RE_BOLD)
+        << QStringLiteral(
+               R"(<span style="font-family:monospace"><span style="font-weight:bold;color:#000000;background-color:#ffffff;">%1</span><br><span style="font-weight:bold;color:#000000;background-color:#ffffff;">%2</span><br></span>)")
+               .arg(inputLine1, inputLine2);
 }
 
 void TerminalCharacterDecoderTest::testHTMLDecoder()
@@ -108,7 +119,15 @@ void TerminalCharacterDecoderTest::testHTMLDecoder()
     QString outputString;
     QTextStream outputStream(&outputString);
     decoder->begin(&outputStream);
-    decoder->decodeLine(testCharacters, text.size(), /* ignored */ LineProperty());
+
+    // Split input text into multiple lines at '\n', and decode each line.
+    QStringList lines = text.split(QLatin1Char('\n'));
+    int pos = 0;
+    for (const QString &line : lines) {
+        decoder->decodeLine(testCharacters + pos, line.size(), /* ignored */ LineProperty());
+        pos += line.size() + 1; // +1 for the '\n'
+    }
+
     decoder->end();
     delete[] testCharacters;
     delete decoder;
