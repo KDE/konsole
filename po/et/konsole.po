@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-23 00:46+0000\n"
+"POT-Creation-Date: 2025-09-24 00:46+0000\n"
 "PO-Revision-Date: 2020-10-23 12:16+0200\n"
 "Last-Translator: Mihkel Tõnnov <mihhkel@gmail.com>\n"
 "Language-Team: Estonian <>\n"
@@ -1937,7 +1937,7 @@ msgstr "Printerisõ&bralik režiim (must tekst, taustata)"
 msgid "&Scale output"
 msgstr "Väljundi &skaleerimine"
 
-#: profile/Profile.cpp:269
+#: profile/Profile.cpp:268
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"

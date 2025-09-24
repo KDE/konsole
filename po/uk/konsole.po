@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-23 00:46+0000\n"
-"PO-Revision-Date: 2025-08-22 22:01+0300\n"
+"POT-Creation-Date: 2025-09-24 00:46+0000\n"
+"PO-Revision-Date: 2025-09-23 09:44+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -1891,7 +1891,7 @@ msgstr "&Оптимізувати для друку (чорний текст б�
 msgid "&Scale output"
 msgstr "&Масштабувати результат"
 
-#: profile/Profile.cpp:269
+#: profile/Profile.cpp:268
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
@@ -2175,6 +2175,8 @@ msgstr "Діяльність у «%1» (сеанс «%2»)"
 #, kde-format
 msgid "Security sensitive DBus API is disabled in the settings."
 msgstr ""
+"Програмний інтерфейс DBus, який може зашкодити захисту, вимкнено у "
+"параметрах програми."
 
 #: session/SessionController.cpp:142
 #, kde-format
@@ -2593,7 +2595,7 @@ msgstr "Пошук назад"
 #: settings/GeneralSettings.ui:59 settings/konsole.kcfg:37
 #, kde-format
 msgid "Enable the security sensitive parts of the DBus API"
-msgstr ""
+msgstr "Увімкнути пов'язані із захистом частини програмного інтерфейсу DBus"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/GeneralSettings.ui:66
@@ -2751,7 +2753,7 @@ msgstr "Розмір вікна Konsole буде збережено під ча�
 #: settings/konsole.kcfg:38
 #, kde-format
 msgid "DBus API like runCommand will be enabled"
-msgstr ""
+msgstr "Буде увімкнено програмний інтерфейс DBus, подібний до runCommand"
 
 #. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:47

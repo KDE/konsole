@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-23 00:46+0000\n"
+"POT-Creation-Date: 2025-09-24 00:46+0000\n"
 "PO-Revision-Date: 2017-12-31 22:42+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -1960,7 +1960,7 @@ msgstr "&Наклоњено штампачу (црн текст, без поза
 msgid "&Scale output"
 msgstr "&Скалирај излаз"
 
-#: profile/Profile.cpp:269
+#: profile/Profile.cpp:268
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"

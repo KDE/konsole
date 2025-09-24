@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-23 00:46+0000\n"
+"POT-Creation-Date: 2025-09-24 00:46+0000\n"
 "PO-Revision-Date: 2025-08-22 15:13+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -1885,7 +1885,7 @@ msgstr "Skrivar&vänligt läge (svart text, ingen bakgrund)"
 msgid "&Scale output"
 msgstr "&Skala utmatning"
 
-#: profile/Profile.cpp:269
+#: profile/Profile.cpp:268
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"

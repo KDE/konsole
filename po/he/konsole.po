@@ -22,8 +22,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-23 00:46+0000\n"
-"PO-Revision-Date: 2025-08-26 11:12+0300\n"
+"POT-Creation-Date: 2025-09-24 00:46+0000\n"
+"PO-Revision-Date: 2025-09-23 15:04+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -1876,7 +1876,7 @@ msgstr "הדפסה י&דידותית (טקסט שחור, ללא רקע)"
 msgid "&Scale output"
 msgstr "התאמת פלט ל&קנה מידה"
 
-#: profile/Profile.cpp:269
+#: profile/Profile.cpp:268
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
@@ -2154,7 +2154,7 @@ msgstr "פעילות אצל ‚%1’ (הפעלה ‚%2’)"
 #: session/Session.cpp:2259
 #, kde-format
 msgid "Security sensitive DBus API is disabled in the settings."
-msgstr ""
+msgstr "ה־API של D-Bus שרגיש מבחינת אבטחת מידע מושבת בהגדרות."
 
 #: session/SessionController.cpp:142
 #, kde-format
@@ -2566,7 +2566,7 @@ msgstr "חיפוש לאחור"
 #: settings/GeneralSettings.ui:59 settings/konsole.kcfg:37
 #, kde-format
 msgid "Enable the security sensitive parts of the DBus API"
-msgstr ""
+msgstr "הפעלת החלקים הרגישים מבחינת אבטחת מידע של ה־API של D-Bus"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/GeneralSettings.ui:66
@@ -2720,7 +2720,7 @@ msgstr "גודל החלון יישמר עם היציאה מ־Konsole"
 #: settings/konsole.kcfg:38
 #, kde-format
 msgid "DBus API like runCommand will be enabled"
-msgstr ""
+msgstr "תופעל runCommand דמויית API של D-Bus"
 
 #. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:47

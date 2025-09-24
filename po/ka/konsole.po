@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-23 00:46+0000\n"
-"PO-Revision-Date: 2025-08-22 05:32+0200\n"
+"POT-Creation-Date: 2025-09-24 00:46+0000\n"
+"PO-Revision-Date: 2025-09-23 03:57+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -1874,7 +1874,7 @@ msgstr "&პრინტერის რეჟიმი (შავი ტექ�
 msgid "&Scale output"
 msgstr "გამოტანის &მასშტაბირება"
 
-#: profile/Profile.cpp:269
+#: profile/Profile.cpp:268
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
@@ -2153,7 +2153,7 @@ msgstr "აქტივობა '%1'-ში (სესია '%2')"
 #: session/Session.cpp:2259
 #, kde-format
 msgid "Security sensitive DBus API is disabled in the settings."
-msgstr ""
+msgstr "უსაფრთხოებაზე გავლენის მქონე DBus-ის API გათიშულია პარამეტრებში."
 
 #: session/SessionController.cpp:142
 #, kde-format
@@ -2574,7 +2574,7 @@ msgstr "უკან ძებნა"
 #: settings/GeneralSettings.ui:59 settings/konsole.kcfg:37
 #, kde-format
 msgid "Enable the security sensitive parts of the DBus API"
-msgstr ""
+msgstr "DBus-ის API-ის უსაფრთხოებაზე გავლენის მქონე ნაწილების ჩართვა"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/GeneralSettings.ui:66
@@ -2729,7 +2729,7 @@ msgstr "Konsole-დან გასვლისას ფანჯრის ზ�
 #: settings/konsole.kcfg:38
 #, kde-format
 msgid "DBus API like runCommand will be enabled"
-msgstr ""
+msgstr "ჩაირთვება DBus API-ის ისეთი ნაწილები, როგორიცაა runCommand"
 
 #. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:47

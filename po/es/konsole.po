@@ -20,8 +20,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-23 00:46+0000\n"
-"PO-Revision-Date: 2025-08-23 01:36+0100\n"
+"POT-Creation-Date: 2025-09-24 00:46+0000\n"
+"PO-Revision-Date: 2025-09-23 14:24+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -29,7 +29,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "First-Translator: Boris Wesslowski <Boris@Wesslowski.com>\n"
-"X-Generator: Lokalize 25.08.0\n"
+"X-Generator: Lokalize 25.08.1\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -1902,7 +1902,7 @@ msgstr "&Modo amigable de la impresora (texto en negro, sin fondo)"
 msgid "&Scale output"
 msgstr "E&scalar la salida"
 
-#: profile/Profile.cpp:269
+#: profile/Profile.cpp:268
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
@@ -2188,6 +2188,7 @@ msgstr "Actividad en «%1» (sesión «%2»)"
 #, kde-format
 msgid "Security sensitive DBus API is disabled in the settings."
 msgstr ""
+"La API de DBus sensible a la seguridad está desactivada en la configuración."
 
 #: session/SessionController.cpp:142
 #, kde-format
@@ -2608,7 +2609,7 @@ msgstr "Buscar hacia atrás"
 #: settings/GeneralSettings.ui:59 settings/konsole.kcfg:37
 #, kde-format
 msgid "Enable the security sensitive parts of the DBus API"
-msgstr ""
+msgstr "Activar las partes sensibles a la seguridad de la API de DBus"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/GeneralSettings.ui:66
@@ -2766,7 +2767,7 @@ msgstr "El tamaño de la ventana se guardará al salir de Konsole"
 #: settings/konsole.kcfg:38
 #, kde-format
 msgid "DBus API like runCommand will be enabled"
-msgstr ""
+msgstr "Se activará ala API de DBus similar a runCommand"
 
 #. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:47
@@ -5691,15 +5692,3 @@ msgstr "&Configurar o cambiar el nombre de la pestaña…"
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "Cerrar pestaña"
-
-#~ msgid ""
-#~ "The D-Bus methods sendText/runCommand were just used.  There are security "
-#~ "concerns about allowing these methods to be public.  If desired, these "
-#~ "methods can be changed to internal use only by re-compiling Konsole. "
-#~ "<p>This warning will only show once for this Konsole instance.</p>"
-#~ msgstr ""
-#~ "Se usarán los métodos D-Bus sendText/runCommand. Puede resultar inseguro "
-#~ "que estos métodos sean públicos. Si así lo desea, se puede hacer que "
-#~ "estos métodos solo se usen internamente volviendo a compilar Konsole. "
-#~ "<p>Esta advertencia solo se mostrará una vez para esta instancia de "
-#~ "Konsole.</p>"

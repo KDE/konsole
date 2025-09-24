@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-23 00:46+0000\n"
+"POT-Creation-Date: 2025-09-24 00:46+0000\n"
 "PO-Revision-Date: 2024-01-19 07:50-0600\n"
 "Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -1871,7 +1871,7 @@ msgstr "ਪਰਿੰਟਰ ਸਹਿਯੋਗੀ ਢੰਗ( ਕਾਲ਼ੇ ਅੱ�
 msgid "&Scale output"
 msgstr "ਆਉਟਪੁੱਟ ਸਕੇਲ ਕਰੋ(&S)"
 
-#: profile/Profile.cpp:269
+#: profile/Profile.cpp:268
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"

@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-23 00:46+0000\n"
-"PO-Revision-Date: 2025-08-22 07:43+0200\n"
+"POT-Creation-Date: 2025-09-24 00:46+0000\n"
+"PO-Revision-Date: 2025-09-23 06:54+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -27,7 +27,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
 "Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.7\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1882,7 +1882,7 @@ msgstr "Prijazen način do tiskalnika (črno besedilo, brez ozadja)"
 msgid "&Scale output"
 msgstr "Umeri izpis"
 
-#: profile/Profile.cpp:269
+#: profile/Profile.cpp:268
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
@@ -2144,12 +2144,12 @@ msgstr "Zaključeno"
 #: session/Session.cpp:1109 session/Session.cpp:1125
 #, kde-format
 msgid "Program '%1' crashed."
-msgstr "Program »%1« se je sesul."
+msgstr "Program '%1' se je sesul."
 
 #: session/Session.cpp:1111
 #, kde-format
 msgid "Program '%1' exited with status %2."
-msgstr "Program »%1« je končal s stanjem %2."
+msgstr "Program '%1' je končal s stanjem %2."
 
 #: session/Session.cpp:1649
 #, kde-format
@@ -2159,12 +2159,12 @@ msgstr "Napredek ZModema"
 #: session/Session.cpp:2121
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
-msgstr "Dejavnost v »%1« (Seja »%2«)"
+msgstr "Dejavnost v '%1' (Seja '%2')"
 
 #: session/Session.cpp:2259
 #, kde-format
 msgid "Security sensitive DBus API is disabled in the settings."
-msgstr ""
+msgstr "Varnostno občutljiv DBus API je v nastavitvah onemogočen."
 
 #: session/SessionController.cpp:142
 #, kde-format
@@ -2174,7 +2174,7 @@ msgstr "Konsole"
 #: session/SessionController.cpp:360
 #, kde-format
 msgid "The process '%1' has finished running in session '%2'"
-msgstr "Dejavnost »%1« se je končala v seji »%2«"
+msgstr "Dejavnost '%1' se je končala v seji '%2'"
 
 #: session/SessionController.cpp:443
 #, kde-format
@@ -2184,7 +2184,7 @@ msgstr "Konsole ne zna odpreti zaznamka: "
 #: session/SessionController.cpp:521
 #, kde-format
 msgid "Search for '%1' with"
-msgstr "Poišči »%1« z"
+msgstr "Poišči '%1' z"
 
 #: session/SessionController.cpp:537
 #, kde-format
@@ -2585,7 +2585,7 @@ msgstr "Poišči vzvratno"
 #: settings/GeneralSettings.ui:59 settings/konsole.kcfg:37
 #, kde-format
 msgid "Enable the security sensitive parts of the DBus API"
-msgstr ""
+msgstr "Omogoči varnostno občutljive dele API-ja DBus"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/GeneralSettings.ui:66
@@ -2741,7 +2741,7 @@ msgstr "Ob izhodu bo shranjena velikost okna programa Konsole"
 #: settings/konsole.kcfg:38
 #, kde-format
 msgid "DBus API like runCommand will be enabled"
-msgstr ""
+msgstr "Omogočen bo DBus API podoben kot je runCommand"
 
 #. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:47

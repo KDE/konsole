@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-23 00:46+0000\n"
+"POT-Creation-Date: 2025-09-24 00:46+0000\n"
 "PO-Revision-Date: 2024-08-04 17:18+0700\n"
 "Last-Translator: OIS <mistresssilvara@hotmail.com>\n"
 "Language-Team: Interlingue <>\n"
@@ -1836,7 +1836,7 @@ msgstr "Por &printation (nigri textu sin funde)"
 msgid "&Scale output"
 msgstr "Production"
 
-#: profile/Profile.cpp:269
+#: profile/Profile.cpp:268
 #, fuzzy, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
