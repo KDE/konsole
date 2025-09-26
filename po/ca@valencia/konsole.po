@@ -11,14 +11,14 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-24 00:46+0000\n"
-"PO-Revision-Date: 2025-08-22 09:40+0200\n"
+"PO-Revision-Date: 2025-09-23 11:40+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 25.08.0\n"
+"X-Generator: Lokalize 25.04.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 
@@ -2178,6 +2178,7 @@ msgstr "Activitat a «%1» (Sessió «%2»)"
 #, kde-format
 msgid "Security sensitive DBus API is disabled in the settings."
 msgstr ""
+"L'API de D-Bus de seguretat confidencial està desactivada en la configuració."
 
 #: session/SessionController.cpp:142
 #, kde-format
@@ -2600,7 +2601,7 @@ msgstr "Busca arrere"
 #: settings/GeneralSettings.ui:59 settings/konsole.kcfg:37
 #, kde-format
 msgid "Enable the security sensitive parts of the DBus API"
-msgstr ""
+msgstr "Activa les parts de seguretat confidencial de l'API de D-Bus"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/GeneralSettings.ui:66
@@ -2758,7 +2759,7 @@ msgstr "La mida de la finestra es guardarà en eixir de Konsole"
 #: settings/konsole.kcfg:38
 #, kde-format
 msgid "DBus API like runCommand will be enabled"
-msgstr ""
+msgstr "S'activarà l'API de D-Bus com «runCommand»"
 
 #. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:47
@@ -5699,15 +5700,3 @@ msgstr "&Configura o canvia el nom de la pestanya…"
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "Tanca la pestanya"
-
-#~ msgid ""
-#~ "The D-Bus methods sendText/runCommand were just used.  There are security "
-#~ "concerns about allowing these methods to be public.  If desired, these "
-#~ "methods can be changed to internal use only by re-compiling Konsole. "
-#~ "<p>This warning will only show once for this Konsole instance.</p>"
-#~ msgstr ""
-#~ "S'utilitzen els mètodes «sendText/runCommand» de D-Bus. Hi ha problemes "
-#~ "de seguretat per a permetre que estos mètodes siguen públics. Si es "
-#~ "desitja, estos mètodes es poden canviar a ús intern només recompilant "
-#~ "Konsole. <p>Este avís només es mostrarà una vegada per a esta instància "
-#~ "de Konsole.</p>"
