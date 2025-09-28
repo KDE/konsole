@@ -14,14 +14,14 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-24 00:46+0000\n"
-"PO-Revision-Date: 2025-08-22 11:20+0200\n"
+"PO-Revision-Date: 2025-09-27 12:23+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 25.08.0\n"
+"X-Generator: Lokalize 25.08.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #, kde-format
@@ -2177,7 +2177,7 @@ msgstr "«%1»(e)ko jarduera («%2» saioa)"
 #: session/Session.cpp:2259
 #, kde-format
 msgid "Security sensitive DBus API is disabled in the settings."
-msgstr ""
+msgstr "Segurtasunarekiko sentikorra den DBus APIa ezarpenetan ezgaituta dago."
 
 #: session/SessionController.cpp:142
 #, kde-format
@@ -2596,7 +2596,7 @@ msgstr "Bilatu atzerantz"
 #: settings/GeneralSettings.ui:59 settings/konsole.kcfg:37
 #, kde-format
 msgid "Enable the security sensitive parts of the DBus API"
-msgstr ""
+msgstr "Gaitu segurtasunarekiko sentikorrak diren DBus APIaren zatiak"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/GeneralSettings.ui:66
@@ -2752,7 +2752,7 @@ msgstr "Leihoaren neurria gordeko da Konsoletik irtetean"
 #: settings/konsole.kcfg:38
 #, kde-format
 msgid "DBus API like runCommand will be enabled"
-msgstr ""
+msgstr "runCommand gisako DBus APIak gaitu egingo dira"
 
 #. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:47

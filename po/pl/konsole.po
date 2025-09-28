@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-24 00:46+0000\n"
-"PO-Revision-Date: 2025-09-06 05:29+0200\n"
+"PO-Revision-Date: 2025-09-27 08:35+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: pl\n"
 "Language: pl\n"
@@ -2161,7 +2161,7 @@ msgstr "Ruch w „%1” (posiedzenie „%2”)"
 #: session/Session.cpp:2259
 #, kde-format
 msgid "Security sensitive DBus API is disabled in the settings."
-msgstr ""
+msgstr "API DBus zagrażające bezpieczeństwu jest wyłączone w ustawieniach."
 
 #: session/SessionController.cpp:142
 #, kde-format
@@ -2582,7 +2582,7 @@ msgstr "Szukaj wstecz"
 #: settings/GeneralSettings.ui:59 settings/konsole.kcfg:37
 #, kde-format
 msgid "Enable the security sensitive parts of the DBus API"
-msgstr ""
+msgstr "Włącz części API z DBus zagrażające bezpieczeństwu"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/GeneralSettings.ui:66
@@ -2738,7 +2738,7 @@ msgstr "Rozmiar okna zostanie zapisany przy wyjściu z Konsoli"
 #: settings/konsole.kcfg:38
 #, kde-format
 msgid "DBus API like runCommand will be enabled"
-msgstr ""
+msgstr "API DBus takie jak runCommand zostanie włączone"
 
 #. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:47
