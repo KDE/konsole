@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-24 00:46+0000\n"
-"PO-Revision-Date: 2025-09-07 18:47+0530\n"
+"PO-Revision-Date: 2025-09-28 15:23+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-l10n-ta@kde.org>\n"
 "Language: ta\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.08.0\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2153,7 +2153,7 @@ msgstr "'%1' என்பதில் செயல்பாடு (அமர்�
 #: session/Session.cpp:2259
 #, kde-format
 msgid "Security sensitive DBus API is disabled in the settings."
-msgstr ""
+msgstr "பாதுகாப்பை பாதிக்கக்கூடிய DBus நெறிமுறை அமைப்புகளில் முடக்கப்பட்டுள்ளது."
 
 #: session/SessionController.cpp:142
 #, kde-format
@@ -2578,7 +2578,7 @@ msgstr "பின்னோக்கித் தேடு"
 #: settings/GeneralSettings.ui:59 settings/konsole.kcfg:37
 #, kde-format
 msgid "Enable the security sensitive parts of the DBus API"
-msgstr ""
+msgstr "பாதுகாப்பை பாதிக்கக்கூடிய DBus நெறிமுறையின் பகுதியை இயக்கு"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/GeneralSettings.ui:66
@@ -2734,7 +2734,7 @@ msgstr "கான்சோலிலிருந்து வெளியேற�
 #: settings/konsole.kcfg:38
 #, kde-format
 msgid "DBus API like runCommand will be enabled"
-msgstr ""
+msgstr "runCommand போன்ற DBus நெறிமுறைகள் இயக்கப்படும்"
 
 #. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:47
