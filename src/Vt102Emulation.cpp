@@ -100,7 +100,7 @@ Vt102Emulation::Vt102Emulation()
         qCDebug(KonsoleDebug) << "win32-input-mode: FAILED to create xkb_context.";
         _win32InputModeAvailable = false;
     } else {
-        struct xkb_rule_names rules = { .layout = "us" };
+        struct xkb_rule_names names = { nullptr, nullptr, "us", nullptr, nullptr };
         _xkbData.keymap_us = xkb_keymap_new_from_names(_xkbData.context, &rules, XKB_KEYMAP_COMPILE_NO_FLAGS);
         if (!_xkbData.keymap_us) {
             qCDebug(KonsoleDebug) << "win32-input-mode: FAILED to create US keymap.";
