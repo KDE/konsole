@@ -1,5 +1,11 @@
 include(ECMAddTests)
 
+if(KONSOLE_HAVE_XKBCOMMON)
+    add_compile_definitions(HAVE_XKBCOMMON)
+
+    list(APPEND KONSOLE_TEST_LIBS ${XKBCOMMON_LIBRARIES})
+endif()
+
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
 
 set(KONSOLE_TEST_LIBS Qt::Test konsoleprivate konsolecharacters konsoledecoders konsoleapp)

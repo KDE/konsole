@@ -15,6 +15,21 @@ include(ECMAddAppIcon)
 configure_file(config-konsole.h.cmake
               ${CMAKE_CURRENT_BINARY_DIR}/config-konsole.h)
 
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    find_package(PkgConfig QUIET)
+    if(PkgConfig_FOUND)
+        pkg_check_modules(XKBCOMMON QUIET xkbcommon)
+    endif()
+    if(XKBCOMMON_FOUND)
+        message(STATUS "Found xkbcommon, enabling win32-input-mode support")
+        set(KONSOLE_HAVE_XKBCOMMON TRUE)
+    else()
+        message(STATUS "xkbcommon not found — building without win32-input-mode support")
+    endif()
+else()
+    message(STATUS "Not on Linux — building without win32-input-mode support")
+endif()
+
 ### Tests
 if(BUILD_TESTING)
         find_package(Qt6Test ${QT_MIN_VERSION} CONFIG REQUIRED)
@@ -280,19 +295,10 @@ generate_export_header(konsoleprivate BASE_NAME konsoleprivate)
 
 find_package(ZLIB)
 
-find_package(PkgConfig QUIET)
-if(PkgConfig_FOUND)
-  pkg_check_modules(XKBCOMMON QUIET xkbcommon)
-endif()
-
-if(XKBCOMMON_FOUND)
-  message(STATUS "Found xkbcommon via pkg-config, enabling win32-input-mode support")
-  target_compile_definitions(konsoleprivate PRIVATE HAVE_XKBCOMMON)
-  target_include_directories(konsoleprivate PRIVATE ${XKBCOMMON_INCLUDE_DIRS})
-  target_compile_options(konsoleprivate PRIVATE ${XKBCOMMON_CFLAGS_OTHER})
-  target_link_libraries(konsoleprivate PUBLIC ${XKBCOMMON_LIBRARIES})
-else()
-  message(STATUS "xkbcommon not found — building without win32-input-mode support")
+if(KONSOLE_HAVE_XKBCOMMON)
+    target_compile_definitions(konsoleprivate PUBLIC HAVE_XKBCOMMON)
+    target_include_directories(konsoleprivate PUBLIC ${XKBCOMMON_INCLUDE_DIRS})
+    target_link_libraries(konsoleprivate PRIVATE ${XKBCOMMON_LIBRARIES})
 endif()
 
 target_link_libraries(konsoleprivate
