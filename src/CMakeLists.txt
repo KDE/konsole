@@ -169,6 +169,7 @@ set(konsoleprivate_SRCS ${windowadaptors_SRCS}
                         ViewProperties.cpp
                         Vt102Emulation.cpp
                         WindowSystemInfo.cpp
+                        WinKeys.h
                         ZModemDialog.cpp
                         filterHotSpots/EscapeSequenceUrlFilter.cpp
                         filterHotSpots/EscapeSequenceUrlFilterHotSpot.cpp
@@ -278,6 +279,21 @@ add_library(konsoleprivate ${konsoleprivate_SRCS})
 generate_export_header(konsoleprivate BASE_NAME konsoleprivate)
 
 find_package(ZLIB)
+
+find_package(PkgConfig QUIET)
+if(PkgConfig_FOUND)
+  pkg_check_modules(XKBCOMMON QUIET xkbcommon)
+endif()
+
+if(XKBCOMMON_FOUND)
+  message(STATUS "Found xkbcommon via pkg-config, enabling win32-input-mode support")
+  target_compile_definitions(konsoleprivate PRIVATE HAVE_XKBCOMMON)
+  target_include_directories(konsoleprivate PRIVATE ${XKBCOMMON_INCLUDE_DIRS})
+  target_compile_options(konsoleprivate PRIVATE ${XKBCOMMON_CFLAGS_OTHER})
+  target_link_libraries(konsoleprivate PUBLIC ${XKBCOMMON_LIBRARIES})
+else()
+  message(STATUS "xkbcommon not found — building without win32-input-mode support")
+endif()
 
 target_link_libraries(konsoleprivate
     PUBLIC

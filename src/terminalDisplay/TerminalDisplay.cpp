@@ -2839,6 +2839,16 @@ void TerminalDisplay::keyReleaseEvent(QKeyEvent *event)
 
     peekPrimaryRequested(false);
 
+#ifdef Q_OS_MACOS // swap Ctrl and Meta
+    if (event->modifiers() & Qt::MetaModifier) {
+        event->setModifiers((event->modifiers() & ~Qt::MetaModifier) | Qt::ControlModifier);
+    } else if (event->modifiers() & Qt::ControlModifier) {
+        event->setModifiers((event->modifiers() & ~Qt::ControlModifier) | Qt::MetaModifier);
+    }
+#endif
+
+    Q_EMIT keyPressedSignal(event);
+
     QWidget::keyReleaseEvent(event);
 }
 

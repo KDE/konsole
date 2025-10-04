@@ -22,6 +22,10 @@
 #include "Screen.h"
 #include "keyboardtranslator/KeyboardTranslator.h"
 
+#ifdef HAVE_XKBCOMMON
+#include <xkbcommon/xkbcommon.h>
+#endif
+
 class QTimer;
 class QKeyEvent;
 
@@ -40,7 +44,8 @@ class QKeyEvent;
 #define MODE_Allow132Columns (MODES_SCREEN + 12) // Allow DECCOLM mode
 #define MODE_BracketedPaste (MODES_SCREEN + 13) // Xterm-style bracketed paste mode
 #define MODE_Sixel (MODES_SCREEN + 14) // Xterm-style bracketed paste mode
-#define MODE_total (MODES_SCREEN + 15)
+#define MODE_Win32Input (MODES_SCREEN + 15)
+#define MODE_total (MODES_SCREEN + 16)
 
 namespace Konsole
 {
@@ -229,6 +234,16 @@ private:
     QByteArray imageData;
     quint32 imageId;
     QMap<char, qint64> savedKeys;
+
+#ifdef HAVE_XKBCOMMON
+    struct XkbData {
+        struct xkb_context *context = nullptr;
+        struct xkb_keymap *keymap_us = nullptr;
+        struct xkb_state *state_us = nullptr;
+    };
+    XkbData _xkbData;
+#endif
+    bool _win32InputModeAvailable = true;
 
 protected:
     virtual void reportDecodingError(int token);
