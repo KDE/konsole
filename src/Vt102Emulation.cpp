@@ -2744,6 +2744,12 @@ void Vt102Emulation::sendText(const QString &text)
 
 void Vt102Emulation::sendKeyEvent(QKeyEvent *event)
 {
+    TerminalDisplay *currentView = _currentScreen->currentTerminalDisplay();
+    bool isReadOnly = false;
+    if (currentView != nullptr) {
+        isReadOnly = currentView->getReadOnly();
+    }
+
 #ifdef HAVE_XKBCOMMON
     if (getMode(MODE_Win32Input) && _win32InputModeAvailable &&
         event->nativeScanCode() && !isReadOnly) {
@@ -2953,12 +2959,6 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent *event)
 
     const Qt::KeyboardModifiers modifiers = event->modifiers();
     KeyboardTranslator::States states = KeyboardTranslator::NoState;
-
-    TerminalDisplay *currentView = _currentScreen->currentTerminalDisplay();
-    bool isReadOnly = false;
-    if (currentView != nullptr) {
-        isReadOnly = currentView->getReadOnly();
-    }
 
     // get current states
     if (getMode(MODE_NewLine)) {
