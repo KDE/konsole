@@ -2745,7 +2745,8 @@ void Vt102Emulation::sendText(const QString &text)
 void Vt102Emulation::sendKeyEvent(QKeyEvent *event)
 {
 #ifdef HAVE_XKBCOMMON
-    if (getMode(MODE_Win32Input) && _win32InputModeAvailable) {
+    if (getMode(MODE_Win32Input) && _win32InputModeAvailable &&
+        event->nativeScanCode() && !isReadOnly) {
 
         bool is_key_down = (event->type() == QEvent::KeyPress);
 
