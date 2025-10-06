@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-24 00:46+0000\n"
-"PO-Revision-Date: 2025-08-23 09:28+0400\n"
+"PO-Revision-Date: 2025-10-05 10:35+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -2162,7 +2162,7 @@ msgstr "نشاط في '%1' (الجلسة '%2')"
 #: session/Session.cpp:2259
 #, kde-format
 msgid "Security sensitive DBus API is disabled in the settings."
-msgstr ""
+msgstr "عُطّلت واجهة برمجة التطبيقات DBus الحساسة للأمن في الإعدادات."
 
 #: session/SessionController.cpp:142
 #, kde-format
@@ -2575,7 +2575,7 @@ msgstr "ابحث بالعكس"
 #: settings/GeneralSettings.ui:59 settings/konsole.kcfg:37
 #, kde-format
 msgid "Enable the security sensitive parts of the DBus API"
-msgstr ""
+msgstr "مكّن الأجزاء الحساسة أمنياً من واجهة برمجة تطبيقات DBus"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/GeneralSettings.ui:66
@@ -2729,7 +2729,7 @@ msgstr "سيُحفَظ حجم النافذة عند الخروج من كونسو
 #: settings/konsole.kcfg:38
 #, kde-format
 msgid "DBus API like runCommand will be enabled"
-msgstr ""
+msgstr "ستمكّن واجهة برمجة التطبيقات DBus مثل runCommand"
 
 #. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:47
