@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-24 00:46+0000\n"
-"PO-Revision-Date: 2025-06-10 23:16+0200\n"
+"PO-Revision-Date: 2025-10-09 01:00+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -2146,7 +2146,7 @@ msgstr "'%1'의 활동(세션 '%2')"
 #: session/Session.cpp:2259
 #, kde-format
 msgid "Security sensitive DBus API is disabled in the settings."
-msgstr ""
+msgstr "보안에 민감한 DBus API가 비활성화되어 있습니다."
 
 #: session/SessionController.cpp:142
 #, kde-format
@@ -2562,7 +2562,7 @@ msgstr "뒤로 검색"
 #: settings/GeneralSettings.ui:59 settings/konsole.kcfg:37
 #, kde-format
 msgid "Enable the security sensitive parts of the DBus API"
-msgstr ""
+msgstr "보안에 민감한 DBus API 활성화"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/GeneralSettings.ui:66
@@ -2716,7 +2716,7 @@ msgstr "Konsole을 끝낼 때 창 크기를 저장합니다"
 #: settings/konsole.kcfg:38
 #, kde-format
 msgid "DBus API like runCommand will be enabled"
-msgstr ""
+msgstr "runCommand와 같은 DBus API가 활성화됨"
 
 #. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:47
@@ -2893,16 +2893,7 @@ msgstr "메모리 모니터링 활성화:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:24
-#, fuzzy, kde-format
-#| msgid ""
-#| "Changes will take effect upon restart. If enabled, sustained memory "
-#| "consumption by Konsole\n"
-#| "exceeding the specified value will cause systemd-oomd to eliminate the "
-#| "tab(s)\n"
-#| "containing the memory-intensive process(es). Note: enabling\n"
-#| "might cause greater slowdowns during high memory consumption and "
-#| "specifying\n"
-#| "excessively low values might still cause Konsole to be killed."
+#, kde-format
 msgid ""
 "Changes will take effect upon restart. If enabled, sustained memory "
 "consumption by Konsole exceeding the specified value will cause systemd-oomd "
@@ -2910,11 +2901,11 @@ msgid ""
 "enabling might cause greater slowdowns during high memory consumption and "
 "specifying excessively low values might still cause Konsole to be killed."
 msgstr ""
-"변경 사항은 다시 시작한 후에 적용됩니다. 이 옵션을 사용하면 Konsole에서\n"
-"메모리 사용량이 지정한 값을 초과할 때 systemd-oomd에 메모리를 많이 사용하는\n"
-"프로세스를 강제 종료하도록 지시합니다. 메모: 이 옵션을 활성화하면\n"
-"큰 용량의 메모리를 사용할 때 더 느려질 수도 있으며 너무 낮은 값을 지정하면\n"
-"Konsole이 예상하지 못하게 종료될 수도 있습니다."
+"변경 사항은 다시 시작한 후에 적용됩니다. 이 옵션을 사용하면 Konsole에서 메모"
+"리 사용량이 지정한 값을 초과할 때 systemd-oomd에 메모리를 많이 사용하는 프로"
+"세스를 강제 종료하도록 지시합니다. 메모: 이 옵션을 활성화하면 큰 용량의 메모"
+"리를 사용할 때 더 느려질 수도 있으며 너무 낮은 값을 지정하면 Konsole이 예상하"
+"지 못하게 종료될 수도 있습니다."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:37
@@ -3914,16 +3905,12 @@ msgstr "내장 코드가 아닌 선택한 글꼴에 포함된 괘선 문자 사�
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:191
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Characters for drawing lines for a frame or box in TUI programs. Not a "
-#| "row of characters."
-#| msgid ">Use line characters contained in font"
+#, kde-format
 msgctxt ""
 "Characters for drawing lines for a frame or box in TUI programs. Not a row "
 "of characters."
 msgid "Use line characters contained in font"
-msgstr ">글꼴에 포함된 괘선 문자 사용"
+msgstr "글꼴에 포함된 괘선 문자 사용"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:198
@@ -5339,8 +5326,7 @@ msgid "Find the previous match for the current search phrase"
 msgstr "이전에 나오는 현재 검색 문자열 찾기"
 
 #: widgets/IncrementalSearchBar.cpp:102
-#, fuzzy, kde-format
-#| msgid "Case sensitive"
+#, kde-format
 msgctxt "@action:button"
 msgid "Case sensitive"
 msgstr "대소문자 구분"
