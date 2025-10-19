@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-24 00:46+0000\n"
-"PO-Revision-Date: 2025-09-11 17:36+0300\n"
+"PO-Revision-Date: 2025-10-15 19:34+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -2181,7 +2181,7 @@ msgstr "Aktiivisuutta päätteessä ”%1” (istunto ”%2”)"
 #: session/Session.cpp:2259
 #, kde-format
 msgid "Security sensitive DBus API is disabled in the settings."
-msgstr ""
+msgstr "Asetuksista on poistettu käytöstä DBus-API, jossa on tietoturvariski"
 
 #: session/SessionController.cpp:142
 #, kde-format
@@ -2599,7 +2599,7 @@ msgstr "Etsi taaksepäin"
 #: settings/GeneralSettings.ui:59 settings/konsole.kcfg:37
 #, kde-format
 msgid "Enable the security sensitive parts of the DBus API"
-msgstr ""
+msgstr "Ota käyttöön DBus-APIn osat, joissa on tietoturvariski"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/GeneralSettings.ui:66
@@ -2756,7 +2756,7 @@ msgstr "Ikkunan koko tallennetaan, kun Konsole lopetetaan"
 #: settings/konsole.kcfg:38
 #, kde-format
 msgid "DBus API like runCommand will be enabled"
-msgstr ""
+msgstr "Otetaan käyttöön DBus-API kuten runCommand"
 
 #. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:47
