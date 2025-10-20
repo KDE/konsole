@@ -1,7 +1,7 @@
 # Traducerea konsole.po în Română
 # Copyright (C) 2003, 2004, 2005, 2008 Free Software Foundation, Inc.
 # Claudiu Costin <claudiuc@kde.org>, 2003, 2004, 2005.
-# Sergiu Bivol <sergiu@cip.md>, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2020, 2021, 2022.
+# SPDX-FileCopyrightText: 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2020, 2021, 2022, 2025 Sergiu Bivol <sergiu@cip.md>
 # Laurenţiu Buzdugan <lbuz@rolix.org>, 2009.
 # Cristian Oneț <onet.cristian@gmail.com>, 2011, 2012.
 #
@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-03 00:46+0000\n"
-"PO-Revision-Date: 2022-06-01 15:35+0100\n"
+"PO-Revision-Date: 2025-10-19 22:32+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
 "Language: ro\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2;\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -604,36 +604,33 @@ msgstr "FărăScalare"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperFlipLabel)
 #: colorscheme/ColorSchemeEditor.ui:205
-#, fuzzy, kde-format
-#| msgid "Wallpaper scaling:"
+#, kde-format
 msgid "Wallpaper flip:"
-msgstr "Scalare tapet:"
+msgstr "Răsturnare tapet:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:213
 #, kde-format
 msgid "NoFlip"
-msgstr ""
+msgstr "FărăRăsturnare"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:218
-#, fuzzy, kde-format
-#| msgid "Horizontal Anchor:"
+#, kde-format
 msgid "Horizontal"
-msgstr "Ancoră orizontală:"
+msgstr "Orizontal"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:223
-#, fuzzy, kde-format
-#| msgid "Vertical Anchor:"
+#, kde-format
 msgid "Vertical"
-msgstr "Ancoră verticală:"
+msgstr "Vertical"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:228
 #, kde-format
 msgid "Both"
-msgstr ""
+msgstr "Ambele"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperHorizontalAnchorLabel)
 #: colorscheme/ColorSchemeEditor.ui:240
@@ -689,11 +686,10 @@ msgid "Deselect All"
 msgstr "Deselectează tot"
 
 #: filterHotSpots/ColorFilterHotSpot.cpp:84
-#, fuzzy, kde-format
-#| msgid "Preview:"
+#, kde-format
 msgctxt "Caption of hover tooltip"
 msgid "Color Preview"
-msgstr "Previzualizare:"
+msgstr "Previzualizare culori"
 
 #: filterHotSpots/FileFilterHotspot.cpp:158
 #, kde-format
@@ -1223,20 +1219,16 @@ msgid "Activate Menu"
 msgstr "Activează meniul"
 
 #: MainWindow.cpp:419
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save tab layout to file"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
-msgstr "Salvează aranjamentul filelor în fișier"
+msgstr "Salvează aranjamentul filelor…"
 
 #: MainWindow.cpp:428
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Load tab layout from file"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
-msgstr "Încarcă aranjamentul filelor din fișier"
+msgstr "Încarcă aranjamentul filelor…"
 
 #: MainWindow.cpp:736 MainWindow.cpp:753
 #, kde-format
@@ -1288,7 +1280,7 @@ msgstr "Generale"
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
-msgstr ""
+msgstr "Memorie"
 
 #: MainWindow.cpp:913
 #, kde-format
@@ -1322,11 +1314,9 @@ msgstr "Formular"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/QuickCommands/qcwidget.ui:22
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut:"
-msgstr "Scurtătură"
+msgstr "Scurtătură:"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterLine)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterText)
@@ -1412,10 +1402,9 @@ msgid "Quick Commands"
 msgstr "Comenzi rapide"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:71
-#, fuzzy, kde-format
-#| msgid "Show Quick Commands"
+#, kde-format
 msgid "Show Quick Access"
-msgstr "Arată comenzi rapide"
+msgstr "Arată accesul rapid"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:106
 #, kde-format
@@ -1423,10 +1412,9 @@ msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
 msgstr ""
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:107
-#, fuzzy, kde-format
-#| msgid "Quick Commands"
+#, kde-format
 msgid "Plugins - Quick Commands"
-msgstr "Comenzi rapide"
+msgstr "Extensii – Comenzi rapide"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:125
 #, kde-format
@@ -1440,18 +1428,15 @@ msgid "A duplicate item exists"
 msgstr "Există un element duplicat"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:183
-#, fuzzy, kde-format
-#| msgid "Please fix all the warnings before trying to execute this script"
+#, kde-format
 msgid "Please fix all the warnings before trying to run this script"
 msgstr ""
-"Remediați toate avertismentele înainte de a încerca să executați acest script"
+"Remediați toate avertismentele înainte de a încerca să rulați acest script"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:215
-#, fuzzy, kde-format
-#| msgid ""
-#| "There are some errors on the script, do you really want to execute it?"
+#, kde-format
 msgid "There are some errors on the script, do you really want to run it?"
-msgstr "Sunt erori în script, sigur doriți să-l executați?"
+msgstr "Sunt erori în script, sigur doriți să-l rulați?"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:216
 #, kde-format
@@ -1459,36 +1444,30 @@ msgid "Shell Errors"
 msgstr "Erori de consolă"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:217
-#, fuzzy, kde-format
-#| msgid "Run"
+#, kde-format
 msgctxt "@action:button"
 msgid "Run"
-msgstr "Execută"
+msgstr "Rulează"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:242
-#, fuzzy, kde-format
-#| msgid ""
-#| "You are about to remove the group %1,\n"
-#| " with multiple configurations, are you sure?"
+#, kde-format
 msgid ""
 "You are about to delete the group %1,\n"
 " with multiple configurations, are you sure?"
 msgstr ""
-"Sunteți pe cale să eliminați grupul %1\n"
+"Sunteți pe cale să ștergeți grupul %1\n"
 " cu multiple configurări. Sunteți sigur?"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:243
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:223
-#, fuzzy, kde-format
-#| msgid "You are about to remove %1, are you sure?"
+#, kde-format
 msgid "You are about to delete %1, are you sure?"
-msgstr "Sunteți pe cale să eliminați %1. Sunteți sigur?"
+msgstr "Sunteți pe cale să ștergeți %1. Sunteți sigur?"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:246
-#, fuzzy, kde-format
-#| msgid "Remove Quick Commands Configurations"
+#, kde-format
 msgid "Delete Quick Commands Configurations"
-msgstr "Elimină configurările comenzilor rapide"
+msgstr "Șterge configurările comenzilor rapide"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:276
 #, kde-format
@@ -1516,15 +1495,13 @@ msgid "Warnings (*)"
 msgstr "Avertismente (*)"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:46
-#, fuzzy, kde-format
-#| msgid "SSH Config"
+#, kde-format
 msgctxt "@item:inlistbox Hosts from ssh/config file"
 msgid "SSH Config"
-msgstr "Configurări SSH"
+msgstr "Configurația SSH"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:49
-#, fuzzy, kde-format
-#| msgid "Default"
+#, kde-format
 msgctxt "@item:inlistbox The default list of ssh hosts"
 msgid "Default"
 msgstr "Implicit"
@@ -1562,7 +1539,7 @@ msgstr "Arată gestionarul SSH"
 #: plugins/SSHManager/sshmanagerplugin.cpp:115
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
-msgstr ""
+msgstr "Arată accesul rapid pentru acțiuni SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:146
 #, kde-format
@@ -1570,15 +1547,14 @@ msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
 msgstr ""
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:147
-#, fuzzy, kde-format
-#| msgid "Open File Manager"
+#, kde-format
 msgid "Plugins - SSH Manager"
-msgstr "Deschide gestionarul de fișiere"
+msgstr "Extensii – Gestionar SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:153
 #, kde-format
 msgid "SSH Entries"
-msgstr ""
+msgstr "Înregistrări SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:182
 #, kde-format
@@ -1610,8 +1586,7 @@ msgid "SSH Key"
 msgstr "Cheie SSH"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:109
-#, fuzzy, kde-format
-#| msgid "Delete"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete"
 msgstr "Șterge"
@@ -1619,31 +1594,27 @@ msgstr "Șterge"
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:151
 #, kde-format
 msgid "Don't Change"
-msgstr ""
+msgstr "Nu modifica"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:222
-#, fuzzy, kde-format
-#| msgid ""
-#| "You are about to remove the folder %1,\n"
-#| " with multiple SSH Configurations, are you sure?"
+#, kde-format
 msgid ""
 "You are about to delete the folder %1,\n"
 " with multiple SSH Configurations, are you sure?"
 msgstr ""
-"Sunteți pe cale să eliminați dosarul %1\n"
+"Sunteți pe cale să ștergeți dosarul %1\n"
 " cu multiple configurări SSH. Sunteți sigur?"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:230
-#, fuzzy, kde-format
-#| msgid "Remove SSH Configurations"
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
-msgstr "Elimină configurările SSH"
+msgstr "Șterge configurările SSH"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:284
 #, kde-format
 msgid "Imported SSH Profile <br/> Some settings are read only."
-msgstr ""
+msgstr "Profil SSH importat <br/> Unele configurări sunt numai-citire."
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:379
 #, kde-format
@@ -1678,16 +1649,14 @@ msgid "An SSH session must have a profile"
 msgstr "O sesiune SSH trebuie să aibă profil"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:431
-#, fuzzy, kde-format
-#| msgid "Cannot remove this folder"
+#, kde-format
 msgid "Cannot delete this folder"
-msgstr "Acest dosar nu poate fi eliminat"
+msgstr "Acest dosar nu poate fi șters"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:434
-#, fuzzy, kde-format
-#| msgid "Remove folder and all of its contents"
+#, kde-format
 msgid "Delete folder and all of its contents"
-msgstr "Elimină dosarul și tot conținutul acestuia"
+msgstr "Șterge dosarul și tot conținutul acestuia"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:438
 #, kde-format
@@ -1695,22 +1664,18 @@ msgid "Double click to change the folder name."
 msgstr "Dublu-clic pentru a schimba denumirea dosarului."
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:445
-#, fuzzy, kde-format
-#| msgid "You can't remove an automatically added entry."
+#, kde-format
 msgid "You can't delete an automatically added entry."
-msgstr "Nu puteți elimina o înregistrare adăugată automat."
+msgstr "Nu puteți șterge o înregistrare adăugată automat."
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:445
-#, fuzzy, kde-format
-#| msgid "Remove selected entry"
+#, kde-format
 msgid "Delete selected entry"
-msgstr "Elimină înregistrarea aleasă"
+msgstr "Șterge înregistrarea aleasă"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: plugins/SSHManager/sshwidget.ui:19
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut"
 msgstr "Scurtătură"
 
@@ -1724,15 +1689,13 @@ msgstr "Arată înregistrări ce nu se potrivesc filtrului"
 #: plugins/SSHManager/sshwidget.ui:57
 #, kde-format
 msgid "Change profile on connect/disconnect"
-msgstr ""
+msgstr "Schimbă profilul la conectare/deconectare"
 
 #. i18n: ectx: property (text), widget (QCheckBox, btnManageProfile)
 #: plugins/SSHManager/sshwidget.ui:60
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Manage Profiles"
+#, kde-format
 msgid "Manage profile"
-msgstr "Gestionează profiluri"
+msgstr "Gestionează profilul"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/SSHManager/sshwidget.ui:82
@@ -1802,6 +1765,8 @@ msgid ""
 "If this is set, we don't rely on the SSH key set above, but on the "
 "configuration on ~/.ssh/config"
 msgstr ""
+"Dacă e activă, nu ne vom baza pe cheia SSH stabilită mai sus, ci pe "
+"configurările din ~/.ssh/config"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useSshConfig)
 #: plugins/SSHManager/sshwidget.ui:170
@@ -1859,10 +1824,9 @@ msgstr "Adaugă înregistrare SSH nouă"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnDelete)
 #: plugins/SSHManager/sshwidget.ui:284
-#, fuzzy, kde-format
-#| msgid "Remove selected SSH entry"
+#, kde-format
 msgid "Delete selected SSH entry"
-msgstr "Elimină înregistrarea SSH aleasă"
+msgstr "Șterge înregistrarea SSH aleasă"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnEdit)
 #: plugins/SSHManager/sshwidget.ui:297
@@ -1912,7 +1876,7 @@ msgstr "&Scalează ieșirea"
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
-msgstr ""
+msgstr "Încorporat"
 
 #: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:539
 #, kde-format
@@ -1920,12 +1884,10 @@ msgid "Default profile"
 msgstr "Profil implicit"
 
 #: profile/ProfileManager.cpp:280
-#, fuzzy, kde-format
-#| msgctxt "The default name of a profile"
-#| msgid "Profile #%1"
+#, kde-format
 msgctxt "New profile name, %1 is a number"
 msgid "Profile %1"
-msgstr "Profil #%1"
+msgstr "Profilul %1"
 
 #: profile/ProfileManager.cpp:294
 #, kde-format
@@ -1988,12 +1950,12 @@ msgstr "%1 nu este un URL valid. Ieșirea nu a putut fi salvată."
 #: SaveHistoryAutoTask.cpp:88
 #, kde-format
 msgid "Failed to create autosave file at %1."
-msgstr ""
+msgstr "Nu s-a putu crea fișierul cu salvări automate la %1."
 
 #: SaveHistoryAutoTask.cpp:102
 #, kde-format
 msgid "Stopping autosave due to switching of screens."
-msgstr ""
+msgstr "Salvarea automată se oprește din cauza schimbării ecranelor."
 
 #: SaveHistoryAutoTask.cpp:115
 #, kde-format
@@ -2043,7 +2005,7 @@ msgstr "Briză"
 #: schemas.cpp:6
 #, kde-format
 msgid "Campbell"
-msgstr ""
+msgstr "Campbell"
 
 #: schemas.cpp:7
 #, kde-format
@@ -2101,20 +2063,16 @@ msgid "Solaris console"
 msgstr "Consolă Solaris"
 
 #: searchtabs/SearchTabs.cpp:127
-#, fuzzy, kde-format
-#| msgctxt "@item:intext Search options"
-#| msgid "Search:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Search..."
-msgstr "Caută:"
+msgstr "Căutare..."
 
 #: searchtabs/SearchTabs.cpp:128
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Enter the text to search for here"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"
-msgstr "Introduceți aici textul de căutat"
+msgstr "Introduceți aici denumirea unei file de căutat"
 
 #: session/Session.cpp:109
 #, kde-format
@@ -2160,10 +2118,9 @@ msgstr "Liniște în „%1” (sesiunea „%2”)"
 #: session/SessionController.cpp:361 session/SessionController.cpp:1887
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1210
 #: Vt102Emulation.cpp:1465
-#, fuzzy, kde-format
-#| msgid "&Close Session"
+#, kde-format
 msgid "Show session"
-msgstr "În&chide sesiunea"
+msgstr "Arată sesiunea"
 
 #: session/Session.cpp:1024
 #, kde-format
@@ -2246,35 +2203,29 @@ msgid "Copy"
 msgstr "Copiază"
 
 #: session/SessionController.cpp:677
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgid "Split View Left-Right"
-msgstr "Desparte vizualizarea stânga/dreapta"
+msgstr "Desparte vizualizarea stânga-dreapta"
 
 #: session/SessionController.cpp:682
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgid "Split View Top-Bottom"
-msgstr "Desparte vizualizarea sus/jos"
+msgstr "Desparte vizualizarea sus-jos"
 
 #: session/SessionController.cpp:686
 #, kde-format
 msgid "Copy except prompts"
-msgstr ""
+msgstr "Copiază cu excepția solicitărilor"
 
 #: session/SessionController.cpp:692
-#, fuzzy, kde-format
-#| msgid "Copy Input"
+#, kde-format
 msgid "Copy user input"
-msgstr "Copiază intrarea"
+msgstr "Copiază intrarea de la utilizator"
 
 #: session/SessionController.cpp:698
-#, fuzzy, kde-format
-#| msgid "Copy Input"
+#, kde-format
 msgid "Copy command output"
-msgstr "Copiază intrarea"
+msgstr "Copiază rezultatul comenzii"
 
 #: session/SessionController.cpp:713
 #, kde-format
@@ -2292,10 +2243,9 @@ msgid "&Select All"
 msgstr "&Selectează tot"
 
 #: session/SessionController.cpp:730
-#, fuzzy, kde-format
-#| msgid "Select &Line"
+#, kde-format
 msgid "Select &Mode"
-msgstr "Selectează &linia"
+msgstr "Regi&m de selecție"
 
 #: session/SessionController.cpp:735
 #, kde-format
@@ -2308,20 +2258,19 @@ msgid "Save Output &As..."
 msgstr "Salvează ieșirea c&a..."
 
 #: session/SessionController.cpp:744
-#, fuzzy, kde-format
-#| msgid "Save Output &As..."
+#, kde-format
 msgid "Auto Save Output As..."
-msgstr "Salvează ieșirea c&a..."
+msgstr "Salvează automat rezultatul ca…"
 
 #: session/SessionController.cpp:748
 #, kde-format
 msgid "Stop Auto Save"
-msgstr ""
+msgstr "Oprește salvarea automată"
 
 #: session/SessionController.cpp:752
 #, kde-format
 msgid "&Print Screen..."
-msgstr "Ti&părește ecranul..."
+msgstr "Ti&părește ecranul…"
 
 #: session/SessionController.cpp:756
 #, kde-format
@@ -2339,16 +2288,14 @@ msgid "Clear Scrollback and Reset"
 msgstr "Curăță revenirea și reinițializează"
 
 #: session/SessionController.cpp:775
-#, fuzzy, kde-format
-#| msgid "Edit Profile"
+#, kde-format
 msgid "Next Profile"
-msgstr "Modifică profilul"
+msgstr "Profilul următor"
 
 #: session/SessionController.cpp:780
-#, fuzzy, kde-format
-#| msgid "Previous View"
+#, kde-format
 msgid "Previous Profile"
-msgstr "Vizualizarea precedentă"
+msgstr "Profilul precedent"
 
 #: session/SessionController.cpp:783
 #, kde-format
@@ -2361,18 +2308,13 @@ msgid "Set &Encoding"
 msgstr "Stabil&ește codarea"
 
 #: session/SessionController.cpp:828
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@item:inmenu Allows terminal applications to request mouse tracking"
-#| msgid "Allow mouse tracking"
+#, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow Mouse Tracking"
 msgstr "Permite urmărirea mausului"
 
 #: session/SessionController.cpp:837
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu A read only (locked) session"
-#| msgid "Read-only"
+#, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
 msgstr "Numai-citire"
@@ -2411,13 +2353,12 @@ msgstr "Încărcare &ZModem..."
 #: session/SessionController.cpp:888
 #, kde-format
 msgid "One-Shot Monitors"
-msgstr ""
+msgstr "Monitoare de unică folosință"
 
 #: session/SessionController.cpp:893
-#, fuzzy, kde-format
-#| msgid "Monitor for &Activity"
+#, kde-format
 msgid "Monitor for &Prompt"
-msgstr "Monitorizează pentru &activitate"
+msgstr "Monitorizează &pentru solicitare"
 
 #: session/SessionController.cpp:900
 #, kde-format
@@ -2524,12 +2465,10 @@ msgid "Confirm Close"
 msgstr "Confirmă închiderea"
 
 #: session/SessionController.cpp:1140
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Close Tab"
+#, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
-msgstr "Închide fila"
+msgstr "Închide programul"
 
 #: session/SessionController.cpp:1163
 #, kde-format
@@ -2541,10 +2480,7 @@ msgstr ""
 "închideți forțat?"
 
 #: session/SessionController.cpp:1167
-#, fuzzy, kde-format
-#| msgid ""
-#| "The program '%1' is in this session would not die.  Are you sure you want "
-#| "to kill it by force?"
+#, kde-format
 msgid ""
 "The program '%1' in this session would not die.  Are you sure you want to "
 "kill it by force?"
@@ -2556,12 +2492,12 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
-msgstr ""
+msgstr "Omoară programul"
 
 #: session/SessionController.cpp:1886
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
-msgstr ""
+msgstr "Solicitarea consolei e afișată în sesiunea „%1”"
 
 #: session/SessionController.cpp:2105
 #, kde-format
@@ -2751,16 +2687,16 @@ msgstr "Caută înapoi"
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchNoWrap)
 #. i18n: ectx: tooltip, entry (SearchNoWrap), group (SearchSettings)
 #: settings/GeneralSettings.ui:271 settings/konsole.kcfg:84
-#, fuzzy, kde-format
-#| msgid "Sets whether search should start from the bottom"
+#, kde-format
 msgid "Sets whether search should stop instead of wrapping"
-msgstr "Stabilește dacă căutarea trebuie să înceapă de jos"
+msgstr ""
+"Stabilește dacă căutarea trebuie să se oprească în loc să reia de la început"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchNoWrap)
 #: settings/GeneralSettings.ui:274
 #, kde-format
 msgid "No wrap"
-msgstr ""
+msgstr "Fără reluare"
 
 #. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:18
@@ -2843,13 +2779,14 @@ msgstr "Stabilește dacă textul potrivit trebuie evidențiat"
 #: settings/konsole.kcfg:83
 #, kde-format
 msgid "Search stops instead of wrapping"
-msgstr ""
+msgstr "Căutarea se oprește în loc să reia"
 
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
 #: settings/konsole.kcfg:90
 #, kde-format
 msgid "Control whether child cgroups are created for individual tabs"
 msgstr ""
+"Controlează dacă cgroup-uri subordonate se creează pentru file individuale"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
 #: settings/konsole.kcfg:94
@@ -2958,10 +2895,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableMemoryMonitoring)
 #: settings/MemorySettings.ui:17
-#, fuzzy, kde-format
-#| msgid "Tab Monitoring"
+#, kde-format
 msgid "Enable memory monitoring:"
-msgstr "Monitorizare file"
+msgstr "Activează monitorizarea memoriei:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:28
@@ -2980,13 +2916,13 @@ msgstr ""
 #: settings/MemorySettings.ui:41
 #, kde-format
 msgid "Memory limit:"
-msgstr ""
+msgstr "Limită memorie:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_MemoryLimitValue)
 #: settings/MemorySettings.ui:48
 #, kde-format
 msgid " MB"
-msgstr ""
+msgstr " Mo"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/PartInfo.ui:17
@@ -3102,17 +3038,15 @@ msgstr "Sub zona termina&lului"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Left)
 #: settings/TabBarSettings.ui:139
-#, fuzzy, kde-format
-#| msgid "Be&low terminal area"
+#, kde-format
 msgid "To the left of terminal area"
-msgstr "Sub zona termina&lului"
+msgstr "La stânga zonei terminalului"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Right)
 #: settings/TabBarSettings.ui:149
-#, fuzzy, kde-format
-#| msgid "Be&low terminal area"
+#, kde-format
 msgid "To the &right of terminal area"
-msgstr "Sub zona termina&lului"
+msgstr "La d&reapta zonei terminalului"
 
 #. i18n: ectx: property (text), widget (QLabel, showCloseTabButtonLabel)
 #: settings/TabBarSettings.ui:175
@@ -3122,10 +3056,9 @@ msgstr "Arată butonul de închidere a filei:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnEachTab)
 #: settings/TabBarSettings.ui:185
-#, fuzzy, kde-format
-#| msgid "&On each tab"
+#, kde-format
 msgid "On ea&ch tab"
-msgstr "Pe fiec&are filă"
+msgstr "Pe fie&care filă"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnTabBar)
 #: settings/TabBarSettings.ui:195
@@ -3142,24 +3075,19 @@ msgstr "Niciunul"
 
 #. i18n: ectx: property (text), widget (QLabel, showSearchTabsButtonLabel)
 #: settings/TabBarSettings.ui:231
-#, fuzzy, kde-format
-#| msgid "Show Close Tab button:"
+#, kde-format
 msgid "Show Search Tabs button:"
-msgstr "Arată butonul de închidere a filei:"
+msgstr "Arată butonul de căutare a filelor:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSearchTabsButton)
 #: settings/TabBarSettings.ui:241
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Always show the split header"
-#| msgid "Always"
+#, kde-format
 msgid "Always"
 msgstr "Întotdeauna"
 
 #. i18n: ectx: property (text), widget (QRadioButton, HideSearchTabsButton)
 #: settings/TabBarSettings.ui:251
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Never show the split header"
-#| msgid "Never"
+#, kde-format
 msgid "Never"
 msgstr "Niciodată"
 
