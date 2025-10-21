@@ -230,6 +230,8 @@ public:
      */
     void setInitialWorkingDirectory(const QString &dir);
 
+    bool reportedWorkingUrlIsLocalFile();
+
     /**
      * Returns the current directory of the foreground process in the session
      */

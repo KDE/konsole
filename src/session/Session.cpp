@@ -286,10 +286,16 @@ void Session::setInitialWorkingDirectory(const QString &dir)
     _initialWorkingDir = validDirectory(KShell::tildeExpand(ShellCommand::expand(dir)));
 }
 
+bool Session::reportedWorkingUrlIsLocalFile()
+{
+    return _reportedWorkingUrl.isLocalFile() // has "file://" prefix
+        && (_reportedWorkingUrl.host().isEmpty() || _reportedWorkingUrl.host().compare(QSysInfo::machineHostName(), Qt::CaseInsensitive) == 0)
+        && QDir{_reportedWorkingUrl.path()}.exists();
+}
+
 QString Session::currentWorkingDirectory()
 {
-    if (_reportedWorkingUrl.isValid() && _reportedWorkingUrl.isLocalFile()
-        && (_reportedWorkingUrl.host().length() == 0 || _reportedWorkingUrl.host().compare(QSysInfo::machineHostName(), Qt::CaseInsensitive) == 0)) {
+    if (_reportedWorkingUrl.isValid() && reportedWorkingUrlIsLocalFile()) {
         return _reportedWorkingUrl.path();
     }
 
@@ -1415,7 +1421,7 @@ QString Session::getDynamicTitle()
 
 QUrl Session::getUrl()
 {
-    if (_reportedWorkingUrl.isValid()) {
+    if (_reportedWorkingUrl.isValid() && reportedWorkingUrlIsLocalFile()) {
         return _reportedWorkingUrl;
     }
 
