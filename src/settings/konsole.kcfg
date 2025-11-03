@@ -38,6 +38,11 @@
       <tooltip>DBus API like runCommand will be enabled</tooltip>
       <default>false</default>
     </entry>
+    <entry name="ListenForZModemTerminalCodes" type="Bool">
+      <label>Listen for ZModem Terminal codes</label>
+      <tooltip>Automatic send/receive files over serial connections</tooltip>
+      <default>false</default>
+    </entry>
   </group>
   <group name="ThumbnailsSettings">
      <entry name="EnableThumbnails" type="Bool">
