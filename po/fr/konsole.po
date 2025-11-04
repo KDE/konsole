@@ -2758,7 +2758,7 @@ msgstr "Mettre en valeur toutes les correspondances"
 #: settings/GeneralSettings.ui:231
 #, kde-format
 msgid "All dialogs will be shown again"
-msgstr "Toutes les boîtes de dialogues seront affichées à nouveau"
+msgstr "Toutes les boites de dialogues seront affichées à nouveau"
 
 #. i18n: ectx: property (text), widget (QPushButton, enableAllMessagesButton)
 #: settings/GeneralSettings.ui:234
