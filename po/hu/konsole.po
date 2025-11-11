@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: KDE 4.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-24 00:46+0000\n"
-"PO-Revision-Date: 2025-07-08 22:18+0200\n"
+"PO-Revision-Date: 2025-11-10 21:13+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.04.3\n"
+"X-Generator: Lokalize 25.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2167,7 +2167,7 @@ msgstr "Aktivitás - „%1” („%2” munkamenet)"
 #: session/Session.cpp:2259
 #, kde-format
 msgid "Security sensitive DBus API is disabled in the settings."
-msgstr ""
+msgstr "A biztonságérzékeny D-Bus API le van tiltva a beállításokban."
 
 #: session/SessionController.cpp:142
 #, kde-format
@@ -2584,7 +2584,7 @@ msgstr "Keresés visszafelé"
 #: settings/GeneralSettings.ui:59 settings/konsole.kcfg:37
 #, kde-format
 msgid "Enable the security sensitive parts of the DBus API"
-msgstr ""
+msgstr "A biztonságérzékeny D-Bus API elemeinek engedélyezése"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/GeneralSettings.ui:66
@@ -2742,7 +2742,7 @@ msgstr "Az ablakméret mentésre kerül a Konsole-ból való kilépéskor"
 #: settings/konsole.kcfg:38
 #, kde-format
 msgid "DBus API like runCommand will be enabled"
-msgstr ""
+msgstr "A runCommand-hoz hasonló D-Bus API-k engedélyezve lesznek."
 
 #. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:47
@@ -2922,16 +2922,7 @@ msgstr "Memóriafigyelés bekapcsolása:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:24
-#, fuzzy, kde-format
-#| msgid ""
-#| "Changes will take effect upon restart. If enabled, sustained memory "
-#| "consumption by Konsole\n"
-#| "exceeding the specified value will cause systemd-oomd to eliminate the "
-#| "tab(s)\n"
-#| "containing the memory-intensive process(es). Note: enabling\n"
-#| "might cause greater slowdowns during high memory consumption and "
-#| "specifying\n"
-#| "excessively low values might still cause Konsole to be killed."
+#, kde-format
 msgid ""
 "Changes will take effect upon restart. If enabled, sustained memory "
 "consumption by Konsole exceeding the specified value will cause systemd-oomd "
@@ -2940,13 +2931,10 @@ msgid ""
 "specifying excessively low values might still cause Konsole to be killed."
 msgstr ""
 "A változtatások újraindításkor lépnek életbe. Ha be van kapcsolva, a Konsole-"
-"nak a megadott\n"
-"értéket túllépő tartós memóriafogyasztása hatására a systemd-oomd "
-"eltávolítja a \n"
-"memóriaintenzív folyamatokat tartalmazó lapokat. Megjegyzés: a bekapcsolás\n"
-"jelentős lassulást okozhat magas memóriafogyasztás során, túl alacsony "
-"értékek\n"
-"megadása pedig a Konsole kilövését is okozhatja."
+"nak a megadott értéket túllépő tartós memóriafogyasztása hatására a systemd-"
+"oomd eltávolítja a memória-intenzív folyamatokat tartalmazó lapokat. "
+"Megjegyzés: a bekapcsolás jelentős lassulást okozhat magas memóriafogyasztás "
+"során, túl alacsony értékek megadása pedig a Konsole kilövését is okozhatja."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:37
@@ -3953,16 +3941,12 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:191
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Characters for drawing lines for a frame or box in TUI programs. Not a "
-#| "row of characters."
-#| msgid ">Use line characters contained in font"
+#, kde-format
 msgctxt ""
 "Characters for drawing lines for a frame or box in TUI programs. Not a row "
 "of characters."
 msgid "Use line characters contained in font"
-msgstr ">A betűkészlet sorjeleinek használata"
+msgstr "A betűkészlet sorjeleinek használata"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:198
@@ -5409,8 +5393,7 @@ msgid "Find the previous match for the current search phrase"
 msgstr "A kifejezés előző előfordulásának keresése"
 
 #: widgets/IncrementalSearchBar.cpp:102
-#, fuzzy, kde-format
-#| msgid "Case sensitive"
+#, kde-format
 msgctxt "@action:button"
 msgid "Case sensitive"
 msgstr "Nagybetűk megkülönböztetése"
