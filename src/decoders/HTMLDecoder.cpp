@@ -129,6 +129,8 @@ void HTMLDecoder::decodeLine(const Character *const characters, int count, LineP
                     text.append(QLatin1String("&gt;"));
                 } else if (ch == U'&') {
                     text.append(QLatin1String("&amp;"));
+                } else if (ch == U'\0') {
+                    // do nothing for the right half of double-width character
                 } else {
                     text.append(QString::fromUcs4(&characters[i].character, 1));
                 }

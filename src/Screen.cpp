@@ -2273,8 +2273,10 @@ int Screen::copyLineToStream(int line,
     }
 
     // If the last character is wide, account for it
-    if (Character::width(characterBuffer[count - 1].character, _ignoreWcWidth) == 2)
+    if (Character::width(characterBuffer[count - 1].character, _ignoreWcWidth) == 2) {
+        characterBuffer[count].setRightHalfOfDoubleWide();
         count++;
+    }
 
     if (appendNewLine) {
         // When users ask not to preserve the linebreaks, they usually mean:
