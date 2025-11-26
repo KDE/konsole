@@ -279,6 +279,18 @@ void ViewManager::setupActions()
     collection->addAction(QStringLiteral("focus-view-right"), action);
     _multiSplitterOnlyActions << action;
 
+    action = new QAction(i18nc("@action Shortcut entry", "Focus Next Terminal"), this);
+    collection->setDefaultShortcut(action, Qt::CTRL | Qt::Key_F11);
+    connect(action, &QAction::triggered, this, &ViewManager::focusNext);
+    collection->addAction(QStringLiteral("focus-view-next"), action);
+    _multiSplitterOnlyActions << action;
+
+    action = new QAction(i18nc("@action Shortcut entry", "Focus Previous Terminal"), this);
+    collection->setDefaultShortcut(action, Qt::CTRL | Qt::SHIFT | Qt::Key_F11);
+    connect(action, &QAction::triggered, this, &ViewManager::focusPrev);
+    collection->addAction(QStringLiteral("focus-view-prev"), action);
+    _multiSplitterOnlyActions << action;
+
     action = new QAction(i18nc("@action Shortcut entry", "Switch to Last Tab"), this);
     connect(action, &QAction::triggered, this, &ViewManager::lastView);
     collection->addAction(QStringLiteral("last-tab"), action);
@@ -437,6 +449,16 @@ void ViewManager::focusLeft()
 void ViewManager::focusRight()
 {
     _viewContainer->activeViewSplitter()->focusRight();
+}
+
+void ViewManager::focusNext()
+{
+    _viewContainer->activeViewSplitter()->focusNext();
+}
+
+void ViewManager::focusPrev()
+{
+    _viewContainer->activeViewSplitter()->focusPrev();
 }
 
 void ViewManager::moveActiveViewLeft()

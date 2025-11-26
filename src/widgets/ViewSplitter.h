@@ -145,6 +145,9 @@ public:
     void focusLeft();
     void focusRight();
 
+    void focusNext(int dir = 1);
+    void focusPrev();
+
     void handleFocusDirection(Qt::Orientation orientation, int direction);
 
     void childEvent(QChildEvent *event) override;

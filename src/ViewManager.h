@@ -410,6 +410,9 @@ private Q_SLOTS:
     void focusLeft();
     void focusRight();
 
+    void focusNext();
+    void focusPrev();
+
     // called when "Next View" shortcut is activated
     void nextView();
 
