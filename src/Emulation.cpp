@@ -13,6 +13,7 @@
 #include <QKeyEvent>
 
 // Konsole
+#include "KonsoleSettings.h"
 #include "Screen.h"
 #include "ScreenWindow.h"
 #include "keyboardtranslator/KeyboardTranslator.h"
@@ -245,6 +246,10 @@ void Emulation::receiveData(const char *text, int length)
     const QString readString = _decoder.decode(QByteArrayView(text, length));
     const QVector<uint> chars = readString.toUcs4();
     receiveChars(chars);
+
+    if (KonsoleSettings::listenForZModemTerminalCodes() == false) {
+        return;
+    }
 
     // look for z-modem indicator
     //-- someone who understands more about z-modems that I do may be able to move
