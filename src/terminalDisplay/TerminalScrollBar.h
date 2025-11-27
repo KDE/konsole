@@ -160,7 +160,7 @@ private:
     QSet<int> _searchLines;
     int _terminalLines;
     QColor _searchHighlightLineColor;
-    int _lineOpacity;
+    int _lineOpacity = 100;
 };
 
 } // namespace Konsole
