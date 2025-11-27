@@ -916,7 +916,7 @@ void TerminalPainter::drawAboveText(QPainter &painter,
                         painter.drawLine(QLineF(x1, y, x2, y));
                     if (underline == RE_UNDERLINE_DOUBLE || underline == RE_UNDERLINE_CURL) {
                         const int fontHeight = m_parentDisplay->terminalFont()->fontHeight();
-                        const qreal amplitude = fontHeight / 8;
+                        const qreal amplitude = static_cast<qreal>(fontHeight) / 8.0;
                         if (underline == RE_UNDERLINE_DOUBLE) {
                             if (amplitude)
                                 painter.drawLine(x1, y - amplitude, x2, y - amplitude);
