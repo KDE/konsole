@@ -349,7 +349,9 @@ public:
                 w += Hangul::width(c, width(c, ignoreWcWidth), hangulSyllablePos);
             }
         }
-        return w;
+        // Do not return a negative width. width() can be negative and could
+        // make the return value here be negative.
+        return (w < 0) ? 0 : w;
     }
 
     inline static int stringWidth(const QString &str, bool ignoreWcWidth = false)
