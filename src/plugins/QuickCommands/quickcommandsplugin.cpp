@@ -67,6 +67,10 @@ void QuickCommandsPlugin::createWidgetsForMainWindow(Konsole::MainWindow *mainWi
 
 void QuickCommandsPlugin::activeViewChanged(Konsole::SessionController *controller, Konsole::MainWindow *mainWindow)
 {
+    if (mainWindow == nullptr) {
+        return;
+    }
+
     priv->showQuickAccess->deleteLater();
     priv->showQuickAccess = new QAction(i18n("Show Quick Access"));
 
@@ -115,13 +119,15 @@ void QuickCommandsPlugin::activeViewChanged(Konsole::SessionController *controll
         bar->show();
     });
 
-    if (mainWindow) {
-        priv->widgetForWindow[mainWindow]->setCurrentController(controller);
-    }
+    priv->widgetForWindow[mainWindow]->setCurrentController(controller);
 }
 
 QList<QAction *> QuickCommandsPlugin::menuBarActions(Konsole::MainWindow *mainWindow) const
 {
+    if (mainWindow == nullptr) {
+        return {};
+    }
+
     QAction *toggleVisibilityAction = new QAction(i18n("Show Quick Commands"), mainWindow);
     toggleVisibilityAction->setCheckable(true);
     mainWindow->actionCollection()->setDefaultShortcut(toggleVisibilityAction, QKeySequence(Qt::CTRL | Qt::SHIFT | Qt::Key_F1));
