@@ -38,7 +38,7 @@ void ProfileTest::initTestCase()
 void ProfileTest::testProfile()
 {
     // create a new profile
-    Profile *parent = new Profile;
+    Profile::Ptr parent(new Profile);
     parent->setProperty(Profile::Name, QStringLiteral("Parent"));
     parent->setProperty(Profile::Path, QStringLiteral("FakePath"));
 
@@ -55,7 +55,7 @@ void ProfileTest::testProfile()
     QCOMPARE(parent->customCursorTextColor(), QColor());
 
     // create a child profile
-    Profile *child = new Profile(Profile::Ptr(parent));
+    Profile::Ptr child(new Profile(parent));
     child->setProperty(Profile::StartInCurrentSessionDir, true);
 
     // check which properties are set
@@ -84,7 +84,7 @@ void ProfileTest::testProfile()
     QVERIFY(!parent->startInCurrentSessionDir());
     QVERIFY(child->startInCurrentSessionDir());
 
-    delete child;
+    Q_UNUSED(child);
 }
 
 void ProfileTest::testClone()
