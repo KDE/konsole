@@ -770,6 +770,9 @@ void Session::silenceTimerDone()
     if (!_views.isEmpty()) {
         view = _views.first();
     }
+    if (view == nullptr) {
+        return;
+    }
 
     KNotification *notification =
         new KNotification(hasFocus() ? QStringLiteral("Silence") : QStringLiteral("SilenceHidden"), KNotification::CloseWhenWindowActivated);
@@ -2112,6 +2115,9 @@ void Session::handleActivity()
     TerminalDisplay *view = nullptr;
     if (!_views.isEmpty()) {
         view = _views.first();
+    }
+    if (view == nullptr) {
+        return;
     }
 
     if (_monitorActivity && !_notifiedActivity) {
