@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-27 00:46+0000\n"
-"PO-Revision-Date: 2025-09-23 11:40+0200\n"
+"PO-Revision-Date: 2025-11-27 09:36+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -2731,7 +2731,7 @@ msgstr "Coincidència usant expressions regulars"
 #: settings/GeneralSettings.ui:288
 #, kde-format
 msgid "Listen for ZModem terminal codes"
-msgstr ""
+msgstr "Escolta els codis de terminal ZModem"
 
 #. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:18
@@ -2771,13 +2771,13 @@ msgstr "S'activarà l'API del DBus com «runCommand»"
 #: settings/konsole.kcfg:42
 #, kde-format
 msgid "Listen for ZModem Terminal codes"
-msgstr ""
+msgstr "Escolta els codis de terminal ZModem"
 
 #. i18n: ectx: tooltip, entry (ListenForZModemTerminalCodes), group (KonsoleWindow)
 #: settings/konsole.kcfg:43
 #, kde-format
 msgid "Automatic send/receive files over serial connections"
-msgstr ""
+msgstr "Envia/rep fitxers automàticament per connexions en sèrie"
 
 #. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:52
@@ -3617,20 +3617,16 @@ msgid "Focus Right Terminal"
 msgstr "Focus a la dreta del terminal"
 
 #: ViewManager.cpp:282
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Focus Left Terminal"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Next Terminal"
-msgstr "Focus a l'esquerra del terminal"
+msgstr "Focus al terminal següent"
 
 #: ViewManager.cpp:288
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Focus Below Terminal"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Previous Terminal"
-msgstr "Focus sota el terminal"
+msgstr "Focus al terminal anterior"
 
 #: ViewManager.cpp:294
 #, kde-format

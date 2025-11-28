@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-27 00:46+0000\n"
-"PO-Revision-Date: 2025-09-23 03:57+0200\n"
+"PO-Revision-Date: 2025-11-27 06:06+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.7\n"
+"X-Generator: Poedit 3.8\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2705,7 +2705,7 @@ msgstr "რეგულარული გამოსახულებებ�
 #: settings/GeneralSettings.ui:288
 #, kde-format
 msgid "Listen for ZModem terminal codes"
-msgstr ""
+msgstr "ZModem-ის ტერმინალის კოდების მოსმენა"
 
 #. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:18
@@ -2741,13 +2741,13 @@ msgstr "ჩაირთვება DBus API-ის ისეთი ნაწი
 #: settings/konsole.kcfg:42
 #, kde-format
 msgid "Listen for ZModem Terminal codes"
-msgstr ""
+msgstr "ZModem-ის ტერმინალის კოდების მოსმენა"
 
 #. i18n: ectx: tooltip, entry (ListenForZModemTerminalCodes), group (KonsoleWindow)
 #: settings/konsole.kcfg:43
 #, kde-format
 msgid "Automatic send/receive files over serial connections"
-msgstr ""
+msgstr "ფაილების ავტომატური გაგზავნა/მიღება სერიული შეერთებებით"
 
 #. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:52
@@ -3577,20 +3577,16 @@ msgid "Focus Right Terminal"
 msgstr "ფოკუსი მარჯვენა ტერმინალზე"
 
 #: ViewManager.cpp:282
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Focus Left Terminal"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Next Terminal"
-msgstr "ფოკუსი მარცხენა ტერმინალზე"
+msgstr "ფოკუსი შემდეგ ტერმინალზე"
 
 #: ViewManager.cpp:288
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Focus Below Terminal"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Previous Terminal"
-msgstr "ფოკუსი ქვედა ტერმინალზე"
+msgstr "ფოკუსი წინა ტერმინალზე"
 
 #: ViewManager.cpp:294
 #, kde-format

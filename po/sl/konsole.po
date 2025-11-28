@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-27 00:46+0000\n"
-"PO-Revision-Date: 2025-09-23 06:54+0200\n"
+"PO-Revision-Date: 2025-11-27 07:19+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -27,7 +27,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
 "Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
-"X-Generator: Poedit 3.7\n"
+"X-Generator: Poedit 3.8\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2715,7 +2715,7 @@ msgstr "Ujemanje naj upošteva regularne izraze"
 #: settings/GeneralSettings.ui:288
 #, kde-format
 msgid "Listen for ZModem terminal codes"
-msgstr ""
+msgstr "Poslušaj kode terminala ZModem"
 
 #. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:18
@@ -2753,13 +2753,13 @@ msgstr "Omogočen bo DBus API podoben kot je runCommand"
 #: settings/konsole.kcfg:42
 #, kde-format
 msgid "Listen for ZModem Terminal codes"
-msgstr ""
+msgstr "Poslušaj kode terminala ZModem"
 
 #. i18n: ectx: tooltip, entry (ListenForZModemTerminalCodes), group (KonsoleWindow)
 #: settings/konsole.kcfg:43
 #, kde-format
 msgid "Automatic send/receive files over serial connections"
-msgstr ""
+msgstr "Samodejno pošiljaj/prejemaj datoteke prek serijskih povezav"
 
 #. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:52
@@ -3586,20 +3586,16 @@ msgid "Focus Right Terminal"
 msgstr "Deluj na desnem terminalu"
 
 #: ViewManager.cpp:282
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Focus Left Terminal"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Next Terminal"
-msgstr "Deluj na levem terminalu"
+msgstr "Fokus na naslednjem terminalu"
 
 #: ViewManager.cpp:288
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Focus Below Terminal"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Previous Terminal"
-msgstr "Deluj pod območjem terminala"
+msgstr "Fokus na prejšnjem terminalu"
 
 #: ViewManager.cpp:294
 #, kde-format

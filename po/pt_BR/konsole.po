@@ -22,15 +22,15 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-27 00:46+0000\n"
-"PO-Revision-Date: 2025-09-23 07:32-0300\n"
-"Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
+"PO-Revision-Date: 2025-11-27 01:51-0300\n"
+"Last-Translator: Guilherme Marçal Silva <guimarcalsilva@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.08.1\n"
+"X-Generator: Lokalize 25.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2736,7 +2736,7 @@ msgstr "Corresponder à expressão regular"
 #: settings/GeneralSettings.ui:288
 #, kde-format
 msgid "Listen for ZModem terminal codes"
-msgstr ""
+msgstr "Escuta por códigos de terminal ZModem"
 
 #. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:18
@@ -2775,13 +2775,13 @@ msgstr "A API do DBus, como o runCommand, será habilitada"
 #: settings/konsole.kcfg:42
 #, kde-format
 msgid "Listen for ZModem Terminal codes"
-msgstr ""
+msgstr "Escuta por códigos de terminal ZModem"
 
 #. i18n: ectx: tooltip, entry (ListenForZModemTerminalCodes), group (KonsoleWindow)
 #: settings/konsole.kcfg:43
 #, kde-format
 msgid "Automatic send/receive files over serial connections"
-msgstr ""
+msgstr "Envia/recebe arquivos por conexões seriais automaticamente"
 
 #. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:52
@@ -3611,20 +3611,16 @@ msgid "Focus Right Terminal"
 msgstr "Focar o terminal à direita"
 
 #: ViewManager.cpp:282
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Focus Left Terminal"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Next Terminal"
-msgstr "Focar o terminal à esquerda"
+msgstr "Focar o próximo terminal"
 
 #: ViewManager.cpp:288
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Focus Below Terminal"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Previous Terminal"
-msgstr "Focar o terminal abaixo"
+msgstr "Focar o terminal anterior"
 
 #: ViewManager.cpp:294
 #, kde-format

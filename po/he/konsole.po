@@ -23,7 +23,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-27 00:46+0000\n"
-"PO-Revision-Date: 2025-10-05 12:32+0300\n"
+"PO-Revision-Date: 2025-11-27 11:49+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -32,7 +32,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 25.08.1\n"
+"X-Generator: Lokalize 25.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2696,7 +2696,7 @@ msgstr "להשתמש בביטויים רגולריים"
 #: settings/GeneralSettings.ui:288
 #, kde-format
 msgid "Listen for ZModem terminal codes"
-msgstr ""
+msgstr "האזנה לקודים של מסוף ZModem"
 
 #. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:18
@@ -2732,13 +2732,13 @@ msgstr "תופעל runCommand דמויית API של D-Bus"
 #: settings/konsole.kcfg:42
 #, kde-format
 msgid "Listen for ZModem Terminal codes"
-msgstr ""
+msgstr "האזנה לקודים של מסוף ZModem"
 
 #. i18n: ectx: tooltip, entry (ListenForZModemTerminalCodes), group (KonsoleWindow)
 #: settings/konsole.kcfg:43
 #, kde-format
 msgid "Automatic send/receive files over serial connections"
-msgstr ""
+msgstr "שליחה/קבלה של קבצים דרך חיבור טורי אוטומטית"
 
 #. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:52
@@ -3562,20 +3562,16 @@ msgid "Focus Right Terminal"
 msgstr "התמקדות במסוף הימני"
 
 #: ViewManager.cpp:282
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Focus Left Terminal"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Next Terminal"
-msgstr "התמקדות במסוף השמאלי"
+msgstr "התמקדות במסוף הבא"
 
 #: ViewManager.cpp:288
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Focus Below Terminal"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Previous Terminal"
-msgstr "מיקוד מתחת למסוף"
+msgstr "התמקדות במסוף הקודמת"
 
 #: ViewManager.cpp:294
 #, kde-format
