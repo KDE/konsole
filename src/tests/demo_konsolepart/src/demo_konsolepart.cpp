@@ -64,9 +64,10 @@ demo_konsolepart::~demo_konsolepart()
 
 KParts::ReadOnlyPart *demo_konsolepart::createPart()
 {
-    const KPluginFactory::Result<KParts::ReadOnlyPart> result =
-        KPluginFactory::instantiatePlugin<KParts::ReadOnlyPart>(KPluginMetaData(QStringLiteral("konsolepart")), this);
+    const KPluginMetaData metaData(QStringLiteral("kf6/parts/konsolepart"), KPluginMetaData::AllowEmptyMetaData);
+    Q_ASSERT(metaData.isValid());
 
+    KPluginFactory::Result<KParts::ReadOnlyPart> result = KPluginFactory::instantiatePlugin<KParts::ReadOnlyPart>(metaData, this);
     Q_ASSERT(result);
 
     return result.plugin;
