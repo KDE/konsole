@@ -3535,20 +3535,16 @@ msgid "Focus Right Terminal"
 msgstr "聚焦右侧终端"
 
 #: ViewManager.cpp:282
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Focus Left Terminal"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Next Terminal"
-msgstr "聚焦左侧终端"
+msgstr ""
 
 #: ViewManager.cpp:288
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Focus Below Terminal"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Previous Terminal"
-msgstr "聚焦下部终端"
+msgstr ""
 
 #: ViewManager.cpp:294
 #, kde-format

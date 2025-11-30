@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-27 00:46+0000\n"
-"PO-Revision-Date: 2025-09-25 01:52+0900\n"
+"PO-Revision-Date: 2025-11-29 17:25+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 25.11.70\n"
+"X-Generator: Lokalize 25.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -94,7 +94,7 @@ msgstr "主工具列"
 #: ../desktop/partui.rc:20
 #, kde-format
 msgid "S&crollback"
-msgstr "往回捲軸(&C)"
+msgstr "回捲歷史(&C)"
 
 #. i18n: ectx: ToolBar (sessionToolbar)
 #: ../desktop/sessionui.rc:80
@@ -756,7 +756,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Adjust Scrollback"
-msgstr "調整捲軸"
+msgstr "調整回捲歷史"
 
 #: HistorySizeDialog.cpp:46
 #, kde-format
@@ -2253,17 +2253,17 @@ msgstr "列印螢幕(&P)..."
 #: session/SessionController.cpp:756
 #, kde-format
 msgid "Adjust Scrollback..."
-msgstr "調整捲軸..."
+msgstr "調整回捲歷史..."
 
 #: session/SessionController.cpp:760
 #, kde-format
 msgid "Clear Scrollback"
-msgstr "清除歷史內容"
+msgstr "清除回捲歷史"
 
 #: session/SessionController.cpp:764
 #, kde-format
 msgid "Clear Scrollback and Reset"
-msgstr "清除歷史內容並重設"
+msgstr "清除回捲歷史並重設"
 
 #: session/SessionController.cpp:775
 #, kde-format
@@ -2680,7 +2680,7 @@ msgstr "使用正則表達式尋找符合項目"
 #: settings/GeneralSettings.ui:288
 #, kde-format
 msgid "Listen for ZModem terminal codes"
-msgstr ""
+msgstr "聆聽 ZModem 終端機控制字元"
 
 #. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:18
@@ -2716,13 +2716,13 @@ msgstr "會啟用 runCommand（執行命令）這種 DBus API"
 #: settings/konsole.kcfg:42
 #, kde-format
 msgid "Listen for ZModem Terminal codes"
-msgstr ""
+msgstr "聆聽 ZModem 終端機控制字元"
 
 #. i18n: ectx: tooltip, entry (ListenForZModemTerminalCodes), group (KonsoleWindow)
 #: settings/konsole.kcfg:43
 #, kde-format
 msgid "Automatic send/receive files over serial connections"
-msgstr ""
+msgstr "自動透過序列連線傳送/接受檔案"
 
 #. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:52
@@ -2871,25 +2871,25 @@ msgstr "展開分頁寬度"
 #: settings/konsole.kcfg:210
 #, kde-format
 msgid "For scrollback files, use system-wide folder location"
-msgstr "捲軸歷史檢視檔案使用系統指定的位置"
+msgstr "對於回捲歷史檔案，使用系統指定的資料夾位置"
 
 #. i18n: ectx: label, entry (scrollbackUseCacheLocation), group (FileLocation)
 #: settings/konsole.kcfg:214
 #, kde-format
 msgid "For scrollback files, use user's specific folder location"
-msgstr "使用者自己指定捲軸歷史檢視檔案的位置"
+msgstr "對於回捲歷史檔案，使用使用者特定的資料夾位置"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocation), group (FileLocation)
 #: settings/konsole.kcfg:218
 #, kde-format
 msgid "For scrollback files, use specified folder location"
-msgstr "歷史檢視檔案使用指定的資料夾位置"
+msgstr "對於回捲歷史檔案，使用指定的資料夾位置"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocationDirectory), group (FileLocation)
 #: settings/konsole.kcfg:222
 #, kde-format
 msgid "For scrollback files, use this folder"
-msgstr "歷史檢視檔案使用這個資料夾"
+msgstr "對於回捲歷史檔案，使用這個資料夾"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableMemoryMonitoring)
 #: settings/MemorySettings.ui:17
@@ -3239,7 +3239,7 @@ msgstr "使用者快取目錄 (%1)"
 #: settings/TemporaryFilesSettings.ui:25
 #, kde-format
 msgid "Scrollback file location:"
-msgstr "捲回（顯示歷史）檔案位置："
+msgstr "回捲歷史檔案位置："
 
 #. i18n: ectx: property (text), widget (QRadioButton, kcfg_scrollbackUseSpecifiedLocation)
 #: settings/TemporaryFilesSettings.ui:64
@@ -3543,20 +3543,16 @@ msgid "Focus Right Terminal"
 msgstr "將焦點移至右方終端機"
 
 #: ViewManager.cpp:282
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Focus Left Terminal"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Next Terminal"
-msgstr "將焦點移至左方終端機"
+msgstr "將焦點移至下一個終端機"
 
 #: ViewManager.cpp:288
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Focus Below Terminal"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Previous Terminal"
-msgstr "將焦點移至下方終端機"
+msgstr "將焦點移至上一個終端機"
 
 #: ViewManager.cpp:294
 #, kde-format
@@ -5067,7 +5063,7 @@ msgstr "允許終端機程式處理敲擊與拖曳"
 #: widgets/EditProfileScrollingPage.ui:25
 #, kde-format
 msgid "Scrollback:"
-msgstr "往回捲動："
+msgstr "回捲歷史："
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: widgets/EditProfileScrollingPage.ui:41
@@ -5231,8 +5227,8 @@ msgid ""
 "choose a huge value, your system may run out of free RAM and cause serious "
 "issues with your system."
 msgstr ""
-"當使用此選項時，捲軸的資料將會儲存至 RAM 中。若您選擇一個很大的值，您的系統可"
-"能會耗盡剩餘的 RAM 並可能造成嚴重的問題。"
+"當使用此選項時，回捲歷史資料將會儲存至 RAM 中。若您選擇一個很大的值，您的系統"
+"可能會耗盡剩餘的 RAM 並可能造成嚴重的問題。"
 
 #: widgets/HistorySizeWidget.cpp:69
 #, kde-kuit-format
@@ -5244,9 +5240,9 @@ msgid ""
 "Konsole → Temporary Files</emphasis> to select the location of the temporary "
 "files."
 msgstr ""
-"使用此選項的話，回捲資料會以不加密的方式寫入暫存檔中。這些暫存檔會在 Konsole "
-"正常關閉時被刪除。<nl/>使用<emphasis>「設定」→「設定 Konsole」→「暫存檔」</"
-"emphasis>來選擇暫存檔的位置。"
+"當使用此選項時，回捲歷史資料會以不加密的方式寫入暫存檔中。這些暫存檔會在 "
+"Konsole 正常關閉時被刪除。<nl/>使用<emphasis>「設定」→「設定 Konsole」→「暫存"
+"檔」</emphasis>來選擇暫存檔的位置。"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, fixedSizeHistoryButton)
 #: widgets/HistorySizeWidget.ui:60
