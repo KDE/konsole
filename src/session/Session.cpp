@@ -1871,17 +1871,17 @@ bool Session::copyInputToAllSessions()
 bool Session::copyInputToSessions(QList<int> sessionIds)
 {
     if (auto c = controller()) {
-        auto sessions = new QList<Session *>();
+        QList<Session *> sessions;
         c->copyInputActions()->setCurrentItem(SessionController::CopyInputToSelectedTabsMode);
 
         for (auto sessionId : sessionIds) {
             if (auto session = SessionManager::instance()->idToSession(sessionId))
-                sessions->append(session);
+                sessions.append(session);
             else
                 return false;
         }
 
-        c->copyInputToSelectedTabs(sessions);
+        c->copyInputToSelectedTabs(&sessions);
         return true;
     }
 

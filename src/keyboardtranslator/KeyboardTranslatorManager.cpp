@@ -206,13 +206,16 @@ const KeyboardTranslator *KeyboardTranslatorManager::defaultTranslator()
         return translator;
     }
 
-    auto fallback = new KeyboardTranslator(QStringLiteral("fallback"));
+    // Create a fallback translator and register it in _translators
+    auto *fallback = new KeyboardTranslator(QStringLiteral("fallback"));
     fallback->setDescription(QStringLiteral("Fallback Keyboard Translator"));
     // Key "TAB" should send out '\t'
     KeyboardTranslator::Entry entry;
     entry.setKeyCode(Qt::Key_Tab);
     entry.setText("\t");
     fallback->addEntry(entry);
+
+    _translators.insert(fallback->name(), fallback);
     return fallback;
 }
 
