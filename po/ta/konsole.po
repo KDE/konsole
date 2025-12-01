@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-27 00:46+0000\n"
-"PO-Revision-Date: 2025-09-28 15:23+0530\n"
+"PO-Revision-Date: 2025-11-30 11:32+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-l10n-ta@kde.org>\n"
 "Language: ta\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.08.1\n"
+"X-Generator: Lokalize 25.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2517,24 +2517,19 @@ msgstr ""
 "<p> 'rzsz' அல்லது 'lrzsz' தொகுப்பை வேண்டுமானால் நிறுவலாம்.\n"
 
 #: session/SessionController.cpp:2203
-#, fuzzy, kde-format
-#| msgid ""
-#| "<p>The current session already has a ZModem file transfer in progress."
+#, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
-msgstr "<பி>நடப்பு அமர்வில் ஏற்கனவே உள்ள Z மோடம் கோப்பு இடமாற்றம் நடைமுறையில் உள்ளது."
+msgstr "<p>தற்போதயை அமர்வில் ஏற்கனவே ZModem மூலமான கோப்பு இடமாற்றம் நடைபெறுகிறது.</p>"
 
 #: session/SessionController.cpp:2216
-#, fuzzy, kde-format
-#| msgid ""
-#| "<p>No suitable ZModem software was found on the system.\n"
-#| "<p>You may wish to install the 'rzsz' or 'lrzsz' package.\n"
+#, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
 "to install the 'rzsz' or 'lrzsz' package.</p>"
 msgstr ""
-"<p>பொருத்தமான Z மோடம் மென்பொருள் அமைப்பு கிடைக்கவில்லை.\n"
-" <p>'rzsz' அல்லது 'lrzsz '  தொகுப்பு வேண்டுமானால் நிறுவலாம்.\n"
+"<p>எந்த ZModem நிரலும் கண்டுபிடிக்கப்படவில்லை.</p><p>'rzsz' அல்லது 'lrzsz' போன்ற "
+"நிரல்களை நிறுவ வேண்டியிருக்கலாம்.</p>"
 
 #: session/SessionController.cpp:2221
 #, kde-format
@@ -2710,7 +2705,7 @@ msgstr "சுருங்குறித் தொடர்களைக் க�
 #: settings/GeneralSettings.ui:288
 #, kde-format
 msgid "Listen for ZModem terminal codes"
-msgstr ""
+msgstr "ZModem முனையக் குறிகளை கையாள்"
 
 #. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:18
@@ -2746,7 +2741,7 @@ msgstr "runCommand போன்ற DBus நெறிமுறைகள் இய
 #: settings/konsole.kcfg:42
 #, kde-format
 msgid "Listen for ZModem Terminal codes"
-msgstr ""
+msgstr "ZModem முனையக் குறிகளை கையாள்"
 
 #. i18n: ectx: tooltip, entry (ListenForZModemTerminalCodes), group (KonsoleWindow)
 #: settings/konsole.kcfg:43
@@ -3578,20 +3573,16 @@ msgid "Focus Right Terminal"
 msgstr "வலதிலுள்ள முனையத்தை குவியப்படுத்து"
 
 #: ViewManager.cpp:282
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Focus Left Terminal"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Next Terminal"
-msgstr "இடதிலுள்ள முனையத்தை குவியப்படுத்து"
+msgstr "அடுத்த முனையத்தைக் குவியப்படுத்து"
 
 #: ViewManager.cpp:288
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Focus Below Terminal"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Previous Terminal"
-msgstr "கீழுள்ள முனையத்தை குவியப்படுத்து"
+msgstr "முந்தைய முனையத்தைக் குவியப்படுத்து"
 
 #: ViewManager.cpp:294
 #, kde-format
