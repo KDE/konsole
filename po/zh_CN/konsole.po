@@ -2676,7 +2676,7 @@ msgstr "匹配正则表达式"
 #: settings/GeneralSettings.ui:288
 #, kde-format
 msgid "Listen for ZModem terminal codes"
-msgstr ""
+msgstr "监听 ZModem 终端代码"
 
 #. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:18
@@ -2712,13 +2712,13 @@ msgstr "像 runCommand 这样的 DBus API 将会被启用"
 #: settings/konsole.kcfg:42
 #, kde-format
 msgid "Listen for ZModem Terminal codes"
-msgstr ""
+msgstr "监听 ZModem 终端代码"
 
 #. i18n: ectx: tooltip, entry (ListenForZModemTerminalCodes), group (KonsoleWindow)
 #: settings/konsole.kcfg:43
 #, kde-format
 msgid "Automatic send/receive files over serial connections"
-msgstr ""
+msgstr "自动通过串口连接发送/接收文件"
 
 #. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:52
@@ -3538,13 +3538,13 @@ msgstr "聚焦右侧终端"
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Next Terminal"
-msgstr ""
+msgstr "聚焦下一个终端"
 
 #: ViewManager.cpp:288
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Previous Terminal"
-msgstr ""
+msgstr "聚焦上一个终端"
 
 #: ViewManager.cpp:294
 #, kde-format
