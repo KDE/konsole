@@ -1589,7 +1589,7 @@ msgstr ""
 #: plugins/SSHManager/sshmanagerplugin.cpp:194
 #, kde-format
 msgid "Error issuing SSH Command"
-msgstr "S'ha produït un error en emetre una ordre SSH"
+msgstr "S'ha produït un error mentre s'emetia una ordre SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:194
 #, kde-format
@@ -1972,7 +1972,7 @@ msgstr "%1 no és un URL vàlid, l'eixida no es pot guardar."
 #: SaveHistoryAutoTask.cpp:88
 #, kde-format
 msgid "Failed to create autosave file at %1."
-msgstr "No s'ha pogut crear el fitxer de guardada automàtica a %1."
+msgstr "Ha fallat mentre es creava el fitxer de guardada automàtica a %1."
 
 #: SaveHistoryAutoTask.cpp:102
 #, kde-format
@@ -1991,8 +1991,8 @@ msgstr ""
 #, kde-format
 msgid "Failed to update autosave state on output changes."
 msgstr ""
-"No s'ha pogut actualitzar l'estat de la guardada automàtica en els canvis de "
-"l'eixida."
+"Ha fallat mentre s'actualitzava l'estat de la guardada automàtica en els "
+"canvis de l'eixida."
 
 #: SaveHistoryTask.cpp:174
 #, kde-format
@@ -2000,7 +2000,7 @@ msgid ""
 "A problem occurred when saving the output.\n"
 "%1"
 msgstr ""
-"S'ha detectat un problema en guardar l'eixida.\n"
+"S'ha detectat un problema mentre es guardava l'eixida.\n"
 "%1"
 
 #: schemas.cpp:1
@@ -3720,7 +3720,7 @@ msgid ""
 "A problem occurred when saving the Layout.\n"
 "%1"
 msgstr ""
-"S'ha produït un problema en guardar la disposició.\n"
+"S'ha produït un problema mentre es guardava la disposició.\n"
 "%1"
 
 #: ViewManager.cpp:1290
@@ -3730,7 +3730,7 @@ msgid ""
 "A problem occurred when loading the Layout.\n"
 "%1"
 msgstr ""
-"S'ha produït un problema en carregar la disposició.\n"
+"S'ha produït un problema mentre es carregava la disposició.\n"
 "%1"
 
 #: ViewManager.cpp:1301
@@ -3819,7 +3819,7 @@ msgstr "Permetre el parpelleig de text"
 #: widgets/EditProfileAdvancedPage.ui:196
 #, kde-format
 msgid "Allow the output to be suspended by pressing Ctrl+S"
-msgstr "Permetre la suspensió de l'eixida prement Ctrl+S"
+msgstr "Permetre la suspensió de l'eixida prement «Ctrl+S»"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableFlowControlButton)
 #: widgets/EditProfileAdvancedPage.ui:199
@@ -4547,7 +4547,7 @@ msgstr "Obtín nous…"
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
-msgstr "No s'ha pogut carregar l'esquema <resource>%1</resource>."
+msgstr "Ha fallat mentre es carregava l'esquema <resource>%1</resource>."
 
 #: widgets/EditProfileDialog.cpp:1527
 #, kde-format
