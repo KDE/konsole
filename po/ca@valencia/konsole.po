@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-27 00:46+0000\n"
-"PO-Revision-Date: 2025-09-23 11:40+0200\n"
+"PO-Revision-Date: 2025-11-27 09:36+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -1589,7 +1589,7 @@ msgstr ""
 #: plugins/SSHManager/sshmanagerplugin.cpp:194
 #, kde-format
 msgid "Error issuing SSH Command"
-msgstr "S'ha produït un error en emetre una ordre SSH"
+msgstr "S'ha produït un error mentre s'emetia una ordre SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:194
 #, kde-format
@@ -1972,7 +1972,7 @@ msgstr "%1 no és un URL vàlid, l'eixida no es pot guardar."
 #: SaveHistoryAutoTask.cpp:88
 #, kde-format
 msgid "Failed to create autosave file at %1."
-msgstr "No s'ha pogut crear el fitxer de guardada automàtica a %1."
+msgstr "Ha fallat mentre es creava el fitxer de guardada automàtica a %1."
 
 #: SaveHistoryAutoTask.cpp:102
 #, kde-format
@@ -1991,8 +1991,8 @@ msgstr ""
 #, kde-format
 msgid "Failed to update autosave state on output changes."
 msgstr ""
-"No s'ha pogut actualitzar l'estat de la guardada automàtica en els canvis de "
-"l'eixida."
+"Ha fallat mentre s'actualitzava l'estat de la guardada automàtica en els "
+"canvis de l'eixida."
 
 #: SaveHistoryTask.cpp:174
 #, kde-format
@@ -2000,7 +2000,7 @@ msgid ""
 "A problem occurred when saving the output.\n"
 "%1"
 msgstr ""
-"S'ha detectat un problema en guardar l'eixida.\n"
+"S'ha detectat un problema mentre es guardava l'eixida.\n"
 "%1"
 
 #: schemas.cpp:1
@@ -2731,7 +2731,7 @@ msgstr "Coincidència utilitzant expressions regulars"
 #: settings/GeneralSettings.ui:288
 #, kde-format
 msgid "Listen for ZModem terminal codes"
-msgstr ""
+msgstr "Escolta els codis de terminal ZModem"
 
 #. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:18
@@ -2771,13 +2771,13 @@ msgstr "S'activarà l'API de D-Bus com «runCommand»"
 #: settings/konsole.kcfg:42
 #, kde-format
 msgid "Listen for ZModem Terminal codes"
-msgstr ""
+msgstr "Escolta els codis de terminal ZModem"
 
 #. i18n: ectx: tooltip, entry (ListenForZModemTerminalCodes), group (KonsoleWindow)
 #: settings/konsole.kcfg:43
 #, kde-format
 msgid "Automatic send/receive files over serial connections"
-msgstr ""
+msgstr "Envia/rep fitxers automàticament per connexions en sèrie"
 
 #. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:52
@@ -3620,20 +3620,16 @@ msgid "Focus Right Terminal"
 msgstr "Focus a la dreta del terminal"
 
 #: ViewManager.cpp:282
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Focus Left Terminal"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Next Terminal"
-msgstr "Focus a l'esquerra del terminal"
+msgstr "Focus al terminal següent"
 
 #: ViewManager.cpp:288
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Focus Below Terminal"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Previous Terminal"
-msgstr "Focus davall el terminal"
+msgstr "Focus al terminal anterior"
 
 #: ViewManager.cpp:294
 #, kde-format
@@ -3754,7 +3750,7 @@ msgid ""
 "A problem occurred when saving the Layout.\n"
 "%1"
 msgstr ""
-"S'ha produït un problema en guardar la disposició.\n"
+"S'ha produït un problema mentre es guardava la disposició.\n"
 "%1"
 
 #: ViewManager.cpp:1312
@@ -3764,7 +3760,7 @@ msgid ""
 "A problem occurred when loading the Layout.\n"
 "%1"
 msgstr ""
-"S'ha produït un problema en carregar la disposició.\n"
+"S'ha produït un problema mentre es carregava la disposició.\n"
 "%1"
 
 #: ViewManager.cpp:1323
@@ -3853,7 +3849,7 @@ msgstr "Permetre el parpelleig de text"
 #: widgets/EditProfileAdvancedPage.ui:196
 #, kde-format
 msgid "Allow the output to be suspended by pressing Ctrl+S"
-msgstr "Permetre la suspensió de l'eixida prement Ctrl+S"
+msgstr "Permetre la suspensió de l'eixida prement «Ctrl+S»"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableFlowControlButton)
 #: widgets/EditProfileAdvancedPage.ui:199
@@ -4581,7 +4577,7 @@ msgstr "Obtín nous…"
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
-msgstr "No s'ha pogut carregar l'esquema <resource>%1</resource>."
+msgstr "Ha fallat mentre es carregava l'esquema <resource>%1</resource>."
 
 #: widgets/EditProfileDialog.cpp:1527
 #, kde-format

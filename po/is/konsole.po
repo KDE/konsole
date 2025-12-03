@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-27 00:46+0000\n"
-"PO-Revision-Date: 2025-11-30 10:51+0000\n"
+"PO-Revision-Date: 2025-12-02 10:59+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
 "Language: is\n"
@@ -4558,7 +4558,7 @@ msgstr ""
 #: widgets/EditProfileDialog.cpp:1934
 #, kde-format
 msgid "Default for file type"
-msgstr "Sjálfgefið fyrir skrárgerð"
+msgstr "Sjálfgefið fyrir skráargerðina"
 
 #: widgets/EditProfileDialog.cpp:1960
 #, kde-format
@@ -4983,14 +4983,14 @@ msgid ""
 "Text recognized as a file will be underlined when hovered by the mouse "
 "pointer."
 msgstr ""
-"Texti sem er skrárheiti verður undirstrikaður þegar músarbendillinn sveimar "
+"Texti sem er skráarheiti verður undirstrikaður þegar músarbendillinn sveimar "
 "yfir."
 
 #. i18n: ectx: property (text), widget (QCheckBox, underlineFilesButton)
 #: widgets/EditProfileMousePage.ui:279
 #, kde-format
 msgid "Underline files"
-msgstr "Undirstrika skrárheiti"
+msgstr "Undirstrika skráaheiti"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, textEditorCommandLabel)
 #. i18n: ectx: property (toolTip), widget (QComboBox, textEditorCombo)
