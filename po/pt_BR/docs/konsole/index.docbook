@@ -100,7 +100,11 @@
 ><year
 >2017</year
 ><year
->2018</year>
+>2018</year
+><year
+>2020</year
+><year
+>2021</year>
 <holder
 >&Kurt.Hindenburg;</holder>
 </copyright>
@@ -116,9 +120,9 @@
 >&FDLNotice;</legalnotice>
 
 <date
->16/06/2019</date>
+>23/04/2024</date>
 <releaseinfo
->Applications 19.08</releaseinfo>
+>KDE Gear 24.05</releaseinfo>
 
 <abstract
 ><para
@@ -198,6 +202,60 @@
 > para abrir essa janela). </para>
 
 </sect1>
+
+<sect1 id="selection">
+<title
+>Modo de seleção</title>
+<para
+>O &konsole; possui um modo de seleção por teclado. Nesse modo, é possível navegar pela barra de rolagem e selecionar texto sem usar o mouse.</para>
+
+<para
+>Entre e saia deste modo usando o atalho de teclado (<keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>D</keycap
+></keycombo
+> por padrão). </para>
+
+<para
+><keycap
+>Esc</keycap
+> também sai do modo de seleção de teclado. </para>
+
+<para
+>Movendo o cursor: Setas, <keycap
+>PageUp</keycap
+>, <keycap
+>PageDown</keycap
+>, <keycap
+>Home</keycap
+>, <keycap
+>End</keycap
+>. </para>
+
+<para
+>Movendo o cursor no estilo <application
+>vi</application
+>: h,j,k,l, para mover um caractere, <keycap
+>Ctrl</keycap
+>+b,f,u,d para página para cima/para baixo ou meia página para cima/para baixo.</para>
+
+<para
+>Selecionar texto usando <keycap
+>Ctrl</keycap
+> ou <keycap
+>Shift</keycap
+> com as setas, ou usando <keycap
+>V</keycap
+> para iniciar a seleção, movendo o cursor e, em seguida, <keycap
+>V</keycap
+> novamente para finalizar a seleção. <keycombo
+>&Shift;<keycap
+>V</keycap
+></keycombo
+> seleciona linhas inteiras, em vez de caracteres. </para>
+
+</sect1>
+
 
 <sect1 id="profiles">
 <title
@@ -290,17 +348,6 @@
 
 </orderedlist>
 </para>
-
-<para
->Os perfis que tenham a opção <guilabel
->Mostrar no menu</guilabel
-> assinalada, terão seus nomes listados no menu <menuchoice
-><guimenu
->Arquivo</guimenu
-><guisubmenu
->Nova aba</guisubmenu
-></menuchoice
->. Não haverá nenhum submenu se apenas o perfil padrão estiver com a opção assinalada. </para>
 
 </sect1>
 
@@ -581,6 +628,213 @@
 
 </sect1>
 
+<sect1 id="semantic-shell-integration">
+<title
+>Integração com a semântica do shell</title>
+
+<para
+>Um programa shell em execução no Konsole pode emitir sequências de escape que divide o texto exibido em três tipos: prompt do shell, entrada do usuário e saída do comando. O uso dessas informações semânticas permite vários aprimoramentos no Konsole. <itemizedlist>
+<listitem
+><para
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>PgUp</keycap
+></keycombo
+> e <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>PgDown</keycap
+></keycombo
+> rola para cima/baixo para o prompt de comando anterior/seguinte.</para
+></listitem>
+<listitem
+><para
+>Dicas visuais:</para>
+<itemizedlist>
+<listitem
+><para
+>Uma linha é exibida acima de cada prompt, as cores do prompt são menos intensas e as cores da saída são mais intensas. </para
+></listitem>
+<listitem
+><para
+>Uma barra vermelha é exibida à esquerda das linhas de entrada e saída dos comandos que resultaram em erro </para
+></listitem>
+<listitem
+><para
+>Um fundo vermelho para as linhas de entrada e saída de comandos que resultaram em erro </para
+></listitem>
+<listitem
+><para
+>Uma barra cinza é exibida à esquerda das linhas de entrada e saída de cada outro comando </para
+></listitem>
+<listitem
+><para
+>Um fundo cinza para as linhas de entrada e saída de todos os outros comandos </para
+></listitem>
+</itemizedlist>
+<para
+>Cada um deles pode ser configurado para nunca aparecer, sempre aparecer ou apenas quando as dicas de URL forem exibidas. A configuração está na aba <guilabel
+>Integração semântica</guilabel
+> da página <guilabel
+>Geral</guilabel
+> da janela de configuração do perfil. </para
+></listitem>
+
+<listitem
+><para
+>As opções do menu de contexto <guimenuitem
+>Copiar entrada do usuário</guimenuitem
+>, <guimenuitem
+>Copiar saída do comando</guimenuitem
+> e <guimenuitem
+>Copiar exceto prompt</guimenuitem
+> podem ser usadas para filtrar a seleção quando ela for copiada para a área de transferência. </para
+></listitem>
+<listitem
+><para
+>Quando a seleção está vazia, a ação copiar para a área de transferência copia a entrada atual. Se não estiver vazia, copia a última saída se não houver entrada atual. </para
+></listitem>
+<listitem
+><para
+>Ao pressionar as setas para cima/para baixo durante a edição de um texto longo, o cursor será posicionado uma linha acima/abaixo, enviando o número apropriado de eventos de tecla para a esquerda/direita para o shell. Isso é configurável nas configurações do perfil.</para
+></listitem>
+<listitem
+><para
+>Clicar com o mouse na entrada de texto posicionará o cursor no local clicado. Configurável nas configurações do perfil.</para
+></listitem>
+<listitem
+><para
+>Pressionar a tecla &Ctrl; enquanto clica três vezes com o mouse na saída de um comando, seleciona toda a saída desse comando.</para
+></listitem>
+</itemizedlist>
+</para>
+
+<para
+>A integração semântica do shell precisa ser configurada no shell. Pressionar <keycombo
+>&Ctrl;&Alt;<keycap
+>]</keycap
+></keycombo
+> irá colar os comandos necessários no bash. Para outros shells, como fish, zsh, python, etc., consulte a documentação do programa correspondente. </para>
+
+</sect1>
+
+
+<sect1 id="complex-text-rendering">
+<title
+>Layout de texto complexo</title>
+
+<para
+>Na aba <guilabel
+>Layout de texto complexo</guilabel
+> da página <guilabel
+>Aparência</guilabel
+> na caixa de diálogo <guilabel
+>Editar perfil</guilabel
+>, você encontrará opções que controlam a renderização do texto. </para>
+
+<para>
+<itemizedlist>
+<listitem
+><para
+><guilabel
+>Modo de palavra</guilabel
+> - neste modo, (algumas) strings são exibidas na tela como um todo, em vez de um caractere por vez. Isso permite que o Qt renderize o texto corretamente quando a forma de um caractere depende dos caracteres anteriores ou posteriores a ele. Isso pode resultar em posicionamento incorreto de alguns caracteres. </para
+><para
+>Os espaços sempre quebram as sequências, garantindo que os caracteres estejam sempre nas posições corretas. Isso assegura que os caracteres nunca estejam muito longe de sua posição correta. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>Usar os mesmos atributos para cada palavra inteira</guilabel
+> - Quando esta opção está ativada, as palavras são renderizadas com os mesmos atributos (cor do texto, negrito, itálico, etc.). Se um atributo for alterado no meio de uma palavra, a alteração só terá efeito após o término da palavra. Quando esta opção está desativada, uma nova palavra começa quando os atributos são alterados. Isso resulta em caracteres que mudam de forma e posição ao mover o cursor ou selecionar o texto. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>Caracteres ASCII</guilabel
+> - Agrupa caracteres ASCII em palavras conforme descrito acima. O efeito mais notável desta opção é que habilitá-la mostra ligaduras de programação (para fontes que as suportam). Por exemplo, a string &lt;= pode ser exibida como ⩽. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>Caracteres de escrita brâhmica</guilabel
+> - Agrupar caracteres brâhmicos conforme descrito acima. Sem esta opção (dependendo da fonte), algumas palavras podem não ser conectadas corretamente. Com esta opção ativada, os caracteres brâhmicos podem aparecer fora de posição. Por exemplo, o terceiro caractere da segunda linha pode não aparecer diretamente abaixo do terceiro caractere da primeira linha. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>Fonte de emoji:</guilabel
+> - Isso permite especificar a fonte a ser usada para os caracteres Emoji Unicode. Se não for definida, a fonte padrão do perfil será usada, ou alguma fonte alternativa poderá ser usada pelo sistema caso os glifos estejam ausentes. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>Renderização de texto bidirecional</guilabel
+> - Reordena caracteres da direita para a esquerda para que os textos em árabe e hebraico apareçam corretamente. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>Forçar direção da linha LTR</guilabel
+> - As linhas são sempre da esquerda para a direita. Sem isso, a direção de cada linha é determinada pelo primeiro caractere com forte direcionalidade. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>Substituição do modo BiDi para caracteres de tabela</guilabel
+> - Considerar caracteres gráficos de tabela como caracteres LTR fortes. Isso permite que tabelas contendo caracteres RTL sejam exibidas corretamente, mas pode causar ordem incorreta se esses caracteres forem usados ​​em textos RTL. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>Substituir wcwidth</guilabel
+> - Os caracteres problemáticos seguem o padrão Unicode, em vez do wcwidth() da glibc. Atualmente, apenas o hífen suave (Unicode 0x00AD), que tem wcwidth de 1 e largura Unicode de 0, é afetado por esta opção. Geralmente, esta opção deve ser desativada quando esses caracteres forem usados ​​principalmente na linha de comando e ativada quando forem apenas exibidos. </para
+></listitem>
+
+</itemizedlist>
+</para>
+</sect1>
+
+<sect1 id="visualhints">
+<title
+>Dicas visuais</title>
+<para
+>Além das várias dicas visuais descritas em <xref linkend="semantic-shell-integration"/>, o &konsole; possui outras dicas visuais: </para>
+
+<itemizedlist>
+<listitem
+><para
+>Uma linha vertical na coluna 80 (ou outra). Isso é configurado na aba <guilabel
+>Diversos</guilabel
+> da página <guilabel
+>Aparência</guilabel
+> na caixa de diálogo <guilabel
+>Editar perfil</guilabel
+>. </para
+></listitem>
+
+<listitem
+><para
+>Os números de linha podem ser exibidos como uma sobreposição ao texto do terminal. Os números de linha aparecem em vermelho na extremidade direita de cada linha. As linhas são numeradas consecutivamente a partir da primeira (superior) linha na lista de rolagem. A exibição dos números de linha pode ser configurada na página <guilabel
+>Avançado</guilabel
+> na caixa de diálogo <guilabel
+>Editar perfil</guilabel
+>. A alternância entre os três modos de exibição também pode ser feita por um atalho de teclado. O atalho padrão é <keycombo
+>&Ctrl;&Alt;<keycap
+>\</keycap
+></keycombo
+> </para
+></listitem>
+</itemizedlist>
+</sect1>
+
 </chapter>
 
 <chapter id="commandreference">
@@ -652,7 +906,7 @@
 >Abre uma nova aba com o perfil padrão</action>
 <note
 ><para
->O &konsole; vem com um perfil padrão. Todos os perfis adicionados pelo usuário serão listados em um submenu. Não aparecerá nenhum submenu se existir apenas o perfil padrão. </para
+>O primeiro perfil no submenu será sempre "Padrão", que é o perfil integrado. Todos os outros perfis serão listados abaixo em ordem alfabética. O perfil padrão especificado pelo usuário estará em negrito. </para
 ></note>
 </para
 ></listitem
@@ -754,13 +1008,13 @@
 > <guimenu
 >Arquivo</guimenu
 > <guimenuitem
->Fechar aba</guimenuitem
+>Fechar sessão</guimenuitem
 ></menuchoice>
 </term>
 <listitem
 ><para
 ><action
->Fecha a aba atual</action>
+>Fecha a sessão atual</action>
 </para
 ></listitem>
 </varlistentry>
@@ -787,17 +1041,8 @@
 ></para>
 <note
 ><para
->O &konsole; apresentará uma caixa de diálogo de confirmação, caso exista mais de uma aba aberta. Essa caixa de diálogo poderá ser desativada se marcar a opção <guibutton
+>O &konsole; exibirá uma caixa de diálogo de confirmação se houver mais de uma sessão aberta ou se determinados programas estiverem em execução em alguma sessão. Essas caixas de diálogo podem ser desativadas clicando na caixa de seleção <guibutton
 >Não perguntar novamente</guibutton
->. </para>
-<para
->Se quiser que a caixa de diálogo de confirmação apareça novamente, remova o item <screen
->[Notification Messages]
-CloseAllTabs=true</screen
-> em <filename
->$<envar
->XDG_CONFIG_HOME</envar
->/konsolerc</filename
 >. </para>
 </note>
 </listitem>
@@ -1055,14 +1300,14 @@ CloseAllTabs=true</screen
 > <guimenu
 >Editar</guimenu
 ><guimenuitem
->Renomear aba...</guimenuitem
+>Configurar aba...</guimenuitem
 ></menuchoice
 ></term>
 <listitem
 ><para
 ><action
->Abre uma caixa de diálogo que permite renomear a aba atual</action
-> (<link linkend="rename-tab-dialog"
+>Abre uma caixa de diálogo que permite alterar o formato do nome, o formato do título da aba remota e a cor da aba atual</action
+> (<link linkend="configure-tab-settings-dialog"
 >mais informações</link
 >) </para
 ></listitem>
@@ -1256,56 +1501,6 @@ Various search improvements
 ><shortcut
 ><keycombo action="simul"
 >&Ctrl;&Shift;<keycap
->X</keycap
-></keycombo
-></shortcut
-> <guimenu
->Exibir</guimenu
-><guisubmenu
->Dividir a exibição</guisubmenu
-><guimenuitem
->Fechar a ativa</guimenuitem
-></menuchoice>
-</term>
-<listitem
-><para
-><action
->Fecha a exibição ativa</action>
-</para
-></listitem>
-</varlistentry>
-
-<varlistentry>
-<term
-><menuchoice
-><shortcut
-><keycombo action="simul"
->&Ctrl;&Shift;<keycap
->O</keycap
-></keycombo
-></shortcut
-> <guimenu
->Exibir</guimenu
-><guisubmenu
->Dividir a exibição</guisubmenu
-><guimenuitem
->Fechar as outras</guimenuitem
-></menuchoice>
-</term>
-<listitem
-><para
-><action
->Fecha todas as exibições, menos a atual</action>
-</para
-></listitem>
-</varlistentry>
-
-<varlistentry>
-<term
-><menuchoice
-><shortcut
-><keycombo action="simul"
->&Ctrl;&Shift;<keycap
 >]</keycap
 ></keycombo
 ></shortcut
@@ -1350,6 +1545,55 @@ Various search improvements
 ></listitem>
 </varlistentry>
 
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>E</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Exibir</guimenu
+><guisubmenu
+>Exibição dividida</guisubmenu
+><guimenuitem
+>Alternar maximizar exibição atual</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Alterna a visualização atual entre o tamanho atual e o tamanho máximo</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>\</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Exibir</guimenu
+><guisubmenu
+>Exibição divida</guisubmenu
+><guimenuitem
+>Tamanho igual para todas as abas</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Define o mesmo tamanho para todas as visualizações</action>
+</para
+></listitem>
+</varlistentry>
 
 <varlistentry>
 <term
@@ -1396,6 +1640,88 @@ Various search improvements
 ><action
 >Abre a área dividida atual em uma janela separada</action>
 </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="save-layout">
+<term
+><menuchoice
+><guimenu
+>Exibir</guimenu
+> <guimenuitem
+>Salvar layout da aba para arquivo</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Permite salvar o layout de abas da visualização atual em um arquivo de layout especializado do &konsole;, que pode ser carregado para restaurar um de seus layouts favoritos.</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Exibir</guimenu
+> <guimenuitem
+>Carregar layout de aba do arquivo</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Permite carregar um dos seus layouts de visualização favoritos a partir do arquivo de layout que foi salvo usando o item de menu <menuchoice
+><guimenu
+>Exibir</guimenu
+><guimenuitem
+>Salvar layout da aba para arquivo</guimenuitem
+></menuchoice
+> anteriormente.</action
+> Os layouts padrão (2x2, 2x1 e 1x2) podem ser carregados pela barra de ferramentas. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Exibir</guimenu
+> <guimenuitem
+>Monitores únicos</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Os seguintes monitores notificam apenas uma vez e depois são desativados. </action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>R</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Exibir</guimenu
+><guimenuitem
+>Monitor para prompt</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Ativa ou desativa o monitoramento da aba atual para um prompt do shell.</action>
+</para
+><para
+>Quando um prompt do shell é exibido, o &konsole; mostrará uma notificação. Esta opção é exibida somente quando a integração semântica está habilitada no shell. </para
 ></listitem>
 </varlistentry>
 
@@ -1461,6 +1787,31 @@ Various search improvements
 ><guimenuitem
 >Atividade em sessão monitorada</guimenuitem
 ></menuchoice
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Exibir</guimenu
+> <guimenuitem
+>Monitor para conclusão de processo</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Ativa ou desativa o monitoramento da aba atual pelo fim do processo</action
+>. </para
+><para
+>Se marcada, ao terminar o processo atual, o &konsole; exibirá uma notificação <guilabel
+>O processo '<replaceable
+>nome do processo</replaceable
+>' terminou de ser executado na sessão '<replaceable
+>nome da sessão</replaceable
+>'</guilabel
 >. </para
 ></listitem>
 </varlistentry>
@@ -1609,6 +1960,27 @@ Various search improvements
 ></listitem>
 </varlistentry>
 
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F11</keycap
+></shortcut
+> <guimenu
+>Exibir</guimenu
+><guimenuitem
+>Modo de tela cheia</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Ativa ou desativa a utilização da tela cheia pelo &konsole;</action
+></para
+></listitem>
+</varlistentry>
+
 </variablelist>
 </sect2>
 
@@ -1716,6 +2088,16 @@ Various search improvements
 </variablelist>
 </sect2>
 
+<sect2 id="plugins-menu">
+<title
+>Menu Plugins</title>
+
+<para
+>Os plugins instalados serão listados ou aparecerá a mensagem "Nenhum plugin disponível" </para>
+
+</sect2>
+
+
 <sect2 id="settings-menu">
 <title
 >Menu Configurações</title>
@@ -1775,6 +2157,23 @@ Various search improvements
 <varlistentry>
 <term
 ><menuchoice
+><guimenu
+>Configurações</guimenu
+><guimenuitem
+>Esquema de cores da janela</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Alterar a &GUI; do &konsole; para o esquema especificado</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
 ><shortcut
 ><keycombo action="simul"
 >&Ctrl;&Shift;<keycap
@@ -1798,20 +2197,33 @@ Various search improvements
 <varlistentry>
 <term
 ><menuchoice
-><shortcut
-><keycap
->F11</keycap
-></shortcut
-> <guimenu
+><guimenu
 >Configurações</guimenu
 ><guimenuitem
->Modo de tela inteira</guimenuitem
+>Barras de ferramentas visíveis</guimenuitem
 ></menuchoice
 ></term>
 <listitem
 ><para
 ><action
->Ativa ou desativa a utilização da tela inteira pelo &konsole;</action
+>Permite ativar/desativar a visibilidade das barras de ferramentas do &konsole;</action
+></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Configurações</guimenu
+><guimenuitem
+>Mostrar barra de status</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Ativa ou desativa a visibilidade da barra de status</action
 ></para
 ></listitem>
 </varlistentry>
@@ -1822,7 +2234,24 @@ Various search improvements
 ><guimenu
 >Configurações</guimenu
 ><guimenuitem
->Configurar atalhos...</guimenuitem
+>Configurar idioma...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Abre uma janela para escolher uma tradução da interface do &konsole;.</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Configurações</guimenu
+><guimenuitem
+>Configurar atalhos do teclado...</guimenuitem
 ></menuchoice
 ></term>
 <listitem
@@ -1870,7 +2299,7 @@ Various search improvements
 <row>
 <entry
 ><keycombo action="simul"
->&Ctrl;&Shift;<keysym
+>&Ctrl;&Alt;<keysym
 >Seta à esquerda</keysym
 ></keycombo
 ></entry>
@@ -1880,7 +2309,7 @@ Various search improvements
 <row>
 <entry
 ><keycombo action="simul"
->&Ctrl;&Shift;<keysym
+>&Ctrl;&Alt;<keysym
 >Seta à direita</keysym
 ></keycombo
 ></entry>
@@ -1897,19 +2326,29 @@ Various search improvements
 <entry
 >Colar a seleção</entry>
 </row>
-<row>
-<entry
-><keycombo action="simul"
->&Shift;&Tab;</keycombo
-></entry>
-<entry
->Próximo contêiner de exibição</entry
-> <!--FIXME what is this:yurchor container widget which holds views-->
-</row>
 </tbody>
 </tgroup>
 </informaltable>
 
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Configurações</guimenu
+><guimenuitem
+>Configurar barras de ferramentas...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Abre <ulink url="help:/fundamentals/config.html#toolbars-items"
+>a janela de configuração da barra de ferramentas</ulink
+></action
+></para>
 </listitem>
 </varlistentry>
 
@@ -1945,15 +2384,94 @@ Various search improvements
 >Abre o editor de configurações do &konsole;</action
 ></para>
 <para
->Esta caixa de diálogo tem opções que influenciam a aparência e o comportamento da <guilabel
->Barra de abas</guilabel
-> e opções gerais da janela do &konsole;. </para
-></listitem>
-<!-- FIXME
-since 4.9 Move options influencing tabbar from profiles into global setting
-Add global option for showing window title on titlebar
-When the window title from current session is emtpy, fallback to using
-  tab title-->
+>Esta caixa de diálogo possui opções que influenciam a aparência e o comportamento da janela do &konsole;. </para>
+<itemizedlist>
+    <listitem>
+        <para
+>A página <guilabel
+>Geral</guilabel
+> permite configurar a visibilidade da barra de menus, memorizar o tamanho da janela do &konsole;, executar todas as janelas do &konsole; em um único processo, ativar atalhos de menu, exibir o título da janela na barra de título, remover a barra de título e a moldura da janela e focar os terminais quando o ponteiro do mouse for movido sobre eles. Também é possível configurar a diferenciação entre maiúsculas e minúsculas na pesquisa, o uso de expressões regulares, destacar todas as correspondências e a direção da pesquisa (<guilabel
+>Pesquisar para trás</guilabel
+> é o padrão). A página <guilabel
+>Geral</guilabel
+> também é o local onde você pode <guibutton
+>Reativar todas as mensagens "Não perguntar novamente"</guibutton
+> caso elas tenham sido desativadas anteriormente. </para>
+    </listitem>
+    <listitem>
+        <para
+>A página <guilabel
+>Perfis</guilabel
+> destina-se à criação e gestão de <link linkend="profiles"
+>perfis</link
+>. </para>
+    </listitem>
+    <listitem>
+        <para
+>Na página <guilabel
+>Barra de abas/Divisores</guilabel
+>, você pode configurar a visibilidade e o posicionamento da barra de abas, definir o comportamento das abas e ajustar as opções dos botões das abas. É possível configurar se você deseja <guilabel
+>Mostrar o botão 'Nova aba'</guilabel
+> e <guilabel
+>Expandir a largura das abas individuais para toda a janela</guilabel
+> ou configurar o <guilabel
+>Uso de uma folha de estilo definida pelo usuário</guilabel
+>. A aba <guilabel
+>Comportamento</guilabel
+> pode ser usada para definir o local das novas abas (<guilabel
+>No final</guilabel
+> ou <guilabel
+>Após a aba atual</guilabel
+>) e o fechamento das abas com um clique do &MMB;. </para>
+        <para
+>Também é possível configurar a visibilidade dos cabeçalhos divididos (<guilabel
+>Quando necessário</guilabel
+> (padrão), <guilabel
+>Sempre</guilabel
+> ou <guilabel
+>Nunca</guilabel
+>) e definir o tamanho da alça de arrastar para as divisões (<guilabel
+>Pequeno</guilabel
+> (padrão), <guilabel
+>Médio</guilabel
+> ou <guilabel
+>Grande</guilabel
+>) usando a aba <guilabel
+>Divisões</guilabel
+> desta página de configuração. </para>
+    </listitem>
+    <listitem>
+        <para
+>A página <guilabel
+>Arquivos temporários</guilabel
+> é usada para definir a localização do arquivo <link linkend="scrollback"
+>scrollback</link
+>. </para>
+    </listitem>
+    <listitem>
+        <para
+>A página <guilabel
+>Miniaturas</guilabel
+> pode ser usada para definir o tamanho da miniatura e as opções de ativação (você pode escolher a tecla de controle de ativação entre &Shift;, &Alt; e &Ctrl;). </para>
+        <note>
+            <para
+>Para usar o recurso de miniaturas que exibe miniaturas de imagens em janelas pop-up ao passar o cursor do mouse sobre os itens de imagem, você deve ativar o sublinhado de arquivos para o seu perfil atual: <menuchoice
+><guimenu
+>Configurações</guimenu
+><guimenuitem
+>Editar perfil atual...</guimenuitem
+><guimenuitem
+>Mouse</guimenuitem
+><guimenuitem
+>Diversos</guimenuitem
+><guimenuitem
+>Sublinhar arquivos</guimenuitem
+></menuchoice
+>. </para>
+        </note>
+    </listitem>
+</itemizedlist>
+</listitem>
 </varlistentry>
 
 </variablelist>
@@ -1977,16 +2495,16 @@ When the window title from current session is emtpy, fallback to using
 <title
 >Caixas de diálogo do &konsole;</title>
 
-<sect2 id="rename-tab-dialog">
+<sect2 id="configure-tab-settings-dialog">
 <title
->Janela de renomeação de aba</title>
+>Janela para configurar aba</title>
 
 <para
->O nome da aba atual poderá ser alterado a partir desta caixa de diálogo, que poderá ser exibida através do menu, usando o atalho <keycombo action="simul"
+>O formato do nome, o formato do título da aba remota e a cor da aba atual podem ser alterados nesta janela, que poderá ser exibida através do menu, usando o atalho <keycombo action="simul"
 >&Ctrl;&Alt; <keycap
 >S</keycap
 ></keycombo
-> ou com um clique duplo na aba. Essas alterações poderão se tornar permanentes se editar o perfil atual. </para>
+> ou com um clique duplo na aba. Essas alterações são temporárias e poderão se tornar permanentes se editar o perfil atual. </para>
 
 <para
 >O &konsole; irá substituir estes itens para as abas locais: </para>
@@ -2163,15 +2681,28 @@ When the window title from current session is emtpy, fallback to using
 <varlistentry>
 <term
 ><option
->--fallback-profile</option
+>--layout</option
+> <parameter
+>arquivo</parameter
 ></term>
 <listitem
 ><para
->Usa o perfil interno ALTERNATIVO. Esta opção é um atalho para <option
->--profile</option
-> <parameter
->ALTERNATIVO/</parameter
+><action
+>Inicia o &konsole;</action
+> usando um <link linkend="save-layout"
+>arquivo de layout &JSON; salvo</link
 >.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--builtin-profile</option
+></term>
+<listitem
+><para
+>Usa o perfil integrado em vez do perfil padrão atual.</para
 ></listitem>
 </varlistentry>
 
@@ -2372,7 +2903,7 @@ When the window title from current session is emtpy, fallback to using
 <listitem
 ><para
 ><action
->Inicia o &konsole; no modo de tela inteira</action
+>Inicia o &konsole; no modo de tela cheia</action
 >.</para
 ></listitem>
 </varlistentry>
@@ -2463,7 +2994,7 @@ When the window title from current session is emtpy, fallback to using
 </variablelist>
 
 <para
->O &konsole; também aceita as opções genéricas do &Qt; e do &kf5-full; - veja as páginas de manual para qt5options e kf5options.</para>
+>O &konsole; também aceita as opções genéricas do &Qt; e do &kf6-full;. Veja as páginas de manual para qt6options e kf6options.</para>
 
 </chapter>
 
@@ -2948,7 +3479,7 @@ Space+Ctrl
 <itemizedlist>
 <listitem>
 <para
->Consulte a base de dados do <ulink url="man:terminfo(5)"
+>Consulte o banco de dados do <ulink url="man:terminfo(5)"
 >terminfo</ulink
 > ou <ulink url="man:termcap(5)"
 >termcap</ulink
@@ -2956,7 +3487,7 @@ Space+Ctrl
 </listitem>
 <listitem>
 <para
->É provável que o seu sistema tenha outras bases de dados de teclado que devem estar igualmente sincronizadas (&eg;, <ulink url="man:bash(1)"
+>É provável que o seu sistema tenha outros bancos de dados de teclado que devem estar igualmente sincronizadas (&eg;, <ulink url="man:bash(1)"
 >/etc/inputrc e readline</ulink
 > para a linha de comando <application
 >BASH</application
@@ -3304,13 +3835,13 @@ CommonDirNames=nome1,nome2,nome3...
 <listitem
 ><para
 ><ulink url="https://userbase.kde.org/Konsole"
->Página Web do &konsole; no &kde; UserBase</ulink
+>Site do &konsole; no &kde; UserBase</ulink
 >&nbsp;</para
 ></listitem>
 <listitem
 ><para
 ><ulink url="https://konsole.kde.org/"
->Página Web do &konsole;</ulink
+>Site do &konsole;</ulink
 ></para
 ></listitem>
 <listitem
