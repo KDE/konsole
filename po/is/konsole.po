@@ -7,16 +7,16 @@
 # Arnar Leósson <leosson@frisurf.no>, 2003.
 # Svanur Palsson <svanur@tern.is>, 2004.
 # Arnar Leosson <leosson@frisurf.no>, 2004, 2005.
-# Sveinn í Felli <sveinki@nett.is>, 2009, 2010, 2011, 2016, 2023.
+# SPDX-FileCopyrightText: 2009, 2010, 2011, 2016, 2023, 2025 Sveinn í Felli <sveinki@nett.is>
 # SPDX-FileCopyrightText: 2023, 2024 gummi <gudmundure@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 14:43+0000\n"
-"PO-Revision-Date: 2024-10-10 14:41+0000\n"
-"Last-Translator: Gummi <gudmundure@gmail.com>\n"
-"Language-Team: Icelandic <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2025-12-07 10:46+0000\n"
+"Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
+"Language-Team: Icelandic\n"
 "Language: is\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2022,7 +2022,7 @@ msgstr "Breeze"
 #: schemas.cpp:6
 #, kde-format
 msgid "Campbell"
-msgstr ""
+msgstr "Campbell"
 
 #: schemas.cpp:7
 #, kde-format
@@ -2080,20 +2080,16 @@ msgid "Solaris console"
 msgstr "Solaris-skjáhermir"
 
 #: searchtabs/SearchTabs.cpp:127
-#, fuzzy, kde-format
-#| msgctxt "@item:intext Search options"
-#| msgid "Search:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Search..."
-msgstr "Leita:"
+msgstr "Leita..."
 
 #: searchtabs/SearchTabs.cpp:128
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Enter the text to search for here"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"
-msgstr "Sláðu textann inn hér til að leita"
+msgstr "Settu hér inn heiti flipa til að leita að"
 
 #: session/Session.cpp:129
 #, kde-format
@@ -2495,16 +2491,13 @@ msgstr ""
 "með valdi?"
 
 #: session/SessionController.cpp:1167
-#, fuzzy, kde-format
-#| msgid ""
-#| "The program '%1' is in this session would not die.  Are you sure you want "
-#| "to kill it by force?"
+#, kde-format
 msgid ""
 "The program '%1' in this session would not die.  Are you sure you want to "
 "kill it by force?"
 msgstr ""
 "Forritið '%1' í þessari lotu neitar að deyja. Ertu viss um að þú viljir "
-"drepa það með valdi?"
+"slátra því með valdi?"
 
 #: session/SessionController.cpp:1175
 #, kde-format
@@ -2873,10 +2866,9 @@ msgstr "Stjórna sýnileika hnappsins \"Nýr flipi\" á flipastikunni"
 
 #. i18n: ectx: label, entry (SearchTabsButton), group (TabBar)
 #: settings/konsole.kcfg:164
-#, fuzzy, kde-format
-#| msgid "Control the visibility of 'New Tab' button on the tab bar"
+#, kde-format
 msgid "Control the visibility of 'Search Tabs' button on the tab bar"
-msgstr "Stjórna sýnileika hnappsins \"Nýr flipi\" á flipastikunni"
+msgstr "Stýra sýnileika hnappsins \"Leita að flipum\" á flipastikunni"
 
 #. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
 #: settings/konsole.kcfg:172
@@ -2928,16 +2920,7 @@ msgstr "Virkja minnisvöktun :"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:24
-#, fuzzy, kde-format
-#| msgid ""
-#| "Changes will take effect upon restart. If enabled, sustained memory "
-#| "consumption by Konsole\n"
-#| "exceeding the specified value will cause systemd-oomd to eliminate the "
-#| "tab(s)\n"
-#| "containing the memory-intensive process(es). Note: enabling\n"
-#| "might cause greater slowdowns during high memory consumption and "
-#| "specifying\n"
-#| "excessively low values might still cause Konsole to be killed."
+#, kde-format
 msgid ""
 "Changes will take effect upon restart. If enabled, sustained memory "
 "consumption by Konsole exceeding the specified value will cause systemd-oomd "
@@ -2947,11 +2930,11 @@ msgid ""
 msgstr ""
 "Breytingar ganga í gegn eftir endurræsingu. Ef minnisnotkun Konsole fer yfir "
 "tiltekið gildi og þetta\n"
-"er virkt mun 'systemd-oomd' loka flipunum sem innihalda vinnslurnar sem\n"
+"er virkt mun 'systemd-oomd' loka flipunum sem innihalda vinnsluferlin sem\n"
 "krefjast mikils minnis. Athugaðu: ef þetta er virkjað gæti það\n"
 "valdið meiri hægagangi þegar mikið minni er notað og ef of lágt gildi er "
 "tilgreint\n"
-"getur það valdið því að Konsole sé drepið."
+"getur það valdið því að Konsole sé slátrað."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:37
@@ -3120,24 +3103,19 @@ msgstr "Hvergi"
 
 #. i18n: ectx: property (text), widget (QLabel, showSearchTabsButtonLabel)
 #: settings/TabBarSettings.ui:231
-#, fuzzy, kde-format
-#| msgid "Show Close Tab button:"
+#, kde-format
 msgid "Show Search Tabs button:"
-msgstr "Sýna lokunarhnapp flipa:"
+msgstr "Sýna hnapp fyrir leit að flipum:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSearchTabsButton)
 #: settings/TabBarSettings.ui:241
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Always show the split header"
-#| msgid "Always"
+#, kde-format
 msgid "Always"
 msgstr "Alltaf"
 
 #. i18n: ectx: property (text), widget (QRadioButton, HideSearchTabsButton)
 #: settings/TabBarSettings.ui:251
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Never show the split header"
-#| msgid "Never"
+#, kde-format
 msgid "Never"
 msgstr "Aldrei"
 
@@ -3951,9 +3929,7 @@ msgstr "Teikna skæra liti í feitletri"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:188
-#, fuzzy, kde-format
-#| msgid ""
-#| "Use the selected font for line characters instead of the builtin code"
+#, kde-format
 msgctxt ""
 "Characters for drawing lines for a frame or box in TUI programs. Not a row "
 "of characters."
@@ -3962,8 +3938,7 @@ msgstr "Nota valda letrið fyrir línustafi í stað innbyggða kóðans"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:191
-#, fuzzy, kde-format
-#| msgid "Use line characters contained in font"
+#, kde-format
 msgctxt ""
 "Characters for drawing lines for a frame or box in TUI programs. Not a row "
 "of characters."
@@ -5203,10 +5178,9 @@ msgstr "Litur á merkjum á skrunstiku:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelSearhcHighlighterColor)
 #: widgets/EditProfileScrollingPage.ui:168
-#, fuzzy, kde-format
-#| msgid "Color of scrollbar markers:"
+#, kde-format
 msgid "Color of scrollbar search highlighting lines:"
-msgstr "Litur á merkjum á skrunstiku:"
+msgstr "Litur á áherslulituðum línum á skrunstiku við leit:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelReflowLines)
 #: widgets/EditProfileScrollingPage.ui:181
@@ -5268,7 +5242,7 @@ msgstr "Staðsetning skrunstiku:"
 #: widgets/EditProfileScrollingPage.ui:290
 #, kde-format
 msgid "Search highlighting line opacity:"
-msgstr ""
+msgstr "Ógegnsæi á áherslulituðum línum við leit:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43
@@ -5411,8 +5385,7 @@ msgid "Find the previous match for the current search phrase"
 msgstr "Finna fyrra tilfelli af leitarstrengnum"
 
 #: widgets/IncrementalSearchBar.cpp:102
-#, fuzzy, kde-format
-#| msgid "Case sensitive"
+#, kde-format
 msgctxt "@action:button"
 msgid "Case sensitive"
 msgstr "Háð há-/lágstöfum"
@@ -5634,12 +5607,10 @@ msgid "Open a new tab"
 msgstr "Opna nýjan flipa"
 
 #: widgets/ViewContainer.cpp:64
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Detach Tab"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Search Tabs"
-msgstr "&Losa flipa af"
+msgstr "Leita að flipum"
 
 #: widgets/ViewContainer.cpp:69
 #, kde-format
