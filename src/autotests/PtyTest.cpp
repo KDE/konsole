@@ -78,7 +78,7 @@ void PtyTest::testRunProgram()
     // auto pid = pty.processId();
     //  Actual   (fpg): 100000; Expected (pid): 28534
     //  Actual   (fpg): 0; Expected (pid): 3487
-    QSKIP("This often fails on multiple CIs", SkipSingle);
+    // QSKIP("This often fails on multiple CIs", SkipSingle);
     //QCOMPARE(fpg, pid);
     pty.close();
 }
