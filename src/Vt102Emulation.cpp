@@ -1520,6 +1520,7 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
     if (attribute == Session::ProfileChange) {
         bool styleChanged = false;
         bool isBlinking = false;
+        bool isAnimating = false;
         Enum::CursorShapeEnum shape = Enum::BlockCursor;
         QColor customColor;
 
@@ -1536,6 +1537,7 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
 
         const QLatin1String cursorShapeStr("CursorShape=");
         const QLatin1String blinkingCursorStr("BlinkingCursorEnabled=");
+        const QLatin1String animatingCursorStr("AnimatingCursorEnabled=");
         const QLatin1String customCursorColorStr("CustomCursorColor=");
 
         QString newValue;
@@ -1562,7 +1564,22 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
                         styleChanged = true;
                     }
                 }
-
+            } else if (item.startsWith(animatingCursorStr)) {
+                const auto str = item.mid(animatingCursorStr.size());
+                if (str.compare(QString::fromLatin1("true"), Qt::CaseInsensitive) == 0) {
+                    isAnimating = true;
+                    styleChanged = true;
+                } else if (str.compare(QString::fromLatin1("false"), Qt::CaseInsensitive) == 0) {
+                    isAnimating = false;
+                    styleChanged = true;
+                } else {
+                    bool ok = false;
+                    bool newIsAnimating = str.toInt(&ok);
+                    if (ok) {
+                        isAnimating = newIsAnimating;
+                        styleChanged = true;
+                    }
+                }
             } else if (item.startsWith(customCursorColorStr)) {
                 const auto colorStr = item.mid(customCursorColorStr.size());
                 customColor = QColor(colorStr);
@@ -1576,7 +1593,7 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
         }
 
         if (styleChanged) {
-            Q_EMIT setCursorStyleRequest(shape, isBlinking, customColor);
+            Q_EMIT setCursorStyleRequest(shape, isBlinking, isAnimating, customColor);
         }
 
         if (newValue.isEmpty()) {

@@ -326,6 +326,18 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
 
     _printManager.reset(new KonsolePrintManager(ldrawBackground, ldrawContents, lgetBackgroundColor));
     ubidi = ubidi_open();
+
+    animationTimer = new QTimer(this);
+    connect(animationTimer, &QTimer::timeout, this, [this]() {
+        qreal step = 0.2;
+        qreal newX = currentCursorRect.x() + (targetCursorRect.x() - currentCursorRect.x()) * step;
+        qreal newY = currentCursorRect.y() + (targetCursorRect.y() - currentCursorRect.y()) * step;
+
+        currentCursorRect.moveTo(newX, newY);
+
+        if (qAbs(currentCursorRect.x() - targetCursorRect.x()) < 0.1 && qAbs(currentCursorRect.y() - targetCursorRect.y()) < 0.1) { }
+        update();
+    });
 }
 
 TerminalDisplay::~TerminalDisplay()
@@ -378,12 +390,13 @@ void TerminalDisplay::setKeyboardCursorShape(Enum::CursorShapeEnum shape)
     _cursorShape = shape;
 }
 
-void TerminalDisplay::setCursorStyle(Enum::CursorShapeEnum shape, bool isBlinking, const QColor &customColor)
+void TerminalDisplay::setCursorStyle(Enum::CursorShapeEnum shape, bool isBlinking, bool isAnimating, const QColor &customColor)
 {
     setKeyboardCursorShape(shape);
 
     setBlinkingCursorEnabled(isBlinking);
 
+    setAnimatingCursorEnabled(isAnimating);
     if (customColor.isValid()) {
         _terminalColor->setCursorColor(customColor);
     }
@@ -409,6 +422,7 @@ void TerminalDisplay::resetCursorStyle()
 
         setKeyboardCursorShape(shape);
         setBlinkingCursorEnabled(currentProfile->blinkingCursorEnabled());
+        setAnimatingCursorEnabled(currentProfile->animatingCursorEnabled());
     }
 }
 
@@ -849,6 +863,12 @@ void TerminalDisplay::setBlinkingCursorEnabled(bool blink)
         }
         Q_ASSERT(!_cursorBlinking);
     }
+}
+
+void TerminalDisplay::setAnimatingCursorEnabled(bool animate)
+{
+    _allowAnimatingCursor = animate;
+    _cursorAnimating = animate;
 }
 
 void TerminalDisplay::setBlinkingTextEnabled(bool blink)
@@ -3126,6 +3146,7 @@ void TerminalDisplay::applyProfile(const Profile::Ptr &profile)
 
     // terminal features
     setBlinkingCursorEnabled(profile->blinkingCursorEnabled());
+    setAnimatingCursorEnabled(profile->animatingCursorEnabled());
     setBlinkingTextEnabled(profile->blinkingTextEnabled());
     _tripleClickMode = Enum::TripleClickModeEnum(profile->property<int>(Profile::TripleClickMode));
     setAutoCopySelectedText(profile->autoCopySelectedText());

@@ -875,6 +875,8 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr &profile)
     // cursor options
     _appearanceUi->enableBlinkingCursorButton->setChecked(profile->property<bool>(Profile::BlinkingCursorEnabled));
     connect(_appearanceUi->enableBlinkingCursorButton, &QToolButton::toggled, this, &EditProfileDialog::toggleBlinkingCursor);
+    _appearanceUi->enableAnimatingCursorButton->setChecked(profile->property<bool>(Profile::AnimatingCursorEnabled));
+    connect(_appearanceUi->enableAnimatingCursorButton, &QToolButton::toggled, this, &EditProfileDialog::toggleAnimatingCursor);
 
     if (profile->useCustomCursorColor()) {
         _appearanceUi->customCursorColorButton->setChecked(true);
@@ -1030,6 +1032,12 @@ void EditProfileDialog::toggleBlinkingCursor(bool enable)
 {
     preview(Profile::BlinkingCursorEnabled, enable);
     updateTempProfileProperty(Profile::BlinkingCursorEnabled, enable);
+}
+
+void EditProfileDialog::toggleAnimatingCursor(bool enable)
+{
+    preview(Profile::AnimatingCursorEnabled, enable);
+    updateTempProfileProperty(Profile::AnimatingCursorEnabled, enable);
 }
 
 void EditProfileDialog::setCursorShape(int index)

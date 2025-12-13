@@ -18,8 +18,8 @@
 #include <QVariant>
 
 // Konsole
-#include "konsoleprivate_export.h"
 #include "Enumeration.h"
+#include "konsoleprivate_export.h"
 
 #include <map>
 #include <vector>
@@ -187,6 +187,9 @@ public:
          * to text editing applications )
          */
         BlinkingCursorEnabled,
+        /** (bool) Specifies whether the cursor animates
+         */
+        AnimatingCursorEnabled,
         /** (bool) If true, terminal displays use a fixed color to draw the
          * cursor, specified by the CustomCursorColor property.  Otherwise
          * the cursor changes color to match the character underneath it.
@@ -727,6 +730,11 @@ public:
     bool blinkingCursorEnabled() const
     {
         return property<bool>(Profile::BlinkingCursorEnabled);
+    }
+    /** Convenience method for property<bool>(Profile::AnimatingCursorEnabled) */
+    bool animatingCursorEnabled() const
+    {
+        return property<bool>(Profile::AnimatingCursorEnabled);
     }
 
     /** Convenience method for property<bool>(Profile::FlowControlEnabled) */

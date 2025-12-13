@@ -409,9 +409,11 @@ Q_SIGNALS:
      * to the terminal.
      * @p shape cursor shape
      * @p isBlinking if true, the cursor will be set to blink
+     * @p isAnimating if true, the cursor will be set to animate
      * @p customColor custom cursor color
      */
-    void setCursorStyleRequest(Enum::CursorShapeEnum shape = Enum::BlockCursor, bool isBlinking = false, const QColor &customColor = {});
+    void
+    setCursorStyleRequest(Enum::CursorShapeEnum shape = Enum::BlockCursor, bool isBlinking = false, bool isAnimating = false, const QColor &customColor = {});
 
     /**
      * Emitted when reset() is called to reset the cursor style to the

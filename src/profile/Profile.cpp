@@ -137,6 +137,7 @@ const std::vector<Profile::PropertyInfo> Profile::DefaultProperties = {
     {BidiLineLTR, "BidiLineLTR", TERMINAL_GROUP, true},
     {BidiTableDirOverride, "BidiTableDirOverride", TERMINAL_GROUP, true},
     {BlinkingCursorEnabled, "BlinkingCursorEnabled", TERMINAL_GROUP, false},
+    {AnimatingCursorEnabled, "AnimatingCursorEnabled", TERMINAL_GROUP, false},
     {BellMode, "BellMode", TERMINAL_GROUP, Enum::NotifyBell},
     {VerticalLine, "VerticalLine", TERMINAL_GROUP, false},
     {VerticalLineAtChar, "VerticalLineAtChar", TERMINAL_GROUP, 80},

@@ -148,6 +148,7 @@ private Q_SLOTS:
     // void focusBorderColor();
     void focusBorderColorChanged(const QColor &color);
     void toggleBlinkingCursor(bool);
+    void toggleAnimatingCursor(bool);
     void setCursorShape(int);
     void autoCursorColor();
     void customCursorColor();

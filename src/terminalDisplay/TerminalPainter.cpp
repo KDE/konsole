@@ -40,10 +40,69 @@ const QChar LTR_OVERRIDE_CHAR(0x202D);
 
 namespace Konsole
 {
+QVariant interpolatePolygonF(const QPolygonF &start, const QPolygonF &end, qreal progress)
+{
+    if (start.size() != end.size())
+        return end;
+
+    QPolygonF result;
+    for (int i = 0; i < start.size(); ++i) {
+        QPointF p = start[i] + (end[i] - start[i]) * progress;
+        result << p;
+    }
+    return QVariant::fromValue(result);
+}
+
 TerminalPainter::TerminalPainter(TerminalDisplay *parent)
     : QObject(parent)
     , m_parentDisplay(parent)
 {
+    qRegisterAnimationInterpolator<QPolygonF>(interpolatePolygonF);
+    m_cursorAnim = new QVariantAnimation(this);
+    m_cursorAnim->setDuration(200);
+    m_cursorAnim->setEasingCurve(QEasingCurve::OutCubic);
+    connect(m_cursorAnim, &QVariantAnimation::valueChanged, this, &TerminalPainter::updateCursorAnimation);
+}
+void TerminalPainter::updateCursorAnimation(const QVariant &value)
+{
+    m_animatedCursorPolygon = value.value<QPolygonF>();
+    m_parentDisplay->update();
+}
+QPolygonF createDynamicPolygon(const QRectF &rect, qreal shear, qreal taper)
+{
+    QPolygonF poly;
+    qreal dx = -shear * rect.height();
+
+    qreal topWidthReduction = (taper < 0) ? (rect.width() * -taper) : 0;
+    qreal bottomWidthReduction = (taper > 0) ? (rect.width() * taper) : 0;
+
+    QPointF topLeft(rect.left() + dx + topWidthReduction, rect.top());
+    QPointF topRight(rect.right() + dx - topWidthReduction, rect.top());
+    QPointF bottomRight(rect.right() - bottomWidthReduction, rect.bottom());
+    QPointF bottomLeft(rect.left() + bottomWidthReduction, rect.bottom());
+
+    poly << topLeft << topRight << bottomRight << bottomLeft;
+    return poly;
+}
+
+void TerminalPainter::onCursorPositionChanged(const QRectF &oldRect, const QRectF &newRect)
+{
+    m_cursorAnim->stop();
+
+    qreal deltaX = oldRect.x() - newRect.x();
+    qreal deltaY = oldRect.y() - newRect.y();
+
+    qreal targetShear = qBound(-0.25, -deltaX * 0.015, 0.25);
+
+    qreal targetTaper = qBound(-0.3, deltaY * 0.02, 0.3);
+
+    QPolygonF startPoly = createDynamicPolygon(oldRect, targetShear, targetTaper);
+
+    QPolygonF endPoly = createDynamicPolygon(newRect, 0.0, 0.0);
+
+    m_cursorAnim->setStartValue(QVariant::fromValue(startPoly));
+    m_cursorAnim->setEndValue(QVariant::fromValue(endPoly));
+    m_cursorAnim->start();
 }
 
 static inline bool isLineCharString(const QString &string, bool braille)
@@ -587,23 +646,41 @@ void TerminalPainter::updateCursorTextColor(const QColor &backgroundColor, QColo
 
 void TerminalPainter::drawCursor(QPainter &painter, const QRectF &cursorRect, const QColor &foregroundColor, const QColor &backgroundColor, QColor &characterColor)
 {
-    if (m_parentDisplay->cursorBlinking()) {
-        return;
+    const qreal width = qMax(m_parentDisplay->terminalFont()->fontWidth() / 12.0, 1.0);
+    const qreal halfWidth = width / 2.0;
+
+    if (m_lastTargetRect != cursorRect) {
+        QRectF nextRect;
+
+        if (m_parentDisplay->cursorShape() == Enum::UnderlineCursor) {
+            nextRect = QRectF(cursorRect.left(), cursorRect.bottom() - width, cursorRect.width(), width);
+        } else if (m_parentDisplay->cursorShape() == Enum::IBeamCursor) {
+            nextRect = QRectF(cursorRect.left(), cursorRect.top(), width, cursorRect.height());
+        } else {
+            nextRect = cursorRect;
+        }
+        onCursorPositionChanged(m_lastTargetRect, nextRect);
+        m_lastTargetRect = cursorRect;
     }
 
     QColor color = m_parentDisplay->terminalColor()->cursorColor();
     QColor cursorColor = color.isValid() ? color : foregroundColor;
 
+    if (m_parentDisplay->cursorAnimating() && m_cursorAnim->state() == QAbstractAnimation::Running && !m_animatedCursorPolygon.isEmpty()) {
+        painter.setRenderHint(QPainter::Antialiasing, true);
+        painter.setBrush(cursorColor);
+        painter.setPen(Qt::NoPen);
+        painter.drawPolygon(m_animatedCursorPolygon, Qt::OddEvenFill);
+        painter.setRenderHint(QPainter::Antialiasing, false);
+        painter.setBrush(Qt::NoBrush);
+    }
+    if (m_parentDisplay->cursorBlinking()) {
+        return;
+    }
     QPen pen(cursorColor);
-    pen.setJoinStyle(Qt::MiterJoin);
-    // TODO: the relative pen width to draw the cursor is a bit hacky
-    // and set to 1/12 of the font width. Visually it seems to work at
-    // all scales but there must be better ways to do it
-    const qreal width = qMax(m_parentDisplay->terminalFont()->fontWidth() / 12.0, 1.0);
-    const qreal halfWidth = width / 2.0;
     pen.setWidthF(width);
+    pen.setJoinStyle(Qt::MiterJoin);
     painter.setPen(pen);
-
     if (m_parentDisplay->cursorShape() == Enum::BlockCursor) {
         if (m_parentDisplay->hasFocus()) {
             painter.fillRect(cursorRect, cursorColor);

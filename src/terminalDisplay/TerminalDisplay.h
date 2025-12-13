@@ -138,6 +138,9 @@ public:
     /** Specifies whether or not the cursor can blink. */
     void setBlinkingCursorEnabled(bool blink);
 
+    /** Specifies whether or not the cursor can animate. */
+    void setAnimatingCursorEnabled(bool animate);
+
     /** Specifies whether or not text can blink. */
     void setBlinkingTextEnabled(bool blink);
 
@@ -161,9 +164,10 @@ public:
      * Sets the Cursor Style (DECSCUSR) via escape sequences
      * @p shape cursor shape
      * @p isBlinking if true, the cursor will be set to blink
+     * @p isAnimating if true, the cursor will be set to animate
      * @p customColor custom cursor color
      */
-    void setCursorStyle(Enum::CursorShapeEnum shape, bool isBlinking, const QColor &customColor);
+    void setCursorStyle(Enum::CursorShapeEnum shape, bool isBlinking, bool isAnimating, const QColor &customColor);
 
     /**
      * Resets the cursor style to the current profile cursor shape and
@@ -327,6 +331,10 @@ public:
     bool cursorBlinking() const
     {
         return _cursorBlinking;
+    }
+    bool cursorAnimating() const
+    {
+        return _cursorAnimating;
     }
 
     bool textBlinking() const
@@ -730,8 +738,10 @@ private:
 
     bool _allowBlinkingText = true; // allow text to blink
     bool _allowBlinkingCursor = false; // allow cursor to blink
+    bool _allowAnimatingCursor = false; // allow cursor to animate
     bool _textBlinking = false; // text is blinking, hide it when drawing
     bool _cursorBlinking = false; // cursor is blinking, hide it when drawing
+    bool _cursorAnimating = false; // cursor is animating, animate it when drawing
     bool _hasTextBlinker = false; // has characters to blink
     QTimer *_blinkTextTimer = nullptr;
     QTimer *_blinkCursorTimer = nullptr;
@@ -833,6 +843,9 @@ private:
     int _id;
 
     static int lastViewId;
+    QRectF currentCursorRect;
+    QRectF targetCursorRect;
+    QTimer *animationTimer;
 };
 
 }
