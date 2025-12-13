@@ -67,6 +67,10 @@ void QuickCommandsPlugin::createWidgetsForMainWindow(Konsole::MainWindow *mainWi
 
 void QuickCommandsPlugin::activeViewChanged(Konsole::SessionController *controller, Konsole::MainWindow *mainWindow)
 {
+    if (mainWindow == nullptr || controller == nullptr) {
+        return;
+    }
+
     priv->showQuickAccess->deleteLater();
     priv->showQuickAccess = new QAction(i18n("Show Quick Access"));
 
@@ -81,10 +85,18 @@ void QuickCommandsPlugin::activeViewChanged(Konsole::SessionController *controll
 
     mainWindow->actionCollection()->setDefaultShortcut(priv->showQuickAccess, shortcutEntry);
 
-    controller->view()->addAction(priv->showQuickAccess);
+    // controller may exist while its view is being torn down
+    QPointer<Konsole::TerminalDisplay> terminalDisplay = controller->view();
+    if (terminalDisplay == nullptr) {
+        return;
+    }
+    terminalDisplay->addAction(priv->showQuickAccess);
 
-    Konsole::TerminalDisplay *terminalDisplay = controller->view();
-    connect(priv->showQuickAccess, &QAction::triggered, this, [this, terminalDisplay, controller] {
+    QPointer<Konsole::SessionController> controllerPtr(controller);
+    connect(priv->showQuickAccess, &QAction::triggered, this, [this, terminalDisplay, controllerPtr] {
+        if (terminalDisplay == nullptr) {
+            return;
+        }
         auto bar = new KCommandBar(terminalDisplay->topLevelWidget());
         QList<QAction *> actions;
         for (int i = 0; i < priv->model.rowCount(); i++) {
@@ -92,10 +104,15 @@ void QuickCommandsPlugin::activeViewChanged(Konsole::SessionController *controll
             for (int e = 0; e < priv->model.rowCount(folder); e++) {
                 QModelIndex idx = priv->model.index(e, 0, folder);
                 QAction *act = new QAction(idx.data().toString());
-                connect(act, &QAction::triggered, this, [this, idx, controller] {
+                connect(act, &QAction::triggered, this, [this, idx, controllerPtr] {
+                    if (controllerPtr == nullptr) {
+                        return;
+                    }
                     const auto item = priv->model.itemFromIndex(idx);
                     const auto data = item->data(QuickCommandsModel::QuickCommandRole).value<QuickCommandData>();
-                    controller->session()->sendTextToTerminal(data.command, QLatin1Char('\r'));
+                    if (controllerPtr->session() != nullptr) {
+                        controllerPtr->session()->sendTextToTerminal(data.command, QLatin1Char('\r'));
+                    }
                 });
                 actions.append(act);
             }
@@ -115,9 +132,7 @@ void QuickCommandsPlugin::activeViewChanged(Konsole::SessionController *controll
         bar->show();
     });
 
-    if (mainWindow) {
-        priv->widgetForWindow[mainWindow]->setCurrentController(controller);
-    }
+    priv->widgetForWindow[mainWindow]->setCurrentController(controller);
 }
 
 QList<QAction *> QuickCommandsPlugin::menuBarActions(Konsole::MainWindow *mainWindow) const
