@@ -919,8 +919,7 @@ void TerminalPainter::drawAboveText(QPainter &painter,
                         const qreal amplitude = static_cast<qreal>(fontHeight) / 8.0;
 
                         if (underline == RE_UNDERLINE_DOUBLE) {
-                            if (amplitude)
-                                painter.drawLine(x1, y - amplitude, x2, y - amplitude);
+                            painter.drawLine(x1, y - amplitude, x2, y - amplitude);
                         } else {
                             y = std::max(static_cast<qreal>(0), y - amplitude / 2);
                             assert(underline == RE_UNDERLINE_CURL);
