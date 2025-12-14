@@ -519,6 +519,8 @@ void TerminalDisplay::updateImage()
     auto dirtyMask = new char[columnsToUpdate + 2];
     QRegion dirtyRegion;
 
+    std::optional<int> startIndex;
+
     for (y = 0; y < linesToUpdate; ++y) {
         const Character *currentLine = &_image[y * _columns];
         const Character *const newLine = &newimg[y * columns];
@@ -533,6 +535,11 @@ void TerminalDisplay::updateImage()
         for (x = 0; x < columnsToUpdate; ++x) {
             if (newLine[x] != currentLine[x]) {
                 dirtyMask[x] = 1;
+
+                if (!startIndex) {
+                    const int lineStartIndex = (y * columns) + x;
+                    startIndex = lineStartIndex;
+                }
             }
         }
 
@@ -655,6 +662,17 @@ void TerminalDisplay::updateImage()
     QAccessible::updateAccessibility(&dataChangeEvent);
     QAccessibleTextCursorEvent cursorEvent(this, _usedColumns * screenWindow()->screen()->getCursorY() + screenWindow()->screen()->getCursorX());
     QAccessible::updateAccessibility(&cursorEvent);
+
+    if (startIndex) {
+        const auto currentCursor = [&]() -> int {
+            int offset = _usedColumns * screenWindow()->screen()->getCursorY();
+            return offset + screenWindow()->screen()->getCursorX();
+        };
+
+        const QString newText = screenWindow()->screen()->text(*startIndex, currentCursor(), Screen::PreserveLineBreaks);
+        QAccessibleTextUpdateEvent textUpdateEvent(this, 0, QString(), newText);
+        QAccessible::updateAccessibility(&textUpdateEvent);
+    }
 #endif
 }
 void TerminalDisplay::showResizeNotification()
