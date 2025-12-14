@@ -11,9 +11,10 @@
 #include "terminalDisplay/TerminalFonts.h"
 
 using namespace Konsole;
+using namespace Qt::StringLiterals;
 
 TerminalDisplayAccessible::TerminalDisplayAccessible(TerminalDisplay *display)
-    : QAccessibleWidget(display, QAccessible::Terminal, display->sessionController() ? display->sessionController()->userTitle() : QString())
+    : QAccessibleWidget(display, QAccessible::Terminal, u"Terminal"_s)
 {
 }
 

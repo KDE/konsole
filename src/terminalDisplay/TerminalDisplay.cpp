@@ -651,6 +651,12 @@ void TerminalDisplay::updateImage()
     QAccessible::updateAccessibility(&dataChangeEvent);
     QAccessibleTextCursorEvent cursorEvent(this, _usedColumns * screenWindow()->screen()->getCursorY() + screenWindow()->screen()->getCursorX());
     QAccessible::updateAccessibility(&cursorEvent);
+
+    QAccessible::State enable;
+    enable.disabled = false;
+    enable.multiLine = true;
+    QAccessibleStateChangeEvent stateChangeEvent(this, enable);
+    QAccessible::updateAccessibility(&stateChangeEvent);
 #endif
 }
 void TerminalDisplay::showResizeNotification()
