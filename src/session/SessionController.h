@@ -408,10 +408,10 @@ private:
 
     bool _isSearchBarEnabled;
 
-    QString _searchText;
+    QString _searchText = QString();
     QPointer<IncrementalSearchBar> _searchBar;
 
-    QString _previousForegroundProcessName;
+    QString _previousForegroundProcessName = QString();
     bool _monitorProcessFinish;
     bool _monitorOnce;
     EscapeSequenceUrlFilter *_escapedUrlFilter;

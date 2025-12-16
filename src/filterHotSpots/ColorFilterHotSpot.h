@@ -27,7 +27,7 @@ private:
     void tooltipRequested();
 
     QColor _color;
-    QPoint _toolPos;
+    QPoint _toolPos = QPoint(0, 0);
     static bool _canGenerateTooltip;
 };
 }

@@ -754,9 +754,9 @@ private:
     Enum::TripleClickModeEnum _tripleClickMode = Enum::SelectWholeLine;
     bool _possibleTripleClick = false; // is set in mouseDoubleClickEvent and cleared
                                        // after QApplication::doubleClickInterval() delay
-    QPoint _tripleClickPos; // The position where a potential triple click was started
-    QString _doubleClickSelectedText; // selected text whose copying may be cancelled by further events; copying
-    QString _doubleClickSelectedHtml; // is delayed to prevent a triple-click from generating > 1 entries in the
+    QPoint _tripleClickPos = QPoint(0, 0); // The position where a potential triple click was started
+    QString _doubleClickSelectedText = QString(); // selected text whose copying may be cancelled by further events; copying
+    QString _doubleClickSelectedHtml = QString(); // is delayed to prevent a triple-click from generating > 1 entries in the
                                       // clipboard history (a triple click is a double click at first ;)
 
     QLabel *_resizeWidget = nullptr;
@@ -768,7 +768,7 @@ private:
     // terminal output - informing them what has happened and how to resume output
     KMessageWidget *_outputSuspendedMessageWidget = nullptr;
 
-    QSize _size;
+    QSize _size = QSize(0, 0);
 
     std::shared_ptr<const ColorScheme> _colorScheme;
     ColorSchemeWallpaper::Ptr _wallpaper;
@@ -804,10 +804,10 @@ private:
     bool _selectMode = false;
 
     bool _dimWhenInactive = false;
-    int _dimValue;
+    int _dimValue = 0;
 
     bool _borderWhenActive = false;
-    QColor _focusBorderColor;
+    QColor _focusBorderColor = QColor();
 
     ScrollState _scrollWheelState;
     IncrementalSearchBar *_searchBar = nullptr;
@@ -831,14 +831,14 @@ private:
 
     std::unique_ptr<KonsolePrintManager> _printManager;
 
-    bool _semanticUpDown;
-    bool _semanticInputClick;
+    bool _semanticUpDown = false;
+    bool _semanticInputClick = false;
 
     UBiDi *ubidi = nullptr;
     QPoint _visualCursorPosition = {0, 0};
 
-    int _selModeModifiers;
-    bool _selModeByModifiers; // Selection started by Shift+Arrow
+    int _selModeModifiers = 0;
+    bool _selModeByModifiers = false; // Selection started by Shift+Arrow
 
     int _id;
 
