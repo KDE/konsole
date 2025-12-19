@@ -743,6 +743,12 @@ public Q_SLOTS:
      */
     Q_SCRIPTABLE QString activationToken(const QString &cookieForRequest) const;
 
+    /**
+     * Sets/gets the session's tab color
+     */
+    Q_SCRIPTABLE QString tabColor() const;
+    Q_SCRIPTABLE void setTabColor(const QString &colorName);
+
 Q_SIGNALS:
 
     /** Emitted when the terminal process starts. */
