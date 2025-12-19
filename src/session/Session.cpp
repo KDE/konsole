@@ -2186,6 +2186,16 @@ QColor Session::color() const
     return _tabColor;
 }
 
+void Session::setTabColor(const QString &colorName)
+{
+    setColor(QColor(colorName));
+}
+
+QString Session::tabColor() const
+{
+    return _tabColor.name();
+}
+
 SessionController *Session::controller()
 {
     if (!_views.isEmpty())
