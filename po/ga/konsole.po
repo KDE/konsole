@@ -2,31 +2,32 @@
 # Copyright (C) 2002 Free Software Foundation, Inc.
 # Séamus Ó Ciardhuáin <seoc@cnds.ucd.ie>, 2002
 # Kevin Scannell <kscanne@gmail.com>, 2009
+# SPDX-FileCopyrightText: 2025 Charlotte <altronic25@protonmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-16 06:54+0000\n"
-"PO-Revision-Date: 2004-12-03 14:52-0500\n"
-"Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
-"Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
+"PO-Revision-Date: 2025-12-19 17:46+0000\n"
+"Last-Translator: Charlotte <altronic25@protonmail.com>\n"
+"Language-Team: Irish <kde-i18n-doc@kde.org>\n"
 "Language: ga\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.0beta1\n"
 "Plural-Forms: nplurals=5; plural=n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n < 11 ? "
-"3 : 4\n"
+"3 : 4;\n"
+"X-Generator: Lokalize 25.12.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Séamus Ó Ciardhuáin,Kevin Scannell"
+msgstr "Séamus Ó Ciardhuáin,Kevin Scannell,Aindriú Mac Giolla Eoin"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "seoc@iolfree.ie,kscanne@gmail.com"
+msgstr "seoc@iolfree.ie,kscanne@gmail.com,aindriu80@gmail.com"
 
 #. i18n: ectx: Menu (file)
 #: ../desktop/konsoleui.rc:6
@@ -65,7 +66,7 @@ msgstr "Socruithe"
 #: ../desktop/konsoleui.rc:54
 #, kde-format
 msgid "Plugins"
-msgstr ""
+msgstr "Breiseáin"
 
 #. i18n: ectx: Menu (help)
 #: ../desktop/konsoleui.rc:57
@@ -77,7 +78,7 @@ msgstr "Cabhair"
 #: ../desktop/konsoleui.rc:61
 #, kde-format
 msgid "Main Toolbar"
-msgstr ""
+msgstr "Príomhbharra Uirlisí"
 
 #. i18n: ectx: Menu (history)
 #: ../desktop/partui.rc:20
@@ -87,10 +88,9 @@ msgstr "Iars&crollú"
 
 #. i18n: ectx: ToolBar (sessionToolbar)
 #: ../desktop/sessionui.rc:80
-#, fuzzy, kde-format
-#| msgid "Session"
+#, kde-format
 msgid "Session Toolbar"
-msgstr "Seisiún"
+msgstr "Barra Uirlisí Seisiúin"
 
 #: Application.cpp:53
 #, kde-format
@@ -99,127 +99,119 @@ msgid "Name of profile to use for new Konsole instance"
 msgstr "Ainm na próifíle le húsáid i bhfuinneog nua Konsole"
 
 #: Application.cpp:54
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "Name of profile to use for new Konsole instance"
+#, kde-format
 msgctxt "@info:shell"
 msgid "json layoutfile to be loaded to use for new Konsole instance"
-msgstr "Ainm na próifíle le húsáid i bhfuinneog nua Konsole"
+msgstr "comhad leagan amach json le luchtú le húsáid don chás nua Konsole"
 
 #: Application.cpp:55
-#, fuzzy, kde-format
-#| msgid "Create a new profile based upon the selected profile"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Use the built-in profile instead of the default profile"
-msgstr "Cruthaigh próifíl nua bunaithe ar an bpróifíl roghnaithe"
+msgstr "Úsáid an phróifíl ionsuite in ionad an phróifíl réamhshocraithe"
 
 #: Application.cpp:56
-#, fuzzy, kde-format
-#| msgid "Set the initial working directory of the new tab or window to 'dir'"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Set the initial working directory of the new tab or window to 'dir'"
 msgstr ""
-"Socraigh an chéad chomhadlann oibre sa chluaisín nó fuinneog nua go 'dir'"
+"Socraigh an chéad eolaire oibre den chluaisín nó den fhuinneog nua go 'dir'"
 
 #: Application.cpp:57
-#, fuzzy, kde-format
-#| msgid "Do not close the initial session automatically when it ends."
+#, kde-format
 msgctxt "@info:shell"
 msgid "Do not close the initial session automatically when it ends."
-msgstr "Ná dún an bunseisiún go huathoibríoch nuair a thagann sé chun deiridh."
+msgstr "Ná dún an seisiún tosaigh go huathoibríoch nuair a chríochnaíonn sé."
 
 #: Application.cpp:61
-#, fuzzy, kde-format
-#| msgid ""
-#| "Create a new tab in an existing window rather than creating a new window"
+#, kde-format
 msgctxt "@info:shell"
 msgid ""
 "Create a new tab in an existing window rather than creating a new window "
 "('Run all Konsole windows in a single process' must be enabled)"
 msgstr ""
-"Cruthaigh cluaisín nua i bhfuinneog atá ann in ionad fuinneog nua a chruthú"
+"Cruthaigh cluaisín nua i bhfuinneog atá ann cheana féin seachas fuinneog nua "
+"a chruthú (ní mór 'Rith gach fuinneog Konsole i bpróiseas amháin' a bheith "
+"cumasaithe)"
 
 #: Application.cpp:62
 #, kde-format
 msgctxt "@info:shell"
 msgid "Create tabs as specified in given tabs configuration file"
 msgstr ""
+"Cruthaigh cluaisíní mar atá sonraithe sa chomhad cumraíochta cluaisíní tugtha"
 
 #: Application.cpp:64
-#, fuzzy, kde-format
-#| msgid ""
-#| "Start Konsole in the background and bring to the front when Ctrl+Shift"
-#| "+F12 (by default) is pressed"
+#, kde-format
 msgctxt "@info:shell"
 msgid ""
 "Start Konsole in the background and bring to the front when Ctrl+Shift+F12 "
 "(by default) is pressed"
 msgstr ""
-"Tosaigh Konsole sa chúlra agus tabhair é chun tosaigh nuair a bhrúitear Ctrl"
+"Tosaigh Konsole sa chúlra agus tabhair chun tosaigh é nuair a bhrúitear Ctrl"
 "+Shift+F12 (de réir réamhshocraithe)"
 
 #: Application.cpp:65
 #, kde-format
 msgctxt "@info:shell"
 msgid "Run in a separate process"
-msgstr ""
+msgstr "Rith i bpróiseas ar leithligh"
 
 #: Application.cpp:66
 #, kde-format
 msgctxt "@info:shell"
 msgid "Show the menubar, overriding the default setting"
-msgstr ""
+msgstr "Taispeáin an barra roghchláir, ag sárú an socraithe réamhshocraithe"
 
 #: Application.cpp:67
 #, kde-format
 msgctxt "@info:shell"
 msgid "Hide the menubar, overriding the default setting"
-msgstr ""
+msgstr "Folaigh an barra roghchláir, ag sárú an socraithe réamhshocraithe"
 
 #: Application.cpp:68
 #, kde-format
 msgctxt "@info:shell"
 msgid "Show the tabbar, overriding the default setting"
-msgstr ""
+msgstr "Taispeáin an barra cluaisíní, ag sárú an socraithe réamhshocraithe"
 
 #: Application.cpp:69
 #, kde-format
 msgctxt "@info:shell"
 msgid "Hide the tabbar, overriding the default setting"
-msgstr ""
+msgstr "Folaigh an barra cluaisíní, ag sárú an socraithe réamhshocraithe"
 
 #: Application.cpp:70
 #, kde-format
 msgctxt "@info:shell"
 msgid "Start Konsole in fullscreen mode"
-msgstr ""
+msgstr "Tosaigh Konsole i mód lánscáileáin"
 
 #: Application.cpp:71
-#, fuzzy, kde-format
-#| msgid "Disable transparent backgrounds, even if the system supports them."
+#, kde-format
 msgctxt "@info:shell"
 msgid "Disable transparent backgrounds, even if the system supports them."
 msgstr "Díchumasaigh cúlraí trédhearcacha, fiú má thacaíonn an córas leo."
 
 #: Application.cpp:72
-#, fuzzy, kde-format
-#| msgid "List the available profiles"
+#, kde-format
 msgctxt "@info:shell"
 msgid "List the available profiles"
-msgstr "Taispeáin na próifílí atá ar fáil"
+msgstr "Liostaigh na próifílí atá ar fáil"
 
 #: Application.cpp:73
 #, kde-format
 msgctxt "@info:shell"
 msgid "List all the profile properties names and their type (for use with -p)"
 msgstr ""
+"Liostaigh ainmneacha na n-airíonna próifíle go léir agus a gcineál (le "
+"húsáid le -p)"
 
 #: Application.cpp:74
-#, fuzzy, kde-format
-#| msgid "Change the value of a profile property."
+#, kde-format
 msgctxt "@info:shell"
 msgid "Change the value of a profile property."
-msgstr "Athraigh luach d'airí próifíle."
+msgstr "Athraigh luach airí próifíle."
 
 #: Application.cpp:76
 #, kde-format
@@ -228,6 +220,8 @@ msgid ""
 "Command to execute. This option will catch all following arguments, so use "
 "it as the last option."
 msgstr ""
+"Ordú le forghníomhú. Gabhfaidh an rogha seo na hargóintí seo a leanas go "
+"léir, mar sin bain úsáid as mar an rogha dheireanach."
 
 #: Application.cpp:79
 #, kde-format
@@ -236,6 +230,8 @@ msgid ""
 "Force re-using the existing instance even if it breaks functionality, e. g. "
 "--new-tab. Mostly for debugging."
 msgstr ""
+"Athúsáid fhorleathan a dhéanamh ar an gcás atá ann cheana fiú má bhriseann "
+"sé feidhmiúlacht, e.g. --new-tab. Den chuid is mó le haghaidh dífhabhtaithe."
 
 #: Application.cpp:86
 #, kde-format
@@ -244,12 +240,10 @@ msgid "Arguments passed to command"
 msgstr "Argóintí a sheoltar chuig ordú"
 
 #: Application.cpp:516
-#, fuzzy, kde-format
-#| msgctxt "@item:intable palette"
-#| msgid "Background (Intense)"
+#, kde-format
 msgctxt "@item"
 msgid "Toggle Background Window"
-msgstr "Cúlra (Tréan)"
+msgstr "Fuinneog an Chúlra a Athrú"
 
 #: BookmarkHandler.cpp:107
 #, kde-format
@@ -364,91 +358,60 @@ msgid "Color 8 (Intense)"
 msgstr "Dath 8 (Tréan)"
 
 #: colorscheme/ColorScheme.cpp:144
-#, fuzzy
-#| msgctxt "@item:intable palette"
-#| msgid "Foreground (Intense)"
 msgctxt "@item:intable palette"
 msgid "Foreground (Faint)"
-msgstr "Tulra (Tréan)"
+msgstr "Túlra (Lagánta)"
 
 #: colorscheme/ColorScheme.cpp:145
-#, fuzzy
-#| msgctxt "@item:intable palette"
-#| msgid "Background (Intense)"
 msgctxt "@item:intable palette"
 msgid "Background (Faint)"
-msgstr "Cúlra (Tréan)"
+msgstr "Cúlra (Lagánta)"
 
 #: colorscheme/ColorScheme.cpp:146
-#, fuzzy
-#| msgctxt "@item:intable palette"
-#| msgid "Color 1 (Intense)"
 msgctxt "@item:intable palette"
 msgid "Color 1 (Faint)"
-msgstr "Dath 1 (Tréan)"
+msgstr "Dath 1 (Lagánta)"
 
 #: colorscheme/ColorScheme.cpp:147
-#, fuzzy
-#| msgctxt "@item:intable palette"
-#| msgid "Color 2 (Intense)"
 msgctxt "@item:intable palette"
 msgid "Color 2 (Faint)"
-msgstr "Dath 2 (Tréan)"
+msgstr "Dath 2 (Lagánta)"
 
 #: colorscheme/ColorScheme.cpp:148
-#, fuzzy
-#| msgctxt "@item:intable palette"
-#| msgid "Color 3 (Intense)"
 msgctxt "@item:intable palette"
 msgid "Color 3 (Faint)"
-msgstr "Dath 3 (Tréan)"
+msgstr "Dath 3 (Lagánta)"
 
 #: colorscheme/ColorScheme.cpp:149
-#, fuzzy
-#| msgctxt "@item:intable palette"
-#| msgid "Color 4 (Intense)"
 msgctxt "@item:intable palette"
 msgid "Color 4 (Faint)"
-msgstr "Dath 4 (Tréan)"
+msgstr "Dath 4 (Lagánta)"
 
 #: colorscheme/ColorScheme.cpp:150
-#, fuzzy
-#| msgctxt "@item:intable palette"
-#| msgid "Color 5 (Intense)"
 msgctxt "@item:intable palette"
 msgid "Color 5 (Faint)"
-msgstr "Dath 5 (Tréan)"
+msgstr "Dath 5 (Lagánta)"
 
 #: colorscheme/ColorScheme.cpp:151
-#, fuzzy
-#| msgctxt "@item:intable palette"
-#| msgid "Color 6 (Intense)"
 msgctxt "@item:intable palette"
 msgid "Color 6 (Faint)"
-msgstr "Dath 6 (Tréan)"
+msgstr "Dath 6 (Lagánta)"
 
 #: colorscheme/ColorScheme.cpp:152
-#, fuzzy
-#| msgctxt "@item:intable palette"
-#| msgid "Color 7 (Intense)"
 msgctxt "@item:intable palette"
 msgid "Color 7 (Faint)"
-msgstr "Dath 7 (Tréan)"
+msgstr "Dath 7 (Lagánta)"
 
 #: colorscheme/ColorScheme.cpp:153
-#, fuzzy
-#| msgctxt "@item:intable palette"
-#| msgid "Color 8 (Intense)"
 msgctxt "@item:intable palette"
 msgid "Color 8 (Faint)"
-msgstr "Dath 8 (Tréan)"
+msgstr "Dath 9 (Lagánta)"
 
 #: colorscheme/ColorScheme.cpp:452
-#, fuzzy, kde-format
-#| msgid "Un-named Color Scheme"
+#, kde-format
 msgctxt "@item"
 msgid "Un-named Color Scheme"
-msgstr "Scéim Datha Gan Ainm"
+msgstr "Scéim Dathanna Gan Ainm"
 
 #: colorscheme/ColorSchemeEditor.cpp:110
 #, kde-format
@@ -466,14 +429,13 @@ msgstr "Dath"
 #, kde-format
 msgctxt "@label:listbox Column header text for the actual intense colors"
 msgid "Intense color"
-msgstr ""
+msgstr "Dath dian"
 
 #: colorscheme/ColorSchemeEditor.cpp:112
-#, fuzzy, kde-format
-#| msgid "Linux Colors"
+#, kde-format
 msgctxt "@label:listbox Column header text for the actual faint colors"
 msgid "Faint color"
-msgstr "Dathanna Linux"
+msgstr "Dath lag"
 
 #: colorscheme/ColorSchemeEditor.cpp:137
 #, kde-format
@@ -489,46 +451,43 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Select wallpaper image file"
-msgstr ""
+msgstr "Roghnaigh comhad íomhá cúlbhrat"
 
 #: colorscheme/ColorSchemeEditor.cpp:190
 #, kde-format
 msgctxt "@label:textbox Filter in file open dialog"
 msgid "Supported Images"
-msgstr ""
+msgstr "Íomhánna Tacaithe"
 
 #: colorscheme/ColorSchemeEditor.cpp:334
-#, fuzzy, kde-format
-#| msgid "New Color Scheme"
+#, kde-format
 msgctxt "@title:window"
 msgid "New Color Scheme"
-msgstr "Scéim Nua Dathanna"
+msgstr "Scéim Dathanna Nua"
 
 #: colorscheme/ColorSchemeEditor.cpp:337
-#, fuzzy, kde-format
-#| msgid "Edit Color Scheme"
+#, kde-format
 msgctxt "@title:window"
 msgid "Edit Color Scheme"
-msgstr "Cuir an Scéim Datha in Eagar"
+msgstr "Cuir Scéim Dathanna in Eagar"
 
 #: colorscheme/ColorSchemeEditor.cpp:383
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose color"
-msgstr ""
+msgstr "Cliceáil chun dath a roghnú"
 
 #: colorscheme/ColorSchemeEditor.cpp:388
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose intense color"
-msgstr ""
+msgstr "Cliceáil chun dath dian a roghnú"
 
 #: colorscheme/ColorSchemeEditor.cpp:393
-#, fuzzy, kde-format
-#| msgid "Click to send an email to %1."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose Faint color"
-msgstr "Cliceáil chun ríomhphost a sheoladh chuig %1."
+msgstr "Cliceáil chun dath lag a roghnú"
 
 #. i18n: ectx: property (text), widget (QLabel, descriptionLabel)
 #. i18n: ectx: property (text), widget (QLabel, discriptionLabel)
@@ -546,27 +505,29 @@ msgid ""
 "settings.\n"
 "To see any effect, set colors with saturation value greater than 0."
 msgstr ""
+"Déantar luachanna datha agus sáithiúcháin dathanna réamhshocraithe an tulra "
+"agus an chúlra a randamú de réir réamhshocraithe. D’fhéadfadh socruithe "
+"randamaithe difriúla a bheith in úsáid ag roinnt scéimeanna dathanna.\n"
+"Chun aon éifeacht a fheiceáil, socraigh dathanna le luach sáithiúcháin níos "
+"mó ná 0."
 
 #. i18n: ectx: property (text), widget (QCheckBox, randomizedBackgroundCheck)
 #: colorscheme/ColorSchemeEditor.ui:53
 #, kde-format
 msgid "Randomly adjust colors for each session"
-msgstr ""
+msgstr "Coigeartaigh dathanna go randamach do gach seisiún"
 
 #. i18n: ectx: property (text), widget (QCheckBox, blurCheckBox)
 #: colorscheme/ColorSchemeEditor.ui:60
-#, fuzzy, kde-format
-#| msgctxt "@item:intable palette"
-#| msgid "Background"
+#, kde-format
 msgid "Blur background"
-msgstr "Cúlra"
+msgstr "Cúlra doiléir"
 
 #. i18n: ectx: property (text), widget (QLabel, transparencyLabel)
 #: colorscheme/ColorSchemeEditor.ui:69
-#, fuzzy, kde-format
-#| msgid "Background transparency:"
+#, kde-format
 msgid "Background color transparency:"
-msgstr "Trédhearcachas an chúlra:"
+msgstr "Trédhearcacht dath an chúlra:"
 
 #. i18n: ectx: property (text), widget (QLabel, transparencyPercentLabel)
 #. i18n: ectx: property (text), widget (QLabel, wallpaperTransparencyPercentLabel)
@@ -577,10 +538,9 @@ msgstr "Céatadán"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperTransparencyLabel)
 #: colorscheme/ColorSchemeEditor.ui:103
-#, fuzzy, kde-format
-#| msgid "Background transparency:"
+#, kde-format
 msgid "Wallpaper transparency:"
-msgstr "Trédhearcachas an chúlra:"
+msgstr "Trédhearcacht cúlbhrat:"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperLabel)
 #: colorscheme/ColorSchemeEditor.ui:137
@@ -592,14 +552,13 @@ msgstr "Íomhá chúlra:"
 #: colorscheme/ColorSchemeEditor.ui:144
 #, kde-format
 msgid "Edit the path of the background image"
-msgstr ""
+msgstr "Cuir cosán na híomhá cúlra in eagar"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, wallpaperSelectButton)
 #: colorscheme/ColorSchemeEditor.ui:151
-#, fuzzy, kde-format
-#| msgid "Background image:"
+#, kde-format
 msgid "Choose the background image"
-msgstr "Íomhá chúlra:"
+msgstr "Roghnaigh an íomhá chúlra"
 
 #. i18n: ectx: property (text), widget (QToolButton, wallpaperSelectButton)
 #. i18n: ectx: property (text), widget (QToolButton, dirSelectButton)
@@ -612,103 +571,98 @@ msgstr "..."
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperScalingLabel)
 #: colorscheme/ColorSchemeEditor.ui:165
-#, fuzzy, kde-format
-#| msgid "Wallpaper:"
+#, kde-format
 msgid "Wallpaper scaling:"
-msgstr "Cúlbhrat:"
+msgstr "Scálú cúlbhrat:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
 #: colorscheme/ColorSchemeEditor.ui:173
 #, kde-format
 msgid "Tile"
-msgstr ""
+msgstr "Tíleanna"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
 #: colorscheme/ColorSchemeEditor.ui:178
 #, kde-format
 msgid "Stretch"
-msgstr ""
+msgstr "Síneadh"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
 #: colorscheme/ColorSchemeEditor.ui:183
 #, kde-format
 msgid "Crop"
-msgstr ""
+msgstr "Barr"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
 #: colorscheme/ColorSchemeEditor.ui:188
 #, kde-format
 msgid "Adapt"
-msgstr ""
+msgstr "Oiriúnú"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
 #: colorscheme/ColorSchemeEditor.ui:193
-#, fuzzy, kde-format
-#| msgid "Scrolling"
+#, kde-format
 msgid "NoScaling"
-msgstr "Scrollú"
+msgstr "Gan Scálú"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperFlipLabel)
 #: colorscheme/ColorSchemeEditor.ui:205
-#, fuzzy, kde-format
-#| msgid "Wallpaper:"
+#, kde-format
 msgid "Wallpaper flip:"
-msgstr "Cúlbhrat:"
+msgstr "Smeach cúlbhrat:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:213
 #, kde-format
 msgid "NoFlip"
-msgstr ""
+msgstr "Gan Flip"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:218
 #, kde-format
 msgid "Horizontal"
-msgstr ""
+msgstr "Cothrománach"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:223
 #, kde-format
 msgid "Vertical"
-msgstr ""
+msgstr "Ingearach"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:228
 #, kde-format
 msgid "Both"
-msgstr ""
+msgstr "An dá cheann"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperHorizontalAnchorLabel)
 #: colorscheme/ColorSchemeEditor.ui:240
 #, kde-format
 msgid "Horizontal Anchor:"
-msgstr ""
+msgstr "Ancaire Cothrománach:"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperHorizontalAnchorPosition)
 #: colorscheme/ColorSchemeEditor.ui:266
-#, fuzzy, kde-format
-#| msgid "&Left"
+#, kde-format
 msgid "Left"
-msgstr "Ar &Chlé"
+msgstr "Ar chlé"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperVerticalAnchorLabel)
 #: colorscheme/ColorSchemeEditor.ui:277
 #, kde-format
 msgid "Vertical Anchor:"
-msgstr ""
+msgstr "Ancaire Ingearach:"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperVerticalAnchorPosition)
 #: colorscheme/ColorSchemeEditor.ui:303
-#, fuzzy, kde-format
-#| msgid "&Top"
+#, kde-format
 msgid "Top"
-msgstr "&Barr"
+msgstr "Barr"
 
 #: colorscheme/ColorSchemeViewDelegate.cpp:52
 #, kde-format
 msgid "AaZz09..."
-msgstr ""
+msgstr "AaZz09..."
 
 #: CopyInputDialog.cpp:30
 #, kde-format
@@ -735,11 +689,10 @@ msgid "Deselect All"
 msgstr "Díroghnaigh Uile"
 
 #: filterHotSpots/ColorFilterHotSpot.cpp:84
-#, fuzzy, kde-format
-#| msgid "Preview:"
+#, kde-format
 msgctxt "Caption of hover tooltip"
 msgid "Color Preview"
-msgstr "Réamhamharc:"
+msgstr "Réamhamharc Dathanna"
 
 #: filterHotSpots/FileFilterHotspot.cpp:158
 #, kde-format
@@ -747,17 +700,18 @@ msgid ""
 "Could not open file with the text editor specified in the profile settings;\n"
 "it will be opened with the system default editor."
 msgstr ""
+"Níorbh fhéidir an comhad a oscailt leis an eagarthóir téacs atá sonraithe "
+"sna socruithe próifíle; osclófar é leis an eagarthóir réamhshocraithe córais."
 
 #: filterHotSpots/FileFilterHotspot.cpp:172
-#, fuzzy, kde-format
-#| msgid "Cursor Options"
+#, kde-format
 msgid "Copy Location"
-msgstr "Roghanna an Chúrsóra"
+msgstr "Cóipeáil Suíomh"
 
 #: filterHotSpots/FileFilterHotspot.cpp:280
 #, kde-format
 msgid "Generating Thumbnail"
-msgstr ""
+msgstr "Mionsamhail á Giniúint"
 
 #: filterHotSpots/UrlFilterHotspot.cpp:90
 #, kde-format
@@ -780,18 +734,16 @@ msgid "Copy Email Address"
 msgstr "Cóipeáil Seoladh Ríomhphoist"
 
 #: FontDialog.cpp:26
-#, fuzzy, kde-format
-#| msgid "Select Font..."
+#, kde-format
 msgctxt "@title:window"
 msgid "Select font"
-msgstr "Roghnaigh Cló..."
+msgstr "Roghnaigh cló"
 
 #: FontDialog.cpp:37
-#, fuzzy, kde-format
-#| msgid "Smooth fonts"
+#, kde-format
 msgctxt "@action:button"
 msgid "Show all fonts"
-msgstr "Clónna míne"
+msgstr "Taispeáin na clónna uile"
 
 #: FontDialog.cpp:66
 #, kde-format
@@ -801,6 +753,10 @@ msgid ""
 "equal width (monospace). Any non monospaced font may cause display issues. "
 "This should not be necessary except in rare cases."
 msgstr ""
+"De réir a nádúir féin, éilíonn clár teirminéal carachtair cló atá "
+"comhleitheadach (aonspás). D’fhéadfadh aon chló nach bhfuil aonspásáilte "
+"fadhbanna taispeána a chruthú. Níor cheart go mbeadh gá leis seo ach amháin "
+"i gcásanna neamhchoitianta."
 
 #: HistorySizeDialog.cpp:25
 #, kde-format
@@ -812,13 +768,13 @@ msgstr "Coigeartaigh Iarscrollú"
 #, kde-format
 msgctxt "@info:status"
 msgid "Any adjustments are only temporary to this session."
-msgstr ""
+msgstr "Ní bheidh aon choigeartuithe ach sealadach don seisiún seo."
 
 #: KeyBindingEditor.cpp:54
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Enter descriptive label"
-msgstr ""
+msgstr "Cuir isteach lipéad tuairisciúil"
 
 #: KeyBindingEditor.cpp:63
 #, kde-format
@@ -843,7 +799,7 @@ msgstr "Cuir an Liosta Ceangal Eochracha in Eagar"
 #: KeyBindingEditor.cpp:287
 #, kde-format
 msgid "A key bindings scheme cannot be saved with an empty description."
-msgstr ""
+msgstr "Ní féidir scéim cheangail eochracha a shábháil le cur síos folamh."
 
 #. i18n: ectx: property (text), widget (QPushButton, addEntryButton)
 #. i18n: ectx: property (text), widget (QPushButton, btnAdd)
@@ -883,8 +839,7 @@ msgid "Output:"
 msgstr "Aschur:"
 
 #: main.cpp:189
-#, fuzzy, kde-format
-#| msgid "Konsole"
+#, kde-format
 msgctxt "@title"
 msgid "Konsole"
 msgstr "Konsole"
@@ -899,7 +854,7 @@ msgstr "Aithriseoir teirminéil"
 #, kde-format
 msgctxt "@info:credit"
 msgid "(c) 1997-2022, The Konsole Developers"
-msgstr ""
+msgstr "(c) 1997-2022, Forbróirí Konsole"
 
 #: main.cpp:369
 #, kde-format
@@ -923,7 +878,7 @@ msgstr "Robert Knight"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Previous maintainer, ported to KDE4"
-msgstr ""
+msgstr "Cothaitheoir roimhe seo, aistrithe chuig KDE4"
 
 #: main.cpp:377
 #, kde-format
@@ -941,39 +896,37 @@ msgstr "An chéad údar"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Ahmad Samir"
-msgstr ""
+msgstr "Ahmad Samir"
 
 #: main.cpp:379 main.cpp:382 main.cpp:385 main.cpp:388
-#, fuzzy, kde-format
-#| msgctxt "@info:credit"
-#| msgid "General maintainer, bug fixes and general improvements"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Major refactoring, bug fixes and major improvements"
-msgstr "Cothaitheoir ginearálta, ceartúcháin agus feabhsúcháin ghinearálta"
+msgstr "Athchóiriú mór, ceartúcháin fabhtanna agus feabhsuithe móra"
 
 #: main.cpp:381
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carlos Alves"
-msgstr ""
+msgstr "Carlos Alves"
 
 #: main.cpp:384
 #, kde-format
 msgctxt "@info:credit"
 msgid "Tomaz Canabrava"
-msgstr ""
+msgstr "Tomaz Canabrava"
 
 #: main.cpp:387
 #, kde-format
 msgctxt "@info:credit"
 msgid "Gustavo Carneiro"
-msgstr ""
+msgstr "Gustavo Carneiro"
 
 #: main.cpp:390
 #, kde-format
 msgctxt "@info:credit"
 msgid "Edwin Pujols"
-msgstr ""
+msgstr "Edwin Pujols"
 
 #: main.cpp:391 main.cpp:394 main.cpp:396 main.cpp:401 main.cpp:403
 #: main.cpp:404 main.cpp:405
@@ -986,35 +939,31 @@ msgstr "Ceartúcháin agus feabhsúcháin ghinearálta"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Martin T. H. Sandsmark"
-msgstr ""
+msgstr "Martin T. H. Sandsmark"
 
 #: main.cpp:396
 #, kde-format
 msgctxt "@info:credit"
 msgid "Nate Graham"
-msgstr ""
+msgstr "Nate Graham"
 
 #: main.cpp:397
 #, kde-format
 msgctxt "@info:credit"
 msgid "Mariusz Glebocki"
-msgstr ""
+msgstr "Mariusz Glebocki"
 
 #: main.cpp:398
-#, fuzzy, kde-format
-#| msgctxt "@info:credit"
-#| msgid "Bug fixes and general improvements"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes and major improvements"
-msgstr "Ceartúcháin agus feabhsúcháin ghinearálta"
+msgstr "Ceartúcháin fabhtanna agus feabhsuithe móra"
 
 #: main.cpp:400
-#, fuzzy, kde-format
-#| msgctxt "@info:credit"
-#| msgid "Thomas Dreibholz"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Thomas Surrel"
-msgstr "Thomas Dreibholz"
+msgstr "Thomas Surrel"
 
 #: main.cpp:403
 #, kde-format
@@ -1258,10 +1207,9 @@ msgid "&Bookmarks"
 msgstr "Lea&bharmharcanna"
 
 #: MainWindow.cpp:395
-#, fuzzy, kde-format
-#| msgid "New Color Scheme"
+#, kde-format
 msgid "&Window Color Scheme"
-msgstr "Scéim Nua Dathanna"
+msgstr "&Scéim Dathanna Fuinneoige"
 
 #: MainWindow.cpp:407
 #, kde-format
@@ -1276,44 +1224,28 @@ msgid "Activate Menu"
 msgstr "Gníomhachtaigh Roghchlár"
 
 #: MainWindow.cpp:419
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Move Tab Left"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
-msgstr "Bog an Cluaisín Faoi Chlé"
+msgstr "Sábháil Leagan Amach na gCluaisíní..."
 
 #: MainWindow.cpp:428
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
-msgstr ""
+msgstr "Luchtaigh Leagan Amach na gCluaisíní..."
 
 #: MainWindow.cpp:736 MainWindow.cpp:753
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "There are %1 tab open in this window. Do you still want to quit?"
-#| msgid_plural ""
-#| "There are %1 tabs open in this window. Do you still want to quit?"
+#, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
 msgid_plural ""
 "There are %1 processes running in this window. Do you still want to quit?"
-msgstr[0] ""
-"Tá %1 chluaisín oscailte agat san fhuinneog seo; an bhfuil tú cinnte go "
-"dteastaíonn uait scor?"
-msgstr[1] ""
-"Tá %1 chluaisín oscailte agat san fhuinneog seo; an bhfuil tú cinnte go "
-"dteastaíonn uait scor?"
-msgstr[2] ""
-"Tá %1 chluaisín oscailte agat san fhuinneog seo; an bhfuil tú cinnte go "
-"dteastaíonn uait scor?"
-msgstr[3] ""
-"Tá %1 gcluaisín oscailte agat san fhuinneog seo; an bhfuil tú cinnte go "
-"dteastaíonn uait scor?"
-msgstr[4] ""
-"Tá %1 cluaisín oscailte agat san fhuinneog seo; an bhfuil tú cinnte go "
-"dteastaíonn uait scor?"
+msgstr[0] "Tá próiseas ag rith sa fhuinneog seo. Ar mhaith leat scor fós?"
+msgstr[1] "Tá %1 próiseas ag rith sa fhuinneog seo. Ar mhaith leat scor fós?"
+msgstr[2] "Tá %1 próiseas ag rith sa fhuinneog seo. Ar mhaith leat scor fós?"
+msgstr[3] "Tá %1 próiseas ag rith sa fhuinneog seo. Ar mhaith leat scor fós?"
+msgstr[4] "Tá %1 próiseas ag rith sa fhuinneog seo. Ar mhaith leat scor fós?"
 
 #: MainWindow.cpp:742 MainWindow.cpp:759 MainWindow.cpp:773
 #, kde-format
@@ -1334,24 +1266,16 @@ msgid "Close Current &Tab"
 msgstr "Dún an &Cluaisín Reatha"
 
 #: MainWindow.cpp:770
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "There are %1 tab open in this window. Do you still want to quit?"
-#| msgid_plural ""
-#| "There are %1 tabs open in this window. Do you still want to quit?"
+#, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
-msgstr ""
-"Tá %1 chluaisín oscailte agat san fhuinneog seo; an bhfuil tú cinnte go "
-"dteastaíonn uait scor?"
+msgstr "Tá %1 teirminéil oscailte sa fhuinneog seo. Ar mhaith leat scor fós?"
 
 #: MainWindow.cpp:877 Part.cpp:298
-#, fuzzy, kde-format
-#| msgctxt "@item This will be used as part of the file name"
-#| msgid "New Profile"
+#, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
-msgstr "Próifíl Nua"
+msgstr "Próifílí"
 
 #: MainWindow.cpp:895
 #, kde-format
@@ -1363,31 +1287,31 @@ msgstr "Ginearálta"
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
-msgstr ""
+msgstr "Cuimhne"
 
 #: MainWindow.cpp:913
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
-msgstr ""
+msgstr "Barra Cluaisíní / Scoilteoirí"
 
 #: MainWindow.cpp:918
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
-msgstr ""
+msgstr "Comhaid Shealadacha"
 
 #: MainWindow.cpp:923
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
-msgstr ""
+msgstr "Mionsamhlacha"
 
 #: Part.cpp:301
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Part Info"
-msgstr ""
+msgstr "Eolas faoi Chuid"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, QuickCommandsWidget)
 #: plugins/QuickCommands/qcwidget.ui:14
@@ -1397,32 +1321,27 @@ msgstr "Foirm"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/QuickCommands/qcwidget.ui:22
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile shortcut text"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut:"
-msgstr "Aicearra"
+msgstr "Aicearra:"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterLine)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterText)
 #: plugins/QuickCommands/qcwidget.ui:52 plugins/SSHManager/sshwidget.ui:33
-#, fuzzy, kde-format
-#| msgid "Filter:"
+#, kde-format
 msgid "Filter..."
-msgstr "Scagaire:"
+msgstr "Scagaire..."
 
 #. i18n: ectx: property (text), widget (QCheckBox, invertFilter)
 #. i18n: ectx: property (text), widget (QCheckBox, btnInvertFilter)
 #: plugins/QuickCommands/qcwidget.ui:59 plugins/SSHManager/sshwidget.ui:46
 #, kde-format
 msgid "Invert"
-msgstr ""
+msgstr "Inbhéartaigh"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: plugins/QuickCommands/qcwidget.ui:97
-#, fuzzy, kde-format
-#| msgctxt "@item:intable The session title"
-#| msgid "Title"
+#, kde-format
 msgid "Title"
 msgstr "Teideal"
 
@@ -1430,124 +1349,115 @@ msgstr "Teideal"
 #: plugins/QuickCommands/qcwidget.ui:107
 #, kde-format
 msgid "Tooltip"
-msgstr ""
+msgstr "Leid Uirlis"
 
 #. i18n: ectx: property (text), widget (QLabel, labelGroup)
 #: plugins/QuickCommands/qcwidget.ui:117
 #, kde-format
 msgid "Group"
-msgstr ""
+msgstr "Grúpa"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, group)
 #. i18n: ectx: property (currentText), widget (QComboBox, folder)
 #: plugins/QuickCommands/qcwidget.ui:128 plugins/SSHManager/sshwidget.ui:213
-#, fuzzy, kde-format
-#| msgid "&Set as Default"
+#, kde-format
 msgid "Default"
-msgstr "&Socraigh mar Réamhshocrú"
+msgstr "Réamhshocrú"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab)
 #: plugins/QuickCommands/qcwidget.ui:143
-#, fuzzy, kde-format
-#| msgid "Command:"
+#, kde-format
 msgid "Command"
-msgstr "Ordú:"
+msgstr "Ordú"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #: plugins/QuickCommands/qcwidget.ui:193
 #: plugins/QuickCommands/quickcommandswidget.cpp:333
-#, fuzzy, kde-format
-#| msgctxt "@info:shell Alert the user with red color text"
-#| msgid "Warning: "
+#, kde-format
 msgid "Warnings"
-msgstr "Rabhadh: "
+msgstr "Rabhaidh"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnRun)
 #: plugins/QuickCommands/qcwidget.ui:236
 #, kde-format
 msgid "Run"
-msgstr ""
+msgstr "Rith"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnSave)
 #: plugins/QuickCommands/qcwidget.ui:256
-#, fuzzy, kde-format
-#| msgid "Open File Manager"
+#, kde-format
 msgid "Save"
-msgstr "Oscail Bainisteoir Comhad"
+msgstr "Sábháil"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnUpdate)
 #: plugins/QuickCommands/qcwidget.ui:266
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:273
 #, kde-format
 msgid "Update"
-msgstr ""
+msgstr "Nuashonrú"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnCancel)
 #: plugins/QuickCommands/qcwidget.ui:276 plugins/SSHManager/sshwidget.ui:320
 #, kde-format
 msgid "Cancel"
-msgstr ""
+msgstr "Cealaigh"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:46
 #: plugins/QuickCommands/quickcommandsplugin.cpp:130
-#, fuzzy, kde-format
-#| msgid "Command:"
+#, kde-format
 msgid "Quick Commands"
-msgstr "Ordú:"
+msgstr "Orduithe Tapa"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:75
 #, kde-format
 msgid "Show Quick Access"
-msgstr ""
+msgstr "Taispeáin Rochtain Thapa"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:123
 #, kde-format
 msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
 msgstr ""
+"Níor aimsíodh aon orduithe tapa. Is féidir leat ceann a chur leis ar "
+"Bhreiseáin -> Orduithe Tapa"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
-#, fuzzy, kde-format
-#| msgid "Command:"
+#, kde-format
 msgid "Plugins - Quick Commands"
-msgstr "Ordú:"
+msgstr "Breiseáin - Orduithe Tapa"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:140
 #, kde-format
 msgid "Show Quick Commands"
-msgstr ""
+msgstr "Taispeáin Orduithe Tapa"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:166
 #: plugins/QuickCommands/quickcommandswidget.cpp:177
 #, kde-format
 msgid "A duplicate item exists"
-msgstr ""
+msgstr "Tá mír dhúblach ann"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:183
 #, kde-format
 msgid "Please fix all the warnings before trying to run this script"
 msgstr ""
+"Deisigh na rabhaidh go léir sula ndéanann tú iarracht an script seo a rith"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:215
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "There are %1 tab open in this window. Do you still want to quit?"
-#| msgid_plural ""
-#| "There are %1 tabs open in this window. Do you still want to quit?"
+#, kde-format
 msgid "There are some errors on the script, do you really want to run it?"
 msgstr ""
-"Tá %1 chluaisín oscailte agat san fhuinneog seo; an bhfuil tú cinnte go "
-"dteastaíonn uait scor?"
+"Tá roinnt earráidí sa script, an bhfuil tú cinnte gur mhaith leat é a rith?"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:216
 #, kde-format
 msgid "Shell Errors"
-msgstr ""
+msgstr "Earráidí Sliogáin"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:217
 #, kde-format
 msgctxt "@action:button"
 msgid "Run"
-msgstr ""
+msgstr "Rith"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:242
 #, kde-format
@@ -1555,66 +1465,61 @@ msgid ""
 "You are about to delete the group %1,\n"
 " with multiple configurations, are you sure?"
 msgstr ""
+"Tá tú ar tí an grúpa %1 a scriosadh,\n"
+" le cumraíochtaí iolracha, an bhfuil tú cinnte?"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:243
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:223
 #, kde-format
 msgid "You are about to delete %1, are you sure?"
-msgstr ""
+msgstr "Tá tú ar tí %1 a scriosadh, an bhfuil tú cinnte?"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:246
-#, fuzzy, kde-format
-#| msgid "Remote Connection"
+#, kde-format
 msgid "Delete Quick Commands Configurations"
-msgstr "Ceangal Cianda"
+msgstr "Scrios Cumraíochtaí Orduithe Tapa"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:276
 #, kde-format
 msgid "Title can not be empty or blank"
-msgstr ""
+msgstr "Ní féidir leis an teideal a bheith folamh ná bán"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:280
-#, fuzzy, kde-format
-#| msgid "Command to execute"
+#, kde-format
 msgid "Command can not be empty"
-msgstr "Ordú le rith"
+msgstr "Ní féidir an t-ordú a fhágáil folamh"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:300
-#, fuzzy, kde-format
-#| msgid "Rename Tab"
+#, kde-format
 msgid "Rename"
-msgstr "Athainmnigh an Cluaisín"
+msgstr "Athainmnigh"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:304
 #, kde-format
 msgid "Delete"
-msgstr ""
+msgstr "Scrios"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:335
-#, fuzzy, kde-format
-#| msgctxt "@info:shell Alert the user with red color text"
-#| msgid "Warning: "
+#, kde-format
 msgid "Warnings (*)"
-msgstr "Rabhadh: "
+msgstr "Rabhaidh (*)"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:46
-#, fuzzy, kde-format
-#| msgid "Confirm Close"
+#, kde-format
 msgctxt "@item:inlistbox Hosts from ssh/config file"
 msgid "SSH Config"
-msgstr "Deimhnigh Dúnadh"
+msgstr "Cumraíocht SSH"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:49
-#, fuzzy, kde-format
-#| msgid "&Set as Default"
+#, kde-format
 msgctxt "@item:inlistbox The default list of ssh hosts"
 msgid "Default"
-msgstr "&Socraigh mar Réamhshocrú"
+msgstr "Réamhshocrú"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:75
 #, kde-format
 msgid "%1 is a folder for SSH entries"
-msgstr ""
+msgstr "Is fillteán é %1 le haghaidh iontrálacha SSH"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:79
 #: plugins/SSHManager/sshmanagermodel.cpp:322
@@ -1622,84 +1527,86 @@ msgstr ""
 #: plugins/SSHManager/sshmanagermodel.cpp:424
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:94
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:429
-#, fuzzy, kde-format
-#| msgid "Confirm Close"
+#, kde-format
 msgid "SSH Config"
-msgstr "Deimhnigh Dúnadh"
+msgstr "Cumraíocht SSH"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:103
-#, fuzzy, kde-format
-#| msgid "Host:"
+#, kde-format
 msgid "Host: %1"
-msgstr "Óstríomhaire:"
+msgstr "Óstach: %1"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:66
 #, kde-format
 msgid "SSH Manager"
-msgstr ""
+msgstr "Bainisteoir SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:96
-#, fuzzy, kde-format
-#| msgid "Show Menu Bar"
+#, kde-format
 msgid "Show SSH Manager"
-msgstr "Taispeáin an Barra Roghchláir"
+msgstr "Taispeáin Bainisteoir SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:115
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
-msgstr ""
+msgstr "Taispeáin Rochtain Thapa do Ghníomhartha SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:146
 #, kde-format
 msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
 msgstr ""
+"Níor aimsíodh aon chumraíocht SSH shábháilte. Is féidir leat ceann a chur "
+"leis ar Bhreiseáin -> Bainisteoir SSH."
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:147
-#, fuzzy, kde-format
-#| msgid "Hide Menu Bar"
+#, kde-format
 msgid "Plugins - SSH Manager"
-msgstr "Taispeáin an Barra Roghchláir"
+msgstr "Breiseáin - Bainisteoir SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:153
 #, kde-format
 msgid "SSH Entries"
-msgstr ""
+msgstr "Iontrálacha SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:182
 #, kde-format
 msgid ""
 "Could not get the process name, assume that we can't request a connection"
 msgstr ""
+"Níorbh fhéidir ainm an phróisis a fháil, glactar leis nach féidir linn nasc "
+"a iarraidh"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:182
 #: plugins/SSHManager/sshmanagerplugin.cpp:194
 #, kde-format
 msgid "Error issuing SSH Command"
-msgstr ""
+msgstr "Earráid ag eisiúint Ordú SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:194
 #, kde-format
 msgid ""
 "Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"
 msgstr ""
+"Ní féidir ordú SSH a eisiúint lasmuigh den fheidhmchlár sliogáin (m.sh., "
+"bash, zsh, sh)"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:70
 #: plugins/SSHManager/sshwidget.ui:133
 #, kde-format
 msgid "SSH Key"
-msgstr ""
+msgstr "Eochair SSH"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:109
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete"
-msgstr ""
+msgstr "Scrios"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:151
 #, kde-format
 msgid "Don't Change"
-msgstr ""
+msgstr "Ná hathraigh"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:222
 #, kde-format
@@ -1707,81 +1614,80 @@ msgid ""
 "You are about to delete the folder %1,\n"
 " with multiple SSH Configurations, are you sure?"
 msgstr ""
+"Tá tú ar tí an fillteán %1 a scriosadh,\n"
+" le Cumraíochtaí SSH iolracha, an bhfuil tú cinnte?"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:230
-#, fuzzy, kde-format
-#| msgid "Remote Connection"
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
-msgstr "Ceangal Cianda"
+msgstr "Scrios Cumraíochtaí SSH"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:284
 #, kde-format
 msgid "Imported SSH Profile <br/> Some settings are read only."
-msgstr ""
+msgstr "Próifíl SSH Iompórtáilte <br/> Tá roinnt socruithe inléite amháin."
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:379
 #, kde-format
 msgid "Missing Hostname"
-msgstr ""
+msgstr "Ainm Óstach ar Iarraidh"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:384
 #, kde-format
 msgid "Missing Name"
-msgstr ""
+msgstr "Ainm ar Iarraidh"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:391
 #, kde-format
 msgid "If Use Ssh Config is set, do not specify sshkey or username."
 msgstr ""
+"Mura bhfuil Úsáid Cumraíocht Ssh socraithe, ná sonraigh sshkey ná ainm "
+"úsáideora."
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:396
 #, kde-format
 msgid "At least Username or SSHKey must be set"
-msgstr ""
+msgstr "Ní mór Ainm Úsáideora nó Eochair SSH a shocrú ar a laghad"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:402
 #, kde-format
 msgid "Missing Folder"
-msgstr ""
+msgstr "Fillteán ar Iarraidh"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:407
 #, kde-format
 msgid "An SSH session must have a profile"
-msgstr ""
+msgstr "Ní mór próifíl a bheith ag seisiún SSH"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:431
 #, kde-format
 msgid "Cannot delete this folder"
-msgstr ""
+msgstr "Ní féidir an fillteán seo a scriosadh"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:434
 #, kde-format
 msgid "Delete folder and all of its contents"
-msgstr ""
+msgstr "Scrios an fillteán agus a bhfuil ann go léir"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:438
 #, kde-format
 msgid "Double click to change the folder name."
-msgstr ""
+msgstr "Cliceáil faoi dhó chun ainm an fhillteáin a athrú."
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:445
-#, fuzzy, kde-format
-#| msgid "Do not close the initial session automatically when it ends."
+#, kde-format
 msgid "You can't delete an automatically added entry."
-msgstr "Ná dún an bunseisiún go huathoibríoch nuair a thagann sé chun deiridh."
+msgstr "Ní féidir leat iontráil a cuireadh leis go huathoibríoch a scriosadh."
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:445
-#, fuzzy, kde-format
-#| msgid "Edit the selected profile(s)"
+#, kde-format
 msgid "Delete selected entry"
-msgstr "Cuir na próifílí roghnaithe in eagar"
+msgstr "Scrios an iontráil roghnaithe"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: plugins/SSHManager/sshwidget.ui:19
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile shortcut text"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut"
 msgstr "Aicearra"
 
@@ -1789,83 +1695,80 @@ msgstr "Aicearra"
 #: plugins/SSHManager/sshwidget.ui:43
 #, kde-format
 msgid "Show entries that don't match the filter"
-msgstr ""
+msgstr "Taispeáin iontrálacha nach bhfuil ag teacht leis an scagaire"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, btnManageProfile)
 #: plugins/SSHManager/sshwidget.ui:57
 #, kde-format
 msgid "Change profile on connect/disconnect"
-msgstr ""
+msgstr "Athraigh próifíl ar cheangal/dícheangal"
 
 #. i18n: ectx: property (text), widget (QCheckBox, btnManageProfile)
 #: plugins/SSHManager/sshwidget.ui:60
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Manage Profiles"
+#, kde-format
 msgid "Manage profile"
-msgstr "Bainistigh Próifílí"
+msgstr "Bainistigh próifíl"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/SSHManager/sshwidget.ui:82
 #, kde-format
 msgid "Identifier"
-msgstr ""
+msgstr "Aitheantóir"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, name)
 #: plugins/SSHManager/sshwidget.ui:89
 #, kde-format
 msgid "A name for this ssh entry"
-msgstr ""
+msgstr "Ainm don iontráil ssh seo"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, name)
 #: plugins/SSHManager/sshwidget.ui:92
 #, kde-format
 msgid "The name of this entry on the list"
-msgstr ""
+msgstr "Ainm an iontrála seo ar an liosta"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: plugins/SSHManager/sshwidget.ui:99
 #, kde-format
 msgid "SSH Hostname"
-msgstr ""
+msgstr "Ainm Óstach SSH"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, hostname)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, hostname)
 #: plugins/SSHManager/sshwidget.ui:106 plugins/SSHManager/sshwidget.ui:109
-#, fuzzy, kde-format
-#| msgid "Change the shape of the cursor"
+#, kde-format
 msgid "The hostname of the server"
-msgstr "Athraigh cruth an chúrsóra"
+msgstr "Ainm óstach an fhreastalaí"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: plugins/SSHManager/sshwidget.ui:116
 #, kde-format
 msgid "Port"
-msgstr ""
+msgstr "Port"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, port)
 #: plugins/SSHManager/sshwidget.ui:123
 #, kde-format
 msgid "The port of the server, 22 is the default for ssh connections"
-msgstr ""
+msgstr "Is é 22 an port réamhshocraithe le haghaidh naisc ssh"
 
 #. i18n: ectx: property (text), widget (QLineEdit, port)
 #: plugins/SSHManager/sshwidget.ui:126
 #, kde-format
 msgid "22"
-msgstr ""
+msgstr "22"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, sshkey)
 #: plugins/SSHManager/sshwidget.ui:142
 #, kde-format
 msgid "The private key to be used for this connection"
-msgstr ""
+msgstr "An eochair phríobháideach le húsáid don nasc seo"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, sshkey)
 #: plugins/SSHManager/sshwidget.ui:148
 #, kde-format
 msgid "The private key"
-msgstr ""
+msgstr "An eochair phríobháideach"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useSshConfig)
 #: plugins/SSHManager/sshwidget.ui:167
@@ -1874,99 +1777,93 @@ msgid ""
 "If this is set, we don't rely on the SSH key set above, but on the "
 "configuration on ~/.ssh/config"
 msgstr ""
+"Más rud é go bhfuil sé seo socraithe, ní bheimid ag brath ar an eochair SSH "
+"atá socraithe thuas, ach ar an chumraíocht ar ~/.ssh/config"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useSshConfig)
 #: plugins/SSHManager/sshwidget.ui:170
 #, kde-format
 msgid "Use ~/.ssh/config for key"
-msgstr ""
+msgstr "Úsáid ~/.ssh/config don eochair"
 
 #. i18n: ectx: property (text), widget (QLabel, label_7)
 #: plugins/SSHManager/sshwidget.ui:177
-#, fuzzy, kde-format
-#| msgid "User Name: %u"
+#, kde-format
 msgid "Username"
-msgstr "Ainm Úsáideora: %u"
+msgstr "Ainm úsáideora"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, username)
 #: plugins/SSHManager/sshwidget.ui:184
-#, fuzzy, kde-format
-#| msgid "New Remote Connection"
+#, kde-format
 msgid "The username for the connection"
-msgstr "Ceangal Nua Cianda"
+msgstr "Ainm úsáideora an naisc"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, username)
 #: plugins/SSHManager/sshwidget.ui:187
-#, fuzzy, kde-format
-#| msgctxt "NAME OF TRANSLATORS"
-#| msgid "Your names"
+#, kde-format
 msgid "Your username"
-msgstr "Séamus Ó Ciardhuáin,Kevin Scannell"
+msgstr "D'ainm úsáideora"
 
 #. i18n: ectx: property (text), widget (QLabel, folderLabel)
 #: plugins/SSHManager/sshwidget.ui:194
 #, kde-format
 msgid "Folder"
-msgstr ""
+msgstr "Fillteán"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, folder)
 #: plugins/SSHManager/sshwidget.ui:207
 #, kde-format
 msgid "For organizational purposes, this entry will be inside of this folder."
 msgstr ""
+"Chun críocha eagrúcháin, beidh an iontráil seo taobh istigh den fhillteán "
+"seo."
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: plugins/SSHManager/sshwidget.ui:220
-#, fuzzy, kde-format
-#| msgctxt "@item This will be used as part of the file name"
-#| msgid "New Profile"
+#, kde-format
 msgid "Profile"
-msgstr "Próifíl Nua"
+msgstr "Próifíl"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, profile)
 #: plugins/SSHManager/sshwidget.ui:233
 #, kde-format
 msgid "The profile to be active when the ssh session starts"
-msgstr ""
+msgstr "An phróifíl le bheith gníomhach nuair a thosaíonn an seisiún ssh"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newSSHConfig)
 #: plugins/SSHManager/sshwidget.ui:271
 #, kde-format
 msgid "Add a new SSH Entry"
-msgstr ""
+msgstr "Cuir Iontráil SSH nua leis"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnDelete)
 #: plugins/SSHManager/sshwidget.ui:284
-#, fuzzy, kde-format
-#| msgid "Edit the selected profile(s)"
+#, kde-format
 msgid "Delete selected SSH entry"
-msgstr "Cuir na próifílí roghnaithe in eagar"
+msgstr "Scrios an iontráil SSH roghnaithe"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnEdit)
 #: plugins/SSHManager/sshwidget.ui:297
-#, fuzzy, kde-format
-#| msgid "Edit the selected profile(s)"
+#, kde-format
 msgid "Edit selected entry"
-msgstr "Cuir na próifílí roghnaithe in eagar"
+msgstr "Cuir an iontráil roghnaithe in eagar"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnAdd)
 #: plugins/SSHManager/sshwidget.ui:307
-#, fuzzy, kde-format
-#| msgid "Remote Connection"
+#, kde-format
 msgid "Add new SSH Configuration"
-msgstr "Ceangal Cianda"
+msgstr "Cuir Cumraíocht SSH nua leis"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnCancel)
 #: plugins/SSHManager/sshwidget.ui:317
 #, kde-format
 msgid "Cancel Add or Edit"
-msgstr ""
+msgstr "Cealaigh Cuir leis nó Cuir in Eagar"
 
 #: pluginsystem/PluginManager.cpp:70
-#, fuzzy, kde-format
-#| msgid "No profiles available"
+#, kde-format
 msgid "No plugins available"
-msgstr "Níl aon phróifílí ar fáil"
+msgstr "Níl aon bhreiseáin ar fáil"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, PrintOptions)
 #. i18n: ectx: property (title), widget (QGroupBox, OutputOptions)
@@ -1987,13 +1884,13 @@ msgstr "Mód cairdiúil don phrintéir (téacs dubh, gan chúlra)"
 #: PrintOptions.ui:46 settings/konsole.kcfg:204
 #, kde-format
 msgid "&Scale output"
-msgstr ""
+msgstr "&Scálaigh an t-aschur"
 
 #: profile/Profile.cpp:268
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
-msgstr ""
+msgstr "Tógtha isteach"
 
 #: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:539
 #, kde-format
@@ -2001,29 +1898,24 @@ msgid "Default profile"
 msgstr "Próifíl réamhshocraithe"
 
 #: profile/ProfileManager.cpp:280
-#, fuzzy, kde-format
-#| msgid "Edit Profile \"%1\""
+#, kde-format
 msgctxt "New profile name, %1 is a number"
 msgid "Profile %1"
-msgstr "Cuir Próifíl \"%1\" in Eagar"
+msgstr "Próifíl %1"
 
 #: profile/ProfileManager.cpp:294
 #, kde-format
 msgid "Konsole does not have permission to save this profile to %1"
-msgstr ""
+msgstr "Níl cead ag Konsole an phróifíl seo a shábháil chuig %1"
 
 #: profile/ProfileModel.cpp:55
-#, fuzzy, kde-format
-#| msgctxt "@label:listbox Column header text for color names"
-#| msgid "Name"
+#, kde-format
 msgctxt "@title:column Profile name"
 msgid "Name"
 msgstr "Ainm"
 
 #: profile/ProfileModel.cpp:57
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile shortcut text"
-#| msgid "Shortcut"
+#, kde-format
 msgctxt "@title:column Profile keyboard shortcut"
 msgid "Shortcut"
 msgstr "Aicearra"
@@ -2034,31 +1926,30 @@ msgctxt ""
 "@label:textbox added to the name of the built-in profile, to point out it's "
 "read-only"
 msgid " [Read-only]"
-msgstr ""
+msgstr " [Léigh amháin]"
 
 #: profile/ProfileModel.cpp:84
-#, fuzzy, kde-format
-#| msgid "&Set as Default"
+#, kde-format
 msgctxt "@label:textbox added to the name of the current default profile"
 msgid " [Default]"
-msgstr "&Socraigh mar Réamhshocrú"
+msgstr " [Réamhshocrú]"
 
 #: profile/ProfileModel.cpp:99
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Built-in profile is always available"
-msgstr ""
+msgstr "Tá próifíl ionsuite ar fáil i gcónaí"
 
 #: profile/ProfileModel.cpp:111
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Double click to change shortcut"
-msgstr ""
+msgstr "Cliceáil faoi dhó chun aicearra a athrú"
 
 #: RenameTabDialog.cpp:25
 #, kde-format
 msgid "Tab Properties"
-msgstr ""
+msgstr "Airíonna na gCluaisíní"
 
 #: SaveHistoryAutoTask.cpp:63 SaveHistoryTask.cpp:71
 #, kde-format
@@ -2071,26 +1962,27 @@ msgid "%1 is an invalid URL, the output could not be saved."
 msgstr "URL neamhbhailí é %1; níorbh fhéidir an t-aschur a shábháil."
 
 #: SaveHistoryAutoTask.cpp:88
-#, fuzzy, kde-format
-#| msgid "Unable to write to file."
+#, kde-format
 msgid "Failed to create autosave file at %1."
-msgstr "Ní féidir scríobh sa chomhad."
+msgstr "Theip ar chruthú comhad uathshábháilte ag %1."
 
 #: SaveHistoryAutoTask.cpp:102
 #, kde-format
 msgid "Stopping autosave due to switching of screens."
-msgstr ""
+msgstr "Ag stopadh uathshábháil mar gheall ar athrú scáileáin."
 
 #: SaveHistoryAutoTask.cpp:116
 #, kde-format
 msgid ""
 "Autosave file has been modified externally, preventing further autosaves."
 msgstr ""
+"Tá an comhad uath-shábháilte modhnaithe go seachtrach, rud a chuireann cosc ​​"
+"ar thuilleadh uath-shábháil."
 
 #: SaveHistoryAutoTask.cpp:173
 #, kde-format
 msgid "Failed to update autosave state on output changes."
-msgstr ""
+msgstr "Theip ar staid uathshábháil a nuashonrú ar athruithe aschuir."
 
 #: SaveHistoryTask.cpp:174
 #, kde-format
@@ -2124,12 +2016,12 @@ msgstr "Gorm ar Dhubh"
 #: schemas.cpp:5
 #, kde-format
 msgid "Breeze"
-msgstr ""
+msgstr "Breeze"
 
 #: schemas.cpp:6
 #, kde-format
 msgid "Campbell"
-msgstr ""
+msgstr "Campbell"
 
 #: schemas.cpp:7
 #, kde-format
@@ -2154,12 +2046,12 @@ msgstr "Dearg ar Dhubh"
 #: schemas.cpp:11
 #, kde-format
 msgid "Solarized"
-msgstr ""
+msgstr "Gréinithe"
 
 #: schemas.cpp:12
 #, kde-format
 msgid "Solarized Light"
-msgstr ""
+msgstr "Solarized Light"
 
 #: schemas.cpp:13
 #, kde-format
@@ -2179,7 +2071,7 @@ msgstr "Consól Linux"
 #: schemas.cpp:16
 #, kde-format
 msgid "macOS"
-msgstr ""
+msgstr "macOS"
 
 #: schemas.cpp:17
 #, kde-format
@@ -2188,23 +2080,21 @@ msgstr "Consól Solaris"
 
 # or "Aschur an Chuardaigh"?
 #: searchtabs/SearchTabs.cpp:127
-#, fuzzy, kde-format
-#| msgid "Search Output..."
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Search..."
-msgstr "Cuardaigh san Aschur..."
+msgstr "Cuardaigh..."
 
 #: searchtabs/SearchTabs.cpp:128
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"
-msgstr ""
+msgstr "Cuir isteach ainm cluaisín le cuardach a dhéanamh air anseo"
 
 #: session/Session.cpp:129
-#, fuzzy, kde-format
-#| msgid "Bell in session '%1'"
+#, kde-format
 msgid "Bell in '%1' (Session '%2')"
-msgstr "Cloigín i seisiún '%1'"
+msgstr "Clog i '%1' (Seisiún '%2')"
 
 #: session/Session.cpp:425
 #, kde-format
@@ -2236,19 +2126,17 @@ msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Níorbh fhéidir ríomhchlár '%1' a thosú le hargóintí '%2'."
 
 #: session/Session.cpp:778
-#, fuzzy, kde-format
-#| msgid "Silence in session '%1'"
+#, kde-format
 msgid "Silence in '%1' (Session '%2')"
-msgstr "Tost i seisiún '%1'"
+msgstr "Ciúnas i '%1' (Seisiún '%2')"
 
 #: session/Session.cpp:779 session/Session.cpp:2122
 #: session/SessionController.cpp:361 session/SessionController.cpp:1892
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1214
 #: Vt102Emulation.cpp:1469
-#, fuzzy, kde-format
-#| msgid "Switch to Session %1"
+#, kde-format
 msgid "Show session"
-msgstr "Athraigh go Seisiún %1"
+msgstr "Taispeáin seisiún"
 
 #: session/Session.cpp:1095
 #, kde-format
@@ -2272,15 +2160,15 @@ msgid "ZModem Progress"
 msgstr "Dul chun cinn ZModem"
 
 #: session/Session.cpp:2121
-#, fuzzy, kde-format
-#| msgid "Activity in session '%1'"
+#, kde-format
 msgid "Activity in '%1' (Session '%2')"
-msgstr "Gníomhaíocht i seisiún '%1'"
+msgstr "Gníomhaíocht i '%1' (Seisiún '%2')"
 
 #: session/Session.cpp:2259
 #, kde-format
 msgid "Security sensitive DBus API is disabled in the settings."
 msgstr ""
+"Tá API DBus atá íogair ó thaobh slándála de díchumasaithe sna socruithe."
 
 #: session/SessionController.cpp:142
 #, kde-format
@@ -2290,12 +2178,12 @@ msgstr "Konsole"
 #: session/SessionController.cpp:360
 #, kde-format
 msgid "The process '%1' has finished running in session '%2'"
-msgstr ""
+msgstr "Tá an próiseas '%1' críochnaithe ag rith i seisiún '%2'"
 
 #: session/SessionController.cpp:443
 #, kde-format
 msgid "Konsole does not know how to open the bookmark: "
-msgstr ""
+msgstr "Níl a fhios ag Konsole conas an leabharmharc a oscailt:"
 
 #: session/SessionController.cpp:521
 #, kde-format
@@ -2308,10 +2196,9 @@ msgid "Configure Web Shortcuts..."
 msgstr "Cumraigh Aicearraí Gréasáin..."
 
 #: session/SessionController.cpp:648
-#, fuzzy, kde-format
-#| msgid "New Session"
+#, kde-format
 msgid "&Close Session"
-msgstr "Seisiún Nua"
+msgstr "&Dún an Seisiún"
 
 #: session/SessionController.cpp:655
 #, kde-format
@@ -2319,41 +2206,34 @@ msgid "Open File Manager"
 msgstr "Oscail Bainisteoir Comhad"
 
 #: session/SessionController.cpp:670
-#, fuzzy, kde-format
-#| msgid "&Copy"
+#, kde-format
 msgid "Copy"
-msgstr "&Cóipeáil"
+msgstr "Cóipeáil"
 
 #: session/SessionController.cpp:677
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgid "Split View Left-Right"
-msgstr "Scoilt an tAmharc Clé/Deas"
+msgstr "Radharc Scoilte Clé-Deas"
 
 #: session/SessionController.cpp:682
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgid "Split View Top-Bottom"
-msgstr "Scoilt an tAmharc Barr/Bun"
+msgstr "Radharc Scoilte Barr-Bun"
 
 #: session/SessionController.cpp:686
 #, kde-format
 msgid "Copy except prompts"
-msgstr ""
+msgstr "Cóipeáil seachas leideanna"
 
 #: session/SessionController.cpp:692
-#, fuzzy, kde-format
-#| msgid "Copy Input"
+#, kde-format
 msgid "Copy user input"
-msgstr "Cóipeáil an tIonchur"
+msgstr "Cóipeáil ionchur úsáideora"
 
 #: session/SessionController.cpp:698
-#, fuzzy, kde-format
-#| msgid "Copy Input"
+#, kde-format
 msgid "Copy command output"
-msgstr "Cóipeáil an tIonchur"
+msgstr "Cóipeáil aschur ordaithe"
 
 #: session/SessionController.cpp:713
 #, kde-format
@@ -2363,7 +2243,7 @@ msgstr "Greamaigh Roghnúchán"
 #: session/SessionController.cpp:720
 #, kde-format
 msgid "Web Search"
-msgstr ""
+msgstr "Cuardach Gréasáin"
 
 #: session/SessionController.cpp:726
 #, kde-format
@@ -2371,16 +2251,14 @@ msgid "&Select All"
 msgstr "&Roghnaigh Uile"
 
 #: session/SessionController.cpp:730
-#, fuzzy, kde-format
-#| msgid "Select Text"
+#, kde-format
 msgid "Select &Mode"
-msgstr "Roghnaigh Téacs"
+msgstr "Roghnaigh &Mód"
 
 #: session/SessionController.cpp:735
-#, fuzzy, kde-format
-#| msgid "Select Text"
+#, kde-format
 msgid "Select &Line"
-msgstr "Roghnaigh Téacs"
+msgstr "Roghnaigh &Líne"
 
 #: session/SessionController.cpp:738
 #, kde-format
@@ -2388,15 +2266,14 @@ msgid "Save Output &As..."
 msgstr "Sábháil an tAschur M&ar..."
 
 #: session/SessionController.cpp:744
-#, fuzzy, kde-format
-#| msgid "Save Output &As..."
+#, kde-format
 msgid "Auto Save Output As..."
-msgstr "Sábháil an tAschur M&ar..."
+msgstr "Sábháil Aschur Uathoibríoch Mar..."
 
 #: session/SessionController.cpp:748
 #, kde-format
 msgid "Stop Auto Save"
-msgstr ""
+msgstr "Stop an Sábháil Uathoibríoch"
 
 #: session/SessionController.cpp:752
 #, kde-format
@@ -2419,21 +2296,19 @@ msgid "Clear Scrollback and Reset"
 msgstr "Glan Iarscrollú agus Athshocraigh"
 
 #: session/SessionController.cpp:775
-#, fuzzy, kde-format
-#| msgid "Edit Profile"
+#, kde-format
 msgid "Next Profile"
-msgstr "Cuir Próifíl in Eagar"
+msgstr "An Chéad Phróifíl Eile"
 
 #: session/SessionController.cpp:780
-#, fuzzy, kde-format
-#| msgid "Previous View"
+#, kde-format
 msgid "Previous Profile"
-msgstr "An tAmharc Roimhe Seo"
+msgstr "Próifíl Roimhe Seo"
 
 #: session/SessionController.cpp:783
 #, kde-format
 msgid "Switch Profile"
-msgstr ""
+msgstr "Próifíl Athraigh"
 
 #: session/SessionController.cpp:808
 #, kde-format
@@ -2444,29 +2319,28 @@ msgstr "Socraigh &Ionchódú"
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow Mouse Tracking"
-msgstr ""
+msgstr "Ceadaigh Rianú Luiche"
 
 #: session/SessionController.cpp:837
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
-msgstr ""
+msgstr "Léamh-Amháin"
 
 #: session/SessionController.cpp:848
-#, fuzzy, kde-format
-#| msgid "&Rename Tab..."
+#, kde-format
 msgid "&Configure or Rename Tab..."
-msgstr "&Athainmnigh an Cluaisín..."
+msgstr "&Cumraigh nó Athainmnigh an Cluaisín..."
 
 #: session/SessionController.cpp:854
 #, kde-format
 msgid "&All Tabs in Current Window"
-msgstr ""
+msgstr "&Gach Cluaisín sa Fhuinneog Reatha"
 
 #: session/SessionController.cpp:861
 #, kde-format
 msgid "&Select Tabs..."
-msgstr ""
+msgstr "&Roghnaigh Cluaisíní..."
 
 #: session/SessionController.cpp:867
 #, kde-format
@@ -2487,13 +2361,12 @@ msgstr "Uasluchtú &ZMóideime..."
 #: session/SessionController.cpp:888
 #, kde-format
 msgid "One-Shot Monitors"
-msgstr ""
+msgstr "Monatóirí Aon-Urchar"
 
 #: session/SessionController.cpp:893
-#, fuzzy, kde-format
-#| msgid "Monitor for &Activity"
+#, kde-format
 msgid "Monitor for &Prompt"
-msgstr "Fair ar &Ghníomhaíocht"
+msgstr "Monatóireacht don Leid"
 
 #: session/SessionController.cpp:900
 #, kde-format
@@ -2506,10 +2379,9 @@ msgid "Monitor for &Silence"
 msgstr "Fair ar &Chiúnas"
 
 #: session/SessionController.cpp:912
-#, fuzzy, kde-format
-#| msgid "Monitor for &Activity"
+#, kde-format
 msgid "Monitor for Process Finishing"
-msgstr "Fair ar &Ghníomhaíocht"
+msgstr "Monatóireacht le haghaidh Críochnú Próisis"
 
 #: session/SessionController.cpp:919
 #, kde-format
@@ -2522,10 +2394,9 @@ msgid "Shrink Font"
 msgstr "Laghdaigh an Cló"
 
 #: session/SessionController.cpp:932
-#, fuzzy, kde-format
-#| msgid "Increase Text Size"
+#, kde-format
 msgid "Reset Font Size"
-msgstr "Cló Níos Mó"
+msgstr "Athshocraigh Méid an Chló"
 
 #: session/SessionController.cpp:938
 #, kde-format
@@ -2555,7 +2426,7 @@ msgstr "&Bris Isteach ar Tasc"
 #: session/SessionController.cpp:962
 #, kde-format
 msgid "&Terminate Task"
-msgstr ""
+msgstr "&Críochnaigh an Tasc"
 
 #: session/SessionController.cpp:967
 #, kde-format
@@ -2573,10 +2444,9 @@ msgid "User Signal &2"
 msgstr "Comhartha Úsáideora &2"
 
 #: session/SessionController.cpp:995
-#, fuzzy, kde-format
-#| msgid "&New Profile..."
+#, kde-format
 msgid "Create New Profile..."
-msgstr "Próifíl &Nua..."
+msgstr "Cruthaigh Próifíl Nua..."
 
 #: session/SessionController.cpp:997
 #, kde-format
@@ -2607,11 +2477,10 @@ msgid "Confirm Close"
 msgstr "Deimhnigh Dúnadh"
 
 #: session/SessionController.cpp:1140
-#, fuzzy, kde-format
-#| msgid "&Close Tab"
+#, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
-msgstr "&Dún an Cluaisín"
+msgstr "Dún an Ríomhchlár"
 
 #: session/SessionController.cpp:1163
 #, kde-format
@@ -2619,40 +2488,38 @@ msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
 "by force?"
 msgstr ""
+"Ní rachadh clár sa seisiún seo i léig. An bhfuil tú cinnte gur mian leat é a "
+"mharú le fórsa?"
 
 #: session/SessionController.cpp:1167
-#, fuzzy, kde-format
-#| msgid ""
-#| "The program '%1' is currently running in this session.  Are you sure you "
-#| "want to close it?"
+#, kde-format
 msgid ""
 "The program '%1' in this session would not die.  Are you sure you want to "
 "kill it by force?"
 msgstr ""
-"Tá ríomhchlár '%1' ag rith sa seisiún seo faoi láthair.  An bhfuil tú cinnte "
-"go dteastaíonn uait é a dhúnadh?"
+"Ní rachadh an clár '%1' sa seisiún seo i léig. An bhfuil tú cinnte gur mian "
+"leat é a mharú le fórsa?"
 
 #: session/SessionController.cpp:1175
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
-msgstr ""
+msgstr "Clár Maraithe"
 
 #: session/SessionController.cpp:1891
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
-msgstr ""
+msgstr "Taispeántar an leid bhlaosc i seisiún '%1'"
 
 #: session/SessionController.cpp:2113
 #, kde-format
 msgid "Open Current Folder With"
-msgstr ""
+msgstr "Oscail an Fillteán Reatha Le"
 
 #: session/SessionController.cpp:2183
-#, fuzzy, kde-format
-#| msgid "&ZModem Upload..."
+#, kde-format
 msgid "Save ZModem Download to..."
-msgstr "Uasluchtú &ZMóideime..."
+msgstr "Sábháil Íoslódáil ZModem chuig..."
 
 #: session/SessionController.cpp:2193
 #, kde-format
@@ -2661,12 +2528,16 @@ msgid ""
 "software was found on this system.</p><p>You may wish to install the 'rzsz' "
 "or 'lrzsz' package.</p>"
 msgstr ""
+"<p>Braithíodh iarracht aistrithe comhaid ZModem, ach ní bhfuarthas aon "
+"bhogearraí ZModem oiriúnacha ar an gcóras seo.</p><p>B’fhéidir gur mhaith "
+"leat an pacáiste ‘rzsz’ nó ‘lrzsz’ a shuiteáil.</p>"
 
 #: session/SessionController.cpp:2203
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr ""
+"<p>Tá aistriú comhaid ZModem ar siúl cheana féin sa seisiún reatha.</p>"
 
 #: session/SessionController.cpp:2216
 #, kde-format
@@ -2674,11 +2545,13 @@ msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
 "to install the 'rzsz' or 'lrzsz' package.</p>"
 msgstr ""
+"<p>Níor aimsíodh aon bhogearraí ZModem oiriúnacha ar an gcóras seo.</"
+"p><p>B’fhéidir gur mhaith leat an pacáiste ‘rzsz’ nó ‘lrzsz’ a shuiteáil.</p>"
 
 #: session/SessionController.cpp:2221
 #, kde-format
 msgid "Select Files for ZModem Upload"
-msgstr ""
+msgstr "Roghnaigh Comhaid le haghaidh Uaslódáil ZModem"
 
 #: session/SessionListModel.cpp:89
 #, kde-format
@@ -2693,285 +2566,270 @@ msgid "Title"
 msgstr "Teideal"
 
 #: settings/ConfigurationDialog.cpp:31
-#, fuzzy, kde-format
-#| msgid "Confirm Close"
+#, kde-format
 msgctxt "@title:window"
 msgid "Configure"
-msgstr "Deimhnigh Dúnadh"
+msgstr "Cumraigh"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchReverseSearch)
 #. i18n: ectx: tooltip, entry (SearchReverseSearch), group (SearchSettings)
 #: settings/GeneralSettings.ui:49 settings/konsole.kcfg:89
 #, kde-format
 msgid "Sets whether search should start from the bottom"
-msgstr ""
+msgstr "Socraíonn sé an dtosóidh an cuardach ón mbun"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchReverseSearch)
 #. i18n: ectx: label, entry (SearchReverseSearch), group (SearchSettings)
 #: settings/GeneralSettings.ui:52 settings/konsole.kcfg:88
 #, kde-format
 msgid "Search backwards"
-msgstr ""
+msgstr "Cuardaigh ar gcúl"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/GeneralSettings.ui:59
-#, fuzzy, kde-format
-#| msgid "System &Notification"
+#, kde-format
 msgid "Notifications:"
-msgstr "&Fógairt an Chórais"
+msgstr "Fógraí:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_FocusFollowsMouse)
 #. i18n: ectx: label, entry (FocusFollowsMouse), group (KonsoleWindow)
 #: settings/GeneralSettings.ui:66 settings/konsole.kcfg:13
 #, kde-format
 msgid "Focus terminals when the mouse pointer is moved over them"
-msgstr ""
+msgstr "Fócas ar teirminéil nuair a bhogtar pointeoir na luiche tharstu"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AllowMenuAccelerators)
 #. i18n: ectx: label, entry (AllowMenuAccelerators), group (KonsoleWindow)
 #: settings/GeneralSettings.ui:79 settings/konsole.kcfg:22
 #, kde-format
 msgid "Enable menu accelerators"
-msgstr ""
+msgstr "Cumasaigh luasairí roghchláir"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/GeneralSettings.ui:86
 #, kde-format
 msgctxt "@item:intext Search options"
 msgid "Search:"
-msgstr ""
+msgstr "Cuardaigh:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RemoveWindowTitleBarAndFrame)
 #. i18n: ectx: label, entry (RemoveWindowTitleBarAndFrame), group (KonsoleWindow)
 #: settings/GeneralSettings.ui:93 settings/konsole.kcfg:9
 #, kde-format
 msgid "Remove window titlebar and frame"
-msgstr ""
+msgstr "Bain barra teidil agus fráma na fuinneoige"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, enableAllMessagesButton)
 #: settings/GeneralSettings.ui:111
 #, kde-format
 msgid "All dialogs will be shown again"
-msgstr ""
+msgstr "Taispeánfar na dialóga go léir arís"
 
 #. i18n: ectx: property (text), widget (QPushButton, enableAllMessagesButton)
 #: settings/GeneralSettings.ui:114
 #, kde-format
 msgid "Enable all \"Don't Ask Again\" messages"
-msgstr ""
+msgstr "Cumasaigh gach teachtaireacht \"Ná Fiafraigh Arís\""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchHighlightMatches)
 #: settings/GeneralSettings.ui:142
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu"
-#| msgid "Highlight all matches"
+#, kde-format
 msgid "Highlight all matches"
-msgstr "Aibhsigh uile"
+msgstr "Aibhsigh na cluichí go léir"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowWindowTitleOnTitleBar)
 #. i18n: ectx: label, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/GeneralSettings.ui:155 settings/konsole.kcfg:17
 #, kde-format
 msgid "Show window title on the titlebar"
-msgstr ""
+msgstr "Taispeáin teideal na fuinneoige ar an mbarra teidil"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchNoWrap)
 #. i18n: ectx: tooltip, entry (SearchNoWrap), group (SearchSettings)
 #: settings/GeneralSettings.ui:168 settings/konsole.kcfg:94
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Find the next match for the current search phrase"
+#, kde-format
 msgid "Sets whether search should stop instead of wrapping"
-msgstr "Aimsigh an chéad sampla eile den fhrása cuardaigh"
+msgstr "Socraíonn sé an gcuardach a stopadh in ionad é a fhilleadh"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchNoWrap)
 #: settings/GeneralSettings.ui:171
 #, kde-format
 msgid "No wrap"
-msgstr ""
+msgstr "Gan fillteán"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/GeneralSettings.ui:194
 #, kde-format
 msgid "Process and window:"
-msgstr ""
+msgstr "Próiseas agus fuinneog:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_UseSingleInstance)
 #. i18n: ectx: tooltip, entry (UseSingleInstance), group (KonsoleWindow)
 #: settings/GeneralSettings.ui:210 settings/konsole.kcfg:33
 #, kde-format
 msgid "When launching Konsole re-use existing process if possible"
-msgstr ""
+msgstr "Agus Konsole á sheoladh athúsáid an próiseas atá ann cheana más féidir"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSingleInstance)
 #. i18n: ectx: label, entry (UseSingleInstance), group (KonsoleWindow)
 #: settings/GeneralSettings.ui:213 settings/konsole.kcfg:32
 #, kde-format
 msgid "Run all Konsole windows in a single process"
-msgstr ""
+msgstr "Rith gach fuinneog Konsole i bpróiseas amháin"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_RememberWindowSize)
 #: settings/GeneralSettings.ui:226
 #, kde-format
 msgid "If enabled, profile settings will be ignored"
-msgstr ""
+msgstr "Má chuirtear ar chumas é, déanfar neamhaird de shocruithe próifíle"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RememberWindowSize)
 #: settings/GeneralSettings.ui:229
-#, fuzzy, kde-format
-#| msgid "Set the window title"
+#, kde-format
 msgid "Remember window size"
-msgstr "Socraigh teideal na fuinneoga"
+msgstr "Cuimhnigh méid na fuinneoige"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableSecuritySensitiveDBusAPI)
 #. i18n: ectx: label, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
 #: settings/GeneralSettings.ui:236 settings/konsole.kcfg:37
 #, kde-format
 msgid "Enable the security sensitive parts of the DBus API"
-msgstr ""
+msgstr "Cumasaigh na codanna íogaire slándála de API DBus"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchCaseSensitive)
 #. i18n: ectx: tooltip, entry (SearchCaseSensitive), group (SearchSettings)
 #: settings/GeneralSettings.ui:265 settings/konsole.kcfg:75
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Sets whether the search is case sensitive"
+#, kde-format
 msgid "Sets whether the search is case sensitive"
-msgstr "Socraigh cé acu an bhfuil an cuardach cásíogair nó nach bhfuil"
+msgstr "Socraíonn sé an bhfuil an cuardach íogair ó thaobh cás de"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchCaseSensitive)
 #: settings/GeneralSettings.ui:268
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu"
-#| msgid "Case sensitive"
+#, kde-format
 msgid "Case sensitive"
-msgstr "Cásíogair"
+msgstr "Cás-íogair"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchRegExpression)
 #. i18n: ectx: label, entry (SearchRegExpression), group (SearchSettings)
 #: settings/GeneralSettings.ui:281 settings/konsole.kcfg:79
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu"
-#| msgid "Match regular expression"
+#, kde-format
 msgid "Match using regular expressions"
-msgstr "Comhoiriúnaigh do shlonn ionadaíochta"
+msgstr "Meaitseáil ag baint úsáide as nathanna rialta"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ListenForZModemTerminalCodes)
 #: settings/GeneralSettings.ui:288
 #, kde-format
 msgid "Listen for ZModem terminal codes"
-msgstr ""
+msgstr "Éist le haghaidh cóid teirminéal ZModem"
 
 #. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:18
 #, kde-format
 msgid "Show window title set by escape sequence on the titlebar"
 msgstr ""
+"Taispeáin teideal na fuinneoige a shocraítear le seicheamh éalaithe ar an "
+"mbarra teidil"
 
 #. i18n: ectx: tooltip, entry (AllowMenuAccelerators), group (KonsoleWindow)
 #: settings/konsole.kcfg:23
 #, kde-format
 msgid "Allow users to access top menu through Alt+Key combination"
 msgstr ""
+"Lig d’úsáideoirí rochtain a fháil ar an roghchlár barr trí chomhcheangal Alt"
+"+Eochracha"
 
 #. i18n: ectx: label, entry (RememberWindowSize), group (KonsoleWindow)
 #: settings/konsole.kcfg:27
 #, kde-format
 msgid "Use current window size on next startup"
-msgstr ""
+msgstr "Úsáid méid reatha na fuinneoige ar an gcéad tosaithe eile"
 
 #. i18n: ectx: tooltip, entry (RememberWindowSize), group (KonsoleWindow)
 #: settings/konsole.kcfg:28
 #, kde-format
 msgid "The window size will be saved upon exiting Konsole"
-msgstr ""
+msgstr "Sábhálfar méid na fuinneoige nuair a fhágfar Konsole"
 
 #. i18n: ectx: tooltip, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
 #: settings/konsole.kcfg:38
 #, kde-format
 msgid "DBus API like runCommand will be enabled"
-msgstr ""
+msgstr "Cumasófar API DBus cosúil le runCommand"
 
 #. i18n: ectx: label, entry (ListenForZModemTerminalCodes), group (KonsoleWindow)
 #: settings/konsole.kcfg:42
 #, kde-format
 msgid "Listen for ZModem Terminal codes"
-msgstr ""
+msgstr "Éist le cóid teirminéal ZModem"
 
 #. i18n: ectx: tooltip, entry (ListenForZModemTerminalCodes), group (KonsoleWindow)
 #: settings/konsole.kcfg:43
 #, kde-format
 msgid "Automatic send/receive files over serial connections"
-msgstr ""
+msgstr "Comhaid a sheoladh/a fháil go huathoibríoch thar naisc sraitheacha"
 
 #. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:52
 #, kde-format
 msgid "Thumbnail Width"
-msgstr ""
+msgstr "Leithead na Mionsamhail"
 
 #. i18n: ectx: tooltip, entry (ThumbnailSize), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:53
 #, kde-format
 msgid "Sets the width of the thumbnail"
-msgstr ""
+msgstr "Socraíonn sé leithead an mhionsamhail"
 
 #. i18n: ectx: label, entry (ThumbnailShift), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailShift), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:57 settings/konsole.kcfg:58
 #, kde-format
 msgid "Use Shift to display a thumbnail"
-msgstr ""
+msgstr "Úsáid Shift chun mionsamhail a thaispeáint"
 
 #. i18n: ectx: label, entry (ThumbnailAlt), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailAlt), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:62 settings/konsole.kcfg:63
 #, kde-format
 msgid "Use Alt to display a thumbnail"
-msgstr ""
+msgstr "Úsáid Alt chun mionsamhail a thaispeáint"
 
 #. i18n: ectx: label, entry (ThumbnailCtrl), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailCtrl), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:67 settings/konsole.kcfg:68
 #, kde-format
 msgid "Use Ctrl to display a thumbnail"
-msgstr ""
+msgstr "Úsáid Ctrl chun mionsamhail a thaispeáint"
 
 #. i18n: ectx: label, entry (SearchCaseSensitive), group (SearchSettings)
 #: settings/konsole.kcfg:74
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Sets whether the search is case sensitive"
+#, kde-format
 msgid "Search is case sensitive"
-msgstr "Socraigh cé acu an bhfuil an cuardach cásíogair nó nach bhfuil"
+msgstr "Tá an cuardach íogair ó thaobh cás de"
 
 #. i18n: ectx: label, entry (SearchHighlightMatches), group (SearchSettings)
 #: settings/konsole.kcfg:83
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu"
-#| msgid "Highlight all matches"
+#, kde-format
 msgid "Highlight all search matches"
-msgstr "Aibhsigh uile"
+msgstr "Aibhsigh gach meaitseáil cuardaigh"
 
 #. i18n: ectx: tooltip, entry (SearchHighlightMatches), group (SearchSettings)
 #: settings/konsole.kcfg:84
-#, fuzzy, kde-format
-#| msgid "Sets whether matching text should be highlighted"
+#, kde-format
 msgid "Sets whether matching text should be highlighted"
-msgstr ""
-"Socraigh cé acu an n-aibhsítear téacs comhoiriúnach nó nach n-aibhsítear"
+msgstr "Socraíonn sé an bhfuil téacs comhoiriúnach le haibhsiú nó nach bhfuil"
 
 #. i18n: ectx: label, entry (SearchNoWrap), group (SearchSettings)
 #: settings/konsole.kcfg:93
 #, kde-format
 msgid "Search stops instead of wrapping"
-msgstr ""
+msgstr "Stopann an cuardach in ionad fillteán"
 
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
 #: settings/konsole.kcfg:100
 #, kde-format
 msgid "Control whether child cgroups are created for individual tabs"
-msgstr ""
+msgstr "Rialú an gcruthaítear cgroups leanaí do chluaisíní aonair"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
 #: settings/konsole.kcfg:104
@@ -2979,111 +2837,116 @@ msgstr ""
 msgid ""
 "Determines the memory consumption level above which throttling will start"
 msgstr ""
+"Cinneann sé an leibhéal ídithe cuimhne os a chionn a thosóidh an luasghéarú"
 
 #. i18n: ectx: label, entry (SplitViewVisibility), group (SplitView)
 #. i18n: ectx: label, entry (TabBarVisibility), group (TabBar)
 #: settings/konsole.kcfg:110 settings/konsole.kcfg:130
 #, kde-format
 msgid "Control the visibility of the whole tab bar"
-msgstr ""
+msgstr "Rialú infheictheacht an bharra cluaisíní ar fad"
 
 #. i18n: ectx: label, entry (SplitDragHandleSize), group (SplitView)
 #: settings/konsole.kcfg:119
 #, kde-format
 msgid "Control the size of the handle between panels"
-msgstr ""
+msgstr "Rialú méid an láimhseála idir painéil"
 
 #. i18n: ectx: label, entry (TabBarPosition), group (TabBar)
 #: settings/konsole.kcfg:139
 #, kde-format
 msgid "Control the position of the tab bar"
-msgstr ""
+msgstr "Rialú suíomh an bharra cluaisíní"
 
 #. i18n: ectx: label, entry (TabBarStyleSheet), group (TabBar)
 #: settings/konsole.kcfg:149
 #, kde-format
 msgid "Control the visual style of the tab bar"
-msgstr ""
+msgstr "Rialú stíl amhairc an bharra cluaisíní"
 
 #. i18n: ectx: label, entry (TabBarUseUserStyleSheet), group (TabBar)
 #: settings/konsole.kcfg:153
-#, fuzzy, kde-format
-#| msgid "Use a custom, fixed color for the cursor"
+#, kde-format
 msgid "Use a user-defined .css file for the tab bar"
-msgstr "Úsáid dath saincheaptha socraithe le haghaidh an chúrsóra"
+msgstr "Úsáid comhad .css atá sainithe ag an úsáideoir don bharra cluaisíní"
 
 #. i18n: ectx: label, entry (TabBarUserStyleSheetFile), group (TabBar)
 #: settings/konsole.kcfg:157
 #, kde-format
 msgid "The .css file to use for the tab bar style"
-msgstr ""
+msgstr "An comhad .css le húsáid don stíl barra cluaisíní"
 
 #. i18n: ectx: label, entry (CloseTabOnMiddleMouseButton), group (TabBar)
 #: settings/konsole.kcfg:161
 #, kde-format
 msgid "Allow middle-clicking on open tabs to close them"
-msgstr ""
+msgstr "Ceadaigh cliceáil lár ar chluaisíní oscailte chun iad a dhúnadh"
 
 #. i18n: ectx: label, entry (NewTabButton), group (TabBar)
 #: settings/konsole.kcfg:165
 #, kde-format
 msgid "Control the visibility of 'New Tab' button on the tab bar"
-msgstr ""
+msgstr "Rialú infheictheacht an chnaipe 'Cluaisín Nua' ar an mbarra cluaisíní"
 
 #. i18n: ectx: label, entry (SearchTabsButton), group (TabBar)
 #: settings/konsole.kcfg:169
 #, kde-format
 msgid "Control the visibility of 'Search Tabs' button on the tab bar"
 msgstr ""
+"Rialú infheictheacht an chnaipe 'Cuardaigh Cluaisíní' ar an mbarra cluaisíní"
 
 #. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
 #: settings/konsole.kcfg:177
 #, kde-format
 msgid "Control where the \"Close tab\" button will be displayed"
-msgstr ""
+msgstr "Rialú cá háit a dtaispeánfar an cnaipe \"Dún an cluaisín\""
 
 #. i18n: ectx: label, entry (NewTabBehavior), group (TabBar)
 #: settings/konsole.kcfg:186
 #, kde-format
 msgid "Control where to put the new tab"
-msgstr ""
+msgstr "Rialú cá háit le cur an cluaisín nua"
 
 #. i18n: ectx: label, entry (ExpandTabWidth), group (TabBar)
 #: settings/konsole.kcfg:194
 #, kde-format
 msgid "Expand the tab widths"
-msgstr ""
+msgstr "Leathnaigh leithead na gcluaisíní"
 
 #. i18n: ectx: label, entry (scrollbackUseSystemLocation), group (FileLocation)
 #: settings/konsole.kcfg:210
 #, kde-format
 msgid "For scrollback files, use system-wide folder location"
 msgstr ""
+"I gcás comhad scrollaigh siar, bain úsáid as suíomh fillteáin ar fud an "
+"chórais"
 
 #. i18n: ectx: label, entry (scrollbackUseCacheLocation), group (FileLocation)
 #: settings/konsole.kcfg:214
 #, kde-format
 msgid "For scrollback files, use user's specific folder location"
 msgstr ""
+"I gcás comhad scrollaigh siar, bain úsáid as suíomh fillteáin shonrach an "
+"úsáideora"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocation), group (FileLocation)
 #: settings/konsole.kcfg:218
 #, kde-format
 msgid "For scrollback files, use specified folder location"
 msgstr ""
+"I gcás comhad scrollaigh siar, bain úsáid as suíomh fillteáin shonraithe"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocationDirectory), group (FileLocation)
 #: settings/konsole.kcfg:222
 #, kde-format
 msgid "For scrollback files, use this folder"
-msgstr ""
+msgstr "Le haghaidh comhaid scrollaigh siar, bain úsáid as an bhfillteán seo"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableMemoryMonitoring)
 #: settings/MemorySettings.ui:17
-#, fuzzy, kde-format
-#| msgid "Enable Bi-Directional text rendering"
+#, kde-format
 msgid "Enable memory monitoring:"
-msgstr "Cumasaigh rindreáil déthreoch"
+msgstr "Cumasaigh monatóireacht chuimhne:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:24
@@ -3095,18 +2958,25 @@ msgid ""
 "enabling might cause greater slowdowns during high memory consumption and "
 "specifying excessively low values might still cause Konsole to be killed."
 msgstr ""
+"Tiocfaidh na hathruithe i bhfeidhm nuair a atosófar iad. Má chuirtear ar "
+"chumas é, má sháraíonn tomhaltas cuimhne leanúnach ag Konsole an luach "
+"sonraithe, cuirfidh systemd-oomd deireadh leis an gcluaisín/na cluaisíní ina "
+"bhfuil an próiseas/na próisis atá dian ar chuimhne. Tabhair faoi deara: "
+"d’fhéadfadh moilliú níos mó a bheith mar thoradh ar chumasú le linn "
+"tomhaltas ard cuimhne agus d’fhéadfadh luachanna thar a bheith ísle a shonrú "
+"go marófaí Konsole fós."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:37
 #, kde-format
 msgid "Memory limit:"
-msgstr ""
+msgstr "Teorainn chuimhne:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_MemoryLimitValue)
 #: settings/MemorySettings.ui:44
 #, kde-format
 msgid " MB"
-msgstr ""
+msgstr " MB"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/PartInfo.ui:17
@@ -3119,51 +2989,52 @@ msgid ""
 "format=guided&product=konsole&component=kpart\">bug report</a> if you desire "
 "a change to how these are handled.</body></html>"
 msgstr ""
+"<html><head/><body><p>Roinneann feidhmchláir a úsáideann KonsolePart "
+"próifílí.</p><p>Ní roinneann siad le Konsole ná le feidhmchláir eile:"
+"<ul><li>próifíl réamhshocraithe</li><li>taispeáin sa roghchlár</"
+"li><li>aicearraí</li></ul></p><p>Is féidir leat <a href=\"https://bugs.kde."
+"org/enter_bug.cgi?format=guided&product=konsole&component=kpart\">tuairisc "
+"fabht</a> Konsole a oscailt más mian leat athrú a dhéanamh ar an gcaoi a "
+"láimhseálann tú iad seo.</body></html>"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newProfileButton)
 #: settings/ProfileSettings.ui:51
-#, fuzzy, kde-format
-#| msgid "Create a new profile based upon the selected profile"
+#, kde-format
 msgid "Create a new profile based on the selected profile"
 msgstr "Cruthaigh próifíl nua bunaithe ar an bpróifíl roghnaithe"
 
 #. i18n: ectx: property (text), widget (QPushButton, newProfileButton)
 #: settings/ProfileSettings.ui:54
-#, fuzzy, kde-format
-#| msgctxt "@action:button Create an alternate color scheme"
-#| msgid "New..."
+#, kde-format
 msgid "&New..."
-msgstr "Nua..."
+msgstr "&Nua..."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, editProfileButton)
 #: settings/ProfileSettings.ui:64
-#, fuzzy, kde-format
-#| msgid "Set the selected profile as the default for new terminal sessions"
+#, kde-format
 msgid ""
 "Edit the selected profile (this button is disabled for read-only profiles)"
 msgstr ""
-"Socraigh an phróifíl roghnaithe mar réamhshocrú i seisiúin nua teirminéil"
+"Cuir an phróifíl roghnaithe in eagar (tá an cnaipe seo díchumasaithe le "
+"haghaidh próifílí inléite amháin)"
 
 #. i18n: ectx: property (text), widget (QPushButton, editProfileButton)
 #: settings/ProfileSettings.ui:67
-#, fuzzy, kde-format
-#| msgid "Edit..."
+#, kde-format
 msgid "&Edit..."
-msgstr "Eagar..."
+msgstr "&Eagarthóireacht..."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, deleteProfileButton)
 #: settings/ProfileSettings.ui:77
-#, fuzzy, kde-format
-#| msgid "Delete the selected profile(s)"
+#, kde-format
 msgid "Delete the selected profile"
-msgstr "Scrios na próifílí roghnaithe"
+msgstr "Scrios an phróifíl roghnaithe"
 
 #. i18n: ectx: property (text), widget (QPushButton, deleteProfileButton)
 #: settings/ProfileSettings.ui:80
-#, fuzzy, kde-format
-#| msgid "Remove"
+#, kde-format
 msgid "&Remove"
-msgstr "Bain"
+msgstr "&Bain"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, setAsDefaultButton)
 #: settings/ProfileSettings.ui:90
@@ -3180,233 +3051,207 @@ msgstr "&Socraigh mar Réamhshocrú"
 
 #. i18n: ectx: attribute (title), widget (QWidget, appearanceTab)
 #: settings/TabBarSettings.ui:39
-#, fuzzy, kde-format
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@title:tab Tab bar settings"
 msgid "Appearance"
-msgstr "Cuma"
+msgstr "Dealramh"
 
 #. i18n: ectx: property (text), widget (QLabel, showTabBarLabel)
 #: settings/TabBarSettings.ui:53
 #, kde-format
 msgid "Show:"
-msgstr ""
+msgstr "Taispeáin:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowTabBarWhenNeeded)
 #: settings/TabBarSettings.ui:63
 #, kde-format
 msgid "When needed"
-msgstr ""
+msgstr "Nuair is gá"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysShowTabBar)
 #: settings/TabBarSettings.ui:73
 #, kde-format
 msgid "Alwa&ys"
-msgstr ""
+msgstr "I gcón&aí"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysHideTabBar)
 #: settings/TabBarSettings.ui:83
 #, kde-format
 msgid "&Never"
-msgstr ""
+msgstr "&Choíche"
 
 #. i18n: ectx: property (text), widget (QLabel, positionLabel)
 #: settings/TabBarSettings.ui:109
-#, fuzzy, kde-format
-#| msgid "Description:"
+#, kde-format
 msgid "Position:"
-msgstr "Cur Síos:"
+msgstr "Seasamh:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Top)
 #: settings/TabBarSettings.ui:119
-#, fuzzy, kde-format
-#| msgid "Above Terminal Area"
+#, kde-format
 msgid "Above terminal area"
 msgstr "Os cionn limistéar an teirminéil"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Bottom)
 #: settings/TabBarSettings.ui:129
-#, fuzzy, kde-format
-#| msgid "Below Terminal Area"
+#, kde-format
 msgid "Be&low terminal area"
-msgstr "Faoi limistéar an teirminéil"
+msgstr "Limistéar teirminé&il faoi bhun"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Left)
 #: settings/TabBarSettings.ui:139
-#, fuzzy, kde-format
-#| msgid "Below Terminal Area"
+#, kde-format
 msgid "To the left of terminal area"
-msgstr "Faoi limistéar an teirminéil"
+msgstr "Ar chlé den limistéar teirminéil"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Right)
 #: settings/TabBarSettings.ui:149
-#, fuzzy, kde-format
-#| msgid "Below Terminal Area"
+#, kde-format
 msgid "To the &right of terminal area"
-msgstr "Faoi limistéar an teirminéil"
+msgstr "Ar dheis &den limistéar teirminéil"
 
 #. i18n: ectx: property (text), widget (QLabel, showCloseTabButtonLabel)
 #: settings/TabBarSettings.ui:175
-#, fuzzy, kde-format
-#| msgid "&Close Tab"
+#, kde-format
 msgid "Show Close Tab button:"
-msgstr "&Dún an Cluaisín"
+msgstr "Taispeáin an cnaipe Dún an Chluaisín:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnEachTab)
 #: settings/TabBarSettings.ui:185
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Detach Tab"
+#, kde-format
 msgid "On ea&ch tab"
-msgstr "&Dícheangail Cluaisín"
+msgstr "Ar ga&ch cluaisín"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnTabBar)
 #: settings/TabBarSettings.ui:195
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Detach Tab"
+#, kde-format
 msgid "On &the tab bar"
-msgstr "&Dícheangail Cluaisín"
+msgstr "Ar an m&barra cluaisíní"
 
 #. i18n: ectx: property (text), widget (QRadioButton, None)
 #: settings/TabBarSettings.ui:205
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu Do not select any tabs"
-#| msgid "&None"
+#, kde-format
 msgctxt "Do not show a close button"
 msgid "None"
-msgstr "N&eamhní"
+msgstr "Dada"
 
 #. i18n: ectx: property (text), widget (QLabel, showSearchTabsButtonLabel)
 #: settings/TabBarSettings.ui:231
-#, fuzzy, kde-format
-#| msgid "&Close Tab"
+#, kde-format
 msgid "Show Search Tabs button:"
-msgstr "&Dún an Cluaisín"
+msgstr "Taispeáin cnaipe na gCluaisíní Cuardaigh:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSearchTabsButton)
 #: settings/TabBarSettings.ui:241
 #, kde-format
 msgid "Always"
-msgstr ""
+msgstr "I gcónaí"
 
 #. i18n: ectx: property (text), widget (QRadioButton, HideSearchTabsButton)
 #: settings/TabBarSettings.ui:251
 #, kde-format
 msgid "Never"
-msgstr ""
+msgstr "Choíche"
 
 #. i18n: ectx: property (text), widget (QLabel, miscellaneousAppearanceLabel)
 #. i18n: ectx: property (text), widget (QLabel, miscellaneousBehaviorLabel)
 #: settings/TabBarSettings.ui:277 settings/TabBarSettings.ui:410
-#, fuzzy, kde-format
-#| msgid "Miscellaneous"
+#, kde-format
 msgctxt "@item:intext Miscellaneous Options"
 msgid "Miscellaneous:"
-msgstr "Rudaí éagsúla"
+msgstr "Ilghnéitheach:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_NewTabButton)
 #: settings/TabBarSettings.ui:287
-#, fuzzy, kde-format
-#| msgid "Show 'New Tab' and 'Close Tab' buttons"
+#, kde-format
 msgid "Show 'New Tab' button"
-msgstr "Taispeáin cnaipí 'Cluaisín Nua' agus 'Dún an Cluaisín'"
+msgstr "Taispeáin an cnaipe 'Cluaisín Nua'"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ExpandTabWidth)
 #: settings/TabBarSettings.ui:294
 #, kde-format
 msgid "Expand individual tab widths to full window"
-msgstr ""
+msgstr "Leathnaigh leithead na gcluaisíní aonair go dtí an fhuinneog iomlán"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabBarUseUserStyleSheet)
 #: settings/TabBarSettings.ui:301
-#, fuzzy, kde-format
-#| msgid "Use a custom, fixed color for the cursor"
+#, kde-format
 msgid "Use user-defined stylesheet:"
-msgstr "Úsáid dath saincheaptha socraithe le haghaidh an chúrsóra"
+msgstr "Use user-defined stylesheet:"
 
 #. i18n: ectx: property (placeholderText), widget (KUrlRequester, kcfg_TabBarUserStyleSheetFile)
 #: settings/TabBarSettings.ui:327
 #, kde-format
 msgctxt "@item:intext Optional file path is empty"
 msgid "(none)"
-msgstr ""
+msgstr "(níl aon cheann)"
 
 #. i18n: ectx: attribute (title), widget (QWidget, behaviorTab)
 #: settings/TabBarSettings.ui:350
-#, fuzzy, kde-format
-#| msgid "Behavior"
+#, kde-format
 msgctxt "@title:tab Tab bar settings"
 msgid "Behavior"
-msgstr "Oibriú"
+msgstr "Iompar"
 
 #. i18n: ectx: property (text), widget (QLabel, putNewTabsLabel)
 #: settings/TabBarSettings.ui:364
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Create new tab"
+#, kde-format
 msgid "Put new tabs:"
-msgstr "Cruthaigh cluaisín nua"
+msgstr "Cuir cluaisíní nua:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAtTheEnd)
 #: settings/TabBarSettings.ui:374
 #, kde-format
 msgid "At &the end"
-msgstr ""
+msgstr "Ag &an deireadh"
 
 #. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAfterCurrentTab)
 #: settings/TabBarSettings.ui:384
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Close Current &Tab"
+#, kde-format
 msgid "After current &tab"
-msgstr "Dún an &Cluaisín Reatha"
+msgstr "Tar éis an chluaisín rea&tha"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_CloseTabOnMiddleMouseButton)
 #: settings/TabBarSettings.ui:420
 #, kde-format
 msgid "Close tab on middle-click"
-msgstr ""
+msgstr "Dún an cluaisín ar chliceáil sa lár"
 
 #. i18n: ectx: attribute (title), widget (QWidget, splitTab)
 #: settings/TabBarSettings.ui:443
-#, fuzzy, kde-format
-#| msgid "Split View"
+#, kde-format
 msgid "Splits"
-msgstr "Amharc Roinnte"
+msgstr "Scoilteanna"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/TabBarSettings.ui:449
-#, fuzzy, kde-format
-#| msgid "Show Menu Bar"
+#, kde-format
 msgid "Show Header:"
-msgstr "Taispeáin an Barra Roghchláir"
+msgstr "Taispeáin Ceanntásc:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSplitHeaderWhenNeeded)
 #: settings/TabBarSettings.ui:456
 #, kde-format
 msgctxt "@option:radio When needed show the split header"
 msgid "When needed"
-msgstr ""
+msgstr "Nuair is gá"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysHideSplitHeader)
 #: settings/TabBarSettings.ui:466
 #, kde-format
 msgctxt "@option:radio Never show the split header"
 msgid "Never"
-msgstr ""
+msgstr "Choíche"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/TabBarSettings.ui:492
 #, kde-format
 msgid "Drag Handle Size:"
-msgstr ""
+msgstr "Méid Láimhseála Tarraingthe:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleSmall)
 #: settings/TabBarSettings.ui:502
-#, fuzzy, kde-format
-#| msgctxt "@item:inrange Minimum Size"
-#| msgid "Small"
+#, kde-format
 msgctxt "@option:radio Small height/width of splitter widget"
 msgid "Small"
 msgstr "Beag"
@@ -3416,13 +3261,11 @@ msgstr "Beag"
 #, kde-format
 msgctxt "@option:radio Medium height/width of splitter widget"
 msgid "Medium"
-msgstr ""
+msgstr "Meánach"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleLarge)
 #: settings/TabBarSettings.ui:522
-#, fuzzy, kde-format
-#| msgctxt "@item:inrange Maximum Size"
-#| msgid "Large"
+#, kde-format
 msgctxt "@option:radio Large height/width of splitter widget"
 msgid "Large"
 msgstr "Mór"
@@ -3432,7 +3275,7 @@ msgstr "Mór"
 #, kde-format
 msgctxt "@option:radio Always show the split header"
 msgid "Always"
-msgstr ""
+msgstr "I gcónaí"
 
 #: settings/TemporaryFilesSettings.cpp:31
 #, kde-format
@@ -3440,7 +3283,7 @@ msgctxt ""
 "@option:radio File location; <filename>%1</filename>: path to directory "
 "placeholder"
 msgid "System temporary directory (%1)"
-msgstr ""
+msgstr "Eolaire sealadach an chórais (%1)"
 
 #: settings/TemporaryFilesSettings.cpp:33
 #, kde-format
@@ -3448,34 +3291,32 @@ msgctxt ""
 "@option:radio File location; <filename>%1</filename>: path to directory "
 "placeholder"
 msgid "User cache directory (%1)"
-msgstr ""
+msgstr "Eolaire taisce úsáideora (%1)"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: settings/TemporaryFilesSettings.ui:25
-#, fuzzy, kde-format
-#| msgid "Scrollback Options"
+#, kde-format
 msgid "Scrollback file location:"
-msgstr "Roghanna Iarscrollaithe"
+msgstr "Suíomh comhaid scrollaigh siar:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, kcfg_scrollbackUseSpecifiedLocation)
 #: settings/TemporaryFilesSettings.ui:64
-#, fuzzy, kde-format
-#| msgid "&Custom..."
+#, kde-format
 msgctxt "@option:radio Custom (file location); followed by text entry field"
 msgid "Custom:"
-msgstr "Sain&cheaptha..."
+msgstr "Saincheaptha:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/ThumbnailsSettings.ui:17
 #, kde-format
 msgid "Size:"
-msgstr ""
+msgstr "Méid:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_ThumbnailSize)
 #: settings/ThumbnailsSettings.ui:24
 #, kde-format
 msgid "px"
-msgstr ""
+msgstr "px"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/ThumbnailsSettings.ui:37
@@ -3485,44 +3326,45 @@ msgid ""
 "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline files</span> in your "
 "profile settings.</p></body></html>"
 msgstr ""
+"<html><head/><body><p>Chun an ghné seo a úsáid, cumasaigh <span style=\" "
+"font-weight:600;\">Luch-&gt;Miscellaneous-&gt;Fo-líneáil comhaid</span> i do "
+"shocruithe próifíle.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/ThumbnailsSettings.ui:53
-#, fuzzy, kde-format
-#| msgctxt "@item"
-#| msgid "Activate Menu"
+#, kde-format
 msgid "Activation:"
-msgstr "Gníomhachtaigh Roghchlár"
+msgstr "Gníomhachtú:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: settings/ThumbnailsSettings.ui:63
 #, kde-format
 msgid "Mouse hover plus"
-msgstr ""
+msgstr "Luchóg móide"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ThumbnailShift)
 #: settings/ThumbnailsSettings.ui:70
 #, kde-format
 msgid "Shift"
-msgstr ""
+msgstr "Shift"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ThumbnailAlt)
 #: settings/ThumbnailsSettings.ui:77
 #, kde-format
 msgid "Alt"
-msgstr ""
+msgstr "Alt"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ThumbnailCtrl)
 #: settings/ThumbnailsSettings.ui:84
 #, kde-format
 msgid "Ctrl"
-msgstr ""
+msgstr "Ctrl"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableThumbnails)
 #: settings/ThumbnailsSettings.ui:93
 #, kde-format
 msgid "Enable thumbnails generation"
-msgstr ""
+msgstr "Cumasaigh giniúint mionsamhlacha"
 
 #: terminalDisplay/TerminalDisplay.cpp:660
 #, kde-format
@@ -3533,11 +3375,11 @@ msgstr "Méid: %1 × %2"
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
+msgstr[0] "An bhfuil tú cinnte gur mian leat %1 carachtar a ghreamú?"
+msgstr[1] "An bhfuil tú cinnte gur mian leat %1 carachtar a ghreamú?"
+msgstr[2] "An bhfuil tú cinnte gur mian leat %1 carachtar a ghreamú?"
+msgstr[3] "An bhfuil tú cinnte gur mian leat %1 carachtar a ghreamú?"
+msgstr[4] "An bhfuil tú cinnte gur mian leat %1 carachtar a ghreamú?"
 
 #: terminalDisplay/TerminalDisplay.cpp:2256
 #, kde-format
@@ -3548,41 +3390,44 @@ msgstr "Deimhnigh Greamú"
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr ""
+"Deireadh Téacs/Idirbhriseadh: féadfaidh sé an próiseas reatha a fhágáil"
 
 #: terminalDisplay/TerminalDisplay.cpp:2290
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
-msgstr ""
+msgstr "Deireadh an Tarchuir: féadfaidh sé an próiseas reatha a fhágáil"
 
 #: terminalDisplay/TerminalDisplay.cpp:2291
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
-msgstr ""
+msgstr "Clog: déanfaidh sé iarracht rabhadh inchloiste a scaoileadh"
 
 #: terminalDisplay/TerminalDisplay.cpp:2292
 #, kde-format
 msgid "Backspace"
-msgstr ""
+msgstr "Cúlspás"
 
 #: terminalDisplay/TerminalDisplay.cpp:2293
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
-msgstr ""
+msgstr "Rialú Gléas a Trí/XOFF: cuireann sé an t-aschur ar fionraí"
 
 #: terminalDisplay/TerminalDisplay.cpp:2294
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr ""
+"Ionadaigh/Cuir ar Fionraí: féadfaidh sé an próiseas reatha a chur ar fionraí"
 
 #: terminalDisplay/TerminalDisplay.cpp:2295
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
-msgstr ""
+msgstr "Éalaithe: a úsáidtear chun staid an teirminéal a ionramháil"
 
 #: terminalDisplay/TerminalDisplay.cpp:2296
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr ""
+"Deighilteoir Comhad/Scoir: féadfaidh sé an próiseas reatha a chur ar ceal"
 
 #: terminalDisplay/TerminalDisplay.cpp:2319
 #, kde-format
@@ -3590,53 +3435,48 @@ msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
 "want to filter them out?"
 msgstr ""
+"Tá carachtair rialaithe i bhfolach sa téacs atá tú ag iarraidh a ghreamú, ar "
+"mhaith leat iad a scagadh amach?"
 
 #: terminalDisplay/TerminalDisplay.cpp:2322
-#, fuzzy, kde-format
-#| msgid "Confirm Paste"
+#, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
-msgstr "Deimhnigh Greamú"
+msgstr "Deimhnigh Greamaigh"
 
 #: terminalDisplay/TerminalDisplay.cpp:2323
-#, fuzzy, kde-format
-#| msgid "Set cursor color to match current character"
+#, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
-msgstr ""
-"Socraigh go bhfuil dath an chúrsóra comhoiriúnach do dhath an charachtair "
-"reatha"
+msgstr "Greamaigh gan carachtair rialaithe"
 
 #: terminalDisplay/TerminalDisplay.cpp:2324
-#, fuzzy, kde-format
-#| msgid "Paste Selection"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
-msgstr "Greamaigh Roghnúchán"
+msgstr "&Greamaigh gach rud"
 
 #: terminalDisplay/TerminalDisplay.cpp:2325
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
-msgstr ""
+msgstr "&Cealaigh"
 
 #: terminalDisplay/TerminalDisplay.cpp:2556
-#, fuzzy, kde-format
-#| msgid ""
-#| "<qt>Output has been <a href=\"http://en.wikipedia.org/wiki/Flow_control"
-#| "\">suspended</a> by pressing Ctrl+S.  Press <b>Ctrl+Q</b> to resume.</qt>"
+#, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
 "Software_flow_control\">suspended</a> by pressing Ctrl+S. Press <b>Ctrl+Q</"
 "b> to resume.</qt>"
 msgstr ""
-"<qt>Cuireadh an t-aschur <a href=\"http://en.wikipedia.org/wiki/Flow_control"
-"\">ar fionraí</a> le Ctrl+S.  Brúigh <b>Ctrl+Q</b> chun tosú arís.</qt>"
+"<qt>Cuireadh an t-aschur <a href=\"https://en.wikipedia.org/wiki/"
+"Software_flow_control\">ar fionraí</a> trí Ctrl+S a bhrú. Brúigh <b>Ctrl+Q</"
+"b> chun atosú.</qt>"
 
 #: terminalDisplay/TerminalDisplay.cpp:2611
 #, kde-format
 msgid "This terminal is read-only."
-msgstr ""
+msgstr "Is teirminéal léite amháin é seo."
 
 #: terminalDisplay/TerminalDisplay.cpp:3006
 #, kde-format
@@ -3649,11 +3489,10 @@ msgid "&Paste Location"
 msgstr "&Greamaigh Suíomh"
 
 #: ViewManager.cpp:120
-#, fuzzy, kde-format
-#| msgid "Split View"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View"
-msgstr "Amharc Roinnte"
+msgstr "Radharc Scoilte"
 
 #: ViewManager.cpp:127
 #, kde-format
@@ -3668,54 +3507,46 @@ msgid "Split View Top/Bottom"
 msgstr "Scoilt an tAmharc Barr/Bun"
 
 #: ViewManager.cpp:143
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically"
-msgstr "Scoilt an tAmharc Barr/Bun"
+msgstr "Scoilt an Radharc go hUathoibríoch"
 
 #: ViewManager.cpp:153
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
-msgstr "Scoilt an tAmharc Clé/Deas"
+msgstr "Radharc Scoilte Ar Chlé/Ar Dheas ón gcéad chluaisín eile"
 
 #: ViewManager.cpp:161
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
-msgstr "Scoilt an tAmharc Barr/Bun"
+msgstr "Radharc Scoilte Barr/Bun ón gcéad chluaisín eile"
 
 #: ViewManager.cpp:169
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
-msgstr "Scoilt an tAmharc Barr/Bun"
+msgstr "Scoilt an Amharc go Huathoibríoch ón gcéad chluaisín eile"
 
 #: ViewManager.cpp:179
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x2 terminals"
-msgstr ""
+msgstr "Luchtaigh cluaisín nua le leagan amach teirminéil 2x2"
 
 #: ViewManager.cpp:188
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x1 terminals"
-msgstr ""
+msgstr "Luchtaigh cluaisín nua le leagan amach teirminéil 2x1"
 
 #: ViewManager.cpp:197
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 1x2 terminals"
-msgstr ""
+msgstr "Luchtaigh cluaisín nua le leagan amach teirminéil 1x2"
 
 #: ViewManager.cpp:205
 #, kde-format
@@ -3730,20 +3561,16 @@ msgid "Shrink View"
 msgstr "Laghdaigh an tAmharc"
 
 #: ViewManager.cpp:223
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "D&etach Current Tab"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &View"
-msgstr "&Dícheangail an Cluaisín Reatha"
+msgstr "Dícheangail an &Radharc Reatha"
 
 #: ViewManager.cpp:235
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "D&etach Current Tab"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &Tab"
-msgstr "&Dícheangail an Cluaisín Reatha"
+msgstr "Dícheangail an &Cluaisín Reatha"
 
 #: ViewManager.cpp:240
 #, kde-format
@@ -3758,44 +3585,40 @@ msgid "Previous Tab"
 msgstr "An Cluaisín Roimhe Seo"
 
 #: ViewManager.cpp:256
-#, fuzzy, kde-format
-#| msgid "Above Terminal Area"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Above Terminal"
-msgstr "Os cionn limistéar an teirminéil"
+msgstr "Fócas Os Cionn an Teirminéal"
 
 #: ViewManager.cpp:263
-#, fuzzy, kde-format
-#| msgid "Below Terminal Area"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Below Terminal"
-msgstr "Faoi limistéar an teirminéil"
+msgstr "Fócas Faoin Teirminéal"
 
 #: ViewManager.cpp:270
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Left Terminal"
-msgstr ""
+msgstr "Fócas ar an Teirminéal Clé"
 
 #: ViewManager.cpp:276
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Right Terminal"
-msgstr ""
+msgstr "Fócas ar an Teirminéal ar Dheis"
 
 #: ViewManager.cpp:282
-#, fuzzy, kde-format
-#| msgid "Above Terminal Area"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Next Terminal"
-msgstr "Os cionn limistéar an teirminéil"
+msgstr "Fócas ar an Teirminéal Eile"
 
 #: ViewManager.cpp:288
-#, fuzzy, kde-format
-#| msgid "Below Terminal Area"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Previous Terminal"
-msgstr "Faoi limistéar an teirminéil"
+msgstr "Fócas ar an Teirminéal Roimhe Seo"
 
 #: ViewManager.cpp:294
 #, kde-format
@@ -3807,83 +3630,79 @@ msgstr "Go dtí an Cluaisín Deiridh"
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs"
-msgstr ""
+msgstr "Cluaisíní Úsáidte Deiridh"
 
 #: ViewManager.cpp:304
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle Between Two Tabs"
-msgstr ""
+msgstr "Athraigh Idir Dhá Chluaisín"
 
 #: ViewManager.cpp:309
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs (Reverse)"
-msgstr ""
+msgstr "Cluaisíní Úsáidte Deiridh (Ar Ais)"
 
 #: ViewManager.cpp:314
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle maximize current view"
-msgstr ""
+msgstr "Uasmhéadaigh an radharc reatha"
 
 #: ViewManager.cpp:315
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle maximize current view"
-msgstr ""
+msgstr "Uasmhéadaigh an radharc reatha"
 
 #: ViewManager.cpp:323
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle zoom-maximize current view"
-msgstr ""
+msgstr "Scoránaigh súmáil-uasmhéadaigh an radharc reatha"
 
 #: ViewManager.cpp:324
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle zoom-maximize current view"
-msgstr ""
+msgstr "Scoránaigh súmáil-uasmhéadaigh an radharc reatha"
 
 #: ViewManager.cpp:332
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Move Tab Right"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the right"
-msgstr "Bog an Cluaisín Faoi Dheis"
+msgstr "Bog an cluaisín ar dheis"
 
 #: ViewManager.cpp:339
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Move Tab Left"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the left"
-msgstr "Bog an Cluaisín Faoi Chlé"
+msgstr "Bog an cluaisín ar chlé"
 
 #: ViewManager.cpp:346
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
-msgstr ""
+msgstr "Socraigh comhtháthú séimeantach (bash)"
 
 #: ViewManager.cpp:352
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
-msgstr ""
+msgstr "Taispeáin leideanna séimeantacha a scoránaigh"
 
 #: ViewManager.cpp:358
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
-msgstr ""
+msgstr "Athraigh taispeáint uimhreacha líne"
 
 #: ViewManager.cpp:365
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
-msgstr ""
+msgstr "Méid comhionann do gach radharc"
 
 #: ViewManager.cpp:375
 #, kde-format
@@ -3892,62 +3711,52 @@ msgid "Switch to Tab %1"
 msgstr "Téigh go Cluaisín %1"
 
 #: ViewManager.cpp:598
-#, fuzzy, kde-format
-#| msgid "Mouse Interaction"
+#, kde-format
 msgid "Semantic hints "
-msgstr "Idirghníomhaíocht Luiche"
+msgstr "Leideanna seimeantacha "
 
 #: ViewManager.cpp:614
-#, fuzzy, kde-format
-#| msgid "Fixed number of lines: "
+#, kde-format
 msgid "Line numbers "
-msgstr "Líon socraithe línte: "
+msgstr "Uimhreacha líne "
 
 #: ViewManager.cpp:1202
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Move Tab Left"
+#, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
-msgstr "Bog an Cluaisín Faoi Chlé"
+msgstr "Sábháil Leagan Amach na gCluaisíní"
 
 #: ViewManager.cpp:1204 ViewManager.cpp:1325
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
-msgstr ""
+msgstr "Leagan Amach Amhairc Konsole (*.json)"
 
 #: ViewManager.cpp:1220
-#, fuzzy, kde-format
-#| msgid ""
-#| "A problem occurred when saving the output.\n"
-#| "%1"
+#, kde-format
 msgctxt "@label:textbox"
 msgid ""
 "A problem occurred when saving the Layout.\n"
 "%1"
 msgstr ""
-"Tharla earráid agus an t-aschur á shábháil.\n"
+"Tharla fadhb agus an Leagan Amach á shábháil.\n"
 "%1"
 
 #: ViewManager.cpp:1312
-#, fuzzy, kde-format
-#| msgid ""
-#| "A problem occurred when saving the output.\n"
-#| "%1"
+#, kde-format
 msgctxt "@label:textbox"
 msgid ""
 "A problem occurred when loading the Layout.\n"
 "%1"
 msgstr ""
-"Tharla earráid agus an t-aschur á shábháil.\n"
+"Tharla fadhb agus an Leagan Amach á luchtú.\n"
 "%1"
 
 #: ViewManager.cpp:1323
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
-msgstr ""
+msgstr "Luchtaigh Leagan Amach na gCluaisíní"
 
 #: Vt102Emulation.cpp:2828
 #, kde-format
@@ -3962,57 +3771,54 @@ msgstr ""
 #: widgets/EditProfileAdvancedPage.ui:19
 #, kde-format
 msgid "Key combination to show URL hints:"
-msgstr ""
+msgstr "Teaglaim eochracha chun leideanna URL a thaispeáint:"
 
 #. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierShift)
 #: widgets/EditProfileAdvancedPage.ui:51
 #, kde-format
 msgctxt "key on keyboard"
 msgid "Shift"
-msgstr ""
+msgstr "Shift"
 
 #. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierCtrl)
 #: widgets/EditProfileAdvancedPage.ui:70
 #, kde-format
 msgctxt "key on keyboard"
 msgid "Ctrl"
-msgstr ""
+msgstr "Ctrl"
 
 #. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierAlt)
 #: widgets/EditProfileAdvancedPage.ui:89
 #, kde-format
 msgctxt "key on keyboard"
 msgid "Alt"
-msgstr ""
+msgstr "Alt"
 
 #. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierMeta)
 #: widgets/EditProfileAdvancedPage.ui:108
 #, kde-format
 msgctxt "key on keyboard"
 msgid "Meta"
-msgstr ""
+msgstr "Meitea"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: widgets/EditProfileAdvancedPage.ui:154
-#, fuzzy, kde-format
-#| msgid "Miscellaneous"
+#, kde-format
 msgctxt "Items that do not fit in other categories"
 msgid "Miscellaneous:"
-msgstr "Rudaí éagsúla"
+msgstr "Ilghnéitheach:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableReverseUrlHints)
 #: widgets/EditProfileAdvancedPage.ui:164
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Find the next match for the current search phrase"
+#, kde-format
 msgid "Number URL hints in reverse, starting from the bottom"
-msgstr "Aimsigh an chéad sampla eile den fhrása cuardaigh"
+msgstr "Uimhrigh leideanna URL ar ais, ag tosú ón mbun"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableReverseUrlHints)
 #: widgets/EditProfileAdvancedPage.ui:167
 #, kde-format
 msgid "Reverse URL hint numbering"
-msgstr ""
+msgstr "Uimhriú leid URL droim ar ais"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBlinkingTextButton)
 #: widgets/EditProfileAdvancedPage.ui:180
@@ -4036,67 +3842,64 @@ msgstr "Ceadaigh an t-aschur a chur ar fionraí le Ctrl+S"
 #: widgets/EditProfileAdvancedPage.ui:199
 #, kde-format
 msgid "Flow control"
-msgstr ""
+msgstr "Rialú sreabhadh"
 
 #. i18n: ectx: property (text), widget (QLabel, label_14)
 #: widgets/EditProfileAdvancedPage.ui:222
-#, fuzzy, kde-format
-#| msgid "Default character encoding:"
+#, kde-format
 msgid "&Default character encoding:"
-msgstr "Ionchódú réamhshocraithe carachtar:"
+msgstr "&Códú carachtar réamhshocraithe:"
 
 #. i18n: ectx: property (text), widget (QLabel, peekPrimaryLabel)
 #: widgets/EditProfileAdvancedPage.ui:242
 #, kde-format
 msgid "Shortcut for peeking the primary screen:"
-msgstr ""
+msgstr "Aicearra chun an príomhscáileán a fheiceáil:"
 
 #. i18n: ectx: property (text), widget (QLabel, autoSaveIntervalLabel)
 #: widgets/EditProfileAdvancedPage.ui:255
 #, kde-format
 msgid "Set interval between autosaves:"
-msgstr ""
+msgstr "Socraigh an t-eatramh idir uath-shábháil:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, autoSaveIntervalWidget)
 #: widgets/EditProfileAdvancedPage.ui:262
 #, kde-format
 msgid " ms"
-msgstr ""
+msgstr " ms"
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
 #: widgets/EditProfileAdvancedPage.ui:275
-#, fuzzy, kde-format
-#| msgid "Fixed number of lines: "
+#, kde-format
 msgid "Line Numbers:"
-msgstr "Líon socraithe línte: "
+msgstr "Uimhreacha Líne:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsNever)
 #: widgets/EditProfileAdvancedPage.ui:285
 #, kde-format
 msgctxt "Never"
 msgid "&Never"
-msgstr ""
+msgstr "&Choíche"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsURL)
 #: widgets/EditProfileAdvancedPage.ui:295
 #, kde-format
 msgctxt "When showing URL hints"
 msgid "When &URL hints show"
-msgstr ""
+msgstr "Cathain a thaispeántar leideanna &URL"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsAlways)
 #: widgets/EditProfileAdvancedPage.ui:305
 #, kde-format
 msgctxt "Always"
 msgid "A&lways"
-msgstr ""
+msgstr "&I gcónaí"
 
 #. i18n: ectx: attribute (title), widget (QWidget, colorSchemeTab)
 #: widgets/EditProfileAppearancePage.ui:36
-#, fuzzy, kde-format
-#| msgid "Color Scheme && Background"
+#, kde-format
 msgid "Color scheme && font"
-msgstr "Scéim Datha agus Cúlra"
+msgstr "Scéim dathanna && cló"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newColorSchemeButton)
 #: widgets/EditProfileAppearancePage.ui:69
@@ -4136,33 +3939,32 @@ msgstr "Scrios an scéim roghnaithe dathanna"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, resetColorSchemeButton)
 #: widgets/EditProfileAppearancePage.ui:99
-#, fuzzy, kde-format
-#| msgid "Delete the selected color scheme"
+#, kde-format
 msgid "Reset the selected color scheme settings to the default values"
-msgstr "Scrios an scéim roghnaithe dathanna"
+msgstr ""
+"Athshocraigh socruithe na scéime dathanna roghnaithe go dtí na luachanna "
+"réamhshocraithe"
 
 #. i18n: ectx: property (text), widget (QPushButton, resetKeyBindingsButton)
 #. i18n: ectx: property (text), widget (QPushButton, resetColorSchemeButton)
 #: widgets/EditProfileAppearancePage.ui:102
 #: widgets/EditProfileKeyboardPage.ui:93
-#, fuzzy, kde-format
-#| msgid "&Set as Default"
+#, kde-format
 msgid "Defaults"
-msgstr "&Socraigh mar Réamhshocrú"
+msgstr "Réamhshocruithe"
 
 #. i18n: ectx: property (text), widget (QLabel, label_7)
 #: widgets/EditProfileAppearancePage.ui:135
-#, fuzzy, kde-format
-#| msgid "Font"
+#, kde-format
 msgid "Font:"
-msgstr "Cló"
+msgstr "Cló:"
 
 #. i18n: ectx: property (text), widget (QPushButton, chooseFontButton)
 #: widgets/EditProfileAppearancePage.ui:167
 #, kde-format
 msgctxt "@action:button open a dialog with list of fonts"
 msgid "Choose..."
-msgstr ""
+msgstr "Roghnaigh..."
 
 #. i18n: ectx: property (text), widget (QCheckBox, antialiasTextButton)
 #: widgets/EditProfileAppearancePage.ui:174
@@ -4174,7 +3976,7 @@ msgstr "Clónna míne"
 #: widgets/EditProfileAppearancePage.ui:181
 #, kde-format
 msgid "Draw intense colors in bold font"
-msgstr ""
+msgstr "Tarraing dathanna láidre i gcló trom"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:188
@@ -4184,6 +3986,8 @@ msgctxt ""
 "of characters."
 msgid "Use the selected font for line characters instead of the builtin code"
 msgstr ""
+"Úsáid an cló roghnaithe le haghaidh carachtair líne in ionad an chóid "
+"ionsuite"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:191
@@ -4192,7 +3996,7 @@ msgctxt ""
 "Characters for drawing lines for a frame or box in TUI programs. Not a row "
 "of characters."
 msgid "Use line characters contained in font"
-msgstr ""
+msgstr "Úsáid carachtair líne atá sa chló"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:198
@@ -4201,12 +4005,14 @@ msgid ""
 "Use the selected font for unicode Braille characters instead of the builtin "
 "code"
 msgstr ""
+"Úsáid an cló roghnaithe le haghaidh carachtair Braille Unicode in ionad an "
+"chóid ionsuite"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:201
 #, kde-format
 msgid "Use unicode Braille characters contained in font"
-msgstr ""
+msgstr "Úsáid carachtair Braille Unicode atá sa chló"
 
 #. i18n: ectx: attribute (title), widget (QWidget, cursorTab)
 #: widgets/EditProfileAppearancePage.ui:209
@@ -4218,13 +4024,11 @@ msgstr "Cúrsóir"
 #: widgets/EditProfileAppearancePage.ui:229
 #, kde-format
 msgid "Shape:"
-msgstr ""
+msgstr "Cruth:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, cursorShapeBlock)
 #: widgets/EditProfileAppearancePage.ui:239
-#, fuzzy, kde-format
-#| msgctxt "The shape of the cursor"
-#| msgid "Block"
+#, kde-format
 msgctxt "A solid rectangular"
 msgid "Block"
 msgstr "Bloc"
@@ -4232,30 +4036,24 @@ msgstr "Bloc"
 # FCT92!
 #. i18n: ectx: property (text), widget (QRadioButton, cursorShapeIBeam)
 #: widgets/EditProfileAppearancePage.ui:249
-#, fuzzy, kde-format
-#| msgctxt "The shape of the cursor, similar to a capital I"
-#| msgid "I-Beam"
+#, kde-format
 msgctxt "A vertical line on the left edge"
 msgid "I-Beam"
 msgstr "I-Bhíoma"
 
 #. i18n: ectx: property (text), widget (QRadioButton, cursorShapeUnderline)
 #: widgets/EditProfileAppearancePage.ui:259
-#, fuzzy, kde-format
-#| msgctxt "The shape of the cursor"
-#| msgid "Underline"
+#, kde-format
 msgctxt "A hortizonal line on the bottom edge"
 msgid "Underline"
-msgstr "Líne Faoi"
+msgstr "Folínigh"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: widgets/EditProfileAppearancePage.ui:291
-#, fuzzy, kde-format
-#| msgctxt "@label:listbox Column header text for the actual colors"
-#| msgid "Color"
+#, kde-format
 msgctxt "Cursor color options"
 msgid "Color:"
-msgstr "Dath"
+msgstr "Dath:"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, autoCursorColorButton)
 #: widgets/EditProfileAppearancePage.ui:307
@@ -4267,12 +4065,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, autoCursorColorButton)
 #: widgets/EditProfileAppearancePage.ui:310
-#, fuzzy, kde-format
-#| msgid "Set cursor color to match current character"
+#, kde-format
 msgid "Match current character"
-msgstr ""
-"Socraigh go bhfuil dath an chúrsóra comhoiriúnach do dhath an charachtair "
-"reatha"
+msgstr "Meaitseáil an carachtar reatha"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, customCursorColorButton)
 #: widgets/EditProfileAppearancePage.ui:326
@@ -4282,17 +4077,15 @@ msgstr "Úsáid dath saincheaptha socraithe le haghaidh an chúrsóra"
 
 #. i18n: ectx: property (text), widget (QRadioButton, customCursorColorButton)
 #: widgets/EditProfileAppearancePage.ui:329
-#, fuzzy, kde-format
-#| msgid "Custom cursor color:"
+#, kde-format
 msgid "Custom cursor color"
-msgstr "Dath saincheaptha an chúrsóra:"
+msgstr "Dath cúrsóra saincheaptha"
 
 #. i18n: ectx: property (text), widget (QLabel, customCursorColorLabel)
 #: widgets/EditProfileAppearancePage.ui:360
-#, fuzzy, kde-format
-#| msgid "Cursor"
+#, kde-format
 msgid "Cursor:"
-msgstr "Cúrsóir"
+msgstr "Cúrsóir:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, customColorSelectButton)
 #: widgets/EditProfileAppearancePage.ui:373
@@ -4304,21 +4097,20 @@ msgstr "Roghnaigh an dath a úsáidfear chun an cúrsóir a dhearadh"
 #: widgets/EditProfileAppearancePage.ui:393
 #, kde-format
 msgid "Text:"
-msgstr ""
+msgstr "Téacs:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, customTextColorSelectButton)
 #: widgets/EditProfileAppearancePage.ui:406
-#, fuzzy, kde-format
-#| msgid "Select the color used to draw the cursor"
+#, kde-format
 msgid "Select the color used to draw the character underneath the cursor"
-msgstr "Roghnaigh an dath a úsáidfear chun an cúrsóir a dhearadh"
+msgstr ""
+"Roghnaigh an dath a úsáidtear chun an carachtar faoin gcúrsóir a tharraingt"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: widgets/EditProfileAppearancePage.ui:431
-#, fuzzy, kde-format
-#| msgid "Blinking cursor"
+#, kde-format
 msgid "Blinking:"
-msgstr "Cúrsóir caochta"
+msgstr "Ag splancadh:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBlinkingCursorButton)
 #: widgets/EditProfileAppearancePage.ui:447
@@ -4330,26 +4122,23 @@ msgstr "Cuir an cúrsóir á chaochadh go rialta"
 #. i18n: ectx: property (text), widget (QCheckBox, alignToCenterButton)
 #: widgets/EditProfileAppearancePage.ui:450
 #: widgets/EditProfileAppearancePage.ui:733
-#, fuzzy, kde-format
-#| msgid "&Enable"
+#, kde-format
 msgid "Enabled"
-msgstr "&Cumasaigh"
+msgstr "Cumasaithe"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #. i18n: ectx: attribute (title), widget (QWidget, miscTab)
 #: widgets/EditProfileAppearancePage.ui:473 widgets/EditProfileMousePage.ui:252
-#, fuzzy, kde-format
-#| msgid "Miscellaneous"
+#, kde-format
 msgctxt "Items that do not fit in other categories"
 msgid "Miscellaneous"
-msgstr "Rudaí éagsúla"
+msgstr "Ilghnéitheach"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: widgets/EditProfileAppearancePage.ui:484
-#, fuzzy, kde-format
-#| msgid "Window"
+#, kde-format
 msgid "Window:"
-msgstr "Fuinneog"
+msgstr "Fuinneog:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, showTerminalSizeHintButton)
 #: widgets/EditProfileAppearancePage.ui:491
@@ -4358,75 +4147,70 @@ msgid ""
 "Show terminal size in columns and lines in the center of window after "
 "resizing"
 msgstr ""
+"Taispeáin méid an teirminéil i gcolúin agus i línte i lár na fuinneoige tar "
+"éis athrú méide"
 
 #. i18n: ectx: property (text), widget (QCheckBox, showTerminalSizeHintButton)
 #: widgets/EditProfileAppearancePage.ui:494
 #, kde-format
 msgid "Show hint for terminal size after resizing"
-msgstr ""
+msgstr "Taispeáin leid maidir le méid an teirminéal tar éis athrú méide"
 
 #. i18n: ectx: property (text), widget (QCheckBox, invertSelectionColorsCheckbox)
 #: widgets/EditProfileAppearancePage.ui:501
 #, kde-format
 msgid "Always invert the colors of selected text"
-msgstr ""
+msgstr "Déan dathanna an téacs roghnaithe a aisiompú i gcónaí"
 
 #. i18n: ectx: property (text), widget (QLabel, dimLabel)
 #: widgets/EditProfileAppearancePage.ui:510
 #, kde-format
 msgid "Darkening strength:"
-msgstr ""
+msgstr "Neart dorchadaithe:"
 
 #. i18n: ectx: property (text), widget (QLabel, borderLabel)
 #: widgets/EditProfileAppearancePage.ui:543
-#, fuzzy, kde-format
-#| msgctxt "@label:listbox Column header text for the actual colors"
-#| msgid "Color"
+#, kde-format
 msgctxt "Border color options"
 msgid "Color:"
-msgstr "Dath"
+msgstr "Dath:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, focusBorderColor)
 #: widgets/EditProfileAppearancePage.ui:559
-#, fuzzy, kde-format
-#| msgid "Select the color used to draw the cursor"
+#, kde-format
 msgid "Select the color used to draw the border"
-msgstr "Roghnaigh an dath a úsáidfear chun an cúrsóir a dhearadh"
+msgstr "Roghnaigh an dath a úsáidtear chun an teorainn a tharraingt"
 
 #. i18n: ectx: property (text), widget (QLabel, label_10)
 #: widgets/EditProfileAppearancePage.ui:581
-#, fuzzy, kde-format
-#| msgid "Terminal Features"
+#, kde-format
 msgid "Inactive Terminals:"
-msgstr "Sainghnéithe an Teirminéil"
+msgstr "Teirminéil Neamhghníomhacha:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_11)
 #: widgets/EditProfileAppearancePage.ui:591
-#, fuzzy, kde-format
-#| msgid "Terminal Features"
+#, kde-format
 msgid "Active Terminals:"
-msgstr "Sainghnéithe an Teirminéil"
+msgstr "Teirminéil Ghníomhacha:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, contentsGroup)
 #: widgets/EditProfileAppearancePage.ui:601
-#, fuzzy, kde-format
-#| msgid "Terminal Features"
+#, kde-format
 msgctxt "@title:group"
 msgid "Terminal contents"
-msgstr "Sainghnéithe an Teirminéil"
+msgstr "Ábhar an teirminéal"
 
 #. i18n: ectx: property (text), widget (QLabel, lineSpacingLabel)
 #: widgets/EditProfileAppearancePage.ui:613
-#, fuzzy, kde-format
-#| msgid "Line Spacing:"
+#, kde-format
 msgid "Line spacing:"
-msgstr "Spásáil na Línte:"
+msgstr "Spásáil líne:"
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, lineSpacingSpinner)
 #: widgets/EditProfileAppearancePage.ui:631
 #, kde-format
 msgid "The number of pixels between two lines"
-msgstr ""
+msgstr "Líon na bpicteilíní idir dhá líne"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, lineSpacingSpinner)
 #. i18n: ectx: property (suffix), widget (QSpinBox, marginsSpinner)
@@ -4435,74 +4219,73 @@ msgstr ""
 #, kde-format
 msgctxt "(pixels) visual size unit"
 msgid " px"
-msgstr ""
+msgstr " px"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/EditProfileAppearancePage.ui:668
 #, kde-format
 msgid "Margins:"
-msgstr ""
+msgstr "Imill:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: widgets/EditProfileAppearancePage.ui:720
 #, kde-format
 msgid "Align to center:"
-msgstr ""
+msgstr "Ailínigh go lár:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dimWhenInactiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:743
 #, kde-format
 msgid "Indicate whether the window is active by dimming the colors"
-msgstr ""
+msgstr "Léirigh an bhfuil an fhuinneog gníomhach trí na dathanna a mhaolú"
 
 #. i18n: ectx: property (text), widget (QCheckBox, dimWhenInactiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:746
 #, kde-format
 msgid "Darken"
-msgstr ""
+msgstr "Dorchaigh"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:753
 #, kde-format
 msgid "Indicate whether the window is active by drawing a border"
-msgstr ""
+msgstr "Léirigh an bhfuil an fhuinneog gníomhach trí imeall a tharraingt"
 
 #. i18n: ectx: property (text), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:756
 #, kde-format
 msgid "Border"
-msgstr ""
+msgstr "Teorainn"
 
 #. i18n: ectx: property (text), widget (QCheckBox, displayVerticalLine)
 #: widgets/EditProfileAppearancePage.ui:798
 #, kde-format
 msgid "Display Vertical line at column:"
-msgstr ""
+msgstr "Taispeáin líne ingearach ag an gcolún:"
 
 #. i18n: ectx: property (toolTip), widget (QWidget, CTLtab)
 #: widgets/EditProfileAppearancePage.ui:843
 #, kde-format
 msgid "<html><head/><body><p>Complex Text Layout</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Leagan Amach Téacs Casta</p></body></html>"
 
 #. i18n: ectx: attribute (title), widget (QWidget, CTLtab)
 #: widgets/EditProfileAppearancePage.ui:846
 #, kde-format
 msgid "Complex Text Layout"
-msgstr ""
+msgstr "Leagan Amach Téacs Casta"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:861
-#, fuzzy, kde-format
-#| msgid "Enable Bi-Directional text rendering"
+#, kde-format
 msgid "Enable word mode text rendering"
-msgstr "Cumasaigh rindreáil déthreoch"
+msgstr "Cumasaigh rindreáil téacs i mód focal"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:864
 #, kde-format
 msgid "Word mode"
-msgstr ""
+msgstr "Mód focal"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:877
@@ -4511,46 +4294,44 @@ msgid ""
 "Ignore attribute changes mid-word (otherwise, attribute changes break word "
 "when rendering)"
 msgstr ""
+"Déan neamhaird d'athruithe tréithe i lár focal (seachas sin, brisfidh "
+"athruithe tréithe an focal agus é á rindreáil)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:880
 #, kde-format
 msgid "Use the same attributes for whole word"
-msgstr ""
+msgstr "Úsáid na tréithe céanna don fhocal iomlán"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:893
 #, kde-format
 msgid "Render words of ASCII characters together"
-msgstr ""
+msgstr "Rindreáil focail de charachtair ASCII le chéile"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:896
 #, kde-format
 msgid "ASCII characters "
-msgstr ""
+msgstr "Carachtair ASCII "
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:909
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
-msgstr ""
+msgstr "Rindreáil focail charachtair scripte Brahmic le chéile"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:912
-#, fuzzy, kde-format
-#| msgid "Set cursor color to match current character"
+#, kde-format
 msgid "Brahmic scripts characters"
-msgstr ""
-"Socraigh go bhfuil dath an chúrsóra comhoiriúnach do dhath an charachtair "
-"reatha"
+msgstr "Carachtair scripteanna Brahmic"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:925
-#, fuzzy, kde-format
-#| msgid "Font"
+#, kde-format
 msgid "Emoji Font:"
-msgstr "Cló"
+msgstr "Cló Emoji:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAppearancePage.ui:951
@@ -4564,49 +4345,47 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAppearancePage.ui:954
-#, fuzzy, kde-format
-#| msgid "Enable Bi-Directional text rendering"
+#, kde-format
 msgid "Bi-Directional text rendering"
-msgstr "Cumasaigh rindreáil déthreoch"
+msgstr "Rindreáil téacs déthreoch"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
 #: widgets/EditProfileAppearancePage.ui:967
 #, kde-format
 msgid "Lines are always LTR, rather than determined by first strong character"
 msgstr ""
+"Bíonn línte i gcónaí LTR, seachas iad a chinneadh ag an gcéad charachtar "
+"láidir"
 
 #. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
 #: widgets/EditProfileAppearancePage.ui:970
 #, kde-format
 msgid "force LTR line direction"
-msgstr ""
+msgstr "treo líne fórsa LTR"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
 #: widgets/EditProfileAppearancePage.ui:983
 #, kde-format
 msgid "Treat table drawing characters as strong LTR."
-msgstr ""
+msgstr "Déan carachtair líníochta tábla a láimhseáil mar LTR láidir."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
 #: widgets/EditProfileAppearancePage.ui:986
 #, kde-format
 msgid "Table characters BiDi mode override"
-msgstr ""
+msgstr "Carachtair tábla sárú mód dé-dhiosca"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:999
-#, fuzzy, kde-format
-#| msgid "Set cursor color to match current character"
+#, kde-format
 msgid "Ignore wcwidth of problematic characters"
-msgstr ""
-"Socraigh go bhfuil dath an chúrsóra comhoiriúnach do dhath an charachtair "
-"reatha"
+msgstr "Déan neamhaird de wcwidth carachtar fadhbach"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:1002
 #, kde-format
 msgid "Override wcwidth"
-msgstr ""
+msgstr "Sáraigh wcwidth"
 
 #: widgets/EditProfileDialog.cpp:68
 #, kde-format
@@ -4640,10 +4419,9 @@ msgid "Keyboard"
 msgstr "Méarchlár"
 
 #: widgets/EditProfileDialog.cpp:154
-#, fuzzy, kde-format
-#| msgid "Key Bindings"
+#, kde-format
 msgid "Key bindings"
-msgstr "Ceangail Eochracha"
+msgstr "Ceangail eochracha"
 
 #: widgets/EditProfileDialog.cpp:165
 #, kde-format
@@ -4664,35 +4442,35 @@ msgid ""
 ">Either change the permissions of that file or set a different name to save "
 "the settings to a new profile."
 msgstr ""
+"Ceadanna neamhleor chun socruithe a shábháil chuig: <filename>%1</filename>."
+"<nl/>Athraigh ceadanna an chomhaid sin nó socraigh ainm difriúil chun na "
+"socruithe a shábháil chuig próifíl nua."
 
 #: widgets/EditProfileDialog.cpp:306
 #, kde-format
 msgctxt "@info"
 msgid "Profile Name was empty; please set a name to be able to save settings."
 msgstr ""
+"Bhí Ainm na Próifíle folamh; socraigh ainm le do thoil chun go mbeidh tú in "
+"ann socruithe a shábháil."
 
 #: widgets/EditProfileDialog.cpp:314
-#, fuzzy, kde-format
-#| msgid ""
-#| "A file with this name already exists.\n"
-#| "Do you want to overwrite it?"
+#, kde-format
 msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
-msgstr ""
-"Tá comhad ann cheana agus an t-ainm seo air.\n"
-"An bhfuil fonn ort scríobh air?"
+msgstr "Tá próifíl leis an ainm \"%1\" ann cheana féin."
 
 #: widgets/EditProfileDialog.cpp:344
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
-msgstr ""
+msgstr "Sháraigh ainm an phróifíle an fad uasta ceadaithe (%1)."
 
 #: widgets/EditProfileDialog.cpp:382
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
-msgstr ""
+msgstr "Tá na carachtair atá aibhsithe neamhbhailí in ainmneacha próifílí: %1."
 
 #: widgets/EditProfileDialog.cpp:418
 #, kde-format
@@ -4705,10 +4483,9 @@ msgstr[3] "%1 bpróifíl á gcur in eagar: %2"
 msgstr[4] "%1 próifíl á gcur in eagar: %2"
 
 #: widgets/EditProfileDialog.cpp:422
-#, fuzzy, kde-format
-#| msgid "&New Profile..."
+#, kde-format
 msgid "Create New Profile"
-msgstr "Próifíl &Nua..."
+msgstr "Cruthaigh Próifíl Nua"
 
 #: widgets/EditProfileDialog.cpp:425
 #, kde-format
@@ -4722,11 +4499,11 @@ msgctxt ""
 "separate it from the number value."
 msgid " column"
 msgid_plural " columns"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
+msgstr[0] " colún"
+msgstr[1] " colúin"
+msgstr[2] " colúin"
+msgstr[3] " colúin"
+msgstr[4] " colúin"
 
 #: widgets/EditProfileDialog.cpp:518
 #, kde-format
@@ -4735,41 +4512,36 @@ msgctxt ""
 "separate it from the number value."
 msgid " row"
 msgid_plural " rows"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
+msgstr[0] " ró"
+msgstr[1] " rónna"
+msgstr[2] " rónna"
+msgstr[3] " rónna"
+msgstr[4] " rónna"
 
 #: widgets/EditProfileDialog.cpp:528
-#, fuzzy, kde-format
-#| msgid "System &Bell"
+#, kde-format
 msgid "System Bell"
-msgstr "&Cloigín an Chórais"
+msgstr "Clog an Chórais"
 
 #: widgets/EditProfileDialog.cpp:528
-#, fuzzy, kde-format
-#| msgid "System &Notification"
+#, kde-format
 msgid "System Notifications"
-msgstr "&Fógairt an Chórais"
+msgstr "Fógraí Córais"
 
 #: widgets/EditProfileDialog.cpp:528
-#, fuzzy, kde-format
-#| msgid "&Visible Bell"
+#, kde-format
 msgid "Visual Bell"
-msgstr "&Cloigín Infheicthe"
+msgstr "Clog Amhairc"
 
 #: widgets/EditProfileDialog.cpp:528
 #, kde-format
 msgid "Ignore Bell Events"
-msgstr ""
+msgstr "Déan neamhaird d'imeachtaí Bell"
 
 #: widgets/EditProfileDialog.cpp:537
-#, fuzzy, kde-format
-#| msgid "Set the selected profile as the default for new terminal sessions"
+#, kde-format
 msgid "Default profile for new terminal sessions in %1"
-msgstr ""
-"Socraigh an phróifíl roghnaithe mar réamhshocrú i seisiúin nua teirminéil"
+msgstr "Próifíl réamhshocraithe do sheisiúin teirminéal nua i %1"
 
 #: widgets/EditProfileDialog.cpp:642
 #, kde-format
@@ -4779,18 +4551,18 @@ msgstr "Cuir Timpeallacht in Eagar"
 #: widgets/EditProfileDialog.cpp:643
 #, kde-format
 msgid "One environment variable per line"
-msgstr ""
+msgstr "Athróg timpeallachta amháin in aghaidh an líne"
 
 #: widgets/EditProfileDialog.cpp:674
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
 msgid_plural " seconds"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
+msgstr[0] " soicind"
+msgstr[1] " soicindí"
+msgstr[2] " soicindí"
+msgstr[3] " soicindí"
+msgstr[4] " soicindí"
 
 #: widgets/EditProfileDialog.cpp:788
 #, kde-format
@@ -4798,17 +4570,15 @@ msgid "Select Initial Directory"
 msgstr "Roghnaigh Comhadlann Tosaigh"
 
 #: widgets/EditProfileDialog.cpp:948
-#, fuzzy, kde-format
-#| msgctxt "@action:button Create an alternate color scheme"
-#| msgid "New..."
+#, kde-format
 msgid "Get New..."
-msgstr "Nua..."
+msgstr "Faigh Nua..."
 
 #: widgets/EditProfileDialog.cpp:1345
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
-msgstr ""
+msgstr "Theip ar luchtú na scéime <resource>%1</resource>."
 
 #: widgets/EditProfileDialog.cpp:1527
 #, kde-format
@@ -4816,8 +4586,8 @@ msgid ""
 "This color scheme uses a transparent background which does not appear to be "
 "supported on your desktop"
 msgstr ""
-"Tá cúlra trédhearcach ag an scéim datha seo ach ní thacaíonn do dheasc leis "
-"seo."
+"Úsáideann an scéim dathanna seo cúlra trédhearcach nach bhfuil tacaíocht "
+"leis ar do dheasc, is cosúil"
 
 #: widgets/EditProfileDialog.cpp:1533
 #, kde-format
@@ -4825,12 +4595,13 @@ msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
 "Konsole to see transparent background."
 msgstr ""
+"Cuireadh tús le Konsole sular cumasaíodh éifeachtaí deisce. Ní mór duit "
+"Konsole a atosú chun an cúlra trédhearcach a fheiceáil."
 
 #: widgets/EditProfileDialog.cpp:1934
-#, fuzzy, kde-format
-#| msgid "Default profile"
+#, kde-format
 msgid "Default for file type"
-msgstr "Próifíl réamhshocraithe"
+msgstr "Réamhshocrú don chineál comhaid"
 
 #: widgets/EditProfileDialog.cpp:1960
 #, kde-format
@@ -4848,18 +4619,28 @@ msgid ""
 "will be ignored and the file will be opened by the default text\n"
 "editor."
 msgstr ""
+"Is é an fhormáid m.sh. 'editorExec PATH:LINE:COLUMN'\n"
+"\n"
+"Cuirfear an cosán chuig an gcomhad téacs in ionad PATH\n"
+"Cuirfear uimhir na líne in ionad LINE\n"
+"Cuirfear uimhir an cholúin in ionad COLUMN (roghnach)\n"
+"Nóta: beidh ort 'PATH:LINE:COLUMN' a athsholáthar leis an gcomhréir iarbhír "
+"a dtacaíonn an t-eagarthóir is mian leat a úsáid leis; m.sh.:\n"
+"gedit +LINE:COLUMN PATH\n"
+"\n"
+"Mura bhfuil PATH nó LINE i láthair san ordú, déanfar neamhaird den socrú seo "
+"agus osclóidh an t-eagarthóir téacs réamhshocraithe an comhad."
 
 #: widgets/EditProfileDialog.cpp:1973
 #, kde-format
 msgid "Text Editor Custom Command"
-msgstr ""
+msgstr "Ordú Saincheaptha Eagarthóra Téacs"
 
 #. i18n: ectx: attribute (title), widget (QWidget, general)
 #: widgets/EditProfileGeneralPage.ui:42
-#, fuzzy, kde-format
-#| msgid "Default character encoding:"
+#, kde-format
 msgid "General Settings"
-msgstr "Ionchódú réamhshocraithe carachtar:"
+msgstr "Socruithe Ginearálta"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, iconSelectButton)
 #: widgets/EditProfileGeneralPage.ui:66
@@ -4876,18 +4657,16 @@ msgstr "Ainm tuairisciúil ar an bpróifíl"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, profileNameEdit)
 #: widgets/EditProfileGeneralPage.ui:87
-#, fuzzy, kde-format
-#| msgid "Profile name:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Profile name"
-msgstr "Ainm na próifíle:"
+msgstr "Ainm próifíle"
 
 #. i18n: ectx: property (text), widget (QCheckBox, setAsDefaultButton)
 #: widgets/EditProfileGeneralPage.ui:94
-#, fuzzy, kde-format
-#| msgid "Default profile"
+#, kde-format
 msgid "Default Profile"
-msgstr "Próifíl réamhshocraithe"
+msgstr "Próifíl Réamhshocraithe"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: widgets/EditProfileGeneralPage.ui:125
@@ -4909,14 +4688,13 @@ msgstr ""
 #: widgets/EditProfileGeneralPage.ui:144
 #, kde-format
 msgid "/bin/sh"
-msgstr ""
+msgstr "/bin/sh"
 
 #. i18n: ectx: property (text), widget (QLabel, label_9)
 #: widgets/EditProfileGeneralPage.ui:157
-#, fuzzy, kde-format
-#| msgid "Initial directory:"
+#, kde-format
 msgid "I&nitial directory:"
-msgstr "Comhadlann tosaigh:"
+msgstr "E&olaire tosaigh:"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, initialDirEdit)
 #: widgets/EditProfileGeneralPage.ui:170
@@ -4931,7 +4709,7 @@ msgstr ""
 #: widgets/EditProfileGeneralPage.ui:176
 #, kde-format
 msgid "/home/username"
-msgstr ""
+msgstr "/home/ainm-úsáideora"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, dirSelectButton)
 #: widgets/EditProfileGeneralPage.ui:183
@@ -4941,10 +4719,9 @@ msgstr "Roghnaigh an bhunchomhadlann"
 
 #. i18n: ectx: property (text), widget (QCheckBox, startInSameDirButton)
 #: widgets/EditProfileGeneralPage.ui:193
-#, fuzzy, kde-format
-#| msgid "Start in same directory as current tab"
+#, kde-format
 msgid "Start in same directory as current session"
-msgstr "Tosaigh sa chomhadlann chéanna leis an gcluaisín reatha"
+msgstr "Tosaigh san eolaire céanna leis an seisiún reatha"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/EditProfileGeneralPage.ui:206
@@ -4961,10 +4738,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: widgets/EditProfileGeneralPage.ui:271
-#, fuzzy, kde-format
-#| msgid "Terminal Features"
+#, kde-format
 msgid "Initial terminal si&ze:"
-msgstr "Sainghnéithe an Teirminéil"
+msgstr "Méi&d teirminéal tosaigh:"
 
 #. i18n: ectx: property (text), widget (QLabel, useCurrentWindowSizeNote)
 #: widgets/EditProfileGeneralPage.ui:346
@@ -4975,39 +4751,40 @@ msgid ""
 "Configure Konsole → General → Remember window size</span> must be disabled "
 "for these entries to work.</p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\"font-style:italic;\">Socruithe → "
+"Cumraigh Konsole → Ginearálta → Cuimhnigh méid na fuinneoige.</span> ní mór "
+"é a bheith díchumasaithe chun go n-oibreoidh na hiontrálacha seo.</p></"
+"body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, terminalBellLabel)
 #: widgets/EditProfileGeneralPage.ui:362
-#, fuzzy, kde-format
-#| msgctxt "@title"
-#| msgid "Terminal emulator"
+#, kde-format
 msgid "&Terminal bell mode:"
-msgstr "Aithriseoir teirminéil"
+msgstr "Mód cloigín &teirminéil:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, semantic)
 #: widgets/EditProfileGeneralPage.ui:380
-#, fuzzy, kde-format
-#| msgid "Mouse Interaction"
+#, kde-format
 msgid "Semantic Integration"
-msgstr "Idirghníomhaíocht Luiche"
+msgstr "Comhtháthú Seimeantach"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticUpDown)
 #: widgets/EditProfileGeneralPage.ui:386
 #, kde-format
 msgid "Up/Down Arrows emulation"
-msgstr ""
+msgstr "Aithris Saigheada Suas/Síos"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticInputClick)
 #: widgets/EditProfileGeneralPage.ui:393
 #, kde-format
 msgid "Mouse click in input line moves cursor"
-msgstr ""
+msgstr "Bogann cliceáil luiche sa líne ionchuir an cúrsóir"
 
 #. i18n: ectx: property (text), widget (QLabel, label_8)
 #: widgets/EditProfileGeneralPage.ui:406
 #, kde-format
 msgid "Semantic hints:"
-msgstr ""
+msgstr "Leideanna seimeantacha:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsNever)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsNever)
@@ -5020,7 +4797,7 @@ msgstr ""
 #, kde-format
 msgctxt "Never"
 msgid "Never"
-msgstr ""
+msgstr "Choíche"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsURL)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsURL)
@@ -5033,7 +4810,7 @@ msgstr ""
 #, kde-format
 msgctxt "When showing URL hints"
 msgid "When URL hints show"
-msgstr ""
+msgstr "Nuair a thaispeántar leideanna URL"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsAlways)
@@ -5046,43 +4823,35 @@ msgstr ""
 #, kde-format
 msgctxt "Always"
 msgid "Always"
-msgstr ""
+msgstr "I gcónaí"
 
 #. i18n: ectx: property (text), widget (QLabel, label_20)
 #: widgets/EditProfileGeneralPage.ui:452
 #, kde-format
 msgid "Red error bars:"
-msgstr ""
+msgstr "Barraí earráide dearga:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_30)
 #: widgets/EditProfileGeneralPage.ui:498
-#, fuzzy, kde-format
-#| msgctxt "@item:intable palette"
-#| msgid "Background"
+#, kde-format
 msgid "Red error background:"
-msgstr "Cúlra"
+msgstr "Cúlra earráide dearg:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_40)
 #: widgets/EditProfileGeneralPage.ui:544
 #, kde-format
 msgid "Alternating bars:"
-msgstr ""
+msgstr "Barraí malartacha:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
 #: widgets/EditProfileGeneralPage.ui:590
-#, fuzzy, kde-format
-#| msgctxt "@item:intable palette"
-#| msgid "Background"
+#, kde-format
 msgid "Alternating background:"
-msgstr "Cúlra"
+msgstr "Cúlra malartach:"
 
 #. i18n: ectx: property (text), widget (QLabel, note)
 #: widgets/EditProfileKeyboardPage.ui:17
-#, fuzzy, kde-format
-#| msgid ""
-#| "Key bindings control how combinations of keystrokes in the terminal "
-#| "window are converted into the stream of characters which are sent to the "
-#| "current terminal program."
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Key bindings control how combinations of keystrokes in the terminal window "
@@ -5090,18 +4859,17 @@ msgid ""
 "terminal program. For more information on how to customize the key bindings "
 "check the Konsole Handbook."
 msgstr ""
-"Leis na ceangail eochracha, is féidir leat rialú conas a thiontaíonn "
-"eochairbhrúnna i bhfuinneog an teirminéil go sruth carachtar a sheoltar "
-"chuig an fheidhmchlár atá ag rith sa teirminéal faoi láthair."
+"Rialaíonn ceangail eochracha conas a thiontaítear teaglamaí de bhuillí "
+"eochracha sa fhuinneog teirminéal go sruth carachtar a sheoltar ansin chuig "
+"an gclár teirminéal reatha. Le haghaidh tuilleadh eolais ar conas na "
+"ceangail eochracha a shaincheapadh, féach ar Lámhleabhar Konsole."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newKeyBindingsButton)
 #: widgets/EditProfileKeyboardPage.ui:60
-#, fuzzy, kde-format
-#| msgid "Create a new key bindings list based upon the selected bindings"
+#, kde-format
 msgid "Create a new key bindings scheme based upon the selected bindings"
 msgstr ""
-"Cruthaigh liosta nua eochracha comhcheangailte bunaithe ar na comhcheangail "
-"roghnaithe"
+"Cruthaigh scéim cheangail eochracha nua bunaithe ar na ceangail roghnaithe"
 
 #. i18n: ectx: property (text), widget (QPushButton, newKeyBindingsButton)
 #: widgets/EditProfileKeyboardPage.ui:63
@@ -5112,146 +4880,140 @@ msgstr "Nua..."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, editKeyBindingsButton)
 #: widgets/EditProfileKeyboardPage.ui:70
-#, fuzzy, kde-format
-#| msgid "Edit the selected key bindings list"
+#, kde-format
 msgid "Edit the selected key bindings scheme"
-msgstr "Cuir an liosta eochracha comhcheangailte atá roghnaithe in eagar"
+msgstr "Cuir an scéim ceangail eochracha roghnaithe in eagar"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, removeKeyBindingsButton)
 #: widgets/EditProfileKeyboardPage.ui:80
-#, fuzzy, kde-format
-#| msgid "Delete the selected key bindings list"
+#, kde-format
 msgid "Delete the selected key bindings scheme"
-msgstr "Scrios an liosta eochracha comhcheangailte atá roghnaithe"
+msgstr "Scrios an scéim cheangail eochracha roghnaithe"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, resetKeyBindingsButton)
 #: widgets/EditProfileKeyboardPage.ui:90
-#, fuzzy, kde-format
-#| msgid "Delete the selected color scheme"
+#, kde-format
 msgid "Reset the selected key bindings scheme to its default values"
-msgstr "Scrios an scéim roghnaithe dathanna"
+msgstr ""
+"Athshocraigh an scéim cheangail eochracha roghnaithe go dtí a luachanna "
+"réamhshocraithe"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab)
 #: widgets/EditProfileMousePage.ui:36
-#, fuzzy, kde-format
-#| msgid "Mouse Interaction"
+#, kde-format
 msgid "Text interaction"
-msgstr "Idirghníomhaíocht Luiche"
+msgstr "Idirghníomhaíocht téacs"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, label_11)
 #. i18n: ectx: property (toolTip), widget (QLineEdit, wordCharacterEdit)
 #: widgets/EditProfileMousePage.ui:50 widgets/EditProfileMousePage.ui:71
-#, fuzzy, kde-format
-#| msgid ""
-#| "Characters which are considered part of a word when double-clicking to "
-#| "select whole words in the terminal"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "Characters which are considered part of a word when double-clicking to "
 "select whole words in the terminal."
 msgstr ""
-"Carachtair nach mbeidh cuid den fhocal nuair a chliceálfaidh tú faoi dhó "
-"chun focal iomlán a roghnú sa teirminéal"
+"Carachtair a mheastar a bheith mar chuid de fhocal nuair a chliceálann tú "
+"faoi dhó chun focail iomlána a roghnú sa teirminéal."
 
 #. i18n: ectx: property (text), widget (QLabel, label_11)
 #: widgets/EditProfileMousePage.ui:53
 #, kde-format
 msgid "Word characters:"
-msgstr ""
+msgstr "Carachtair focal:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileMousePage.ui:94
 #, kde-format
 msgid "Triple-click selects:"
-msgstr ""
+msgstr "Roghnaigh trí chliceáil:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, tripleClickSelectsTheWholeLine)
 #: widgets/EditProfileMousePage.ui:104
-#, fuzzy, kde-format
-#| msgid "The whole current line"
+#, kde-format
 msgid "&The whole line"
-msgstr "An líne reatha ina hiomláine"
+msgstr "&An líne iomlán"
 
 #. i18n: ectx: property (text), widget (QRadioButton, tripleClickSelectsFromMousePosition)
 #: widgets/EditProfileMousePage.ui:114
 #, kde-format
 msgid "From mouse position to the end of &line"
-msgstr ""
+msgstr "Ó shuíomh na luiche go dtí deireadh na &líne"
 
 #. i18n: ectx: property (text), widget (QLabel, label_13)
 #: widgets/EditProfileMousePage.ui:140
 #, kde-format
 msgid "Middle-click pastes:"
-msgstr ""
+msgstr "Greamaigh cliceáil sa lár:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, pasteFromClipboardButton)
 #: widgets/EditProfileMousePage.ui:150
-#, fuzzy, kde-format
-#| msgid "Paste from selection"
+#, kde-format
 msgid "From clipboard"
-msgstr "Greamaigh ón roghnúchán"
+msgstr "Ón ghearrthaisce"
 
 #. i18n: ectx: property (text), widget (QRadioButton, pasteFromX11SelectionButton)
 #: widgets/EditProfileMousePage.ui:160
-#, fuzzy, kde-format
-#| msgid "Paste from selection"
+#, kde-format
 msgid "From selection"
-msgstr "Greamaigh ón roghnúchán"
+msgstr "Ó rogha"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: widgets/EditProfileMousePage.ui:186
-#, fuzzy, kde-format
-#| msgid "Cursor Options"
+#, kde-format
 msgid "Copy options:"
-msgstr "Roghanna an Chúrsóra"
+msgstr "Roghanna cóipeála:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, copyTextToClipboardButton)
 #: widgets/EditProfileMousePage.ui:196
 #, kde-format
 msgid "Automatically copy selected text into clipboard"
-msgstr ""
+msgstr "Cóipeáil an téacs roghnaithe go huathoibríoch isteach sa ghearrthaisce"
 
 #. i18n: ectx: property (text), widget (QCheckBox, copyTextToClipboardButton)
 #: widgets/EditProfileMousePage.ui:199
 #, kde-format
 msgid "Copy on select"
-msgstr ""
+msgstr "Cóipeáil ar rogha"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, copyTextAsHTMLButton)
 #: widgets/EditProfileMousePage.ui:206
 #, kde-format
 msgid "Copy text as HTML (including formatting, font faces, colors... etc)"
 msgstr ""
+"Cóipeáil téacs mar HTML (lena n-áirítear formáidiú, clónna, dathanna... srl.)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, copyTextAsHTMLButton)
 #: widgets/EditProfileMousePage.ui:209
 #, kde-format
 msgid "Copy text as HTML"
-msgstr ""
+msgstr "Cóipeáil téacs mar HTML"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, trimLeadingSpacesButton)
 #: widgets/EditProfileMousePage.ui:216
 #, kde-format
 msgid "Trim leading spaces in selected text, useful in some instances"
 msgstr ""
+"Bearr spásanna tosaigh i dtéacs roghnaithe, úsáideach i gcásanna áirithe"
 
 #. i18n: ectx: property (text), widget (QCheckBox, trimLeadingSpacesButton)
 #: widgets/EditProfileMousePage.ui:219
 #, kde-format
 msgid "Trim leading spaces"
-msgstr ""
+msgstr "Bearr spásanna tosaigh"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, trimTrailingSpacesButton)
 #: widgets/EditProfileMousePage.ui:226
 #, kde-format
 msgid "Trim trailing spaces in selected text, useful in some instances"
 msgstr ""
+"Bearr spásanna deiridh i dtéacs roghnaithe, úsáideach i gcásanna áirithe"
 
 #. i18n: ectx: property (text), widget (QCheckBox, trimTrailingSpacesButton)
 #: widgets/EditProfileMousePage.ui:229
 #, kde-format
 msgid "Trim trailing spaces"
-msgstr ""
+msgstr "Bearr spásanna deiridh"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, underlineLinksButton)
 #: widgets/EditProfileMousePage.ui:266
@@ -5260,13 +5022,14 @@ msgid ""
 "Text recognized as a link or an email address will be underlined when "
 "hovered by the mouse pointer."
 msgstr ""
+"Beidh líne faoi théacs a aithnítear mar nasc nó mar sheoladh ríomhphoist "
+"nuair a bheidh an luchóg ag gluaiseacht thar an téacs."
 
 #. i18n: ectx: property (text), widget (QCheckBox, underlineLinksButton)
 #: widgets/EditProfileMousePage.ui:269
-#, fuzzy, kde-format
-#| msgid "Underline links"
+#, kde-format
 msgid "Underline links"
-msgstr "Cuir Línte Faoi Naisc"
+msgstr "Cuir líne faoi naisc"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, underlineFilesButton)
 #: widgets/EditProfileMousePage.ui:276
@@ -5275,13 +5038,14 @@ msgid ""
 "Text recognized as a file will be underlined when hovered by the mouse "
 "pointer."
 msgstr ""
+"Beidh líne faoi théacs a aithnítear mar chomhad nuair a bheidh pointeoir na "
+"luiche ag luí thar an téacs."
 
 #. i18n: ectx: property (text), widget (QCheckBox, underlineFilesButton)
 #: widgets/EditProfileMousePage.ui:279
-#, fuzzy, kde-format
-#| msgid "Underline links"
+#, kde-format
 msgid "Underline files"
-msgstr "Cuir Línte Faoi Naisc"
+msgstr "Cuir líne faoi chomhaid"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, textEditorCommandLabel)
 #. i18n: ectx: property (toolTip), widget (QComboBox, textEditorCombo)
@@ -5290,12 +5054,14 @@ msgstr "Cuir Línte Faoi Naisc"
 msgctxt "@info:tooltip"
 msgid "Text editor to use when opening text file URLs at a given line/column."
 msgstr ""
+"Eagarthóir téacs le húsáid agus URLanna comhad téacs á n-oscailt ag líne/"
+"colún ar leith."
 
 #. i18n: ectx: property (text), widget (QLabel, textEditorCommandLabel)
 #: widgets/EditProfileMousePage.ui:291
 #, kde-format
 msgid "Text Editor Command: "
-msgstr ""
+msgstr "Ordú Eagarthóra Téacs: "
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, openLinksByDirectClickButton)
 #: widgets/EditProfileMousePage.ui:335
@@ -5304,18 +5070,20 @@ msgid ""
 "Text recognized as a file, link or an email address can be opened by direct "
 "mouse click."
 msgstr ""
+"Is féidir téacs a aithnítear mar chomhad, nasc nó seoladh ríomhphoist a "
+"oscailt trí chliceáil dhíreach ar an luch."
 
 #. i18n: ectx: property (text), widget (QCheckBox, openLinksByDirectClickButton)
 #: widgets/EditProfileMousePage.ui:338
 #, kde-format
 msgid "Open files/links by direct click"
-msgstr ""
+msgstr "Oscail comhaid/naisc le cliceáil dhíreach"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowLinkEscapeSequenceButton)
 #: widgets/EditProfileMousePage.ui:349
 #, kde-format
 msgid "Allow escape sequences for links"
-msgstr ""
+msgstr "Ceadaigh seichimh éalaithe do naisc"
 
 #. i18n: ectx: property (text), widget (QLabel, allowLinkEscapeSequenceButtonWarning)
 #: widgets/EditProfileMousePage.ui:356
@@ -5325,31 +5093,35 @@ msgid ""
 "to be shown as another URL or hidden.<br>Make sure you understand the "
 "implications before turning this on."
 msgstr ""
+"<b>RABHADH</b>: Tá impleachtaí slándála leis seo mar go gceadaíonn sé "
+"URLanna mailíseacha a thaispeáint mar URL eile nó a cheilt.<br>Déan cinnte "
+"go dtuigeann tú na himpleachtaí sula gcuireann tú seo ar siúl."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: widgets/EditProfileMousePage.ui:374
-#, fuzzy, kde-format
-#| msgid "Allow blinking text"
+#, kde-format
 msgid "Allowed link formats: "
-msgstr "Ceadaigh téacs caochta"
+msgstr "Formáidí nasc ceadaithe: "
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, linkEscapeSequenceTexts)
 #: widgets/EditProfileMousePage.ui:384
 #, kde-format
 msgid "The formats of possible links, like http://, https:// and file://"
-msgstr ""
+msgstr "Na formáidí nasc féideartha, amhail http://, https:// agus file://"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ctrlRequiredForDragButton)
 #: widgets/EditProfileMousePage.ui:395
 #, kde-format
 msgid "Selected text will require control key plus click to drag."
 msgstr ""
+"Beidh an eochair rialaithe móide cliceáil chun an téacs roghnaithe a "
+"tharraingt ag teastáil."
 
 #. i18n: ectx: property (text), widget (QCheckBox, ctrlRequiredForDragButton)
 #: widgets/EditProfileMousePage.ui:398
 #, kde-format
 msgid "Require Ctrl key for drag && drop"
-msgstr ""
+msgstr "Éilítear eochair Ctrl le haghaidh tarraingt && scaoil"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableAlternateScrollingButton)
 #: widgets/EditProfileMousePage.ui:405
@@ -5358,12 +5130,14 @@ msgid ""
 "Mouse scroll wheel will emulate up/down key presses in programs that use the "
 "Alternate Screen buffer (e.g. less)"
 msgstr ""
+"Déanfaidh roth scrolla na luiche aithris ar bhrúnna eochracha suas/síos i "
+"gcláir a úsáideann an maolán Scáileáin Mhalartach (m.sh. níos lú)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableAlternateScrollingButton)
 #: widgets/EditProfileMousePage.ui:408
 #, kde-format
 msgid "Enable Alternate Screen buffer scrolling"
-msgstr ""
+msgstr "Cumasaigh scrollú maoláin Scáileáin Mhalartach"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dropUrlsAsText)
 #: widgets/EditProfileMousePage.ui:415
@@ -5372,24 +5146,26 @@ msgid ""
 "Always paste dropped files and URLs as text without offering move, copy and "
 "link actions."
 msgstr ""
+"Greamaigh comhaid agus URLanna a scaoiltear mar théacs i gcónaí gan "
+"gníomhartha bogtha, cóipeála ná nasctha a thairiscint."
 
 #. i18n: ectx: property (text), widget (QCheckBox, dropUrlsAsText)
 #: widgets/EditProfileMousePage.ui:418
 #, kde-format
 msgid "Disable drag && drop menu for files && URLs"
-msgstr ""
+msgstr "Díchumasaigh an roghchlár tarraing & scaoil do chomhaid agus URLanna"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableMouseWheelZoomButton)
 #: widgets/EditProfileMousePage.ui:425
 #, kde-format
 msgid "Pressing Ctrl+scrollwheel will increase/decrease the text size."
-msgstr ""
+msgstr "Méadóidh/laghdóidh brú Ctrl+roth scrollaigh méid an téacs."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableMouseWheelZoomButton)
 #: widgets/EditProfileMousePage.ui:428
 #, kde-format
 msgid "Allow Ctrl+scrollwheel to zoom text size"
-msgstr ""
+msgstr "Ceadaigh Ctrl+roth scrollaigh méid an téacs a shúmáil"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, allowColorFilters)
 #: widgets/EditProfileMousePage.ui:435
@@ -5398,12 +5174,14 @@ msgid ""
 "When positioning the mouse over a hexadecimal color it will be displayed in "
 "a frame next to the mouse pointer"
 msgstr ""
+"Nuair a chuirtear an luch os cionn dath heicsidheachúlach, taispeánfar é i "
+"bhfráma in aice leis an pointeoir luiche."
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowColorFilters)
 #: widgets/EditProfileMousePage.ui:438
 #, kde-format
 msgid "Preview Colors on hover"
-msgstr ""
+msgstr "Réamhamharc ar na Dathanna ar an luchóg"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, allowMouseTrackingButton)
 #: widgets/EditProfileMousePage.ui:458
@@ -5412,100 +5190,100 @@ msgid ""
 "Some terminal applications have mouse support, this allows them to get it by "
 "default. It can be toggled on/off while running as well."
 msgstr ""
+"Tá tacaíocht luiche ag roinnt feidhmchlár teirminéal, rud a ligeann dóibh é "
+"a fháil de réir réamhshocraithe. Is féidir é a chasadh air/as agus é ag rith "
+"chomh maith."
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowMouseTrackingButton)
 #: widgets/EditProfileMousePage.ui:461
 #, kde-format
 msgid "Allow terminal applications to handle clicks and drags"
-msgstr ""
+msgstr "Lig d’fheidhmchláir teirminéal cliceáil agus tarraingt a láimhseáil"
 
 #. i18n: ectx: property (text), widget (QLabel, historySizeLabel)
 #: widgets/EditProfileScrollingPage.ui:25
-#, fuzzy, kde-format
-#| msgid "Scrollback"
+#, kde-format
 msgid "Scrollback:"
-msgstr "Iarscrollú"
+msgstr "Scrollaigh siar:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: widgets/EditProfileScrollingPage.ui:41
 #, kde-format
 msgid "Scroll Page Up/Down:"
-msgstr ""
+msgstr "Scrollaigh Leathanach Suas/Síos:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, highlightScrolledLinesButton)
 #: widgets/EditProfileScrollingPage.ui:51
 #, kde-format
 msgid "Highlight the lines coming into view"
-msgstr ""
+msgstr "Aibhsigh na línte atá ag teacht chun solais"
 
 #. i18n: ectx: property (suffix), widget (QDoubleSpinBox, markerSizeWidget)
 #: widgets/EditProfileScrollingPage.ui:58
 #, no-c-format, kde-format
 msgid " %"
-msgstr ""
+msgstr " %"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarHiddenButton)
 #: widgets/EditProfileScrollingPage.ui:74
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Conceal the scroll bar"
-#| msgid "Hidden"
+#, kde-format
 msgctxt "@option:radio Hide the scroll bar"
 msgid "Hidden"
-msgstr "Folaithe"
+msgstr "I bhfolach"
 
 #. i18n: ectx: property (text), widget (QLabel, labelMarkerSize)
 #: widgets/EditProfileScrollingPage.ui:84
 #, kde-format
 msgid "Size of each marker (as a percentage of scrollbar length):"
-msgstr ""
+msgstr "Méid gach marcóra (mar chéatadán de fhad an bharra scrollaithe):"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: widgets/EditProfileScrollingPage.ui:97
 #, kde-format
 msgid "Highlighting:"
-msgstr ""
+msgstr "Ag aibhsiú:"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollHalfPage)
 #: widgets/EditProfileScrollingPage.ui:129
 #, kde-format
 msgid "Scroll the page the half height of window"
-msgstr ""
+msgstr "Scrollaigh an leathanach leath airde na fuinneoige"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollHalfPage)
 #: widgets/EditProfileScrollingPage.ui:132
 #, kde-format
 msgid "Half screen heigh&t"
-msgstr ""
+msgstr "Airde lea&thscáileáin"
 
 #. i18n: ectx: property (text), widget (QLabel, labelMarkerColor)
 #: widgets/EditProfileScrollingPage.ui:142
 #, kde-format
 msgid "Color of scrollbar markers:"
-msgstr ""
+msgstr "Dath marcóirí scrollbharra:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelSearhcHighlighterColor)
 #: widgets/EditProfileScrollingPage.ui:168
 #, kde-format
 msgid "Color of scrollbar search highlighting lines:"
-msgstr ""
+msgstr "Dath línte aibhsithe cuardaigh scrollbharra:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelReflowLines)
 #: widgets/EditProfileScrollingPage.ui:181
 #, kde-format
 msgid "Reflow Lines:"
-msgstr ""
+msgstr "Línte Athshreafa:"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollFullPage)
 #: widgets/EditProfileScrollingPage.ui:191
 #, kde-format
 msgid "Scroll the page the full height of window"
-msgstr ""
+msgstr "Scrollaigh an leathanach airde iomlán na fuinneoige"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollFullPage)
 #: widgets/EditProfileScrollingPage.ui:194
 #, kde-format
 msgid "F&ull screen height"
-msgstr ""
+msgstr "Airde lánscáileáin"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollBarRightButton)
 #: widgets/EditProfileScrollingPage.ui:215
@@ -5515,11 +5293,10 @@ msgstr "Taispeáin an scrollbharra ar thaobh na láimhe deise den teirminéal"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarRightButton)
 #: widgets/EditProfileScrollingPage.ui:218
-#, fuzzy, kde-format
-#| msgid "Show on right side"
+#, kde-format
 msgctxt "@option:radio Show scrollbar on the right side"
 msgid "Ri&ght side"
-msgstr "Taispeáin ar thaobh na láimhe deise"
+msgstr "T&aobh deas"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollBarLeftButton)
 #: widgets/EditProfileScrollingPage.ui:238
@@ -5529,30 +5306,28 @@ msgstr "Taispeáin an scrollbharra ar thaobh na láimhe clé den teirminéal"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarLeftButton)
 #: widgets/EditProfileScrollingPage.ui:241
-#, fuzzy, kde-format
-#| msgid "Text size:"
+#, kde-format
 msgctxt "@option:radio Show scrollbar on the left side"
 msgid "&Left side"
-msgstr "Clómhéid:"
+msgstr "&Taobh clé"
 
 #. i18n: ectx: property (text), widget (QCheckBox, reflowLinesButton)
 #: widgets/EditProfileScrollingPage.ui:251
 #, kde-format
 msgid "Reflow lines when terminal resizes"
-msgstr ""
+msgstr "Athshreabhadh línte nuair a athraítear méid an teirminéal"
 
 #. i18n: ectx: property (text), widget (QLabel, labelSize)
 #: widgets/EditProfileScrollingPage.ui:280
-#, fuzzy, kde-format
-#| msgid "Tab bar position:"
+#, kde-format
 msgid "Scrollbar position:"
-msgstr "Ionad bharra na gcluaisíní:"
+msgstr "Suíomh an bharra scrollaithe:"
 
 #. i18n: ectx: property (text), widget (QLabel, lableSearchHighlighterOpacity)
 #: widgets/EditProfileScrollingPage.ui:290
 #, kde-format
 msgid "Search highlighting line opacity:"
-msgstr ""
+msgstr "Teimhneacht líne aibhsithe cuardaigh:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43
@@ -5564,33 +5339,30 @@ msgstr "Teidil na gCluaisíní"
 #: widgets/EditProfileTabsPage.ui:65
 #, kde-format
 msgid "Tab Monitoring"
-msgstr ""
+msgstr "Monatóireacht Cluaisíní"
 
 #. i18n: ectx: property (text), widget (QLabel, silenceSecondsLabel)
 #: widgets/EditProfileTabsPage.ui:80
 #, kde-format
 msgid "Threshold for continuous silence:"
-msgstr ""
+msgstr "Tairseach le haghaidh tost leanúnach:"
 
 #. i18n: ectx: property (toolTip), widget (KPluralHandlingSpinBox, silenceSecondsSpinner)
 #: widgets/EditProfileTabsPage.ui:93
 #, kde-format
 msgid "The threshold for continuous silence to be detected by Konsole"
-msgstr ""
+msgstr "An tairseach le haghaidh tost leanúnach atá le braith ag Konsole"
 
 #: widgets/HistorySizeWidget.cpp:40
-#, fuzzy, kde-format
-#| msgctxt "Unit of scrollback"
-#| msgid " line"
-#| msgid_plural " lines"
+#, kde-format
 msgctxt "@label:textbox Unit of scrollback"
 msgid " line"
 msgid_plural " lines"
 msgstr[0] " líne"
-msgstr[1] " líne"
-msgstr[2] " líne"
-msgstr[3] " líne"
-msgstr[4] " líne"
+msgstr[1] " línte"
+msgstr[2] " línte"
+msgstr[3] " línte"
+msgstr[4] " línte"
 
 #: widgets/HistorySizeWidget.cpp:57
 #, kde-format
@@ -5600,6 +5372,9 @@ msgid ""
 "choose a huge value, your system may run out of free RAM and cause serious "
 "issues with your system."
 msgstr ""
+"Agus an rogha seo á úsáid, sábhálfar na sonraí scrollaigh siar chuig RAM. Má "
+"roghnaíonn tú luach ollmhór, d’fhéadfadh do chóras rith as RAM saor in aisce "
+"agus fadhbanna tromchúiseacha a chruthú leis."
 
 #: widgets/HistorySizeWidget.cpp:69
 #, kde-kuit-format
@@ -5611,6 +5386,11 @@ msgid ""
 "Konsole → Temporary Files</emphasis> to select the location of the temporary "
 "files."
 msgstr ""
+"Agus an rogha seo á úsáid, scríobhfar na sonraí scrollaigh siar gan chriptiú "
+"chuig comhaid shealadacha. Scriosfar na comhaid shealadacha sin go "
+"huathoibríoch nuair a dhúnfar Konsole ar an ngnáthbhealach.<nl/>Úsáid "
+"<emphasis>Socruithe → Cumraigh Konsole → Comhaid Shealadacha</emphasis> chun "
+"suíomh na gcomhad sealadach a roghnú."
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, fixedSizeHistoryButton)
 #: widgets/HistorySizeWidget.ui:60
@@ -5620,10 +5400,9 @@ msgstr "Ná meabhraigh níos mó ná líon socraithe línte"
 
 #. i18n: ectx: property (text), widget (QRadioButton, fixedSizeHistoryButton)
 #: widgets/HistorySizeWidget.ui:63
-#, fuzzy, kde-format
-#| msgid "Fixed size scrollback:"
+#, kde-format
 msgid "Fi&xed size:"
-msgstr "Iarscrollú buanmhéide:"
+msgstr "Méid socraithe:"
 
 #. i18n: ectx: property (toolTip), widget (KPluralHandlingSpinBox, historyLineSpinner)
 #: widgets/HistorySizeWidget.ui:73
@@ -5639,8 +5418,7 @@ msgstr "Meabhraigh an t-aschur go léir a dhéanann an teirminéal"
 
 #. i18n: ectx: property (text), widget (QRadioButton, unlimitedHistoryButton)
 #: widgets/HistorySizeWidget.ui:137
-#, fuzzy, kde-format
-#| msgid "&Set Unlimited"
+#, kde-format
 msgctxt "Save all lines to the scrollback history"
 msgid "&Unlimited"
 msgstr "&Gan Teorainn"
@@ -5653,26 +5431,22 @@ msgstr "Ná meabhraigh an t-aschur roimhe seo"
 
 #. i18n: ectx: property (text), widget (QRadioButton, noHistoryButton)
 #: widgets/HistorySizeWidget.ui:175
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu Do not select any tabs"
-#| msgid "&None"
+#, kde-format
 msgctxt "Do not save any lines to the scrollback history"
 msgid "&None"
-msgstr "N&eamhní"
+msgstr "&Dada"
 
 #: widgets/IncrementalSearchBar.cpp:50
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox"
-#| msgid "Find:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Find..."
-msgstr "Aimsigh:"
+msgstr "Aimsigh..."
 
 #: widgets/IncrementalSearchBar.cpp:52
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the text to search for here"
-msgstr ""
+msgstr "Cuir isteach an téacs atá le cuardach anseo"
 
 #: widgets/IncrementalSearchBar.cpp:74
 #, kde-format
@@ -5699,12 +5473,10 @@ msgid "Find the previous match for the current search phrase"
 msgstr "Aimsigh an sampla roimhe seo den fhrása cuardaigh"
 
 #: widgets/IncrementalSearchBar.cpp:102
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu"
-#| msgid "Case sensitive"
+#, kde-format
 msgctxt "@action:button"
 msgid "Case sensitive"
-msgstr "Cásíogair"
+msgstr "Cás-íogair"
 
 #: widgets/IncrementalSearchBar.cpp:103
 #, kde-format
@@ -5716,7 +5488,7 @@ msgstr "Socraigh cé acu an bhfuil an cuardach cásíogair nó nach bhfuil"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Display the options menu"
-msgstr ""
+msgstr "Taispeáin an roghchlár roghanna"
 
 #: widgets/IncrementalSearchBar.cpp:121
 #, kde-format
@@ -5737,69 +5509,57 @@ msgid "Highlight all matches"
 msgstr "Aibhsigh uile"
 
 #: widgets/IncrementalSearchBar.cpp:137
-#, fuzzy, kde-format
-#| msgid "Sets whether matching text should be highlighted"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether matching text should be highlighted"
-msgstr ""
-"Socraigh cé acu an n-aibhsítear téacs comhoiriúnach nó nach n-aibhsítear"
+msgstr "Socraíonn sé an bhfuil téacs comhoiriúnach le haibhsiú nó nach bhfuil"
 
 #: widgets/IncrementalSearchBar.cpp:140
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Search backwards"
-msgstr ""
+msgstr "Cuardaigh ar gcúl"
 
 #: widgets/IncrementalSearchBar.cpp:142
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Find the next match for the current search phrase"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should start from the bottom"
-msgstr "Aimsigh an chéad sampla eile den fhrása cuardaigh"
+msgstr "Socraíonn sé an dtosóidh an cuardach ón mbun"
 
 #: widgets/IncrementalSearchBar.cpp:147
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "No wrap"
-msgstr ""
+msgstr "Gan fillteán"
 
 #: widgets/IncrementalSearchBar.cpp:149
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Find the next match for the current search phrase"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should stop instead of wrapping"
-msgstr "Aimsigh an chéad sampla eile den fhrása cuardaigh"
+msgstr "Socraíonn sé an gcuardach a stopadh in ionad é a fhilleadh"
 
 #: widgets/IncrementalSearchBar.cpp:184
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Find the next match for the current search phrase"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the bottom"
-msgstr "Aimsigh an chéad sampla eile den fhrása cuardaigh"
+msgstr "Cuardaigh an frása cuardaigh reatha ón mbun"
 
 #: widgets/IncrementalSearchBar.cpp:189
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Find the next match for the current search phrase"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the top"
-msgstr "Aimsigh an chéad sampla eile den fhrása cuardaigh"
+msgstr "Cuardaigh an frása cuardaigh reatha ón mbarr"
 
 #: widgets/KonsolePrintManager.cpp:50
 #, kde-format
 msgid "Print Shell"
-msgstr ""
+msgstr "Priontáil Shell"
 
 #: widgets/RenameTabWidget.cpp:37
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu Do not select any tabs"
-#| msgid "&None"
+#, kde-format
 msgctxt "@label:listbox No color selected"
 msgid "None"
-msgstr "N&eamhní"
+msgstr "Dada"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, remoteTabTitleEdit)
 #: widgets/RenameTabWidget.ui:41
@@ -5819,10 +5579,9 @@ msgstr "Formáid teidil cluaisíní cianda:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: widgets/RenameTabWidget.ui:79
-#, fuzzy, kde-format
-#| msgid "Tab title format:"
+#, kde-format
 msgid "&Tab title format:"
-msgstr "Formáid teidil cluaisíní:"
+msgstr "Formáid teidil &Cluaisín:"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, tabTitleEdit)
 #: widgets/RenameTabWidget.ui:98
@@ -5832,11 +5591,9 @@ msgstr "Gnáthfhormáid teidil cluaisíní"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: widgets/RenameTabWidget.ui:105
-#, fuzzy, kde-format
-#| msgctxt "@label:listbox Column header text for the actual colors"
-#| msgid "Color"
+#, kde-format
 msgid "Tab Co&lor:"
-msgstr "Dath"
+msgstr "Dath an Ch&luaisín:"
 
 #: widgets/TabTitleFormatButton.cpp:21
 #, c-format
@@ -5867,17 +5624,15 @@ msgstr "Ainm Úsáideora: %u"
 
 #: widgets/TabTitleFormatButton.cpp:27
 msgid "Local Host: %h"
-msgstr ""
+msgstr "Óstach Áitiúil: %h"
 
 #: widgets/TabTitleFormatButton.cpp:28
 msgid "User's Bourne prompt sigil: %B"
-msgstr ""
+msgstr "Síntiús leid Bourne an úsáideora: %B"
 
 #: widgets/TabTitleFormatButton.cpp:35
-#, fuzzy
-#| msgid "User Name: %u"
 msgid "User Name@ (if given): %U"
-msgstr "Ainm Úsáideora: %u"
+msgstr "Ainm Úsáideora@ (más tugtha): %U"
 
 #: widgets/TabTitleFormatButton.cpp:36
 msgid "Remote Host (Short): %h"
@@ -5890,7 +5645,7 @@ msgstr "Óstríomhaire Cianda (Fada): %H"
 #: widgets/TabTitleFormatButton.cpp:38
 #, c-format
 msgid "Command and arguments: %c"
-msgstr ""
+msgstr "Ordú agus argóintí: %c"
 
 #: widgets/TabTitleFormatButton.cpp:48
 #, kde-format
@@ -5910,56 +5665,46 @@ msgid "Insert remote title format"
 msgstr "Ionsáigh formáid teidil cianda"
 
 #: widgets/TerminalHeaderBar.cpp:80 widgets/TerminalHeaderBar.cpp:188
-#, fuzzy, kde-format
-#| msgid "C&lear Terminal"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Maximize terminal"
-msgstr "G&lan Teirminéal"
+msgstr "Uasmhéadaigh teirminéal"
 
 #: widgets/TerminalHeaderBar.cpp:91
-#, fuzzy, kde-format
-#| msgid "Above Terminal Area"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Move terminal to new tab"
-msgstr "Os cionn limistéar an teirminéil"
+msgstr "Bog críochfort go cluaisín nua"
 
 #: widgets/TerminalHeaderBar.cpp:101
-#, fuzzy, kde-format
-#| msgid "C&lear Terminal"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Close terminal"
-msgstr "G&lan Teirminéal"
+msgstr "Dún teirminéal"
 
 #: widgets/TerminalHeaderBar.cpp:186
-#, fuzzy, kde-format
-#| msgid "&Reset && Clear Terminal"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Restore terminal"
-msgstr "Athshoc&raigh agus Glan Teirminéal"
+msgstr "Athchóirigh teirminéal"
 
 #: widgets/ViewContainer.cpp:59
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Detach Tab"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Open a new tab"
-msgstr "&Dícheangail Cluaisín"
+msgstr "Oscail cluaisín nua"
 
 #: widgets/ViewContainer.cpp:64
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Detach Tab"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Search Tabs"
-msgstr "&Dícheangail Cluaisín"
+msgstr "Cuardaigh Cluaisíní"
 
 #: widgets/ViewContainer.cpp:69
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Close tab"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Close this tab"
-msgstr "Dún an cluaisín"
+msgstr "Dún an cluaisín seo"
 
 #: widgets/ViewContainer.cpp:102
 #, kde-format
@@ -5968,18 +5713,16 @@ msgid "&Detach Tab"
 msgstr "&Dícheangail Cluaisín"
 
 #: widgets/ViewContainer.cpp:108
-#, fuzzy, kde-format
-#| msgid "&Rename Tab..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&Configure or Rename Tab..."
-msgstr "&Athainmnigh an Cluaisín..."
+msgstr "&Cumraigh nó Athainmnigh an Cluaisín..."
 
 #: widgets/ViewContainer.cpp:113
-#, fuzzy, kde-format
-#| msgid "&Close Tab"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Tab"
-msgstr "&Dún an Cluaisín"
+msgstr "Dún an Cluaisín"
 
 #~ msgctxt "@item:inmenu"
 #~ msgid "Case sensitive"
