@@ -1256,12 +1256,8 @@ void TerminalDisplay::mousePressEvent(QMouseEvent *ev)
     } else if (ev->button() == Qt::MiddleButton) {
         processMidButtonClick(ev);
     } else if (ev->button() == Qt::RightButton) {
-        if (!usesMouseTracking() || ((ev->modifiers() & Qt::ShiftModifier) != 0u)) {
-            Q_EMIT configureRequest(ev->pos());
-        } else {
-            if (!_readOnly) {
-                Q_EMIT mouseSignal(mouseButton(2, ev->modifiers()), charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum(), 0);
-            }
+        if (usesMouseTracking() && !_readOnly && !ev->modifiers().testFlag(Qt::ShiftModifier)) {
+            Q_EMIT mouseSignal(mouseButton(2, ev->modifiers()), charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum(), 0);
         }
     }
 }
@@ -2949,8 +2945,9 @@ bool TerminalDisplay::event(QEvent *event)
 
 void TerminalDisplay::contextMenuEvent(QContextMenuEvent *event)
 {
-    // the logic for the mouse case is within MousePressEvent()
-    if (event->reason() != QContextMenuEvent::Mouse) {
+    if (!usesMouseTracking() || event->modifiers().testFlag(Qt::ShiftModifier)) {
+        Q_EMIT configureRequest(event->pos());
+    } else if (event->reason() != QContextMenuEvent::Mouse) {
         Q_EMIT configureRequest(mapFromGlobal(QCursor::pos()));
     }
 }

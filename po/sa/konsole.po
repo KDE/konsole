@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-16 06:54+0000\n"
+"POT-Creation-Date: 2025-12-21 00:47+0000\n"
 "PO-Revision-Date: 2024-12-25 19:40+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -3339,59 +3339,59 @@ msgstr "लघुचित्रजननं सक्षमं कुर्व�
 msgid "Size: %1 x %2"
 msgstr "आकारः %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2255
+#: terminalDisplay/TerminalDisplay.cpp:2251
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "किं भवान् निश्चितः यत् भवान् %1 वर्णं चिनोतुम् इच्छति?"
 msgstr[1] "किं भवान् निश्चितरूपेण %1 वर्णं चिनोतुम् इच्छति?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2256
+#: terminalDisplay/TerminalDisplay.cpp:2252
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Confirm Paste इति"
 
-#: terminalDisplay/TerminalDisplay.cpp:2289
+#: terminalDisplay/TerminalDisplay.cpp:2285
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "End Of Text/Interrupt: वर्तमानप्रक्रियायाः निर्गमनं कर्तुं शक्नोति"
 
-#: terminalDisplay/TerminalDisplay.cpp:2290
+#: terminalDisplay/TerminalDisplay.cpp:2286
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "End Of Transmission: वर्तमानप्रक्रियायाः निर्गमनं कर्तुं शक्नोति"
 
-#: terminalDisplay/TerminalDisplay.cpp:2291
+#: terminalDisplay/TerminalDisplay.cpp:2287
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "बेल: श्रव्यं चेतावनीम् उत्सर्जयितुं प्रयतते"
 
-#: terminalDisplay/TerminalDisplay.cpp:2292
+#: terminalDisplay/TerminalDisplay.cpp:2288
 #, kde-format
 msgid "Backspace"
 msgstr "पृष्ठभाग"
 
-#: terminalDisplay/TerminalDisplay.cpp:2293
+#: terminalDisplay/TerminalDisplay.cpp:2289
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "उपकरणनियन्त्रणं त्रयः/XOFF: उत्पादनं निलम्बयति"
 
-#: terminalDisplay/TerminalDisplay.cpp:2294
+#: terminalDisplay/TerminalDisplay.cpp:2290
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "प्रतिस्थापन/निलम्बनम्: वर्तमानप्रक्रियायाः निलम्बनं कर्तुं शक्नोति"
 
-#: terminalDisplay/TerminalDisplay.cpp:2295
+#: terminalDisplay/TerminalDisplay.cpp:2291
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "पलायनम् : टर्मिनल् अवस्थायां हेरफेरार्थं प्रयुक्तम्"
 
-#: terminalDisplay/TerminalDisplay.cpp:2296
+#: terminalDisplay/TerminalDisplay.cpp:2292
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "File Separator/Quit: वर्तमान प्रक्रियां निरस्तं कर्तुं शक्नोति"
 
-#: terminalDisplay/TerminalDisplay.cpp:2319
+#: terminalDisplay/TerminalDisplay.cpp:2315
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3400,31 +3400,31 @@ msgstr ""
 "भवन्तः यस्मिन् पाठे चिनोतुम् प्रयतन्ते तस्मिन् गुप्तनियन्त्रणवर्णाः सन्ति, किं भवन्तः तान् "
 "छानयितुम् इच्छन्ति?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2322
+#: terminalDisplay/TerminalDisplay.cpp:2318
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Confirm Paste इति"
 
-#: terminalDisplay/TerminalDisplay.cpp:2323
+#: terminalDisplay/TerminalDisplay.cpp:2319
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "&नियंत्रणवर्णान् विना चिनोतु"
 
-#: terminalDisplay/TerminalDisplay.cpp:2324
+#: terminalDisplay/TerminalDisplay.cpp:2320
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "&सर्वं चिनोतु"
 
-#: terminalDisplay/TerminalDisplay.cpp:2325
+#: terminalDisplay/TerminalDisplay.cpp:2321
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "&निरसयतु"
 
-#: terminalDisplay/TerminalDisplay.cpp:2556
+#: terminalDisplay/TerminalDisplay.cpp:2552
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3435,17 +3435,17 @@ msgstr ""
 "Software_flow_control\">निलम्बितम्</a> अस्ति । पुनः आरम्भं कर्तुं <b>Ctrl+Q</b> नुदन्तु।"
 "</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2611
+#: terminalDisplay/TerminalDisplay.cpp:2607
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "इदं टर्मिनल् केवलं पठनीयम् अस्ति ।"
 
-#: terminalDisplay/TerminalDisplay.cpp:3006
+#: terminalDisplay/TerminalDisplay.cpp:3003
 #, kde-format
 msgid "Change &Directory To"
 msgstr "परिवर्तनं &निर्देशिका To"
 
-#: terminalDisplay/TerminalDisplay.cpp:3041
+#: terminalDisplay/TerminalDisplay.cpp:3038
 #, kde-format
 msgid "&Paste Location"
 msgstr "&Paste स्थान"
