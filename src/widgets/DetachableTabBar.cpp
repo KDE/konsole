@@ -32,14 +32,41 @@ DetachableTabBar::DetachableTabBar(QWidget *parent)
 
 void DetachableTabBar::setColor(int idx, const QColor &color)
 {
-    setTabData(idx, color);
-    update();
+    DetachableTabData data = tabData(idx).value<DetachableTabData>();
+    if (data.color != color) {
+        data.color = color;
+        setDetachableTabData(idx, data);
+        update(tabRect(idx));
+    }
 }
 
 void DetachableTabBar::removeColor(int idx)
 {
-    setTabData(idx, QVariant());
-    update();
+    DetachableTabData data = tabData(idx).value<DetachableTabData>();
+    if (data.color.isValid()) {
+        data.color = QColor();
+        setDetachableTabData(idx, data);
+        update(tabRect(idx));
+    }
+}
+
+void DetachableTabBar::setProgress(int idx, const std::optional<int> &progress)
+{
+    DetachableTabData data = tabData(idx).value<DetachableTabData>();
+    if (data.progress != progress) {
+        data.progress = progress;
+        setDetachableTabData(idx, data);
+        update(tabRect(idx));
+    }
+}
+
+void DetachableTabBar::setDetachableTabData(int idx, const DetachableTabData &data)
+{
+    if ((data.color.isValid() && data.color.alpha() > 0) || data.progress.has_value()) {
+        setTabData(idx, QVariant::fromValue(data));
+    } else {
+        setTabData(idx, QVariant());
+    }
 }
 
 void DetachableTabBar::middleMouseButtonClickAt(const QPoint &pos)
@@ -170,18 +197,34 @@ void DetachableTabBar::paintEvent(QPaintEvent *event)
             continue;
         }
 
-        QColor varColor = data.value<QColor>();
-        if (!varColor.isValid() || varColor.alpha() == 0) {
+        const DetachableTabData tabData = data.value<DetachableTabData>();
+
+        const bool colorValid = tabData.color.isValid() && tabData.color.alpha() > 0;
+
+        if (!colorValid && !tabData.progress.has_value()) {
             continue;
         }
 
-        painter.setBrush(varColor);
+        const QColor color = colorValid ? tabData.color : palette().highlight().color();
+
+        painter.setBrush(color);
         QRect tRect = tabRect(tabIndex);
         tRect.setTop(painter.fontMetrics().height() + 6); // Color bar top position consider a height the font and fixed spacing of 6px
         tRect.setHeight(4);
         tRect.setLeft(tRect.left() + 6);
         tRect.setWidth(tRect.width() - 6);
-        painter.drawRect(tRect);
+
+        // Draw progress, if any, ontop of a faint bar.
+        if (tabData.progress.has_value()) {
+            painter.setOpacity(0.3);
+            painter.drawRect(tRect);
+            painter.setOpacity(1.0);
+
+            tRect.setWidth(tRect.width() * tabData.progress.value() / 100.0);
+            painter.drawRect(tRect);
+        } else {
+            painter.drawRect(tRect);
+        }
     }
 }
 

@@ -1678,6 +1678,43 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
         int rows = -1, cols = -1;
         _currentScreen->addPlacement(pixmap, rows, cols, -1, -1, TerminalGraphicsPlacement_t::iTerm, true, moveCursor);
     }
+
+    if (attribute == ConEmu) {
+        const auto list = QStringView(value).split(QLatin1Char(';'));
+        if (list.size() >= 2) {
+            // Progress indicator.
+            if (list.at(0) == QLatin1Char('4')) {
+                bool ok;
+                const int st = list.at(1).toInt(&ok);
+                if (ok) {
+                    switch (st) {
+                    case 0:
+                        Q_EMIT progressHidden();
+                        break;
+                    case 1:
+                        if (list.size() >= 3) {
+                            const int pr = list.at(2).toInt(&ok);
+                            if (ok && pr >= 0 && pr <= 100) {
+                                Q_EMIT progressChanged(pr);
+                            }
+                        }
+                        break;
+                    case 2:
+                        // TODO error state.
+                        break;
+                    case 3:
+                        // TODO indeterminate state.
+                        Q_EMIT progressHidden();
+                        break;
+                    case 4:
+                        // TODO paused state.
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
     _pendingSessionAttributesUpdates[attribute] = value;
     _sessionAttributesUpdateTimer->start(20);
 }
