@@ -85,6 +85,8 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
     connect(this, &TabbedViewContainer::setColor, tabBarWidget, &DetachableTabBar::setColor);
     connect(this, &TabbedViewContainer::removeColor, tabBarWidget, &DetachableTabBar::removeColor);
 
+    connect(this, &TabbedViewContainer::setProgress, tabBarWidget, &DetachableTabBar::setProgress);
+
     // The context menu of tab bar
     _contextPopupMenu = new QMenu(tabBar());
     connect(_contextPopupMenu, &QMenu::aboutToHide, this, [this]() {
@@ -406,6 +408,8 @@ void TabbedViewContainer::connectTerminalDisplay(TerminalDisplay *display)
     connect(item, &Konsole::ViewProperties::readOnlyChanged, this, &Konsole::TabbedViewContainer::updateSpecialState);
 
     connect(item, &Konsole::ViewProperties::copyInputChanged, this, &Konsole::TabbedViewContainer::updateSpecialState);
+
+    connect(item, &Konsole::ViewProperties::progressChanged, this, &Konsole::TabbedViewContainer::updateProgress);
 }
 
 void TabbedViewContainer::disconnectTerminalDisplay(TerminalDisplay *display)
@@ -687,6 +691,15 @@ void TabbedViewContainer::updateSpecialState(ViewProperties *item)
         }
     }
     updateIcon(item);
+}
+
+void TabbedViewContainer::updateProgress(ViewProperties *item)
+{
+    auto controller = qobject_cast<SessionController *>(item);
+    auto topLevelSplitter = qobject_cast<ViewSplitter *>(controller->view()->parentWidget())->getToplevelSplitter();
+    const int index = indexOf(topLevelSplitter);
+
+    Q_EMIT setProgress(index, item->progress());
 }
 
 void TabbedViewContainer::currentSessionControllerChanged(SessionController *controller)
