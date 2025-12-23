@@ -86,6 +86,14 @@ void ViewProperties::setIdentifier(int id)
     _viewProperties.insert(id, this);
 }
 
+void ViewProperties::setProgress(const std::optional<int> &progress)
+{
+    if (_progress != progress) {
+        _progress = progress;
+        Q_EMIT progressChanged(this);
+    }
+}
+
 QString ViewProperties::title() const
 {
     return _title;
@@ -104,6 +112,11 @@ int ViewProperties::identifier() const
 QColor ViewProperties::color() const
 {
     return _color;
+}
+
+std::optional<int> ViewProperties::progress() const
+{
+    return _progress;
 }
 
 #include "moc_ViewProperties.cpp"

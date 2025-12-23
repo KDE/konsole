@@ -37,26 +37,47 @@
      <property name="spacing">
       <number>6</number>
      </property>
+     <item row="16" column="0" alignment="Qt::AlignmentFlag::AlignRight">
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>Notifications:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="1">
+      <widget class="QCheckBox" name="kcfg_EnableSecuritySensitiveDBusAPI">
+       <property name="text">
+        <string>Enable the security sensitive parts of the DBus API</string>
+       </property>
+      </widget>
+     </item>
      <item row="12" column="1">
-      <widget class="QCheckBox" name="kcfg_SearchReverseSearch">
+      <widget class="QCheckBox" name="kcfg_SearchHighlightMatches">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="toolTip">
-        <string>Sets whether search should start from the bottom</string>
-       </property>
        <property name="text">
-        <string>Search backwards</string>
+        <string>Highlight all matches</string>
        </property>
       </widget>
      </item>
-     <item row="15" column="0" alignment="Qt::AlignmentFlag::AlignRight">
-      <widget class="QLabel" name="label_3">
+     <item row="0" column="0">
+      <widget class="QLabel" name="label">
        <property name="text">
-        <string>Notifications:</string>
+        <string>Process and window:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="1">
+      <widget class="QCheckBox" name="kcfg_ListenForZModemTerminalCodes">
+       <property name="text">
+        <string>Listen for ZModem terminal codes</string>
        </property>
       </widget>
      </item>
@@ -64,6 +85,42 @@
       <widget class="QCheckBox" name="kcfg_FocusFollowsMouse">
        <property name="text">
         <string>Focus terminals when the mouse pointer is moved over them</string>
+       </property>
+      </widget>
+     </item>
+     <item row="15" column="1">
+      <spacer>
+       <property name="orientation">
+        <enum>Qt::Orientation::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Policy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>16</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="3" column="1">
+      <widget class="QCheckBox" name="kcfg_ShowWindowTitleOnTitleBar">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Show window title on the titlebar</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QCheckBox" name="kcfg_RemoveWindowTitleBarAndFrame">
+       <property name="text">
+        <string>Remove window titlebar and frame</string>
        </property>
       </widget>
      </item>
@@ -80,21 +137,23 @@
        </property>
       </widget>
      </item>
-     <item row="9" column="0" alignment="Qt::AlignmentFlag::AlignRight">
-      <widget class="QLabel" name="label_2">
+     <item row="1" column="1">
+      <widget class="QCheckBox" name="kcfg_UseSingleInstance">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="toolTip">
+        <string>When launching Konsole re-use existing process if possible</string>
+       </property>
        <property name="text">
-        <string comment="@item:intext Search options">Search:</string>
+        <string>Run all Konsole windows in a single process</string>
        </property>
       </widget>
      </item>
-     <item row="4" column="1">
-      <widget class="QCheckBox" name="kcfg_RemoveWindowTitleBarAndFrame">
-       <property name="text">
-        <string>Remove window titlebar and frame</string>
-       </property>
-      </widget>
-     </item>
-     <item row="15" column="1">
+     <item row="16" column="1">
       <layout class="QHBoxLayout" stretch="0,1">
        <property name="spacing">
         <number>0</number>
@@ -130,49 +189,7 @@
        </item>
       </layout>
      </item>
-     <item row="11" column="1">
-      <widget class="QCheckBox" name="kcfg_SearchHighlightMatches">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string>Highlight all matches</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1">
-      <widget class="QCheckBox" name="kcfg_ShowWindowTitleOnTitleBar">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string>Show window title on the titlebar</string>
-       </property>
-      </widget>
-     </item>
-     <item row="13" column="1">
-      <widget class="QCheckBox" name="kcfg_SearchNoWrap">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="toolTip">
-        <string>Sets whether search should stop instead of wrapping</string>
-       </property>
-       <property name="text">
-        <string>No wrap</string>
-       </property>
-      </widget>
-     </item>
-     <item row="14" column="1">
+     <item row="9" column="1">
       <spacer>
        <property name="orientation">
         <enum>Qt::Orientation::Vertical</enum>
@@ -188,18 +205,8 @@
        </property>
       </spacer>
      </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>Process and window:</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QCheckBox" name="kcfg_UseSingleInstance">
+     <item row="10" column="1">
+      <widget class="QCheckBox" name="kcfg_SearchCaseSensitive">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -207,10 +214,62 @@
         </sizepolicy>
        </property>
        <property name="toolTip">
-        <string>When launching Konsole re-use existing process if possible</string>
+        <string>Sets whether the search is case sensitive</string>
        </property>
        <property name="text">
-        <string>Run all Konsole windows in a single process</string>
+        <string>Case sensitive</string>
+       </property>
+      </widget>
+     </item>
+     <item row="13" column="1">
+      <widget class="QCheckBox" name="kcfg_SearchReverseSearch">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="toolTip">
+        <string>Sets whether search should start from the bottom</string>
+       </property>
+       <property name="text">
+        <string>Search backwards</string>
+       </property>
+      </widget>
+     </item>
+     <item row="11" column="1">
+      <widget class="QCheckBox" name="kcfg_SearchRegExpression">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Match using regular expressions</string>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="0" alignment="Qt::AlignmentFlag::AlignRight">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string comment="@item:intext Search options">Search:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="14" column="1">
+      <widget class="QCheckBox" name="kcfg_SearchNoWrap">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="toolTip">
+        <string>Sets whether search should stop instead of wrapping</string>
+       </property>
+       <property name="text">
+        <string>No wrap</string>
        </property>
       </widget>
      </item>
@@ -230,62 +289,10 @@
        </property>
       </widget>
      </item>
-     <item row="6" column="1">
-      <widget class="QCheckBox" name="kcfg_EnableSecuritySensitiveDBusAPI">
-       <property name="text">
-        <string>Enable the security sensitive parts of the DBus API</string>
-       </property>
-      </widget>
-     </item>
      <item row="8" column="1">
-      <spacer>
-       <property name="orientation">
-        <enum>Qt::Orientation::Vertical</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Policy::Fixed</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>16</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="9" column="1">
-      <widget class="QCheckBox" name="kcfg_SearchCaseSensitive">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="toolTip">
-        <string>Sets whether the search is case sensitive</string>
-       </property>
+      <widget class="QCheckBox" name="kcfg_ShowProgressInTaskBar">
        <property name="text">
-        <string>Case sensitive</string>
-       </property>
-      </widget>
-     </item>
-     <item row="10" column="1">
-      <widget class="QCheckBox" name="kcfg_SearchRegExpression">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string>Match using regular expressions</string>
-       </property>
-      </widget>
-     </item>
-     <item row="7" column="1">
-      <widget class="QCheckBox" name="kcfg_ListenForZModemTerminalCodes">
-       <property name="text">
-        <string>Listen for ZModem terminal codes</string>
+        <string>Show progress in taskbar</string>
        </property>
       </widget>
      </item>

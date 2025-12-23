@@ -13,6 +13,9 @@
 #include <QPointer>
 #include <QUrl>
 
+// STL
+#include <optional>
+
 // KDE
 #include <KXmlGuiWindow>
 
@@ -173,6 +176,7 @@ private Q_SLOTS:
 
     void updateWindowIcon();
     void updateWindowCaption();
+    void updateProgress();
     void openUrls(const QList<QUrl> &urls);
 
     // Sets the list of profiles to be displayed under the "New Tab" action
@@ -225,6 +229,7 @@ private:
     QPointer<SessionController> _pluggedController;
     std::vector<IKonsolePlugin *> _plugins;
     QList<QAction *> _pluginsActions;
+    std::optional<int> _progress;
     bool _blurEnabled = false;
     bool _firstShowEvent = true;
 
