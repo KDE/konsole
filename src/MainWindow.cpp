@@ -516,8 +516,15 @@ void MainWindow::applyMainWindowSettings(const KConfigGroup &config)
     KMainWindow::applyMainWindowSettings(config);
 
     // Override the menubar state from the config file
-    if (_windowArgsMenuBarVisible.enabled) {
-        menuBar()->setVisible(_windowArgsMenuBarVisible.showMenuBar);
+    if (_windowArgsShowMenuBar.has_value()) {
+        menuBar()->setVisible(_windowArgsShowMenuBar.value());
+    }
+
+    // Override the toolbar state from the config file
+    if (_windowArgsShowToolBars.has_value()) {
+        for (const auto& name : toolBarNames()) {
+            setToolBarVisible(name, _windowArgsShowToolBars.value());
+        }
     }
 
     _toggleMenuBarAction->setChecked(menuBar()->isVisibleTo(this));
@@ -998,8 +1005,12 @@ void MainWindow::setBlur(bool blur)
 
 void MainWindow::setMenuBarInitialVisibility(bool showMenuBar)
 {
-    _windowArgsMenuBarVisible.enabled = true;
-    _windowArgsMenuBarVisible.showMenuBar = showMenuBar;
+    _windowArgsShowMenuBar = showMenuBar;
+}
+
+void MainWindow::setToolBarsInitialVisibility(bool showToolbars)
+{
+    _windowArgsShowToolBars = showToolbars;
 }
 
 void MainWindow::setRemoveWindowTitleBarAndFrame(bool frameless)
