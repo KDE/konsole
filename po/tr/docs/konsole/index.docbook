@@ -120,13 +120,13 @@
 >&FDLNotice;</legalnotice>
 
 <date
->2023-04-25</date>
+>2024‒04‒23</date>
 <releaseinfo
->KDE Gear 23.08</releaseinfo>
+>KDE Gear 24.05</releaseinfo>
 
 <abstract
 ><para
->&konsole;, &kde;'nin uçbirim öykünücüsüdür.</para
+>&konsole;, &kde;’nin uçbirim öykünücüsüdür.</para
 ></abstract>
 
 <keywordset>
@@ -159,7 +159,7 @@
 >&konsole;, genellikle uçbirim veya kabuk olarak adlandırılan bir X uçbirim öykünücüsüdür. Yalnızca metin penceresindeki bir komut satırı arayüzünü öykünür. </para>
 
 <para
->&konsole;, tipik olarak yazdığınız komutları yürüten bir uygulama olan bir komut kabuğu çalıştırır. &konsole;'nin çalıştığı kabuk hesap ayarlarınıza bağlıdır. Kabuk nedir, nasıl yapılandırılır ve nasıl kullanılır öğrenmek için işletim sistemi belgelerinize bakın. </para>
+>&konsole;, tipik olarak yazdığınız komutları yürüten bir uygulama olan bir komut kabuğu çalıştırır. &konsole;’nin çalıştığı kabuk hesap ayarlarınıza bağlıdır. Kabuk nedir, nasıl yapılandırılır ve nasıl kullanılır öğrenmek için işletim sistemi belgelerinize bakın. </para>
 </sect1>
 
 <sect1 id="scrollback">
@@ -197,7 +197,7 @@
 ><guimenu
 >Ayarlar</guimenu
 ><guimenuitem
->Geçerli Profili Düzenle...</guimenuitem
+>Geçerli Profili Düzenle…</guimenuitem
 ></menuchoice
 > yolunu kullanın). </para>
 
@@ -207,7 +207,7 @@
 <title
 >Seçim Kipi</title>
 <para
->&konsole;'de bir klavyeyle seçim kipi vardır. Bu kipte, geçmişte serbestçe dolanılabilir ve fare olmadan metin seçilebilir.</para>
+>&konsole;’de bir klavyeyle seçim kipi vardır. Bu kipte, geçmişte serbestçe dolanılabilir ve fare olmadan metin seçilebilir.</para>
 
 <para
 >Bu kipe giriş yapıp çıkmak için klavye kısayolunu kullanın (öntanımlı olarak <keycombo action="simul"
@@ -248,7 +248,7 @@
 >V</keycap
 > düğmesine basın; imleci hareket ettirin ve seçimi sonlandırmak için yeniden <keycap
 >V</keycap
->'ye basın. <keycombo
+>’ye basın. <keycombo
 >&Shift;<keycap
 >V</keycap
 ></keycombo
@@ -293,7 +293,7 @@
 ><guimenu
 >Ayarlar</guimenu
 ><guimenuitem
->Profilleri Yönet...</guimenuitem
+>Profilleri Yönet…</guimenuitem
 ></menuchoice
 > menü girdisine tıklayın.</para
 ></listitem>
@@ -308,7 +308,7 @@
 <listitem
 ><para
 ><guibutton
->Yeni Profil...</guibutton
+>Yeni Profil…</guibutton
 > düğmesine tıklayın.</para
 ></listitem>
 
@@ -342,7 +342,7 @@
 ><guibutton
 >Tamam</guibutton
 > düğmesine basın. Yeni oturum artık <guilabel
->Profilleri Yönet...</guilabel
+>Profilleri Yönet…</guilabel
 > iletişim kutusunda görünecektir. </para
 ></listitem>
 
@@ -369,7 +369,7 @@
 
 <listitem
 ><para
->Tüm &LMB; tıklamaları, &konsole;'da çalışan fare uyumlu bir uygulamaya gönderilir. Bir uygulama, fare tıklamasına tepki gösteriyorsa &konsole; bunu bir ok imleci ile gösterir. Değilse bir çubuk imleci gösterilir.</para>
+>Tüm &LMB; tıklamaları, &konsole;’da çalışan fare uyumlu bir uygulamaya gönderilir. Bir uygulama, fare tıklamasına tepki gösteriyorsa &konsole; bunu bir ok imleci ile gösterir. Değilse bir çubuk imleci gösterilir.</para>
 
 <para
 >Farenin farkında olmayan bir uygulama çalışırken &LMB; ile basılı tutmak ve fareyi ekran üzerinde sürüklemek metnin bir bölümünü işaretleyecektir. Fareyi sürüklerken, işaretlenen metin görsel geri bildirim için ters renkte görüntülenir. İşaretli metni &konsole; içinde daha sonra kullanmak üzere panoya kopyalamak veya başka bir uygulamaya göndermek için <guimenu
@@ -470,7 +470,7 @@
 <listitem
 ><para
 ><guimenuitem
->Geçmişi Ayarla...</guimenuitem
+>Geçmişi Ayarla…</guimenuitem
 ></para
 ></listitem>
 <listitem
@@ -488,7 +488,7 @@
 <listitem
 ><para
 ><guimenuitem
->Geçerli Profili Düzenle...</guimenuitem
+>Geçerli Profili Düzenle…</guimenuitem
 ></para
 ></listitem>
 <listitem
@@ -619,10 +619,10 @@
 </variablelist>
 
 <para
->Sürükle ve bırak işlemi sırasında &LMB;'ni bırakmadan önce kısayollara basarsanız herhangi bir bağlam menüsü görünmez ve eylemler hemen yürütülür. </para>
+>Sürükle ve bırak işlemi sırasında &LMB;’ni bırakmadan önce kısayollara basarsanız herhangi bir bağlam menüsü görünmez ve eylemler hemen yürütülür. </para>
 
 <para
->&URL;'leri öntanımlı olarak metin olarak eklemek üzere sürükleyip bırakmak için &Ctrl; düğmesini kullanmak veya bağlam menüsünü devre dışı bırakmak istiyorsanız profil ayarları iletişim kutusundaki <guilabel
+>&URL;’leri öntanımlı olarak metin olarak eklemek üzere sürükleyip bırakmak için &Ctrl; düğmesini kullanmak veya bağlam menüsünü devre dışı bırakmak istiyorsanız profil ayarları iletişim kutusundaki <guilabel
 >Fare</guilabel
 > sekmesinde ilgili seçenekleri etkinleştirin. </para>
 
@@ -725,9 +725,11 @@
 <para
 ><guilabel
 >Profili Düzenle</guilabel
-> iletişim kutusunun <guilabel
+> iletişim kutusundaki <guilabel
+>Görünüş</guilabel
+> sayfasının <guilabel
 >Karmaşık Metin Yerleşimi</guilabel
-> sayfasında, metin sunumunu denetleyen seçenekleri bulacaksınız. </para>
+> sekmesinde metin sunumunu denetleyen seçenekleri bulacaksınız. </para>
 
 <para>
 <itemizedlist>
@@ -735,7 +737,7 @@
 ><para
 ><guilabel
 >Sözcük kipi</guilabel
-> - Bu kipte (bazı) diziler ekranda tek tek karakter yerine bir bütün olarak görüntülenir. Bu, bir karakterin şekli kendisinden önceki veya sonraki karakterlere bağlı olduğunda Qt’un metni doğru şekilde oluşturmasını sağlar. Bu, bazı karakterlerin yanlış konumlandırılmasına neden olabilir. </para
+> — Bu kipte (bazı) diziler ekranda tek tek karakter yerine bir bütün olarak görüntülenir. Bu, bir karakterin şekli kendisinden önceki veya sonraki karakterlere bağlı olduğunda Qt’un metni doğru şekilde oluşturmasını sağlar. Bu, bazı karakterlerin yanlış konumlandırılmasına neden olabilir. </para
 ><para
 >Boşluklar her zaman dizileri bozar, dolayısıyla her zaman doğru konumlarda olurlar. Bu, karakterlerin hiçbir zaman doğru konumlarından çok fazla uzaklaşmamasını sağlar. </para
 ></listitem>
@@ -744,61 +746,93 @@
 ><para
 ><guilabel
 >Tüm sözcük için aynı öznitelikleri kullan</guilabel
-> - Bu etkinleştirildiğinde, sözcükler aynı niteliklerle (metin rengi, kalın, yatık vb.) oluşturulur. Bir öznitelik kelimenin ortasında değişirse bu durum; ancak sözcüğün sonundan sonra geçerli olur. Bu devre dışı bırakıldığında, öznitelikler değiştiğinde yeni bir sözcük başlar. Bu, imleci hareket ettirirken veya metni seçerken karakterlerin şekil ve konumunu değiştirmesine neden olur. </para
+> — Bu etkinleştirildiğinde, sözcükler aynı niteliklerle (metin rengi, kalın, yatık vb.) oluşturulur. Bir öznitelik kelimenin ortasında değişirse bu durum; ancak sözcüğün sonundan sonra geçerli olur. Bu devre dışı bırakıldığında, öznitelikler değiştiğinde yeni bir sözcük başlar. Bu, imleci hareket ettirirken veya metni seçerken karakterlerin şekil ve konumunu değiştirmesine neden olur. </para
 ></listitem>
 
 <listitem
 ><para
 ><guilabel
 >ASCII karakterler</guilabel
-> - ASCII karakterlerini yukarıda açıklandığı gibi sözcükler halinde gruplayın. Bu seçeneğin en göze çarpan etkisi, bunun etkinleştirilmesinin programlama bitişik harflerini (bunları destekleyen yazı tipleri için) göstermesidir. Örneğin. &lt;= dizesi ⩽ olarak görüntülenebilir. </para
+> — ASCII karakterlerini yukarıda açıklandığı gibi sözcükler halinde gruplayın. Bu seçeneğin en göze çarpan etkisi, bunun etkinleştirilmesinin programlama bitişik harflerini (bunları destekleyen yazı tipleri için) göstermesidir. Örneğin. &lt;= dizesi ⩽ olarak görüntülenebilir. </para
 ></listitem>
 
 <listitem
 ><para
 ><guilabel
 >Brahmi yazısı karakterleri</guilabel
-> - Brahmi karakterlerini yukarıda açıklandığı gibi gruplandırın. Bu seçenek olmadan (yazıtipine bağlı olarak) bazı sözcükler olması gerektiği gibi bağlanmayabilir. Bu etkinleştirildiğinde Brahmi karakterleri konumlarının dışında görünebilir. Örneğin, ikinci satırdaki üçüncü karakter doğrudan birinci satırdaki üçüncü karakterin altında görünmeyebilir. </para
+> — Brahmi karakterlerini yukarıda açıklandığı gibi gruplandırın. Bu seçenek olmadan (yazıtipine bağlı olarak) bazı sözcükler olması gerektiği gibi bağlanmayabilir. Bu etkinleştirildiğinde Brahmi karakterleri konumlarının dışında görünebilir. Örneğin, ikinci satırdaki üçüncü karakter doğrudan birinci satırdaki üçüncü karakterin altında görünmeyebilir. </para
 ></listitem>
 
 <listitem
 ><para
 ><guilabel
 >Emoji yazısı:</guilabel
-> - Bu, Unicode Emoji karakterleri için kullanılacak yazıtipinin belirlenmesine olanak tanır. Ayarlanmazsa öntanımlı profil yazıtipi kullanılır veya bu yazıtipinde glifler eksikse sistem tarafından bazı yedek yazıtipleri kullanılabilir. </para
+> — Bu, Unicode Emoji karakterleri için kullanılacak yazıtipinin belirlenmesine olanak tanır. Ayarlanmazsa öntanımlı profil yazıtipi kullanılır veya bu yazıtipinde glifler eksikse sistem tarafından bazı yedek yazıtipleri kullanılabilir. </para
 ></listitem>
 
 <listitem
 ><para
 ><guilabel
 >Çift yönlü metin sunumu</guilabel
-> - Arapça ve İbranice metinlerin doğru görünmesi için sağdan sola karakterleri yeniden sıralayın. </para
+> — Arapça ve İbranice metinlerin doğru görünmesi için sağdan sola karakterleri yeniden sıralayın. </para
 ></listitem>
 
 <listitem
 ><para
 ><guilabel
 >Soldan sağa satır yönü zorla</guilabel
-> - Satırlar her zaman soldan sağadır. Bu olmadan her satırın yönü, güçlü yönlülüğe sahip ilk karakter tarafından belirlenir. </para
+> — Satırlar her zaman soldan sağadır. Bu olmadan her satırın yönü, güçlü yönlülüğe sahip ilk karakter tarafından belirlenir. </para
 ></listitem>
 
 <listitem
 ><para
 ><guilabel
 >Tablo karakterlerinde çift yönlü kipi geçersiz kıl</guilabel
-> - Grafik tablo karakterlerini güçlü soldan sağa karakterleri olarak düşünün. Bu, sağdan sola karakterlerini içeren tablonun doğru şekilde görüntülenmesine olanak tanır; ancak bu karakterler sağdan sola metinlerinde kullanılırsa sıralamanın yanlış olmasına neden olabilir. </para
+> — Grafik tablo karakterlerini güçlü soldan sağa karakterleri olarak düşünün. Bu, sağdan sola karakterlerini içeren tablonun doğru şekilde görüntülenmesine olanak tanır; ancak bu karakterler sağdan sola metinlerinde kullanılırsa sıralamanın yanlış olmasına neden olabilir. </para
 ></listitem>
 
 <listitem
 ><para
 ><guilabel
 >wcwidth’i geçersiz kıl</guilabel
-> - Sorunlu karakterler glibc’nin wcwidth() yöntemi yerine Unicode standardını izler. Şu anda yalnızca wc genişliği 1 ve Unicode genişliği 0 olan yumuşak kısa çizgi (Unicode 0x00AD) bu seçenekten etkilenmektedir. Genel olarak bu seçenek, esas olarak komut satırında bu karakterler kullanıldığında devre dışı bırakılmalı ve yalnızca görüntülendiklerinde etkinleştirilmelidir. </para
+> — Sorunlu karakterler glibc’nin wcwidth() yöntemi yerine Unicode standardını izler. Şu anda yalnızca wc genişliği 1 ve Unicode genişliği 0 olan yumuşak kısa çizgi (Unicode 0x00AD) bu seçenekten etkilenmektedir. Genel olarak bu seçenek, esas olarak komut satırında bu karakterler kullanıldığında devre dışı bırakılmalı ve yalnızca görüntülendiklerinde etkinleştirilmelidir. </para
 ></listitem>
-
 
 </itemizedlist>
 </para>
+</sect1>
+
+<sect1 id="visualhints">
+<title
+>Görsel İpuçları</title>
+<para
+><xref linkend="semantic-shell-integration"/> içinde açıklanan çeşitli görsel ipuçlarına ek olarak, &konsole; içinde başka görsel ipuçları da bulunur: </para>
+
+<itemizedlist>
+<listitem
+><para
+>80. veya başka bir sütunda görsel bir çizgi. Bu, <guilabel
+>Profili Düzenle</guilabel
+> iletişim kutusunun <guilabel
+>Görünüş</guilabel
+> sayfasındaki <guilabel
+>Diğer</guilabel
+> sekmesinde yapılandırılır. </para
+></listitem>
+
+<listitem
+><para
+>Satır numaraları, uçbirim metninin üzerine koyulacak biçimde görüntülenebilir. Satır numaraları, her bir satırın sağ ucuna doğru kırmızı renkte görünürler. Satırlar, geçmişteki ilk (en üst) satırdan başlanarak numaralandırılırlar. Satır numaralarının görüntülenmesi, <guilabel
+>Profili Düzenle</guilabel
+> iletişim kutusunun <guilabel
+>Gelişmiş</guilabel
+> sekmesinde yapılandırılabilir. Görüntülenen üç kip arasında geçiş ise bir klavye kısayoluyla sağlanabilir. Öntanımlı kısayol: <keycombo
+>&Ctrl;&Alt;<keycap
+>\</keycap
+></keycombo
+> </para
+></listitem>
+</itemizedlist>
 </sect1>
 
 </chapter>
@@ -907,7 +941,7 @@
 > <guimenu
 >Dosya</guimenu
 > <guimenuitem
->Çıktıyı Farklı Kaydet...</guimenuitem
+>Çıktıyı Farklı Kaydet…</guimenuitem
 ></menuchoice
 ></term>
 <listitem
@@ -930,7 +964,7 @@
 > <guimenu
 >Dosya</guimenu
 > <guimenuitem
->Ekranı Yazdır ...</guimenuitem
+>Ekranı Yazdır…</guimenuitem
 ></menuchoice
 ></term>
 <listitem
@@ -958,7 +992,7 @@
 >Geçerli dizinde &kde; dosya yöneticisini açar</action
 >. Öntanımlı olarak bu <ulink url="help:/dolphin/index.html"
 >&dolphin;</ulink
->'dir. </para
+>’dir. </para
 ></listitem>
 </varlistentry>
 
@@ -1003,7 +1037,7 @@
 <listitem
 ><para
 ><action
->&konsole;'dan çıkar</action
+>&konsole;’dan çıkar</action
 ></para>
 <note
 ><para
@@ -1119,7 +1153,7 @@
 ><guisubmenu
 >Girdiyi Şuraya Kopyala</guisubmenu
 ><guimenuitem
->Sekmeler Seç...</guimenuitem
+>Sekmeler Seç…</guimenuitem
 ></menuchoice
 ></term>
 <listitem
@@ -1266,7 +1300,7 @@
 > <guimenu
 >Düzen</guimenu
 ><guimenuitem
->Sekme Ayarlarını Yapılandır...</guimenuitem
+>Sekmeyi Yapılandır/Yeniden Adlandır…</guimenuitem
 ></menuchoice
 ></term>
 <listitem
@@ -1291,7 +1325,7 @@
 > <guimenu
 >Düzen</guimenu
 ><guimenuitem
->ZModem ile Karşıya Yükle...</guimenuitem
+>ZModem ile Karşıya Yükle…</guimenuitem
 ></menuchoice
 ></term>
 <listitem
@@ -1314,7 +1348,7 @@
 > <guimenu
 >Düzen</guimenu
 ><guimenuitem
->Bul...</guimenuitem
+>Bul…</guimenuitem
 ></menuchoice
 ></term>
 <listitem
@@ -1772,12 +1806,12 @@ Various search improvements
 >Süreç tamamlanması için geçerli sekmenin izlenmesini açar/kapatır</action
 >. </para
 ><para
->İşaretlenirse geçerli sürecin tamamlanmasının ardından &konsole; <guilabel
->'<replaceable
+>İşaretlenirse geçerli sürecin tamamlanmasının ardından &konsole;, <guilabel
+>“<replaceable
 >A</replaceable
->' süreci, '<replaceable
+>” süreci, “<replaceable
 >B</replaceable
-> oturumundaki çalışmayı bitirdi</guilabel
+>” oturumundaki çalışmayı bitirdi</guilabel
 > biçiminde bir bildirim gösterir. </para
 ></listitem>
 </varlistentry>
@@ -1817,7 +1851,7 @@ Various search improvements
 <listitem
 ><para
 ><action
->Metnin yazıtipi boyutunu artırır</action
+>Metnin yazıtipi puntosunu artırır</action
 ></para
 ></listitem>
 </varlistentry>
@@ -1834,13 +1868,13 @@ Various search improvements
 > <guimenu
 >Görünüm</guimenu
 ><guimenuitem
->Yazıtipi Boyutunu Sıfırla</guimenuitem
+>Yazıtipi Puntosunu Sıfırla</guimenuitem
 ></menuchoice
 ></term>
 <listitem
 ><para
 ><action
->Metnin yazıtipi boyutunu profil öntanımlısına sıfırlar</action
+>Metnin yazıtipi puntosunu profil öntanımlısına sıfırlar</action
 ></para
 ></listitem>
 </varlistentry>
@@ -1864,7 +1898,7 @@ Various search improvements
 <listitem
 ><para
 ><action
->Metnin yazıtipi boyutunu azaltır</action
+>Metnin yazıtipi puntosunu azaltır</action
 ></para
 ></listitem>
 </varlistentry>
@@ -1942,7 +1976,7 @@ Various search improvements
 <listitem
 ><para
 ><action
->&konsole;'nin tüm ekranı kaplamasını açar/kapatır</action
+>&konsole;’nin tüm ekranı kaplamasını açar/kapatır</action
 ></para
 ></listitem>
 </varlistentry>
@@ -1968,7 +2002,7 @@ Various search improvements
 > <guimenu
 >Yer İmleri</guimenu
 ><guimenuitem
->Yer İmi Ekle</guimenuitem
+>Yer İmi Koy</guimenuitem
 ></menuchoice
 ></term>
 <listitem
@@ -1985,7 +2019,7 @@ Various search improvements
 ><guimenu
 >Yer İmleri</guimenu
 ><guimenuitem
->Sekmeleri Klasör Olarak Yer İmlerine Ekle...</guimenuitem
+>Sekmeleri Klasör Olarak Yer İmlerine Ekle…</guimenuitem
 ></menuchoice
 ></term>
 <listitem
@@ -2004,7 +2038,7 @@ Various search improvements
 ><guimenu
 >Yer İmleri</guimenu
 ><guimenuitem
->Yeni Yer İmi Klasörü...</guimenuitem
+>Yeni Yer İmi Klasörü…</guimenuitem
 ></menuchoice
 ></term>
 <listitem
@@ -2075,7 +2109,7 @@ Various search improvements
 ><guimenu
 >Ayarlar</guimenu
 ><guimenuitem
->Geçerli Profili Düzenle...</guimenuitem
+>Geçerli Profili Düzenle…</guimenuitem
 ></menuchoice
 ></term>
 <listitem
@@ -2109,7 +2143,7 @@ Various search improvements
 ><guimenu
 >Ayarlar</guimenu
 ><guimenuitem
->Profilleri Yönet...</guimenuitem
+>Profilleri Yönet…</guimenuitem
 ></menuchoice
 ></term>
 <listitem
@@ -2200,13 +2234,13 @@ Various search improvements
 ><guimenu
 >Ayarlar</guimenu
 ><guimenuitem
->Dili Yapılandır... </guimenuitem
+>Dili Yapılandır…</guimenuitem
 ></menuchoice
 ></term>
 <listitem
 ><para
 ><action
->&konsole;'nin arayüz çevirisini seçmek için bir pencere açar.</action>
+>&konsole;’nin arayüz çevirisini seçmek için bir pencere açar.</action>
 </para>
 </listitem>
 </varlistentry>
@@ -2217,7 +2251,7 @@ Various search improvements
 ><guimenu
 >Ayarlar</guimenu
 ><guimenuitem
->Klavye Kısayollarını Yapılandır...</guimenuitem
+>Klavye Kısayollarını Yapılandır…</guimenuitem
 ></menuchoice
 ></term>
 <listitem
@@ -2305,7 +2339,7 @@ Various search improvements
 ><guimenu
 >Ayarlar</guimenu
 ><guimenuitem
->Araç Çubuklarını Yapılandır...</guimenuitem
+>Araç Çubuklarını Yapılandır…</guimenuitem
 ></menuchoice
 ></term>
 <listitem
@@ -2324,7 +2358,7 @@ Various search improvements
 ><guimenu
 >Ayarlar</guimenu
 ><guimenuitem
->Bildirimleri Yapılandır...</guimenuitem
+>Bildirimleri Yapılandır…</guimenuitem
 ></menuchoice
 ></term>
 <listitem
@@ -2341,7 +2375,7 @@ Various search improvements
 ><guimenu
 >Ayarlar</guimenu
 ><guimenuitem
->&konsole; Uygulamasını Yapılandır...</guimenuitem
+>&konsole; Uygulamasını Yapılandır…</guimenuitem
 ></menuchoice
 ></term>
 <listitem
@@ -2362,7 +2396,7 @@ Various search improvements
 >General</guilabel
 > sayfası, ayrıca daha önce kapatılmışlarsa <guibutton
 >Tüm "Bir Daha Sorma" İletilerini Etkinleştir</guibutton
->'ebileceğiniz yerdir. </para>
+>’ebileceğiniz yerdir. </para>
     </listitem>
     <listitem>
         <para
@@ -2377,7 +2411,7 @@ Various search improvements
 ><guilabel
 >Sekme Çubuğu/Ayırıcılar</guilabel
 > sayfasını kullanarak, sekme çubuğunun görünürlüğünü ve konumunu, sekme davranışlarını ve sekme düğmelerinin ince ayarlarını yapılandırabilirsiniz. <guilabel
->'Yeni Sekme' düğmesini göster</guilabel
+>“Yeni Sekme” düğmesini göster</guilabel
 > ve <guilabel
 >Bireysel sekme genişliklerini tam pencereye genişlet</guilabel
 > arasında seçim yapabilir veya <guilabel
@@ -2425,7 +2459,7 @@ Various search improvements
 ><guimenu
 >Ayarlar</guimenu
 ><guimenuitem
->Geçerli Profili Düzenle...</guimenuitem
+>Geçerli Profili Düzenle…</guimenuitem
 ><guimenuitem
 >Fare</guimenuitem
 ><guimenuitem
@@ -2639,7 +2673,7 @@ Various search improvements
 <listitem
 ><para
 >Öntanımlı profil yerine belirtilen profili kullanarak <action
->&konsole;'u başlat</action
+>&konsole;’u başlat</action
 >.</para
 ></listitem>
 </varlistentry>
@@ -2656,7 +2690,7 @@ Various search improvements
 >Bir <link linkend="save-layout"
 >kaydedilen &JSON; yerleşim dosyası</link
 > kullanarak <action
->&konsole;'u başlat</action
+>&konsole;’u başlat</action
 >.</para
 ></listitem>
 </varlistentry>
@@ -2783,7 +2817,7 @@ Various search improvements
 <listitem
 ><para
 ><action
->&konsole;'u arka planda başlat</action
+>&konsole;’u arka planda başlat</action
 > ve <keycombo action="simul"
 >&Ctrl;&Shift;<keycap
 >F12</keycap
@@ -2803,7 +2837,7 @@ Various search improvements
 ></term>
 <listitem
 ><para
->&konsole;'un yeni bir örneğini ayrı bir süreçte <action
+>&konsole;’nin yeni bir örneğini ayrı bir süreçte <action
 >çalıştır</action
 >. </para
 ></listitem>
@@ -2869,7 +2903,7 @@ Various search improvements
 <listitem
 ><para
 ><action
->&konsole;'u tam ekran kipinde başlat</action
+>&konsole;’u tam ekran kipinde başlat</action
 >.</para
 ></listitem>
 </varlistentry>
@@ -2915,7 +2949,7 @@ Various search improvements
 <para
 >Daha fazla bilgi için lütfen <ulink url="https://api.kde.org/4.14-api/applications-apidocs/konsole/html/classKonsole_1_1Profile.html"
 >&konsole; API Başvurusu</ulink
->'nu ziyaret edin. </para>
+>’nu ziyaret edin. </para>
 </listitem>
 </varlistentry>
 
@@ -2950,7 +2984,7 @@ Various search improvements
 >.</para>
 <note
 ><para
->Bu seçenek, &konsole;'a aktarılan tüm değişkenleri yakalar ve <parameter
+>Bu seçenek, &konsole;’a aktarılan tüm değişkenleri yakalar ve <parameter
 >komut</parameter
 > olarak yürütür. Bu nedenle, bu seçenek her zaman son seçenek olarak kullanılmalıdır.</para
 ></note>
@@ -2960,7 +2994,7 @@ Various search improvements
 </variablelist>
 
 <para
->&konsole; aynı zamanda genel &Qt; ve &kf5-full; seçeneklerini kabul eder; ek bilgi için qt5options ve kf5options kılavuz sayfalarına göz atın.</para>
+>&konsole; aynı zamanda genel &Qt; ve &kf6-full; seçeneklerini kabul eder; ek bilgi için qt6options ve kf6options kılavuz sayfalarına göz atın.</para>
 
 </chapter>
 
@@ -2971,7 +3005,7 @@ Various search improvements
 <para
 >&konsole;, &DBus; ile kullanılabilecek birçok yöntemi destekler. </para>
 <para
->&DBus; arayüzünü kullanmanın iki yolu vardır: &Qt;'nin grafiksel <application
+>&DBus; arayüzünü kullanmanın iki yolu vardır: &Qt;’nin grafiksel <application
 >qdbusviewer</application
 > uygulaması ve <application
 >qdbus</application
@@ -3073,12 +3107,12 @@ Various search improvements
 ><para
 ><option
 >$KONSOLE_DBUS_SERVICE</option
-> (bu, geçerli &konsole;'dan kullanılabilir) </para
+> (bu, geçerli &konsole;’dan kullanılabilir) </para
 ></listitem>
 <listitem
 ><para>
 <option
->'qdbus | grep konsole' çıktılarından birini seçin</option>
+>“qdbus | grep konsole” çıktılarından birini seçin</option>
 </para
 ></listitem>
 
@@ -3088,7 +3122,7 @@ Various search improvements
 <para
 >Daha fazla bilgi için lütfen <ulink url="https://techbase.kde.org/Development/Tutorials/D-Bus/Introduction"
 >&DBus; öğreticisi</ulink
->'ni ziyaret edin. </para>
+>’ni ziyaret edin. </para>
 
 </chapter>
 
@@ -3113,7 +3147,7 @@ Various search improvements
 >) gönderilen denetim karakterlerine ve kaçış dizilerine dönüştürmek için *.keytab dosyalarını kullanır.</para>
 
 <para
->Kullanıcılar, düğme bağıntısı düzenleyicisini kullanarak &konsole;'deki düğme bağıntısı ayarlarını özelleştirebilir. Uçbirime belirli bir denetim veya kaçış dizisi göndermek için bir düğme kombinasyonu yapılandırılabilir.</para>
+>Kullanıcılar, düğme bağıntısı düzenleyicisini kullanarak &konsole;’deki düğme bağıntısı ayarlarını özelleştirebilir. Uçbirime belirli bir denetim veya kaçış dizisi göndermek için bir düğme kombinasyonu yapılandırılabilir.</para>
 
 <para
 >Düğme Bağıntıları Düzenleyicisi’ni <menuchoice
@@ -3239,7 +3273,7 @@ Boşluk+Kontrol
 >screen</application
 >, <application
 >tmux</application
->... &etc;)</para>
+>… &etc;)</para>
 </listitem>
 </itemizedlist>
 </note>
@@ -3273,7 +3307,7 @@ Boşluk+Kontrol
 <para
 >Bu kip VT100 <ulink url="https://www.vt100.net/docs/vt100-ug/chapter3.html#DECCKM"
 >İmleç Düğmeleri Kipi (DECCKM)</ulink
->'ni gerçekler. Bu, bu kipin ayarlı veya sıfırlanan durumuna istinaden, her bir imleç düğmesinin (<keycap
+>’ni gerçekler. Bu, bu kipin ayarlı veya sıfırlanan durumuna istinaden, her bir imleç düğmesinin (<keycap
 >Yukarı</keycap
 >, <keycap
 >Aşağı</keycap
@@ -3320,8 +3354,8 @@ Boşluk+Kontrol
 > düğmesi için de geçerlidir.</para>
 <para
 >Bu kip <ulink url="https://www.vt100.net/docs/vt100-ug/chapter3.html#LNM"
->LNM - Satır Besleme/Yeni Satır Kipi</ulink
->'ne öykünür.</para>
+>LNM — Satır Besleme/Yeni Satır Kipi</ulink
+>’ne öykünür.</para>
 </listitem>
 </varlistentry>
 
@@ -3357,10 +3391,10 @@ Boşluk+Kontrol
 >Çıktı Alanı</title>
 
 <para
->Çıktı alanında ilgili düğme kombinasyonuna basıldığında &konsole;'nin uçbirimee göndermesini istediğiniz kaçış dizilerini veya denetim karakterlerini ekleyebilirsiniz.</para>
+>Çıktı alanında ilgili düğme kombinasyonuna basıldığında &konsole;’nin uçbirime göndermesini istediğiniz kaçış dizilerini veya denetim karakterlerini ekleyebilirsiniz.</para>
 
 <para
->Ayrıca &konsole;'de her biri özel bir anlama sahip olan aşağıdaki anahtar sözcüklerden herhangi birini de kullanabilirsiniz:</para>
+>Ayrıca &konsole;’de her biri özel bir anlama sahip olan aşağıdaki anahtar sözcüklerden herhangi birini de kullanabilirsiniz:</para>
 
 <itemizedlist>
 <listitem
@@ -3500,7 +3534,7 @@ Boşluk+Kontrol
 >.css</filename
 > dosyasında onu kullanacak araç takımı <userinput
 >QTabBar::tab</userinput
->'dır. </para>
+>’dır. </para>
 <para
 >Daha fazla bilgi için <ulink url="https://doc.qt.io/qt-5/stylesheet.html"
 >&Qt; Biçem Sayfaları</ulink
@@ -3640,7 +3674,7 @@ QTabBar::tab {
 
 <listitem
 ><para
->Sekme başlığındaki "%d" biçimlendiricisinde gizli bir özellik vardır. &konsole;'a bir dizin adını onun ilk karakterine kısaltmasını söyleyebilirsiniz. Örneğin, "/konsole/ikilisi/yolu", "konsole/i" olarak kısaltılabilir. Bu gizli özelliği etkinleştirmek ve denetlemek isterseniz <userinput
+>Sekme başlığındaki "%d" biçimlendiricisinde gizli bir özellik vardır. &konsole;’a bir dizin adını onun ilk karakterine kısaltmasını söyleyebilirsiniz. Örneğin, "/konsole/ikilisi/yolu", "konsole/i" olarak kısaltılabilir. Bu gizli özelliği etkinleştirmek ve denetlemek isterseniz <userinput
 ><command
 >qtpaths</command
 > <option
@@ -3653,7 +3687,7 @@ QTabBar::tab {
 <para
 ><programlisting
 >[ProcessInfo]
-CommonDirNames=ad1,ad2,ad3...
+CommonDirNames=ad1,ad2,ad3…
 </programlisting>
 
 <note
@@ -3686,7 +3720,7 @@ CommonDirNames=ad1,ad2,ad3...
 
 <listitem>
 <para
->Bazı yazıtipleri, diğer uygulamalarda kullanılabilir olmasına rağmen &konsole;'de kullanılamayabilir. Bu, &konsole;'de bir hata olduğu anlamına gelmez. &konsole;, en iyi görsel sonucu sağlamak eş aralıklı yazıtiplerini gerektirir, bu nedenle &Qt;'den yalnızca eş aralıklı yazıtiplerini listelemesini ister.</para>
+>Bazı yazıtipleri, diğer uygulamalarda kullanılabilir olmasına rağmen &konsole;’de kullanılamayabilir. Bu, &konsole;’de bir hata olduğu anlamına gelmez. &konsole;, en iyi görsel sonucu sağlamak eş aralıklı yazıtiplerini gerektirir, bu nedenle &Qt;’den yalnızca eş aralıklı yazıtiplerini listelemesini ister.</para>
 
 <para
 >16.08 sürümünden (Ağustos 2016) itibaren &konsole;, ekranın doğru görüntülenemeyebileceği uyarısıyla herhangi bir yazıtipinin seçilmesine izin verecek biçimde yapılandırılabilir.</para>
@@ -3730,7 +3764,7 @@ CommonDirNames=ad1,ad2,ad3...
 ><para
 >&konsole;, oturum açma kabuğunu çalıştırma konusunda kolaylık sağlamaz; çünkü geliştiricileri oturum açma kabuğunu bir uçbirim öykünücüsünde çalıştırma fikrinden hoşlanmıyor. </para>
 <para
->Tabii ki kullanıcılar çok gerekirse oturum açma kabuğunu &konsole;'da çalıştırabilirler. Kullanımdaki profili düzenleyin ve komutunu bir oturum açma kabuğunu açıkça çağıracak biçimde değiştirin; örneğin, "<command
+>Tabii ki kullanıcılar çok gerekirse oturum açma kabuğunu &konsole;’da çalıştırabilirler. Kullanımdaki profili düzenleyin ve komutunu bir oturum açma kabuğunu açıkça çağıracak biçimde değiştirin; örneğin, "<command
 >bash -l</command
 >" ve "<command
 >zsh -l</command
@@ -3765,7 +3799,7 @@ CommonDirNames=ad1,ad2,ad3...
 >Önceki &konsole; bakımcıları: &Robert.Knight; &Robert.Knight.mail; ve &Waldo.Bastian; &Waldo.Bastian.mail;</para>
 
 <para
->&konsole; uygulaması telif hakkı &copy; 1997-2008 &Lars.Doelle; &Lars.Doelle.mail;</para>
+>&konsole; uygulaması telif hakkı &copy; 1997–2008 &Lars.Doelle; &Lars.Doelle.mail;</para>
 
 <para
 >Bu belge ilk olarak &Jonathan.Singer; &Jonathan.Singer.mail; tarafından yazılmıştır.</para>
