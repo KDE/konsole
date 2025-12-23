@@ -14,6 +14,9 @@
 #include <QObject>
 #include <QUrl>
 
+// STL
+#include <optional>
+
 // Konsole
 #include "konsoleprivate_export.h"
 #include "session/Session.h"
@@ -41,6 +44,8 @@ public:
     QString title() const;
     /** Returns the color associated with a view */
     QColor color() const;
+    /** Returns the progress associated with a view */
+    std::optional<int> progress() const;
 
     /**
      * Returns the URL current associated with a view.
@@ -89,6 +94,8 @@ Q_SIGNALS:
     void readOnlyChanged(ViewProperties *item);
     /** Emitted when "copy input" state changes */
     void copyInputChanged(ViewProperties *item);
+    /** Emitted when the progress changes */
+    void progressChanged(ViewProperties *item);
 
 public Q_SLOTS:
     /**
@@ -119,6 +126,8 @@ protected:
     void setColor(const QColor &color);
     /** Subclasses may call this method to change the identifier. */
     void setIdentifier(int id);
+    /** Subclass may call this method to change the progress. */
+    void setProgress(const std::optional<int> &progress);
 
 private:
     Q_DISABLE_COPY(ViewProperties)
@@ -127,7 +136,7 @@ private:
     QString _title;
     QColor _color;
     int _identifier;
-
+    std::optional<int> _progress;
     static QHash<int, ViewProperties *> _viewProperties;
 };
 }

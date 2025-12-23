@@ -448,6 +448,20 @@ Q_SIGNALS:
      */
     void updateDroppedLines(int droppedLines);
 
+    /**
+     * Emitted after receiving the escape sequence which asks to
+     * display progress.
+     *
+     * @param progress The progress in percent (0-100)
+     */
+    void progressChanged(int progress);
+
+    /**
+     * Emitted after receiving the escape sequence which asks to
+     * hide progress.
+     */
+    void progressHidden();
+
 protected:
     virtual void setMode(int mode) = 0;
     virtual void resetMode(int mode) = 0;
