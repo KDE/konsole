@@ -616,6 +616,8 @@ void Session::run()
     secretEnv << QStringLiteral("KONSOLE_DBUS_ACTIVATION_COOKIE=%1").arg(m_activationCookie);
 #endif
 
+    addEnvironmentEntry(QStringLiteral("FLATPAK_TTY_PROGRESS=1"));
+
     // stuff set via addEnvironmentEntry and the secret parts
     const QStringList fullEnv = _environment + secretEnv;
 
