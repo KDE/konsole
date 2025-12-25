@@ -1378,7 +1378,7 @@ QString Session::getDynamicTitle()
                 // allow for shortname to have the ~ as homeDir
                 const QString homeDir = process->userHomeDir();
                 if (!homeDir.isEmpty()) {
-                    if (dir.startsWith(homeDir)) {
+                    if (dir.startsWith(homeDir) && (dir.size() == homeDir.size() || dir.at(homeDir.size()) == QLatin1Char('/'))) {
                         dir.remove(0, homeDir.length());
                         dir.prepend(QLatin1Char('~'));
                     }
