@@ -17,17 +17,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=5; plural=n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n < 11 ? "
 "3 : 4\n"
-"X-Generator: Lokalize 25.12.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Séamus Ó Ciardhuáin,Kevin Scannell,Aindriú Mac Giolla Eoin"
+msgstr "Séamus Ó Ciardhuáin,Kevin Scannell"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "seoc@iolfree.ie,kscanne@gmail.com,aindriu80@gmail.com"
+msgstr "seoc@iolfree.ie,kscanne@gmail.com"
 
 #. i18n: ectx: Menu (file)
 #: ../desktop/konsoleui.rc:6
@@ -4586,8 +4585,8 @@ msgid ""
 "This color scheme uses a transparent background which does not appear to be "
 "supported on your desktop"
 msgstr ""
-"Úsáideann an scéim dathanna seo cúlra trédhearcach nach bhfuil tacaíocht "
-"leis ar do dheasc, is cosúil"
+"Tá cúlra trédhearcach ag an scéim datha seo ach ní thacaíonn do dheasc leis "
+"seo."
 
 #: widgets/EditProfileDialog.cpp:1533
 #, kde-format
