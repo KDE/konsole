@@ -378,7 +378,7 @@ MainWindow *Application::processWindowArgs(bool &createdNewMainWindow)
 {
     MainWindow *window = nullptr;
 
-    if (m_parser->isSet(QStringLiteral("new-tab"))) {
+    if (Konsole::KonsoleSettings::forceNewTabs() || m_parser->isSet(QStringLiteral("new-tab"))) {
         const QList<QWidget *> list = QApplication::topLevelWidgets();
         for (auto it = list.crbegin(), endIt = list.crend(); it != endIt; ++it) {
             window = qobject_cast<MainWindow *>(*it);
