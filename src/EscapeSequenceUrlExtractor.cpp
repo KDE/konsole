@@ -70,6 +70,16 @@ void EscapeSequenceUrlExtractor::clear()
     _history.clear();
 }
 
+void EscapeSequenceUrlExtractor::clearBetween(int loca, int loce)
+{
+    _history.removeIf([&](const ExtractedUrl &url) {
+        int beginLoc = url.begin.row * _screen->getColumns() + url.begin.col;
+        int endLoc = url.end.row * _screen->getColumns() + url.end.col;
+
+        return (loca <= beginLoc && beginLoc <= loce) || (loca <= endLoc && endLoc <= loce);
+    });
+}
+
 void EscapeSequenceUrlExtractor::setAllowedLinkSchema(const QStringList &schema)
 {
     _allowedUriSchemas = schema;
