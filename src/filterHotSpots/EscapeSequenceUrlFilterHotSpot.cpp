@@ -34,3 +34,17 @@ void EscapeSequenceUrlHotSpot::activate(QObject *obj)
     job->setUiDelegate(KIO::createDefaultJobUiDelegate(KJobUiDelegate::AutoHandlingEnabled, QApplication::activeWindow()));
     job->start();
 }
+
+void EscapeSequenceUrlHotSpot::mouseEnterEvent(TerminalDisplay *td, QMouseEvent *ev)
+{
+    HotSpot::mouseEnterEvent(td, ev);
+
+    td->setHoverLinkIndicator(this->_url);
+}
+
+void EscapeSequenceUrlHotSpot::mouseLeaveEvent(TerminalDisplay *td, QMouseEvent *ev)
+{
+    HotSpot::mouseLeaveEvent(td, ev);
+
+    td->setHoverLinkIndicator(QStringLiteral(""));
+}

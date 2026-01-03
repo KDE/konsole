@@ -432,6 +432,8 @@ public:
 
     void setVisualCursorPosition(int x);
 
+    void setHoverLinkIndicator(QString text);
+
 public Q_SLOTS:
     /**
      * Causes the terminal display to fetch the latest character image from the associated
@@ -820,6 +822,7 @@ private:
     TerminalScrollBar *_scrollBar = nullptr;
     TerminalColor *_terminalColor = nullptr;
     std::unique_ptr<TerminalFont> _terminalFont;
+    QLabel *_hoverLinkIndicator = nullptr;
 
     std::unique_ptr<KonsolePrintManager> _printManager;
 

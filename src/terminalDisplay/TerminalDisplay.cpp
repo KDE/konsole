@@ -240,6 +240,10 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
     });
     connect(_scrollBar, &QScrollBar::sliderMoved, this, &Konsole::TerminalDisplay::viewScrolledByUser);
 
+    _hoverLinkIndicator = new QLabel(this);
+    _hoverLinkIndicator->setStyleSheet(QStringLiteral("background-color:palette(window); padding: 2px;"));
+    _hoverLinkIndicator->setVisible(false);
+
     // setup timers for blinking text
     _blinkTextTimer = new QTimer(this);
     _blinkTextTimer->setInterval(TEXT_BLINK_DELAY);
@@ -782,6 +786,13 @@ void TerminalDisplay::setVisualCursorPosition(int x)
     _visualCursorPosition = {x, cursorPosition().y()};
 }
 
+void TerminalDisplay::setHoverLinkIndicator(QString text)
+{
+    _hoverLinkIndicator->setVisible(!text.isEmpty());
+    _hoverLinkIndicator->setText(text);
+    _hoverLinkIndicator->adjustSize();
+}
+
 bool TerminalDisplay::isCursorOnDisplay() const
 {
     return cursorPosition().x() < _columns && cursorPosition().y() < _lines;
@@ -961,6 +972,8 @@ void TerminalDisplay::resizeEvent(QResizeEvent *event)
     const auto x = width() - scrollBarWidth - _searchBar->width();
     const auto y = headerHeight;
     _searchBar->move(x, y);
+
+    _hoverLinkIndicator->move(0, height() - _hoverLinkIndicator->height());
 }
 
 void TerminalDisplay::propagateSize()
