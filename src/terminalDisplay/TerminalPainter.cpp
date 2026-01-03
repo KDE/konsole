@@ -270,7 +270,7 @@ void TerminalPainter::drawContents(Character *image,
         QFont::Bold,
         QFont::Black,
     };
-    const QFont::Weight normalWeight = static_cast<QFont::Weight>(m_parentDisplay->font().weight()); // Qt6: cast can go away
+    const QFont::Weight normalWeight = m_parentDisplay->font().weight();
     auto it = std::upper_bound(std::begin(FontWeights), std::end(FontWeights), normalWeight);
     const QFont::Weight boldWeight = it != std::end(FontWeights) ? *it : QFont::Black;
     paint.setLayoutDirection(Qt::LeftToRight);
