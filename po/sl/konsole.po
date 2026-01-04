@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-03 00:46+0000\n"
-"PO-Revision-Date: 2025-11-27 07:19+0100\n"
+"PO-Revision-Date: 2026-01-03 10:28+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -2645,10 +2645,9 @@ msgstr "Omogoči vsa sporočila »Ne vprašaj več«"
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ForceNewTabs)
 #. i18n: ectx: label, entry (ForceNewTabs), group (KonsoleWindow)
 #: settings/GeneralSettings.ui:178 settings/konsole.kcfg:37
-#, fuzzy, kde-format
-#| msgid "Put new tabs:"
+#, kde-format
 msgid "Force new tabs"
-msgstr "Postavi nove zavihke:"
+msgstr "Prisili nove zavihke"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/GeneralSettings.ui:185
@@ -2753,12 +2752,13 @@ msgstr "Ob izhodu bo shranjena velikost okna programa Konsole"
 
 #. i18n: ectx: tooltip, entry (ForceNewTabs), group (KonsoleWindow)
 #: settings/konsole.kcfg:38
-#, fuzzy, kde-format
-#| msgid "When launching Konsole re-use existing process if possible"
+#, kde-format
 msgid ""
 "When launching Konsole create a new tab instead of creating new windows if "
 "possible"
-msgstr "Ob zagonu Konsole ponovno uporabi obstoječe opravilo (če je mogoče)"
+msgstr ""
+"Ob zagonu Konsole ustvari nov zavihek ustvarjanja namesto novih oken, če je "
+"mogoče"
 
 #. i18n: ectx: tooltip, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
 #: settings/konsole.kcfg:43

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-03 00:46+0000\n"
-"PO-Revision-Date: 2025-11-27 06:06+0100\n"
+"PO-Revision-Date: 2026-01-03 02:43+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -2634,10 +2634,9 @@ msgstr "ყველა \"აღარ მკითხო\" შეტყობ�
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ForceNewTabs)
 #. i18n: ectx: label, entry (ForceNewTabs), group (KonsoleWindow)
 #: settings/GeneralSettings.ui:178 settings/konsole.kcfg:37
-#, fuzzy, kde-format
-#| msgid "Put new tabs:"
+#, kde-format
 msgid "Force new tabs"
-msgstr "ახალი ჩანართების განთავსება:"
+msgstr "ახალი ჩანართების იძულება"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/GeneralSettings.ui:185
@@ -2741,13 +2740,13 @@ msgstr "Konsole-დან გასვლისას ფანჯრის ზ�
 
 #. i18n: ectx: tooltip, entry (ForceNewTabs), group (KonsoleWindow)
 #: settings/konsole.kcfg:38
-#, fuzzy, kde-format
-#| msgid "When launching Konsole re-use existing process if possible"
+#, kde-format
 msgid ""
 "When launching Konsole create a new tab instead of creating new windows if "
 "possible"
 msgstr ""
-"Konsole-ს გაშვებისას არსებული გაშვებული ასლის გამოყენება, თუ ეს შესაძლებელია"
+"Konsole-ს გაშვებისას ახალი ჩანართის შექმნა ახალი ფანჯრების შექმნის მაგიერ, "
+"თუ ეს შესაძლებელია"
 
 #. i18n: ectx: tooltip, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
 #: settings/konsole.kcfg:43
