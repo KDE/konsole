@@ -1239,7 +1239,7 @@ void TerminalDisplay::mousePressEvent(QMouseEvent *ev)
                 _iPntSel = _pntSel = pos;
                 _actSel = 1; // left mouse button pressed but nothing selected yet.
             } else if (usesMouseTracking() && !_readOnly) {
-                Q_EMIT mouseSignal(mouseButton(0, ev->modifiers()), charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum(), 0);
+                sendMouseSignal(mouseButton(0, ev->modifiers()), ev->pos(), 0, true);
             }
         }
         if (_semanticInputClick && (ev->modifiers() & Qt::ControlModifier) == 0 && _screenWindow->screen()->replMode() == REPL_INPUT) {
@@ -1250,7 +1250,7 @@ void TerminalDisplay::mousePressEvent(QMouseEvent *ev)
         processMidButtonClick(ev);
     } else if (ev->button() == Qt::RightButton) {
         if (usesMouseTracking() && !_readOnly && !ev->modifiers().testFlag(Qt::ShiftModifier)) {
-            Q_EMIT mouseSignal(mouseButton(2, ev->modifiers()), charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum(), 0);
+            sendMouseSignal(mouseButton(2, ev->modifiers()), ev->pos(), 0, true);
         }
     }
 }
@@ -1287,9 +1287,7 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent *ev)
     // being held down, which overrides this.
     if (usesMouseTracking() && !(ev->modifiers() & Qt::ShiftModifier)) {
         // Ignore mouse movements that don't change the character position.
-        if (charLine == _prevCharacterLine && charColumn == _prevCharacterColumn) {
-            return;
-        }
+        bool sameChar = charLine == _prevCharacterLine && charColumn == _prevCharacterColumn;
 
         _prevCharacterLine = charLine;
         _prevCharacterColumn = charColumn;
@@ -1306,7 +1304,7 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent *ev)
                 button = 2;
             }
 
-            Q_EMIT mouseSignal(mouseButton(button, ev->modifiers()), charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum(), 1);
+            sendMouseSignal(mouseButton(button, ev->modifiers()), ev->pos(), 1, !sameChar);
         }
 
         return;
@@ -1346,6 +1344,19 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent *ev)
     }
 
     extendSelection(ev->pos());
+}
+
+void TerminalDisplay::sendMouseSignal(int button, QPoint pos, int eventType, bool sendInexact)
+{
+    if (_readOnly)
+        return;
+
+    if (sendInexact) {
+        auto [charLine, charColumn] = getCharacterPosition(pos, !usesMouseTracking());
+        Q_EMIT mouseSignal(button, charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum(), eventType);
+    }
+
+    Q_EMIT exactMouseSignal(button, pos.x(), pos.y(), eventType);
 }
 
 void TerminalDisplay::leaveEvent(QEvent *ev)
@@ -1545,17 +1556,14 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent *ev)
             //       applies here, too.
 
             if (usesMouseTracking() && !(ev->modifiers() & Qt::ShiftModifier) && !_readOnly) {
-                Q_EMIT mouseSignal(mouseButton(0, ev->modifiers()), charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum(), 2);
+                sendMouseSignal(mouseButton(0, ev->modifiers()), ev->pos(), 2, true);
             }
         }
         _dragInfo.state = diNone;
     }
 
     if (usesMouseTracking() && !_readOnly && (ev->button() == Qt::RightButton || ev->button() == Qt::MiddleButton) && !(ev->modifiers() & Qt::ShiftModifier)) {
-        Q_EMIT mouseSignal(mouseButton((ev->button() == Qt::MiddleButton ? 1 : 2), ev->modifiers()),
-                           charColumn + 1,
-                           charLine + 1 + _scrollBar->value() - _scrollBar->maximum(),
-                           2);
+        sendMouseSignal(mouseButton((ev->button() == Qt::MiddleButton ? 1 : 2), ev->modifiers()), ev->pos(), 2, true);
     }
 
     if (!_screenWindow->screen()->hasSelection()) {
@@ -1615,8 +1623,7 @@ void TerminalDisplay::processMidButtonClick(QMouseEvent *ev)
         }
     } else {
         if (!_readOnly) {
-            auto [charLine, charColumn] = getCharacterPosition(ev->pos(), !usesMouseTracking());
-            Q_EMIT mouseSignal(mouseButton(1, ev->modifiers()), charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum(), 0);
+            sendMouseSignal(mouseButton(1, ev->modifiers()), ev->pos(), 0, true);
         }
     }
 }
@@ -1756,12 +1763,11 @@ void TerminalDisplay::wheelEvent(QWheelEvent *ev)
         } else if (usesMouseTracking()) {
             // terminal program wants notification of mouse activity
 
-            auto [charLine, charColumn] = getCharacterPosition(ev->position().toPoint(), !usesMouseTracking());
             const int steps = _scrollWheelState.consumeLegacySteps(ScrollState::DEFAULT_ANGLE_SCROLL_LINE);
             const int button = (steps > 0) ? 64 : 65;
             for (int i = 0; i < abs(steps); ++i) {
                 // Alt+wheel unsupported, Qt transforms it into horizontal wheel, see QTBUG-30948
-                Q_EMIT mouseSignal(mouseButton(button, ev->modifiers()), charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum(), 0);
+                sendMouseSignal(mouseButton(button, ev->modifiers()), ev->position().toPoint(), 0, true);
             }
         }
     }

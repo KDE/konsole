@@ -35,13 +35,14 @@ class QKeyEvent;
 #define MODE_Mouse1006 (MODES_SCREEN + 7) // 2nd Xterm-style extended coordinates
 #define MODE_Mouse1007 (MODES_SCREEN + 8) // XTerm Alternate Scroll mode; also check AlternateScrolling profile property
 #define MODE_Mouse1015 (MODES_SCREEN + 9) // Urxvt-style extended coordinates
-#define MODE_Ansi (MODES_SCREEN + 10) // Use US Ascii for character sets G0-G3 (DECANM)
-#define MODE_132Columns (MODES_SCREEN + 11) // 80 <-> 132 column mode switch (DECCOLM)
-#define MODE_Allow132Columns (MODES_SCREEN + 12) // Allow DECCOLM mode
-#define MODE_BracketedPaste (MODES_SCREEN + 13) // Xterm-style bracketed paste mode
-#define MODE_Sixel (MODES_SCREEN + 14) // Xterm-style bracketed paste mode
-#define MODE_SynchronizedUpdate (MODES_SCREEN + 15) // Synchronized update in progress
-#define MODE_total (MODES_SCREEN + 16)
+#define MODE_Mouse1016 (MODES_SCREEN + 10) // 2nd Xterm-style extended coordinates (in pixels)
+#define MODE_Ansi (MODES_SCREEN + 11) // Use US Ascii for character sets G0-G3 (DECANM)
+#define MODE_132Columns (MODES_SCREEN + 12) // 80 <-> 132 column mode switch (DECCOLM)
+#define MODE_Allow132Columns (MODES_SCREEN + 13) // Allow DECCOLM mode
+#define MODE_BracketedPaste (MODES_SCREEN + 14) // Xterm-style bracketed paste mode
+#define MODE_Sixel (MODES_SCREEN + 15) // Xterm-style bracketed paste mode
+#define MODE_SynchronizedUpdate (MODES_SCREEN + 16) // Synchronized update in progress
+#define MODE_total (MODES_SCREEN + 17)
 
 namespace Konsole
 {
@@ -85,6 +86,7 @@ public Q_SLOTS:
     void sendText(const QString &text) override;
     void sendKeyEvent(QKeyEvent *) override;
     void sendMouseEvent(int buttons, int column, int line, int eventType) override;
+    void sendExactMouseEvent(int buttons, int x, int y, int eventType) override;
     void focusChanged(bool focused) override;
     void clearHistory() override;
 

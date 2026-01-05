@@ -331,6 +331,7 @@ void Session::addView(TerminalDisplay *widget)
     // connect emulation - view signals and slots
     connect(widget, &Konsole::TerminalDisplay::keyPressedSignal, _emulation, &Konsole::Emulation::sendKeyEvent);
     connect(widget, &Konsole::TerminalDisplay::mouseSignal, _emulation, &Konsole::Emulation::sendMouseEvent);
+    connect(widget, &Konsole::TerminalDisplay::exactMouseSignal, _emulation, &Konsole::Emulation::sendExactMouseEvent);
     connect(widget, &Konsole::TerminalDisplay::sendStringToEmu, _emulation, &Konsole::Emulation::sendString);
     connect(widget, &Konsole::TerminalDisplay::peekPrimaryRequested, _emulation, &Konsole::Emulation::setPeekPrimary);
 

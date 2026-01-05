@@ -2173,6 +2173,11 @@ void Vt102Emulation::processToken(int token, int p, int q)
     case token_csi_pr('s', 1015) :         saveMode      (MODE_Mouse1015); break; //URXVT
     case token_csi_pr('r', 1015) :      restoreMode      (MODE_Mouse1015); break; //URXVT
 
+    case token_csi_pr('h', 1016) :          setMode      (MODE_Mouse1016); break; //XTERM
+    case token_csi_pr('l', 1016) :        resetMode      (MODE_Mouse1016); break; //XTERM
+    case token_csi_pr('s', 1016) :         saveMode      (MODE_Mouse1016); break; //XTERM
+    case token_csi_pr('r', 1016) :      restoreMode      (MODE_Mouse1016); break; //XTERM
+
     case token_csi_pr('h', 1034) : /* IGNORED: 8bitinput activation     */ break; //XTERM
 
     case token_csi_pr('h', 1047) :          setMode      (MODE_AppScreen); break; //XTERM
@@ -2619,6 +2624,10 @@ void Vt102Emulation::reportAnswerBack()
 
 void Vt102Emulation::sendMouseEvent(int cb, int cx, int cy, int eventType)
 {
+    if (getMode(MODE_Mouse1016)) {
+        return;
+    }
+
     if (cx < 1 || cy < 1) {
         return;
     }
@@ -2722,6 +2731,39 @@ void Vt102Emulation::sendMouseEvent(int cb, int cx, int cy, int eventType)
     } else if (cx <= 223 && cy <= 223) {
         snprintf(command, sizeof(command), "\033[M%c%c%c", cb + 0x20, cx + 0x20, cy + 0x20);
     }
+
+    sendString(command);
+}
+
+void Vt102Emulation::sendExactMouseEvent(int cb, int x, int y, int eventType)
+{
+    if (!getMode(MODE_Mouse1016))
+        return;
+
+    // Don't send move/drag events if only press and release requested
+    if (eventType == 1 && getMode(MODE_Mouse1000)) {
+        return;
+    }
+
+    // Don't send move with no button pressed if button-motion requested
+    if ((cb & 3) == 3 && getMode(MODE_Mouse1002)) {
+        return;
+    }
+
+    // With the exception of the 1006 mode, button release is encoded in cb.
+    // Note that if multiple extensions are enabled, the 1006 is used, so it's okay to check for only that.
+    if (eventType == 2 && !getMode(MODE_Mouse1006)) {
+        cb &= ~3;
+        cb |= 3;
+    }
+
+    // Mouse motion handling
+    if ((getMode(MODE_Mouse1002) || getMode(MODE_Mouse1003)) && eventType == 1) {
+        cb += 0x20; // add 32 to signify motion event
+    }
+    char command[40];
+    command[0] = '\0';
+    snprintf(command, sizeof(command), "\033[<%d;%d;%d%c", cb, x, y, eventType == 2 ? 'm' : 'M');
 
     sendString(command);
 }
@@ -3072,6 +3114,8 @@ void Vt102Emulation::resetModes()
     saveMode(MODE_Mouse1006);
     resetMode(MODE_Mouse1015);
     saveMode(MODE_Mouse1015);
+    resetMode(MODE_Mouse1016);
+    saveMode(MODE_Mouse1016);
     resetMode(MODE_BracketedPaste);
     saveMode(MODE_BracketedPaste);
 
@@ -3113,9 +3157,11 @@ void Vt102Emulation::setMode(int m)
     case MODE_Mouse1005:
     case MODE_Mouse1006:
     case MODE_Mouse1015:
+    case MODE_Mouse1016:
         _currentModes.mode[MODE_Mouse1005] = false;
         _currentModes.mode[MODE_Mouse1006] = false;
         _currentModes.mode[MODE_Mouse1015] = false;
+        _currentModes.mode[MODE_Mouse1016] = false;
         _currentModes.mode[m] = true;
         break;
 

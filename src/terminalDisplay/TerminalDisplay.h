@@ -515,6 +515,7 @@ Q_SIGNALS:
      * @param eventType The type of event.  0 for a mouse press / release or 1 for mouse motion
      */
     void mouseSignal(int button, int column, int line, int eventType);
+    void exactMouseSignal(int button, int x, int y, int eventType);
     void changedContentSizeSignal(int height, int width);
 
     /**
@@ -670,6 +671,8 @@ private:
 
     // Clear _screenWindow selection and also pending double click selection
     void clearSelection();
+
+    void sendMouseSignal(int button, QPoint pos, int eventType, bool sendInexact);
 
     // the window onto the terminal screen which this display
     // is currently showing.

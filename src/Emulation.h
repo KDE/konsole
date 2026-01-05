@@ -231,6 +231,8 @@ public Q_SLOTS:
      */
     virtual void sendMouseEvent(int buttons, int column, int line, int eventType) = 0;
 
+    virtual void sendExactMouseEvent(int buttons, int x, int y, int eventType) = 0;
+
     /**
      * Sends a string of characters to the foreground terminal process.
      *
