@@ -40,7 +40,8 @@ class QKeyEvent;
 #define MODE_Allow132Columns (MODES_SCREEN + 12) // Allow DECCOLM mode
 #define MODE_BracketedPaste (MODES_SCREEN + 13) // Xterm-style bracketed paste mode
 #define MODE_Sixel (MODES_SCREEN + 14) // Xterm-style bracketed paste mode
-#define MODE_total (MODES_SCREEN + 15)
+#define MODE_SynchronizedUpdate (MODES_SCREEN + 15) // Synchronized update in progress
+#define MODE_total (MODES_SCREEN + 16)
 
 namespace Konsole
 {

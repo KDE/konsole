@@ -305,6 +305,8 @@ Q_SIGNALS:
 
     void programBracketedPasteModeChanged(bool bracketedPasteMode);
 
+    void programRequestedSynchronizedUpdate(bool start);
+
     /**
      * Emitted when the contents of the screen image change.
      * The emulation buffers the updates from successive image changes,
@@ -496,12 +498,15 @@ private Q_SLOTS:
 
     void bracketedPasteModeChanged(bool bracketedPasteMode);
 
+    void synchronizedUpdateChanged(bool inProgress);
+
 private:
     void setScreenInternal(int index);
     Q_DISABLE_COPY(Emulation)
 
     bool _usesMouseTracking = false;
     bool _bracketedPasteMode = false;
+    bool _synchronizedUpdate = false;
     QTimer _bulkTimer1{this};
     QTimer _bulkTimer2{this};
     bool _imageSizeInitialized = false;

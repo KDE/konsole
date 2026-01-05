@@ -2196,6 +2196,9 @@ void Vt102Emulation::processToken(int token, int p, int q)
     case token_csi_pr('s', 2004) :         saveMode      (MODE_BracketedPaste); break; //XTERM
     case token_csi_pr('r', 2004) :      restoreMode      (MODE_BracketedPaste); break; //XTERM
 
+    case token_csi_pr('h', 2026):           setMode      (MODE_SynchronizedUpdate); break; //ITERM2
+    case token_csi_pr('l', 2026):         resetMode      (MODE_SynchronizedUpdate); break; //ITERM2
+
     case token_csi_pr('S',    1) : if(!p) sixelQuery        (1          ); break;
     case token_csi_pr('S',    2) : if(!p) sixelQuery        (2          ); break;
     // Set Cursor Style (DECSCUSR), VT520, with the extra xterm sequences
@@ -3120,6 +3123,10 @@ void Vt102Emulation::setMode(int m)
         Q_EMIT programBracketedPasteModeChanged(true);
         break;
 
+    case MODE_SynchronizedUpdate:
+        Q_EMIT programRequestedSynchronizedUpdate(true);
+        break;
+
     case MODE_AppScreen:
         _screen[1]->setDefaultRendition();
         _screen[1]->clearSelection();
@@ -3165,6 +3172,10 @@ void Vt102Emulation::resetMode(int m)
 
     case MODE_BracketedPaste:
         Q_EMIT programBracketedPasteModeChanged(false);
+        break;
+
+    case MODE_SynchronizedUpdate:
+        Q_EMIT programRequestedSynchronizedUpdate(false);
         break;
 
     case MODE_AppScreen:
