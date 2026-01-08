@@ -181,6 +181,7 @@ private:
         // https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h2-Operating-System-Commands
         ReportColors = 4,
         CursorColor = 12,
+        PointerShape = 22,
         Clipboard = 52,
         KittyNotification = 99,
         ResetColors = 104,

@@ -2161,6 +2161,11 @@ void TerminalDisplay::resetCursor()
     setCursor(usesMouseTracking() ? Qt::ArrowCursor : Qt::IBeamCursor);
 }
 
+void TerminalDisplay::setPointerShape(Qt::CursorShape shape)
+{
+    setCursor(shape);
+}
+
 bool TerminalDisplay::usesMouseTracking() const
 {
     return _usesMouseTracking && _allowMouseTracking;

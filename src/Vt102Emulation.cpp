@@ -1678,6 +1678,88 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
         int rows = -1, cols = -1;
         _currentScreen->addPlacement(pixmap, rows, cols, -1, -1, TerminalGraphicsPlacement_t::iTerm, true, moveCursor);
     }
+
+    if (attribute == PointerShape) {
+        static QMap<QString, Qt::CursorShape> cursorShapes = {
+            // CSS shapes
+            {QLatin1String("default"), Qt::ArrowCursor},
+
+            {QLatin1String("context-menu"), Qt::ArrowCursor}, // no exact match
+            {QLatin1String("help"), Qt::WhatsThisCursor},
+            {QLatin1String("pointer"), Qt::PointingHandCursor},
+            {QLatin1String("progress"), Qt::BusyCursor},
+            {QLatin1String("wait"), Qt::WaitCursor},
+
+            {QLatin1String("cell"), Qt::ArrowCursor}, // no exact match
+            {QLatin1String("crosshair"), Qt::CrossCursor},
+            {QLatin1String("text"), Qt::IBeamCursor},
+            {QLatin1String("vertical-text"), Qt::IBeamCursor}, // no exact match
+
+            {QLatin1String("alias"), Qt::DragLinkCursor},
+            {QLatin1String("copy"), Qt::DragCopyCursor},
+            {QLatin1String("move"), Qt::DragMoveCursor},
+            {QLatin1String("no-drop"), Qt::ForbiddenCursor}, // no exact match
+            {QLatin1String("not-allowed"), Qt::ForbiddenCursor},
+            {QLatin1String("grab"), Qt::OpenHandCursor},
+            {QLatin1String("grabbing"), Qt::ClosedHandCursor},
+
+            {QLatin1String("all-scroll"), Qt::ArrowCursor}, // no exact match
+            {QLatin1String("col-resize"), Qt::ArrowCursor}, // no exact match
+            {QLatin1String("row-resize"), Qt::ArrowCursor}, // no exact match
+
+            {QLatin1String("n-resize"), Qt::SizeVerCursor}, // no exact match
+            {QLatin1String("e-resize"), Qt::SizeHorCursor}, // no exact match
+            {QLatin1String("s-resize"), Qt::SizeVerCursor}, // no exact match
+            {QLatin1String("w-resize"), Qt::SizeHorCursor}, // no exact match
+            {QLatin1String("ne-resize"), Qt::SizeBDiagCursor}, // no exact match
+            {QLatin1String("nw-resize"), Qt::SizeFDiagCursor}, // no exact match
+            {QLatin1String("se-resize"), Qt::SizeFDiagCursor}, // no exact match
+            {QLatin1String("sw-resize"), Qt::SizeBDiagCursor}, // no exact match
+
+            {QLatin1String("ew-resize"), Qt::SizeHorCursor},
+            {QLatin1String("ns-resize"), Qt::SizeVerCursor},
+            {QLatin1String("nesw-resize"), Qt::SizeBDiagCursor},
+            {QLatin1String("nwse-resize"), Qt::SizeFDiagCursor},
+
+            {QLatin1String("zoom-in"), Qt::ArrowCursor}, // no exact match
+            {QLatin1String("zoom-out"), Qt::ArrowCursor}, // no exact match
+
+            // XCursor shapes, taken from the Qt docs
+            {QLatin1String("left_ptr"), Qt::ArrowCursor},
+            {QLatin1String("up_arrow"), Qt::UpArrowCursor},
+            {QLatin1String("cross"), Qt::CrossCursor},
+            {QLatin1String("ibeam"), Qt::IBeamCursor},
+            {QLatin1String("wait"), Qt::WaitCursor},
+            {QLatin1String("left_ptr_watch"), Qt::BusyCursor},
+            {QLatin1String("forbidden"), Qt::ForbiddenCursor},
+            {QLatin1String("pointing_hand"), Qt::PointingHandCursor},
+            {QLatin1String("whats_this"), Qt::WhatsThisCursor},
+            {QLatin1String("dnd-move"), Qt::DragMoveCursor},
+            {QLatin1String("move"), Qt::DragMoveCursor},
+            {QLatin1String("dnd-link"), Qt::DragLinkCursor},
+            {QLatin1String("link"), Qt::DragLinkCursor},
+            {QLatin1String("size_ver"), Qt::SizeVerCursor},
+            {QLatin1String("size_hor"), Qt::SizeHorCursor},
+            {QLatin1String("size_bdiag"), Qt::SizeBDiagCursor},
+            {QLatin1String("size_fdiag"), Qt::SizeFDiagCursor},
+            {QLatin1String("size_all"), Qt::SizeAllCursor},
+            {QLatin1String("split_v"), Qt::SplitVCursor},
+            {QLatin1String("split_h"), Qt::SplitHCursor},
+            {QLatin1String("openhand"), Qt::OpenHandCursor},
+            {QLatin1String("closedhand"), Qt::ClosedHandCursor},
+            {QLatin1String("dnd-copy"), Qt::DragCopyCursor},
+            {QLatin1String("copy"), Qt::DragCopyCursor},
+        };
+
+        if (!cursorShapes.contains(value)) {
+            _currentScreen->currentTerminalDisplay()->resetCursor();
+        } else {
+            _currentScreen->currentTerminalDisplay()->setPointerShape(cursorShapes[value]);
+        }
+
+        return;
+    }
+
     _pendingSessionAttributesUpdates[attribute] = value;
     _sessionAttributesUpdateTimer->start(20);
 }

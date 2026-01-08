@@ -230,6 +230,8 @@ public:
 
     void resetCursor();
 
+    void setPointerShape(Qt::CursorShape shape);
+
     QRect contentRect() const
     {
         return _contentRect;
