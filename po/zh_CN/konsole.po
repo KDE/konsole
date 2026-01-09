@@ -2608,7 +2608,7 @@ msgstr "启用所有设置为“不再询问”的消息"
 #: settings/GeneralSettings.ui:178 settings/konsole.kcfg:37
 #, kde-format
 msgid "Force new tabs"
-msgstr ""
+msgstr "强制新建标签页"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/GeneralSettings.ui:185
@@ -2715,7 +2715,7 @@ msgstr "退出时将保存窗口大小"
 msgid ""
 "When launching Konsole create a new tab instead of creating new windows if "
 "possible"
-msgstr ""
+msgstr "启动 Konsole 时，新建标签页而不是新建窗口 (如果可能)"
 
 #. i18n: ectx: tooltip, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
 #: settings/konsole.kcfg:43
