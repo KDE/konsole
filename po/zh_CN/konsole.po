@@ -2633,7 +2633,7 @@ msgstr "在标题栏显示窗口标题"
 #: settings/GeneralSettings.ui:174 settings/konsole.kcfg:13
 #, kde-format
 msgid "Focus terminals when the mouse pointer is moved over them"
-msgstr "鼠标光标途径终端时获取焦点"
+msgstr "鼠标指针途径终端时获取焦点"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchCaseSensitive)
 #. i18n: ectx: tooltip, entry (SearchCaseSensitive), group (SearchSettings)
@@ -4871,7 +4871,7 @@ msgstr "链接加下划线"
 msgid ""
 "Text recognized as a file will be underlined when hovered by the mouse "
 "pointer."
-msgstr "识别为文件的文本将在鼠标光标悬停时添加下划线。"
+msgstr "识别为文件的文本将在鼠标指针悬停时添加下划线。"
 
 #. i18n: ectx: property (text), widget (QCheckBox, underlineFilesButton)
 #: widgets/EditProfileMousePage.ui:279
@@ -4995,7 +4995,7 @@ msgstr "允许 Ctrl+滚轮 缩放文字大小"
 msgid ""
 "When positioning the mouse over a hexadecimal color it will be displayed in "
 "a frame next to the mouse pointer"
-msgstr "鼠标在十六进制颜色上悬停时，它将显示到鼠标光标旁边的框中"
+msgstr "鼠标在十六进制颜色上悬停时，它将显示到鼠标指针旁边的框中"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowColorFilters)
 #: widgets/EditProfileMousePage.ui:438
