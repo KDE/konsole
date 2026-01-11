@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-03 00:46+0000\n"
+"POT-Creation-Date: 2026-01-11 00:46+0000\n"
 "PO-Revision-Date: 2024-08-04 17:18+0700\n"
 "Last-Translator: OIS <mistresssilvara@hotmail.com>\n"
 "Language-Team: Interlingue <>\n"
@@ -163,46 +163,58 @@ msgstr "Predefinit"
 #: Application.cpp:68
 #, fuzzy, kde-format
 msgctxt "@info:shell"
-msgid "Show the tabbar, overriding the default setting"
+msgid "Show all the toolbars, overriding the default setting"
 msgstr "Predefinit"
 
 #: Application.cpp:69
 #, fuzzy, kde-format
 msgctxt "@info:shell"
-msgid "Hide the tabbar, overriding the default setting"
+msgid "Hide all the toolbars, overriding the default setting"
 msgstr "Predefinit"
 
 #: Application.cpp:70
 #, fuzzy, kde-format
 msgctxt "@info:shell"
+msgid "Show the tabbar, overriding the default setting"
+msgstr "Predefinit"
+
+#: Application.cpp:71
+#, fuzzy, kde-format
+msgctxt "@info:shell"
+msgid "Hide the tabbar, overriding the default setting"
+msgstr "Predefinit"
+
+#: Application.cpp:72
+#, fuzzy, kde-format
+msgctxt "@info:shell"
 msgid "Start Konsole in fullscreen mode"
 msgstr "Konsole"
 
-#: Application.cpp:71
+#: Application.cpp:73
 #, fuzzy, kde-format
 msgctxt "@info:shell"
 msgid "Disable transparent backgrounds, even if the system supports them."
 msgstr "Notificationes del sistema"
 
-#: Application.cpp:72
+#: Application.cpp:74
 #, kde-format
 msgctxt "@info:shell"
 msgid "List the available profiles"
 msgstr "Liste de disponibil profiles"
 
-#: Application.cpp:73
+#: Application.cpp:75
 #, fuzzy, kde-format
 msgctxt "@info:shell"
 msgid "List all the profile properties names and their type (for use with -p)"
 msgstr "OIS"
 
-#: Application.cpp:74
+#: Application.cpp:76
 #, fuzzy, kde-format
 msgctxt "@info:shell"
 msgid "Change the value of a profile property."
 msgstr "Konsole ne have un permission gardar di profil a %1"
 
-#: Application.cpp:76
+#: Application.cpp:78
 #, fuzzy, kde-format
 msgctxt "@info:shell"
 msgid ""
@@ -210,7 +222,7 @@ msgid ""
 "it as the last option."
 msgstr "Comande"
 
-#: Application.cpp:79
+#: Application.cpp:81
 #, fuzzy, kde-format
 msgctxt "@info:shell"
 msgid ""
@@ -221,13 +233,13 @@ msgstr ""
 "hamburger</interface>. Amb optiones provide presc li sam comandes e "
 "parametres de configuration."
 
-#: Application.cpp:86
+#: Application.cpp:88
 #, fuzzy, kde-format
 msgctxt "@info:shell"
 msgid "Arguments passed to command"
 msgstr "Comande:"
 
-#: Application.cpp:516
+#: Application.cpp:529
 #, fuzzy, kde-format
 msgctxt "@item"
 msgid "Toggle Background Window"
@@ -1204,7 +1216,7 @@ msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "&Configurar o renominar li carte..."
 
-#: MainWindow.cpp:736 MainWindow.cpp:753
+#: MainWindow.cpp:743 MainWindow.cpp:760
 #, fuzzy, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1213,61 +1225,61 @@ msgid_plural ""
 msgstr[0] "Hay %1 apertet terminales in ti fenestre. Surtir sin egard?"
 msgstr[1] "Hay %1 apertet terminales in ti fenestre. Surtir sin egard?"
 
-#: MainWindow.cpp:742 MainWindow.cpp:759 MainWindow.cpp:773
+#: MainWindow.cpp:749 MainWindow.cpp:766 MainWindow.cpp:780
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Confirmar clusion"
 
-#: MainWindow.cpp:743 MainWindow.cpp:760 MainWindow.cpp:774
+#: MainWindow.cpp:750 MainWindow.cpp:767 MainWindow.cpp:781
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Cluder li &fenestre"
 
-#: MainWindow.cpp:761 MainWindow.cpp:775
+#: MainWindow.cpp:768 MainWindow.cpp:782
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Cluder li ac&tual carte"
 
-#: MainWindow.cpp:770
+#: MainWindow.cpp:777
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "Hay %1 apertet terminales in ti fenestre. Surtir sin egard?"
 
-#: MainWindow.cpp:877 Part.cpp:298
+#: MainWindow.cpp:884 Part.cpp:298
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profiles"
 
-#: MainWindow.cpp:895
+#: MainWindow.cpp:902
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "General"
 
-#: MainWindow.cpp:907
+#: MainWindow.cpp:914
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr "Memorie"
 
-#: MainWindow.cpp:913
+#: MainWindow.cpp:920
 #, fuzzy, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Cluder li carte"
 
-#: MainWindow.cpp:918
+#: MainWindow.cpp:925
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Temporari files"
 
-#: MainWindow.cpp:923
+#: MainWindow.cpp:930
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"

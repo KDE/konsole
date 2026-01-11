@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-03 00:46+0000\n"
+"POT-Creation-Date: 2026-01-11 00:46+0000\n"
 "PO-Revision-Date: 2026-01-03 08:25+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -178,36 +178,52 @@ msgid "Hide the menubar, overriding the default setting"
 msgstr "Oculta la barra de menús, substituint la configuració per defecte"
 
 #: Application.cpp:68
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@info:shell"
+#| msgid "Show the tabbar, overriding the default setting"
 msgctxt "@info:shell"
-msgid "Show the tabbar, overriding the default setting"
+msgid "Show all the toolbars, overriding the default setting"
 msgstr "Mostra la barra de pestanyes, substituint la configuració per defecte"
 
 #: Application.cpp:69
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@info:shell"
+#| msgid "Hide the tabbar, overriding the default setting"
 msgctxt "@info:shell"
-msgid "Hide the tabbar, overriding the default setting"
+msgid "Hide all the toolbars, overriding the default setting"
 msgstr "Oculta la barra de pestanyes, substituint la configuració per defecte"
 
 #: Application.cpp:70
 #, kde-format
 msgctxt "@info:shell"
+msgid "Show the tabbar, overriding the default setting"
+msgstr "Mostra la barra de pestanyes, substituint la configuració per defecte"
+
+#: Application.cpp:71
+#, kde-format
+msgctxt "@info:shell"
+msgid "Hide the tabbar, overriding the default setting"
+msgstr "Oculta la barra de pestanyes, substituint la configuració per defecte"
+
+#: Application.cpp:72
+#, kde-format
+msgctxt "@info:shell"
 msgid "Start Konsole in fullscreen mode"
 msgstr "Inicia el Konsole en mode de pantalla completa"
 
-#: Application.cpp:71
+#: Application.cpp:73
 #, kde-format
 msgctxt "@info:shell"
 msgid "Disable transparent backgrounds, even if the system supports them."
 msgstr "Inhabilita els fons transparents, encara que el sistema els permeti."
 
-#: Application.cpp:72
+#: Application.cpp:74
 #, kde-format
 msgctxt "@info:shell"
 msgid "List the available profiles"
 msgstr "Llista els perfils disponibles"
 
-#: Application.cpp:73
+#: Application.cpp:75
 #, kde-format
 msgctxt "@info:shell"
 msgid "List all the profile properties names and their type (for use with -p)"
@@ -215,13 +231,13 @@ msgstr ""
 "Llista tots els noms de les propietats del perfil i llur tipus (per a usar "
 "amb -p)"
 
-#: Application.cpp:74
+#: Application.cpp:76
 #, kde-format
 msgctxt "@info:shell"
 msgid "Change the value of a profile property."
 msgstr "Canvia el valor d'una propietat del perfil."
 
-#: Application.cpp:76
+#: Application.cpp:78
 #, kde-format
 msgctxt "@info:shell"
 msgid ""
@@ -231,7 +247,7 @@ msgstr ""
 "Ordre a executar. Aquesta opció capturarà tots els arguments que segueixin, "
 "per tant, useu-la com a última opció."
 
-#: Application.cpp:79
+#: Application.cpp:81
 #, kde-format
 msgctxt "@info:shell"
 msgid ""
@@ -241,13 +257,13 @@ msgstr ""
 "Força la reutilització de la instància existent, encara que trenqui "
 "funcionalitats, p. ex. «--new-tab». Principalment per a depuració."
 
-#: Application.cpp:86
+#: Application.cpp:88
 #, kde-format
 msgctxt "@info:shell"
 msgid "Arguments passed to command"
 msgstr "Arguments passats a l'ordre"
 
-#: Application.cpp:516
+#: Application.cpp:529
 #, kde-format
 msgctxt "@item"
 msgid "Toggle Background Window"
@@ -1246,7 +1262,7 @@ msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Carrega la disposició de les pestanyes..."
 
-#: MainWindow.cpp:736 MainWindow.cpp:753
+#: MainWindow.cpp:743 MainWindow.cpp:760
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1257,61 +1273,61 @@ msgstr[0] ""
 msgstr[1] ""
 "Hi ha %1 processos executant-se en aquesta finestra. Encara voleu sortir?"
 
-#: MainWindow.cpp:742 MainWindow.cpp:759 MainWindow.cpp:773
+#: MainWindow.cpp:749 MainWindow.cpp:766 MainWindow.cpp:780
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Confirmació del tancament"
 
-#: MainWindow.cpp:743 MainWindow.cpp:760 MainWindow.cpp:774
+#: MainWindow.cpp:750 MainWindow.cpp:767 MainWindow.cpp:781
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Tanca la &finestra"
 
-#: MainWindow.cpp:761 MainWindow.cpp:775
+#: MainWindow.cpp:768 MainWindow.cpp:782
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Tanca la &pestanya actual"
 
-#: MainWindow.cpp:770
+#: MainWindow.cpp:777
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "Hi ha %1 terminals oberts en aquesta finestra. Encara voleu sortir?"
 
-#: MainWindow.cpp:877 Part.cpp:298
+#: MainWindow.cpp:884 Part.cpp:298
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Perfils"
 
-#: MainWindow.cpp:895
+#: MainWindow.cpp:902
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "General"
 
-#: MainWindow.cpp:907
+#: MainWindow.cpp:914
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr "Memòria"
 
-#: MainWindow.cpp:913
+#: MainWindow.cpp:920
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Barra de pestanyes / Divisors"
 
-#: MainWindow.cpp:918
+#: MainWindow.cpp:925
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Fitxers temporals"
 
-#: MainWindow.cpp:923
+#: MainWindow.cpp:930
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
