@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 14:43+0000\n"
-"PO-Revision-Date: 2025-09-24 14:18+0200\n"
+"PO-Revision-Date: 2026-01-10 20:01+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -32,7 +32,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Accelerator-Marker: &\n"
 "X-Environment: kde\n"
-"X-Generator: Lokalize 25.12.0\n"
+"X-Generator: Lokalize 25.12.1\n"
 "X-Text-Markup: kde4\n"
 
 #, kde-format
@@ -2211,7 +2211,7 @@ msgstr "Activité de « %1 » (Session « %2 »)"
 #, kde-format
 msgid "Security sensitive DBus API is disabled in the settings."
 msgstr ""
-"L'API « D-Bus »  de confidentialité pour la sécurité est désactivée dans la "
+"L'API « D-Bus » de confidentialité pour la sécurité est désactivée dans la "
 "configuration."
 
 #: session/SessionController.cpp:142
@@ -2636,7 +2636,7 @@ msgstr "Chercher en arrière"
 #, kde-format
 msgid "Enable the security sensitive parts of the DBus API"
 msgstr ""
-"Activer les parties de l'API « D-Bus »  de confidentialité pour la sécurité"
+"Activer les parties de l'API « D-Bus » de confidentialité pour la sécurité"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/GeneralSettings.ui:66
@@ -4007,7 +4007,7 @@ msgctxt ""
 "of characters."
 msgid "Use the selected font for line characters instead of the builtin code"
 msgstr ""
-"Utiliser la fonte sélectionnée pour les caractères de ligne plutôt que le "
+"Utiliser la police sélectionnée pour les caractères de ligne plutôt que le "
 "code intégré"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontLineCharactersButton)
@@ -4017,7 +4017,7 @@ msgctxt ""
 "Characters for drawing lines for a frame or box in TUI programs. Not a row "
 "of characters."
 msgid "Use line characters contained in font"
-msgstr "Utiliser les caractères de lignes contenus dans la fonte"
+msgstr "Utiliser les caractères de lignes contenus dans la police"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:198
