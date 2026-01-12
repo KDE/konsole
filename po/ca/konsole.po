@@ -11,14 +11,14 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-11 00:46+0000\n"
-"PO-Revision-Date: 2026-01-03 08:25+0100\n"
+"PO-Revision-Date: 2026-01-11 10:11+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 25.12.0\n"
+"X-Generator: Lokalize 25.04.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 
@@ -178,32 +178,30 @@ msgid "Hide the menubar, overriding the default setting"
 msgstr "Oculta la barra de menús, substituint la configuració per defecte"
 
 #: Application.cpp:68
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "Show the tabbar, overriding the default setting"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Show all the toolbars, overriding the default setting"
-msgstr "Mostra la barra de pestanyes, substituint la configuració per defecte"
+msgstr ""
+"Mostra totes les barres d'eines, substituint la configuració predeterminada"
 
 #: Application.cpp:69
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "Hide the tabbar, overriding the default setting"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Hide all the toolbars, overriding the default setting"
-msgstr "Oculta la barra de pestanyes, substituint la configuració per defecte"
+msgstr ""
+"Oculta totes les barres d'eines, substituint la configuració predeterminada"
 
 #: Application.cpp:70
 #, kde-format
 msgctxt "@info:shell"
 msgid "Show the tabbar, overriding the default setting"
-msgstr "Mostra la barra de pestanyes, substituint la configuració per defecte"
+msgstr "Mostra la barra d'eines, substituint la configuració predeterminada"
 
 #: Application.cpp:71
 #, kde-format
 msgctxt "@info:shell"
 msgid "Hide the tabbar, overriding the default setting"
-msgstr "Oculta la barra de pestanyes, substituint la configuració per defecte"
+msgstr "Oculta la barra d'eines, substituint la configuració predeterminada"
 
 #: Application.cpp:72
 #, kde-format
@@ -5761,23 +5759,3 @@ msgstr "&Configura o reanomena la pestanya..."
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "Tanca la pestanya"
-
-#~ msgid ""
-#~ "The D-Bus methods sendText/runCommand were just used.  There are security "
-#~ "concerns about allowing these methods to be public.  If desired, these "
-#~ "methods can be changed to internal use only by re-compiling Konsole. "
-#~ "<p>This warning will only show once for this Konsole instance.</p>"
-#~ msgstr ""
-#~ "S'usen els mètodes «sendText/runCommand» del D-Bus. Hi ha problemes de "
-#~ "seguretat per a permetre que aquests mètodes siguin públics. Si es "
-#~ "desitja, aquests mètodes es poden canviar a ús intern només recompilant "
-#~ "el Konsole. <p>Aquest avís només es mostrarà una vegada per a aquesta "
-#~ "instància del Konsole.</p>"
-
-#~ msgctxt "@item:inmenu"
-#~ msgid "Case sensitive"
-#~ msgstr "Distingeix entre majúscules i minúscules"
-
-#~ msgctxt "Do not save any lines to the scrollback history"
-#~ msgid "None"
-#~ msgstr "Res"

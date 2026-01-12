@@ -11,14 +11,14 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-11 00:46+0000\n"
-"PO-Revision-Date: 2026-01-03 08:25+0100\n"
+"PO-Revision-Date: 2026-01-11 10:11+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 25.12.0\n"
+"X-Generator: Lokalize 25.04.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 
@@ -178,36 +178,30 @@ msgid "Hide the menubar, overriding the default setting"
 msgstr "Oculta la barra de menús, substituint la configuració predeterminada"
 
 #: Application.cpp:68
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "Show the tabbar, overriding the default setting"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Show all the toolbars, overriding the default setting"
 msgstr ""
-"Mostra la barra de pestanyes, substituint la configuració predeterminada"
+"Mostra totes les barres d'eines, substituint la configuració predeterminada"
 
 #: Application.cpp:69
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "Hide the tabbar, overriding the default setting"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Hide all the toolbars, overriding the default setting"
 msgstr ""
-"Oculta la barra de pestanyes, substituint la configuració predeterminada"
+"Oculta totes les barres d'eines, substituint la configuració predeterminada"
 
 #: Application.cpp:70
 #, kde-format
 msgctxt "@info:shell"
 msgid "Show the tabbar, overriding the default setting"
-msgstr ""
-"Mostra la barra de pestanyes, substituint la configuració predeterminada"
+msgstr "Mostra la barra d'eines, substituint la configuració predeterminada"
 
 #: Application.cpp:71
 #, kde-format
 msgctxt "@info:shell"
 msgid "Hide the tabbar, overriding the default setting"
-msgstr ""
-"Oculta la barra de pestanyes, substituint la configuració predeterminada"
+msgstr "Oculta la barra d'eines, substituint la configuració predeterminada"
 
 #: Application.cpp:72
 #, kde-format

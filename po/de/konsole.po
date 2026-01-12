@@ -7,20 +7,21 @@
 # SPDX-FileCopyrightText: 2011 Panagiotis Papadopoulos <pano_90@gmx.net>
 # SPDX-FileCopyrightText: 2016, 2023, 2024, 2025 Frank Steinmetzger <Warp_7@gmx.de>
 # SPDX-FileCopyrightText: 2022, 2025 Alois Spitzbart <spitz234@hotmail.com>
+# SPDX-FileCopyrightText: 2026 Philipp Kiemle <l10n.daphipz@fastmail.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-11 00:46+0000\n"
-"PO-Revision-Date: 2025-12-25 12:15+0100\n"
-"Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
+"PO-Revision-Date: 2026-01-07 20:56+0100\n"
+"Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.12.0\n"
+"X-Generator: Lokalize 25.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -688,7 +689,7 @@ msgstr "Oben"
 #: colorscheme/ColorSchemeViewDelegate.cpp:52
 #, kde-format
 msgid "AaZz09..."
-msgstr "AaZz09 …"
+msgstr "AaZz09 …"
 
 #: CopyInputDialog.cpp:30
 #, kde-format
@@ -753,7 +754,7 @@ msgstr "Verknüpfungsadresse kopieren"
 #: filterHotSpots/UrlFilterHotspot.cpp:95
 #, kde-format
 msgid "Send Email To..."
-msgstr "E-Mail senden an …"
+msgstr "E-Mail senden an …"
 
 #: filterHotSpots/UrlFilterHotspot.cpp:97
 #, kde-format
@@ -883,7 +884,7 @@ msgstr "Terminal-Emulator"
 #, kde-format
 msgctxt "@info:credit"
 msgid "(c) 1997-2022, The Konsole Developers"
-msgstr "(c) 1997-2022 die Konsole-Entwickler"
+msgstr "© 1997–2022 Die Konsole-Entwickler"
 
 #: main.cpp:369
 #, kde-format
@@ -1242,7 +1243,7 @@ msgstr "&Fenster-Farbschema"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
-msgstr "Profile verwalten …"
+msgstr "Profile verwalten …"
 
 #: MainWindow.cpp:413
 #, kde-format
@@ -1254,13 +1255,13 @@ msgstr "Menü aktivieren"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
-msgstr "Unterfenster-Layout speichern …"
+msgstr "Unterfenster-Layout speichern …"
 
 #: MainWindow.cpp:428
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
-msgstr "Unterfenster-Layout laden …"
+msgstr "Unterfenster-Layout laden …"
 
 #: MainWindow.cpp:743 MainWindow.cpp:760
 #, kde-format
@@ -1360,7 +1361,7 @@ msgstr "Kurzbefehl:"
 #: plugins/QuickCommands/qcwidget.ui:52 plugins/SSHManager/sshwidget.ui:33
 #, kde-format
 msgid "Filter..."
-msgstr "Filter …"
+msgstr "Filter …"
 
 #. i18n: ectx: property (text), widget (QCheckBox, invertFilter)
 #. i18n: ectx: property (text), widget (QCheckBox, btnInvertFilter)
@@ -1475,7 +1476,7 @@ msgstr ""
 #: plugins/QuickCommands/quickcommandswidget.cpp:215
 #, kde-format
 msgid "There are some errors on the script, do you really want to run it?"
-msgstr "Das Skript weist einige Fehler auf, wollen Sie es wirklich ausführen?"
+msgstr "Das Skript weist einige Fehler auf, möchten Sie es wirklich ausführen?"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:216
 #, kde-format
@@ -2113,7 +2114,7 @@ msgstr "Solaris-Konsole"
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Search..."
-msgstr "Suchen …"
+msgstr "Suchen …"
 
 #: searchtabs/SearchTabs.cpp:128
 #, kde-format
@@ -2224,7 +2225,7 @@ msgstr "Nach „%1“ suchen mit"
 #: session/SessionController.cpp:537
 #, kde-format
 msgid "Configure Web Shortcuts..."
-msgstr "Web-Kurzbefehle festlegen …"
+msgstr "Web-Kurzbefehle einrichten …"
 
 #: session/SessionController.cpp:648
 #, kde-format
@@ -2294,12 +2295,12 @@ msgstr "Zei&le auswählen"
 #: session/SessionController.cpp:738
 #, kde-format
 msgid "Save Output &As..."
-msgstr "Ausgabe speichern &unter …"
+msgstr "Ausgabe speichern &unter …"
 
 #: session/SessionController.cpp:744
 #, kde-format
 msgid "Auto Save Output As..."
-msgstr "Ausgabe automatisch speichern unter …"
+msgstr "Ausgabe automatisch speichern unter …"
 
 #: session/SessionController.cpp:748
 #, kde-format
@@ -2309,12 +2310,12 @@ msgstr "Automatisches Speichern anhalten"
 #: session/SessionController.cpp:752
 #, kde-format
 msgid "&Print Screen..."
-msgstr "&Bildschirm drucken …"
+msgstr "&Bildschirm drucken …"
 
 #: session/SessionController.cpp:756
 #, kde-format
 msgid "Adjust Scrollback..."
-msgstr "Verlaufsspeicher anpassen …"
+msgstr "Verlaufsspeicher anpassen …"
 
 #: session/SessionController.cpp:760
 #, kde-format
@@ -2361,7 +2362,7 @@ msgstr "Nur lesen"
 #: session/SessionController.cpp:848
 #, kde-format
 msgid "&Configure or Rename Tab..."
-msgstr "Unterfenster einrichten oder &umbenennen …"
+msgstr "Unterfenster einrichten oder &umbenennen …"
 
 #: session/SessionController.cpp:854
 #, kde-format
@@ -2371,7 +2372,7 @@ msgstr "&Alle Unterfenster im aktuellen Fenster"
 #: session/SessionController.cpp:861
 #, kde-format
 msgid "&Select Tabs..."
-msgstr "Unterfenster &auswählen …"
+msgstr "Unterfenster &auswählen …"
 
 #: session/SessionController.cpp:867
 #, kde-format
@@ -2387,7 +2388,7 @@ msgstr "Eingabe kopieren nach"
 #: session/SessionController.cpp:883
 #, kde-format
 msgid "&ZModem Upload..."
-msgstr "&ZModem-Upload …"
+msgstr "&ZModem-Upload …"
 
 #: session/SessionController.cpp:888
 #, kde-format
@@ -2477,12 +2478,12 @@ msgstr "Benutzer-Signal &2"
 #: session/SessionController.cpp:995
 #, kde-format
 msgid "Create New Profile..."
-msgstr "Neues Profil erstellen …"
+msgstr "Neues Profil erstellen …"
 
 #: session/SessionController.cpp:997
 #, kde-format
 msgid "Edit Current Profile..."
-msgstr "Aktuelles Profil bearbeiten …"
+msgstr "Aktuelles Profil bearbeiten …"
 
 #: session/SessionController.cpp:1128
 #, kde-format
@@ -2550,7 +2551,7 @@ msgstr "Aktuellen Ordner öffnen mit"
 #: session/SessionController.cpp:2183
 #, kde-format
 msgid "Save ZModem Download to..."
-msgstr "ZModem-Download speichern unter …"
+msgstr "ZModem-Download speichern unter …"
 
 #: session/SessionController.cpp:2193
 #, kde-format
@@ -2683,10 +2684,9 @@ msgstr "Alle „Diese Nachfrage nicht mehr anzeigen“-Meldungen aktivieren"
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ForceNewTabs)
 #. i18n: ectx: label, entry (ForceNewTabs), group (KonsoleWindow)
 #: settings/GeneralSettings.ui:178 settings/konsole.kcfg:37
-#, fuzzy, kde-format
-#| msgid "Put new tabs:"
+#, kde-format
 msgid "Force new tabs"
-msgstr "Neue Unterfenster:"
+msgstr "Neue Unterfenster erzwingen"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/GeneralSettings.ui:185
@@ -2793,12 +2793,13 @@ msgstr "Speichert die Fenstergröße beim Beenden von Konsole"
 
 #. i18n: ectx: tooltip, entry (ForceNewTabs), group (KonsoleWindow)
 #: settings/konsole.kcfg:38
-#, fuzzy, kde-format
-#| msgid "When launching Konsole re-use existing process if possible"
+#, kde-format
 msgid ""
 "When launching Konsole create a new tab instead of creating new windows if "
 "possible"
-msgstr "Beim Start von Konsole vorhandene Prozesse verwenden, falls möglich"
+msgstr ""
+"Beim Start von Konsole ein neues Unterfenster statt eines neuen Fensters "
+"öffnen, falls möglich"
 
 #. i18n: ectx: tooltip, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
 #: settings/konsole.kcfg:43
@@ -2816,7 +2817,7 @@ msgstr ""
 #: settings/konsole.kcfg:48
 #, kde-format
 msgid "Automatic send/receive files over serial connections"
-msgstr ""
+msgstr "Dateien über serielle Verbindungen automatisch senden/empfangen"
 
 #. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:57
@@ -3056,7 +3057,7 @@ msgstr "Erzeugt ein neues Profil basierend auf dem ausgewählten Profil"
 #: settings/ProfileSettings.ui:54
 #, kde-format
 msgid "&New..."
-msgstr "&Neu …"
+msgstr "&Neu …"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, editProfileButton)
 #: settings/ProfileSettings.ui:64
@@ -3071,7 +3072,7 @@ msgstr ""
 #: settings/ProfileSettings.ui:67
 #, kde-format
 msgid "&Edit..."
-msgstr "&Bearbeiten …"
+msgstr "&Bearbeiten …"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, deleteProfileButton)
 #: settings/ProfileSettings.ui:77
@@ -3657,20 +3658,16 @@ msgid "Focus Right Terminal"
 msgstr "Rechtes Terminal aktivieren"
 
 #: ViewManager.cpp:282
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Focus Left Terminal"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Next Terminal"
-msgstr "Linkes Terminal aktivieren"
+msgstr "Nächstes Terminal aktivieren"
 
 #: ViewManager.cpp:288
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Focus Below Terminal"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Previous Terminal"
-msgstr "Terminal unten aktivieren"
+msgstr "Vorheriges Terminal aktivieren"
 
 #: ViewManager.cpp:294
 #, kde-format
@@ -3971,7 +3968,7 @@ msgstr "Ein neues Farbschema basierend auf dem ausgewählten erzeugen"
 #, kde-format
 msgctxt "@action:button Create an alternate color scheme"
 msgid "New..."
-msgstr "Neu …"
+msgstr "Neu …"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, editColorSchemeButton)
 #: widgets/EditProfileAppearancePage.ui:79
@@ -3988,7 +3985,7 @@ msgstr "Das ausgewählte Farbschema bearbeiten"
 #: widgets/EditProfileMousePage.ui:320
 #, kde-format
 msgid "Edit..."
-msgstr "Bearbeiten …"
+msgstr "Bearbeiten …"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, removeColorSchemeButton)
 #: widgets/EditProfileAppearancePage.ui:89
@@ -4021,7 +4018,7 @@ msgstr "Schriftart:"
 #, kde-format
 msgctxt "@action:button open a dialog with list of fonts"
 msgid "Choose..."
-msgstr "Auswählen …"
+msgstr "Auswählen …"
 
 #. i18n: ectx: property (text), widget (QCheckBox, antialiasTextButton)
 #: widgets/EditProfileAppearancePage.ui:174
@@ -4612,7 +4609,7 @@ msgstr "Wählen Sie den Startordner"
 #: widgets/EditProfileDialog.cpp:948
 #, kde-format
 msgid "Get New..."
-msgstr "Neues Schema holen …"
+msgstr "Neues Schema holen …"
 
 #: widgets/EditProfileDialog.cpp:1345
 #, kde-kuit-format
@@ -4881,7 +4878,7 @@ msgstr "Roter Fehlerhintergrund:"
 #: widgets/EditProfileGeneralPage.ui:544
 #, kde-format
 msgid "Alternating bars:"
-msgstr ""
+msgstr "Abwechselnde Balken:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
 #: widgets/EditProfileGeneralPage.ui:590
@@ -4899,9 +4896,9 @@ msgid ""
 "terminal program. For more information on how to customize the key bindings "
 "check the Konsole Handbook."
 msgstr ""
-"Mit Tasten-Zuordnungen wird festgelegt, welche Tastendaten beim Druck "
+"Mit Tastenzuordnungen wird festgelegt, welche Tastendaten beim Druck "
 "bestimmter Tastenkombinationen an das aktuelle Terminalprogramm gesendet "
-"werden. Weitere Informationen zum Einrichten von Tasten-Zuordnungen finden "
+"werden. Weitere Informationen zum Einrichten von Tastenzuordnungen finden "
 "Sie im Handbuch zu Konsole."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newKeyBindingsButton)
@@ -4917,7 +4914,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button Create an alternate key binding"
 msgid "New..."
-msgstr "Neu …"
+msgstr "Neu …"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, editKeyBindingsButton)
 #: widgets/EditProfileKeyboardPage.ui:70
@@ -5486,7 +5483,7 @@ msgstr "&Keine"
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Find..."
-msgstr "Suchen …"
+msgstr "Suchen …"
 
 #: widgets/IncrementalSearchBar.cpp:52
 #, kde-format
@@ -5764,7 +5761,7 @@ msgstr "Unterfenster &verselbständigen"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Configure or Rename Tab..."
-msgstr "Unterfenster einrichten oder &umbenennen …"
+msgstr "Unterfenster einrichten oder &umbenennen …"
 
 #: widgets/ViewContainer.cpp:113
 #, kde-format

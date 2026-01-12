@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-11 00:46+0000\n"
-"PO-Revision-Date: 2026-01-03 10:28+0100\n"
+"PO-Revision-Date: 2026-01-11 08:56+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -178,20 +178,16 @@ msgid "Hide the menubar, overriding the default setting"
 msgstr "Skrije menijsko vrstico ne glede na privzeto nastavitev"
 
 #: Application.cpp:68
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "Show the tabbar, overriding the default setting"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Show all the toolbars, overriding the default setting"
-msgstr "Pokaže vrstico z zavihki ne glede na privzeto nastavitev"
+msgstr "Pokaže vse orodne vrstice in preglasi privzeto nastavitev"
 
 #: Application.cpp:69
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "Hide the tabbar, overriding the default setting"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Hide all the toolbars, overriding the default setting"
-msgstr "Skrije vrstico z zavihki ne glede na privzeto nastavitev"
+msgstr "Skrije vse orodne vrstice in preglasi privzeto nastavitev"
 
 #: Application.cpp:70
 #, kde-format

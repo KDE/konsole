@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-11 00:46+0000\n"
-"PO-Revision-Date: 2026-01-07 20:35+0300\n"
+"PO-Revision-Date: 2026-01-11 13:00+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -171,41 +171,37 @@ msgstr "Ayrı bir süreçte çalıştır"
 #, kde-format
 msgctxt "@info:shell"
 msgid "Show the menubar, overriding the default setting"
-msgstr "Menü çubuğunu göster, öntanımlı ayarların üzerine yazılır"
+msgstr "Öntanımlı ayarı geçersiz kılarak menü çubuğunu göster"
 
 #: Application.cpp:67
 #, kde-format
 msgctxt "@info:shell"
 msgid "Hide the menubar, overriding the default setting"
-msgstr "Menü çubuğunu gizle, öntanımlı ayarların üzerine yazılır"
+msgstr "Öntanımlı ayarı geçersiz kılarak menü çubuğunu gizle"
 
 #: Application.cpp:68
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "Show the tabbar, overriding the default setting"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Show all the toolbars, overriding the default setting"
-msgstr "Sekme çubuğunu göster, öntanımlı ayarların üzerine yazılır"
+msgstr "Öntanımlı ayarı geçersiz kılarak tüm araç çubuklarını göster"
 
 #: Application.cpp:69
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "Hide the tabbar, overriding the default setting"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Hide all the toolbars, overriding the default setting"
-msgstr "Sekme çubuğunu gizle, öntanımlı ayarların üzerine yazılır"
+msgstr "Öntanımlı ayarı geçersiz kılarak tüm araç çubuklarını gizle"
 
 #: Application.cpp:70
 #, kde-format
 msgctxt "@info:shell"
 msgid "Show the tabbar, overriding the default setting"
-msgstr "Sekme çubuğunu göster, öntanımlı ayarların üzerine yazılır"
+msgstr "Öntanımlı ayarı geçersiz kılarak sekme çubuğunu göster"
 
 #: Application.cpp:71
 #, kde-format
 msgctxt "@info:shell"
 msgid "Hide the tabbar, overriding the default setting"
-msgstr "Sekme çubuğunu gizle, öntanımlı ayarların üzerine yazılır"
+msgstr "Öntanımlı ayarı geçersiz kılarak sekme çubuğunu gizle"
 
 #: Application.cpp:72
 #, kde-format

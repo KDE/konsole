@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-11 00:46+0000\n"
-"PO-Revision-Date: 2026-01-03 06:32-0300\n"
+"PO-Revision-Date: 2026-01-11 06:53-0300\n"
 "Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -187,20 +187,18 @@ msgid "Hide the menubar, overriding the default setting"
 msgstr "Ocultar a barra de menu, sobrepondo-se à configuração padrão"
 
 #: Application.cpp:68
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "Show the tabbar, overriding the default setting"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Show all the toolbars, overriding the default setting"
-msgstr "Mostrar a barra de abas, sobrepondo-se à configuração padrão"
+msgstr ""
+"Mostrar todas as barras de ferramentas, sobrepondo-se à configuração padrão"
 
 #: Application.cpp:69
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "Hide the tabbar, overriding the default setting"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Hide all the toolbars, overriding the default setting"
-msgstr "Ocultar a barra de abas, sobrepondo-se à configuração padrão"
+msgstr ""
+"Ocultar todas as barras de ferramentas, sobrepondo-se à configuração padrão"
 
 #: Application.cpp:70
 #, kde-format

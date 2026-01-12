@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-11 00:46+0000\n"
-"PO-Revision-Date: 2026-01-04 14:15+0100\n"
+"PO-Revision-Date: 2026-01-11 14:26+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -187,20 +187,16 @@ msgid "Hide the menubar, overriding the default setting"
 msgstr "De menubalk verbergen, boven de standaard instellingen uitgaan"
 
 #: Application.cpp:68
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "Show the tabbar, overriding the default setting"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Show all the toolbars, overriding the default setting"
-msgstr "De tabbladbalk tonen, boven de standaard instellingen uitgaan"
+msgstr "Alle tabbladbalken tonen, de standaard instellingen overschrijven"
 
 #: Application.cpp:69
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "Hide the tabbar, overriding the default setting"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Hide all the toolbars, overriding the default setting"
-msgstr "De tabbladbalk verbergen, boven de standaard instellingen uitgaan"
+msgstr "Alle tabbladbalken verbergen, de standaard instellingen overschrijven"
 
 #: Application.cpp:70
 #, kde-format
