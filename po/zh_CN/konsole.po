@@ -170,20 +170,16 @@ msgid "Hide the menubar, overriding the default setting"
 msgstr "隐藏菜单栏，覆盖默认设置"
 
 #: Application.cpp:68
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "Show the tabbar, overriding the default setting"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Show all the toolbars, overriding the default setting"
-msgstr "显示标签页栏，覆盖默认设置"
+msgstr ""
 
 #: Application.cpp:69
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "Hide the tabbar, overriding the default setting"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Hide all the toolbars, overriding the default setting"
-msgstr "隐藏标签页栏，覆盖默认设置"
+msgstr ""
 
 #: Application.cpp:70
 #, kde-format

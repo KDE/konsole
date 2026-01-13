@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-11 00:46+0000\n"
-"PO-Revision-Date: 2026-01-04 11:53+0200\n"
+"PO-Revision-Date: 2026-01-12 03:18+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -176,20 +176,16 @@ msgid "Hide the menubar, overriding the default setting"
 msgstr "Приховати панель меню, перевизначивши типову поведінку"
 
 #: Application.cpp:68
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "Show the tabbar, overriding the default setting"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Show all the toolbars, overriding the default setting"
-msgstr "Показати панель вкладок, перевизначивши типову поведінку"
+msgstr "Показати усі панелі інструментів, перевизначивши типову поведінку"
 
 #: Application.cpp:69
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "Hide the tabbar, overriding the default setting"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Hide all the toolbars, overriding the default setting"
-msgstr "Приховати панель вкладок, перевизначивши типову поведінку"
+msgstr "Приховати усі панелі інструментів, перевизначивши типову поведінку"
 
 #: Application.cpp:70
 #, kde-format
