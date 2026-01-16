@@ -173,13 +173,13 @@ msgstr "隐藏菜单栏，覆盖默认设置"
 #, kde-format
 msgctxt "@info:shell"
 msgid "Show all the toolbars, overriding the default setting"
-msgstr ""
+msgstr "显示所有工具栏，覆盖默认设置"
 
 #: Application.cpp:69
 #, kde-format
 msgctxt "@info:shell"
 msgid "Hide all the toolbars, overriding the default setting"
-msgstr ""
+msgstr "隐藏所有工具栏，覆盖默认设置"
 
 #: Application.cpp:70
 #, kde-format
