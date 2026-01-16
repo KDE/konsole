@@ -83,6 +83,7 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
     connect(this, &TabbedViewContainer::currentChanged, this, &TabbedViewContainer::currentTabChanged);
 
     connect(this, &TabbedViewContainer::setColor, tabBarWidget, &DetachableTabBar::setColor);
+    connect(this, &TabbedViewContainer::setActivityColor, tabBarWidget, &DetachableTabBar::setActivityColor);
     connect(this, &TabbedViewContainer::removeColor, tabBarWidget, &DetachableTabBar::removeColor);
 
     connect(this, &TabbedViewContainer::setProgress, tabBarWidget, &DetachableTabBar::setProgress);
@@ -399,6 +400,8 @@ void TabbedViewContainer::connectTerminalDisplay(TerminalDisplay *display)
 
     connect(item, &Konsole::ViewProperties::colorChanged, this, &Konsole::TabbedViewContainer::updateColor);
 
+    connect(item, &Konsole::ViewProperties::activityColorChanged, this, &Konsole::TabbedViewContainer::updateColor);
+
     connect(item, &Konsole::ViewProperties::iconChanged, this, &Konsole::TabbedViewContainer::updateIcon);
 
     connect(item, &Konsole::ViewProperties::activity, this, &Konsole::TabbedViewContainer::updateActivity);
@@ -558,12 +561,16 @@ void TabbedViewContainer::wheelScrolled(int delta)
 
 void TabbedViewContainer::setTabActivity(int index, bool activity)
 {
-    const QPalette &palette = tabBar()->palette();
-    KColorScheme colorScheme(palette.currentColorGroup());
-    const QColor colorSchemeActive = colorScheme.foreground(KColorScheme::ActiveText).color();
-
-    const QColor normalColor = palette.text().color();
-    const QColor activityColor = KColorUtils::mix(normalColor, colorSchemeActive);
+    auto controller = viewSplitterAt(index)->activeTerminalDisplay()->sessionController();
+    auto session = controller->session();
+    QColor activityColor = session->activityColor();
+    if (activityColor == QColor::Invalid) {
+        const QPalette &palette = tabBar()->palette();
+        KColorScheme colorScheme(palette.currentColorGroup());
+        const QColor colorSchemeActive = colorScheme.foreground(KColorScheme::ActiveText).color();
+        const QColor normalColor = palette.text().color();
+        activityColor = KColorUtils::mix(normalColor, colorSchemeActive);
+    }
 
     QColor color = activity ? activityColor : QColor();
 
@@ -596,6 +603,15 @@ void TabbedViewContainer::updateColor(ViewProperties *item)
     const int index = indexOf(topLevelSplitter);
 
     Q_EMIT setColor(index, item->color());
+}
+
+void TabbedViewContainer::updateActivityColor(ViewProperties *item)
+{
+    auto controller = qobject_cast<SessionController *>(item);
+    auto topLevelSplitter = qobject_cast<ViewSplitter *>(controller->view()->parentWidget())->getToplevelSplitter();
+    const int index = indexOf(topLevelSplitter);
+
+    Q_EMIT setActivityColor(index, item->activityColor());
 }
 
 void TabbedViewContainer::updateIcon(ViewProperties *item)
@@ -715,6 +731,7 @@ void TabbedViewContainer::currentSessionControllerChanged(SessionController *con
 
     updateTitle(qobject_cast<ViewProperties *>(controller));
     updateColor(qobject_cast<ViewProperties *>(controller));
+    updateActivityColor(qobject_cast<ViewProperties *>(controller));
     updateActivity(qobject_cast<ViewProperties *>(controller));
     updateSpecialState(qobject_cast<ViewProperties *>(controller));
 }

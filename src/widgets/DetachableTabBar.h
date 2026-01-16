@@ -38,6 +38,7 @@ public:
 
     void setColor(int idx, const QColor &color);
     void removeColor(int idx);
+    void setActivityColor(int idx, const QColor &color);
 
     void setProgress(int idx, const std::optional<int> &progress);
 
@@ -64,6 +65,7 @@ private:
     QCursor _originalCursor;
     QList<TabbedViewContainer *> _containers;
     int tabId;
+    QColor _activityColor;
 };
 }
 

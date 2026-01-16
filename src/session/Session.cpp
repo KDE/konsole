@@ -780,6 +780,16 @@ bool Session::isTabColorSetByUser() const
     return _tabColorSetByUser;
 }
 
+void Session::tabActivityColorSetByUser(bool set)
+{
+    _tabActivityColorSetByUser = set;
+}
+
+bool Session::isTabActivityColorSetByUser() const
+{
+    return _tabActivityColorSetByUser;
+}
+
 void Session::silenceTimerDone()
 {
     // FIXME: The idea here is that the notification popup will appear to tell the user than output from
@@ -2160,6 +2170,7 @@ void Session::saveSession(KConfigGroup &group)
     group.writeEntry("LocalTab", tabTitleFormat(LocalTabTitle));
     group.writeEntry("RemoteTab", tabTitleFormat(RemoteTabTitle));
     group.writeEntry("TabColor", color().isValid() ? color().name(QColor::HexArgb) : QString());
+    group.writeEntry("TabActivityColor", activityColor().isValid() ? color().name(QColor::HexArgb) : QString());
     group.writeEntry("SessionGuid", _uniqueIdentifier.toString());
     group.writeEntry("Encoding", QString::fromUtf8(codec()));
 }
@@ -2183,6 +2194,10 @@ void Session::restoreSession(KConfigGroup &group)
     value = group.readEntry("TabColor");
     if (!value.isEmpty()) {
         setColor(QColor(value));
+    }
+    value = group.readEntry("TabActivityColor");
+    if (!value.isEmpty()) {
+        setActivityColor(QColor(value));
     }
     value = group.readEntry("SessionGuid");
     if (!value.isEmpty()) {
@@ -2301,14 +2316,19 @@ QColor Session::color() const
     return _tabColor;
 }
 
-void Session::setTabColor(const QString &colorName)
+void Session::setActivityColor(const QColor &color)
 {
-    setColor(QColor(colorName));
+    if (_tabActivityColor == color) {
+        return;
+    }
+
+    _tabActivityColor = color;
+    Q_EMIT sessionAttributeChanged();
 }
 
-QString Session::tabColor() const
+QColor Session::activityColor() const
 {
-    return _tabColor.name();
+    return _tabActivityColor;
 }
 
 SessionController *Session::controller()

@@ -30,9 +30,11 @@ public:
     QString tabTitleText() const;
     QString remoteTabTitleText() const;
     QColor color() const;
+    QColor activityColor() const;
     void setTabTitleText(const QString &);
     void setRemoteTabTitleText(const QString &);
     void setColor(const QColor &);
+    void setActivityColor(const QColor &);
 
     void focusTabTitleText();
     void focusRemoteTabTitleText();
@@ -41,6 +43,7 @@ Q_SIGNALS:
     void tabTitleFormatChanged(const QString &);
     void remoteTabTitleFormatChanged(const QString &);
     void tabColorChanged(const QColor &);
+    void tabActivityColorChanged(const QColor &);
 
 public Q_SLOTS:
     void insertTabTitleText(const QString &text);

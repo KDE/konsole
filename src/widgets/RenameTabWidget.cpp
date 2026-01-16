@@ -36,9 +36,13 @@ RenameTabWidget::RenameTabWidget(QWidget *parent)
     _ui->tabColorCombo->setColors(listColors);
     _ui->tabColorCombo->setItemText(1, i18nc("@label:listbox No color selected", "None"));
 
+    _ui->tabActivityColorCombo->setColors(listColors);
+    _ui->tabActivityColorCombo->setItemText(1, i18nc("@label:listbox No color selected", "None"));
+
     connect(_ui->tabTitleEdit, &QLineEdit::textChanged, this, &Konsole::RenameTabWidget::tabTitleFormatChanged);
     connect(_ui->remoteTabTitleEdit, &QLineEdit::textChanged, this, &Konsole::RenameTabWidget::remoteTabTitleFormatChanged);
     connect(_ui->tabColorCombo, &KColorCombo::activated, this, &Konsole::RenameTabWidget::tabColorChanged);
+    connect(_ui->tabActivityColorCombo, &KColorCombo::activated, this, &Konsole::RenameTabWidget::tabActivityColorChanged);
 
     _ui->tabTitleFormatButton->setContext(Session::LocalTabTitle);
     connect(_ui->tabTitleFormatButton, &Konsole::TabTitleFormatButton::dynamicElementSelected, this, &Konsole::RenameTabWidget::insertTabTitleText);
@@ -81,6 +85,15 @@ void RenameTabWidget::setColor(const QColor &color)
     }
 }
 
+void RenameTabWidget::setActivityColor(const QColor &color)
+{
+    if (!color.isValid() || color.alpha() == 0) {
+        _ui->tabActivityColorCombo->setColor(_colorNone);
+    } else {
+        _ui->tabActivityColorCombo->setColor(color);
+    }
+}
+
 QString RenameTabWidget::tabTitleText() const
 {
     return _ui->tabTitleEdit->text();
@@ -94,6 +107,11 @@ QString RenameTabWidget::remoteTabTitleText() const
 QColor RenameTabWidget::color() const
 {
     return _ui->tabColorCombo->color();
+}
+
+QColor RenameTabWidget::activityColor() const
+{
+    return _ui->tabActivityColorCombo->color();
 }
 
 void RenameTabWidget::insertTabTitleText(const QString &text)

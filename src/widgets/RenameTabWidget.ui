@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>119</height>
+    <height>136</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -118,7 +118,30 @@
       <bool>false</bool>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>-1</number>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="label_4">
+     <property name="text">
+      <string>&amp;Activity Tab Color:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+     </property>
+     <property name="buddy">
+      <cstring>tabActivityColorCombo</cstring>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="KColorCombo" name="tabActivityColorCombo">
+     <property name="editable">
+      <bool>false</bool>
+     </property>
+     <property name="currentIndex">
+      <number>-1</number>
      </property>
     </widget>
    </item>
@@ -141,6 +164,8 @@
   <tabstop>tabTitleFormatButton</tabstop>
   <tabstop>remoteTabTitleEdit</tabstop>
   <tabstop>remoteTabTitleFormatButton</tabstop>
+  <tabstop>tabColorCombo</tabstop>
+  <tabstop>tabActivityColorCombo</tabstop>
  </tabstops>
  <resources/>
  <connections/>

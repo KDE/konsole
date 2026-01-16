@@ -195,6 +195,15 @@ public:
     QColor color() const;
 
     /**
+     * Sets the activity color user by this session for tab.
+     *
+     * @param color The foreground text color for the tab in which activity was detected.
+     */
+    void setActivityColor(const QColor &color);
+    /** Returns the activity color used by this session for tab. */
+    QColor activityColor() const;
+
+    /**
      * Returns true if the tab title has been changed by the user via the
      * rename-tab dialog.
      */
@@ -205,6 +214,12 @@ public:
      * rename-tab dialog.
      */
     bool isTabColorSetByUser() const;
+
+    /**
+     * Returns true if the tab activity color has been changed by the user via the
+     * rename-tab dialog.
+     */
+    bool isTabActivityColorSetByUser() const;
 
     /** Returns the arguments passed to the shell process when run() is called. */
     QStringList arguments() const;
@@ -429,6 +444,7 @@ public:
     bool isPrimaryScreen();
     void tabTitleSetByUser(bool set);
     void tabColorSetByUser(bool set);
+    void tabActivityColorSetByUser(bool set);
 
     enum Notification {
         NoNotification = 0,
@@ -765,12 +781,6 @@ public Q_SLOTS:
      */
     Q_SCRIPTABLE QString activationToken(const QString &cookieForRequest) const;
 
-    /**
-     * Sets/gets the session's tab color
-     */
-    Q_SCRIPTABLE QString tabColor() const;
-    Q_SCRIPTABLE void setTabColor(const QString &colorName);
-
 Q_SIGNALS:
 
     /** Emitted when the terminal process starts. */
@@ -981,9 +991,11 @@ private:
     QString _localTabTitleFormat = QString();
     QString _remoteTabTitleFormat = QString();
     QColor _tabColor = QColor();
+    QColor _tabActivityColor = QColor();
 
     bool _tabTitleSetByUser = false;
     bool _tabColorSetByUser = false;
+    bool _tabActivityColorSetByUser = false;
 
     QString _iconName = QString();
     QString _iconText = QString(); // not actually used

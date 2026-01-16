@@ -676,10 +676,12 @@ void EditProfileDialog::setupTabsPage(const Profile::Ptr &profile)
     _tabsUi->renameTabWidget->setTabTitleText(profile->localTabTitleFormat());
     _tabsUi->renameTabWidget->setRemoteTabTitleText(profile->remoteTabTitleFormat());
     _tabsUi->renameTabWidget->setColor(profile->tabColor());
+    _tabsUi->renameTabWidget->setActivityColor(profile->tabActivityColor());
 
     connect(_tabsUi->renameTabWidget, &Konsole::RenameTabWidget::tabTitleFormatChanged, this, &Konsole::EditProfileDialog::tabTitleFormatChanged);
     connect(_tabsUi->renameTabWidget, &Konsole::RenameTabWidget::remoteTabTitleFormatChanged, this, &Konsole::EditProfileDialog::remoteTabTitleFormatChanged);
     connect(_tabsUi->renameTabWidget, &Konsole::RenameTabWidget::tabColorChanged, this, &Konsole::EditProfileDialog::tabColorChanged);
+    connect(_tabsUi->renameTabWidget, &Konsole::RenameTabWidget::tabActivityColorChanged, this, &Konsole::EditProfileDialog::tabActivityColorChanged);
 
     // tab monitoring
     const int silenceSeconds = profile->silenceSeconds();
@@ -740,6 +742,11 @@ void EditProfileDialog::remoteTabTitleFormatChanged(const QString &format)
 void EditProfileDialog::tabColorChanged(const QColor &color)
 {
     updateTempProfileProperty(Profile::TabColor, color);
+}
+
+void EditProfileDialog::tabActivityColorChanged(const QColor &color)
+{
+    updateTempProfileProperty(Profile::TabActivityColor, color);
 }
 
 void EditProfileDialog::focusBorderColorChanged(const QColor &color)

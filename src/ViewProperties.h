@@ -46,6 +46,8 @@ public:
     QColor color() const;
     /** Returns the progress associated with a view */
     std::optional<int> progress() const;
+    /** Returns the activity color associated with a view */
+    QColor activityColor() const;
 
     /**
      * Returns the URL current associated with a view.
@@ -86,6 +88,8 @@ Q_SIGNALS:
     void titleChanged(ViewProperties *properties);
     /** Emitted when the color for a view changes */
     void colorChanged(ViewProperties *properties);
+    /** Emitted when the color for a view changes */
+    void activityColorChanged(ViewProperties *properties);
     /** Emitted when activity has occurred in this view. */
     void activity(ViewProperties *item);
     /** Emitted when notification for a view changes */
@@ -124,6 +128,11 @@ protected:
      * a colorChanged() signal to be emitted
      */
     void setColor(const QColor &color);
+    /**
+     * Subclasses may call this method to change the activity color.  This causes
+     * a activityColorChanged() signal to be emitted
+     */
+    void setActivityColor(const QColor &color);
     /** Subclasses may call this method to change the identifier. */
     void setIdentifier(int id);
     /** Subclass may call this method to change the progress. */
@@ -135,6 +144,7 @@ private:
     QIcon _icon;
     QString _title;
     QColor _color;
+    QColor _activityColor;
     int _identifier;
     std::optional<int> _progress;
     static QHash<int, ViewProperties *> _viewProperties;

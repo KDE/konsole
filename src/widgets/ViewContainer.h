@@ -68,6 +68,8 @@ public:
     /** Sets tab title to item title if the view is active */
     void updateTitle(ViewProperties *item);
     /** Sets tab color to item color if the view is active */
+    void updateActivityColor(ViewProperties *item);
+    /** Sets tab color to item color if the view is active */
     void updateColor(ViewProperties *item);
     /** Sets tab icon to item icon if the view is active */
     void updateIcon(ViewProperties *item);
@@ -213,6 +215,9 @@ Q_SIGNALS:
 
     /** set the tab progress */
     void setProgress(int idx, const std::optional<int> &progress);
+
+    /** set the activity color tab */
+    void setActivityColor(int index, const QColor &color);
 
 protected:
     // close tabs and unregister

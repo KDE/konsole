@@ -70,6 +70,11 @@ void RenameTabDialog::setColor(const QColor &color)
     _ui->renameTabWidget->setColor(color);
 }
 
+void RenameTabDialog::setActivityColor(const QColor &color)
+{
+    _ui->renameTabWidget->setActivityColor(color);
+}
+
 QString RenameTabDialog::tabTitleText() const
 {
     return _ui->renameTabWidget->tabTitleText();
@@ -83,6 +88,11 @@ QString RenameTabDialog::remoteTabTitleText() const
 QColor RenameTabDialog::color() const
 {
     return _ui->renameTabWidget->color();
+}
+
+QColor RenameTabDialog::activityColor() const
+{
+    return _ui->renameTabWidget->activityColor();
 }
 
 #include "moc_RenameTabDialog.cpp"

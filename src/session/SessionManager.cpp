@@ -237,6 +237,9 @@ void SessionManager::applyProfile(Session *session, const Profile::Ptr &profile,
     if (apply.shouldApply(Profile::TabColor) && !session->isTabColorSetByUser()) {
         session->setColor(profile->tabColor());
     }
+    if (apply.shouldApply(Profile::TabActivityColor) && !session->isTabActivityColorSetByUser()) {
+        session->setActivityColor(profile->tabActivityColor());
+    }
 
     // History
     if (apply.shouldApply(Profile::HistoryMode) || apply.shouldApply(Profile::HistorySize)) {

@@ -200,6 +200,11 @@ Q_SIGNALS:
     void tabColoredByUser(bool set) const;
 
     /**
+     * Emitted when the user changes the tab activity color.
+     */
+    void tabActivityColoredByUser(bool set) const;
+
+    /**
      * Emitted when the user request print screen.
      */
     void requestPrint();

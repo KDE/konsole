@@ -32,6 +32,8 @@ public:
     void setTabTitleText(const QString &);
     void setRemoteTabTitleText(const QString &);
     void setColor(const QColor &);
+    void setActivityColor(const QColor &);
+    QColor activityColor() const;
 
     void focusTabTitleText();
     void focusRemoteTabTitleText();

@@ -346,6 +346,8 @@ public:
         ReverseUrlHints,
         /** (QColor) used in tab color */
         TabColor,
+        /** (QColor) used in tab activity color */
+        TabActivityColor,
         /** (int) Value of the Dimm Effect */
         DimValue,
         /** (QColor) Color for focus border */
@@ -618,6 +620,12 @@ public:
     QColor tabColor() const
     {
         return property<QColor>(Profile::TabColor);
+    }
+
+    /** Convenience method for property<QColor>(Profile::TabActivityColor) */
+    QColor tabActivityColor() const
+    {
+        return property<QColor>(Profile::TabActivityColor);
     }
 
     bool allowEscapedLinks() const

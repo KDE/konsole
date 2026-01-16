@@ -98,6 +98,7 @@ const std::vector<Profile::PropertyInfo> Profile::DefaultProperties = {
     {UseFontBrailleCharacters, "UseFontBrailleChararacters", APPEARANCE_GROUP, true},
     {LineSpacing, "LineSpacing", APPEARANCE_GROUP, 0},
     {TabColor, "TabColor", APPEARANCE_GROUP, QColor(QColor::Invalid)},
+    {TabActivityColor, "TabActivityColor", APPEARANCE_GROUP, QColor(QColor::Invalid)},
     {DimValue, "DimmValue", APPEARANCE_GROUP, 128},
     {DimWhenInactive, "DimWhenInactive", GENERAL_GROUP, false},
     {BorderWhenActive, "BorderWhenActive", APPEARANCE_GROUP, false},

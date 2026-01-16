@@ -24,6 +24,7 @@ DetachableTabBar::DetachableTabBar(QWidget *parent)
     , dragType(DragType::NONE)
     , _originalCursor(cursor())
     , tabId(-1)
+    , _activityColor(QColor::Invalid)
 {
     setAcceptDrops(true);
     setElideMode(Qt::TextElideMode::ElideLeft);
@@ -38,6 +39,12 @@ void DetachableTabBar::setColor(int idx, const QColor &color)
         setDetachableTabData(idx, data);
         update(tabRect(idx));
     }
+}
+
+void DetachableTabBar::setActivityColor(int idx, const QColor &color)
+{
+    _activityColor = color;
+    update();
 }
 
 void DetachableTabBar::removeColor(int idx)

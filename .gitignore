@@ -12,6 +12,7 @@
 *.user
 .*.swp
 .swp.*
+.qtcreator
 Doxyfile
 Makefile
 avail

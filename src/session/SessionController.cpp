@@ -188,6 +188,7 @@ SessionController::SessionController(Session *sessionParam, TerminalDisplay *vie
 
     connect(this, &Konsole::SessionController::tabRenamedByUser, session(), &Konsole::Session::tabTitleSetByUser);
     connect(this, &Konsole::SessionController::tabColoredByUser, session(), &Konsole::Session::tabColorSetByUser);
+    connect(this, &Konsole::SessionController::tabActivityColoredByUser, session(), &Konsole::Session::tabActivityColorSetByUser);
 
     connect(session(), &Konsole::Session::currentDirectoryChanged, this, &Konsole::SessionController::currentDirectoryChanged);
 
@@ -337,6 +338,7 @@ void SessionController::snapshot()
         title.append(QLatin1Char('*'));
     }
 
+    qDebug() << "snapshot TP3: " << title;
     // use the fallback title if needed
     if (title.isEmpty()) {
         title = session()->title(Session::NameRole);
@@ -352,11 +354,17 @@ void SessionController::snapshot()
         color = QColor(QColor::Invalid);
     }
 
+    QColor activityColor = session()->activityColor();
+    if (!activityColor.isValid()) {
+        activityColor = QColor(QColor::Invalid);
+    }
+
     // apply new title
     session()->setTitle(Session::DisplayedTitleRole, title);
 
     // apply new color
     session()->setColor(color);
+    session()->setActivityColor(activityColor);
 
     // check if foreground process ended and notify if this option was requested
     if (_monitorProcessFinish) {
@@ -1074,6 +1082,7 @@ void SessionController::renameSession()
     const QString sessionLocalTabTitleFormat = session()->tabTitleFormat(Session::LocalTabTitle);
     const QString sessionRemoteTabTitleFormat = session()->tabTitleFormat(Session::RemoteTabTitle);
     const QColor sessionTabColor = session()->color();
+    const QColor sessionActivityTabColor = session()->activityColor();
 
     auto *dialog = new RenameTabDialog(QApplication::activeWindow());
     dialog->setAttribute(Qt::WA_DeleteOnClose);
@@ -1081,6 +1090,7 @@ void SessionController::renameSession()
     dialog->setTabTitleText(sessionLocalTabTitleFormat);
     dialog->setRemoteTabTitleText(sessionRemoteTabTitleFormat);
     dialog->setColor(sessionTabColor);
+    dialog->setActivityColor(sessionActivityTabColor);
 
     if (session()->isRemote()) {
         dialog->focusRemoteTabTitleText();
@@ -1092,6 +1102,7 @@ void SessionController::renameSession()
         const QString tabTitle = dialog->tabTitleText();
         const QString remoteTabTitle = dialog->remoteTabTitleText();
         const QColor tabColor = dialog->color();
+        const QColor tabActivityColor = dialog->activityColor();
 
         if (tabTitle != sessionLocalTabTitleFormat) {
             session()->setTabTitleFormat(Session::LocalTabTitle, tabTitle);
@@ -1109,6 +1120,12 @@ void SessionController::renameSession()
         if (tabColor != sessionTabColor) {
             session()->setColor(tabColor);
             Q_EMIT tabColoredByUser(true);
+            snapshot();
+        }
+
+        if (tabActivityColor != sessionActivityTabColor) {
+            session()->setActivityColor(tabActivityColor);
+            Q_EMIT tabActivityColoredByUser(true);
             snapshot();
         }
     });
@@ -2024,11 +2041,16 @@ bool SessionController::isCopyInputActive() const
 
 void SessionController::sessionAttributeChanged()
 {
+    qDebug() << "sessionAttributeChanged: TP 1";
+
     if (_sessionIconName != session()->iconName()) {
+        qCDebug(KonsoleDebug) << "sessionAttributeChanged: TP 1.1";
         updateSessionIcon();
     }
 
+    qDebug() << "sessionAttributeChanged: TP 2";
     QString title = session()->title(Session::DisplayedTitleRole);
+    qDebug() << "sessionAttributeChanged: TP 3: " << title;
 
     // special handling for the "%w" marker which is replaced with the
     // window title set by the shell

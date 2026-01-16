@@ -124,6 +124,7 @@ private Q_SLOTS:
     void tabTitleFormatChanged(const QString &format);
     void remoteTabTitleFormatChanged(const QString &format);
     void tabColorChanged(const QColor &color);
+    void tabActivityColorChanged(const QColor &color);
     void silenceSecondsChanged(int);
 
     void terminalColumnsEntryChanged(int);

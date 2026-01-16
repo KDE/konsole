@@ -75,6 +75,14 @@ void ViewProperties::setColor(const QColor &color)
     }
 }
 
+void ViewProperties::setActivityColor(const QColor &color)
+{
+    if (color != _activityColor) {
+        _activityColor = color;
+        Q_EMIT activityColorChanged(this);
+    }
+}
+
 void ViewProperties::setIdentifier(int id)
 {
     if (_viewProperties.contains(_identifier)) {
@@ -117,6 +125,11 @@ QColor ViewProperties::color() const
 std::optional<int> ViewProperties::progress() const
 {
     return _progress;
+}
+
+QColor ViewProperties::activityColor() const
+{
+    return _activityColor;
 }
 
 #include "moc_ViewProperties.cpp"
