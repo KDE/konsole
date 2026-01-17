@@ -11,21 +11,21 @@
 # Alexander Potashev <aspotashev@gmail.com>, 2009, 2010, 2011, 2014, 2015, 2016, 2017, 2019.
 # Yuri Efremov <yur.arh@gmail.com>, 2012, 2013.
 # Alexander Lakhin <exclusion@gmail.com>, 2013, 2014.
-# SPDX-FileCopyrightText: 2022, 2024, 2025 Olesya Gerasimenko <translation-team@basealt.ru>
+# SPDX-FileCopyrightText: 2022, 2024, 2025, 2026 Olesya Gerasimenko <translation-team@basealt.ru>
 # Alexander Yavorsky <kekcuha@gmail.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 14:43+0000\n"
-"PO-Revision-Date: 2025-05-22 18:16+0300\n"
-"Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
-"Language-Team: Russian <kde-russian@lists.kde.ru>\n"
+"PO-Revision-Date: 2026-01-16 14:05+0300\n"
+"Last-Translator: Olesya Gerasimenko <goa@altlinux.org>\n"
+"Language-Team: Basealt Translation Team\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 25.04.1\n"
+"X-Generator: Lokalize 23.08.5\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Environment: kde\n"
@@ -2185,7 +2185,7 @@ msgstr "Активность в «%1» (сеанс «%2»)"
 #: session/Session.cpp:2259
 #, kde-format
 msgid "Security sensitive DBus API is disabled in the settings."
-msgstr ""
+msgstr "В параметрах настройки отключены уязвимые части API DBus."
 
 #: session/SessionController.cpp:142
 #, kde-format
@@ -2599,7 +2599,7 @@ msgstr "Искать назад"
 #: settings/GeneralSettings.ui:59 settings/konsole.kcfg:37
 #, kde-format
 msgid "Enable the security sensitive parts of the DBus API"
-msgstr ""
+msgstr "Включить уязвимые части API DBus"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/GeneralSettings.ui:66
@@ -2757,7 +2757,7 @@ msgstr "Сохранять размер окна при выходе из Konsol
 #: settings/konsole.kcfg:38
 #, kde-format
 msgid "DBus API like runCommand will be enabled"
-msgstr ""
+msgstr "Будет включён API DBus (например, runCommand)"
 
 #. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:47
@@ -2939,16 +2939,7 @@ msgstr "Отслеживать использование памяти:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:24
-#, fuzzy, kde-format
-#| msgid ""
-#| "Changes will take effect upon restart. If enabled, sustained memory "
-#| "consumption by Konsole\n"
-#| "exceeding the specified value will cause systemd-oomd to eliminate the "
-#| "tab(s)\n"
-#| "containing the memory-intensive process(es). Note: enabling\n"
-#| "might cause greater slowdowns during high memory consumption and "
-#| "specifying\n"
-#| "excessively low values might still cause Konsole to be killed."
+#, kde-format
 msgid ""
 "Changes will take effect upon restart. If enabled, sustained memory "
 "consumption by Konsole exceeding the specified value will cause systemd-oomd "
@@ -2961,7 +2952,7 @@ msgstr ""
 "значение, приведёт к тому, что служба systemd-oomd завершит работу вкладок, "
 "содержащих процессы, интенсивно использующие память. Обратите внимание, что "
 "включение параметра может привести к замедлению работы при значительном "
-"использовании памяти, а указание слишком низких значений все равно может "
+"использовании памяти, а указание слишком низких значений всё равно может "
 "привести к завершению работы Konsole."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
@@ -3971,20 +3962,16 @@ msgctxt ""
 msgid "Use the selected font for line characters instead of the builtin code"
 msgstr ""
 "Использовать символы из шрифта для рисования линий вместо встроенного в "
-"Konsole алгоритма."
+"Konsole алгоритма"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:191
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Characters for drawing lines for a frame or box in TUI programs. Not a "
-#| "row of characters."
-#| msgid ">Use line characters contained in font"
+#, kde-format
 msgctxt ""
 "Characters for drawing lines for a frame or box in TUI programs. Not a row "
 "of characters."
 msgid "Use line characters contained in font"
-msgstr ">Использовать символы из шрифта для рисования линий"
+msgstr "Использовать символы из шрифта для рисования линий"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:198
@@ -4277,14 +4264,14 @@ msgid ""
 "Ignore attribute changes mid-word (otherwise, attribute changes break word "
 "when rendering)"
 msgstr ""
-"Не учитывать изменения аттрибутов посреди слов (если параметр отключён, то "
-"изменение аттрибута приведёт к разрыву слова при его отображении)"
+"Не учитывать изменения атрибутов посреди слов (если параметр отключён, то "
+"изменение атрибута приведёт к разрыву слова при его отображении)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:880
 #, kde-format
 msgid "Use the same attributes for whole word"
-msgstr "Использовать единые аттрибуты для всего слова"
+msgstr "Использовать единые атрибуты для всего слова"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:893
@@ -4342,7 +4329,7 @@ msgstr ""
 #: widgets/EditProfileAppearancePage.ui:970
 #, kde-format
 msgid "force LTR line direction"
-msgstr "Принудительно использовать направление написания слева направо"
+msgstr "Принудительное написание слева направо"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
 #: widgets/EditProfileAppearancePage.ui:983
@@ -4355,7 +4342,7 @@ msgstr ""
 #: widgets/EditProfileAppearancePage.ui:986
 #, kde-format
 msgid "Table characters BiDi mode override"
-msgstr "Табличные символы переопределения режима BiDi"
+msgstr "Табличные символы отменяют вывод справа налево"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:999
@@ -4603,9 +4590,9 @@ msgstr ""
 "  PATH — будет заменено на полный путь к текстовому файлу;\n"
 "  LINE — будет заменено на номер строки;\n"
 "  COLUMN (необязательное поле) — будет заменено на номер столбца.\n"
-"Примечание: аргументы PATH:LINE:COLUMN следует указывать с учётом "
-"синтаксиса, поддерживаемого тектовым редактором, к примеру: «gedit +LINE:"
-"COLUMN PATH»\n"
+"Примечание: аргументы PATH:LINE:COLUMN следует указывать с учётом\n"
+"синтаксиса, поддерживаемого текстовым редактором, например:\n"
+"gedit +LINE:COLUMN PATH\n"
 "\n"
 "Если поля PATH или LINE не указаны, то данный параметр\n"
 "не будет использован, а файл будет открыт в приложении\n"
@@ -5453,8 +5440,7 @@ msgid "Find the previous match for the current search phrase"
 msgstr "Переход к предыдущему вхождению"
 
 #: widgets/IncrementalSearchBar.cpp:102
-#, fuzzy, kde-format
-#| msgid "Case sensitive"
+#, kde-format
 msgctxt "@action:button"
 msgid "Case sensitive"
 msgstr "С учётом регистра"
