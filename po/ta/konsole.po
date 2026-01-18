@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-11 00:46+0000\n"
+"POT-Creation-Date: 2026-01-18 00:46+0000\n"
 "PO-Revision-Date: 2026-01-04 15:56+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-l10n-ta@kde.org>\n"
@@ -1247,7 +1247,7 @@ msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "கீற்றுகளின் தளவமைப்பை ஏற்று..."
 
-#: MainWindow.cpp:743 MainWindow.cpp:760
+#: MainWindow.cpp:746 MainWindow.cpp:763
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1256,61 +1256,61 @@ msgid_plural ""
 msgstr[0] "இச்சாளரத்தில் ஓர் நிரல் இயங்கிக்கொண்டிருக்கிறது. உறுதியாக வெளியேற வேண்டுமா?"
 msgstr[1] "இச்சாளரத்தில் %1 நிரல்கள் இயங்கிக்கொண்டிருக்கின்றன. உறுதியாக வெளியேற வேண்டுமா?"
 
-#: MainWindow.cpp:749 MainWindow.cpp:766 MainWindow.cpp:780
+#: MainWindow.cpp:752 MainWindow.cpp:769 MainWindow.cpp:783
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "வெளியேறுவதை உறுதிப்படுத்தல்"
 
-#: MainWindow.cpp:750 MainWindow.cpp:767 MainWindow.cpp:781
+#: MainWindow.cpp:753 MainWindow.cpp:770 MainWindow.cpp:784
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "&சாளரத்தை மூடு"
 
-#: MainWindow.cpp:768 MainWindow.cpp:782
+#: MainWindow.cpp:771 MainWindow.cpp:785
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "&தற்போதைய கீற்றை மூடு"
 
-#: MainWindow.cpp:777
+#: MainWindow.cpp:780
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "இச்சாளரத்தில் %1 முனையங்கள் திறந்துள்ளன. உறுதியாக வேளியேற வேண்டுமா?"
 
-#: MainWindow.cpp:884 Part.cpp:298
+#: MainWindow.cpp:887 Part.cpp:298
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "பயன்முறைகள்"
 
-#: MainWindow.cpp:902
+#: MainWindow.cpp:905
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "பொதுவானவை"
 
-#: MainWindow.cpp:914
+#: MainWindow.cpp:917
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr "நினைவகம்"
 
-#: MainWindow.cpp:920
+#: MainWindow.cpp:923
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "கீற்றுப்பட்டை / பிரிப்பான்கள்"
 
-#: MainWindow.cpp:925
+#: MainWindow.cpp:928
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "தற்காலிக கோப்புகள்"
 
-#: MainWindow.cpp:930
+#: MainWindow.cpp:933
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
