@@ -23,6 +23,7 @@
 
 #include "konsoleapp_export.h"
 
+#include <optional>
 #include <vector>
 
 class KActionMenu;
@@ -92,6 +93,11 @@ public:
      * Set the initial visibility of the menubar.
      */
     void setMenuBarInitialVisibility(bool showMenuBar);
+
+    /**
+     * Set the initial visibility of the toolbars.
+     */
+    void setToolBarsInitialVisibility(bool showToolbars);
 
     /**
      * @brief Set the frameless state
@@ -228,10 +234,9 @@ private:
     bool _blurEnabled = false;
     bool _firstShowEvent = true;
 
-    struct {
-        bool enabled = false; // indicates that we got a command line argument for menubar
-        bool showMenuBar = true;
-    } _windowArgsMenuBarVisible;
+    // indicates that we got a command line argument that overwrites showing/hidding
+    std::optional<bool> _windowArgsShowMenuBar;
+    std::optional<bool> _windowArgsShowToolBars;
 };
 }
 

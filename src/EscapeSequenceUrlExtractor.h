@@ -117,6 +117,9 @@ public:
     /* Clear all the URL's, this is triggered when the Screen is cleared. */
     void clear();
 
+    /* Clear all the URL's between the given locations. Triggered when parts of the Screen are cleared. */
+    void clearBetween(int loca, int loce);
+
     /* Iterates through all the URL's and remove the ones that are currently
      * out of bounds because we removed lines in the History
      */

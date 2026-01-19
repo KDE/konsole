@@ -8,6 +8,7 @@
 #include "EscapeSequenceUrlExtractor.h"
 #include "Screen.h"
 
+#include <QHostInfo>
 #include <QUrl>
 
 namespace Konsole
@@ -38,8 +39,19 @@ void EscapeSequenceUrlExtractor::appendUrlText_impl(uint c)
 
 void EscapeSequenceUrlExtractor::setUrl(const QString &url)
 {
-    if (_allowedUriSchemas.contains(QUrl(url).scheme() + QLatin1String("://"))) {
-        _currentUrl.url = url;
+    QUrl qUrl = QUrl(url);
+
+    if (_allowedUriSchemas.contains(qUrl.scheme() + QLatin1String("://"))) {
+        if (qUrl.scheme() == QLatin1String("file") && !qUrl.host().isEmpty()) {
+            if (qUrl.host() != QHostInfo::localHostName() && qUrl.host() != QLatin1String("localhost")) {
+                abortUrlInput();
+                return;
+            }
+
+            qUrl.setHost(QString());
+        }
+
+        _currentUrl.url = qUrl.toString();
     } else {
         abortUrlInput();
     }
@@ -68,6 +80,16 @@ void EscapeSequenceUrlExtractor::endUrlInput()
 void EscapeSequenceUrlExtractor::clear()
 {
     _history.clear();
+}
+
+void EscapeSequenceUrlExtractor::clearBetween(int loca, int loce)
+{
+    _history.removeIf([&](const ExtractedUrl &url) {
+        int beginLoc = url.begin.row * _screen->getColumns() + url.begin.col;
+        int endLoc = url.end.row * _screen->getColumns() + url.end.col;
+
+        return (loca <= beginLoc && beginLoc <= loce) || (loca <= endLoc && endLoc <= loce);
+    });
 }
 
 void EscapeSequenceUrlExtractor::setAllowedLinkSchema(const QStringList &schema)

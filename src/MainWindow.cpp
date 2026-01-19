@@ -472,32 +472,35 @@ void MainWindow::updateHamburgerMenu()
 
     menu->addSeparator();
 
-    auto monitorMenu =
-        menu->addMenu(QIcon::fromTheme(QStringLiteral("visibility")), static_cast<QMenu *>(factory()->container(QStringLiteral("view"), nullptr))->title());
-    monitorMenu->addAction(controllerCollection->action(QStringLiteral("monitor-silence")));
-    monitorMenu->addAction(controllerCollection->action(QStringLiteral("monitor-activity")));
-    monitorMenu->addAction(controllerCollection->action(QStringLiteral("monitor-process-finish")));
-    menu->addMenu(monitorMenu);
-    _hamburgerMenu->hideActionsOf(monitorMenu);
+    if (auto viewMenu = static_cast<QMenu *>(factory()->container(QStringLiteral("view"), nullptr))) {
+        auto monitorMenu = menu->addMenu(QIcon::fromTheme(QStringLiteral("visibility")), viewMenu->title());
+        monitorMenu->addAction(controllerCollection->action(QStringLiteral("monitor-silence")));
+        monitorMenu->addAction(controllerCollection->action(QStringLiteral("monitor-activity")));
+        monitorMenu->addAction(controllerCollection->action(QStringLiteral("monitor-process-finish")));
+        menu->addMenu(monitorMenu);
+        _hamburgerMenu->hideActionsOf(monitorMenu);
+    }
 
     auto bookmarkMenu = collection->action(QStringLiteral("bookmark"));
     bookmarkMenu->setIcon(QIcon::fromTheme(QStringLiteral("bookmarks"))); // Icon will be removed again when the menu bar is enabled.
     menu->addAction(bookmarkMenu);
 
-    auto pluginsMenu = static_cast<QMenu *>(factory()->container(QStringLiteral("plugins"), this));
-    pluginsMenu->setIcon(QIcon::fromTheme(QStringLiteral("plugins"))); // Icon will be removed again when the menu bar is enabled.
-    menu->addMenu(pluginsMenu);
+    if (auto pluginsMenu = static_cast<QMenu *>(factory()->container(QStringLiteral("plugins"), this))) {
+        pluginsMenu->setIcon(QIcon::fromTheme(QStringLiteral("plugins"))); // Icon will be removed again when the menu bar is enabled.
+        menu->addMenu(pluginsMenu);
+    }
 
-    auto configureMenu =
-        menu->addMenu(QIcon::fromTheme(QStringLiteral("configure")), static_cast<QMenu *>(factory()->container(QStringLiteral("settings"), nullptr))->title());
-    configureMenu->addAction(toolBarMenuAction());
-    configureMenu->addSeparator();
-    configureMenu->addAction(collection->action(KStandardAction::name(KStandardAction::SwitchApplicationLanguage)));
-    configureMenu->addAction(collection->action(KStandardAction::name(KStandardAction::KeyBindings)));
-    configureMenu->addAction(collection->action(KStandardAction::name(KStandardAction::ConfigureToolbars)));
-    configureMenu->addAction(collection->action(KStandardAction::name(KStandardAction::ConfigureNotifications)));
-    configureMenu->addAction(collection->action(KStandardAction::name(KStandardAction::Preferences)));
-    _hamburgerMenu->hideActionsOf(configureMenu);
+    if (auto settingsMenu = static_cast<QMenu *>(factory()->container(QStringLiteral("settings"), nullptr))) {
+        auto configureMenu = menu->addMenu(QIcon::fromTheme(QStringLiteral("configure")), settingsMenu->title());
+        configureMenu->addAction(toolBarMenuAction());
+        configureMenu->addSeparator();
+        configureMenu->addAction(collection->action(KStandardAction::name(KStandardAction::SwitchApplicationLanguage)));
+        configureMenu->addAction(collection->action(KStandardAction::name(KStandardAction::KeyBindings)));
+        configureMenu->addAction(collection->action(KStandardAction::name(KStandardAction::ConfigureToolbars)));
+        configureMenu->addAction(collection->action(KStandardAction::name(KStandardAction::ConfigureNotifications)));
+        configureMenu->addAction(collection->action(KStandardAction::name(KStandardAction::Preferences)));
+        _hamburgerMenu->hideActionsOf(configureMenu);
+    }
 
     _hamburgerMenu->hideActionsOf(toolBar());
 }
@@ -516,8 +519,15 @@ void MainWindow::applyMainWindowSettings(const KConfigGroup &config)
     KMainWindow::applyMainWindowSettings(config);
 
     // Override the menubar state from the config file
-    if (_windowArgsMenuBarVisible.enabled) {
-        menuBar()->setVisible(_windowArgsMenuBarVisible.showMenuBar);
+    if (_windowArgsShowMenuBar.has_value()) {
+        menuBar()->setVisible(_windowArgsShowMenuBar.value());
+    }
+
+    // Override the toolbar state from the config file
+    if (_windowArgsShowToolBars.has_value()) {
+        for (const auto& name : toolBarNames()) {
+            setToolBarVisible(name, _windowArgsShowToolBars.value());
+        }
     }
 
     _toggleMenuBarAction->setChecked(menuBar()->isVisibleTo(this));
@@ -998,8 +1008,12 @@ void MainWindow::setBlur(bool blur)
 
 void MainWindow::setMenuBarInitialVisibility(bool showMenuBar)
 {
-    _windowArgsMenuBarVisible.enabled = true;
-    _windowArgsMenuBarVisible.showMenuBar = showMenuBar;
+    _windowArgsShowMenuBar = showMenuBar;
+}
+
+void MainWindow::setToolBarsInitialVisibility(bool showToolbars)
+{
+    _windowArgsShowToolBars = showToolbars;
 }
 
 void MainWindow::setRemoveWindowTitleBarAndFrame(bool frameless)

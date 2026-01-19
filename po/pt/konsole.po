@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-03 00:46+0000\n"
+"POT-Creation-Date: 2026-01-18 00:46+0000\n"
 "PO-Revision-Date: 2023-05-15 10:35+0100\n"
 "Last-Translator: Pedro Morais <morais@kde.org>\n"
 "Language-Team: pt <kde-i18n-pt@kde.org>\n"
@@ -190,36 +190,52 @@ msgid "Hide the menubar, overriding the default setting"
 msgstr "Esconde a barra do menu, substituindo a configuração por omissão"
 
 #: Application.cpp:68
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@info:shell"
+#| msgid "Show the tabbar, overriding the default setting"
 msgctxt "@info:shell"
-msgid "Show the tabbar, overriding the default setting"
+msgid "Show all the toolbars, overriding the default setting"
 msgstr "Mostra a barra de páginas, substituindo a configuração por omissão"
 
 #: Application.cpp:69
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@info:shell"
+#| msgid "Hide the tabbar, overriding the default setting"
 msgctxt "@info:shell"
-msgid "Hide the tabbar, overriding the default setting"
+msgid "Hide all the toolbars, overriding the default setting"
 msgstr "Esconde a barra de páginas, substituindo a configuração por omissão"
 
 #: Application.cpp:70
 #, kde-format
 msgctxt "@info:shell"
+msgid "Show the tabbar, overriding the default setting"
+msgstr "Mostra a barra de páginas, substituindo a configuração por omissão"
+
+#: Application.cpp:71
+#, kde-format
+msgctxt "@info:shell"
+msgid "Hide the tabbar, overriding the default setting"
+msgstr "Esconde a barra de páginas, substituindo a configuração por omissão"
+
+#: Application.cpp:72
+#, kde-format
+msgctxt "@info:shell"
 msgid "Start Konsole in fullscreen mode"
 msgstr "Iniciar o Konsole em todo o ecrã"
 
-#: Application.cpp:71
+#: Application.cpp:73
 #, kde-format
 msgctxt "@info:shell"
 msgid "Disable transparent backgrounds, even if the system supports them."
 msgstr "Desactiva os fundos transparentes, mesmo que o sistema os suporte."
 
-#: Application.cpp:72
+#: Application.cpp:74
 #, kde-format
 msgctxt "@info:shell"
 msgid "List the available profiles"
 msgstr "Listar os perfis disponíveis"
 
-#: Application.cpp:73
+#: Application.cpp:75
 #, kde-format
 msgctxt "@info:shell"
 msgid "List all the profile properties names and their type (for use with -p)"
@@ -227,13 +243,13 @@ msgstr ""
 "Apresentar todos os nomes das propriedades do perfil e o seu tipo (a usar "
 "com o -p)"
 
-#: Application.cpp:74
+#: Application.cpp:76
 #, kde-format
 msgctxt "@info:shell"
 msgid "Change the value of a profile property."
 msgstr "Mudar o valor de uma propriedade do perfil."
 
-#: Application.cpp:76
+#: Application.cpp:78
 #, kde-format
 msgctxt "@info:shell"
 msgid ""
@@ -243,7 +259,7 @@ msgstr ""
 "O comando a executar. Esta opção irá capturar todos os argumentos seguintes, "
 "por isso use-a como a última opção."
 
-#: Application.cpp:79
+#: Application.cpp:81
 #, kde-format
 msgctxt "@info:shell"
 msgid ""
@@ -253,13 +269,13 @@ msgstr ""
 "Forçar a reutilização da instância existente, mesmo que quebre "
 "funcionalidades, p.ex., --new-tab. Maioritariamente para depuração."
 
-#: Application.cpp:86
+#: Application.cpp:88
 #, kde-format
 msgctxt "@info:shell"
 msgid "Arguments passed to command"
 msgstr "Argumentos passados ao comando"
 
-#: Application.cpp:516
+#: Application.cpp:529
 #, kde-format
 msgctxt "@item"
 msgid "Toggle Background Window"
@@ -1257,7 +1273,7 @@ msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Carregar uma Disposição de Páginas..."
 
-#: MainWindow.cpp:736 MainWindow.cpp:753
+#: MainWindow.cpp:746 MainWindow.cpp:763
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1268,62 +1284,62 @@ msgstr[0] ""
 msgstr[1] ""
 "Tem %1 processos em execução nesta janela; tem a certeza que deseja sair?"
 
-#: MainWindow.cpp:742 MainWindow.cpp:759 MainWindow.cpp:773
+#: MainWindow.cpp:752 MainWindow.cpp:769 MainWindow.cpp:783
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Confirmar o Fecho"
 
-#: MainWindow.cpp:743 MainWindow.cpp:760 MainWindow.cpp:774
+#: MainWindow.cpp:753 MainWindow.cpp:770 MainWindow.cpp:784
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Fechar a &Janela"
 
-#: MainWindow.cpp:761 MainWindow.cpp:775
+#: MainWindow.cpp:771 MainWindow.cpp:785
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Fechar a &Página Actual"
 
-#: MainWindow.cpp:770
+#: MainWindow.cpp:780
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr ""
 "Existem %1 páginas abertas nesta janela; tem a certeza que deseja sair?"
 
-#: MainWindow.cpp:877 Part.cpp:298
+#: MainWindow.cpp:887 Part.cpp:298
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Perfis"
 
-#: MainWindow.cpp:895
+#: MainWindow.cpp:905
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Geral"
 
-#: MainWindow.cpp:907
+#: MainWindow.cpp:917
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr ""
 
-#: MainWindow.cpp:913
+#: MainWindow.cpp:923
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Barra de Páginas / Divisórias"
 
-#: MainWindow.cpp:918
+#: MainWindow.cpp:928
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Ficheiros Temporários"
 
-#: MainWindow.cpp:923
+#: MainWindow.cpp:933
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
