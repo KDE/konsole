@@ -5,14 +5,14 @@
 # Marta Rybczyńska <kde-i18n@rybczynska.net>, 2007, 2011, 2013.
 # Marcin Kocur <marcin2006@gmail.com>, 2009.
 # Artur Chłond <eugenewolfe@o2.pl>, 2010.
-# SPDX-FileCopyrightText: 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+# SPDX-FileCopyrightText: 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 # Ignacy Kajdan <ignacy.kajdan@gmail.com>, 2019, 2020, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-18 00:46+0000\n"
-"PO-Revision-Date: 2025-12-06 15:16+0100\n"
+"PO-Revision-Date: 2026-01-18 16:00+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: pl\n"
 "Language: pl\n"
@@ -172,20 +172,16 @@ msgid "Hide the menubar, overriding the default setting"
 msgstr "Ukryj pasek menu, zastępując ustawienia domyślne"
 
 #: Application.cpp:68
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "Show the tabbar, overriding the default setting"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Show all the toolbars, overriding the default setting"
-msgstr "Pokaż pasek kart, zastępując ustawienia domyślne"
+msgstr "Pokaż wszystkie paski narzędzi, zastępując ustawienia domyślne"
 
 #: Application.cpp:69
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "Hide the tabbar, overriding the default setting"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Hide all the toolbars, overriding the default setting"
-msgstr "Ukryj pasek kart, zastępując ustawienia domyślne"
+msgstr "Ukryj wszystkie paski narzędzi, zastępując ustawienia domyślne"
 
 #: Application.cpp:70
 #, kde-format
@@ -2658,10 +2654,9 @@ msgstr "Przywróć wszystkie zapytania „Nie pytaj ponownie”"
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ForceNewTabs)
 #. i18n: ectx: label, entry (ForceNewTabs), group (KonsoleWindow)
 #: settings/GeneralSettings.ui:178 settings/konsole.kcfg:37
-#, fuzzy, kde-format
-#| msgid "Put new tabs:"
+#, kde-format
 msgid "Force new tabs"
-msgstr "Nowe karty umieszczaj:"
+msgstr "Wymuś nowe karty"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/GeneralSettings.ui:185
@@ -2766,12 +2761,11 @@ msgstr "Rozmiar okna zostanie zapisany przy wyjściu z Konsoli"
 
 #. i18n: ectx: tooltip, entry (ForceNewTabs), group (KonsoleWindow)
 #: settings/konsole.kcfg:38
-#, fuzzy, kde-format
-#| msgid "When launching Konsole re-use existing process if possible"
+#, kde-format
 msgid ""
 "When launching Konsole create a new tab instead of creating new windows if "
 "possible"
-msgstr "Jeśli to możliwe, uruchom Konsolę używając istniejącego procesu"
+msgstr "Jeśli to możliwe, uruchom Konsolę w nowej karcie zamiast nowym oknie"
 
 #. i18n: ectx: tooltip, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
 #: settings/konsole.kcfg:43
