@@ -5,7 +5,7 @@
 # Author: Lliehu
 # Author: Niklas Laxström
 # Author: Rytilahti
-# SPDX-FileCopyrightText: 2009, 2010, 2011, 2024, 2025 Tommi Nieminen <translator@legisign.org>
+# SPDX-FileCopyrightText: 2009, 2010, 2011, 2024, 2025, 2026 Tommi Nieminen <translator@legisign.org>
 # Kim Enkovaara <kim.enkovaara@iki.fi>, 2002,2003, 2006.
 # Teemu Rytilahti <teemu.rytilahti@d5k.net>, 2003, 2012.
 # Mikko Ikola <ikola@iki.fi>, 2003, 2005.
@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-18 00:46+0000\n"
-"PO-Revision-Date: 2025-10-15 19:34+0300\n"
+"PO-Revision-Date: 2026-01-05 17:20+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -2755,7 +2755,7 @@ msgstr "Käytä valikon valintanäppäimiä"
 #: settings/GeneralSettings.ui:295
 #, kde-format
 msgid "Listen for ZModem terminal codes"
-msgstr ""
+msgstr "Kuuntele ZModem-päätekoodeja"
 
 #. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:18
@@ -2803,13 +2803,13 @@ msgstr "Otetaan käyttöön DBus-API kuten runCommand"
 #: settings/konsole.kcfg:47
 #, kde-format
 msgid "Listen for ZModem Terminal codes"
-msgstr ""
+msgstr "Kuuntele ZModem-päätekoodeja"
 
 #. i18n: ectx: tooltip, entry (ListenForZModemTerminalCodes), group (KonsoleWindow)
 #: settings/konsole.kcfg:48
 #, kde-format
 msgid "Automatic send/receive files over serial connections"
-msgstr ""
+msgstr "Tiedostojen automaattinen lähetys ja vastaanotto sarjaliitäntöjen yli"
 
 #. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:57
@@ -3633,20 +3633,16 @@ msgid "Focus Right Terminal"
 msgstr "Kohdista oikeanpuoleiseen päätteeseen"
 
 #: ViewManager.cpp:282
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Focus Left Terminal"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Next Terminal"
-msgstr "Kohdista vasemmanpuoleiseen päätteeseen"
+msgstr "Kohdista seuraavaan päätteeseen"
 
 #: ViewManager.cpp:288
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Focus Below Terminal"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Previous Terminal"
-msgstr "Kohdistus päätteen alle"
+msgstr "Kohdistus edelliseen alle"
 
 #: ViewManager.cpp:294
 #, kde-format
