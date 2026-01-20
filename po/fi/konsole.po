@@ -5,7 +5,7 @@
 # Author: Lliehu
 # Author: Niklas Laxström
 # Author: Rytilahti
-# SPDX-FileCopyrightText: 2009, 2010, 2011, 2024, 2025 Tommi Nieminen <translator@legisign.org>
+# SPDX-FileCopyrightText: 2009, 2010, 2011, 2024, 2025, 2026 Tommi Nieminen <translator@legisign.org>
 # Kim Enkovaara <kim.enkovaara@iki.fi>, 2002,2003, 2006.
 # Teemu Rytilahti <teemu.rytilahti@d5k.net>, 2003, 2012.
 # Mikko Ikola <ikola@iki.fi>, 2003, 2005.
