@@ -1,14 +1,14 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# SPDX-FileCopyrightText: 2010, 2011, 2012, 2013, 2014, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025 g.sora <g.sora@tiscali.it>
+# SPDX-FileCopyrightText: 2010, 2011, 2012, 2013, 2014, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026 g.sora <g.sora@tiscali.it>
 # giovanni <g.sora@tiscali.it>, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-18 00:46+0000\n"
-"PO-Revision-Date: 2025-09-02 17:50+0200\n"
+"POT-Creation-Date: 2026-01-23 00:47+0000\n"
+"PO-Revision-Date: 2026-01-22 12:02+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -171,20 +171,17 @@ msgid "Hide the menubar, overriding the default setting"
 msgstr "Cela le barra de menu, ultrapassante le preferentia predefinite"
 
 #: Application.cpp:68
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "Show the tabbar, overriding the default setting"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Show all the toolbars, overriding the default setting"
-msgstr "Monstra la barra de scheda, ultrapassante le preferentia predefinite"
+msgstr ""
+"Monstra omne barras de scheda, ultrapassante le preferentia predefinite"
 
 #: Application.cpp:69
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "Hide the tabbar, overriding the default setting"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Hide all the toolbars, overriding the default setting"
-msgstr "Cela la barra de scheda, ultrapassante le preferentia predefinite"
+msgstr "Cela omne barras de scheda, ultrapassante le preferentia predefinite"
 
 #: Application.cpp:70
 #, kde-format
@@ -2178,10 +2175,10 @@ msgstr "Progresso de ZModem"
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Activitate in  '%1' (Session '%2')"
 
-#: session/Session.cpp:2259
+#: session/Session.cpp:2269
 #, kde-format
 msgid "Security sensitive DBus API is disabled in the settings."
-msgstr ""
+msgstr "DBus API sensibile a securitate es dishabilitate in le preferentias."
 
 #: session/SessionController.cpp:142
 #, kde-format
@@ -2589,7 +2586,7 @@ msgstr "Configura"
 #: settings/GeneralSettings.ui:43 settings/konsole.kcfg:42
 #, kde-format
 msgid "Enable the security sensitive parts of the DBus API"
-msgstr ""
+msgstr "Habilita le partes sensibile a securitate del DBus API"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchHighlightMatches)
 #: settings/GeneralSettings.ui:56
@@ -2664,10 +2661,9 @@ msgstr "Habilita omne messages de \"Non demanda de novo\""
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ForceNewTabs)
 #. i18n: ectx: label, entry (ForceNewTabs), group (KonsoleWindow)
 #: settings/GeneralSettings.ui:178 settings/konsole.kcfg:37
-#, fuzzy, kde-format
-#| msgid "Put new tabs:"
+#, kde-format
 msgid "Force new tabs"
-msgstr "Pone nove schedas:"
+msgstr "Fortia nove schedas"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/GeneralSettings.ui:185
@@ -2744,7 +2740,7 @@ msgstr "Habilita acceleratores de menu"
 #: settings/GeneralSettings.ui:295
 #, kde-format
 msgid "Listen for ZModem terminal codes"
-msgstr ""
+msgstr "Ascolta per codices de terminal de ZModem"
 
 #. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:18
@@ -2774,30 +2770,31 @@ msgstr "Le grandor de fenestra essera salveguardate quando on abandona Konsole"
 
 #. i18n: ectx: tooltip, entry (ForceNewTabs), group (KonsoleWindow)
 #: settings/konsole.kcfg:38
-#, fuzzy, kde-format
-#| msgid "When launching Konsole re-use existing process if possible"
+#, kde-format
 msgid ""
 "When launching Konsole create a new tab instead of creating new windows if "
 "possible"
-msgstr "Quando on lancea Konsole reusara le processo existente si possibile"
+msgstr ""
+"Quando on lancea Konsole crea un nove scheda in loco de crear un nove "
+"fenestra si possibile"
 
 #. i18n: ectx: tooltip, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
 #: settings/konsole.kcfg:43
 #, kde-format
 msgid "DBus API like runCommand will be enabled"
-msgstr ""
+msgstr "runCommand simile a DBus API essera habilitate"
 
 #. i18n: ectx: label, entry (ListenForZModemTerminalCodes), group (KonsoleWindow)
 #: settings/konsole.kcfg:47
 #, kde-format
 msgid "Listen for ZModem Terminal codes"
-msgstr ""
+msgstr "Ascolta codices de terminal de ZModem"
 
 #. i18n: ectx: tooltip, entry (ListenForZModemTerminalCodes), group (KonsoleWindow)
 #: settings/konsole.kcfg:48
 #, kde-format
 msgid "Automatic send/receive files over serial connections"
-msgstr ""
+msgstr "Inviar/Reciper files automaticamente sur connexiones serial"
 
 #. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:57
@@ -2981,16 +2978,7 @@ msgstr "Habilita Controlante de Memoria"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:24
-#, fuzzy, kde-format
-#| msgid ""
-#| "Changes will take effect upon restart. If enabled, sustained memory "
-#| "consumption by Konsole\n"
-#| "exceeding the specified value will cause systemd-oomd to eliminate the "
-#| "tab(s)\n"
-#| "containing the memory-intensive process(es). Note: enabling\n"
-#| "might cause greater slowdowns during high memory consumption and "
-#| "specifying\n"
-#| "excessively low values might still cause Konsole to be killed."
+#, kde-format
 msgid ""
 "Changes will take effect upon restart. If enabled, sustained memory "
 "consumption by Konsole exceeding the specified value will cause systemd-oomd "
@@ -2998,13 +2986,12 @@ msgid ""
 "enabling might cause greater slowdowns during high memory consumption and "
 "specifying excessively low values might still cause Konsole to be killed."
 msgstr ""
-"Modificationes habera effecto  quando on restarta. Si habilitate, consumo\n"
-"de memoria sustenite per Konsole excedente le valor specificate causara\n"
-"que systemd-doom eliminara le scheda(s) continente le processo(s) con \n"
-"requestas de memoria intensive.\n"
-"Nota: habilitar pote causar relantamentos plus grande durante le consumo\n"
-"de memoria elevate e specificar valores excessivemente basse pote anque\n"
-"causar que Konsole es occidite. "
+"Modificationes habera effecto  quando on restarta. Si habilitate, consumode "
+"memoria sustenite per Konsole excedente le valor specificate causaraque "
+"systemd-oomd eliminara le scheda(s) continente le processo(s) conrequestas "
+"de memoria intensive. Nota: habilitar pote causar relantamentos  plus grande "
+"durante le consumo de memoria elevate e specificar valores  excessivemente "
+"basse pote anque causar que Konsole es occidite. "
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:37
@@ -3411,59 +3398,59 @@ msgstr "Habilita generation de miniaturas"
 msgid "Size: %1 x %2"
 msgstr "Dimension: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2251
+#: terminalDisplay/TerminalDisplay.cpp:2256
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "Tu es secur que tu vole collar %1 character?"
 msgstr[1] "Tu es secur que tu vole collar %1 characteres?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2252
+#: terminalDisplay/TerminalDisplay.cpp:2257
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Confirma Collar"
 
-#: terminalDisplay/TerminalDisplay.cpp:2285
+#: terminalDisplay/TerminalDisplay.cpp:2290
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "Fin de Texto/Interrumper: pote exir le processo currente"
 
-#: terminalDisplay/TerminalDisplay.cpp:2286
+#: terminalDisplay/TerminalDisplay.cpp:2291
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "Fin de Transmission: pote exir le processo currente"
 
-#: terminalDisplay/TerminalDisplay.cpp:2287
+#: terminalDisplay/TerminalDisplay.cpp:2292
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Campana: essayara emitter un aviso audibile"
 
-#: terminalDisplay/TerminalDisplay.cpp:2288
+#: terminalDisplay/TerminalDisplay.cpp:2293
 #, kde-format
 msgid "Backspace"
 msgstr "RetroSpatio"
 
-#: terminalDisplay/TerminalDisplay.cpp:2289
+#: terminalDisplay/TerminalDisplay.cpp:2294
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "Dispositivo Controlo Tres/XOFF: suspende exito"
 
-#: terminalDisplay/TerminalDisplay.cpp:2290
+#: terminalDisplay/TerminalDisplay.cpp:2295
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "Substitue/Suspende: pote suspender processo currente"
 
-#: terminalDisplay/TerminalDisplay.cpp:2291
+#: terminalDisplay/TerminalDisplay.cpp:2296
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Escappar: usate per manipular stato de terminal"
 
-#: terminalDisplay/TerminalDisplay.cpp:2292
+#: terminalDisplay/TerminalDisplay.cpp:2297
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "Separator de file/Quit: pote abortar le processo currente"
 
-#: terminalDisplay/TerminalDisplay.cpp:2315
+#: terminalDisplay/TerminalDisplay.cpp:2320
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3472,31 +3459,31 @@ msgstr ""
 "Le texto que tu es essayante a collar contine chracteres de controlo celate, "
 "Tu vole excluder los?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2318
+#: terminalDisplay/TerminalDisplay.cpp:2323
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Confirma Collar"
 
-#: terminalDisplay/TerminalDisplay.cpp:2319
+#: terminalDisplay/TerminalDisplay.cpp:2324
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Colla &sin controlar characteres"
 
-#: terminalDisplay/TerminalDisplay.cpp:2320
+#: terminalDisplay/TerminalDisplay.cpp:2325
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "Colla &Toto"
 
-#: terminalDisplay/TerminalDisplay.cpp:2321
+#: terminalDisplay/TerminalDisplay.cpp:2326
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "&Cancella"
 
-#: terminalDisplay/TerminalDisplay.cpp:2552
+#: terminalDisplay/TerminalDisplay.cpp:2557
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3507,17 +3494,17 @@ msgstr ""
 "\">suspendite</a>per premer Ctrl+S. Tu pulsa <b>Ctrl+Q</b>pro resumer lo.</"
 "qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2607
+#: terminalDisplay/TerminalDisplay.cpp:2612
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Iste terminal es de sol lectura."
 
-#: terminalDisplay/TerminalDisplay.cpp:3003
+#: terminalDisplay/TerminalDisplay.cpp:3008
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Modifica un &Directorio in"
 
-#: terminalDisplay/TerminalDisplay.cpp:3038
+#: terminalDisplay/TerminalDisplay.cpp:3043
 #, kde-format
 msgid "&Paste Location"
 msgstr "Colla &Location"
@@ -3643,20 +3630,16 @@ msgid "Focus Right Terminal"
 msgstr "Focalisa terminal dextere"
 
 #: ViewManager.cpp:282
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Focus Left Terminal"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Next Terminal"
-msgstr "Focalisa Terminal sinistre"
+msgstr "Focalisa Proxime Terminal "
 
 #: ViewManager.cpp:288
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Focus Below Terminal"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Previous Terminal"
-msgstr "Focus a  basso de terminal"
+msgstr "Focus Previe Terminal"
 
 #: ViewManager.cpp:294
 #, kde-format
@@ -3796,7 +3779,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Carga disposition de scheda"
 
-#: Vt102Emulation.cpp:2828
+#: Vt102Emulation.cpp:2910
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "

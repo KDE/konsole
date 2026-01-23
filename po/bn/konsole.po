@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-18 00:46+0000\n"
+"POT-Creation-Date: 2026-01-23 00:47+0000\n"
 "PO-Revision-Date: 2010-05-30 02:09-0700\n"
 "Last-Translator: Deepayan Sarkar <deepayan.sarkar@gmail.com>\n"
 "Language-Team: Bengali <kde-translation@bengalinux.org>\n"
@@ -2337,7 +2337,7 @@ msgstr "জি-মোডেম অগ্রগতি"
 msgid "Activity in '%1' (Session '%2')"
 msgstr "সেশন '%1'-এ কিছু ঘটছে"
 
-#: session/Session.cpp:2259
+#: session/Session.cpp:2269
 #, kde-format
 msgid "Security sensitive DBus API is disabled in the settings."
 msgstr ""
@@ -3597,93 +3597,93 @@ msgstr ""
 msgid "Size: %1 x %2"
 msgstr "মাপ: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2251
+#: terminalDisplay/TerminalDisplay.cpp:2256
 #, fuzzy, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "আপনি কি বর্তমান সেশনটি বন্ধ করার ব্যাপারে নিশ্চিত?"
 msgstr[1] "আপনি কি বর্তমান সেশনটি বন্ধ করার ব্যাপারে নিশ্চিত?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2252
+#: terminalDisplay/TerminalDisplay.cpp:2257
 #, fuzzy, kde-format
 #| msgid "Confirm Close"
 msgid "Confirm Paste"
 msgstr "বন্ধ করা অনুমোদন করো"
 
-#: terminalDisplay/TerminalDisplay.cpp:2285
+#: terminalDisplay/TerminalDisplay.cpp:2290
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2286
+#: terminalDisplay/TerminalDisplay.cpp:2291
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2287
+#: terminalDisplay/TerminalDisplay.cpp:2292
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2288
+#: terminalDisplay/TerminalDisplay.cpp:2293
 #, kde-format
 msgid "Backspace"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2289
+#: terminalDisplay/TerminalDisplay.cpp:2294
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2290
+#: terminalDisplay/TerminalDisplay.cpp:2295
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2291
+#: terminalDisplay/TerminalDisplay.cpp:2296
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2292
+#: terminalDisplay/TerminalDisplay.cpp:2297
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2315
+#: terminalDisplay/TerminalDisplay.cpp:2320
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
 "want to filter them out?"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2318
+#: terminalDisplay/TerminalDisplay.cpp:2323
 #, fuzzy, kde-format
 #| msgid "Confirm Close"
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "বন্ধ করা অনুমোদন করো"
 
-#: terminalDisplay/TerminalDisplay.cpp:2319
+#: terminalDisplay/TerminalDisplay.cpp:2324
 #, fuzzy, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "বর্তমান অক্ষর মিলতে কার্সর রং নিযুক্ত করো"
 
-#: terminalDisplay/TerminalDisplay.cpp:2320
+#: terminalDisplay/TerminalDisplay.cpp:2325
 #, fuzzy, kde-format
 #| msgid "Paste Selection"
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "নির্বাচিত অংশ সাঁটো"
 
-#: terminalDisplay/TerminalDisplay.cpp:2321
+#: terminalDisplay/TerminalDisplay.cpp:2326
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2552
+#: terminalDisplay/TerminalDisplay.cpp:2557
 #, fuzzy, kde-format
 #| msgid ""
 #| "<qt>Output has been <a href=\"http://en.wikipedia.org/wiki/Flow_control"
@@ -3696,17 +3696,17 @@ msgstr ""
 "<qt>Ctrl+S চাপা হয়েছে বলে আউটপুট <a href=\"http://en.wikipedia.org/wiki/"
 "Flow_control\">আটকে রাখা</a> হয়েছে। <b>Ctrl+Q</b> চাপলে পুনরায় শুরু হবে।</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2607
+#: terminalDisplay/TerminalDisplay.cpp:2612
 #, kde-format
 msgid "This terminal is read-only."
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:3003
+#: terminalDisplay/TerminalDisplay.cpp:3008
 #, fuzzy, kde-format
 msgid "Change &Directory To"
 msgstr "কার্যকরী ডিরেক্টরি পাল্টে 'dir' করো"
 
-#: terminalDisplay/TerminalDisplay.cpp:3038
+#: terminalDisplay/TerminalDisplay.cpp:3043
 #, fuzzy, kde-format
 #| msgid "Paste Selection"
 msgid "&Paste Location"
@@ -4012,7 +4012,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr ""
 
-#: Vt102Emulation.cpp:2828
+#: Vt102Emulation.cpp:2910
 #, fuzzy, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
