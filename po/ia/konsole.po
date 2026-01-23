@@ -1,14 +1,14 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# SPDX-FileCopyrightText: 2010, 2011, 2012, 2013, 2014, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025 g.sora <g.sora@tiscali.it>
+# SPDX-FileCopyrightText: 2010, 2011, 2012, 2013, 2014, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026 g.sora <g.sora@tiscali.it>
 # giovanni <g.sora@tiscali.it>, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 14:43+0000\n"
-"PO-Revision-Date: 2025-09-02 17:50+0200\n"
+"PO-Revision-Date: 2026-01-22 17:37+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -2165,7 +2165,7 @@ msgstr "Activitate in  '%1' (Session '%2')"
 #: session/Session.cpp:2259
 #, kde-format
 msgid "Security sensitive DBus API is disabled in the settings."
-msgstr ""
+msgstr "DBus API sensibile a securitate es dishabilitate in le preferentias."
 
 #: session/SessionController.cpp:142
 #, kde-format
@@ -2587,7 +2587,7 @@ msgstr "Cerca retro"
 #: settings/GeneralSettings.ui:59 settings/konsole.kcfg:37
 #, kde-format
 msgid "Enable the security sensitive parts of the DBus API"
-msgstr ""
+msgstr "Habilita le partes sensibile a securitate del DBus API"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/GeneralSettings.ui:66
@@ -2746,7 +2746,7 @@ msgstr "Le grandor de fenestra essera salveguardate quando on abandona Konsole"
 #: settings/konsole.kcfg:38
 #, kde-format
 msgid "DBus API like runCommand will be enabled"
-msgstr ""
+msgstr "runCommand simile a DBus API essera habilitate"
 
 #. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:47
@@ -2930,16 +2930,7 @@ msgstr "Habilita Controlante de Memoria"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:24
-#, fuzzy, kde-format
-#| msgid ""
-#| "Changes will take effect upon restart. If enabled, sustained memory "
-#| "consumption by Konsole\n"
-#| "exceeding the specified value will cause systemd-oomd to eliminate the "
-#| "tab(s)\n"
-#| "containing the memory-intensive process(es). Note: enabling\n"
-#| "might cause greater slowdowns during high memory consumption and "
-#| "specifying\n"
-#| "excessively low values might still cause Konsole to be killed."
+#, kde-format
 msgid ""
 "Changes will take effect upon restart. If enabled, sustained memory "
 "consumption by Konsole exceeding the specified value will cause systemd-oomd "
@@ -2947,13 +2938,12 @@ msgid ""
 "enabling might cause greater slowdowns during high memory consumption and "
 "specifying excessively low values might still cause Konsole to be killed."
 msgstr ""
-"Modificationes habera effecto  quando on restarta. Si habilitate, consumo\n"
-"de memoria sustenite per Konsole excedente le valor specificate causara\n"
-"que systemd-doom eliminara le scheda(s) continente le processo(s) con \n"
-"requestas de memoria intensive.\n"
-"Nota: habilitar pote causar relantamentos plus grande durante le consumo\n"
-"de memoria elevate e specificar valores excessivemente basse pote anque\n"
-"causar que Konsole es occidite. "
+"Modificationes habera effecto  quando on restarta. Si habilitate, consumode "
+"memoria sustenite per Konsole excedente le valor specificate causaraque "
+"systemd-oomd eliminara le scheda(s) continente le processo(s) conrequestas "
+"de memoria intensive. Nota: habilitar pote causar relantamentos  plus grande "
+"durante le consumo de memoria elevate e specificar valores  excessivemente "
+"basse pote anque causar que Konsole es occidite. "
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:37
