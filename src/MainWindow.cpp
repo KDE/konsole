@@ -6,6 +6,7 @@
 
 // Own
 #include "MainWindow.h"
+#include "config-konsole.h"
 
 // Qt
 #include <QMenu>
@@ -62,6 +63,8 @@
 
 #include "terminalDisplay/TerminalDisplay.h"
 #include "widgets/ViewContainer.h"
+
+#include "pluginsystem/IKonsolePlugin.h"
 
 #include <konsoledebug.h>
 

@@ -17,10 +17,6 @@
 #include <KXmlGuiWindow>
 
 // Konsole
-#include "widgets/ViewSplitter.h"
-
-#include "pluginsystem/IKonsolePlugin.h"
-
 #include "konsoleapp_export.h"
 
 #include <optional>
@@ -34,10 +30,13 @@ namespace Konsole
 {
 class ViewManager;
 class ViewProperties;
+class ViewSplitter;
+class TerminalDisplay;
 class Session;
 class SessionController;
 class Profile;
 class ProfileList;
+class IKonsolePlugin;
 class BookmarkHandler;
 
 /**
