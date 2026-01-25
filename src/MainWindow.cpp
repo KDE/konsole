@@ -738,8 +738,10 @@ bool MainWindow::queryClose()
 
 #if WITH_X11
     // make sure the window is shown on current desktop and is not minimized
-    KX11Extras::setOnDesktop(winId(), KX11Extras::currentDesktop());
+    if (KWindowSystem::isPlatformX11())
+        KX11Extras::setOnDesktop(winId(), KX11Extras::currentDesktop());
 #endif
+
     int result;
 
     if (!processesRunning.isEmpty()) {
