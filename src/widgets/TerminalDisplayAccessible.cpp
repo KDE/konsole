@@ -175,3 +175,10 @@ TerminalDisplay *TerminalDisplayAccessible::display() const
 {
     return qobject_cast<TerminalDisplay *>(widget());
 }
+
+QAccessible::State Konsole::TerminalDisplayAccessible::state() const
+{
+    QAccessible::State s = QAccessibleWidget::state();
+    s.multiLine = true;
+    return s;
+}

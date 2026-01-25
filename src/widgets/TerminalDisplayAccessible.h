@@ -33,6 +33,8 @@ public:
     QString text(int startOffset, int endOffset) const override;
     int characterCount() const override;
 
+    QAccessible::State state() const override;
+
     int selectionCount() const override;
     void selection(int selectionIndex, int *startOffset, int *endOffset) const override;
     void addSelection(int startOffset, int endOffset) override;
