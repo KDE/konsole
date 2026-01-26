@@ -1538,6 +1538,10 @@ void Screen::clearImage(int loca, int loce, char c, bool resetLineRendition)
             }
         }
     }
+
+    if (_escapeSequenceUrlExtractor) {
+        _escapeSequenceUrlExtractor->clearBetween(loca, loce);
+    }
 }
 
 void Screen::moveImage(int dest, int sourceBegin, int sourceEnd)

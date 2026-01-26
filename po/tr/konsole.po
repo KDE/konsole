@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025 Emir SARI <emir_sari@icloud.com>
+# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025, 2026 Emir SARI <emir_sari@icloud.com>
 # Adem Alp Yıldız <ademalp@kde.org.tr>, 2005.
 # Bekir SONAT <cortexbs@yahoo.com>, 2005.
 # Görkem Çetin <gorkem@kde.org>, 2003-2004.
@@ -18,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:55+0000\n"
-"PO-Revision-Date: 2025-09-24 09:19+0300\n"
+"POT-Creation-Date: 2026-01-23 00:47+0000\n"
+"PO-Revision-Date: 2026-01-11 13:00+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -27,7 +27,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.08.1\n"
+"X-Generator: Lokalize 25.12.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -171,58 +171,70 @@ msgstr "Ayrı bir süreçte çalıştır"
 #, kde-format
 msgctxt "@info:shell"
 msgid "Show the menubar, overriding the default setting"
-msgstr "Menü çubuğunu göster, öntanımlı ayarların üzerine yazılır"
+msgstr "Öntanımlı ayarı geçersiz kılarak menü çubuğunu göster"
 
 #: Application.cpp:67
 #, kde-format
 msgctxt "@info:shell"
 msgid "Hide the menubar, overriding the default setting"
-msgstr "Menü çubuğunu gizle, öntanımlı ayarların üzerine yazılır"
+msgstr "Öntanımlı ayarı geçersiz kılarak menü çubuğunu gizle"
 
 #: Application.cpp:68
 #, kde-format
 msgctxt "@info:shell"
-msgid "Show the tabbar, overriding the default setting"
-msgstr "Sekme çubuğunu göster, öntanımlı ayarların üzerine yazılır"
+msgid "Show all the toolbars, overriding the default setting"
+msgstr "Öntanımlı ayarı geçersiz kılarak tüm araç çubuklarını göster"
 
 #: Application.cpp:69
 #, kde-format
 msgctxt "@info:shell"
-msgid "Hide the tabbar, overriding the default setting"
-msgstr "Sekme çubuğunu gizle, öntanımlı ayarların üzerine yazılır"
+msgid "Hide all the toolbars, overriding the default setting"
+msgstr "Öntanımlı ayarı geçersiz kılarak tüm araç çubuklarını gizle"
 
 #: Application.cpp:70
+#, kde-format
+msgctxt "@info:shell"
+msgid "Show the tabbar, overriding the default setting"
+msgstr "Öntanımlı ayarı geçersiz kılarak sekme çubuğunu göster"
+
+#: Application.cpp:71
+#, kde-format
+msgctxt "@info:shell"
+msgid "Hide the tabbar, overriding the default setting"
+msgstr "Öntanımlı ayarı geçersiz kılarak sekme çubuğunu gizle"
+
+#: Application.cpp:72
 #, kde-format
 msgctxt "@info:shell"
 msgid "Start Konsole in fullscreen mode"
 msgstr "Konsole’yi tam ekran kipinde başlat"
 
-#: Application.cpp:71
+#: Application.cpp:73
 #, kde-format
 msgctxt "@info:shell"
 msgid "Disable transparent backgrounds, even if the system supports them."
 msgstr "Sistem desteklese bile saydam arka planları devre dışı bırakın."
 
-#: Application.cpp:72
+#: Application.cpp:74
 #, kde-format
 msgctxt "@info:shell"
 msgid "List the available profiles"
 msgstr "Kullanılabilir profilleri listele"
 
-#: Application.cpp:73
+#: Application.cpp:75
 #, kde-format
 msgctxt "@info:shell"
 msgid "List all the profile properties names and their type (for use with -p)"
 msgstr ""
 "Tüm profile özelliklerinin adlarını ve tiplerini listele (-p kullanarak)"
 
-#: Application.cpp:74
+#: Application.cpp:76
 #, kde-format
 msgctxt "@info:shell"
 msgid "Change the value of a profile property."
 msgstr "Bir profil özelliğine ait değeri değiştir."
 
-#: Application.cpp:76
+#: Application.cpp:78
 #, kde-format
 msgctxt "@info:shell"
 msgid ""
@@ -232,7 +244,7 @@ msgstr ""
 "Yürütülecek komut. Bu seçenek, tüm izleyen argümanları yakalar, bu nedenle "
 "son seçenek olarak kullanın."
 
-#: Application.cpp:79
+#: Application.cpp:81
 #, kde-format
 msgctxt "@info:shell"
 msgid ""
@@ -242,13 +254,13 @@ msgstr ""
 "İşlevselliği bozsa bile var olan oturumu yeniden kullanmayı zorla; örn. --"
 "new-tab. Çoğunlukla hata ayıklama için kullanılır."
 
-#: Application.cpp:86
+#: Application.cpp:88
 #, kde-format
 msgctxt "@info:shell"
 msgid "Arguments passed to command"
 msgstr "Komuta verilen argümanlar"
 
-#: Application.cpp:516
+#: Application.cpp:529
 #, kde-format
 msgctxt "@item"
 msgid "Toggle Background Window"
@@ -1243,7 +1255,7 @@ msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Sekme Yerleşimi Yükle…"
 
-#: MainWindow.cpp:736 MainWindow.cpp:753
+#: MainWindow.cpp:746 MainWindow.cpp:763
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1254,61 +1266,61 @@ msgstr[0] ""
 msgstr[1] ""
 "Bu pencerede çalışan %1 süreç var. Çıkmak istediğinizden emin misiniz?"
 
-#: MainWindow.cpp:742 MainWindow.cpp:759 MainWindow.cpp:773
+#: MainWindow.cpp:752 MainWindow.cpp:769 MainWindow.cpp:783
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Kapatmayı Doğrula"
 
-#: MainWindow.cpp:743 MainWindow.cpp:760 MainWindow.cpp:774
+#: MainWindow.cpp:753 MainWindow.cpp:770 MainWindow.cpp:784
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "&Pencereyi Kapat"
 
-#: MainWindow.cpp:761 MainWindow.cpp:775
+#: MainWindow.cpp:771 MainWindow.cpp:785
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "G&eçerli Sekmeyi Kapat"
 
-#: MainWindow.cpp:770
+#: MainWindow.cpp:780
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "Bu pencerede %1 açık uçbirim var. Çıkmak istediğinizden emin misiniz?"
 
-#: MainWindow.cpp:877 Part.cpp:298
+#: MainWindow.cpp:887 Part.cpp:298
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profiller"
 
-#: MainWindow.cpp:895
+#: MainWindow.cpp:905
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Genel"
 
-#: MainWindow.cpp:907
+#: MainWindow.cpp:917
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr "Bellek"
 
-#: MainWindow.cpp:913
+#: MainWindow.cpp:923
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Sekme Çubuğu / Ayırıcılar"
 
-#: MainWindow.cpp:918
+#: MainWindow.cpp:928
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Geçici Dosyalar"
 
-#: MainWindow.cpp:923
+#: MainWindow.cpp:933
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -1410,29 +1422,29 @@ msgid "Cancel"
 msgstr "İptal et"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:46
-#: plugins/QuickCommands/quickcommandsplugin.cpp:113
+#: plugins/QuickCommands/quickcommandsplugin.cpp:130
 #, kde-format
 msgid "Quick Commands"
 msgstr "Tez Komutlar"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:71
+#: plugins/QuickCommands/quickcommandsplugin.cpp:75
 #, kde-format
 msgid "Show Quick Access"
 msgstr "Tez Erişim’i Göster"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:106
+#: plugins/QuickCommands/quickcommandsplugin.cpp:123
 #, kde-format
 msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
 msgstr ""
 "Bir tez komut bulunamadı. Eklentiler → Tez Komutlar bölümünden bir tane "
 "ekleyebilirsiniz"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:107
+#: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
 msgid "Plugins - Quick Commands"
 msgstr "Eklentiler — Tez Komutlar"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:125
+#: plugins/QuickCommands/quickcommandsplugin.cpp:140
 #, kde-format
 msgid "Show Quick Commands"
 msgstr "Tez Komutları Göster"
@@ -1872,14 +1884,14 @@ msgstr "Çıktı Seçenekleri"
 
 #. i18n: ectx: property (text), widget (QCheckBox, printerFriendly)
 #. i18n: ectx: label, entry (PrinterFriendly), group (PrintOptions)
-#: PrintOptions.ui:39 settings/konsole.kcfg:195
+#: PrintOptions.ui:39 settings/konsole.kcfg:205
 #, kde-format
 msgid "Printer &friendly mode (black text, no background)"
 msgstr "Yazıcı &dostu kip (siyah metin, arka plan yok)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, scaleOutput)
 #. i18n: ectx: label, entry (ScaleOutput), group (PrintOptions)
-#: PrintOptions.ui:46 settings/konsole.kcfg:199
+#: PrintOptions.ui:46 settings/konsole.kcfg:209
 #, kde-format
 msgid "&Scale output"
 msgstr "Çıkı&şı Ölçeklendir"
@@ -2162,7 +2174,7 @@ msgstr "ZModem İlerlemesi"
 msgid "Activity in '%1' (Session '%2')"
 msgstr "“%1” içinde Etkinlik (Oturum “%2”)"
 
-#: session/Session.cpp:2259
+#: session/Session.cpp:2269
 #, kde-format
 msgid "Security sensitive DBus API is disabled in the settings."
 msgstr "Güvenliğe duyarlı DBus API’si, ayarlarda devre dışı bırakılmıştır."
@@ -2383,12 +2395,12 @@ msgstr "Süreç Sonlanmasını İzle"
 #: session/SessionController.cpp:919
 #, kde-format
 msgid "Enlarge Font"
-msgstr "Yazıtipi Boyutunu Büyüt"
+msgstr "Yazıtipi Puntosunu Büyüt"
 
 #: session/SessionController.cpp:927
 #, kde-format
 msgid "Shrink Font"
-msgstr "Yazıtipi Boyutunu Küçült"
+msgstr "Yazıtipi Puntosunu Küçült"
 
 #: session/SessionController.cpp:932
 #, kde-format
@@ -2562,150 +2574,163 @@ msgctxt "@title:window"
 msgid "Configure"
 msgstr "Yapılandır"
 
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableSecuritySensitiveDBusAPI)
+#. i18n: ectx: label, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:43 settings/konsole.kcfg:42
+#, kde-format
+msgid "Enable the security sensitive parts of the DBus API"
+msgstr "DBus API’sinin güvenliğe duyarlı kısımlarını etkinleştir"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchHighlightMatches)
+#: settings/GeneralSettings.ui:56
+#, kde-format
+msgid "Highlight all matches"
+msgstr "Tüm eşleşmeleri vurgula"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: settings/GeneralSettings.ui:63
+#, kde-format
+msgid "Notifications:"
+msgstr "Bildirimler:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_FocusFollowsMouse)
+#. i18n: ectx: label, entry (FocusFollowsMouse), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:70 settings/konsole.kcfg:13
+#, kde-format
+msgid "Focus terminals when the mouse pointer is moved over them"
+msgstr "Fare işaretçisi üzerine getirildiğinde uçbirimlere odaklan"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RemoveWindowTitleBarAndFrame)
+#. i18n: ectx: label, entry (RemoveWindowTitleBarAndFrame), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:77 settings/konsole.kcfg:9
+#, kde-format
+msgid "Remove window titlebar and frame"
+msgstr "Pencere başlık çubuğunu ve çerçevesini kaldır"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_RememberWindowSize)
+#: settings/GeneralSettings.ui:90
+#, kde-format
+msgid "If enabled, profile settings will be ignored"
+msgstr "Etkin ise profil ayarları yok sayılır"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RememberWindowSize)
+#: settings/GeneralSettings.ui:93
+#, kde-format
+msgid "Remember window size"
+msgstr "Pencere boyutunu anımsa"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchNoWrap)
+#. i18n: ectx: tooltip, entry (SearchNoWrap), group (SearchSettings)
+#: settings/GeneralSettings.ui:106 settings/konsole.kcfg:99
+#, kde-format
+msgid "Sets whether search should stop instead of wrapping"
+msgstr "Aramanın sardırmak yerine durup durmaması gerektiğini ayarlar"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchNoWrap)
+#: settings/GeneralSettings.ui:109
+#, kde-format
+msgid "No wrap"
+msgstr "Sardırma yok"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: settings/GeneralSettings.ui:116
+#, kde-format
+msgid "Process and window:"
+msgstr "Süreç ve pencere:"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, enableAllMessagesButton)
+#: settings/GeneralSettings.ui:137
+#, kde-format
+msgid "All dialogs will be shown again"
+msgstr "Tüm iletişim kutuları yeniden gösterilecek"
+
+#. i18n: ectx: property (text), widget (QPushButton, enableAllMessagesButton)
+#: settings/GeneralSettings.ui:140
+#, kde-format
+msgid "Enable all \"Don't Ask Again\" messages"
+msgstr "“Bir Daha Sorma” İletilerini Etkinleştir"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ForceNewTabs)
+#. i18n: ectx: label, entry (ForceNewTabs), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:178 settings/konsole.kcfg:37
+#, kde-format
+msgid "Force new tabs"
+msgstr "Yeni sekmeleri zorla"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: settings/GeneralSettings.ui:185
+#, kde-format
+msgctxt "@item:intext Search options"
+msgid "Search:"
+msgstr "Ara:"
+
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchReverseSearch)
 #. i18n: ectx: tooltip, entry (SearchReverseSearch), group (SearchSettings)
-#: settings/GeneralSettings.ui:49 settings/konsole.kcfg:84
+#: settings/GeneralSettings.ui:198 settings/konsole.kcfg:94
 #, kde-format
 msgid "Sets whether search should start from the bottom"
 msgstr "Aramanın aşağıdan başlayıp başlamayacağını ayarlar"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchReverseSearch)
 #. i18n: ectx: label, entry (SearchReverseSearch), group (SearchSettings)
-#: settings/GeneralSettings.ui:52 settings/konsole.kcfg:83
+#: settings/GeneralSettings.ui:201 settings/konsole.kcfg:93
 #, kde-format
 msgid "Search backwards"
 msgstr "Geriye doğru ara"
 
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableSecuritySensitiveDBusAPI)
-#. i18n: ectx: label, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:59 settings/konsole.kcfg:37
-#, kde-format
-msgid "Enable the security sensitive parts of the DBus API"
-msgstr "DBus API’sinin güvenliğe duyarlı kısımlarını etkinleştir"
-
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: settings/GeneralSettings.ui:66
-#, kde-format
-msgctxt "@item:intext Search options"
-msgid "Search:"
-msgstr "Ara:"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchRegExpression)
-#. i18n: ectx: label, entry (SearchRegExpression), group (SearchSettings)
-#: settings/GeneralSettings.ui:79 settings/konsole.kcfg:74
-#, kde-format
-msgid "Match using regular expressions"
-msgstr "Düzenli ifade kullanarak eşleştir"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RemoveWindowTitleBarAndFrame)
-#. i18n: ectx: label, entry (RemoveWindowTitleBarAndFrame), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:86 settings/konsole.kcfg:9
-#, kde-format
-msgid "Remove window titlebar and frame"
-msgstr "Pencere başlık çubuğunu ve çerçevesini kaldır"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_AllowMenuAccelerators)
-#. i18n: ectx: label, entry (AllowMenuAccelerators), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:99 settings/konsole.kcfg:22
-#, kde-format
-msgid "Enable menu accelerators"
-msgstr "Menü ivmelendiricilerini etkinleştir"
-
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_UseSingleInstance)
 #. i18n: ectx: tooltip, entry (UseSingleInstance), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:112 settings/konsole.kcfg:33
+#: settings/GeneralSettings.ui:214 settings/konsole.kcfg:33
 #, kde-format
 msgid "When launching Konsole re-use existing process if possible"
 msgstr "Olanaklıysa Konsole çalıştırılırken var olan süreci yeniden kullan"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSingleInstance)
 #. i18n: ectx: label, entry (UseSingleInstance), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:115 settings/konsole.kcfg:32
+#: settings/GeneralSettings.ui:217 settings/konsole.kcfg:32
 #, kde-format
 msgid "Run all Konsole windows in a single process"
 msgstr "Tüm Konsole pencerelerini tek süreçte çalıştır"
 
-#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_RememberWindowSize)
-#: settings/GeneralSettings.ui:128
-#, kde-format
-msgid "If enabled, profile settings will be ignored"
-msgstr "Etkin ise profil ayarları yok sayılır"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RememberWindowSize)
-#: settings/GeneralSettings.ui:131
-#, kde-format
-msgid "Remember window size"
-msgstr "Pencere boyutunu anımsa"
-
-#. i18n: ectx: property (text), widget (QLabel, label_3)
-#: settings/GeneralSettings.ui:138
-#, kde-format
-msgid "Notifications:"
-msgstr "Bildirimler:"
-
-#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchNoWrap)
-#. i18n: ectx: tooltip, entry (SearchNoWrap), group (SearchSettings)
-#: settings/GeneralSettings.ui:151 settings/konsole.kcfg:89
-#, kde-format
-msgid "Sets whether search should stop instead of wrapping"
-msgstr "Aramanın sardırmak yerine durup durmaması gerektiğini ayarlar"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchNoWrap)
-#: settings/GeneralSettings.ui:154
-#, kde-format
-msgid "No wrap"
-msgstr "Sardırma yok"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowWindowTitleOnTitleBar)
-#. i18n: ectx: label, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:167 settings/konsole.kcfg:17
-#, kde-format
-msgid "Show window title on the titlebar"
-msgstr "Başlık çubuğunda pencere başlığını göster"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_FocusFollowsMouse)
-#. i18n: ectx: label, entry (FocusFollowsMouse), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:174 settings/konsole.kcfg:13
-#, kde-format
-msgid "Focus terminals when the mouse pointer is moved over them"
-msgstr "Fare işaretçisi üzerine getirildiğinde uçbirimlere odaklan"
-
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchCaseSensitive)
 #. i18n: ectx: tooltip, entry (SearchCaseSensitive), group (SearchSettings)
-#: settings/GeneralSettings.ui:187 settings/konsole.kcfg:70
+#: settings/GeneralSettings.ui:230 settings/konsole.kcfg:80
 #, kde-format
 msgid "Sets whether the search is case sensitive"
 msgstr "Aramanın BÜYÜK/küçük harf duyarlı olup olmayacağını ayarlar"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchCaseSensitive)
-#: settings/GeneralSettings.ui:190
+#: settings/GeneralSettings.ui:233
 #, kde-format
 msgid "Case sensitive"
 msgstr "BÜYÜK/küçük harf duyarlı"
 
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: settings/GeneralSettings.ui:197
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowWindowTitleOnTitleBar)
+#. i18n: ectx: label, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:262 settings/konsole.kcfg:17
 #, kde-format
-msgid "Process and window:"
-msgstr "Süreç ve pencere:"
+msgid "Show window title on the titlebar"
+msgstr "Başlık çubuğunda pencere başlığını göster"
 
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchHighlightMatches)
-#: settings/GeneralSettings.ui:213
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchRegExpression)
+#. i18n: ectx: label, entry (SearchRegExpression), group (SearchSettings)
+#: settings/GeneralSettings.ui:275 settings/konsole.kcfg:84
 #, kde-format
-msgid "Highlight all matches"
-msgstr "Tüm eşleşmeleri vurgula"
+msgid "Match using regular expressions"
+msgstr "Düzenli ifade kullanarak eşleştir"
 
-#. i18n: ectx: property (toolTip), widget (QPushButton, enableAllMessagesButton)
-#: settings/GeneralSettings.ui:231
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_AllowMenuAccelerators)
+#. i18n: ectx: label, entry (AllowMenuAccelerators), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:288 settings/konsole.kcfg:22
 #, kde-format
-msgid "All dialogs will be shown again"
-msgstr "Tüm iletişim kutuları yeniden gösterilecek"
+msgid "Enable menu accelerators"
+msgstr "Menü ivmelendiricilerini etkinleştir"
 
-#. i18n: ectx: property (text), widget (QPushButton, enableAllMessagesButton)
-#: settings/GeneralSettings.ui:234
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ListenForZModemTerminalCodes)
+#: settings/GeneralSettings.ui:295
 #, kde-format
-msgid "Enable all \"Don't Ask Again\" messages"
-msgstr "“Bir Daha Sorma” İletilerini Etkinleştir"
+msgid "Listen for ZModem terminal codes"
+msgstr "ZModem uçbirim kodları için dinle"
 
 #. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:18
@@ -2732,71 +2757,93 @@ msgstr "Sonraki başlangıçta geçerli pencere boyutunu kullan"
 msgid "The window size will be saved upon exiting Konsole"
 msgstr "Konsole’dan çıkarken pencere boyutu kaydedilecek"
 
-#. i18n: ectx: tooltip, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
+#. i18n: ectx: tooltip, entry (ForceNewTabs), group (KonsoleWindow)
 #: settings/konsole.kcfg:38
+#, kde-format
+msgid ""
+"When launching Konsole create a new tab instead of creating new windows if "
+"possible"
+msgstr ""
+"Konsole’yi başlatırken olanaklıysa yeni pencereler yerine yeni sekmeler "
+"oluştur"
+
+#. i18n: ectx: tooltip, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
+#: settings/konsole.kcfg:43
 #, kde-format
 msgid "DBus API like runCommand will be enabled"
 msgstr "DBus API’sine benzer runCommand etkinleştirilecektir"
 
-#. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
+#. i18n: ectx: label, entry (ListenForZModemTerminalCodes), group (KonsoleWindow)
 #: settings/konsole.kcfg:47
+#, kde-format
+msgid "Listen for ZModem Terminal codes"
+msgstr "ZModem uçbirim kodları için dinle"
+
+#. i18n: ectx: tooltip, entry (ListenForZModemTerminalCodes), group (KonsoleWindow)
+#: settings/konsole.kcfg:48
+#, kde-format
+msgid "Automatic send/receive files over serial connections"
+msgstr "Seri bağlantılar üzerinden kendiliğinden dosya alımı/gönderimi"
+
+#. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
+#: settings/konsole.kcfg:57
 #, kde-format
 msgid "Thumbnail Width"
 msgstr "Küçük Görsel Genişliği"
 
 #. i18n: ectx: tooltip, entry (ThumbnailSize), group (ThumbnailsSettings)
-#: settings/konsole.kcfg:48
+#: settings/konsole.kcfg:58
 #, kde-format
 msgid "Sets the width of the thumbnail"
 msgstr "Küçük resmin genişliğini ayarlar"
 
 #. i18n: ectx: label, entry (ThumbnailShift), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailShift), group (ThumbnailsSettings)
-#: settings/konsole.kcfg:52 settings/konsole.kcfg:53
+#: settings/konsole.kcfg:62 settings/konsole.kcfg:63
 #, kde-format
 msgid "Use Shift to display a thumbnail"
 msgstr "Bir küçük görsel görüntülemek için Üst Karakter düğmesini kullan"
 
 #. i18n: ectx: label, entry (ThumbnailAlt), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailAlt), group (ThumbnailsSettings)
-#: settings/konsole.kcfg:57 settings/konsole.kcfg:58
+#: settings/konsole.kcfg:67 settings/konsole.kcfg:68
 #, kde-format
 msgid "Use Alt to display a thumbnail"
 msgstr "Bir küçük görsel görüntülemek için Seçenek düğmesini kullan"
 
 #. i18n: ectx: label, entry (ThumbnailCtrl), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailCtrl), group (ThumbnailsSettings)
-#: settings/konsole.kcfg:62 settings/konsole.kcfg:63
+#: settings/konsole.kcfg:72 settings/konsole.kcfg:73
 #, kde-format
 msgid "Use Ctrl to display a thumbnail"
 msgstr "Bir küçük görsel görüntülemek için Kontrol düğmesini kullan"
 
 #. i18n: ectx: label, entry (SearchCaseSensitive), group (SearchSettings)
-#: settings/konsole.kcfg:69
+#: settings/konsole.kcfg:79
 #, kde-format
 msgid "Search is case sensitive"
 msgstr "Arama BÜYÜK/küçük harf duyarlı"
 
 #. i18n: ectx: label, entry (SearchHighlightMatches), group (SearchSettings)
-#: settings/konsole.kcfg:78
+#: settings/konsole.kcfg:88
 #, kde-format
 msgid "Highlight all search matches"
 msgstr "Tüm eşleşenleri vurgula"
 
 #. i18n: ectx: tooltip, entry (SearchHighlightMatches), group (SearchSettings)
-#: settings/konsole.kcfg:79
+#: settings/konsole.kcfg:89
 #, kde-format
 msgid "Sets whether matching text should be highlighted"
 msgstr "Eşleşen metnin vurgulanıp vurgulanmayacağını ayarlar"
 
 #. i18n: ectx: label, entry (SearchNoWrap), group (SearchSettings)
-#: settings/konsole.kcfg:88
+#: settings/konsole.kcfg:98
 #, kde-format
 msgid "Search stops instead of wrapping"
 msgstr "Sardırma yerine arama durdurulur"
 
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
-#: settings/konsole.kcfg:95
+#: settings/konsole.kcfg:105
 #, kde-format
 msgid "Control whether child cgroups are created for individual tabs"
 msgstr ""
@@ -2804,7 +2851,7 @@ msgstr ""
 "denetle"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
-#: settings/konsole.kcfg:99
+#: settings/konsole.kcfg:109
 #, kde-format
 msgid ""
 "Determines the memory consumption level above which throttling will start"
@@ -2812,97 +2859,97 @@ msgstr "Kısma işleminin başlayacağı bellek tüketimi düzeyini belirler"
 
 #. i18n: ectx: label, entry (SplitViewVisibility), group (SplitView)
 #. i18n: ectx: label, entry (TabBarVisibility), group (TabBar)
-#: settings/konsole.kcfg:105 settings/konsole.kcfg:125
+#: settings/konsole.kcfg:115 settings/konsole.kcfg:135
 #, kde-format
 msgid "Control the visibility of the whole tab bar"
 msgstr "Tüm sekme çubuğunun görünürlüğünü denetle"
 
 #. i18n: ectx: label, entry (SplitDragHandleSize), group (SplitView)
-#: settings/konsole.kcfg:114
+#: settings/konsole.kcfg:124
 #, kde-format
 msgid "Control the size of the handle between panels"
 msgstr "Paneller arasındaki tutamacın boyutunu denetle"
 
 #. i18n: ectx: label, entry (TabBarPosition), group (TabBar)
-#: settings/konsole.kcfg:134
+#: settings/konsole.kcfg:144
 #, kde-format
 msgid "Control the position of the tab bar"
 msgstr "Sekme çubuğunun konumunu denetle"
 
 #. i18n: ectx: label, entry (TabBarStyleSheet), group (TabBar)
-#: settings/konsole.kcfg:144
+#: settings/konsole.kcfg:154
 #, kde-format
 msgid "Control the visual style of the tab bar"
 msgstr "Sekme çubuğunun görsel biçemini denetle"
 
 #. i18n: ectx: label, entry (TabBarUseUserStyleSheet), group (TabBar)
-#: settings/konsole.kcfg:148
+#: settings/konsole.kcfg:158
 #, kde-format
 msgid "Use a user-defined .css file for the tab bar"
 msgstr "Sekme çubuğu için kullanıcı tanımlı bir .css dosyası kullan"
 
 #. i18n: ectx: label, entry (TabBarUserStyleSheetFile), group (TabBar)
-#: settings/konsole.kcfg:152
+#: settings/konsole.kcfg:162
 #, kde-format
 msgid "The .css file to use for the tab bar style"
 msgstr "Sekme çubuk biçeminde kullanılmak üzere .css dosyası"
 
 #. i18n: ectx: label, entry (CloseTabOnMiddleMouseButton), group (TabBar)
-#: settings/konsole.kcfg:156
+#: settings/konsole.kcfg:166
 #, kde-format
 msgid "Allow middle-clicking on open tabs to close them"
 msgstr "Açık sekmeleri kapatmak için orta tıklamaya izin ver"
 
 #. i18n: ectx: label, entry (NewTabButton), group (TabBar)
-#: settings/konsole.kcfg:160
+#: settings/konsole.kcfg:170
 #, kde-format
 msgid "Control the visibility of 'New Tab' button on the tab bar"
 msgstr "Sekme çubuğunda “Yeni Sekme” düğmesinin görünürlüğünü denetle"
 
 #. i18n: ectx: label, entry (SearchTabsButton), group (TabBar)
-#: settings/konsole.kcfg:164
+#: settings/konsole.kcfg:174
 #, kde-format
 msgid "Control the visibility of 'Search Tabs' button on the tab bar"
 msgstr "Sekme çubuğunda “Sekmeler Ara” düğmesinin görünürlüğünü denetle"
 
 #. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
-#: settings/konsole.kcfg:172
+#: settings/konsole.kcfg:182
 #, kde-format
 msgid "Control where the \"Close tab\" button will be displayed"
 msgstr "“Sekmeyi Kapat” düğmesinin nerede görüntüleneceğini denetle"
 
 #. i18n: ectx: label, entry (NewTabBehavior), group (TabBar)
-#: settings/konsole.kcfg:181
+#: settings/konsole.kcfg:191
 #, kde-format
 msgid "Control where to put the new tab"
 msgstr "Yeni sekmenin nereye konulacağını denetle"
 
 #. i18n: ectx: label, entry (ExpandTabWidth), group (TabBar)
-#: settings/konsole.kcfg:189
+#: settings/konsole.kcfg:199
 #, kde-format
 msgid "Expand the tab widths"
 msgstr "Sekme genişliklerini genişlet"
 
 #. i18n: ectx: label, entry (scrollbackUseSystemLocation), group (FileLocation)
-#: settings/konsole.kcfg:205
+#: settings/konsole.kcfg:215
 #, kde-format
 msgid "For scrollback files, use system-wide folder location"
 msgstr "Geçmiş dosyaları için sistem genelindeki dosya konumunu kullan"
 
 #. i18n: ectx: label, entry (scrollbackUseCacheLocation), group (FileLocation)
-#: settings/konsole.kcfg:209
+#: settings/konsole.kcfg:219
 #, kde-format
 msgid "For scrollback files, use user's specific folder location"
 msgstr "Geçmiş dosyaları için kullanıcı ev tanımlı klasör konumunu kullan"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocation), group (FileLocation)
-#: settings/konsole.kcfg:213
+#: settings/konsole.kcfg:223
 #, kde-format
 msgid "For scrollback files, use specified folder location"
 msgstr "Geçmiş dosyaları için belirtilen klasör konumunu kullan"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocationDirectory), group (FileLocation)
-#: settings/konsole.kcfg:217
+#: settings/konsole.kcfg:227
 #, kde-format
 msgid "For scrollback files, use this folder"
 msgstr "Geçmiş dosyaları için bu klasörü kullan"
@@ -3289,7 +3336,7 @@ msgid ""
 "profile settings.</p></body></html>"
 msgstr ""
 "<html><head/><body><p>Bu özelliği kullanmak için profil ayarlarınızda <span "
-"style=\" font-weight:600;\">Fare → Diğer → Dosyaların altını çiz</span> "
+"style=\" font-weight:600;\">“Fare → Diğer → Dosyaların altını çiz”</span> "
 "özelliğini etkinleştirin</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
@@ -3333,59 +3380,59 @@ msgstr "Küçük görsel oluşturmayı etkinleştir"
 msgid "Size: %1 x %2"
 msgstr "Boyut: %1 × %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2255
+#: terminalDisplay/TerminalDisplay.cpp:2256
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "%1 karakter yapıştırmak istediğinizden emin misiniz?"
 msgstr[1] "%1 karakter yapıştırmak istediğinizden emin misiniz?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2256
+#: terminalDisplay/TerminalDisplay.cpp:2257
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Yapıştırmayı Doğrula"
 
-#: terminalDisplay/TerminalDisplay.cpp:2289
+#: terminalDisplay/TerminalDisplay.cpp:2290
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "Metnin sonu/Kesinti: Geçerli süreçten çıkabilir"
 
-#: terminalDisplay/TerminalDisplay.cpp:2290
+#: terminalDisplay/TerminalDisplay.cpp:2291
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "İletimin sonu: Geçerli süreçten çıkılabilir"
 
-#: terminalDisplay/TerminalDisplay.cpp:2291
+#: terminalDisplay/TerminalDisplay.cpp:2292
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Zil: sesli bir uyarı vermeye çalışacak"
 
-#: terminalDisplay/TerminalDisplay.cpp:2292
+#: terminalDisplay/TerminalDisplay.cpp:2293
 #, kde-format
 msgid "Backspace"
-msgstr "Geri silme"
+msgstr "Geri sil"
 
-#: terminalDisplay/TerminalDisplay.cpp:2293
+#: terminalDisplay/TerminalDisplay.cpp:2294
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "Aygıt Denetimi Üç/XOFF: Çıktıyı askıya alır"
 
-#: terminalDisplay/TerminalDisplay.cpp:2294
+#: terminalDisplay/TerminalDisplay.cpp:2295
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "Yerine koy/Askıya al: Geçerli süreci askıya alabilir"
 
-#: terminalDisplay/TerminalDisplay.cpp:2295
+#: terminalDisplay/TerminalDisplay.cpp:2296
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Vazgeç: Uçbirim durumunu değiştirmek için kullanılır"
 
-#: terminalDisplay/TerminalDisplay.cpp:2296
+#: terminalDisplay/TerminalDisplay.cpp:2297
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "Dosya ayırıcısı/Çık: Geçerli süreci iptal edebilir"
 
-#: terminalDisplay/TerminalDisplay.cpp:2319
+#: terminalDisplay/TerminalDisplay.cpp:2320
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3394,31 +3441,31 @@ msgstr ""
 "Yapıştırmaya çalıştığınız metin gizli denetim karakterleri içeriyor, bunları "
 "süzmek ister misiniz?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2322
+#: terminalDisplay/TerminalDisplay.cpp:2323
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Yapıştırmayı Doğrula"
 
-#: terminalDisplay/TerminalDisplay.cpp:2323
+#: terminalDisplay/TerminalDisplay.cpp:2324
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Denetim karakterleri olmadan &yapıştır"
 
-#: terminalDisplay/TerminalDisplay.cpp:2324
+#: terminalDisplay/TerminalDisplay.cpp:2325
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "Her şeyi &yapıştır"
 
-#: terminalDisplay/TerminalDisplay.cpp:2325
+#: terminalDisplay/TerminalDisplay.cpp:2326
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "İ&ptal et"
 
-#: terminalDisplay/TerminalDisplay.cpp:2556
+#: terminalDisplay/TerminalDisplay.cpp:2557
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3429,17 +3476,17 @@ msgstr ""
 "Software_flow_control\">askıya alındı</a>. Sürdürmek için <b>Kontrol+Q</"
 "b>’ya basın.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2611
+#: terminalDisplay/TerminalDisplay.cpp:2612
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Bu uçbirim saltokunurdur."
 
-#: terminalDisplay/TerminalDisplay.cpp:3006
+#: terminalDisplay/TerminalDisplay.cpp:3008
 #, kde-format
 msgid "Change &Directory To"
 msgstr "&Dizini Bu Adresle Değiştir"
 
-#: terminalDisplay/TerminalDisplay.cpp:3041
+#: terminalDisplay/TerminalDisplay.cpp:3043
 #, kde-format
 msgid "&Paste Location"
 msgstr "Konumu &Yapıştır"
@@ -3567,116 +3614,128 @@ msgstr "Sağ Uçbirime Odaklan"
 #: ViewManager.cpp:282
 #, kde-format
 msgctxt "@action Shortcut entry"
+msgid "Focus Next Terminal"
+msgstr "Sonraki Uçbirime Odaklan"
+
+#: ViewManager.cpp:288
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Focus Previous Terminal"
+msgstr "Önceki Uçbirime Odaklan"
+
+#: ViewManager.cpp:294
+#, kde-format
+msgctxt "@action Shortcut entry"
 msgid "Switch to Last Tab"
 msgstr "Son Sekmeye Geç"
 
-#: ViewManager.cpp:287
+#: ViewManager.cpp:299
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs"
 msgstr "Son Kullanılan Sekmeler"
 
-#: ViewManager.cpp:292
+#: ViewManager.cpp:304
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle Between Two Tabs"
 msgstr "İki Sekme Arasında Geçiş Yap"
 
-#: ViewManager.cpp:297
+#: ViewManager.cpp:309
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs (Reverse)"
 msgstr "Son Kullanılan Sekmeler (Ters)"
 
-#: ViewManager.cpp:302
+#: ViewManager.cpp:314
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle maximize current view"
 msgstr "Geçerli Görünümü Büyüt/Küçült"
 
-#: ViewManager.cpp:303
+#: ViewManager.cpp:315
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle maximize current view"
 msgstr "Geçerli Görünümü Büyüt/Küçült"
 
-#: ViewManager.cpp:311
+#: ViewManager.cpp:323
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle zoom-maximize current view"
 msgstr "Geçerli Görünümü Yakınlaştır/Büyüt"
 
-#: ViewManager.cpp:312
+#: ViewManager.cpp:324
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle zoom-maximize current view"
 msgstr "Geçerli Görünümü Yakınlaştır/Büyüt"
 
-#: ViewManager.cpp:320
+#: ViewManager.cpp:332
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the right"
 msgstr "Sekmeyi Sağa Taşı"
 
-#: ViewManager.cpp:327
+#: ViewManager.cpp:339
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the left"
 msgstr "Sekmeyi Sola Taşı"
 
-#: ViewManager.cpp:334
+#: ViewManager.cpp:346
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
 msgstr "Anlamsal Tümleşimi Ayarla (bash)"
 
-#: ViewManager.cpp:340
+#: ViewManager.cpp:352
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
 msgstr "Anlamsal İpuçları Görünümünü Aç/Kapat"
 
-#: ViewManager.cpp:346
+#: ViewManager.cpp:358
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
 msgstr "Satır Numaraları Görünümünü Aç/Kapat"
 
-#: ViewManager.cpp:353
+#: ViewManager.cpp:365
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
 msgstr "Tüm Görünümlere Eşit Boyut"
 
-#: ViewManager.cpp:363
+#: ViewManager.cpp:375
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Tab %1"
 msgstr "%1. Sekmeye Seç"
 
-#: ViewManager.cpp:576
+#: ViewManager.cpp:598
 #, kde-format
 msgid "Semantic hints "
 msgstr "Anlamsal ipuçları "
 
-#: ViewManager.cpp:592
+#: ViewManager.cpp:614
 #, kde-format
 msgid "Line numbers "
 msgstr "Satır numaraları"
 
-#: ViewManager.cpp:1180
+#: ViewManager.cpp:1202
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Sekme Yerleşimini Kaydet…"
 
-#: ViewManager.cpp:1182 ViewManager.cpp:1303
+#: ViewManager.cpp:1204 ViewManager.cpp:1325
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Konsole Görünüm Yerleşimi (*.json)"
 
-#: ViewManager.cpp:1198
+#: ViewManager.cpp:1220
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3686,7 +3745,7 @@ msgstr ""
 "Yerleşim kaydedilirken bir sorun oluştu.\n"
 "%1"
 
-#: ViewManager.cpp:1290
+#: ViewManager.cpp:1312
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3696,13 +3755,13 @@ msgstr ""
 "Yerleşim yüklenirken bir sorun oluştu.\n"
 "%1"
 
-#: ViewManager.cpp:1301
+#: ViewManager.cpp:1323
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Sekme Yerleşimi Yükle"
 
-#: Vt102Emulation.cpp:2828
+#: Vt102Emulation.cpp:2910
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "

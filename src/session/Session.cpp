@@ -286,10 +286,16 @@ void Session::setInitialWorkingDirectory(const QString &dir)
     _initialWorkingDir = validDirectory(KShell::tildeExpand(ShellCommand::expand(dir)));
 }
 
+bool Session::reportedWorkingUrlIsLocalFile()
+{
+    return _reportedWorkingUrl.isLocalFile() // has "file://" prefix
+        && (_reportedWorkingUrl.host().isEmpty() || _reportedWorkingUrl.host().compare(QSysInfo::machineHostName(), Qt::CaseInsensitive) == 0)
+        && QDir{_reportedWorkingUrl.path()}.exists();
+}
+
 QString Session::currentWorkingDirectory()
 {
-    if (_reportedWorkingUrl.isValid() && _reportedWorkingUrl.isLocalFile()
-        && (_reportedWorkingUrl.host().length() == 0 || _reportedWorkingUrl.host().compare(QSysInfo::machineHostName(), Qt::CaseInsensitive) == 0)) {
+    if (_reportedWorkingUrl.isValid() && reportedWorkingUrlIsLocalFile()) {
         return _reportedWorkingUrl.path();
     }
 
@@ -325,6 +331,7 @@ void Session::addView(TerminalDisplay *widget)
     // connect emulation - view signals and slots
     connect(widget, &Konsole::TerminalDisplay::keyPressedSignal, _emulation, &Konsole::Emulation::sendKeyEvent);
     connect(widget, &Konsole::TerminalDisplay::mouseSignal, _emulation, &Konsole::Emulation::sendMouseEvent);
+    connect(widget, &Konsole::TerminalDisplay::exactMouseSignal, _emulation, &Konsole::Emulation::sendExactMouseEvent);
     connect(widget, &Konsole::TerminalDisplay::sendStringToEmu, _emulation, &Konsole::Emulation::sendString);
     connect(widget, &Konsole::TerminalDisplay::peekPrimaryRequested, _emulation, &Konsole::Emulation::setPeekPrimary);
 
@@ -1378,7 +1385,7 @@ QString Session::getDynamicTitle()
                 // allow for shortname to have the ~ as homeDir
                 const QString homeDir = process->userHomeDir();
                 if (!homeDir.isEmpty()) {
-                    if (dir.startsWith(homeDir)) {
+                    if (dir.startsWith(homeDir) && (dir.size() == homeDir.size() || dir.at(homeDir.size()) == QLatin1Char('/'))) {
                         dir.remove(0, homeDir.length());
                         dir.prepend(QLatin1Char('~'));
                     }
@@ -1415,7 +1422,7 @@ QString Session::getDynamicTitle()
 
 QUrl Session::getUrl()
 {
-    if (_reportedWorkingUrl.isValid()) {
+    if (_reportedWorkingUrl.isValid() && reportedWorkingUrlIsLocalFile()) {
         return _reportedWorkingUrl;
     }
 
@@ -1871,17 +1878,17 @@ bool Session::copyInputToAllSessions()
 bool Session::copyInputToSessions(QList<int> sessionIds)
 {
     if (auto c = controller()) {
-        auto sessions = new QList<Session *>();
+        QList<Session *> sessions;
         c->copyInputActions()->setCurrentItem(SessionController::CopyInputToSelectedTabsMode);
 
         for (auto sessionId : sessionIds) {
             if (auto session = SessionManager::instance()->idToSession(sessionId))
-                sessions->append(session);
+                sessions.append(session);
             else
                 return false;
         }
 
-        c->copyInputToSelectedTabs(sessions);
+        c->copyInputToSelectedTabs(&sessions);
         return true;
     }
 
@@ -2184,6 +2191,16 @@ void Session::setColor(const QColor &color)
 QColor Session::color() const
 {
     return _tabColor;
+}
+
+void Session::setTabColor(const QString &colorName)
+{
+    setColor(QColor(colorName));
+}
+
+QString Session::tabColor() const
+{
+    return _tabColor.name();
 }
 
 SessionController *Session::controller()

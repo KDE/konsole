@@ -290,6 +290,30 @@ void ViewSplitter::focusRight()
     handleFocusDirection(Qt::Horizontal, +1);
 }
 
+void ViewSplitter::focusNext(int dir)
+{
+    auto terminalDisplay = activeTerminalDisplay();
+    auto parentSplitter = qobject_cast<ViewSplitter *>(terminalDisplay->parentWidget());
+    auto topSplitter = parentSplitter->getToplevelSplitter();
+    auto terminals = topSplitter->findChildren<TerminalDisplay *>();
+    int id = terminals.indexOf(terminalDisplay);
+    int targetId = (id + dir) % terminals.size();
+    if (targetId < 0) {
+        targetId = terminals.size() + targetId;
+    }
+
+    auto targetTerminal = terminals.at(targetId);
+
+    if (targetTerminal) {
+        targetTerminal->setFocus(Qt::OtherFocusReason);
+    }
+}
+
+void ViewSplitter::focusPrev()
+{
+    focusNext(-1);
+}
+
 TerminalDisplay *ViewSplitter::activeTerminalDisplay() const
 {
     auto focusedWidget = focusWidget();

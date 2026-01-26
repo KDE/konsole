@@ -253,6 +253,8 @@ public Q_SLOTS:
     void copyInputToSelectedTabs(QList<Session *> *sessions = nullptr);
     void copyInputToNone();
 
+    void setContextMenuAdditionalActions(const QList<QAction *> &extension);
+
 private Q_SLOTS:
     // menu item handlers
     void openBrowser();
@@ -408,10 +410,10 @@ private:
 
     bool _isSearchBarEnabled;
 
-    QString _searchText;
+    QString _searchText = QString();
     QPointer<IncrementalSearchBar> _searchBar;
 
-    QString _previousForegroundProcessName;
+    QString _previousForegroundProcessName = QString();
     bool _monitorProcessFinish;
     bool _monitorOnce;
     EscapeSequenceUrlFilter *_escapedUrlFilter;
@@ -423,6 +425,8 @@ private:
     QAction *_startAutoSaveAction;
     QAction *_stopAutoSaveAction;
     QPointer<SaveHistoryAutoTask> _autoSaveTask;
+
+    QList<QAction *> contextMenuAdditionalActions;
 };
 
 }

@@ -194,6 +194,8 @@ public:
      */
     Session *createSession(const QExplicitlySharedDataPointer<Profile> &profile, const QString &directory = QString());
 
+    void setContextMenuAdditionalActions(const QList<QAction *> &extension);
+
 Q_SIGNALS:
     /** Emitted when the last view is removed from the view manager */
     void empty();
@@ -235,6 +237,8 @@ Q_SIGNALS:
     void newViewWithProfileRequest(const QExplicitlySharedDataPointer<Profile> &profile);
 
     void activationRequest(const QString &xdgActivationToken);
+
+    void contextMenuAdditionalActionsChanged(const QList<QAction *> &extension);
 
 public Q_SLOTS:
     /** DBus slot that returns the number of sessions in the current view. */
@@ -410,6 +414,9 @@ private Q_SLOTS:
     void focusLeft();
     void focusRight();
 
+    void focusNext();
+    void focusPrev();
+
     // called when "Next View" shortcut is activated
     void nextView();
 
@@ -527,6 +534,8 @@ private:
     // containers open
     QList<QAction *> _multiTabOnlyActions;
     QList<QAction *> _multiSplitterOnlyActions;
+
+    QList<QAction *> contextMenuAdditionalActions;
 
     friend class ViewManagerTest;
 };

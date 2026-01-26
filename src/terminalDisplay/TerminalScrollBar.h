@@ -155,12 +155,12 @@ private:
     HighlightScrolledLines _highlightScrolledLines;
     QPalette _backgroundMatchingPalette;
     QColor _markerColor;
-    double _markerPSize;
+    double _markerPSize = 2.0;
     QList<Marker *> _markers;
     QSet<int> _searchLines;
-    int _terminalLines;
+    int _terminalLines = 1;
     QColor _searchHighlightLineColor;
-    int _lineOpacity;
+    int _lineOpacity = 100;
 };
 
 } // namespace Konsole

@@ -64,6 +64,7 @@ ViewManager::ViewManager(QObject *parent, KActionCollection *collection)
     , _navigationVisibility(NavigationNotSet)
     , _managerId(0)
     , _terminalDisplayHistoryIndex(-1)
+    , contextMenuAdditionalActions({})
 {
 #if HAVE_DBUS
     qDBusRegisterMetaType<QList<double>>();
@@ -279,6 +280,18 @@ void ViewManager::setupActions()
     collection->addAction(QStringLiteral("focus-view-right"), action);
     _multiSplitterOnlyActions << action;
 
+    action = new QAction(i18nc("@action Shortcut entry", "Focus Next Terminal"), this);
+    collection->setDefaultShortcut(action, Qt::CTRL | Qt::Key_F11);
+    connect(action, &QAction::triggered, this, &ViewManager::focusNext);
+    collection->addAction(QStringLiteral("focus-view-next"), action);
+    _multiSplitterOnlyActions << action;
+
+    action = new QAction(i18nc("@action Shortcut entry", "Focus Previous Terminal"), this);
+    collection->setDefaultShortcut(action, Qt::CTRL | Qt::SHIFT | Qt::Key_F11);
+    connect(action, &QAction::triggered, this, &ViewManager::focusPrev);
+    collection->addAction(QStringLiteral("focus-view-prev"), action);
+    _multiSplitterOnlyActions << action;
+
     action = new QAction(i18nc("@action Shortcut entry", "Switch to Last Tab"), this);
     connect(action, &QAction::triggered, this, &ViewManager::lastView);
     collection->addAction(QStringLiteral("last-tab"), action);
@@ -437,6 +450,16 @@ void ViewManager::focusLeft()
 void ViewManager::focusRight()
 {
     _viewContainer->activeViewSplitter()->focusRight();
+}
+
+void ViewManager::focusNext()
+{
+    _viewContainer->activeViewSplitter()->focusNext();
+}
+
+void ViewManager::focusPrev()
+{
+    _viewContainer->activeViewSplitter()->focusPrev();
 }
 
 void ViewManager::moveActiveViewLeft()
@@ -617,6 +640,12 @@ Session *ViewManager::forgetTerminal(TerminalDisplay *terminal)
     _viewContainer->disconnectTerminalDisplay(terminal);
     updateTerminalDisplayHistory(terminal, true);
     return session;
+}
+
+void ViewManager::setContextMenuAdditionalActions(const QList<QAction *> &extension)
+{
+    contextMenuAdditionalActions = extension;
+    Q_EMIT contextMenuAdditionalActionsChanged(extension);
 }
 
 Session *ViewManager::createSession(const Profile::Ptr &profile, const QString &directory)
@@ -846,10 +875,15 @@ SessionController *ViewManager::createController(Session *session, TerminalDispl
     connect(controller, &Konsole::SessionController::viewDragAndDropped, this, &Konsole::ViewManager::forgetController);
     connect(controller, &Konsole::SessionController::requestSplitViewLeftRight, this, &Konsole::ViewManager::splitLeftRight);
     connect(controller, &Konsole::SessionController::requestSplitViewTopBottom, this, &Konsole::ViewManager::splitTopBottom);
+    connect(this, &Konsole::ViewManager::contextMenuAdditionalActionsChanged, controller, &Konsole::SessionController::setContextMenuAdditionalActions);
 
     // if this is the first controller created then set it as the active controller
     if (_pluggedController.isNull()) {
         controllerChanged(controller);
+    }
+
+    if (!contextMenuAdditionalActions.isEmpty()) {
+        controller->setContextMenuAdditionalActions(contextMenuAdditionalActions);
     }
 
     return controller;

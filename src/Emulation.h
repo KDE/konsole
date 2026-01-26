@@ -231,6 +231,8 @@ public Q_SLOTS:
      */
     virtual void sendMouseEvent(int buttons, int column, int line, int eventType) = 0;
 
+    virtual void sendExactMouseEvent(int buttons, int x, int y, int eventType) = 0;
+
     /**
      * Sends a string of characters to the foreground terminal process.
      *
@@ -304,6 +306,8 @@ Q_SIGNALS:
     void enableAlternateScrolling(bool enable);
 
     void programBracketedPasteModeChanged(bool bracketedPasteMode);
+
+    void programRequestedSynchronizedUpdate(bool start);
 
     /**
      * Emitted when the contents of the screen image change.
@@ -496,12 +500,15 @@ private Q_SLOTS:
 
     void bracketedPasteModeChanged(bool bracketedPasteMode);
 
+    void synchronizedUpdateChanged(bool inProgress);
+
 private:
     void setScreenInternal(int index);
     Q_DISABLE_COPY(Emulation)
 
     bool _usesMouseTracking = false;
     bool _bracketedPasteMode = false;
+    bool _synchronizedUpdate = false;
     QTimer _bulkTimer1{this};
     QTimer _bulkTimer2{this};
     bool _imageSizeInitialized = false;

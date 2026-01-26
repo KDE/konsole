@@ -1,7 +1,7 @@
 # translation of konsole.po to Chinese Traditional
 # Copyright (C) 2001-2002, 2006, 2007, 2008 Free Software Foundation, Inc.
 #
-# SPDX-FileCopyrightText: 2023, 2024, 2025 Kisaragi Hiu <mail@kisaragi-hiu.com>
+# SPDX-FileCopyrightText: 2023, 2024, 2025, 2026 Kisaragi Hiu <mail@kisaragi-hiu.com>
 # Jouston Huang (Huang, Jiun-Jeng) <jouston@housediy.com>, 2001.
 # Roy Hiu-yeung Chan (voidoo) <voidoo@xychen.org>, 2002.
 # Kenduest Lee <kenduest@i18n.linux.org.tw>, 2002.
@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:55+0000\n"
-"PO-Revision-Date: 2025-09-25 01:52+0900\n"
+"POT-Creation-Date: 2026-01-23 00:47+0000\n"
+"PO-Revision-Date: 2026-01-13 01:23+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 25.11.70\n"
+"X-Generator: Lokalize 26.03.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -94,7 +94,7 @@ msgstr "主工具列"
 #: ../desktop/partui.rc:20
 #, kde-format
 msgid "S&crollback"
-msgstr "往回捲軸(&C)"
+msgstr "回捲歷史(&C)"
 
 #. i18n: ectx: ToolBar (sessionToolbar)
 #: ../desktop/sessionui.rc:80
@@ -177,46 +177,58 @@ msgstr "隱藏選單列，覆蓋預設的設定"
 #: Application.cpp:68
 #, kde-format
 msgctxt "@info:shell"
+msgid "Show all the toolbars, overriding the default setting"
+msgstr "顯示所有工具列，覆蓋預設的設定"
+
+#: Application.cpp:69
+#, kde-format
+msgctxt "@info:shell"
+msgid "Hide all the toolbars, overriding the default setting"
+msgstr "隱藏所有工具列，覆蓋預設的設定"
+
+#: Application.cpp:70
+#, kde-format
+msgctxt "@info:shell"
 msgid "Show the tabbar, overriding the default setting"
 msgstr "顯示分頁列，覆蓋預設的設定"
 
-#: Application.cpp:69
+#: Application.cpp:71
 #, kde-format
 msgctxt "@info:shell"
 msgid "Hide the tabbar, overriding the default setting"
 msgstr "隱藏分頁列，覆蓋預設的設定"
 
-#: Application.cpp:70
+#: Application.cpp:72
 #, kde-format
 msgctxt "@info:shell"
 msgid "Start Konsole in fullscreen mode"
 msgstr "以全螢幕模式開啟 Konsole"
 
-#: Application.cpp:71
+#: Application.cpp:73
 #, kde-format
 msgctxt "@info:shell"
 msgid "Disable transparent backgrounds, even if the system supports them."
 msgstr "關閉透明背景，即使系統有支援"
 
-#: Application.cpp:72
+#: Application.cpp:74
 #, kde-format
 msgctxt "@info:shell"
 msgid "List the available profiles"
 msgstr "可用的設定檔清單"
 
-#: Application.cpp:73
+#: Application.cpp:75
 #, kde-format
 msgctxt "@info:shell"
 msgid "List all the profile properties names and their type (for use with -p)"
 msgstr "列出所有設定檔屬性名稱與型態（以便與 -p 使用） "
 
-#: Application.cpp:74
+#: Application.cpp:76
 #, kde-format
 msgctxt "@info:shell"
 msgid "Change the value of a profile property."
 msgstr "改變設定檔內容的值。"
 
-#: Application.cpp:76
+#: Application.cpp:78
 #, kde-format
 msgctxt "@info:shell"
 msgid ""
@@ -224,7 +236,7 @@ msgid ""
 "it as the last option."
 msgstr "要執行的指令。此選項會將所有後面的字串都視為參數，所以不得已不要使用。"
 
-#: Application.cpp:79
+#: Application.cpp:81
 #, kde-format
 msgctxt "@info:shell"
 msgid ""
@@ -233,13 +245,13 @@ msgid ""
 msgstr ""
 "強制重複使用已存在的實體（就算功能會被破壞），例如 --new-tab。主要用於除錯。"
 
-#: Application.cpp:86
+#: Application.cpp:88
 #, kde-format
 msgctxt "@info:shell"
 msgid "Arguments passed to command"
 msgstr "要傳給指令的參數"
 
-#: Application.cpp:516
+#: Application.cpp:529
 #, kde-format
 msgctxt "@item"
 msgid "Toggle Background Window"
@@ -756,7 +768,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Adjust Scrollback"
-msgstr "調整捲軸"
+msgstr "調整回捲歷史"
 
 #: HistorySizeDialog.cpp:46
 #, kde-format
@@ -1229,7 +1241,7 @@ msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "載入分頁佈局……"
 
-#: MainWindow.cpp:736 MainWindow.cpp:753
+#: MainWindow.cpp:746 MainWindow.cpp:763
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1237,61 +1249,61 @@ msgid_plural ""
 "There are %1 processes running in this window. Do you still want to quit?"
 msgstr[0] "此視窗中目前有 %1 個行程執行中。您確定要離開嗎？"
 
-#: MainWindow.cpp:742 MainWindow.cpp:759 MainWindow.cpp:773
+#: MainWindow.cpp:752 MainWindow.cpp:769 MainWindow.cpp:783
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "確認關閉"
 
-#: MainWindow.cpp:743 MainWindow.cpp:760 MainWindow.cpp:774
+#: MainWindow.cpp:753 MainWindow.cpp:770 MainWindow.cpp:784
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "關閉視窗(&W)"
 
-#: MainWindow.cpp:761 MainWindow.cpp:775
+#: MainWindow.cpp:771 MainWindow.cpp:785
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "關閉目前的分頁(&T)"
 
-#: MainWindow.cpp:770
+#: MainWindow.cpp:780
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "此視窗中目前有 %1 個開啟的終端機。您確定要離開嗎？"
 
-#: MainWindow.cpp:877 Part.cpp:298
+#: MainWindow.cpp:887 Part.cpp:298
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "設定檔"
 
-#: MainWindow.cpp:895
+#: MainWindow.cpp:905
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "一般"
 
-#: MainWindow.cpp:907
+#: MainWindow.cpp:917
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr "記憶體"
 
-#: MainWindow.cpp:913
+#: MainWindow.cpp:923
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "分頁列/界線"
 
-#: MainWindow.cpp:918
+#: MainWindow.cpp:928
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "暫存檔"
 
-#: MainWindow.cpp:923
+#: MainWindow.cpp:933
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -1393,27 +1405,27 @@ msgid "Cancel"
 msgstr "取消(&C)"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:46
-#: plugins/QuickCommands/quickcommandsplugin.cpp:113
+#: plugins/QuickCommands/quickcommandsplugin.cpp:130
 #, kde-format
 msgid "Quick Commands"
 msgstr "快捷指令"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:71
+#: plugins/QuickCommands/quickcommandsplugin.cpp:75
 #, kde-format
 msgid "Show Quick Access"
 msgstr "顯示快速存取"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:106
+#: plugins/QuickCommands/quickcommandsplugin.cpp:123
 #, kde-format
 msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
 msgstr "沒有找到快捷指令。您可以在擴充元件 → 快捷指令裡新增一個"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:107
+#: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
 msgid "Plugins - Quick Commands"
 msgstr "擴充元件 - 快捷指令"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:125
+#: plugins/QuickCommands/quickcommandsplugin.cpp:140
 #, kde-format
 msgid "Show Quick Commands"
 msgstr "顯示快捷指令"
@@ -1849,14 +1861,14 @@ msgstr "輸出選項"
 
 #. i18n: ectx: property (text), widget (QCheckBox, printerFriendly)
 #. i18n: ectx: label, entry (PrinterFriendly), group (PrintOptions)
-#: PrintOptions.ui:39 settings/konsole.kcfg:195
+#: PrintOptions.ui:39 settings/konsole.kcfg:205
 #, kde-format
 msgid "Printer &friendly mode (black text, no background)"
 msgstr "便於列印模式 (黑色文字，不列印背景)(&F)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, scaleOutput)
 #. i18n: ectx: label, entry (ScaleOutput), group (PrintOptions)
-#: PrintOptions.ui:46 settings/konsole.kcfg:199
+#: PrintOptions.ui:46 settings/konsole.kcfg:209
 #, kde-format
 msgid "&Scale output"
 msgstr "調整輸出(&S)"
@@ -2135,7 +2147,7 @@ msgstr "ZModem 進度"
 msgid "Activity in '%1' (Session '%2')"
 msgstr "分頁 %1 目前活躍中（於工作階段 %2）"
 
-#: session/Session.cpp:2259
+#: session/Session.cpp:2269
 #, kde-format
 msgid "Security sensitive DBus API is disabled in the settings."
 msgstr "安全性敏感的 DBus API 已在設定中被停用。"
@@ -2253,17 +2265,17 @@ msgstr "列印螢幕(&P)..."
 #: session/SessionController.cpp:756
 #, kde-format
 msgid "Adjust Scrollback..."
-msgstr "調整捲軸..."
+msgstr "調整回捲歷史..."
 
 #: session/SessionController.cpp:760
 #, kde-format
 msgid "Clear Scrollback"
-msgstr "清除歷史內容"
+msgstr "清除回捲歷史"
 
 #: session/SessionController.cpp:764
 #, kde-format
 msgid "Clear Scrollback and Reset"
-msgstr "清除歷史內容並重設"
+msgstr "清除回捲歷史並重設"
 
 #: session/SessionController.cpp:775
 #, kde-format
@@ -2531,150 +2543,163 @@ msgctxt "@title:window"
 msgid "Configure"
 msgstr "設定"
 
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableSecuritySensitiveDBusAPI)
+#. i18n: ectx: label, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:43 settings/konsole.kcfg:42
+#, kde-format
+msgid "Enable the security sensitive parts of the DBus API"
+msgstr "啟用 DBus API 當中安全性敏感的部分"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchHighlightMatches)
+#: settings/GeneralSettings.ui:56
+#, kde-format
+msgid "Highlight all matches"
+msgstr "標示所有符合項目"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: settings/GeneralSettings.ui:63
+#, kde-format
+msgid "Notifications:"
+msgstr "通知："
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_FocusFollowsMouse)
+#. i18n: ectx: label, entry (FocusFollowsMouse), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:70 settings/konsole.kcfg:13
+#, kde-format
+msgid "Focus terminals when the mouse pointer is moved over them"
+msgstr "當滑鼠游標經過時，聚焦至該終端機視窗"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RemoveWindowTitleBarAndFrame)
+#. i18n: ectx: label, entry (RemoveWindowTitleBarAndFrame), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:77 settings/konsole.kcfg:9
+#, kde-format
+msgid "Remove window titlebar and frame"
+msgstr "移除視窗標題列與邊框"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_RememberWindowSize)
+#: settings/GeneralSettings.ui:90
+#, kde-format
+msgid "If enabled, profile settings will be ignored"
+msgstr "開啟此選項的話，設定檔將會被忽略"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RememberWindowSize)
+#: settings/GeneralSettings.ui:93
+#, kde-format
+msgid "Remember window size"
+msgstr "記住視窗大小"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchNoWrap)
+#. i18n: ectx: tooltip, entry (SearchNoWrap), group (SearchSettings)
+#: settings/GeneralSettings.ui:106 settings/konsole.kcfg:99
+#, kde-format
+msgid "Sets whether search should stop instead of wrapping"
+msgstr "設定搜尋是否應該停止，而非從另一頭繼續"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchNoWrap)
+#: settings/GeneralSettings.ui:109
+#, kde-format
+msgid "No wrap"
+msgstr "不從另一頭繼續"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: settings/GeneralSettings.ui:116
+#, kde-format
+msgid "Process and window:"
+msgstr "行程及視窗："
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, enableAllMessagesButton)
+#: settings/GeneralSettings.ui:137
+#, kde-format
+msgid "All dialogs will be shown again"
+msgstr "所有通知對話框都會重新再顯示"
+
+#. i18n: ectx: property (text), widget (QPushButton, enableAllMessagesButton)
+#: settings/GeneralSettings.ui:140
+#, kde-format
+msgid "Enable all \"Don't Ask Again\" messages"
+msgstr "打開所有「不要再問我」的訊息"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ForceNewTabs)
+#. i18n: ectx: label, entry (ForceNewTabs), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:178 settings/konsole.kcfg:37
+#, kde-format
+msgid "Force new tabs"
+msgstr "強制使用新分頁"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: settings/GeneralSettings.ui:185
+#, kde-format
+msgctxt "@item:intext Search options"
+msgid "Search:"
+msgstr "搜尋："
+
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchReverseSearch)
 #. i18n: ectx: tooltip, entry (SearchReverseSearch), group (SearchSettings)
-#: settings/GeneralSettings.ui:49 settings/konsole.kcfg:84
+#: settings/GeneralSettings.ui:198 settings/konsole.kcfg:94
 #, kde-format
 msgid "Sets whether search should start from the bottom"
 msgstr "設定是否要從底端開始搜尋"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchReverseSearch)
 #. i18n: ectx: label, entry (SearchReverseSearch), group (SearchSettings)
-#: settings/GeneralSettings.ui:52 settings/konsole.kcfg:83
+#: settings/GeneralSettings.ui:201 settings/konsole.kcfg:93
 #, kde-format
 msgid "Search backwards"
 msgstr "向後尋找"
 
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableSecuritySensitiveDBusAPI)
-#. i18n: ectx: label, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:59 settings/konsole.kcfg:37
-#, kde-format
-msgid "Enable the security sensitive parts of the DBus API"
-msgstr "啟用 DBus API 當中安全性敏感的部分"
-
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: settings/GeneralSettings.ui:66
-#, kde-format
-msgctxt "@item:intext Search options"
-msgid "Search:"
-msgstr "搜尋："
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchRegExpression)
-#. i18n: ectx: label, entry (SearchRegExpression), group (SearchSettings)
-#: settings/GeneralSettings.ui:79 settings/konsole.kcfg:74
-#, kde-format
-msgid "Match using regular expressions"
-msgstr "使用正則表達式尋找符合項目"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RemoveWindowTitleBarAndFrame)
-#. i18n: ectx: label, entry (RemoveWindowTitleBarAndFrame), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:86 settings/konsole.kcfg:9
-#, kde-format
-msgid "Remove window titlebar and frame"
-msgstr "移除視窗標題列與邊框"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_AllowMenuAccelerators)
-#. i18n: ectx: label, entry (AllowMenuAccelerators), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:99 settings/konsole.kcfg:22
-#, kde-format
-msgid "Enable menu accelerators"
-msgstr "開啟選單加速器"
-
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_UseSingleInstance)
 #. i18n: ectx: tooltip, entry (UseSingleInstance), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:112 settings/konsole.kcfg:33
+#: settings/GeneralSettings.ui:214 settings/konsole.kcfg:33
 #, kde-format
 msgid "When launching Konsole re-use existing process if possible"
-msgstr "當執行 Konsole 時，若可以的話就重新使用既存的行程"
+msgstr "啟動 Konsole 時，可以的話重複利用既存的行程"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSingleInstance)
 #. i18n: ectx: label, entry (UseSingleInstance), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:115 settings/konsole.kcfg:32
+#: settings/GeneralSettings.ui:217 settings/konsole.kcfg:32
 #, kde-format
 msgid "Run all Konsole windows in a single process"
 msgstr "在單一行程中執行所有的 Konsole 視窗"
 
-#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_RememberWindowSize)
-#: settings/GeneralSettings.ui:128
-#, kde-format
-msgid "If enabled, profile settings will be ignored"
-msgstr "開啟此選項的話，設定檔將會被忽略"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RememberWindowSize)
-#: settings/GeneralSettings.ui:131
-#, kde-format
-msgid "Remember window size"
-msgstr "記住視窗大小"
-
-#. i18n: ectx: property (text), widget (QLabel, label_3)
-#: settings/GeneralSettings.ui:138
-#, kde-format
-msgid "Notifications:"
-msgstr "通知："
-
-#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchNoWrap)
-#. i18n: ectx: tooltip, entry (SearchNoWrap), group (SearchSettings)
-#: settings/GeneralSettings.ui:151 settings/konsole.kcfg:89
-#, kde-format
-msgid "Sets whether search should stop instead of wrapping"
-msgstr "設定搜尋是否應該停止，而非從另一頭繼續"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchNoWrap)
-#: settings/GeneralSettings.ui:154
-#, kde-format
-msgid "No wrap"
-msgstr "不從另一頭繼續"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowWindowTitleOnTitleBar)
-#. i18n: ectx: label, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:167 settings/konsole.kcfg:17
-#, kde-format
-msgid "Show window title on the titlebar"
-msgstr "在標題列顯示視窗標題"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_FocusFollowsMouse)
-#. i18n: ectx: label, entry (FocusFollowsMouse), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:174 settings/konsole.kcfg:13
-#, kde-format
-msgid "Focus terminals when the mouse pointer is moved over them"
-msgstr "當滑鼠游標經過時，聚焦至該終端機視窗"
-
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchCaseSensitive)
 #. i18n: ectx: tooltip, entry (SearchCaseSensitive), group (SearchSettings)
-#: settings/GeneralSettings.ui:187 settings/konsole.kcfg:70
+#: settings/GeneralSettings.ui:230 settings/konsole.kcfg:80
 #, kde-format
 msgid "Sets whether the search is case sensitive"
 msgstr "設定搜尋時是否要區分大小寫"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchCaseSensitive)
-#: settings/GeneralSettings.ui:190
+#: settings/GeneralSettings.ui:233
 #, kde-format
 msgid "Case sensitive"
 msgstr "區分大小寫"
 
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: settings/GeneralSettings.ui:197
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowWindowTitleOnTitleBar)
+#. i18n: ectx: label, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:262 settings/konsole.kcfg:17
 #, kde-format
-msgid "Process and window:"
-msgstr "程式及視窗："
+msgid "Show window title on the titlebar"
+msgstr "在標題列顯示視窗標題"
 
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchHighlightMatches)
-#: settings/GeneralSettings.ui:213
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchRegExpression)
+#. i18n: ectx: label, entry (SearchRegExpression), group (SearchSettings)
+#: settings/GeneralSettings.ui:275 settings/konsole.kcfg:84
 #, kde-format
-msgid "Highlight all matches"
-msgstr "標示所有符合項目"
+msgid "Match using regular expressions"
+msgstr "使用正則表達式尋找符合項目"
 
-#. i18n: ectx: property (toolTip), widget (QPushButton, enableAllMessagesButton)
-#: settings/GeneralSettings.ui:231
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_AllowMenuAccelerators)
+#. i18n: ectx: label, entry (AllowMenuAccelerators), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:288 settings/konsole.kcfg:22
 #, kde-format
-msgid "All dialogs will be shown again"
-msgstr "所有通知對話框都會重新再顯示"
+msgid "Enable menu accelerators"
+msgstr "開啟選單加速器"
 
-#. i18n: ectx: property (text), widget (QPushButton, enableAllMessagesButton)
-#: settings/GeneralSettings.ui:234
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ListenForZModemTerminalCodes)
+#: settings/GeneralSettings.ui:295
 #, kde-format
-msgid "Enable all \"Don't Ask Again\" messages"
-msgstr "打開所有「不要再問我」的訊息"
+msgid "Listen for ZModem terminal codes"
+msgstr "聆聽 ZModem 終端機控制字元"
 
 #. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:18
@@ -2700,77 +2725,97 @@ msgstr "下次啟動時使用目前的視窗大小"
 msgid "The window size will be saved upon exiting Konsole"
 msgstr "離開 Konsole 時會儲存視窗大小"
 
-#. i18n: ectx: tooltip, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
+#. i18n: ectx: tooltip, entry (ForceNewTabs), group (KonsoleWindow)
 #: settings/konsole.kcfg:38
+#, kde-format
+msgid ""
+"When launching Konsole create a new tab instead of creating new windows if "
+"possible"
+msgstr "啟動 Konsole 時，可以的話在現有視窗內建立新分頁而不是建立新視窗"
+
+#. i18n: ectx: tooltip, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
+#: settings/konsole.kcfg:43
 #, kde-format
 msgid "DBus API like runCommand will be enabled"
 msgstr "會啟用 runCommand（執行命令）這種 DBus API"
 
-#. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
+#. i18n: ectx: label, entry (ListenForZModemTerminalCodes), group (KonsoleWindow)
 #: settings/konsole.kcfg:47
+#, kde-format
+msgid "Listen for ZModem Terminal codes"
+msgstr "聆聽 ZModem 終端機控制字元"
+
+#. i18n: ectx: tooltip, entry (ListenForZModemTerminalCodes), group (KonsoleWindow)
+#: settings/konsole.kcfg:48
+#, kde-format
+msgid "Automatic send/receive files over serial connections"
+msgstr "自動透過序列連線傳送/接受檔案"
+
+#. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
+#: settings/konsole.kcfg:57
 #, kde-format
 msgid "Thumbnail Width"
 msgstr "縮圖寬度"
 
 #. i18n: ectx: tooltip, entry (ThumbnailSize), group (ThumbnailsSettings)
-#: settings/konsole.kcfg:48
+#: settings/konsole.kcfg:58
 #, kde-format
 msgid "Sets the width of the thumbnail"
 msgstr "選擇縮圖的寬度"
 
 #. i18n: ectx: label, entry (ThumbnailShift), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailShift), group (ThumbnailsSettings)
-#: settings/konsole.kcfg:52 settings/konsole.kcfg:53
+#: settings/konsole.kcfg:62 settings/konsole.kcfg:63
 #, kde-format
 msgid "Use Shift to display a thumbnail"
 msgstr "使用 Shift 鍵顯示縮圖"
 
 #. i18n: ectx: label, entry (ThumbnailAlt), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailAlt), group (ThumbnailsSettings)
-#: settings/konsole.kcfg:57 settings/konsole.kcfg:58
+#: settings/konsole.kcfg:67 settings/konsole.kcfg:68
 #, kde-format
 msgid "Use Alt to display a thumbnail"
 msgstr "使用 Alt 鍵顯示縮圖"
 
 #. i18n: ectx: label, entry (ThumbnailCtrl), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailCtrl), group (ThumbnailsSettings)
-#: settings/konsole.kcfg:62 settings/konsole.kcfg:63
+#: settings/konsole.kcfg:72 settings/konsole.kcfg:73
 #, kde-format
 msgid "Use Ctrl to display a thumbnail"
 msgstr "使用 Ctrl 鍵顯示縮圖"
 
 #. i18n: ectx: label, entry (SearchCaseSensitive), group (SearchSettings)
-#: settings/konsole.kcfg:69
+#: settings/konsole.kcfg:79
 #, kde-format
 msgid "Search is case sensitive"
 msgstr "區分大小寫搜尋"
 
 #. i18n: ectx: label, entry (SearchHighlightMatches), group (SearchSettings)
-#: settings/konsole.kcfg:78
+#: settings/konsole.kcfg:88
 #, kde-format
 msgid "Highlight all search matches"
 msgstr "突顯所有的搜尋符合"
 
 #. i18n: ectx: tooltip, entry (SearchHighlightMatches), group (SearchSettings)
-#: settings/konsole.kcfg:79
+#: settings/konsole.kcfg:89
 #, kde-format
 msgid "Sets whether matching text should be highlighted"
 msgstr "設定符合的文字是否要突顯出來"
 
 #. i18n: ectx: label, entry (SearchNoWrap), group (SearchSettings)
-#: settings/konsole.kcfg:88
+#: settings/konsole.kcfg:98
 #, kde-format
 msgid "Search stops instead of wrapping"
 msgstr "搜尋會停止而非從另一頭繼續"
 
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
-#: settings/konsole.kcfg:95
+#: settings/konsole.kcfg:105
 #, kde-format
 msgid "Control whether child cgroups are created for individual tabs"
 msgstr "控制是否要為個別分頁建立子 cgroup"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
-#: settings/konsole.kcfg:99
+#: settings/konsole.kcfg:109
 #, kde-format
 msgid ""
 "Determines the memory consumption level above which throttling will start"
@@ -2778,100 +2823,100 @@ msgstr "決定記憶體用量超過多少時要開始限制用量"
 
 #. i18n: ectx: label, entry (SplitViewVisibility), group (SplitView)
 #. i18n: ectx: label, entry (TabBarVisibility), group (TabBar)
-#: settings/konsole.kcfg:105 settings/konsole.kcfg:125
+#: settings/konsole.kcfg:115 settings/konsole.kcfg:135
 #, kde-format
 msgid "Control the visibility of the whole tab bar"
 msgstr "控制整個分頁列的可見度"
 
 #. i18n: ectx: label, entry (SplitDragHandleSize), group (SplitView)
-#: settings/konsole.kcfg:114
+#: settings/konsole.kcfg:124
 #, kde-format
 msgid "Control the size of the handle between panels"
 msgstr "改變面板控制器的尺寸"
 
 #. i18n: ectx: label, entry (TabBarPosition), group (TabBar)
-#: settings/konsole.kcfg:134
+#: settings/konsole.kcfg:144
 #, kde-format
 msgid "Control the position of the tab bar"
 msgstr "控制分頁列的位置"
 
 #. i18n: ectx: label, entry (TabBarStyleSheet), group (TabBar)
-#: settings/konsole.kcfg:144
+#: settings/konsole.kcfg:154
 #, kde-format
 msgid "Control the visual style of the tab bar"
 msgstr "控制分頁列的可見樣式"
 
 #. i18n: ectx: label, entry (TabBarUseUserStyleSheet), group (TabBar)
-#: settings/konsole.kcfg:148
+#: settings/konsole.kcfg:158
 #, kde-format
 msgid "Use a user-defined .css file for the tab bar"
 msgstr "在分頁列使用自定義的 .css 檔"
 
 #. i18n: ectx: label, entry (TabBarUserStyleSheetFile), group (TabBar)
-#: settings/konsole.kcfg:152
+#: settings/konsole.kcfg:162
 #, kde-format
 msgid "The .css file to use for the tab bar style"
 msgstr "用於分頁列樣式的 .css 檔"
 
 #. i18n: ectx: label, entry (CloseTabOnMiddleMouseButton), group (TabBar)
-#: settings/konsole.kcfg:156
+#: settings/konsole.kcfg:166
 #, kde-format
 msgid "Allow middle-clicking on open tabs to close them"
 msgstr "允許透過按下中鍵來關閉開啟的分頁"
 
 #. i18n: ectx: label, entry (NewTabButton), group (TabBar)
-#: settings/konsole.kcfg:160
+#: settings/konsole.kcfg:170
 #, kde-format
 msgid "Control the visibility of 'New Tab' button on the tab bar"
 msgstr "控制分頁列上「新增分頁」按鈕的可見度"
 
 #. i18n: ectx: label, entry (SearchTabsButton), group (TabBar)
-#: settings/konsole.kcfg:164
+#: settings/konsole.kcfg:174
 #, kde-format
 msgid "Control the visibility of 'Search Tabs' button on the tab bar"
 msgstr "控制分頁列上「搜尋分頁」按鈕的可見度"
 
 #. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
-#: settings/konsole.kcfg:172
+#: settings/konsole.kcfg:182
 #, kde-format
 msgid "Control where the \"Close tab\" button will be displayed"
 msgstr "控制要顯示「關閉分頁」按鈕的位置"
 
 #. i18n: ectx: label, entry (NewTabBehavior), group (TabBar)
-#: settings/konsole.kcfg:181
+#: settings/konsole.kcfg:191
 #, kde-format
 msgid "Control where to put the new tab"
 msgstr "控制新分頁要放在哪裡"
 
 #. i18n: ectx: label, entry (ExpandTabWidth), group (TabBar)
-#: settings/konsole.kcfg:189
+#: settings/konsole.kcfg:199
 #, kde-format
 msgid "Expand the tab widths"
 msgstr "展開分頁寬度"
 
 #. i18n: ectx: label, entry (scrollbackUseSystemLocation), group (FileLocation)
-#: settings/konsole.kcfg:205
+#: settings/konsole.kcfg:215
 #, kde-format
 msgid "For scrollback files, use system-wide folder location"
-msgstr "捲軸歷史檢視檔案使用系統指定的位置"
+msgstr "對於回捲歷史檔案，使用系統指定的資料夾位置"
 
 #. i18n: ectx: label, entry (scrollbackUseCacheLocation), group (FileLocation)
-#: settings/konsole.kcfg:209
+#: settings/konsole.kcfg:219
 #, kde-format
 msgid "For scrollback files, use user's specific folder location"
-msgstr "使用者自己指定捲軸歷史檢視檔案的位置"
+msgstr "對於回捲歷史檔案，使用使用者特定的資料夾位置"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocation), group (FileLocation)
-#: settings/konsole.kcfg:213
+#: settings/konsole.kcfg:223
 #, kde-format
 msgid "For scrollback files, use specified folder location"
-msgstr "歷史檢視檔案使用指定的資料夾位置"
+msgstr "對於回捲歷史檔案，使用指定的資料夾位置"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocationDirectory), group (FileLocation)
-#: settings/konsole.kcfg:217
+#: settings/konsole.kcfg:227
 #, kde-format
 msgid "For scrollback files, use this folder"
-msgstr "歷史檢視檔案使用這個資料夾"
+msgstr "對於回捲歷史檔案，使用這個資料夾"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableMemoryMonitoring)
 #: settings/MemorySettings.ui:17
@@ -3221,7 +3266,7 @@ msgstr "使用者快取目錄 (%1)"
 #: settings/TemporaryFilesSettings.ui:25
 #, kde-format
 msgid "Scrollback file location:"
-msgstr "捲回（顯示歷史）檔案位置："
+msgstr "回捲歷史檔案位置："
 
 #. i18n: ectx: property (text), widget (QRadioButton, kcfg_scrollbackUseSpecifiedLocation)
 #: settings/TemporaryFilesSettings.ui:64
@@ -3297,89 +3342,89 @@ msgstr "開啟縮圖產生器"
 msgid "Size: %1 x %2"
 msgstr "大小: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2255
+#: terminalDisplay/TerminalDisplay.cpp:2256
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "您確定要貼上這 %1 個字元嗎？"
 
-#: terminalDisplay/TerminalDisplay.cpp:2256
+#: terminalDisplay/TerminalDisplay.cpp:2257
 #, kde-format
 msgid "Confirm Paste"
 msgstr "確認貼上"
 
-#: terminalDisplay/TerminalDisplay.cpp:2289
+#: terminalDisplay/TerminalDisplay.cpp:2290
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "文字結尾/中止：可能會退出目前程序"
 
-#: terminalDisplay/TerminalDisplay.cpp:2290
+#: terminalDisplay/TerminalDisplay.cpp:2291
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "傳輸結尾：可能會退出目前程序"
 
-#: terminalDisplay/TerminalDisplay.cpp:2291
+#: terminalDisplay/TerminalDisplay.cpp:2292
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "鈴響 (Bell)：將嘗試發出聲音警告"
 
-#: terminalDisplay/TerminalDisplay.cpp:2292
+#: terminalDisplay/TerminalDisplay.cpp:2293
 #, kde-format
 msgid "Backspace"
 msgstr "Backspace 鍵"
 
-#: terminalDisplay/TerminalDisplay.cpp:2293
+#: terminalDisplay/TerminalDisplay.cpp:2294
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "裝置控制 3 / XOFF: 暫停輸出"
 
-#: terminalDisplay/TerminalDisplay.cpp:2294
+#: terminalDisplay/TerminalDisplay.cpp:2295
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "替代字元/暫停：可能會暫停目前程序"
 
-#: terminalDisplay/TerminalDisplay.cpp:2295
+#: terminalDisplay/TerminalDisplay.cpp:2296
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Esc 鍵：用來控制終端機狀態"
 
-#: terminalDisplay/TerminalDisplay.cpp:2296
+#: terminalDisplay/TerminalDisplay.cpp:2297
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "檔案分隔符/退出：可能會中止目前程序"
 
-#: terminalDisplay/TerminalDisplay.cpp:2319
+#: terminalDisplay/TerminalDisplay.cpp:2320
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
 "want to filter them out?"
 msgstr "您嘗試貼上的文字有隱藏控制字元。是否過濾出這些字元？"
 
-#: terminalDisplay/TerminalDisplay.cpp:2322
+#: terminalDisplay/TerminalDisplay.cpp:2323
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "確認貼上"
 
-#: terminalDisplay/TerminalDisplay.cpp:2323
+#: terminalDisplay/TerminalDisplay.cpp:2324
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "去除控制字元後貼上(&W)"
 
-#: terminalDisplay/TerminalDisplay.cpp:2324
+#: terminalDisplay/TerminalDisplay.cpp:2325
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "全部貼上(&P)"
 
-#: terminalDisplay/TerminalDisplay.cpp:2325
+#: terminalDisplay/TerminalDisplay.cpp:2326
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "取消(&C)"
 
-#: terminalDisplay/TerminalDisplay.cpp:2556
+#: terminalDisplay/TerminalDisplay.cpp:2557
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3389,17 +3434,17 @@ msgstr ""
 "<qt>輸出已經被 Ctrl+S <a href=\"https://en.wikipedia.org/wiki/"
 "Software_flow_control\">暫停</a>。按下 <b>Ctrl+Q</b> 回復。</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2611
+#: terminalDisplay/TerminalDisplay.cpp:2612
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "此終端器為唯讀狀態。"
 
-#: terminalDisplay/TerminalDisplay.cpp:3006
+#: terminalDisplay/TerminalDisplay.cpp:3008
 #, kde-format
 msgid "Change &Directory To"
 msgstr "變更目錄為(&D)"
 
-#: terminalDisplay/TerminalDisplay.cpp:3041
+#: terminalDisplay/TerminalDisplay.cpp:3043
 #, kde-format
 msgid "&Paste Location"
 msgstr "貼上位置(&P)"
@@ -3464,17 +3509,21 @@ msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 1x2 terminals"
 msgstr "新增上一下二版面的分頁"
 
+# This makes the split view bigger.
+# --Kisaragi
 #: ViewManager.cpp:205
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Expand View"
-msgstr "展開樹狀檢視"
+msgstr "展開檢視"
 
+# This makes the split view smaller.
+# --Kisaragi
 #: ViewManager.cpp:213
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Shrink View"
-msgstr "縮回樹狀檢視"
+msgstr "縮回檢視"
 
 #: ViewManager.cpp:223
 #, kde-format
@@ -3527,116 +3576,128 @@ msgstr "將焦點移至右方終端機"
 #: ViewManager.cpp:282
 #, kde-format
 msgctxt "@action Shortcut entry"
+msgid "Focus Next Terminal"
+msgstr "將焦點移至下一個終端機"
+
+#: ViewManager.cpp:288
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Focus Previous Terminal"
+msgstr "將焦點移至上一個終端機"
+
+#: ViewManager.cpp:294
+#, kde-format
+msgctxt "@action Shortcut entry"
 msgid "Switch to Last Tab"
 msgstr "切換到最後一個分頁"
 
-#: ViewManager.cpp:287
+#: ViewManager.cpp:299
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs"
 msgstr "上次使用分頁"
 
-#: ViewManager.cpp:292
+#: ViewManager.cpp:304
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle Between Two Tabs"
 msgstr "在兩個分頁中切換"
 
-#: ViewManager.cpp:297
+#: ViewManager.cpp:309
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs (Reverse)"
 msgstr "上次使用分頁 (倒序)"
 
-#: ViewManager.cpp:302
+#: ViewManager.cpp:314
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle maximize current view"
 msgstr "切換最大化目前檢視"
 
-#: ViewManager.cpp:303
+#: ViewManager.cpp:315
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle maximize current view"
 msgstr "切換最大化目前檢視"
 
-#: ViewManager.cpp:311
+#: ViewManager.cpp:323
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle zoom-maximize current view"
 msgstr "切換縮放最大化目前檢視"
 
-#: ViewManager.cpp:312
+#: ViewManager.cpp:324
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle zoom-maximize current view"
 msgstr "切換縮放最大化目前檢視"
 
-#: ViewManager.cpp:320
+#: ViewManager.cpp:332
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the right"
 msgstr "將分頁右移"
 
-#: ViewManager.cpp:327
+#: ViewManager.cpp:339
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the left"
 msgstr "將分頁左移"
 
-#: ViewManager.cpp:334
+#: ViewManager.cpp:346
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
 msgstr "設定語意整合 (bash)"
 
-#: ViewManager.cpp:340
+#: ViewManager.cpp:352
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
 msgstr "切換語意提示顯示"
 
-#: ViewManager.cpp:346
+#: ViewManager.cpp:358
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
 msgstr "切換行數顯示"
 
-#: ViewManager.cpp:353
+#: ViewManager.cpp:365
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
 msgstr "所有檢視區域大小相等"
 
-#: ViewManager.cpp:363
+#: ViewManager.cpp:375
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Tab %1"
 msgstr "切換到分頁 %1"
 
-#: ViewManager.cpp:576
+#: ViewManager.cpp:598
 #, kde-format
 msgid "Semantic hints "
 msgstr "語意提示"
 
-#: ViewManager.cpp:592
+#: ViewManager.cpp:614
 #, kde-format
 msgid "Line numbers "
 msgstr "行數"
 
-#: ViewManager.cpp:1180
+#: ViewManager.cpp:1202
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "儲存分頁佈局"
 
-#: ViewManager.cpp:1182 ViewManager.cpp:1303
+#: ViewManager.cpp:1204 ViewManager.cpp:1325
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Konsole 檢視佈局 (*.json)"
 
-#: ViewManager.cpp:1198
+#: ViewManager.cpp:1220
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3646,7 +3707,7 @@ msgstr ""
 "儲存佈局時發生問題。\n"
 "%1"
 
-#: ViewManager.cpp:1290
+#: ViewManager.cpp:1312
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3656,13 +3717,13 @@ msgstr ""
 "載入佈局時發生問題。\n"
 "%1"
 
-#: ViewManager.cpp:1301
+#: ViewManager.cpp:1323
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "載入分頁佈局"
 
-#: Vt102Emulation.cpp:2828
+#: Vt102Emulation.cpp:2910
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
@@ -5033,7 +5094,7 @@ msgstr "允許終端機程式處理敲擊與拖曳"
 #: widgets/EditProfileScrollingPage.ui:25
 #, kde-format
 msgid "Scrollback:"
-msgstr "往回捲動："
+msgstr "回捲歷史："
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: widgets/EditProfileScrollingPage.ui:41
@@ -5197,8 +5258,8 @@ msgid ""
 "choose a huge value, your system may run out of free RAM and cause serious "
 "issues with your system."
 msgstr ""
-"當使用此選項時，捲軸的資料將會儲存至 RAM 中。若您選擇一個很大的值，您的系統可"
-"能會耗盡剩餘的 RAM 並可能造成嚴重的問題。"
+"當使用此選項時，回捲歷史資料將會儲存至 RAM 中。若您選擇一個很大的值，您的系統"
+"可能會耗盡剩餘的 RAM 並可能造成嚴重的問題。"
 
 #: widgets/HistorySizeWidget.cpp:69
 #, kde-kuit-format
@@ -5210,9 +5271,9 @@ msgid ""
 "Konsole → Temporary Files</emphasis> to select the location of the temporary "
 "files."
 msgstr ""
-"使用此選項的話，回捲資料會以不加密的方式寫入暫存檔中。這些暫存檔會在 Konsole "
-"正常關閉時被刪除。<nl/>使用<emphasis>「設定」→「設定 Konsole」→「暫存檔」</"
-"emphasis>來選擇暫存檔的位置。"
+"當使用此選項時，回捲歷史資料會以不加密的方式寫入暫存檔中。這些暫存檔會在 "
+"Konsole 正常關閉時被刪除。<nl/>使用<emphasis>「設定」→「設定 Konsole」→「暫存"
+"檔」</emphasis>來選擇暫存檔的位置。"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, fixedSizeHistoryButton)
 #: widgets/HistorySizeWidget.ui:60

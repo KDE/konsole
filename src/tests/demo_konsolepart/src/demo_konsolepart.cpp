@@ -45,9 +45,13 @@ demo_konsolepart::demo_konsolepart()
     _terminal = qobject_cast<TerminalInterface *>(_terminalPart);
 
     // Test if blur is enabled for profile
-    bool blurEnabled;
-    QMetaObject::invokeMethod(_terminalPart, "isBlurEnabled", Qt::DirectConnection, Q_RETURN_ARG(bool, blurEnabled));
-    qWarning() << "blur enabled: " << blurEnabled;
+    bool blurEnabled = false;
+    bool invoked = QMetaObject::invokeMethod(_terminalPart, "isBlurEnabled", Qt::DirectConnection, Q_RETURN_ARG(bool, blurEnabled));
+    if (!invoked) {
+        qWarning() << "isBlurEnabled invocation failed; using default:" << blurEnabled;
+    } else {
+        qWarning() << "blur enabled: " << blurEnabled;
+    }
     KWindowEffects::enableBlurBehind(windowHandle(), blurEnabled);
 }
 
@@ -60,9 +64,10 @@ demo_konsolepart::~demo_konsolepart()
 
 KParts::ReadOnlyPart *demo_konsolepart::createPart()
 {
-    const KPluginFactory::Result<KParts::ReadOnlyPart> result =
-        KPluginFactory::instantiatePlugin<KParts::ReadOnlyPart>(KPluginMetaData(QStringLiteral("konsolepart")), this);
+    const KPluginMetaData metaData(QStringLiteral("kf6/parts/konsolepart"), KPluginMetaData::AllowEmptyMetaData);
+    Q_ASSERT(metaData.isValid());
 
+    KPluginFactory::Result<KParts::ReadOnlyPart> result = KPluginFactory::instantiatePlugin<KParts::ReadOnlyPart>(metaData, this);
     Q_ASSERT(result);
 
     return result.plugin;

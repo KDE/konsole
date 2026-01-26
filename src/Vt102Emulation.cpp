@@ -1716,6 +1716,88 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
         int rows = -1, cols = -1;
         _currentScreen->addPlacement(pixmap, rows, cols, -1, -1, TerminalGraphicsPlacement_t::iTerm, true, moveCursor);
     }
+
+    if (attribute == PointerShape) {
+        static QMap<QString, Qt::CursorShape> cursorShapes = {
+            // CSS shapes
+            {QLatin1String("default"), Qt::ArrowCursor},
+
+            {QLatin1String("context-menu"), Qt::ArrowCursor}, // no exact match
+            {QLatin1String("help"), Qt::WhatsThisCursor},
+            {QLatin1String("pointer"), Qt::PointingHandCursor},
+            {QLatin1String("progress"), Qt::BusyCursor},
+            {QLatin1String("wait"), Qt::WaitCursor},
+
+            {QLatin1String("cell"), Qt::ArrowCursor}, // no exact match
+            {QLatin1String("crosshair"), Qt::CrossCursor},
+            {QLatin1String("text"), Qt::IBeamCursor},
+            {QLatin1String("vertical-text"), Qt::IBeamCursor}, // no exact match
+
+            {QLatin1String("alias"), Qt::DragLinkCursor},
+            {QLatin1String("copy"), Qt::DragCopyCursor},
+            {QLatin1String("move"), Qt::DragMoveCursor},
+            {QLatin1String("no-drop"), Qt::ForbiddenCursor}, // no exact match
+            {QLatin1String("not-allowed"), Qt::ForbiddenCursor},
+            {QLatin1String("grab"), Qt::OpenHandCursor},
+            {QLatin1String("grabbing"), Qt::ClosedHandCursor},
+
+            {QLatin1String("all-scroll"), Qt::ArrowCursor}, // no exact match
+            {QLatin1String("col-resize"), Qt::ArrowCursor}, // no exact match
+            {QLatin1String("row-resize"), Qt::ArrowCursor}, // no exact match
+
+            {QLatin1String("n-resize"), Qt::SizeVerCursor}, // no exact match
+            {QLatin1String("e-resize"), Qt::SizeHorCursor}, // no exact match
+            {QLatin1String("s-resize"), Qt::SizeVerCursor}, // no exact match
+            {QLatin1String("w-resize"), Qt::SizeHorCursor}, // no exact match
+            {QLatin1String("ne-resize"), Qt::SizeBDiagCursor}, // no exact match
+            {QLatin1String("nw-resize"), Qt::SizeFDiagCursor}, // no exact match
+            {QLatin1String("se-resize"), Qt::SizeFDiagCursor}, // no exact match
+            {QLatin1String("sw-resize"), Qt::SizeBDiagCursor}, // no exact match
+
+            {QLatin1String("ew-resize"), Qt::SizeHorCursor},
+            {QLatin1String("ns-resize"), Qt::SizeVerCursor},
+            {QLatin1String("nesw-resize"), Qt::SizeBDiagCursor},
+            {QLatin1String("nwse-resize"), Qt::SizeFDiagCursor},
+
+            {QLatin1String("zoom-in"), Qt::ArrowCursor}, // no exact match
+            {QLatin1String("zoom-out"), Qt::ArrowCursor}, // no exact match
+
+            // XCursor shapes, taken from the Qt docs
+            {QLatin1String("left_ptr"), Qt::ArrowCursor},
+            {QLatin1String("up_arrow"), Qt::UpArrowCursor},
+            {QLatin1String("cross"), Qt::CrossCursor},
+            {QLatin1String("ibeam"), Qt::IBeamCursor},
+            {QLatin1String("wait"), Qt::WaitCursor},
+            {QLatin1String("left_ptr_watch"), Qt::BusyCursor},
+            {QLatin1String("forbidden"), Qt::ForbiddenCursor},
+            {QLatin1String("pointing_hand"), Qt::PointingHandCursor},
+            {QLatin1String("whats_this"), Qt::WhatsThisCursor},
+            {QLatin1String("dnd-move"), Qt::DragMoveCursor},
+            {QLatin1String("move"), Qt::DragMoveCursor},
+            {QLatin1String("dnd-link"), Qt::DragLinkCursor},
+            {QLatin1String("link"), Qt::DragLinkCursor},
+            {QLatin1String("size_ver"), Qt::SizeVerCursor},
+            {QLatin1String("size_hor"), Qt::SizeHorCursor},
+            {QLatin1String("size_bdiag"), Qt::SizeBDiagCursor},
+            {QLatin1String("size_fdiag"), Qt::SizeFDiagCursor},
+            {QLatin1String("size_all"), Qt::SizeAllCursor},
+            {QLatin1String("split_v"), Qt::SplitVCursor},
+            {QLatin1String("split_h"), Qt::SplitHCursor},
+            {QLatin1String("openhand"), Qt::OpenHandCursor},
+            {QLatin1String("closedhand"), Qt::ClosedHandCursor},
+            {QLatin1String("dnd-copy"), Qt::DragCopyCursor},
+            {QLatin1String("copy"), Qt::DragCopyCursor},
+        };
+
+        if (!cursorShapes.contains(value)) {
+            _currentScreen->currentTerminalDisplay()->resetCursor();
+        } else {
+            _currentScreen->currentTerminalDisplay()->setPointerShape(cursorShapes[value]);
+        }
+
+        return;
+    }
+
     _pendingSessionAttributesUpdates[attribute] = value;
     _sessionAttributesUpdateTimer->start(20);
 }
@@ -2129,6 +2211,11 @@ void Vt102Emulation::processToken(int token, int p, int q)
     case token_csi_pr('s', 1015) :         saveMode      (MODE_Mouse1015); break; //URXVT
     case token_csi_pr('r', 1015) :      restoreMode      (MODE_Mouse1015); break; //URXVT
 
+    case token_csi_pr('h', 1016) :          setMode      (MODE_Mouse1016); break; //XTERM
+    case token_csi_pr('l', 1016) :        resetMode      (MODE_Mouse1016); break; //XTERM
+    case token_csi_pr('s', 1016) :         saveMode      (MODE_Mouse1016); break; //XTERM
+    case token_csi_pr('r', 1016) :      restoreMode      (MODE_Mouse1016); break; //XTERM
+
     case token_csi_pr('h', 1034) : /* IGNORED: 8bitinput activation     */ break; //XTERM
 
     case token_csi_pr('h', 1047) :          setMode      (MODE_AppScreen); break; //XTERM
@@ -2154,6 +2241,9 @@ void Vt102Emulation::processToken(int token, int p, int q)
 
     case token_csi_pr('h', 9001) :          setMode      (MODE_Win32Input); break; // win32-input-mode
     case token_csi_pr('l', 9001) :        resetMode      (MODE_Win32Input); break; // win32-input-mode
+
+    case token_csi_pr('h', 2026):           setMode      (MODE_SynchronizedUpdate); break; //ITERM2
+    case token_csi_pr('l', 2026):         resetMode      (MODE_SynchronizedUpdate); break; //ITERM2
 
     case token_csi_pr('S',    1) : if(!p) sixelQuery        (1          ); break;
     case token_csi_pr('S',    2) : if(!p) sixelQuery        (2          ); break;
@@ -2575,6 +2665,10 @@ void Vt102Emulation::reportAnswerBack()
 
 void Vt102Emulation::sendMouseEvent(int cb, int cx, int cy, int eventType)
 {
+    if (getMode(MODE_Mouse1016)) {
+        return;
+    }
+
     if (cx < 1 || cy < 1) {
         return;
     }
@@ -2678,6 +2772,39 @@ void Vt102Emulation::sendMouseEvent(int cb, int cx, int cy, int eventType)
     } else if (cx <= 223 && cy <= 223) {
         snprintf(command, sizeof(command), "\033[M%c%c%c", cb + 0x20, cx + 0x20, cy + 0x20);
     }
+
+    sendString(command);
+}
+
+void Vt102Emulation::sendExactMouseEvent(int cb, int x, int y, int eventType)
+{
+    if (!getMode(MODE_Mouse1016))
+        return;
+
+    // Don't send move/drag events if only press and release requested
+    if (eventType == 1 && getMode(MODE_Mouse1000)) {
+        return;
+    }
+
+    // Don't send move with no button pressed if button-motion requested
+    if ((cb & 3) == 3 && getMode(MODE_Mouse1002)) {
+        return;
+    }
+
+    // With the exception of the 1006 mode, button release is encoded in cb.
+    // Note that if multiple extensions are enabled, the 1006 is used, so it's okay to check for only that.
+    if (eventType == 2 && !getMode(MODE_Mouse1006)) {
+        cb &= ~3;
+        cb |= 3;
+    }
+
+    // Mouse motion handling
+    if ((getMode(MODE_Mouse1002) || getMode(MODE_Mouse1003)) && eventType == 1) {
+        cb += 0x20; // add 32 to signify motion event
+    }
+    char command[40];
+    command[0] = '\0';
+    snprintf(command, sizeof(command), "\033[<%d;%d;%d%c", cb, x, y, eventType == 2 ? 'm' : 'M');
 
     sendString(command);
 }
@@ -3235,6 +3362,8 @@ void Vt102Emulation::resetModes()
     saveMode(MODE_Mouse1006);
     resetMode(MODE_Mouse1015);
     saveMode(MODE_Mouse1015);
+    resetMode(MODE_Mouse1016);
+    saveMode(MODE_Mouse1016);
     resetMode(MODE_BracketedPaste);
     saveMode(MODE_BracketedPaste);
 
@@ -3276,14 +3405,20 @@ void Vt102Emulation::setMode(int m)
     case MODE_Mouse1005:
     case MODE_Mouse1006:
     case MODE_Mouse1015:
+    case MODE_Mouse1016:
         _currentModes.mode[MODE_Mouse1005] = false;
         _currentModes.mode[MODE_Mouse1006] = false;
         _currentModes.mode[MODE_Mouse1015] = false;
+        _currentModes.mode[MODE_Mouse1016] = false;
         _currentModes.mode[m] = true;
         break;
 
     case MODE_BracketedPaste:
         Q_EMIT programBracketedPasteModeChanged(true);
+        break;
+
+    case MODE_SynchronizedUpdate:
+        Q_EMIT programRequestedSynchronizedUpdate(true);
         break;
 
     case MODE_AppScreen:
@@ -3331,6 +3466,10 @@ void Vt102Emulation::resetMode(int m)
 
     case MODE_BracketedPaste:
         Q_EMIT programBracketedPasteModeChanged(false);
+        break;
+
+    case MODE_SynchronizedUpdate:
+        Q_EMIT programRequestedSynchronizedUpdate(false);
         break;
 
     case MODE_AppScreen:

@@ -33,9 +33,19 @@
       <tooltip>When launching Konsole re-use existing process if possible</tooltip>
       <default>false</default>
     </entry>
+    <entry name="ForceNewTabs" type="Bool">
+      <label>Force new tabs</label>
+      <tooltip>When launching Konsole create a new tab instead of creating new windows if possible</tooltip>
+      <default>false</default>
+    </entry>
     <entry name="EnableSecuritySensitiveDBusAPI" type="Bool">
       <label>Enable the security sensitive parts of the DBus API</label>
       <tooltip>DBus API like runCommand will be enabled</tooltip>
+      <default>false</default>
+    </entry>
+    <entry name="ListenForZModemTerminalCodes" type="Bool">
+      <label>Listen for ZModem Terminal codes</label>
+      <tooltip>Automatic send/receive files over serial connections</tooltip>
       <default>false</default>
     </entry>
   </group>

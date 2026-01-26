@@ -13,6 +13,7 @@
 #include <QKeyEvent>
 
 // Konsole
+#include "KonsoleSettings.h"
 #include "Screen.h"
 #include "ScreenWindow.h"
 #include "keyboardtranslator/KeyboardTranslator.h"
@@ -33,6 +34,7 @@ Emulation::Emulation()
     // listen for mouse status changes
     connect(this, &Konsole::Emulation::programRequestsMouseTracking, this, &Konsole::Emulation::setUsesMouseTracking);
     connect(this, &Konsole::Emulation::programBracketedPasteModeChanged, this, &Konsole::Emulation::bracketedPasteModeChanged);
+    connect(this, &Konsole::Emulation::programRequestedSynchronizedUpdate, this, &Konsole::Emulation::synchronizedUpdateChanged);
 }
 
 bool Emulation::programUsesMouseTracking() const
@@ -53,6 +55,23 @@ bool Emulation::programBracketedPasteMode() const
 void Emulation::bracketedPasteModeChanged(bool bracketedPasteMode)
 {
     _bracketedPasteMode = bracketedPasteMode;
+}
+
+void Emulation::synchronizedUpdateChanged(bool inProgress)
+{
+    showBulk();
+
+    bool old = _synchronizedUpdate;
+    _synchronizedUpdate = inProgress;
+
+    if (!old && inProgress) {
+        static const int SYNCHRONIZED_TIMEOUT = 1000;
+
+        _bulkTimer1.stop();
+
+        _bulkTimer2.setSingleShot(true);
+        _bulkTimer2.start(SYNCHRONIZED_TIMEOUT);
+    }
 }
 
 ScreenWindow *Emulation::createWindow()
@@ -246,6 +265,10 @@ void Emulation::receiveData(const char *text, int length)
     const QVector<uint> chars = readString.toUcs4();
     receiveChars(chars);
 
+    if (KonsoleSettings::listenForZModemTerminalCodes() == false) {
+        return;
+    }
+
     // look for z-modem indicator
     //-- someone who understands more about z-modems that I do may be able to move
     // this check into the above for loop?
@@ -280,6 +303,8 @@ int Emulation::lineCount() const
 
 void Emulation::showBulk()
 {
+    _synchronizedUpdate = false;
+
     _bulkTimer1.stop();
     _bulkTimer2.stop();
 
@@ -292,6 +317,9 @@ void Emulation::showBulk()
 
 void Emulation::bufferedUpdate()
 {
+    if (_synchronizedUpdate)
+        return;
+
     static const int BULK_TIMEOUT1 = 10;
     static const int BULK_TIMEOUT2 = 40;
 

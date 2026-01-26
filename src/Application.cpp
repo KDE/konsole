@@ -65,6 +65,8 @@ void Application::populateCommandLineParser(QCommandLineParser *parser)
         {{QStringLiteral("separate"), QStringLiteral("nofork")}, i18nc("@info:shell", "Run in a separate process")},
         {{QStringLiteral("show-menubar")}, i18nc("@info:shell", "Show the menubar, overriding the default setting")},
         {{QStringLiteral("hide-menubar")}, i18nc("@info:shell", "Hide the menubar, overriding the default setting")},
+        {{QStringLiteral("show-toolbars")}, i18nc("@info:shell", "Show all the toolbars, overriding the default setting")},
+        {{QStringLiteral("hide-toolbars")}, i18nc("@info:shell", "Hide all the toolbars, overriding the default setting")},
         {{QStringLiteral("show-tabbar")}, i18nc("@info:shell", "Show the tabbar, overriding the default setting")},
         {{QStringLiteral("hide-tabbar")}, i18nc("@info:shell", "Hide the tabbar, overriding the default setting")},
         {{QStringLiteral("fullscreen")}, i18nc("@info:shell", "Start Konsole in fullscreen mode")},
@@ -378,7 +380,7 @@ MainWindow *Application::processWindowArgs(bool &createdNewMainWindow)
 {
     MainWindow *window = nullptr;
 
-    if (m_parser->isSet(QStringLiteral("new-tab"))) {
+    if (Konsole::KonsoleSettings::forceNewTabs() || m_parser->isSet(QStringLiteral("new-tab"))) {
         const QList<QWidget *> list = QApplication::topLevelWidgets();
         for (auto it = list.crbegin(), endIt = list.crend(); it != endIt; ++it) {
             window = qobject_cast<MainWindow *>(*it);
@@ -399,13 +401,24 @@ MainWindow *Application::processWindowArgs(bool &createdNewMainWindow)
         if (m_parser->isSet(QStringLiteral("hide-menubar"))) {
             window->setMenuBarInitialVisibility(false);
         }
-        if (m_parser->isSet(QStringLiteral("fullscreen"))) {
-            window->viewFullScreen(true);
+
+        // override default toolbars visibility
+        if (m_parser->isSet(QStringLiteral("show-toolbars"))) {
+            window->setToolBarsInitialVisibility(true);
         }
+        if (m_parser->isSet(QStringLiteral("hide-toolbars"))) {
+            window->setToolBarsInitialVisibility(false);
+        }
+
+        // override default tabbar visibility
         if (m_parser->isSet(QStringLiteral("show-tabbar"))) {
             window->viewManager()->setNavigationVisibility(ViewManager::AlwaysShowNavigation);
         } else if (m_parser->isSet(QStringLiteral("hide-tabbar"))) {
             window->viewManager()->setNavigationVisibility(ViewManager::AlwaysHideNavigation);
+        }
+
+        if (m_parser->isSet(QStringLiteral("fullscreen"))) {
+            window->viewFullScreen(true);
         }
     }
     return window;

@@ -4,20 +4,20 @@
 # Zlatko Popov <zlatkopopov@fsa-bg.org>, 2006, 2007, 2008.
 # Yasen Pramatarov <yasen@lindeas.com>, 2009, 2010, 2011, 2013.
 # Kiril Vladimirov <kiril@vladimiroff.org>, 2021.
-# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025 Mincho Kondarev <mkondarev@yahoo.de>
+# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025, 2026 Mincho Kondarev <mkondarev@yahoo.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:55+0000\n"
-"PO-Revision-Date: 2025-10-24 22:07+0200\n"
+"POT-Creation-Date: 2026-01-23 00:47+0000\n"
+"PO-Revision-Date: 2026-01-19 22:43+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 25.07.70\n"
+"X-Generator: Lokalize 26.03.70\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -179,34 +179,49 @@ msgstr "Скриване на лентата с менюта, заменяйки
 #: Application.cpp:68
 #, kde-format
 msgctxt "@info:shell"
+msgid "Show all the toolbars, overriding the default setting"
+msgstr ""
+"Показване на всички ленти с инструменти, заменяйки настройката по "
+"подразбиране"
+
+#: Application.cpp:69
+#, kde-format
+msgctxt "@info:shell"
+msgid "Hide all the toolbars, overriding the default setting"
+msgstr ""
+"Скриване на всички ленти с инструменти, заменяйки настройката по подразбиране"
+
+#: Application.cpp:70
+#, kde-format
+msgctxt "@info:shell"
 msgid "Show the tabbar, overriding the default setting"
 msgstr "Показване на лентата с раздели, заменяйки настройката по подразбиране"
 
-#: Application.cpp:69
+#: Application.cpp:71
 #, kde-format
 msgctxt "@info:shell"
 msgid "Hide the tabbar, overriding the default setting"
 msgstr "Скриване на лентата с раздели, замяна на настройката по подразбиране"
 
-#: Application.cpp:70
+#: Application.cpp:72
 #, kde-format
 msgctxt "@info:shell"
 msgid "Start Konsole in fullscreen mode"
 msgstr "Стартиране на Konsole в режим на цял екран"
 
-#: Application.cpp:71
+#: Application.cpp:73
 #, kde-format
 msgctxt "@info:shell"
 msgid "Disable transparent backgrounds, even if the system supports them."
 msgstr "Деактивиране на прозрачния фон, дори ако системата го поддържа."
 
-#: Application.cpp:72
+#: Application.cpp:74
 #, kde-format
 msgctxt "@info:shell"
 msgid "List the available profiles"
 msgstr "Списък с наличните профили"
 
-#: Application.cpp:73
+#: Application.cpp:75
 #, kde-format
 msgctxt "@info:shell"
 msgid "List all the profile properties names and their type (for use with -p)"
@@ -214,13 +229,13 @@ msgstr ""
 "Списък на всички имена на свойствата на профила и техния тип (за използване "
 "с -p)"
 
-#: Application.cpp:74
+#: Application.cpp:76
 #, kde-format
 msgctxt "@info:shell"
 msgid "Change the value of a profile property."
 msgstr "Промяна на стойността на свойството на профила."
 
-#: Application.cpp:76
+#: Application.cpp:78
 #, kde-format
 msgctxt "@info:shell"
 msgid ""
@@ -230,7 +245,7 @@ msgstr ""
 "Команда за изпълнение. Тази опция ще улови всички следващи аргументи, затова "
 "я използвайте като последна опция."
 
-#: Application.cpp:79
+#: Application.cpp:81
 #, kde-format
 msgctxt "@info:shell"
 msgid ""
@@ -241,13 +256,13 @@ msgstr ""
 "нарушава функционалността, например --new-tab. Използва се най-често за "
 "откриване на грешки."
 
-#: Application.cpp:86
+#: Application.cpp:88
 #, kde-format
 msgctxt "@info:shell"
 msgid "Arguments passed to command"
 msgstr "Подавани на командата аргументи"
 
-#: Application.cpp:516
+#: Application.cpp:529
 #, kde-format
 msgctxt "@item"
 msgid "Toggle Background Window"
@@ -1245,7 +1260,7 @@ msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Зареждане подредбата на разделите..."
 
-#: MainWindow.cpp:736 MainWindow.cpp:753
+#: MainWindow.cpp:746 MainWindow.cpp:763
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1255,61 +1270,61 @@ msgstr[0] "В този прозорец се изпълнява процес. И
 msgstr[1] ""
 "В този прозорец се изпълняват %1 процеси. Все още ли искате да излезете?"
 
-#: MainWindow.cpp:742 MainWindow.cpp:759 MainWindow.cpp:773
+#: MainWindow.cpp:752 MainWindow.cpp:769 MainWindow.cpp:783
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Потвърждение на затваряне"
 
-#: MainWindow.cpp:743 MainWindow.cpp:760 MainWindow.cpp:774
+#: MainWindow.cpp:753 MainWindow.cpp:770 MainWindow.cpp:784
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "&Затваряне на прозореца"
 
-#: MainWindow.cpp:761 MainWindow.cpp:775
+#: MainWindow.cpp:771 MainWindow.cpp:785
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Затваряне на &раздела"
 
-#: MainWindow.cpp:770
+#: MainWindow.cpp:780
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "В този прозорец има %1 отворени терминали. Искате да излезете?"
 
-#: MainWindow.cpp:877 Part.cpp:298
+#: MainWindow.cpp:887 Part.cpp:298
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Профили"
 
-#: MainWindow.cpp:895
+#: MainWindow.cpp:905
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Общи"
 
-#: MainWindow.cpp:907
+#: MainWindow.cpp:917
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr "Памет"
 
-#: MainWindow.cpp:913
+#: MainWindow.cpp:923
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Лента с раздели / разделители "
 
-#: MainWindow.cpp:918
+#: MainWindow.cpp:928
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Временни файлове"
 
-#: MainWindow.cpp:923
+#: MainWindow.cpp:933
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -1411,29 +1426,29 @@ msgid "Cancel"
 msgstr "Отказ"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:46
-#: plugins/QuickCommands/quickcommandsplugin.cpp:113
+#: plugins/QuickCommands/quickcommandsplugin.cpp:130
 #, kde-format
 msgid "Quick Commands"
 msgstr "Бързи команди"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:71
+#: plugins/QuickCommands/quickcommandsplugin.cpp:75
 #, kde-format
 msgid "Show Quick Access"
 msgstr "Показване на бърз достъп"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:106
+#: plugins/QuickCommands/quickcommandsplugin.cpp:123
 #, kde-format
 msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
 msgstr ""
 "Не са намерени бързи команди. Можете да добавите такава в Приставки -> Бързи "
 "команди"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:107
+#: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
 msgid "Plugins - Quick Commands"
 msgstr "Приставки - Бързи команди"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:125
+#: plugins/QuickCommands/quickcommandsplugin.cpp:140
 #, kde-format
 msgid "Show Quick Commands"
 msgstr "Показване на бързи команди"
@@ -1879,14 +1894,14 @@ msgstr "Настройки на изхода"
 
 #. i18n: ectx: property (text), widget (QCheckBox, printerFriendly)
 #. i18n: ectx: label, entry (PrinterFriendly), group (PrintOptions)
-#: PrintOptions.ui:39 settings/konsole.kcfg:195
+#: PrintOptions.ui:39 settings/konsole.kcfg:205
 #, kde-format
 msgid "Printer &friendly mode (black text, no background)"
 msgstr "Обикновен режим на пе&чат (черен текст, без фон)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, scaleOutput)
 #. i18n: ectx: label, entry (ScaleOutput), group (PrintOptions)
-#: PrintOptions.ui:46 settings/konsole.kcfg:199
+#: PrintOptions.ui:46 settings/konsole.kcfg:209
 #, kde-format
 msgid "&Scale output"
 msgstr "&Scale output"
@@ -2171,7 +2186,7 @@ msgstr "Индикатор на прогреса на качването"
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Активност в „%1“ (Сесия „%2“)"
 
-#: session/Session.cpp:2259
+#: session/Session.cpp:2269
 #, kde-format
 msgid "Security sensitive DBus API is disabled in the settings."
 msgstr "Чувствителният към сигурността DBus API е деактивиран в настройките."
@@ -2577,58 +2592,113 @@ msgctxt "@title:window"
 msgid "Configure"
 msgstr "Настройване"
 
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableSecuritySensitiveDBusAPI)
+#. i18n: ectx: label, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:43 settings/konsole.kcfg:42
+#, kde-format
+msgid "Enable the security sensitive parts of the DBus API"
+msgstr "Активиране на чувствителните към сигурността части на DBus API"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchHighlightMatches)
+#: settings/GeneralSettings.ui:56
+#, kde-format
+msgid "Highlight all matches"
+msgstr "Осветяване на всички съвпадения"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: settings/GeneralSettings.ui:63
+#, kde-format
+msgid "Notifications:"
+msgstr "Известия:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_FocusFollowsMouse)
+#. i18n: ectx: label, entry (FocusFollowsMouse), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:70 settings/konsole.kcfg:13
+#, kde-format
+msgid "Focus terminals when the mouse pointer is moved over them"
+msgstr "Фокусиране на терминалите при поставяне на курсора на мишката над тях"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RemoveWindowTitleBarAndFrame)
+#. i18n: ectx: label, entry (RemoveWindowTitleBarAndFrame), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:77 settings/konsole.kcfg:9
+#, kde-format
+msgid "Remove window titlebar and frame"
+msgstr "Премахване на заглавната лента и рамка на прозореца"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_RememberWindowSize)
+#: settings/GeneralSettings.ui:90
+#, kde-format
+msgid "If enabled, profile settings will be ignored"
+msgstr "Ако е активирано, настройките на профила ще бъдат игнорирани"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RememberWindowSize)
+#: settings/GeneralSettings.ui:93
+#, kde-format
+msgid "Remember window size"
+msgstr "Запомняне размера на прозореца"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchNoWrap)
+#. i18n: ectx: tooltip, entry (SearchNoWrap), group (SearchSettings)
+#: settings/GeneralSettings.ui:106 settings/konsole.kcfg:99
+#, kde-format
+msgid "Sets whether search should stop instead of wrapping"
+msgstr "Задава дали търсенето да спре вместо да започне отначало"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchNoWrap)
+#: settings/GeneralSettings.ui:109
+#, kde-format
+msgid "No wrap"
+msgstr "Без продължаване"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: settings/GeneralSettings.ui:116
+#, kde-format
+msgid "Process and window:"
+msgstr "Процес и прозорец:"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, enableAllMessagesButton)
+#: settings/GeneralSettings.ui:137
+#, kde-format
+msgid "All dialogs will be shown again"
+msgstr "Всички диалогови прозорци ще се показват отново"
+
+#. i18n: ectx: property (text), widget (QPushButton, enableAllMessagesButton)
+#: settings/GeneralSettings.ui:140
+#, kde-format
+msgid "Enable all \"Don't Ask Again\" messages"
+msgstr "Активиране на всички \"Не ме питай отново\" съобщения"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ForceNewTabs)
+#. i18n: ectx: label, entry (ForceNewTabs), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:178 settings/konsole.kcfg:37
+#, kde-format
+msgid "Force new tabs"
+msgstr "Принудително нови раздели"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: settings/GeneralSettings.ui:185
+#, kde-format
+msgctxt "@item:intext Search options"
+msgid "Search:"
+msgstr "Търсене:"
+
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchReverseSearch)
 #. i18n: ectx: tooltip, entry (SearchReverseSearch), group (SearchSettings)
-#: settings/GeneralSettings.ui:49 settings/konsole.kcfg:84
+#: settings/GeneralSettings.ui:198 settings/konsole.kcfg:94
 #, kde-format
 msgid "Sets whether search should start from the bottom"
 msgstr "Процеси и прозорци:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchReverseSearch)
 #. i18n: ectx: label, entry (SearchReverseSearch), group (SearchSettings)
-#: settings/GeneralSettings.ui:52 settings/konsole.kcfg:83
+#: settings/GeneralSettings.ui:201 settings/konsole.kcfg:93
 #, kde-format
 msgid "Search backwards"
 msgstr "Търсене назад"
 
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableSecuritySensitiveDBusAPI)
-#. i18n: ectx: label, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:59 settings/konsole.kcfg:37
-#, kde-format
-msgid "Enable the security sensitive parts of the DBus API"
-msgstr "Активиране на чувствителните към сигурността части на DBus API"
-
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: settings/GeneralSettings.ui:66
-#, kde-format
-msgctxt "@item:intext Search options"
-msgid "Search:"
-msgstr "Търсене:"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchRegExpression)
-#. i18n: ectx: label, entry (SearchRegExpression), group (SearchSettings)
-#: settings/GeneralSettings.ui:79 settings/konsole.kcfg:74
-#, kde-format
-msgid "Match using regular expressions"
-msgstr "Съвпадение с помощта на регулярни изрази"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RemoveWindowTitleBarAndFrame)
-#. i18n: ectx: label, entry (RemoveWindowTitleBarAndFrame), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:86 settings/konsole.kcfg:9
-#, kde-format
-msgid "Remove window titlebar and frame"
-msgstr "Премахване на заглавната лента и рамка на прозореца"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_AllowMenuAccelerators)
-#. i18n: ectx: label, entry (AllowMenuAccelerators), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:99 settings/konsole.kcfg:22
-#, kde-format
-msgid "Enable menu accelerators"
-msgstr "Активиране ускорителите на менютата"
-
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_UseSingleInstance)
 #. i18n: ectx: tooltip, entry (UseSingleInstance), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:112 settings/konsole.kcfg:33
+#: settings/GeneralSettings.ui:214 settings/konsole.kcfg:33
 #, kde-format
 msgid "When launching Konsole re-use existing process if possible"
 msgstr ""
@@ -2636,92 +2706,50 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSingleInstance)
 #. i18n: ectx: label, entry (UseSingleInstance), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:115 settings/konsole.kcfg:32
+#: settings/GeneralSettings.ui:217 settings/konsole.kcfg:32
 #, kde-format
 msgid "Run all Konsole windows in a single process"
 msgstr "Изпълняване на всички Konsole прозорци в един процес"
 
-#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_RememberWindowSize)
-#: settings/GeneralSettings.ui:128
-#, kde-format
-msgid "If enabled, profile settings will be ignored"
-msgstr "Ако е активирано, настройките на профила ще бъдат игнорирани"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RememberWindowSize)
-#: settings/GeneralSettings.ui:131
-#, kde-format
-msgid "Remember window size"
-msgstr "Запомняне размера на прозореца"
-
-#. i18n: ectx: property (text), widget (QLabel, label_3)
-#: settings/GeneralSettings.ui:138
-#, kde-format
-msgid "Notifications:"
-msgstr "Известия:"
-
-#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchNoWrap)
-#. i18n: ectx: tooltip, entry (SearchNoWrap), group (SearchSettings)
-#: settings/GeneralSettings.ui:151 settings/konsole.kcfg:89
-#, kde-format
-msgid "Sets whether search should stop instead of wrapping"
-msgstr "Задава дали търсенето да спре вместо да започне отначало"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchNoWrap)
-#: settings/GeneralSettings.ui:154
-#, kde-format
-msgid "No wrap"
-msgstr "Без продължаване"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowWindowTitleOnTitleBar)
-#. i18n: ectx: label, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:167 settings/konsole.kcfg:17
-#, kde-format
-msgid "Show window title on the titlebar"
-msgstr "Показване заглавието на прозореца в заглавната лента"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_FocusFollowsMouse)
-#. i18n: ectx: label, entry (FocusFollowsMouse), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:174 settings/konsole.kcfg:13
-#, kde-format
-msgid "Focus terminals when the mouse pointer is moved over them"
-msgstr "Фокусиране на терминалите при поставяне на курсора на мишката над тях"
-
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchCaseSensitive)
 #. i18n: ectx: tooltip, entry (SearchCaseSensitive), group (SearchSettings)
-#: settings/GeneralSettings.ui:187 settings/konsole.kcfg:70
+#: settings/GeneralSettings.ui:230 settings/konsole.kcfg:80
 #, kde-format
 msgid "Sets whether the search is case sensitive"
 msgstr "Задава дали търсенето да е чувствително към регистъра"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchCaseSensitive)
-#: settings/GeneralSettings.ui:190
+#: settings/GeneralSettings.ui:233
 #, kde-format
 msgid "Case sensitive"
 msgstr "С отчитане на регистъра"
 
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: settings/GeneralSettings.ui:197
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowWindowTitleOnTitleBar)
+#. i18n: ectx: label, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:262 settings/konsole.kcfg:17
 #, kde-format
-msgid "Process and window:"
-msgstr "Процес и прозорец:"
+msgid "Show window title on the titlebar"
+msgstr "Показване заглавието на прозореца в заглавната лента"
 
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchHighlightMatches)
-#: settings/GeneralSettings.ui:213
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchRegExpression)
+#. i18n: ectx: label, entry (SearchRegExpression), group (SearchSettings)
+#: settings/GeneralSettings.ui:275 settings/konsole.kcfg:84
 #, kde-format
-msgid "Highlight all matches"
-msgstr "Осветяване на всички съвпадения"
+msgid "Match using regular expressions"
+msgstr "Съвпадение с помощта на регулярни изрази"
 
-#. i18n: ectx: property (toolTip), widget (QPushButton, enableAllMessagesButton)
-#: settings/GeneralSettings.ui:231
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_AllowMenuAccelerators)
+#. i18n: ectx: label, entry (AllowMenuAccelerators), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:288 settings/konsole.kcfg:22
 #, kde-format
-msgid "All dialogs will be shown again"
-msgstr "Всички диалогови прозорци ще се показват отново"
+msgid "Enable menu accelerators"
+msgstr "Активиране ускорителите на менютата"
 
-#. i18n: ectx: property (text), widget (QPushButton, enableAllMessagesButton)
-#: settings/GeneralSettings.ui:234
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ListenForZModemTerminalCodes)
+#: settings/GeneralSettings.ui:295
 #, kde-format
-msgid "Enable all \"Don't Ask Again\" messages"
-msgstr "Активиране на всички \"Не ме питай отново\" съобщения"
+msgid "Listen for ZModem terminal codes"
+msgstr "Слушане за ZModem терминални кодове"
 
 #. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:18
@@ -2749,77 +2777,99 @@ msgstr "Запомняне размера на прозореца при сле�
 msgid "The window size will be saved upon exiting Konsole"
 msgstr "Размерът на прозореца ще бъде запазен при излизане от Konsole"
 
-#. i18n: ectx: tooltip, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
+#. i18n: ectx: tooltip, entry (ForceNewTabs), group (KonsoleWindow)
 #: settings/konsole.kcfg:38
+#, kde-format
+msgid ""
+"When launching Konsole create a new tab instead of creating new windows if "
+"possible"
+msgstr ""
+"При стартиране на Konsole, създаване на нов раздел вместо нови прозорци, ако "
+"е възможно."
+
+#. i18n: ectx: tooltip, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
+#: settings/konsole.kcfg:43
 #, kde-format
 msgid "DBus API like runCommand will be enabled"
 msgstr "DBus API, като например runCommand, ще бъде активиран"
 
-#. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
+#. i18n: ectx: label, entry (ListenForZModemTerminalCodes), group (KonsoleWindow)
 #: settings/konsole.kcfg:47
+#, kde-format
+msgid "Listen for ZModem Terminal codes"
+msgstr "Слушане за ZModem терминални кодове"
+
+#. i18n: ectx: tooltip, entry (ListenForZModemTerminalCodes), group (KonsoleWindow)
+#: settings/konsole.kcfg:48
+#, kde-format
+msgid "Automatic send/receive files over serial connections"
+msgstr "Автоматично изпращане/получаване на файлове през серийни връзки"
+
+#. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
+#: settings/konsole.kcfg:57
 #, kde-format
 msgid "Thumbnail Width"
 msgstr "Ширина на миниатюри"
 
 #. i18n: ectx: tooltip, entry (ThumbnailSize), group (ThumbnailsSettings)
-#: settings/konsole.kcfg:48
+#: settings/konsole.kcfg:58
 #, kde-format
 msgid "Sets the width of the thumbnail"
 msgstr "Задава ширината на миниатюрата"
 
 #. i18n: ectx: label, entry (ThumbnailShift), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailShift), group (ThumbnailsSettings)
-#: settings/konsole.kcfg:52 settings/konsole.kcfg:53
+#: settings/konsole.kcfg:62 settings/konsole.kcfg:63
 #, kde-format
 msgid "Use Shift to display a thumbnail"
 msgstr "Използване на Shift за показване на миниатюри"
 
 #. i18n: ectx: label, entry (ThumbnailAlt), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailAlt), group (ThumbnailsSettings)
-#: settings/konsole.kcfg:57 settings/konsole.kcfg:58
+#: settings/konsole.kcfg:67 settings/konsole.kcfg:68
 #, kde-format
 msgid "Use Alt to display a thumbnail"
 msgstr "Използване на Alt за показване на миниатюри"
 
 #. i18n: ectx: label, entry (ThumbnailCtrl), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailCtrl), group (ThumbnailsSettings)
-#: settings/konsole.kcfg:62 settings/konsole.kcfg:63
+#: settings/konsole.kcfg:72 settings/konsole.kcfg:73
 #, kde-format
 msgid "Use Ctrl to display a thumbnail"
 msgstr "Използване на Ctr за показване на миниатюри"
 
 #. i18n: ectx: label, entry (SearchCaseSensitive), group (SearchSettings)
-#: settings/konsole.kcfg:69
+#: settings/konsole.kcfg:79
 #, kde-format
 msgid "Search is case sensitive"
 msgstr "Търсенето е чувствително към регистъра"
 
 #. i18n: ectx: label, entry (SearchHighlightMatches), group (SearchSettings)
-#: settings/konsole.kcfg:78
+#: settings/konsole.kcfg:88
 #, kde-format
 msgid "Highlight all search matches"
 msgstr "Осветяване на всички съвпадения"
 
 #. i18n: ectx: tooltip, entry (SearchHighlightMatches), group (SearchSettings)
-#: settings/konsole.kcfg:79
+#: settings/konsole.kcfg:89
 #, kde-format
 msgid "Sets whether matching text should be highlighted"
 msgstr "Задава дали съвпадащият текст да се маркира"
 
 #. i18n: ectx: label, entry (SearchNoWrap), group (SearchSettings)
-#: settings/konsole.kcfg:88
+#: settings/konsole.kcfg:98
 #, kde-format
 msgid "Search stops instead of wrapping"
 msgstr "Търсенето спира вместо да започне отначало"
 
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
-#: settings/konsole.kcfg:95
+#: settings/konsole.kcfg:105
 #, kde-format
 msgid "Control whether child cgroups are created for individual tabs"
 msgstr "Контролиране дали дъщерни cgroups са създадени за индивидуални раздели"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
-#: settings/konsole.kcfg:99
+#: settings/konsole.kcfg:109
 #, kde-format
 msgid ""
 "Determines the memory consumption level above which throttling will start"
@@ -2829,56 +2879,56 @@ msgstr ""
 
 #. i18n: ectx: label, entry (SplitViewVisibility), group (SplitView)
 #. i18n: ectx: label, entry (TabBarVisibility), group (TabBar)
-#: settings/konsole.kcfg:105 settings/konsole.kcfg:125
+#: settings/konsole.kcfg:115 settings/konsole.kcfg:135
 #, kde-format
 msgid "Control the visibility of the whole tab bar"
 msgstr "Контролиране видимостта на цялата лента с раздели"
 
 #. i18n: ectx: label, entry (SplitDragHandleSize), group (SplitView)
-#: settings/konsole.kcfg:114
+#: settings/konsole.kcfg:124
 #, kde-format
 msgid "Control the size of the handle between panels"
 msgstr "Контролиране размера на дръжката между панелите"
 
 #. i18n: ectx: label, entry (TabBarPosition), group (TabBar)
-#: settings/konsole.kcfg:134
+#: settings/konsole.kcfg:144
 #, kde-format
 msgid "Control the position of the tab bar"
 msgstr "Контролиране позицията на лентата с раздели"
 
 #. i18n: ectx: label, entry (TabBarStyleSheet), group (TabBar)
-#: settings/konsole.kcfg:144
+#: settings/konsole.kcfg:154
 #, kde-format
 msgid "Control the visual style of the tab bar"
 msgstr "Контролиране визуалния стил на лентата с раздели"
 
 #. i18n: ectx: label, entry (TabBarUseUserStyleSheet), group (TabBar)
-#: settings/konsole.kcfg:148
+#: settings/konsole.kcfg:158
 #, kde-format
 msgid "Use a user-defined .css file for the tab bar"
 msgstr "Използване на дефиниран от потребителя .css файл за лентата с раздели"
 
 #. i18n: ectx: label, entry (TabBarUserStyleSheetFile), group (TabBar)
-#: settings/konsole.kcfg:152
+#: settings/konsole.kcfg:162
 #, kde-format
 msgid "The .css file to use for the tab bar style"
 msgstr "Файлът .css, който да се използва за стила на лентата с раздели"
 
 #. i18n: ectx: label, entry (CloseTabOnMiddleMouseButton), group (TabBar)
-#: settings/konsole.kcfg:156
+#: settings/konsole.kcfg:166
 #, kde-format
 msgid "Allow middle-clicking on open tabs to close them"
 msgstr ""
 "Позволете на средно щракване върху отворени раздели, за да ги затворите"
 
 #. i18n: ectx: label, entry (NewTabButton), group (TabBar)
-#: settings/konsole.kcfg:160
+#: settings/konsole.kcfg:170
 #, kde-format
 msgid "Control the visibility of 'New Tab' button on the tab bar"
 msgstr "Контролиране видимостта на бутона \"Нов раздел\" в лентата с раздели"
 
 #. i18n: ectx: label, entry (SearchTabsButton), group (TabBar)
-#: settings/konsole.kcfg:164
+#: settings/konsole.kcfg:174
 #, kde-format
 msgid "Control the visibility of 'Search Tabs' button on the tab bar"
 msgstr ""
@@ -2886,25 +2936,25 @@ msgstr ""
 "разделите"
 
 #. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
-#: settings/konsole.kcfg:172
+#: settings/konsole.kcfg:182
 #, kde-format
 msgid "Control where the \"Close tab\" button will be displayed"
 msgstr "Контролиране къде ще се показва бутонът \"Затваряне на раздел\""
 
 #. i18n: ectx: label, entry (NewTabBehavior), group (TabBar)
-#: settings/konsole.kcfg:181
+#: settings/konsole.kcfg:191
 #, kde-format
 msgid "Control where to put the new tab"
 msgstr "Контролиране къде да поставите новия раздел"
 
 #. i18n: ectx: label, entry (ExpandTabWidth), group (TabBar)
-#: settings/konsole.kcfg:189
+#: settings/konsole.kcfg:199
 #, kde-format
 msgid "Expand the tab widths"
 msgstr "Разширяване на ширините на раздела"
 
 #. i18n: ectx: label, entry (scrollbackUseSystemLocation), group (FileLocation)
-#: settings/konsole.kcfg:205
+#: settings/konsole.kcfg:215
 #, kde-format
 msgid "For scrollback files, use system-wide folder location"
 msgstr ""
@@ -2912,7 +2962,7 @@ msgstr ""
 "папката"
 
 #. i18n: ectx: label, entry (scrollbackUseCacheLocation), group (FileLocation)
-#: settings/konsole.kcfg:209
+#: settings/konsole.kcfg:219
 #, kde-format
 msgid "For scrollback files, use user's specific folder location"
 msgstr ""
@@ -2920,7 +2970,7 @@ msgstr ""
 "папката на потребителя"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocation), group (FileLocation)
-#: settings/konsole.kcfg:213
+#: settings/konsole.kcfg:223
 #, kde-format
 msgid "For scrollback files, use specified folder location"
 msgstr ""
@@ -2928,7 +2978,7 @@ msgstr ""
 "папката"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocationDirectory), group (FileLocation)
-#: settings/konsole.kcfg:217
+#: settings/konsole.kcfg:227
 #, kde-format
 msgid "For scrollback files, use this folder"
 msgstr "За файлове с история на командите използвайте тази папка"
@@ -3360,59 +3410,59 @@ msgstr "Включване на &квадратни миниатюри"
 msgid "Size: %1 x %2"
 msgstr "Размери: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2255
+#: terminalDisplay/TerminalDisplay.cpp:2256
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "Наистина ли искате да поставите %1 символ?"
 msgstr[1] "Наистина ли искате да поставите %1 символи?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2256
+#: terminalDisplay/TerminalDisplay.cpp:2257
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Потвърждаване на поставянето"
 
-#: terminalDisplay/TerminalDisplay.cpp:2289
+#: terminalDisplay/TerminalDisplay.cpp:2290
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "Край на текст/прекъсване: може да излезе от текущия процес"
 
-#: terminalDisplay/TerminalDisplay.cpp:2290
+#: terminalDisplay/TerminalDisplay.cpp:2291
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "Край на предаването: може да излезе от текущия процес"
 
-#: terminalDisplay/TerminalDisplay.cpp:2291
+#: terminalDisplay/TerminalDisplay.cpp:2292
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Сигнал: издаване на звуково предупреждение"
 
-#: terminalDisplay/TerminalDisplay.cpp:2292
+#: terminalDisplay/TerminalDisplay.cpp:2293
 #, kde-format
 msgid "Backspace"
 msgstr "Backspace"
 
-#: terminalDisplay/TerminalDisplay.cpp:2293
+#: terminalDisplay/TerminalDisplay.cpp:2294
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "Контрол на устройство три/XOFF: преустановява изхода"
 
-#: terminalDisplay/TerminalDisplay.cpp:2294
+#: terminalDisplay/TerminalDisplay.cpp:2295
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "Замяна/спиране: може да спре текущия процес"
 
-#: terminalDisplay/TerminalDisplay.cpp:2295
+#: terminalDisplay/TerminalDisplay.cpp:2296
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Escape: използва се за манипулиране на състоянието на терминала"
 
-#: terminalDisplay/TerminalDisplay.cpp:2296
+#: terminalDisplay/TerminalDisplay.cpp:2297
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "Разделител на файлове/изход: може да прекрати текущия процес"
 
-#: terminalDisplay/TerminalDisplay.cpp:2319
+#: terminalDisplay/TerminalDisplay.cpp:2320
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3421,31 +3471,31 @@ msgstr ""
 "Текстът, който се опитвате да поставите, съдържа скрити контролни знаци, "
 "искате ли да ги филтрирате?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2322
+#: terminalDisplay/TerminalDisplay.cpp:2323
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Потвърждаване на поставянето"
 
-#: terminalDisplay/TerminalDisplay.cpp:2323
+#: terminalDisplay/TerminalDisplay.cpp:2324
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Поставяне и без контролни знаци"
 
-#: terminalDisplay/TerminalDisplay.cpp:2324
+#: terminalDisplay/TerminalDisplay.cpp:2325
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "Поставяне на селекцията"
 
-#: terminalDisplay/TerminalDisplay.cpp:2325
+#: terminalDisplay/TerminalDisplay.cpp:2326
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "&Отказ"
 
-#: terminalDisplay/TerminalDisplay.cpp:2556
+#: terminalDisplay/TerminalDisplay.cpp:2557
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3456,17 +3506,17 @@ msgstr ""
 "\">спрян</a> чрез натискане на Ctrl+S. Натиснете <b>Ctrl+Q</b> за "
 "възобновяване.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2611
+#: terminalDisplay/TerminalDisplay.cpp:2612
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Този ​​терминал е само за четене."
 
-#: terminalDisplay/TerminalDisplay.cpp:3006
+#: terminalDisplay/TerminalDisplay.cpp:3008
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Смяна на &директорията на"
 
-#: terminalDisplay/TerminalDisplay.cpp:3041
+#: terminalDisplay/TerminalDisplay.cpp:3043
 #, kde-format
 msgid "&Paste Location"
 msgstr "&Поставяне на местоположение"
@@ -3594,116 +3644,128 @@ msgstr "Фокусиране на терминала в дясно"
 #: ViewManager.cpp:282
 #, kde-format
 msgctxt "@action Shortcut entry"
+msgid "Focus Next Terminal"
+msgstr "Фокусиране на следващия терминал"
+
+#: ViewManager.cpp:288
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Focus Previous Terminal"
+msgstr "Фокусиране на предишния терминал"
+
+#: ViewManager.cpp:294
+#, kde-format
+msgctxt "@action Shortcut entry"
 msgid "Switch to Last Tab"
 msgstr "Превключване към последния раздел"
 
-#: ViewManager.cpp:287
+#: ViewManager.cpp:299
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs"
 msgstr "Последно използвани раздели"
 
-#: ViewManager.cpp:292
+#: ViewManager.cpp:304
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle Between Two Tabs"
 msgstr "Превключване между два раздела"
 
-#: ViewManager.cpp:297
+#: ViewManager.cpp:309
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs (Reverse)"
 msgstr "Последно използвани подпрозорци (обратен ред)"
 
-#: ViewManager.cpp:302
+#: ViewManager.cpp:314
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle maximize current view"
 msgstr "Превключване максимизирането на текущия изглед"
 
-#: ViewManager.cpp:303
+#: ViewManager.cpp:315
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle maximize current view"
 msgstr "Превключване максимизирането на текущия изглед"
 
-#: ViewManager.cpp:311
+#: ViewManager.cpp:323
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle zoom-maximize current view"
 msgstr "Превключване максимизирането на текущия изглед"
 
-#: ViewManager.cpp:312
+#: ViewManager.cpp:324
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle zoom-maximize current view"
 msgstr "Превключване максимизирането на текущия изглед"
 
-#: ViewManager.cpp:320
+#: ViewManager.cpp:332
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the right"
 msgstr "Преместване раздела надясно"
 
-#: ViewManager.cpp:327
+#: ViewManager.cpp:339
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the left"
 msgstr "Преместване раздела наляво"
 
-#: ViewManager.cpp:334
+#: ViewManager.cpp:346
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
 msgstr "Настройка на семантичната интеграция (bash)"
 
-#: ViewManager.cpp:340
+#: ViewManager.cpp:352
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
 msgstr "Превключване на семантични съвети"
 
-#: ViewManager.cpp:346
+#: ViewManager.cpp:358
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
 msgstr "Превключване на показване на номера на редове"
 
-#: ViewManager.cpp:353
+#: ViewManager.cpp:365
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
 msgstr "Еднакъв размер за всички изгледи"
 
-#: ViewManager.cpp:363
+#: ViewManager.cpp:375
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Tab %1"
 msgstr "Превключване към раздел %1"
 
-#: ViewManager.cpp:576
+#: ViewManager.cpp:598
 #, kde-format
 msgid "Semantic hints "
 msgstr "Семантични съвети"
 
-#: ViewManager.cpp:592
+#: ViewManager.cpp:614
 #, kde-format
 msgid "Line numbers "
 msgstr "Номериране на редове"
 
-#: ViewManager.cpp:1180
+#: ViewManager.cpp:1202
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Запазване подредбата на разделите"
 
-#: ViewManager.cpp:1182 ViewManager.cpp:1303
+#: ViewManager.cpp:1204 ViewManager.cpp:1325
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Изглед на конзолата (*.json)"
 
-#: ViewManager.cpp:1198
+#: ViewManager.cpp:1220
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3713,7 +3775,7 @@ msgstr ""
 "Възникна проблем при запазване на оформлението.\n"
 "%1"
 
-#: ViewManager.cpp:1290
+#: ViewManager.cpp:1312
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3723,13 +3785,13 @@ msgstr ""
 "Възникна проблем при зареждане на оформлението.\n"
 "%1"
 
-#: ViewManager.cpp:1301
+#: ViewManager.cpp:1323
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Зареждане подредбата на разделите"
 
-#: Vt102Emulation.cpp:2828
+#: Vt102Emulation.cpp:2910
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "

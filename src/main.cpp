@@ -344,7 +344,7 @@ bool shouldUseNewProcess(int argc, char *argv[])
     }
 
     // the only way to create new tab is to reuse existing Konsole process.
-    if (arguments.contains(QStringLiteral("--new-tab"))) {
+    if (Konsole::KonsoleSettings::forceNewTabs() || arguments.contains(QStringLiteral("--new-tab"))) {
         return false;
     }
 

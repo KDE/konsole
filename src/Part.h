@@ -71,6 +71,8 @@ public:
     /** Reimplemented from TerminalInterfaceV2 */
     QVariant profileProperty(const QString &profileProperty) const override;
 
+    Q_INVOKABLE void setContextMenuAdditionalActions(const QList<QAction *> &extension);
+
 public Q_SLOTS:
     /**
      * creates and run a session using the specified profile and directory

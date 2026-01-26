@@ -32,6 +32,8 @@ private Q_SLOTS:
     void testTokenizingVT52_data();
     void testTokenizingVT52();
 
+    void testBufferedUpdates();
+
 private:
     static void sendAndCompare(TestEmulation *em, const char *input, size_t inputLen, const QString &expectedPrint, const QByteArray &expectedSent);
 };

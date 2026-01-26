@@ -211,7 +211,7 @@ void TerminalPainter::drawContents(Character *image,
         QFont::Bold,
         QFont::Black,
     };
-    const QFont::Weight normalWeight = static_cast<QFont::Weight>(m_parentDisplay->font().weight()); // Qt6: cast can go away
+    const QFont::Weight normalWeight = m_parentDisplay->font().weight();
     auto it = std::upper_bound(std::begin(FontWeights), std::end(FontWeights), normalWeight);
     const QFont::Weight boldWeight = it != std::end(FontWeights) ? *it : QFont::Black;
     paint.setLayoutDirection(Qt::LeftToRight);
@@ -916,10 +916,10 @@ void TerminalPainter::drawAboveText(QPainter &painter,
                         painter.drawLine(QLineF(x1, y, x2, y));
                     if (underline == RE_UNDERLINE_DOUBLE || underline == RE_UNDERLINE_CURL) {
                         const int fontHeight = m_parentDisplay->terminalFont()->fontHeight();
-                        const qreal amplitude = fontHeight / 8;
+                        const qreal amplitude = static_cast<qreal>(fontHeight) / 8.0;
+
                         if (underline == RE_UNDERLINE_DOUBLE) {
-                            if (amplitude)
-                                painter.drawLine(x1, y - amplitude, x2, y - amplitude);
+                            painter.drawLine(x1, y - amplitude, x2, y - amplitude);
                         } else {
                             y = std::max(static_cast<qreal>(0), y - amplitude / 2);
                             assert(underline == RE_UNDERLINE_CURL);

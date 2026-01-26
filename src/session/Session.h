@@ -230,6 +230,8 @@ public:
      */
     void setInitialWorkingDirectory(const QString &dir);
 
+    bool reportedWorkingUrlIsLocalFile();
+
     /**
      * Returns the current directory of the foreground process in the session
      */
@@ -743,6 +745,12 @@ public Q_SLOTS:
      */
     Q_SCRIPTABLE QString activationToken(const QString &cookieForRequest) const;
 
+    /**
+     * Sets/gets the session's tab color
+     */
+    Q_SCRIPTABLE QString tabColor() const;
+    Q_SCRIPTABLE void setTabColor(const QString &colorName);
+
 Q_SIGNALS:
 
     /** Emitted when the terminal process starts. */
@@ -931,23 +939,23 @@ private:
     bool _autoClose = true;
     bool _closePerUserRequest = false;
 
-    QString _nameTitle;
-    QString _displayTitle;
-    QString _userTitle;
+    QString _nameTitle = QString();
+    QString _displayTitle = QString();
+    QString _userTitle = QString();
 
-    QString _localTabTitleFormat;
-    QString _remoteTabTitleFormat;
-    QColor _tabColor;
+    QString _localTabTitleFormat = QString();
+    QString _remoteTabTitleFormat = QString();
+    QColor _tabColor = QColor();
 
     bool _tabTitleSetByUser = false;
     bool _tabColorSetByUser = false;
 
-    QString _iconName;
-    QString _iconText; // not actually used
+    QString _iconName = QString();
+    QString _iconText = QString(); // not actually used
     bool _addToUtmp = true;
     bool _flowControlEnabled = true;
 
-    QString _program;
+    QString _program = QString();
     QStringList _arguments;
 
     QStringList _environment;
@@ -968,13 +976,13 @@ private:
 
     bool _hasDarkBackground = false;
 
-    QSize _preferredSize;
+    QSize _preferredSize = QSize(0, 0);
 
     bool _readOnly = false;
 
     bool _isPrimaryScreen = true;
 
-    QString _currentHostName;
+    QString _currentHostName = QString();
 
     bool _selectMode = false;
 

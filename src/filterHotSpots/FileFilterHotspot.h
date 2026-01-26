@@ -66,16 +66,16 @@ private:
     void openWithEditorFromProfile(const QString &fullCmd, const QString &path) const;
 
     void showThumbnail(const KFileItem &item, const QPixmap &preview);
-    QString _filePath;
+    QString _filePath = QString();
     Session *_session = nullptr;
 
     // This is a pointer for performance reasons
     // constructing KFileItemActions is super expensive
     KFileItemActions *_menuActions = nullptr;
 
-    QPoint _eventPos;
-    QPoint _thumbnailPos;
-    Qt::KeyboardModifiers _eventModifiers;
+    QPoint _eventPos = QPoint(0, 0);
+    QPoint _thumbnailPos = QPoint(0, 0);
+    Qt::KeyboardModifiers _eventModifiers = Qt::NoModifier;
     bool _thumbnailFinished;
 
     /* This variable stores the pointer of the active HotSpot that

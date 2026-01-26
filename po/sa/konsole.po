@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:55+0000\n"
+"POT-Creation-Date: 2026-01-23 00:47+0000\n"
 "PO-Revision-Date: 2024-12-25 19:40+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -166,49 +166,65 @@ msgid "Hide the menubar, overriding the default setting"
 msgstr "पूर्वनिर्धारितसेटिंग् अतिक्रम्य मेनूपट्टिकां गोपयन्तु"
 
 #: Application.cpp:68
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@info:shell"
+#| msgid "Show the tabbar, overriding the default setting"
 msgctxt "@info:shell"
-msgid "Show the tabbar, overriding the default setting"
+msgid "Show all the toolbars, overriding the default setting"
 msgstr "पूर्वनिर्धारितसेटिंग् अतिक्रम्य टब्बर् दर्शयतु"
 
 #: Application.cpp:69
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@info:shell"
+#| msgid "Hide the tabbar, overriding the default setting"
 msgctxt "@info:shell"
-msgid "Hide the tabbar, overriding the default setting"
+msgid "Hide all the toolbars, overriding the default setting"
 msgstr "पूर्वनिर्धारितसेटिंग् अतिक्रम्य टब्बर् गोपयन्तु"
 
 #: Application.cpp:70
 #, kde-format
 msgctxt "@info:shell"
+msgid "Show the tabbar, overriding the default setting"
+msgstr "पूर्वनिर्धारितसेटिंग् अतिक्रम्य टब्बर् दर्शयतु"
+
+#: Application.cpp:71
+#, kde-format
+msgctxt "@info:shell"
+msgid "Hide the tabbar, overriding the default setting"
+msgstr "पूर्वनिर्धारितसेटिंग् अतिक्रम्य टब्बर् गोपयन्तु"
+
+#: Application.cpp:72
+#, kde-format
+msgctxt "@info:shell"
 msgid "Start Konsole in fullscreen mode"
 msgstr "पूर्णपर्दे कन्सोल् आरभत"
 
-#: Application.cpp:71
+#: Application.cpp:73
 #, kde-format
 msgctxt "@info:shell"
 msgid "Disable transparent backgrounds, even if the system supports them."
 msgstr "पारदर्शकपृष्ठभूमिः निष्क्रियं कुर्वन्तु, यद्यपि प्रणाली तान् समर्थयति ।"
 
-#: Application.cpp:72
+#: Application.cpp:74
 #, kde-format
 msgctxt "@info:shell"
 msgid "List the available profiles"
 msgstr "उपलब्धानि प्रोफाइल्-सूचयन्तु"
 
-#: Application.cpp:73
+#: Application.cpp:75
 #, kde-format
 msgctxt "@info:shell"
 msgid "List all the profile properties names and their type (for use with -p)"
 msgstr ""
 "सर्वाणि प्रोफाइलगुणनामानि तेषां प्रकारं च (-p इत्यनेन सह उपयोगाय) सूचीबद्धं कुर्वन्तु ।"
 
-#: Application.cpp:74
+#: Application.cpp:76
 #, kde-format
 msgctxt "@info:shell"
 msgid "Change the value of a profile property."
 msgstr "प्रोफाइल गुणस्य मूल्यं परिवर्तयन्तु ।"
 
-#: Application.cpp:76
+#: Application.cpp:78
 #, kde-format
 msgctxt "@info:shell"
 msgid ""
@@ -218,7 +234,7 @@ msgstr ""
 "निष्पादयितुं आदेशः । एषः विकल्पः निम्नलिखित-सर्वं तर्कं गृह्णीयात्, अतः अन्तिमविकल्परूपेण तस्य "
 "उपयोगं कुर्वन्तु ।"
 
-#: Application.cpp:79
+#: Application.cpp:81
 #, kde-format
 msgctxt "@info:shell"
 msgid ""
@@ -228,13 +244,13 @@ msgstr ""
 "कार्यक्षमतां भङ्गयति चेदपि विद्यमानस्य दृष्टान्तस्य पुनः उपयोगं कर्तुं बाध्यताम्, ङ. छ. --नव-"
 "टब। प्रायः त्रुटिनिवारणाय ।"
 
-#: Application.cpp:86
+#: Application.cpp:88
 #, kde-format
 msgctxt "@info:shell"
 msgid "Arguments passed to command"
 msgstr "तर्काः आज्ञां प्रति गताः"
 
-#: Application.cpp:516
+#: Application.cpp:529
 #, kde-format
 msgctxt "@item"
 msgid "Toggle Background Window"
@@ -1226,7 +1242,7 @@ msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "लोड टैब लेआउट..."
 
-#: MainWindow.cpp:736 MainWindow.cpp:753
+#: MainWindow.cpp:746 MainWindow.cpp:763
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1235,61 +1251,61 @@ msgid_plural ""
 msgstr[0] "अस्मिन् विण्डो मध्ये एकः प्रक्रिया प्रचलति । किं त्वं अद्यापि त्यक्तुम् इच्छसि ?"
 msgstr[1] "अस्मिन् विण्डो मध्ये %1 प्रक्रियाः प्रचलन्ति । किं त्वं अद्यापि त्यक्तुम् इच्छसि ?"
 
-#: MainWindow.cpp:742 MainWindow.cpp:759 MainWindow.cpp:773
+#: MainWindow.cpp:752 MainWindow.cpp:769 MainWindow.cpp:783
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Confirm Close इति"
 
-#: MainWindow.cpp:743 MainWindow.cpp:760 MainWindow.cpp:774
+#: MainWindow.cpp:753 MainWindow.cpp:770 MainWindow.cpp:784
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "&विण्डो बन्द करो"
 
-#: MainWindow.cpp:761 MainWindow.cpp:775
+#: MainWindow.cpp:771 MainWindow.cpp:785
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Current &Tab बन्द करें"
 
-#: MainWindow.cpp:770
+#: MainWindow.cpp:780
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "अस्मिन् विण्डो मध्ये %1 उद्घाटिताः टर्मिनल् सन्ति । किं त्वं अद्यापि त्यक्तुम् इच्छसि ?"
 
-#: MainWindow.cpp:877 Part.cpp:298
+#: MainWindow.cpp:887 Part.cpp:298
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "प्रोफाइल"
 
-#: MainWindow.cpp:895
+#: MainWindow.cpp:905
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "सामान्य"
 
-#: MainWindow.cpp:907
+#: MainWindow.cpp:917
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr "स्मृति"
 
-#: MainWindow.cpp:913
+#: MainWindow.cpp:923
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "ट्याब बार / स्प्लिटर्स"
 
-#: MainWindow.cpp:918
+#: MainWindow.cpp:928
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "अस्थायी सञ्चिकाः"
 
-#: MainWindow.cpp:923
+#: MainWindow.cpp:933
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -1391,28 +1407,28 @@ msgid "Cancel"
 msgstr "निरसयतु"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:46
-#: plugins/QuickCommands/quickcommandsplugin.cpp:113
+#: plugins/QuickCommands/quickcommandsplugin.cpp:130
 #, kde-format
 msgid "Quick Commands"
 msgstr "त्वरित आदेशाः"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:71
+#: plugins/QuickCommands/quickcommandsplugin.cpp:75
 #, kde-format
 msgid "Show Quick Access"
 msgstr "द्रुतप्रवेशं दर्शयतु"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:106
+#: plugins/QuickCommands/quickcommandsplugin.cpp:123
 #, kde-format
 msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
 msgstr ""
 "न शीघ्रं आदेशाः प्राप्ताः। Plugins -> Quick Commands इत्यत्र एकं योजयितुं शक्नुवन्ति"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:107
+#: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
 msgid "Plugins - Quick Commands"
 msgstr "प्लगिन्स् - त्वरित आदेशाः"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:125
+#: plugins/QuickCommands/quickcommandsplugin.cpp:140
 #, kde-format
 msgid "Show Quick Commands"
 msgstr "त्वरित आदेशान् दर्शयतु"
@@ -1851,14 +1867,14 @@ msgstr "आउटपुट विकल्प"
 
 #. i18n: ectx: property (text), widget (QCheckBox, printerFriendly)
 #. i18n: ectx: label, entry (PrinterFriendly), group (PrintOptions)
-#: PrintOptions.ui:39 settings/konsole.kcfg:195
+#: PrintOptions.ui:39 settings/konsole.kcfg:205
 #, kde-format
 msgid "Printer &friendly mode (black text, no background)"
 msgstr "मुद्रकः &अनुकूलः मोडः (कृष्णः पाठः, पृष्ठभूमिः नास्ति)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, scaleOutput)
 #. i18n: ectx: label, entry (ScaleOutput), group (PrintOptions)
-#: PrintOptions.ui:46 settings/konsole.kcfg:199
+#: PrintOptions.ui:46 settings/konsole.kcfg:209
 #, kde-format
 msgid "&Scale output"
 msgstr "&स्केल आउटपुट"
@@ -2138,7 +2154,7 @@ msgstr "ZModem प्रगति"
 msgid "Activity in '%1' (Session '%2')"
 msgstr "'%1' (सत्र '%2') इत्यस्मिन् क्रियाकलापः"
 
-#: session/Session.cpp:2259
+#: session/Session.cpp:2269
 #, kde-format
 msgid "Security sensitive DBus API is disabled in the settings."
 msgstr ""
@@ -2545,150 +2561,164 @@ msgctxt "@title:window"
 msgid "Configure"
 msgstr "विन्यस्तं कुर्वन्तु"
 
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableSecuritySensitiveDBusAPI)
+#. i18n: ectx: label, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:43 settings/konsole.kcfg:42
+#, kde-format
+msgid "Enable the security sensitive parts of the DBus API"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchHighlightMatches)
+#: settings/GeneralSettings.ui:56
+#, kde-format
+msgid "Highlight all matches"
+msgstr "सर्वाणि मेलनानि प्रकाशयन्तु"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: settings/GeneralSettings.ui:63
+#, kde-format
+msgid "Notifications:"
+msgstr "सूचनाः :"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_FocusFollowsMouse)
+#. i18n: ectx: label, entry (FocusFollowsMouse), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:70 settings/konsole.kcfg:13
+#, kde-format
+msgid "Focus terminals when the mouse pointer is moved over them"
+msgstr "यदा मूषकसूचकः तेषां उपरि चालितः भवति तदा टर्मिनल् फोकस कुर्वन्तु"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RemoveWindowTitleBarAndFrame)
+#. i18n: ectx: label, entry (RemoveWindowTitleBarAndFrame), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:77 settings/konsole.kcfg:9
+#, kde-format
+msgid "Remove window titlebar and frame"
+msgstr "विण्डो शीर्षकपट्टिकां फ्रेमं च निष्कासयन्तु"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_RememberWindowSize)
+#: settings/GeneralSettings.ui:90
+#, kde-format
+msgid "If enabled, profile settings will be ignored"
+msgstr "यदि सक्षमं भवति तर्हि प्रोफाइलसेटिंग्स् उपेक्षिताः भविष्यन्ति"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RememberWindowSize)
+#: settings/GeneralSettings.ui:93
+#, kde-format
+msgid "Remember window size"
+msgstr "विण्डो आकारं स्मर्यताम्"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchNoWrap)
+#. i18n: ectx: tooltip, entry (SearchNoWrap), group (SearchSettings)
+#: settings/GeneralSettings.ui:106 settings/konsole.kcfg:99
+#, kde-format
+msgid "Sets whether search should stop instead of wrapping"
+msgstr "अन्वेषणं वेष्टनस्य स्थाने स्थगितव्यं वा इति सेट् करोति"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchNoWrap)
+#: settings/GeneralSettings.ui:109
+#, kde-format
+msgid "No wrap"
+msgstr "न वेष्टनम्"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: settings/GeneralSettings.ui:116
+#, kde-format
+msgid "Process and window:"
+msgstr "प्रक्रिया तथा विण्डो :"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, enableAllMessagesButton)
+#: settings/GeneralSettings.ui:137
+#, kde-format
+msgid "All dialogs will be shown again"
+msgstr "सर्वे संवादाः पुनः दर्शिताः भविष्यन्ति"
+
+#. i18n: ectx: property (text), widget (QPushButton, enableAllMessagesButton)
+#: settings/GeneralSettings.ui:140
+#, kde-format
+msgid "Enable all \"Don't Ask Again\" messages"
+msgstr "सर्वे \"पुनः मा पृच्छन्तु\" इति सन्देशाः सक्षमाः कुर्वन्तु"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ForceNewTabs)
+#. i18n: ectx: label, entry (ForceNewTabs), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:178 settings/konsole.kcfg:37
+#, fuzzy, kde-format
+#| msgid "Put new tabs:"
+msgid "Force new tabs"
+msgstr "नूतनानि ट्याब्स् स्थापयन्तु :"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: settings/GeneralSettings.ui:185
+#, kde-format
+msgctxt "@item:intext Search options"
+msgid "Search:"
+msgstr "अन्वेषण:"
+
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchReverseSearch)
 #. i18n: ectx: tooltip, entry (SearchReverseSearch), group (SearchSettings)
-#: settings/GeneralSettings.ui:49 settings/konsole.kcfg:84
+#: settings/GeneralSettings.ui:198 settings/konsole.kcfg:94
 #, kde-format
 msgid "Sets whether search should start from the bottom"
 msgstr "अन्वेषणं अधः आरभ्यत इति सेट् करोति"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchReverseSearch)
 #. i18n: ectx: label, entry (SearchReverseSearch), group (SearchSettings)
-#: settings/GeneralSettings.ui:52 settings/konsole.kcfg:83
+#: settings/GeneralSettings.ui:201 settings/konsole.kcfg:93
 #, kde-format
 msgid "Search backwards"
 msgstr "पश्चात् अन्वेषणं कुर्वन्तु"
 
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableSecuritySensitiveDBusAPI)
-#. i18n: ectx: label, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:59 settings/konsole.kcfg:37
-#, kde-format
-msgid "Enable the security sensitive parts of the DBus API"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: settings/GeneralSettings.ui:66
-#, kde-format
-msgctxt "@item:intext Search options"
-msgid "Search:"
-msgstr "अन्वेषण:"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchRegExpression)
-#. i18n: ectx: label, entry (SearchRegExpression), group (SearchSettings)
-#: settings/GeneralSettings.ui:79 settings/konsole.kcfg:74
-#, kde-format
-msgid "Match using regular expressions"
-msgstr "नियमितव्यञ्जनानां उपयोगेन मेलनं कुर्वन्तु"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RemoveWindowTitleBarAndFrame)
-#. i18n: ectx: label, entry (RemoveWindowTitleBarAndFrame), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:86 settings/konsole.kcfg:9
-#, kde-format
-msgid "Remove window titlebar and frame"
-msgstr "विण्डो शीर्षकपट्टिकां फ्रेमं च निष्कासयन्तु"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_AllowMenuAccelerators)
-#. i18n: ectx: label, entry (AllowMenuAccelerators), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:99 settings/konsole.kcfg:22
-#, kde-format
-msgid "Enable menu accelerators"
-msgstr "मेनू त्वरकान् सक्षमं कुर्वन्तु"
-
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_UseSingleInstance)
 #. i18n: ectx: tooltip, entry (UseSingleInstance), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:112 settings/konsole.kcfg:33
+#: settings/GeneralSettings.ui:214 settings/konsole.kcfg:33
 #, kde-format
 msgid "When launching Konsole re-use existing process if possible"
 msgstr "Konsole प्रारम्भं कुर्वन् यदि सम्भवं तर्हि विद्यमानप्रक्रियायाः पुनः उपयोगं कुर्वन्तु"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSingleInstance)
 #. i18n: ectx: label, entry (UseSingleInstance), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:115 settings/konsole.kcfg:32
+#: settings/GeneralSettings.ui:217 settings/konsole.kcfg:32
 #, kde-format
 msgid "Run all Konsole windows in a single process"
 msgstr "एकस्मिन् प्रक्रियायां सर्वाणि Konsole विण्डोस् चालयन्तु"
 
-#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_RememberWindowSize)
-#: settings/GeneralSettings.ui:128
-#, kde-format
-msgid "If enabled, profile settings will be ignored"
-msgstr "यदि सक्षमं भवति तर्हि प्रोफाइलसेटिंग्स् उपेक्षिताः भविष्यन्ति"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RememberWindowSize)
-#: settings/GeneralSettings.ui:131
-#, kde-format
-msgid "Remember window size"
-msgstr "विण्डो आकारं स्मर्यताम्"
-
-#. i18n: ectx: property (text), widget (QLabel, label_3)
-#: settings/GeneralSettings.ui:138
-#, kde-format
-msgid "Notifications:"
-msgstr "सूचनाः :"
-
-#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchNoWrap)
-#. i18n: ectx: tooltip, entry (SearchNoWrap), group (SearchSettings)
-#: settings/GeneralSettings.ui:151 settings/konsole.kcfg:89
-#, kde-format
-msgid "Sets whether search should stop instead of wrapping"
-msgstr "अन्वेषणं वेष्टनस्य स्थाने स्थगितव्यं वा इति सेट् करोति"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchNoWrap)
-#: settings/GeneralSettings.ui:154
-#, kde-format
-msgid "No wrap"
-msgstr "न वेष्टनम्"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowWindowTitleOnTitleBar)
-#. i18n: ectx: label, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:167 settings/konsole.kcfg:17
-#, kde-format
-msgid "Show window title on the titlebar"
-msgstr "शीर्षकपट्टिकायां विण्डो शीर्षकं दर्शयतु"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_FocusFollowsMouse)
-#. i18n: ectx: label, entry (FocusFollowsMouse), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:174 settings/konsole.kcfg:13
-#, kde-format
-msgid "Focus terminals when the mouse pointer is moved over them"
-msgstr "यदा मूषकसूचकः तेषां उपरि चालितः भवति तदा टर्मिनल् फोकस कुर्वन्तु"
-
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchCaseSensitive)
 #. i18n: ectx: tooltip, entry (SearchCaseSensitive), group (SearchSettings)
-#: settings/GeneralSettings.ui:187 settings/konsole.kcfg:70
+#: settings/GeneralSettings.ui:230 settings/konsole.kcfg:80
 #, kde-format
 msgid "Sets whether the search is case sensitive"
 msgstr "अन्वेषणं लघुसंवेदनशीलं वा इति सेट् करोति"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchCaseSensitive)
-#: settings/GeneralSettings.ui:190
+#: settings/GeneralSettings.ui:233
 #, kde-format
 msgid "Case sensitive"
 msgstr "प्रकरणसंवेदनशीलः"
 
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: settings/GeneralSettings.ui:197
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowWindowTitleOnTitleBar)
+#. i18n: ectx: label, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:262 settings/konsole.kcfg:17
 #, kde-format
-msgid "Process and window:"
-msgstr "प्रक्रिया तथा विण्डो :"
+msgid "Show window title on the titlebar"
+msgstr "शीर्षकपट्टिकायां विण्डो शीर्षकं दर्शयतु"
 
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchHighlightMatches)
-#: settings/GeneralSettings.ui:213
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchRegExpression)
+#. i18n: ectx: label, entry (SearchRegExpression), group (SearchSettings)
+#: settings/GeneralSettings.ui:275 settings/konsole.kcfg:84
 #, kde-format
-msgid "Highlight all matches"
-msgstr "सर्वाणि मेलनानि प्रकाशयन्तु"
+msgid "Match using regular expressions"
+msgstr "नियमितव्यञ्जनानां उपयोगेन मेलनं कुर्वन्तु"
 
-#. i18n: ectx: property (toolTip), widget (QPushButton, enableAllMessagesButton)
-#: settings/GeneralSettings.ui:231
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_AllowMenuAccelerators)
+#. i18n: ectx: label, entry (AllowMenuAccelerators), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:288 settings/konsole.kcfg:22
 #, kde-format
-msgid "All dialogs will be shown again"
-msgstr "सर्वे संवादाः पुनः दर्शिताः भविष्यन्ति"
+msgid "Enable menu accelerators"
+msgstr "मेनू त्वरकान् सक्षमं कुर्वन्तु"
 
-#. i18n: ectx: property (text), widget (QPushButton, enableAllMessagesButton)
-#: settings/GeneralSettings.ui:234
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ListenForZModemTerminalCodes)
+#: settings/GeneralSettings.ui:295
 #, kde-format
-msgid "Enable all \"Don't Ask Again\" messages"
-msgstr "सर्वे \"पुनः मा पृच्छन्तु\" इति सन्देशाः सक्षमाः कुर्वन्तु"
+msgid "Listen for ZModem terminal codes"
+msgstr ""
 
 #. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:18
@@ -2714,77 +2744,98 @@ msgstr "अग्रिमे आरम्भे वर्तमानविण�
 msgid "The window size will be saved upon exiting Konsole"
 msgstr "Konsole निर्गत्य विण्डो आकारः रक्षितः भविष्यति"
 
-#. i18n: ectx: tooltip, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
+#. i18n: ectx: tooltip, entry (ForceNewTabs), group (KonsoleWindow)
 #: settings/konsole.kcfg:38
+#, fuzzy, kde-format
+#| msgid "When launching Konsole re-use existing process if possible"
+msgid ""
+"When launching Konsole create a new tab instead of creating new windows if "
+"possible"
+msgstr "Konsole प्रारम्भं कुर्वन् यदि सम्भवं तर्हि विद्यमानप्रक्रियायाः पुनः उपयोगं कुर्वन्तु"
+
+#. i18n: ectx: tooltip, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
+#: settings/konsole.kcfg:43
 #, kde-format
 msgid "DBus API like runCommand will be enabled"
 msgstr ""
 
-#. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
+#. i18n: ectx: label, entry (ListenForZModemTerminalCodes), group (KonsoleWindow)
 #: settings/konsole.kcfg:47
+#, kde-format
+msgid "Listen for ZModem Terminal codes"
+msgstr ""
+
+#. i18n: ectx: tooltip, entry (ListenForZModemTerminalCodes), group (KonsoleWindow)
+#: settings/konsole.kcfg:48
+#, kde-format
+msgid "Automatic send/receive files over serial connections"
+msgstr ""
+
+#. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
+#: settings/konsole.kcfg:57
 #, kde-format
 msgid "Thumbnail Width"
 msgstr "लघुचित्र चौड़ाई"
 
 #. i18n: ectx: tooltip, entry (ThumbnailSize), group (ThumbnailsSettings)
-#: settings/konsole.kcfg:48
+#: settings/konsole.kcfg:58
 #, kde-format
 msgid "Sets the width of the thumbnail"
 msgstr "लघुचित्रस्य विस्तारं सेट् करोति"
 
 #. i18n: ectx: label, entry (ThumbnailShift), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailShift), group (ThumbnailsSettings)
-#: settings/konsole.kcfg:52 settings/konsole.kcfg:53
+#: settings/konsole.kcfg:62 settings/konsole.kcfg:63
 #, kde-format
 msgid "Use Shift to display a thumbnail"
 msgstr "लघुचित्रं प्रदर्शयितुं Shift इत्यस्य उपयोगं कुर्वन्तु"
 
 #. i18n: ectx: label, entry (ThumbnailAlt), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailAlt), group (ThumbnailsSettings)
-#: settings/konsole.kcfg:57 settings/konsole.kcfg:58
+#: settings/konsole.kcfg:67 settings/konsole.kcfg:68
 #, kde-format
 msgid "Use Alt to display a thumbnail"
 msgstr "लघुचित्रं प्रदर्शयितुं Alt इत्यस्य उपयोगं कुर्वन्तु"
 
 #. i18n: ectx: label, entry (ThumbnailCtrl), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailCtrl), group (ThumbnailsSettings)
-#: settings/konsole.kcfg:62 settings/konsole.kcfg:63
+#: settings/konsole.kcfg:72 settings/konsole.kcfg:73
 #, kde-format
 msgid "Use Ctrl to display a thumbnail"
 msgstr "लघुचित्रं प्रदर्शयितुं Ctrl इत्यस्य उपयोगं कुर्वन्तु"
 
 #. i18n: ectx: label, entry (SearchCaseSensitive), group (SearchSettings)
-#: settings/konsole.kcfg:69
+#: settings/konsole.kcfg:79
 #, kde-format
 msgid "Search is case sensitive"
 msgstr "अन्वेषणं केस-संवेदनशीलं भवति"
 
 #. i18n: ectx: label, entry (SearchHighlightMatches), group (SearchSettings)
-#: settings/konsole.kcfg:78
+#: settings/konsole.kcfg:88
 #, kde-format
 msgid "Highlight all search matches"
 msgstr "सर्वाणि अन्वेषणमेलनानि प्रकाशयन्तु"
 
 #. i18n: ectx: tooltip, entry (SearchHighlightMatches), group (SearchSettings)
-#: settings/konsole.kcfg:79
+#: settings/konsole.kcfg:89
 #, kde-format
 msgid "Sets whether matching text should be highlighted"
 msgstr "मेलपाठः प्रकाशितः भवेत् वा इति सेट् करोति"
 
 #. i18n: ectx: label, entry (SearchNoWrap), group (SearchSettings)
-#: settings/konsole.kcfg:88
+#: settings/konsole.kcfg:98
 #, kde-format
 msgid "Search stops instead of wrapping"
 msgstr "अन्वेषणं वेष्टनस्य स्थाने स्थगयति"
 
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
-#: settings/konsole.kcfg:95
+#: settings/konsole.kcfg:105
 #, kde-format
 msgid "Control whether child cgroups are created for individual tabs"
 msgstr "व्यक्तिगतट्याब्स् कृते बाल cgroups निर्मिताः सन्ति वा इति नियन्त्रयन्तु"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
-#: settings/konsole.kcfg:99
+#: settings/konsole.kcfg:109
 #, kde-format
 msgid ""
 "Determines the memory consumption level above which throttling will start"
@@ -2792,97 +2843,97 @@ msgstr "स्मृति-उपभोगस्तरं निर्धार�
 
 #. i18n: ectx: label, entry (SplitViewVisibility), group (SplitView)
 #. i18n: ectx: label, entry (TabBarVisibility), group (TabBar)
-#: settings/konsole.kcfg:105 settings/konsole.kcfg:125
+#: settings/konsole.kcfg:115 settings/konsole.kcfg:135
 #, kde-format
 msgid "Control the visibility of the whole tab bar"
 msgstr "सम्पूर्णस्य ट्याब् बारस्य दृश्यतां नियन्त्रयन्तु"
 
 #. i18n: ectx: label, entry (SplitDragHandleSize), group (SplitView)
-#: settings/konsole.kcfg:114
+#: settings/konsole.kcfg:124
 #, kde-format
 msgid "Control the size of the handle between panels"
 msgstr "फलकयोः मध्ये हस्तकस्य आकारं नियन्त्रयन्तु"
 
 #. i18n: ectx: label, entry (TabBarPosition), group (TabBar)
-#: settings/konsole.kcfg:134
+#: settings/konsole.kcfg:144
 #, kde-format
 msgid "Control the position of the tab bar"
 msgstr "ट्याब् बारस्य स्थितिं नियन्त्रयन्तु"
 
 #. i18n: ectx: label, entry (TabBarStyleSheet), group (TabBar)
-#: settings/konsole.kcfg:144
+#: settings/konsole.kcfg:154
 #, kde-format
 msgid "Control the visual style of the tab bar"
 msgstr "ट्याब् बारस्य दृश्यशैलीं नियन्त्रयन्तु"
 
 #. i18n: ectx: label, entry (TabBarUseUserStyleSheet), group (TabBar)
-#: settings/konsole.kcfg:148
+#: settings/konsole.kcfg:158
 #, kde-format
 msgid "Use a user-defined .css file for the tab bar"
 msgstr "ट्याब् बारस्य कृते उपयोक्तृनिर्धारितं .css सञ्चिकां उपयुज्यताम्"
 
 #. i18n: ectx: label, entry (TabBarUserStyleSheetFile), group (TabBar)
-#: settings/konsole.kcfg:152
+#: settings/konsole.kcfg:162
 #, kde-format
 msgid "The .css file to use for the tab bar style"
 msgstr "ट्याब् बारशैल्याः कृते उपयोक्तुं .css सञ्चिका"
 
 #. i18n: ectx: label, entry (CloseTabOnMiddleMouseButton), group (TabBar)
-#: settings/konsole.kcfg:156
+#: settings/konsole.kcfg:166
 #, kde-format
 msgid "Allow middle-clicking on open tabs to close them"
 msgstr "उद्घाटित-ट्याब्-मध्ये मध्य-क्लिक् कृत्वा तान् पिधातुम् अनुमन्यताम्"
 
 #. i18n: ectx: label, entry (NewTabButton), group (TabBar)
-#: settings/konsole.kcfg:160
+#: settings/konsole.kcfg:170
 #, kde-format
 msgid "Control the visibility of 'New Tab' button on the tab bar"
 msgstr "ट्याब् बार मध्ये 'New Tab' बटनस्य दृश्यतां नियन्त्रयन्तु"
 
 #. i18n: ectx: label, entry (SearchTabsButton), group (TabBar)
-#: settings/konsole.kcfg:164
+#: settings/konsole.kcfg:174
 #, kde-format
 msgid "Control the visibility of 'Search Tabs' button on the tab bar"
 msgstr "ट्याब् पट्टिकायां 'Search Tabs' बटनस्य दृश्यतां नियन्त्रयन्तु"
 
 #. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
-#: settings/konsole.kcfg:172
+#: settings/konsole.kcfg:182
 #, kde-format
 msgid "Control where the \"Close tab\" button will be displayed"
 msgstr "\"Close tab\" इति बटनं कुत्र प्रदर्शितं भविष्यति इति नियन्त्रयन्तु"
 
 #. i18n: ectx: label, entry (NewTabBehavior), group (TabBar)
-#: settings/konsole.kcfg:181
+#: settings/konsole.kcfg:191
 #, kde-format
 msgid "Control where to put the new tab"
 msgstr "नूतनं ट्याब् कुत्र स्थापयितव्यम् इति नियन्त्रयन्तु"
 
 #. i18n: ectx: label, entry (ExpandTabWidth), group (TabBar)
-#: settings/konsole.kcfg:189
+#: settings/konsole.kcfg:199
 #, kde-format
 msgid "Expand the tab widths"
 msgstr "ट्याब् विस्तारान् विस्तारयन्तु"
 
 #. i18n: ectx: label, entry (scrollbackUseSystemLocation), group (FileLocation)
-#: settings/konsole.kcfg:205
+#: settings/konsole.kcfg:215
 #, kde-format
 msgid "For scrollback files, use system-wide folder location"
 msgstr "स्क्रॉलबैक् सञ्चिकानां कृते, सिस्टम्-व्यापी पुटस्थानस्य उपयोगं कुर्वन्तु"
 
 #. i18n: ectx: label, entry (scrollbackUseCacheLocation), group (FileLocation)
-#: settings/konsole.kcfg:209
+#: settings/konsole.kcfg:219
 #, kde-format
 msgid "For scrollback files, use user's specific folder location"
 msgstr "स्क्रॉलबैक् सञ्चिकानां कृते उपयोक्तुः विशिष्टं पुटस्थानं उपयुज्यताम्"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocation), group (FileLocation)
-#: settings/konsole.kcfg:213
+#: settings/konsole.kcfg:223
 #, kde-format
 msgid "For scrollback files, use specified folder location"
 msgstr "स्क्रॉलबैक् सञ्चिकानां कृते निर्दिष्टं पुटस्थानं उपयुज्यताम्"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocationDirectory), group (FileLocation)
-#: settings/konsole.kcfg:217
+#: settings/konsole.kcfg:227
 #, kde-format
 msgid "For scrollback files, use this folder"
 msgstr "स्क्रॉलबैक् सञ्चिकानां कृते एतत् पुटे उपयुज्यताम्"
@@ -3321,59 +3372,59 @@ msgstr "लघुचित्रजननं सक्षमं कुर्व�
 msgid "Size: %1 x %2"
 msgstr "आकारः %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2255
+#: terminalDisplay/TerminalDisplay.cpp:2256
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "किं भवान् निश्चितः यत् भवान् %1 वर्णं चिनोतुम् इच्छति?"
 msgstr[1] "किं भवान् निश्चितरूपेण %1 वर्णं चिनोतुम् इच्छति?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2256
+#: terminalDisplay/TerminalDisplay.cpp:2257
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Confirm Paste इति"
 
-#: terminalDisplay/TerminalDisplay.cpp:2289
+#: terminalDisplay/TerminalDisplay.cpp:2290
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "End Of Text/Interrupt: वर्तमानप्रक्रियायाः निर्गमनं कर्तुं शक्नोति"
 
-#: terminalDisplay/TerminalDisplay.cpp:2290
+#: terminalDisplay/TerminalDisplay.cpp:2291
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "End Of Transmission: वर्तमानप्रक्रियायाः निर्गमनं कर्तुं शक्नोति"
 
-#: terminalDisplay/TerminalDisplay.cpp:2291
+#: terminalDisplay/TerminalDisplay.cpp:2292
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "बेल: श्रव्यं चेतावनीम् उत्सर्जयितुं प्रयतते"
 
-#: terminalDisplay/TerminalDisplay.cpp:2292
+#: terminalDisplay/TerminalDisplay.cpp:2293
 #, kde-format
 msgid "Backspace"
 msgstr "पृष्ठभाग"
 
-#: terminalDisplay/TerminalDisplay.cpp:2293
+#: terminalDisplay/TerminalDisplay.cpp:2294
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "उपकरणनियन्त्रणं त्रयः/XOFF: उत्पादनं निलम्बयति"
 
-#: terminalDisplay/TerminalDisplay.cpp:2294
+#: terminalDisplay/TerminalDisplay.cpp:2295
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "प्रतिस्थापन/निलम्बनम्: वर्तमानप्रक्रियायाः निलम्बनं कर्तुं शक्नोति"
 
-#: terminalDisplay/TerminalDisplay.cpp:2295
+#: terminalDisplay/TerminalDisplay.cpp:2296
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "पलायनम् : टर्मिनल् अवस्थायां हेरफेरार्थं प्रयुक्तम्"
 
-#: terminalDisplay/TerminalDisplay.cpp:2296
+#: terminalDisplay/TerminalDisplay.cpp:2297
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "File Separator/Quit: वर्तमान प्रक्रियां निरस्तं कर्तुं शक्नोति"
 
-#: terminalDisplay/TerminalDisplay.cpp:2319
+#: terminalDisplay/TerminalDisplay.cpp:2320
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3382,31 +3433,31 @@ msgstr ""
 "भवन्तः यस्मिन् पाठे चिनोतुम् प्रयतन्ते तस्मिन् गुप्तनियन्त्रणवर्णाः सन्ति, किं भवन्तः तान् "
 "छानयितुम् इच्छन्ति?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2322
+#: terminalDisplay/TerminalDisplay.cpp:2323
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Confirm Paste इति"
 
-#: terminalDisplay/TerminalDisplay.cpp:2323
+#: terminalDisplay/TerminalDisplay.cpp:2324
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "&नियंत्रणवर्णान् विना चिनोतु"
 
-#: terminalDisplay/TerminalDisplay.cpp:2324
+#: terminalDisplay/TerminalDisplay.cpp:2325
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "&सर्वं चिनोतु"
 
-#: terminalDisplay/TerminalDisplay.cpp:2325
+#: terminalDisplay/TerminalDisplay.cpp:2326
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "&निरसयतु"
 
-#: terminalDisplay/TerminalDisplay.cpp:2556
+#: terminalDisplay/TerminalDisplay.cpp:2557
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3417,17 +3468,17 @@ msgstr ""
 "Software_flow_control\">निलम्बितम्</a> अस्ति । पुनः आरम्भं कर्तुं <b>Ctrl+Q</b> नुदन्तु।"
 "</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2611
+#: terminalDisplay/TerminalDisplay.cpp:2612
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "इदं टर्मिनल् केवलं पठनीयम् अस्ति ।"
 
-#: terminalDisplay/TerminalDisplay.cpp:3006
+#: terminalDisplay/TerminalDisplay.cpp:3008
 #, kde-format
 msgid "Change &Directory To"
 msgstr "परिवर्तनं &निर्देशिका To"
 
-#: terminalDisplay/TerminalDisplay.cpp:3041
+#: terminalDisplay/TerminalDisplay.cpp:3043
 #, kde-format
 msgid "&Paste Location"
 msgstr "&Paste स्थान"
@@ -3553,118 +3604,134 @@ msgid "Focus Right Terminal"
 msgstr "फोकस राइट टर्मिनल"
 
 #: ViewManager.cpp:282
+#, fuzzy, kde-format
+#| msgctxt "@action Shortcut entry"
+#| msgid "Focus Left Terminal"
+msgctxt "@action Shortcut entry"
+msgid "Focus Next Terminal"
+msgstr "फोकस वाम टर्मिनल"
+
+#: ViewManager.cpp:288
+#, fuzzy, kde-format
+#| msgctxt "@action Shortcut entry"
+#| msgid "Focus Below Terminal"
+msgctxt "@action Shortcut entry"
+msgid "Focus Previous Terminal"
+msgstr "टर्मिनल् इत्यस्य अधः फोकस कुर्वन्तु"
+
+#: ViewManager.cpp:294
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Last Tab"
 msgstr "Last Tab इत्यत्र स्विच कुर्वन्तु"
 
-#: ViewManager.cpp:287
+#: ViewManager.cpp:299
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs"
 msgstr "अन्तिमप्रयुक्ताः ट्याब्स्"
 
-#: ViewManager.cpp:292
+#: ViewManager.cpp:304
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle Between Two Tabs"
 msgstr "द्वयोः ट्याब्योः मध्ये Toggle कुर्वन्तु"
 
-#: ViewManager.cpp:297
+#: ViewManager.cpp:309
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs (Reverse)"
 msgstr "अन्तिमप्रयुक्ताः ट्याब्स् (विपरीताः)"
 
-#: ViewManager.cpp:302
+#: ViewManager.cpp:314
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle maximize current view"
 msgstr "वर्तमानदृश्यं अधिकतमं कर्तुं टॉगलं कुर्वन्तु"
 
-#: ViewManager.cpp:303
+#: ViewManager.cpp:315
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle maximize current view"
 msgstr "वर्तमानदृश्यं अधिकतमं कर्तुं टॉगलं कुर्वन्तु"
 
-#: ViewManager.cpp:311
+#: ViewManager.cpp:323
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle zoom-maximize current view"
 msgstr "वर्तमानदृश्यं जूम्-अधिकतमं कुर्वन्तु"
 
-#: ViewManager.cpp:312
+#: ViewManager.cpp:324
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle zoom-maximize current view"
 msgstr "वर्तमानदृश्यं जूम्-अधिकतमं कुर्वन्तु"
 
-#: ViewManager.cpp:320
+#: ViewManager.cpp:332
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the right"
 msgstr "ट्याब् दक्षिणतः चालयन्तु"
 
-#: ViewManager.cpp:327
+#: ViewManager.cpp:339
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the left"
 msgstr "ट्याब् वामभागे चालयन्तु"
 
-#: ViewManager.cpp:334
+#: ViewManager.cpp:346
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
 msgstr "शब्दार्थ एकीकरण (bash) सेटअप 1.1."
 
-#: ViewManager.cpp:340
+#: ViewManager.cpp:352
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
 msgstr "शब्दार्थसंकेतप्रदर्शनं टॉगल कुर्वन्तु"
 
-#: ViewManager.cpp:346
+#: ViewManager.cpp:358
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
 msgstr "रेखासङ्ख्यानां प्रदर्शनं टॉगल कुर्वन्तु"
 
-#: ViewManager.cpp:353
+#: ViewManager.cpp:365
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
 msgstr "सर्वेषां दृश्यानां समान आकारः"
 
-#: ViewManager.cpp:363
+#: ViewManager.cpp:375
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Tab %1"
 msgstr "%1 ट्याब् प्रति स्विच कुर्वन्तु"
 
-#: ViewManager.cpp:576
+#: ViewManager.cpp:598
 #, kde-format
 msgid "Semantic hints "
 msgstr "शब्दार्थसंकेता "
 
-#: ViewManager.cpp:592
+#: ViewManager.cpp:614
 #, kde-format
 msgid "Line numbers "
 msgstr "रेखासङ्ख्याः "
 
-#: ViewManager.cpp:1180
+#: ViewManager.cpp:1202
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Tab Layout रक्षतु"
 
-#: ViewManager.cpp:1182 ViewManager.cpp:1303
+#: ViewManager.cpp:1204 ViewManager.cpp:1325
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Konsole दृश्य विन्यास (*.json)"
 
-#: ViewManager.cpp:1198
+#: ViewManager.cpp:1220
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3674,7 +3741,7 @@ msgstr ""
 "Layout इत्यस्य रक्षणकाले समस्या अभवत् ।\n"
 "%1"
 
-#: ViewManager.cpp:1290
+#: ViewManager.cpp:1312
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3684,13 +3751,13 @@ msgstr ""
 "Layout लोड् करणसमये समस्या अभवत् ।\n"
 "%1"
 
-#: ViewManager.cpp:1301
+#: ViewManager.cpp:1323
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "लोड ट्याब लेआउट"
 
-#: Vt102Emulation.cpp:2828
+#: Vt102Emulation.cpp:2910
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "

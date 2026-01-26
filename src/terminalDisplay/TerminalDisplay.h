@@ -230,6 +230,8 @@ public:
 
     void resetCursor();
 
+    void setPointerShape(Qt::CursorShape shape);
+
     QRect contentRect() const
     {
         return _contentRect;
@@ -430,6 +432,8 @@ public:
 
     void setVisualCursorPosition(int x);
 
+    void setHoverLinkIndicator(QString text);
+
 public Q_SLOTS:
     /**
      * Causes the terminal display to fetch the latest character image from the associated
@@ -511,6 +515,7 @@ Q_SIGNALS:
      * @param eventType The type of event.  0 for a mouse press / release or 1 for mouse motion
      */
     void mouseSignal(int button, int column, int line, int eventType);
+    void exactMouseSignal(int button, int x, int y, int eventType);
     void changedContentSizeSignal(int height, int width);
 
     /**
@@ -667,6 +672,8 @@ private:
     // Clear _screenWindow selection and also pending double click selection
     void clearSelection();
 
+    void sendMouseSignal(int button, QPoint pos, int eventType, bool sendInexact);
+
     // the window onto the terminal screen which this display
     // is currently showing.
     QPointer<ScreenWindow> _screenWindow;
@@ -744,9 +751,9 @@ private:
     Enum::TripleClickModeEnum _tripleClickMode = Enum::SelectWholeLine;
     bool _possibleTripleClick = false; // is set in mouseDoubleClickEvent and cleared
                                        // after QApplication::doubleClickInterval() delay
-    QPoint _tripleClickPos; // The position where a potential triple click was started
-    QString _doubleClickSelectedText; // selected text whose copying may be cancelled by further events; copying
-    QString _doubleClickSelectedHtml; // is delayed to prevent a triple-click from generating > 1 entries in the
+    QPoint _tripleClickPos = QPoint(0, 0); // The position where a potential triple click was started
+    QString _doubleClickSelectedText = QString(); // selected text whose copying may be cancelled by further events; copying
+    QString _doubleClickSelectedHtml = QString(); // is delayed to prevent a triple-click from generating > 1 entries in the
                                       // clipboard history (a triple click is a double click at first ;)
 
     QLabel *_resizeWidget = nullptr;
@@ -758,7 +765,7 @@ private:
     // terminal output - informing them what has happened and how to resume output
     KMessageWidget *_outputSuspendedMessageWidget = nullptr;
 
-    QSize _size;
+    QSize _size = QSize(0, 0);
 
     std::shared_ptr<const ColorScheme> _colorScheme;
     ColorSchemeWallpaper::Ptr _wallpaper;
@@ -794,10 +801,10 @@ private:
     bool _selectMode = false;
 
     bool _dimWhenInactive = false;
-    int _dimValue;
+    int _dimValue = 0;
 
     bool _borderWhenActive = false;
-    QColor _focusBorderColor;
+    QColor _focusBorderColor = QColor();
 
     ScrollState _scrollWheelState;
     IncrementalSearchBar *_searchBar = nullptr;
@@ -818,17 +825,18 @@ private:
     TerminalScrollBar *_scrollBar = nullptr;
     TerminalColor *_terminalColor = nullptr;
     std::unique_ptr<TerminalFont> _terminalFont;
+    QLabel *_hoverLinkIndicator = nullptr;
 
     std::unique_ptr<KonsolePrintManager> _printManager;
 
-    bool _semanticUpDown;
-    bool _semanticInputClick;
+    bool _semanticUpDown = false;
+    bool _semanticInputClick = false;
 
     UBiDi *ubidi = nullptr;
     QPoint _visualCursorPosition = {0, 0};
 
-    int _selModeModifiers;
-    bool _selModeByModifiers; // Selection started by Shift+Arrow
+    int _selModeModifiers = 0;
+    bool _selModeByModifiers = false; // Selection started by Shift+Arrow
 
     int _id;
 
