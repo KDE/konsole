@@ -46,7 +46,8 @@ class QKeyEvent;
 #define MODE_BracketedPaste (MODES_SCREEN + 14) // Xterm-style bracketed paste mode
 #define MODE_Sixel (MODES_SCREEN + 15) // Xterm-style bracketed paste mode
 #define MODE_SynchronizedUpdate (MODES_SCREEN + 16) // Synchronized update in progress
-#define MODE_total (MODES_SCREEN + 17)
+#define MODE_Win32Input (MODES_SCREEN + 17)
+#define MODE_total (MODES_SCREEN + 18)
 
 namespace Konsole
 {
