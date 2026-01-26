@@ -2316,6 +2316,16 @@ QColor Session::color() const
     return _tabColor;
 }
 
+void Session::setTabColor(const QString &colorName)
+{
+    setColor(QColor(colorName));
+}
+
+QString Session::tabColor() const
+{
+    return _tabColor.name();
+}
+
 void Session::setActivityColor(const QColor &color)
 {
     if (_tabActivityColor == color) {

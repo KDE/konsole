@@ -338,7 +338,6 @@ void SessionController::snapshot()
         title.append(QLatin1Char('*'));
     }
 
-    qDebug() << "snapshot TP3: " << title;
     // use the fallback title if needed
     if (title.isEmpty()) {
         title = session()->title(Session::NameRole);
@@ -2041,16 +2040,12 @@ bool SessionController::isCopyInputActive() const
 
 void SessionController::sessionAttributeChanged()
 {
-    qDebug() << "sessionAttributeChanged: TP 1";
-
     if (_sessionIconName != session()->iconName()) {
         qCDebug(KonsoleDebug) << "sessionAttributeChanged: TP 1.1";
         updateSessionIcon();
     }
 
-    qDebug() << "sessionAttributeChanged: TP 2";
     QString title = session()->title(Session::DisplayedTitleRole);
-    qDebug() << "sessionAttributeChanged: TP 3: " << title;
 
     // special handling for the "%w" marker which is replaced with the
     // window title set by the shell
