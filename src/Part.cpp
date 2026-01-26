@@ -8,6 +8,7 @@
 #include "Part.h"
 
 // Qt
+#include <QAction>
 #include <QDir>
 #include <QKeyEvent>
 #include <QMetaEnum>
@@ -19,7 +20,6 @@
 #include <KConfigDialog>
 #include <KLocalizedString>
 #include <KPluginFactory>
-#include <QAction>
 
 // Konsole
 #include "Emulation.h"
@@ -188,6 +188,11 @@ QVariant Part::profileProperty(const QString &profileProperty) const
 
     const auto p = static_cast<Profile::Property>(value);
     return SessionManager::instance()->sessionProfile(activeSession())->property<QVariant>(p);
+}
+
+void Part::setContextMenuAdditionalActions(const QList<QAction *> &extension)
+{
+    _viewManager->setContextMenuAdditionalActions(extension);
 }
 
 QStringList Part::availableProfiles() const

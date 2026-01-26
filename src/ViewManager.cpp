@@ -64,6 +64,7 @@ ViewManager::ViewManager(QObject *parent, KActionCollection *collection)
     , _navigationVisibility(NavigationNotSet)
     , _managerId(0)
     , _terminalDisplayHistoryIndex(-1)
+    , contextMenuAdditionalActions({})
 {
 #if HAVE_DBUS
     qDBusRegisterMetaType<QList<double>>();
@@ -641,6 +642,12 @@ Session *ViewManager::forgetTerminal(TerminalDisplay *terminal)
     return session;
 }
 
+void ViewManager::setContextMenuAdditionalActions(const QList<QAction *> &extension)
+{
+    contextMenuAdditionalActions = extension;
+    Q_EMIT contextMenuAdditionalActionsChanged(extension);
+}
+
 Session *ViewManager::createSession(const Profile::Ptr &profile, const QString &directory)
 {
     Session *session = SessionManager::instance()->createSession(profile);
@@ -868,10 +875,15 @@ SessionController *ViewManager::createController(Session *session, TerminalDispl
     connect(controller, &Konsole::SessionController::viewDragAndDropped, this, &Konsole::ViewManager::forgetController);
     connect(controller, &Konsole::SessionController::requestSplitViewLeftRight, this, &Konsole::ViewManager::splitLeftRight);
     connect(controller, &Konsole::SessionController::requestSplitViewTopBottom, this, &Konsole::ViewManager::splitTopBottom);
+    connect(this, &Konsole::ViewManager::contextMenuAdditionalActionsChanged, controller, &Konsole::SessionController::setContextMenuAdditionalActions);
 
     // if this is the first controller created then set it as the active controller
     if (_pluggedController.isNull()) {
         controllerChanged(controller);
+    }
+
+    if (!contextMenuAdditionalActions.isEmpty()) {
+        controller->setContextMenuAdditionalActions(contextMenuAdditionalActions);
     }
 
     return controller;

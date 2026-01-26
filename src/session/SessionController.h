@@ -253,6 +253,8 @@ public Q_SLOTS:
     void copyInputToSelectedTabs(QList<Session *> *sessions = nullptr);
     void copyInputToNone();
 
+    void setContextMenuAdditionalActions(const QList<QAction *> &extension);
+
 private Q_SLOTS:
     // menu item handlers
     void openBrowser();
@@ -423,6 +425,8 @@ private:
     QAction *_startAutoSaveAction;
     QAction *_stopAutoSaveAction;
     QPointer<SaveHistoryAutoTask> _autoSaveTask;
+
+    QList<QAction *> contextMenuAdditionalActions;
 };
 
 }
