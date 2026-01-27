@@ -11,6 +11,7 @@
 #include <QCommandLineParser>
 
 // Konsole
+#include "containers/ContainerInfo.h"
 #include "konsoleapp_export.h"
 #include "pluginsystem/PluginManager.h"
 #include "profile/Profile.h"
@@ -59,7 +60,7 @@ public:
     MainWindow *newMainWindow();
 
 private Q_SLOTS:
-    void createWindow(const QExplicitlySharedDataPointer<Profile> &profile, const QString &directory);
+    void createWindow(const QExplicitlySharedDataPointer<Profile> &profile, const QString &directory, const ContainerInfo &container);
     void detachTerminals(MainWindow *currentWindow, ViewSplitter *splitter, const QHash<TerminalDisplay *, Session *> &sessionsMap);
 
     void toggleBackgroundInstance();

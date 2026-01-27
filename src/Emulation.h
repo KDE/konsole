@@ -231,6 +231,8 @@ public Q_SLOTS:
      */
     virtual void sendMouseEvent(int buttons, int column, int line, int eventType) = 0;
 
+    virtual void sendExactMouseEvent(int buttons, int x, int y, int eventType) = 0;
+
     /**
      * Sends a string of characters to the foreground terminal process.
      *
@@ -304,6 +306,8 @@ Q_SIGNALS:
     void enableAlternateScrolling(bool enable);
 
     void programBracketedPasteModeChanged(bool bracketedPasteMode);
+
+    void programRequestedSynchronizedUpdate(bool start);
 
     /**
      * Emitted when the contents of the screen image change.
@@ -424,6 +428,22 @@ Q_SIGNALS:
     void toggleUrlExtractionRequest();
 
     /**
+     * Emitted when an OSC 777 (notification/extension) escape sequence is received.
+     * The params list contains the semicolon-separated values after "777;".
+     *
+     * This is a generic signal that allows external handlers to process
+     * OSC 777 extensions like:
+     *   - notify;title;body - Desktop notifications (handled internally)
+     *   - container;push;name;type - Enter container context
+     *   - container;pop;; - Exit container context
+     *   - precmd;; - Shell is about to show prompt
+     *   - preexec;; - Shell is about to execute command
+     *
+     * @param params The parameters from the OSC sequence, split by semicolons
+     */
+    void osc777Received(const QStringList &params);
+
+    /**
      * Mainly used to communicate dropped lines to active autosave tasks.
      * Takes into account lines dropped by Screen::addHistLine and Screen::fastAddHistLine.
      * Also includes lines dropped by clearing scrollback and resetting the screen.
@@ -498,12 +518,15 @@ private Q_SLOTS:
 
     void bracketedPasteModeChanged(bool bracketedPasteMode);
 
+    void synchronizedUpdateChanged(bool inProgress);
+
 private:
     void setScreenInternal(int index);
     Q_DISABLE_COPY(Emulation)
 
     bool _usesMouseTracking = false;
     bool _bracketedPasteMode = false;
+    bool _synchronizedUpdate = false;
     QTimer _bulkTimer1{this};
     QTimer _bulkTimer2{this};
     bool _imageSizeInitialized = false;

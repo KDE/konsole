@@ -240,6 +240,10 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
     });
     connect(_scrollBar, &QScrollBar::sliderMoved, this, &Konsole::TerminalDisplay::viewScrolledByUser);
 
+    _hoverLinkIndicator = new QLabel(this);
+    _hoverLinkIndicator->setStyleSheet(QStringLiteral("background-color:palette(window); padding: 2px;"));
+    _hoverLinkIndicator->setVisible(false);
+
     // setup timers for blinking text
     _blinkTextTimer = new QTimer(this);
     _blinkTextTimer->setInterval(TEXT_BLINK_DELAY);
@@ -529,6 +533,8 @@ void TerminalDisplay::updateImage()
     auto dirtyMask = new char[columnsToUpdate + 2];
     QRegion dirtyRegion;
 
+    std::optional<int> startIndex;
+
     for (y = 0; y < linesToUpdate; ++y) {
         const Character *currentLine = &_image[y * _columns];
         const Character *const newLine = &newimg[y * columns];
@@ -543,6 +549,11 @@ void TerminalDisplay::updateImage()
         for (x = 0; x < columnsToUpdate; ++x) {
             if (newLine[x] != currentLine[x]) {
                 dirtyMask[x] = 1;
+
+                if (!startIndex) {
+                    const int lineStartIndex = (y * columns) + x;
+                    startIndex = lineStartIndex;
+                }
             }
         }
 
@@ -665,6 +676,17 @@ void TerminalDisplay::updateImage()
     QAccessible::updateAccessibility(&dataChangeEvent);
     QAccessibleTextCursorEvent cursorEvent(this, _usedColumns * screenWindow()->screen()->getCursorY() + screenWindow()->screen()->getCursorX());
     QAccessible::updateAccessibility(&cursorEvent);
+
+    if (startIndex) {
+        const auto currentCursor = [&]() -> int {
+            int offset = _usedColumns * screenWindow()->screen()->getCursorY();
+            return offset + screenWindow()->screen()->getCursorX();
+        };
+
+        const QString newText = screenWindow()->screen()->text(*startIndex, currentCursor(), Screen::PreserveLineBreaks);
+        QAccessibleTextUpdateEvent textUpdateEvent(this, 0, QString(), newText);
+        QAccessible::updateAccessibility(&textUpdateEvent);
+    }
 #endif
 }
 void TerminalDisplay::showResizeNotification()
@@ -794,6 +816,13 @@ QPoint TerminalDisplay::cursorPosition() const
 void TerminalDisplay::setVisualCursorPosition(int x)
 {
     _visualCursorPosition = {x, cursorPosition().y()};
+}
+
+void TerminalDisplay::setHoverLinkIndicator(QString text)
+{
+    _hoverLinkIndicator->setVisible(!text.isEmpty());
+    _hoverLinkIndicator->setText(text);
+    _hoverLinkIndicator->adjustSize();
 }
 
 bool TerminalDisplay::isCursorOnDisplay() const
@@ -981,6 +1010,8 @@ void TerminalDisplay::resizeEvent(QResizeEvent *event)
     const auto x = width() - scrollBarWidth - _searchBar->width();
     const auto y = headerHeight;
     _searchBar->move(x, y);
+
+    _hoverLinkIndicator->move(0, height() - _hoverLinkIndicator->height());
 }
 
 void TerminalDisplay::propagateSize()
@@ -1246,7 +1277,7 @@ void TerminalDisplay::mousePressEvent(QMouseEvent *ev)
                 _iPntSel = _pntSel = pos;
                 _actSel = 1; // left mouse button pressed but nothing selected yet.
             } else if (usesMouseTracking() && !_readOnly) {
-                Q_EMIT mouseSignal(mouseButton(0, ev->modifiers()), charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum(), 0);
+                sendMouseSignal(mouseButton(0, ev->modifiers()), ev->pos(), 0, true);
             }
         }
         if (_semanticInputClick && (ev->modifiers() & Qt::ControlModifier) == 0 && _screenWindow->screen()->replMode() == REPL_INPUT) {
@@ -1257,7 +1288,7 @@ void TerminalDisplay::mousePressEvent(QMouseEvent *ev)
         processMidButtonClick(ev);
     } else if (ev->button() == Qt::RightButton) {
         if (usesMouseTracking() && !_readOnly && !ev->modifiers().testFlag(Qt::ShiftModifier)) {
-            Q_EMIT mouseSignal(mouseButton(2, ev->modifiers()), charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum(), 0);
+            sendMouseSignal(mouseButton(2, ev->modifiers()), ev->pos(), 0, true);
         }
     }
 }
@@ -1294,9 +1325,7 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent *ev)
     // being held down, which overrides this.
     if (usesMouseTracking() && !(ev->modifiers() & Qt::ShiftModifier)) {
         // Ignore mouse movements that don't change the character position.
-        if (charLine == _prevCharacterLine && charColumn == _prevCharacterColumn) {
-            return;
-        }
+        bool sameChar = charLine == _prevCharacterLine && charColumn == _prevCharacterColumn;
 
         _prevCharacterLine = charLine;
         _prevCharacterColumn = charColumn;
@@ -1313,7 +1342,7 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent *ev)
                 button = 2;
             }
 
-            Q_EMIT mouseSignal(mouseButton(button, ev->modifiers()), charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum(), 1);
+            sendMouseSignal(mouseButton(button, ev->modifiers()), ev->pos(), 1, !sameChar);
         }
 
         return;
@@ -1353,6 +1382,19 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent *ev)
     }
 
     extendSelection(ev->pos());
+}
+
+void TerminalDisplay::sendMouseSignal(int button, QPoint pos, int eventType, bool sendInexact)
+{
+    if (_readOnly)
+        return;
+
+    if (sendInexact) {
+        auto [charLine, charColumn] = getCharacterPosition(pos, !usesMouseTracking());
+        Q_EMIT mouseSignal(button, charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum(), eventType);
+    }
+
+    Q_EMIT exactMouseSignal(button, pos.x(), pos.y(), eventType);
 }
 
 void TerminalDisplay::leaveEvent(QEvent *ev)
@@ -1552,17 +1594,14 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent *ev)
             //       applies here, too.
 
             if (usesMouseTracking() && !(ev->modifiers() & Qt::ShiftModifier) && !_readOnly) {
-                Q_EMIT mouseSignal(mouseButton(0, ev->modifiers()), charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum(), 2);
+                sendMouseSignal(mouseButton(0, ev->modifiers()), ev->pos(), 2, true);
             }
         }
         _dragInfo.state = diNone;
     }
 
     if (usesMouseTracking() && !_readOnly && (ev->button() == Qt::RightButton || ev->button() == Qt::MiddleButton) && !(ev->modifiers() & Qt::ShiftModifier)) {
-        Q_EMIT mouseSignal(mouseButton((ev->button() == Qt::MiddleButton ? 1 : 2), ev->modifiers()),
-                           charColumn + 1,
-                           charLine + 1 + _scrollBar->value() - _scrollBar->maximum(),
-                           2);
+        sendMouseSignal(mouseButton((ev->button() == Qt::MiddleButton ? 1 : 2), ev->modifiers()), ev->pos(), 2, true);
     }
 
     if (!_screenWindow->screen()->hasSelection()) {
@@ -1622,8 +1661,7 @@ void TerminalDisplay::processMidButtonClick(QMouseEvent *ev)
         }
     } else {
         if (!_readOnly) {
-            auto [charLine, charColumn] = getCharacterPosition(ev->pos(), !usesMouseTracking());
-            Q_EMIT mouseSignal(mouseButton(1, ev->modifiers()), charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum(), 0);
+            sendMouseSignal(mouseButton(1, ev->modifiers()), ev->pos(), 0, true);
         }
     }
 }
@@ -1763,12 +1801,11 @@ void TerminalDisplay::wheelEvent(QWheelEvent *ev)
         } else if (usesMouseTracking()) {
             // terminal program wants notification of mouse activity
 
-            auto [charLine, charColumn] = getCharacterPosition(ev->position().toPoint(), !usesMouseTracking());
             const int steps = _scrollWheelState.consumeLegacySteps(ScrollState::DEFAULT_ANGLE_SCROLL_LINE);
             const int button = (steps > 0) ? 64 : 65;
             for (int i = 0; i < abs(steps); ++i) {
                 // Alt+wheel unsupported, Qt transforms it into horizontal wheel, see QTBUG-30948
-                Q_EMIT mouseSignal(mouseButton(button, ev->modifiers()), charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum(), 0);
+                sendMouseSignal(mouseButton(button, ev->modifiers()), ev->position().toPoint(), 0, true);
             }
         }
     }
@@ -2179,6 +2216,11 @@ bool TerminalDisplay::allowsMouseTracking() const
 void TerminalDisplay::resetCursor()
 {
     setCursor(usesMouseTracking() ? Qt::ArrowCursor : Qt::IBeamCursor);
+}
+
+void TerminalDisplay::setPointerShape(Qt::CursorShape shape)
+{
+    setCursor(shape);
 }
 
 bool TerminalDisplay::usesMouseTracking() const
@@ -2854,6 +2896,16 @@ void TerminalDisplay::keyReleaseEvent(QKeyEvent *event)
     }
 
     peekPrimaryRequested(false);
+
+#ifdef Q_OS_MACOS // swap Ctrl and Meta
+    if (event->modifiers() & Qt::MetaModifier) {
+        event->setModifiers((event->modifiers() & ~Qt::MetaModifier) | Qt::ControlModifier);
+    } else if (event->modifiers() & Qt::ControlModifier) {
+        event->setModifiers((event->modifiers() & ~Qt::ControlModifier) | Qt::MetaModifier);
+    }
+#endif
+
+    Q_EMIT keyPressedSignal(event);
 
     QWidget::keyReleaseEvent(event);
 }

@@ -130,6 +130,7 @@ SessionController::SessionController(Session *sessionParam, TerminalDisplay *vie
     , _monitorProcessFinish(false)
     , _monitorOnce(false)
     , _escapedUrlFilter(nullptr)
+    , contextMenuAdditionalActions({})
 {
     Q_ASSERT(sessionParam);
     Q_ASSERT(viewParam);
@@ -1430,6 +1431,11 @@ void SessionController::copyInputToNone()
     Q_EMIT copyInputChanged(this);
 }
 
+void SessionController::setContextMenuAdditionalActions(const QList<QAction *> &extension)
+{
+    contextMenuAdditionalActions = extension;
+}
+
 void SessionController::searchClosed()
 {
     _isSearchBarEnabled = false;
@@ -2080,6 +2086,13 @@ void SessionController::showDisplayContextMenu(const QPoint &position)
         // Adds a "Open Folder With" action
         const QUrl currentUrl = url().isLocalFile() ? url() : QUrl::fromLocalFile(QDir::homePath());
         KFileItem item(currentUrl);
+
+        if (!contextMenuAdditionalActions.isEmpty()) {
+            popup->addSeparator();
+            for (const auto &action : std::as_const(contextMenuAdditionalActions)) {
+                popup->addAction(action);
+            }
+        }
 
         const auto old = popup->actions();
 

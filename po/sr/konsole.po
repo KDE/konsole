@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-18 00:46+0000\n"
+"POT-Creation-Date: 2026-01-27 00:48+0000\n"
 "PO-Revision-Date: 2017-12-31 22:42+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -1230,69 +1230,69 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Хвала многима другима.\n"
 
-#: MainWindow.cpp:339
+#: MainWindow.cpp:342
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "Нови &језичак"
 
-#: MainWindow.cpp:349
+#: MainWindow.cpp:352
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "&Умножи језичак"
 
-#: MainWindow.cpp:356
+#: MainWindow.cpp:359
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "Нови &прозор"
 
-#: MainWindow.cpp:363
+#: MainWindow.cpp:366
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Затвори прозор"
 
-#: MainWindow.cpp:368
+#: MainWindow.cpp:371
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "&Обележивачи"
 
-#: MainWindow.cpp:395
+#: MainWindow.cpp:398
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "New Color Scheme"
 msgid "&Window Color Scheme"
 msgstr "Нова шема боја"
 
-#: MainWindow.cpp:407
+#: MainWindow.cpp:410
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Управљај профилима..."
 
 # >> @action:inmenu
-#: MainWindow.cpp:413
+#: MainWindow.cpp:416
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Активирај мени"
 
-#: MainWindow.cpp:419
+#: MainWindow.cpp:422
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr ""
 
-#: MainWindow.cpp:428
+#: MainWindow.cpp:431
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr ""
 
-#: MainWindow.cpp:746 MainWindow.cpp:763
+#: MainWindow.cpp:751 MainWindow.cpp:768
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1303,26 +1303,26 @@ msgstr[1] "У овом прозору раде %1 процеса, желите �
 msgstr[2] "У овом прозору ради %1 процеса, желите ли заиста да га напустите?"
 msgstr[3] "У овом прозору ради један процес, желите ли заиста да га напустите?"
 
-#: MainWindow.cpp:752 MainWindow.cpp:769 MainWindow.cpp:783
+#: MainWindow.cpp:757 MainWindow.cpp:774 MainWindow.cpp:788
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Потврда затварања"
 
-#: MainWindow.cpp:753 MainWindow.cpp:770 MainWindow.cpp:784
+#: MainWindow.cpp:758 MainWindow.cpp:775 MainWindow.cpp:789
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Затвори &прозор"
 
-#: MainWindow.cpp:771 MainWindow.cpp:785
+#: MainWindow.cpp:776 MainWindow.cpp:790
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Затвори текући &језичак"
 
 # >! Plurals.
-#: MainWindow.cpp:780
+#: MainWindow.cpp:785
 #, fuzzy, kde-format
 #| msgctxt "@info"
 #| msgid "There are %1 open tabs in this window. Do you still want to quit?"
@@ -1333,43 +1333,43 @@ msgstr ""
 "напустите?|/|У овом прозору има %1 $[множ ^1 'отворен језичак' 'отворена "
 "језичка' 'отворених језичака'], желите ли заиста да га напустите?"
 
-#: MainWindow.cpp:887 Part.cpp:298
+#: MainWindow.cpp:892 Part.cpp:303
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Профили"
 
-#: MainWindow.cpp:905
+#: MainWindow.cpp:910
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Опште"
 
-#: MainWindow.cpp:917
+#: MainWindow.cpp:922
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr ""
 
-#: MainWindow.cpp:923
+#: MainWindow.cpp:928
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr ""
 
-#: MainWindow.cpp:928
+#: MainWindow.cpp:933
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr ""
 
-#: MainWindow.cpp:933
+#: MainWindow.cpp:938
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
 msgstr ""
 
-#: Part.cpp:301
+#: Part.cpp:306
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Part Info"
@@ -2197,23 +2197,23 @@ msgstr "Унесите текст који треба потражити."
 msgid "Bell in '%1' (Session '%2')"
 msgstr "Звоно у сесији „%1“"
 
-#: session/Session.cpp:425
+#: session/Session.cpp:432
 #, kde-format
 msgid "Could not find binary: "
 msgstr "Не могу да нађем наредбу: "
 
-#: session/Session.cpp:434
+#: session/Session.cpp:441
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Упозорење: "
 
-#: session/Session.cpp:529
+#: session/Session.cpp:536
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "Не могу да нађем интерактивну шкољку за покретање."
 
-#: session/Session.cpp:535 session/Session.cpp:538
+#: session/Session.cpp:542 session/Session.cpp:545
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2221,19 +2221,19 @@ msgid ""
 msgstr ""
 "Не могу да нађем %1, покрећем %2 уместо тога. Проверите поставке профила."
 
-#: session/Session.cpp:612
+#: session/Session.cpp:619
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Не могу да извршим наредбу %1 са аргументима „%2“."
 
-#: session/Session.cpp:778
+#: session/Session.cpp:785
 #, fuzzy, kde-format
 #| msgid "Silence in session '%1'"
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Тишина у сесији „%1“"
 
-#: session/Session.cpp:779 session/Session.cpp:2122
-#: session/SessionController.cpp:361 session/SessionController.cpp:1892
+#: session/Session.cpp:786 session/Session.cpp:2129
+#: session/SessionController.cpp:362 session/SessionController.cpp:1898
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1214
 #: Vt102Emulation.cpp:1469
 #, fuzzy, kde-format
@@ -2241,344 +2241,344 @@ msgstr "Тишина у сесији „%1“"
 msgid "Show session"
 msgstr "&Затвори сесију"
 
-#: session/Session.cpp:1095
+#: session/Session.cpp:1102
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Завршено"
 
-#: session/Session.cpp:1109 session/Session.cpp:1125
+#: session/Session.cpp:1116 session/Session.cpp:1132
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Програм „%1“ се срушио."
 
-#: session/Session.cpp:1111
+#: session/Session.cpp:1118
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "Програм „%1“ завршио је стањем %2."
 
-#: session/Session.cpp:1649
+#: session/Session.cpp:1656
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Напредак з‑модема"
 
-#: session/Session.cpp:2121
+#: session/Session.cpp:2128
 #, fuzzy, kde-format
 #| msgid "Activity in session '%1'"
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Активност у сесији „%1“"
 
-#: session/Session.cpp:2259
+#: session/Session.cpp:2276
 #, kde-format
 msgid "Security sensitive DBus API is disabled in the settings."
 msgstr ""
 
-#: session/SessionController.cpp:142
+#: session/SessionController.cpp:143
 #, kde-format
 msgid "Konsole"
 msgstr "Конзола"
 
-#: session/SessionController.cpp:360
+#: session/SessionController.cpp:361
 #, kde-format
 msgid "The process '%1' has finished running in session '%2'"
 msgstr ""
 
-#: session/SessionController.cpp:443
+#: session/SessionController.cpp:444
 #, kde-format
 msgid "Konsole does not know how to open the bookmark: "
 msgstr "Конзола не зна како да отвори обележивач: "
 
-#: session/SessionController.cpp:521
+#: session/SessionController.cpp:522
 #, kde-format
 msgid "Search for '%1' with"
 msgstr "Потражи „%1“ помоћу"
 
-#: session/SessionController.cpp:537
+#: session/SessionController.cpp:538
 #, kde-format
 msgid "Configure Web Shortcuts..."
 msgstr "Подеси веб пречице..."
 
-#: session/SessionController.cpp:648
+#: session/SessionController.cpp:649
 #, kde-format
 msgid "&Close Session"
 msgstr "&Затвори сесију"
 
-#: session/SessionController.cpp:655
+#: session/SessionController.cpp:656
 #, kde-format
 msgid "Open File Manager"
 msgstr "Отвори менаџер фајлова"
 
-#: session/SessionController.cpp:670
+#: session/SessionController.cpp:671
 #, kde-format
 msgid "Copy"
 msgstr ""
 
-#: session/SessionController.cpp:677
+#: session/SessionController.cpp:678
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Split View Left/Right"
 msgid "Split View Left-Right"
 msgstr "Подели приказ лево/десно"
 
-#: session/SessionController.cpp:682
+#: session/SessionController.cpp:683
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Split View Top/Bottom"
 msgid "Split View Top-Bottom"
 msgstr "Подели приказ горе/доле"
 
-#: session/SessionController.cpp:686
+#: session/SessionController.cpp:687
 #, kde-format
 msgid "Copy except prompts"
 msgstr ""
 
 # >> @title:window
-#: session/SessionController.cpp:692
+#: session/SessionController.cpp:693
 #, fuzzy, kde-format
 #| msgid "Copy Input"
 msgid "Copy user input"
 msgstr "Копирање уноса"
 
 # >> @title:window
-#: session/SessionController.cpp:698
+#: session/SessionController.cpp:699
 #, fuzzy, kde-format
 #| msgid "Copy Input"
 msgid "Copy command output"
 msgstr "Копирање уноса"
 
-#: session/SessionController.cpp:713
+#: session/SessionController.cpp:714
 #, kde-format
 msgid "Paste Selection"
 msgstr "Налепи избор"
 
-#: session/SessionController.cpp:720
+#: session/SessionController.cpp:721
 #, kde-format
 msgid "Web Search"
 msgstr "Веб претрага"
 
-#: session/SessionController.cpp:726
+#: session/SessionController.cpp:727
 #, kde-format
 msgid "&Select All"
 msgstr "&Изабери све"
 
-#: session/SessionController.cpp:730
+#: session/SessionController.cpp:731
 #, fuzzy, kde-format
 #| msgid "Select &Line"
 msgid "Select &Mode"
 msgstr "Изабери &ред"
 
-#: session/SessionController.cpp:735
+#: session/SessionController.cpp:736
 #, kde-format
 msgid "Select &Line"
 msgstr "Изабери &ред"
 
-#: session/SessionController.cpp:738
+#: session/SessionController.cpp:739
 #, kde-format
 msgid "Save Output &As..."
 msgstr "Сачувај излаз &као..."
 
-#: session/SessionController.cpp:744
+#: session/SessionController.cpp:745
 #, fuzzy, kde-format
 #| msgid "Save Output &As..."
 msgid "Auto Save Output As..."
 msgstr "Сачувај излаз &као..."
 
-#: session/SessionController.cpp:748
+#: session/SessionController.cpp:749
 #, kde-format
 msgid "Stop Auto Save"
 msgstr ""
 
-#: session/SessionController.cpp:752
+#: session/SessionController.cpp:753
 #, kde-format
 msgid "&Print Screen..."
 msgstr "&Одштампај екран..."
 
 # rewrite-msgid: /Adjust/Configure/
-#: session/SessionController.cpp:756
+#: session/SessionController.cpp:757
 #, kde-format
 msgid "Adjust Scrollback..."
 msgstr "Подеси препис..."
 
-#: session/SessionController.cpp:760
+#: session/SessionController.cpp:761
 #, kde-format
 msgid "Clear Scrollback"
 msgstr "Очисти препис"
 
-#: session/SessionController.cpp:764
+#: session/SessionController.cpp:765
 #, kde-format
 msgid "Clear Scrollback and Reset"
 msgstr "Очисти препис и ресетуј"
 
-#: session/SessionController.cpp:775
+#: session/SessionController.cpp:776
 #, fuzzy, kde-format
 #| msgid "Edit Profile"
 msgid "Next Profile"
 msgstr "Уреди профил"
 
-#: session/SessionController.cpp:780
+#: session/SessionController.cpp:781
 #, fuzzy, kde-format
 #| msgctxt "@action:button Go to the previous phrase"
 #| msgid "Previous"
 msgid "Previous Profile"
 msgstr "Претходно"
 
-#: session/SessionController.cpp:783
+#: session/SessionController.cpp:784
 #, kde-format
 msgid "Switch Profile"
 msgstr "Промени профил"
 
-#: session/SessionController.cpp:808
+#: session/SessionController.cpp:809
 #, kde-format
 msgid "Set &Encoding"
 msgstr "Постави &кодирање"
 
-#: session/SessionController.cpp:828
+#: session/SessionController.cpp:829
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow Mouse Tracking"
 msgstr ""
 
-#: session/SessionController.cpp:837
+#: session/SessionController.cpp:838
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
 msgstr ""
 
-#: session/SessionController.cpp:848
+#: session/SessionController.cpp:849
 #, fuzzy, kde-format
 #| msgid "&Rename Tab..."
 msgid "&Configure or Rename Tab..."
 msgstr "&Преименуј језичак..."
 
 # >> @action:inmenu Copy Input To
-#: session/SessionController.cpp:854
+#: session/SessionController.cpp:855
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr "&све језичке у текућем прозору"
 
 # >> @action:inmenu Copy Input To
-#: session/SessionController.cpp:861
+#: session/SessionController.cpp:862
 #, kde-format
 msgid "&Select Tabs..."
 msgstr "&изабране језичке..."
 
 # >> @action:inmenu Copy Input To
-#: session/SessionController.cpp:867
+#: session/SessionController.cpp:868
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "&нигде"
 
-#: session/SessionController.cpp:875
+#: session/SessionController.cpp:876
 #, kde-format
 msgid "Copy Input To"
 msgstr "Копирај унос у"
 
-#: session/SessionController.cpp:883
+#: session/SessionController.cpp:884
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "Отпреми &з‑модемом..."
 
-#: session/SessionController.cpp:888
+#: session/SessionController.cpp:889
 #, kde-format
 msgid "One-Shot Monitors"
 msgstr ""
 
-#: session/SessionController.cpp:893
+#: session/SessionController.cpp:894
 #, fuzzy, kde-format
 #| msgid "Monitor for &Activity"
 msgid "Monitor for &Prompt"
 msgstr "Надгледај &активност"
 
-#: session/SessionController.cpp:900
+#: session/SessionController.cpp:901
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "Надгледај &активност"
 
-#: session/SessionController.cpp:906
+#: session/SessionController.cpp:907
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "Надгледај &тишину"
 
-#: session/SessionController.cpp:912
+#: session/SessionController.cpp:913
 #, fuzzy, kde-format
 #| msgid "Monitor for &Activity"
 msgid "Monitor for Process Finishing"
 msgstr "Надгледај &активност"
 
-#: session/SessionController.cpp:919
+#: session/SessionController.cpp:920
 #, kde-format
 msgid "Enlarge Font"
 msgstr "Повећај фонт"
 
-#: session/SessionController.cpp:927
+#: session/SessionController.cpp:928
 #, kde-format
 msgid "Shrink Font"
 msgstr "Смањи фонт"
 
-#: session/SessionController.cpp:932
+#: session/SessionController.cpp:933
 #, kde-format
 msgid "Reset Font Size"
 msgstr ""
 
-#: session/SessionController.cpp:938
+#: session/SessionController.cpp:939
 #, kde-format
 msgid "Send Signal"
 msgstr "Пошаљи сигнал"
 
-#: session/SessionController.cpp:942
+#: session/SessionController.cpp:943
 #, kde-format
 msgid "&Suspend Task"
 msgstr "&Суспендуј задатак"
 
-#: session/SessionController.cpp:947
+#: session/SessionController.cpp:948
 #, kde-format
 msgid "&Continue Task"
 msgstr "&Настави задатак"
 
-#: session/SessionController.cpp:952
+#: session/SessionController.cpp:953
 #, kde-format
 msgid "&Hangup"
 msgstr "&Прекини везу"
 
-#: session/SessionController.cpp:957
+#: session/SessionController.cpp:958
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "&Прекини задатак"
 
-#: session/SessionController.cpp:962
+#: session/SessionController.cpp:963
 #, kde-format
 msgid "&Terminate Task"
 msgstr "&Обустави задатак"
 
-#: session/SessionController.cpp:967
+#: session/SessionController.cpp:968
 #, kde-format
 msgid "&Kill Task"
 msgstr "&Укини задатак"
 
-#: session/SessionController.cpp:972
+#: session/SessionController.cpp:973
 #, kde-format
 msgid "User Signal &1"
 msgstr "Кориснички сигнал &1"
 
-#: session/SessionController.cpp:977
+#: session/SessionController.cpp:978
 #, kde-format
 msgid "User Signal &2"
 msgstr "Кориснички сигнал &2"
 
-#: session/SessionController.cpp:995
+#: session/SessionController.cpp:996
 #, fuzzy, kde-format
 #| msgctxt "@item This will be used as part of the file name"
 #| msgid "New Profile"
 msgid "Create New Profile..."
 msgstr "нови профил"
 
-#: session/SessionController.cpp:997
+#: session/SessionController.cpp:998
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "Уреди текући профил..."
 
-#: session/SessionController.cpp:1128
+#: session/SessionController.cpp:1129
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
@@ -2587,7 +2587,7 @@ msgstr ""
 "У сесији се тренутно извршава један програм. Желите ли заиста да је "
 "затворите?"
 
-#: session/SessionController.cpp:1132
+#: session/SessionController.cpp:1133
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
@@ -2596,19 +2596,19 @@ msgstr ""
 "У сесији се тренутно извршава програм „%1“. Желите ли заиста да је затворите?"
 
 # >> @title:window
-#: session/SessionController.cpp:1139 session/SessionController.cpp:1174
+#: session/SessionController.cpp:1140 session/SessionController.cpp:1175
 #, kde-format
 msgid "Confirm Close"
 msgstr "Потврда затварања"
 
-#: session/SessionController.cpp:1140
+#: session/SessionController.cpp:1141
 #, fuzzy, kde-format
 #| msgid "&Close Tab"
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "&Затвори језичак"
 
-#: session/SessionController.cpp:1163
+#: session/SessionController.cpp:1164
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
@@ -2617,7 +2617,7 @@ msgstr ""
 "Један програм у овој сесији неће да се укине. Желите ли заиста да га "
 "принудно укинете?"
 
-#: session/SessionController.cpp:1167
+#: session/SessionController.cpp:1168
 #, fuzzy, kde-format
 #| msgid ""
 #| "The program '%1' is in this session would not die.  Are you sure you want "
@@ -2629,29 +2629,29 @@ msgstr ""
 "Програм ‘%1’ у овој сесији неће да се укине. Желите ли заиста да га принудно "
 "укинете?"
 
-#: session/SessionController.cpp:1175
+#: session/SessionController.cpp:1176
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr ""
 
-#: session/SessionController.cpp:1891
+#: session/SessionController.cpp:1897
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr ""
 
-#: session/SessionController.cpp:2113
+#: session/SessionController.cpp:2126
 #, kde-format
 msgid "Open Current Folder With"
 msgstr ""
 
 # rewrite-msgid: /Save//
-#: session/SessionController.cpp:2183
+#: session/SessionController.cpp:2196
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Преузимање з‑модемом у..."
 
-#: session/SessionController.cpp:2193
+#: session/SessionController.cpp:2206
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2662,13 +2662,13 @@ msgstr ""
 "софтвера за з‑модем.</p><p>Инсталирајте пакет <tt>rzsz</tt> или <tt>lrzsz</"
 "tt>.</p>"
 
-#: session/SessionController.cpp:2203
+#: session/SessionController.cpp:2216
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>У текућој сесији се већ одвија з‑модемски пренос фајла.</p>"
 
-#: session/SessionController.cpp:2216
+#: session/SessionController.cpp:2229
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2678,7 +2678,7 @@ msgstr ""
 "tt> или <tt>lrzsz</tt>.</p>"
 
 # >> @title:window
-#: session/SessionController.cpp:2221
+#: session/SessionController.cpp:2234
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Избор фајлова за отпремање з‑модемом"
@@ -3550,12 +3550,12 @@ msgstr ""
 msgid "Enable thumbnails generation"
 msgstr "Активирај убрзиваче у менију"
 
-#: terminalDisplay/TerminalDisplay.cpp:660
+#: terminalDisplay/TerminalDisplay.cpp:682
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr "Величина: %1×%2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2251
+#: terminalDisplay/TerminalDisplay.cpp:2293
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
@@ -3565,52 +3565,52 @@ msgstr[2] "Желите ли заиста да налепите %1 знаков�
 msgstr[3] "Желите ли заиста да налепите %1 знак?"
 
 # >> @title:window
-#: terminalDisplay/TerminalDisplay.cpp:2252
+#: terminalDisplay/TerminalDisplay.cpp:2294
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Потврда налепљивања"
 
-#: terminalDisplay/TerminalDisplay.cpp:2285
+#: terminalDisplay/TerminalDisplay.cpp:2327
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2286
+#: terminalDisplay/TerminalDisplay.cpp:2328
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2287
+#: terminalDisplay/TerminalDisplay.cpp:2329
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2288
+#: terminalDisplay/TerminalDisplay.cpp:2330
 #, kde-format
 msgid "Backspace"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2289
+#: terminalDisplay/TerminalDisplay.cpp:2331
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2290
+#: terminalDisplay/TerminalDisplay.cpp:2332
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2291
+#: terminalDisplay/TerminalDisplay.cpp:2333
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2292
+#: terminalDisplay/TerminalDisplay.cpp:2334
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2315
+#: terminalDisplay/TerminalDisplay.cpp:2357
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3618,7 +3618,7 @@ msgid ""
 msgstr ""
 
 # >> @title:window
-#: terminalDisplay/TerminalDisplay.cpp:2318
+#: terminalDisplay/TerminalDisplay.cpp:2360
 #, fuzzy, kde-format
 #| msgid "Confirm Paste"
 msgctxt "@title"
@@ -3626,27 +3626,27 @@ msgid "Confirm Paste"
 msgstr "Потврда налепљивања"
 
 # >> @option:radio Cursor options
-#: terminalDisplay/TerminalDisplay.cpp:2319
+#: terminalDisplay/TerminalDisplay.cpp:2361
 #, fuzzy, kde-format
 #| msgid "Set cursor color to match current character"
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Курсор прати боју знака под њим"
 
-#: terminalDisplay/TerminalDisplay.cpp:2320
+#: terminalDisplay/TerminalDisplay.cpp:2362
 #, fuzzy, kde-format
 #| msgid "Paste Selection"
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "Налепи избор"
 
-#: terminalDisplay/TerminalDisplay.cpp:2321
+#: terminalDisplay/TerminalDisplay.cpp:2363
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2552
+#: terminalDisplay/TerminalDisplay.cpp:2594
 #, fuzzy, kde-format
 #| msgid ""
 #| "<qt>Output has been <a href=\"http://en.wikipedia.org/wiki/"
@@ -3662,42 +3662,42 @@ msgstr ""
 "\">заустављен</a> притиском <b>Ctrl+S</b>. Притисните <b>Ctrl+Q</b> да "
 "продужи. Кликните <a href=\"#close\">овде</a> да уклоните поруку.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2607
+#: terminalDisplay/TerminalDisplay.cpp:2649
 #, kde-format
 msgid "This terminal is read-only."
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:3003
+#: terminalDisplay/TerminalDisplay.cpp:3045
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Промени &фасциклу на"
 
-#: terminalDisplay/TerminalDisplay.cpp:3038
+#: terminalDisplay/TerminalDisplay.cpp:3080
 #, kde-format
 msgid "&Paste Location"
 msgstr "&Налепи локацију"
 
 # >> @title:menu
-#: ViewManager.cpp:120
+#: ViewManager.cpp:121
 #, fuzzy, kde-format
 #| msgid "Split View"
 msgctxt "@action:inmenu"
 msgid "Split View"
 msgstr "Подељен приказ"
 
-#: ViewManager.cpp:127
+#: ViewManager.cpp:128
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right"
 msgstr "Подели приказ лево/десно"
 
-#: ViewManager.cpp:135
+#: ViewManager.cpp:136
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom"
 msgstr "Подели приказ горе/доле"
 
-#: ViewManager.cpp:143
+#: ViewManager.cpp:144
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Split View Top/Bottom"
@@ -3705,7 +3705,7 @@ msgctxt "@action:inmenu"
 msgid "Split View Automatically"
 msgstr "Подели приказ горе/доле"
 
-#: ViewManager.cpp:153
+#: ViewManager.cpp:154
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Split View Left/Right"
@@ -3713,7 +3713,7 @@ msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
 msgstr "Подели приказ лево/десно"
 
-#: ViewManager.cpp:161
+#: ViewManager.cpp:162
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Split View Top/Bottom"
@@ -3721,43 +3721,43 @@ msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
 msgstr "Подели приказ горе/доле"
 
-#: ViewManager.cpp:169
+#: ViewManager.cpp:170
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
 msgstr ""
 
-#: ViewManager.cpp:179
+#: ViewManager.cpp:180
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x2 terminals"
 msgstr ""
 
-#: ViewManager.cpp:188
+#: ViewManager.cpp:189
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x1 terminals"
 msgstr ""
 
-#: ViewManager.cpp:197
+#: ViewManager.cpp:198
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 1x2 terminals"
 msgstr ""
 
-#: ViewManager.cpp:205
+#: ViewManager.cpp:206
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Expand View"
 msgstr "Рашири приказ"
 
-#: ViewManager.cpp:213
+#: ViewManager.cpp:214
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Shrink View"
 msgstr "Скупи приказ"
 
-#: ViewManager.cpp:223
+#: ViewManager.cpp:224
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "D&etach Current Tab"
@@ -3765,7 +3765,7 @@ msgctxt "@action:inmenu"
 msgid "Detach Current &View"
 msgstr "От&качи текући језичак"
 
-#: ViewManager.cpp:235
+#: ViewManager.cpp:236
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "D&etach Current Tab"
@@ -3773,20 +3773,20 @@ msgctxt "@action:inmenu"
 msgid "Detach Current &Tab"
 msgstr "От&качи текући језичак"
 
-#: ViewManager.cpp:240
+#: ViewManager.cpp:241
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Next Tab"
 msgstr "Следећи језичак"
 
-#: ViewManager.cpp:248
+#: ViewManager.cpp:249
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Previous Tab"
 msgstr "Претходни језичак"
 
 # >> @item:inlistbox Tab bar position
-#: ViewManager.cpp:256
+#: ViewManager.cpp:257
 #, fuzzy, kde-format
 #| msgid "Above Terminal Area"
 msgctxt "@action Shortcut entry"
@@ -3794,27 +3794,27 @@ msgid "Focus Above Terminal"
 msgstr "изнад зоне терминала"
 
 # >> @item:inlistbox Tab bar position
-#: ViewManager.cpp:263
+#: ViewManager.cpp:264
 #, fuzzy, kde-format
 #| msgid "Below Terminal Area"
 msgctxt "@action Shortcut entry"
 msgid "Focus Below Terminal"
 msgstr "испод зоне терминала"
 
-#: ViewManager.cpp:270
+#: ViewManager.cpp:271
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Left Terminal"
 msgstr ""
 
-#: ViewManager.cpp:276
+#: ViewManager.cpp:277
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Right Terminal"
 msgstr ""
 
 # >> @item:inlistbox Tab bar position
-#: ViewManager.cpp:282
+#: ViewManager.cpp:283
 #, fuzzy, kde-format
 #| msgid "Above Terminal Area"
 msgctxt "@action Shortcut entry"
@@ -3822,7 +3822,7 @@ msgid "Focus Next Terminal"
 msgstr "изнад зоне терминала"
 
 # >> @item:inlistbox Tab bar position
-#: ViewManager.cpp:288
+#: ViewManager.cpp:289
 #, fuzzy, kde-format
 #| msgid "Below Terminal Area"
 msgctxt "@action Shortcut entry"
@@ -3830,55 +3830,55 @@ msgid "Focus Previous Terminal"
 msgstr "испод зоне терминала"
 
 # rewrite-msgid: /Last/Last Viewed/
-#: ViewManager.cpp:294
+#: ViewManager.cpp:295
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Last Tab"
 msgstr "Претходно приказани језичак"
 
-#: ViewManager.cpp:299
+#: ViewManager.cpp:300
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs"
 msgstr ""
 
-#: ViewManager.cpp:304
+#: ViewManager.cpp:305
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle Between Two Tabs"
 msgstr ""
 
-#: ViewManager.cpp:309
+#: ViewManager.cpp:310
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs (Reverse)"
 msgstr ""
 
-#: ViewManager.cpp:314
+#: ViewManager.cpp:315
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle maximize current view"
 msgstr ""
 
-#: ViewManager.cpp:315
+#: ViewManager.cpp:316
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle maximize current view"
-msgstr ""
-
-#: ViewManager.cpp:323
-#, kde-format
-msgctxt "@action Shortcut entry"
-msgid "Toggle zoom-maximize current view"
 msgstr ""
 
 #: ViewManager.cpp:324
 #, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Toggle zoom-maximize current view"
+msgstr ""
+
+#: ViewManager.cpp:325
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle zoom-maximize current view"
 msgstr ""
 
-#: ViewManager.cpp:332
+#: ViewManager.cpp:333
 #, fuzzy, kde-format
 #| msgctxt "@action Shortcut entry"
 #| msgid "Move Tab Right"
@@ -3886,7 +3886,7 @@ msgctxt "@action Shortcut entry"
 msgid "Move tab to the right"
 msgstr "Помери језичак удесно"
 
-#: ViewManager.cpp:339
+#: ViewManager.cpp:340
 #, fuzzy, kde-format
 #| msgctxt "@action Shortcut entry"
 #| msgid "Move Tab Left"
@@ -3894,59 +3894,59 @@ msgctxt "@action Shortcut entry"
 msgid "Move tab to the left"
 msgstr "Помери језичак улево"
 
-#: ViewManager.cpp:346
+#: ViewManager.cpp:347
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
 msgstr ""
 
-#: ViewManager.cpp:352
+#: ViewManager.cpp:353
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
 msgstr ""
 
-#: ViewManager.cpp:358
+#: ViewManager.cpp:359
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
 msgstr ""
 
-#: ViewManager.cpp:365
+#: ViewManager.cpp:366
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
 msgstr ""
 
-#: ViewManager.cpp:375
+#: ViewManager.cpp:376
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Tab %1"
 msgstr "Пребаци на језичак %1"
 
-#: ViewManager.cpp:598
+#: ViewManager.cpp:599
 #, kde-format
 msgid "Semantic hints "
 msgstr ""
 
-#: ViewManager.cpp:614
+#: ViewManager.cpp:615
 #, kde-format
 msgid "Line numbers "
 msgstr ""
 
-#: ViewManager.cpp:1202
+#: ViewManager.cpp:1214
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr ""
 
-#: ViewManager.cpp:1204 ViewManager.cpp:1325
+#: ViewManager.cpp:1216 ViewManager.cpp:1337
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr ""
 
-#: ViewManager.cpp:1220
+#: ViewManager.cpp:1232
 #, fuzzy, kde-format
 #| msgid ""
 #| "A problem occurred when saving the output.\n"
@@ -3959,7 +3959,7 @@ msgstr ""
 "Проблем при уписивању излаза.\n"
 "%1"
 
-#: ViewManager.cpp:1312
+#: ViewManager.cpp:1324
 #, fuzzy, kde-format
 #| msgid ""
 #| "A problem occurred when saving the output.\n"
@@ -3972,13 +3972,13 @@ msgstr ""
 "Проблем при уписивању излаза.\n"
 "%1"
 
-#: ViewManager.cpp:1323
+#: ViewManager.cpp:1335
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr ""
 
-#: Vt102Emulation.cpp:2828
+#: Vt102Emulation.cpp:2955
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "

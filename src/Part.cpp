@@ -8,6 +8,7 @@
 #include "Part.h"
 
 // Qt
+#include <QAction>
 #include <QDir>
 #include <QKeyEvent>
 #include <QMetaEnum>
@@ -19,12 +20,12 @@
 #include <KConfigDialog>
 #include <KLocalizedString>
 #include <KPluginFactory>
-#include <QAction>
 
 // Konsole
 #include "Emulation.h"
 #include "KonsoleSettings.h"
 #include "ViewManager.h"
+#include "konsoledebug.h"
 #include "profile/ProfileManager.h"
 #include "session/SessionController.h"
 #include "session/SessionManager.h"
@@ -190,6 +191,11 @@ QVariant Part::profileProperty(const QString &profileProperty) const
     return SessionManager::instance()->sessionProfile(activeSession())->property<QVariant>(p);
 }
 
+void Part::setContextMenuAdditionalActions(const QList<QAction *> &extension)
+{
+    _viewManager->setContextMenuAdditionalActions(extension);
+}
+
 QStringList Part::availableProfiles() const
 {
     return ProfileManager::instance()->availableProfileNames();
@@ -229,6 +235,19 @@ void Part::createSession(const QString &profileName, const QString &directory)
     Q_ASSERT(profile);
 
     Session *session = SessionManager::instance()->createSession(profile);
+
+    // Inherit container context from active session if enabled in profile
+    if (profile->inheritContainerContext() && _pluggedController) {
+        Session *activeSession = _pluggedController->session();
+        if (activeSession && activeSession->isInContainer()) {
+            session->setContainerContext(activeSession->containerContext());
+        } else {
+            qDebug(KonsoleDebug) << "Active session is not in a container, cannot inherit container context.";
+        }
+    } else {
+        qDebug(KonsoleDebug) << "Not inheriting container context because"
+                             << (profile->inheritContainerContext() ? "no plugged controller." : "inheritance is disabled in profile.");
+    }
 
     // override the default directory specified in the profile
     if (!directory.isEmpty() && profile->startInCurrentSessionDir()) {

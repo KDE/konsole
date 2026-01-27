@@ -8,6 +8,7 @@
 #include "ViewManager.h"
 
 #include "config-konsole.h"
+#include "konsoledebug.h"
 
 // Qt
 #include <QFile>
@@ -64,6 +65,7 @@ ViewManager::ViewManager(QObject *parent, KActionCollection *collection)
     , _navigationVisibility(NavigationNotSet)
     , _managerId(0)
     , _terminalDisplayHistoryIndex(-1)
+    , contextMenuAdditionalActions({})
 {
 #if HAVE_DBUS
     qDBusRegisterMetaType<QList<double>>();
@@ -641,6 +643,12 @@ Session *ViewManager::forgetTerminal(TerminalDisplay *terminal)
     return session;
 }
 
+void ViewManager::setContextMenuAdditionalActions(const QList<QAction *> &extension)
+{
+    contextMenuAdditionalActions = extension;
+    Q_EMIT contextMenuAdditionalActionsChanged(extension);
+}
+
 Session *ViewManager::createSession(const Profile::Ptr &profile, const QString &directory)
 {
     Session *session = SessionManager::instance()->createSession(profile);
@@ -803,6 +811,14 @@ void ViewManager::splitView(Qt::Orientation orientation, bool fromNextTab)
         const QString directory = profile->startInCurrentSessionDir() ? activeSession->currentWorkingDirectory() : QString();
         auto *session = createSession(profile, directory);
 
+        // Inherit container context if enabled in profile
+        if (profile->inheritContainerContext() && activeSession->isInContainer()) {
+            session->setContainerContext(activeSession->containerContext());
+        } else {
+            qDebug(KonsoleDebug) << "Not inheriting container context for new split session because"
+                                 << (profile->inheritContainerContext() ? "active session is not in a container" : "profile setting disabled");
+        }
+
         focused = terminalDisplay = createView(session);
         Q_EMIT activeViewChanged(activeViewController());
     }
@@ -868,10 +884,15 @@ SessionController *ViewManager::createController(Session *session, TerminalDispl
     connect(controller, &Konsole::SessionController::viewDragAndDropped, this, &Konsole::ViewManager::forgetController);
     connect(controller, &Konsole::SessionController::requestSplitViewLeftRight, this, &Konsole::ViewManager::splitLeftRight);
     connect(controller, &Konsole::SessionController::requestSplitViewTopBottom, this, &Konsole::ViewManager::splitTopBottom);
+    connect(this, &Konsole::ViewManager::contextMenuAdditionalActionsChanged, controller, &Konsole::SessionController::setContextMenuAdditionalActions);
 
     // if this is the first controller created then set it as the active controller
     if (_pluggedController.isNull()) {
         controllerChanged(controller);
+    }
+
+    if (!contextMenuAdditionalActions.isEmpty()) {
+        controller->setContextMenuAdditionalActions(contextMenuAdditionalActions);
     }
 
     return controller;
@@ -1455,6 +1476,15 @@ int ViewManager::newSession(const QString &profile, const QString &directory)
 
     Session *session = createSession(profileptr, directory);
 
+    // Inherit container context from currently active session if enabled
+    int activeSessionId = currentSession();
+    if (activeSessionId >= 0 && profileptr->inheritContainerContext()) {
+        Session *activeSession = SessionManager::instance()->idToSession(activeSessionId);
+        if (activeSession && activeSession->isInContainer()) {
+            session->setContainerContext(activeSession->containerContext());
+        }
+    }
+
     auto newView = createView(session);
     activeContainer()->addView(newView);
     session->run();
@@ -1528,7 +1558,7 @@ QList<double> ViewManager::getSplitProportions(int splitterId)
     const QList<int> sizes = splitter->sizes();
     int totalSize = 0;
 
-    for (const auto& size : sizes) {
+    for (const auto &size : sizes) {
         totalSize += size;
     }
 

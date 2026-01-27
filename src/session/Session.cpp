@@ -63,6 +63,7 @@
 #include "ShellCommand.h"
 #include "Vt102Emulation.h"
 #include "ZModemDialog.h"
+#include "containers/ContainerRegistry.h"
 #include "decoders/PlainTextDecoder.h"
 #include "history/HistoryTypeFile.h"
 #include "history/HistoryTypeNone.h"
@@ -125,6 +126,7 @@ Session::Session(QObject *parent)
     _emulation->reset();
 
     connect(_emulation, &Konsole::Emulation::sessionAttributeChanged, this, &Konsole::Session::setSessionAttribute);
+    connect(_emulation, &Konsole::Emulation::osc777Received, this, &Konsole::Session::handleOsc777);
     connect(_emulation, &Konsole::Emulation::bell, this, [this]() {
         Q_EMIT bellRequest(i18n("Bell in '%1' (Session '%2')", _displayTitle, _nameTitle));
         this->setPendingNotification(Notification::Bell);
@@ -286,10 +288,16 @@ void Session::setInitialWorkingDirectory(const QString &dir)
     _initialWorkingDir = validDirectory(KShell::tildeExpand(ShellCommand::expand(dir)));
 }
 
+bool Session::reportedWorkingUrlIsLocalFile()
+{
+    return _reportedWorkingUrl.isLocalFile() // has "file://" prefix
+        && (_reportedWorkingUrl.host().isEmpty() || _reportedWorkingUrl.host().compare(QSysInfo::machineHostName(), Qt::CaseInsensitive) == 0)
+        && QDir{_reportedWorkingUrl.path()}.exists();
+}
+
 QString Session::currentWorkingDirectory()
 {
-    if (_reportedWorkingUrl.isValid() && _reportedWorkingUrl.isLocalFile()
-        && (_reportedWorkingUrl.host().length() == 0 || _reportedWorkingUrl.host().compare(QSysInfo::machineHostName(), Qt::CaseInsensitive) == 0)) {
+    if (_reportedWorkingUrl.isValid() && reportedWorkingUrlIsLocalFile()) {
         return _reportedWorkingUrl.path();
     }
 
@@ -325,6 +333,7 @@ void Session::addView(TerminalDisplay *widget)
     // connect emulation - view signals and slots
     connect(widget, &Konsole::TerminalDisplay::keyPressedSignal, _emulation, &Konsole::Emulation::sendKeyEvent);
     connect(widget, &Konsole::TerminalDisplay::mouseSignal, _emulation, &Konsole::Emulation::sendMouseEvent);
+    connect(widget, &Konsole::TerminalDisplay::exactMouseSignal, _emulation, &Konsole::Emulation::sendExactMouseEvent);
     connect(widget, &Konsole::TerminalDisplay::sendStringToEmu, _emulation, &Konsole::Emulation::sendString);
     connect(widget, &Konsole::TerminalDisplay::peekPrimaryRequested, _emulation, &Konsole::Emulation::setPeekPrimary);
 
@@ -546,6 +555,23 @@ void Session::run()
     // name of the program to execute, remove it in favor of the actual program name
     Q_ASSERT(arguments.count() >= 1);
     arguments = arguments.mid(1);
+
+    // If we have a container context to enter, wrap the command
+    if (_containerContext.isValid() && ContainerRegistry::instance()->isEnabled()) {
+        qDebug(KonsoleDebug) << "Entering container context:" << _containerContext.name;
+        QStringList entryCmd = ContainerRegistry::instance()->entryCommand(_containerContext);
+        qDebug(KonsoleDebug) << "Container entry command:" << entryCmd;
+        if (!entryCmd.isEmpty()) {
+            // Replace exec and arguments with container entry command
+            // The container entry command will spawn the shell inside the container
+            exec = entryCmd.takeFirst();
+            arguments = entryCmd;
+            _enteredViaContainerCommand = true;
+        }
+    } else {
+        qDebug(KonsoleDebug) << "Container context is " << (_containerContext.isValid() ? "valid" : "invalid") << "but container support is"
+                             << (ContainerRegistry::instance()->isEnabled() ? "enabled" : "disabled");
+    }
 
     if (!_initialWorkingDir.isEmpty()) {
         _shellProcess->setInitialWorkingDirectory(_initialWorkingDir);
@@ -1202,6 +1228,15 @@ ProcessInfo *Session::getProcessInfo()
     } else {
         updateSessionProcessInfo();
         process = _sessionProcessInfo;
+
+        // Update _foregroundPid to reflect the current state (shell process)
+        // This is needed for container context detection to work correctly
+        // when user exits a container and returns to the host shell
+        _foregroundPid = _shellProcess->foregroundProcessGroup();
+
+        // Update container context even when foreground process is the shell
+        // This handles the case when user exits a container
+        updateContainerContext();
     }
 
     return process;
@@ -1247,6 +1282,10 @@ bool Session::updateForegroundProcessInfo()
 
     if (_foregroundProcessInfo != nullptr) {
         _foregroundProcessInfo->update();
+
+        // Update container context detection when foreground process changes
+        updateContainerContext();
+
         return _foregroundProcessInfo->isValid();
     } else {
         return false;
@@ -1415,7 +1454,7 @@ QString Session::getDynamicTitle()
 
 QUrl Session::getUrl()
 {
-    if (_reportedWorkingUrl.isValid()) {
+    if (_reportedWorkingUrl.isValid() && reportedWorkingUrlIsLocalFile()) {
         return _reportedWorkingUrl;
     }
 
@@ -1756,6 +1795,77 @@ void Session::setPreferredSize(const QSize &size)
 int Session::processId() const
 {
     return _shellProcess->shellProcessId();
+}
+
+ContainerInfo Session::containerContext() const
+{
+    return _containerContext;
+}
+
+void Session::setContainerContext(const ContainerInfo &newContext)
+{
+    if (newContext != _containerContext) {
+        qDebug(KonsoleDebug) << "Container context changed to:" << newContext.name << "("
+                             << (newContext.detector ? newContext.detector->typeId() : QStringLiteral("none")) << ")";
+        ContainerInfo oldContext = _containerContext;
+        _containerContext = newContext;
+
+        // Detect container-to-host transition
+        if (oldContext.isValid() && !newContext.isValid()) {
+            // User exited the container
+            _enteredViaContainerCommand = false;
+        }
+
+        Q_EMIT containerContextChanged(_containerContext);
+    }
+}
+
+bool Session::isInContainer() const
+{
+    return _containerContext.isValid();
+}
+
+void Session::handleOsc777(const QStringList &params)
+{
+    // Delegate OSC 777 container parsing to ContainerRegistry
+    auto info = ContainerRegistry::instance()->containerInfoFromOsc777(params);
+    if (info.has_value()) {
+        // Capture current foreground PID as the host PID for OSC 777-detected containers
+        // This allows us to detect when the user exits (foreground returns to host shell)
+        if (info->isValid()) {
+            info->hostPid = _foregroundPid;
+        }
+        setContainerContext(info.value());
+    }
+}
+
+void Session::updateContainerContext()
+{
+    // Skip if container support is disabled or we haven't started yet
+    if (!ContainerRegistry::instance()->isEnabled() || _foregroundPid <= 0) {
+        return;
+    }
+
+    // If current context was set via OSC 777 (has hostPid), check if we've returned to the host
+    if (_containerContext.hostPid.has_value()) {
+        if (_foregroundPid == _containerContext.hostPid.value()) {
+            // Foreground PID returned to host shell - container exited (pop or crash)
+            qCDebug(KonsoleDebug) << "Foreground returned to host PID" << _foregroundPid << "- clearing OSC 777 container context";
+            setContainerContext(ContainerInfo{});
+        }
+        // Don't do polling-based detection while in an OSC 777-detected container
+        return;
+    }
+
+    // Skip if PID hasn't changed since last check
+    if (_foregroundPid == _lastContainerCheckPid) {
+        return;
+    }
+    _lastContainerCheckPid = _foregroundPid;
+
+    // Detect container for current foreground process (polling-based, e.g., distrobox)
+    auto newContext = ContainerRegistry::instance()->detectContainer(_foregroundPid);
+    setContainerContext(newContext);
 }
 
 void Session::setTitle(int role, const QString &title)
@@ -2184,6 +2294,16 @@ void Session::setColor(const QColor &color)
 QColor Session::color() const
 {
     return _tabColor;
+}
+
+void Session::setTabColor(const QString &colorName)
+{
+    setColor(QColor(colorName));
+}
+
+QString Session::tabColor() const
+{
+    return _tabColor.name();
 }
 
 SessionController *Session::controller()

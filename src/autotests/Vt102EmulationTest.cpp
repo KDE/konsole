@@ -7,6 +7,7 @@
 // Own
 #include "Vt102EmulationTest.h"
 
+#include <QSignalSpy>
 #include <QTest>
 
 // The below is to verify the old #defines match the new constexprs
@@ -430,6 +431,36 @@ void Vt102EmulationTest::testTokenFunctions()
     QCOMPARE(token_vt52('Z'), TY_VT52('Z'));
     QCOMPARE(token_vt52('='), TY_VT52('='));
     QCOMPARE(token_vt52('>'), TY_VT52('>'));
+}
+
+void Vt102EmulationTest::testBufferedUpdates()
+{
+    TestEmulation em;
+    em.reset();
+
+    QSignalSpy outputChangedSpy(&em, &TestEmulation::outputChanged);
+
+    // Test the normal buffered update behaviour.
+    em.receiveChars({'h', 'e', 'l', 'l', 'o', '!'});
+
+    QCOMPARE(outputChangedSpy.count(), 0);
+    QVERIFY(outputChangedSpy.wait(15));
+    outputChangedSpy.clear();
+
+    const uint ESC = '\033';
+
+    // Test that synchronized updates can time out.
+    em.receiveChars({ESC, '[', '?', '2', '0', '2', '6', 'h'});
+
+    QVERIFY(!outputChangedSpy.wait(900));
+    QVERIFY(outputChangedSpy.wait(150));
+    outputChangedSpy.clear();
+
+    // Test that synchronized updates work.
+    em.receiveChars({ESC, '[', '?', '2', '0', '2', '6', 'h'});
+    em.receiveChars({ESC, '[', '?', '2', '0', '2', '6', 'l'});
+
+    QCOMPARE(outputChangedSpy.count(), 2);
 }
 
 QTEST_GUILESS_MAIN(Vt102EmulationTest)

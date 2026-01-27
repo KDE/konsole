@@ -6,6 +6,7 @@
 
 // Own
 #include "MainWindow.h"
+#include "config-konsole.h"
 
 // Qt
 #include <QMenu>
@@ -62,6 +63,8 @@
 
 #include "terminalDisplay/TerminalDisplay.h"
 #include "widgets/ViewContainer.h"
+
+#include "pluginsystem/IKonsolePlugin.h"
 
 #include <konsoledebug.h>
 
@@ -525,7 +528,7 @@ void MainWindow::applyMainWindowSettings(const KConfigGroup &config)
 
     // Override the toolbar state from the config file
     if (_windowArgsShowToolBars.has_value()) {
-        for (const auto& name : toolBarNames()) {
+        for (const auto &name : toolBarNames()) {
             setToolBarVisible(name, _windowArgsShowToolBars.value());
         }
     }
@@ -639,6 +642,19 @@ Session *MainWindow::createSession(Profile::Ptr profile, const QString &director
     const QString newSessionDirectory = profile->startInCurrentSessionDir() ? directory : QString();
     Session *session = _viewManager->createSession(profile, newSessionDirectory);
 
+    // Inherit container context from active session if enabled in profile
+    if (profile->inheritContainerContext() && _pluggedController) {
+        Session *activeSession = _pluggedController->session();
+        if (activeSession && activeSession->isInContainer()) {
+            session->setContainerContext(activeSession->containerContext());
+        } else {
+            qDebug(KonsoleDebug) << "Active session is not in a container, cannot inherit container context.";
+        }
+    } else {
+        qDebug(KonsoleDebug) << "Not inheriting container context because"
+                             << (profile->inheritContainerContext() ? "no plugged controller." : "inheritance is disabled in profile.");
+    }
+
     // create view before starting the session process so that the session
     // doesn't suffer a change in terminal size right after the session
     // starts.  Some applications such as GNU Screen and Midnight Commander
@@ -686,8 +702,23 @@ void MainWindow::setFocus()
 
 void MainWindow::newWindow()
 {
-    Profile::Ptr defaultProfile = ProfileManager::instance()->defaultProfile();
-    Q_EMIT newWindowRequest(defaultProfile, activeSessionDir());
+    // Use the active session's profile for container inheritance check,
+    // since the user might have a different profile with inheritance enabled
+    Profile::Ptr profile = ProfileManager::instance()->defaultProfile();
+    if (_pluggedController && _pluggedController->session()) {
+        profile = SessionManager::instance()->sessionProfile(_pluggedController->session());
+    }
+
+    // Pass container context if inheritance is enabled and we're in a container
+    ContainerInfo container;
+    if (profile->inheritContainerContext() && _pluggedController) {
+        Session *activeSession = _pluggedController->session();
+        if (activeSession && activeSession->isInContainer()) {
+            container = activeSession->containerContext();
+        }
+    }
+
+    Q_EMIT newWindowRequest(profile, activeSessionDir(), container);
 }
 
 bool MainWindow::queryClose()
@@ -735,8 +766,10 @@ bool MainWindow::queryClose()
 
 #if WITH_X11
     // make sure the window is shown on current desktop and is not minimized
-    KX11Extras::setOnDesktop(winId(), KX11Extras::currentDesktop());
+    if (KWindowSystem::isPlatformX11())
+        KX11Extras::setOnDesktop(winId(), KX11Extras::currentDesktop());
 #endif
+
     int result;
 
     if (!processesRunning.isEmpty()) {

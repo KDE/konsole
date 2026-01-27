@@ -77,6 +77,7 @@ const std::vector<Profile::PropertyInfo> Profile::DefaultProperties = {
     {SemanticInputClick, "SemanticInputClick", GENERAL_GROUP, false},
     {ShowTerminalSizeHint, "ShowTerminalSizeHint", GENERAL_GROUP, true},
     {StartInCurrentSessionDir, "StartInCurrentSessionDir", GENERAL_GROUP, true},
+    {InheritContainerContext, "InheritContainerContext", GENERAL_GROUP, false},
     {SilenceSeconds, "SilenceSeconds", GENERAL_GROUP, 10},
     {TerminalColumns, "TerminalColumns", GENERAL_GROUP, 110},
     {TerminalRows, "TerminalRows", GENERAL_GROUP, 28},

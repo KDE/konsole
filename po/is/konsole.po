@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-18 00:46+0000\n"
+"POT-Creation-Date: 2026-01-27 00:48+0000\n"
 "PO-Revision-Date: 2025-12-07 10:46+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
@@ -1200,66 +1200,66 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Þakkir til margra annarra.\n"
 
-#: MainWindow.cpp:339
+#: MainWindow.cpp:342
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "&Nýr flipi"
 
-#: MainWindow.cpp:349
+#: MainWindow.cpp:352
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "&Klóna flipa"
 
-#: MainWindow.cpp:356
+#: MainWindow.cpp:359
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "Nýr &gluggi"
 
-#: MainWindow.cpp:363
+#: MainWindow.cpp:366
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Loka glugga"
 
-#: MainWindow.cpp:368
+#: MainWindow.cpp:371
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "&Bókamerki"
 
-#: MainWindow.cpp:395
+#: MainWindow.cpp:398
 #, kde-format
 msgid "&Window Color Scheme"
 msgstr "&Litastef glugga"
 
-#: MainWindow.cpp:407
+#: MainWindow.cpp:410
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Umsjón prófíla..."
 
-#: MainWindow.cpp:413
+#: MainWindow.cpp:416
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Virkja valmynd"
 
-#: MainWindow.cpp:419
+#: MainWindow.cpp:422
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Vista flipaframsetningu..."
 
-#: MainWindow.cpp:428
+#: MainWindow.cpp:431
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Hlaða inn flipaframsetningu..."
 
-#: MainWindow.cpp:746 MainWindow.cpp:763
+#: MainWindow.cpp:751 MainWindow.cpp:768
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1268,67 +1268,67 @@ msgid_plural ""
 msgstr[0] "Það er ferli í gangi í þessum glugga. Viltu samt hætta?"
 msgstr[1] "Það eru %1 ferli í gangi í þessum glugga. Viltu samt hætta?"
 
-#: MainWindow.cpp:752 MainWindow.cpp:769 MainWindow.cpp:783
+#: MainWindow.cpp:757 MainWindow.cpp:774 MainWindow.cpp:788
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Staðfesta lokun"
 
-#: MainWindow.cpp:753 MainWindow.cpp:770 MainWindow.cpp:784
+#: MainWindow.cpp:758 MainWindow.cpp:775 MainWindow.cpp:789
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Loka &glugga"
 
-#: MainWindow.cpp:771 MainWindow.cpp:785
+#: MainWindow.cpp:776 MainWindow.cpp:790
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Loka núverandi &flipa"
 
-#: MainWindow.cpp:780
+#: MainWindow.cpp:785
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "Það eru %1 skeljar opnar í þessum glugga. Viltu samt hætta?"
 
-#: MainWindow.cpp:887 Part.cpp:298
+#: MainWindow.cpp:892 Part.cpp:303
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Prófílar"
 
-#: MainWindow.cpp:905
+#: MainWindow.cpp:910
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Almennt"
 
-#: MainWindow.cpp:917
+#: MainWindow.cpp:922
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr "Minni"
 
-#: MainWindow.cpp:923
+#: MainWindow.cpp:928
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Flipastika / kljúfar"
 
-#: MainWindow.cpp:928
+#: MainWindow.cpp:933
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Bráðabirgðaskrár"
 
-#: MainWindow.cpp:933
+#: MainWindow.cpp:938
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
 msgstr "Smámyndir"
 
-#: Part.cpp:301
+#: Part.cpp:306
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Part Info"
@@ -2112,23 +2112,23 @@ msgstr "Settu hér inn heiti flipa til að leita að"
 msgid "Bell in '%1' (Session '%2')"
 msgstr "Bjalla í '%1' (seta '%2')"
 
-#: session/Session.cpp:425
+#: session/Session.cpp:432
 #, kde-format
 msgid "Could not find binary: "
 msgstr "Fann ekki tvíundarskrá: "
 
-#: session/Session.cpp:434
+#: session/Session.cpp:441
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Aðvörun: "
 
-#: session/Session.cpp:529
+#: session/Session.cpp:536
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "Fann ekki gagnvirka skel til að ræsa."
 
-#: session/Session.cpp:535 session/Session.cpp:538
+#: session/Session.cpp:542 session/Session.cpp:545
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2137,339 +2137,339 @@ msgstr ""
 "Fann ekki '%1', ræsi '%2' í staðinn.  Þú ættir að athuga stillingar "
 "prófílsins þíns."
 
-#: session/Session.cpp:612
+#: session/Session.cpp:619
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Tókst ekki að ræsa forritið '%1' með viðföngum '%2'."
 
-#: session/Session.cpp:778
+#: session/Session.cpp:785
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Þögn í '%1' (seta '%2')"
 
-#: session/Session.cpp:779 session/Session.cpp:2122
-#: session/SessionController.cpp:361 session/SessionController.cpp:1892
+#: session/Session.cpp:786 session/Session.cpp:2129
+#: session/SessionController.cpp:362 session/SessionController.cpp:1898
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1214
 #: Vt102Emulation.cpp:1469
 #, kde-format
 msgid "Show session"
 msgstr "Sýna setu"
 
-#: session/Session.cpp:1095
+#: session/Session.cpp:1102
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Lokið"
 
-#: session/Session.cpp:1109 session/Session.cpp:1125
+#: session/Session.cpp:1116 session/Session.cpp:1132
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Forritið '%1' hrundi."
 
-#: session/Session.cpp:1111
+#: session/Session.cpp:1118
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "Forritið '%1' stöðvaðist með stöðuna %2."
 
-#: session/Session.cpp:1649
+#: session/Session.cpp:1656
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Framvinda ZModem"
 
-#: session/Session.cpp:2121
+#: session/Session.cpp:2128
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Virkni í '%1' (seta '%2')"
 
-#: session/Session.cpp:2259
+#: session/Session.cpp:2276
 #, kde-format
 msgid "Security sensitive DBus API is disabled in the settings."
 msgstr ""
 
-#: session/SessionController.cpp:142
+#: session/SessionController.cpp:143
 #, kde-format
 msgid "Konsole"
 msgstr "Konsole"
 
-#: session/SessionController.cpp:360
+#: session/SessionController.cpp:361
 #, kde-format
 msgid "The process '%1' has finished running in session '%2'"
 msgstr "Ferlið '%1' lauk keyrslu í setunni '%2'"
 
-#: session/SessionController.cpp:443
+#: session/SessionController.cpp:444
 #, kde-format
 msgid "Konsole does not know how to open the bookmark: "
 msgstr "Konsole veit ekki hvernig á að opna bókamerkið: "
 
-#: session/SessionController.cpp:521
+#: session/SessionController.cpp:522
 #, kde-format
 msgid "Search for '%1' with"
 msgstr "Leita að '%1' með"
 
-#: session/SessionController.cpp:537
+#: session/SessionController.cpp:538
 #, kde-format
 msgid "Configure Web Shortcuts..."
 msgstr "Grunnstilla vefflýtilykla..."
 
-#: session/SessionController.cpp:648
+#: session/SessionController.cpp:649
 #, kde-format
 msgid "&Close Session"
 msgstr "&Loka setu"
 
-#: session/SessionController.cpp:655
+#: session/SessionController.cpp:656
 #, kde-format
 msgid "Open File Manager"
 msgstr "Opna skráastjóra"
 
-#: session/SessionController.cpp:670
+#: session/SessionController.cpp:671
 #, kde-format
 msgid "Copy"
 msgstr "Afrita"
 
-#: session/SessionController.cpp:677
+#: session/SessionController.cpp:678
 #, kde-format
 msgid "Split View Left-Right"
 msgstr "Kljúfa skeljaglugga lóðrétt"
 
-#: session/SessionController.cpp:682
+#: session/SessionController.cpp:683
 #, kde-format
 msgid "Split View Top-Bottom"
 msgstr "Kljúfa skeljaglugga lárétt"
 
-#: session/SessionController.cpp:686
+#: session/SessionController.cpp:687
 #, kde-format
 msgid "Copy except prompts"
 msgstr "Afrita nema kvaðningar"
 
-#: session/SessionController.cpp:692
+#: session/SessionController.cpp:693
 #, kde-format
 msgid "Copy user input"
 msgstr "Afrita notandainntak"
 
-#: session/SessionController.cpp:698
+#: session/SessionController.cpp:699
 #, kde-format
 msgid "Copy command output"
 msgstr "Afrita úttak skipunar"
 
-#: session/SessionController.cpp:713
+#: session/SessionController.cpp:714
 #, kde-format
 msgid "Paste Selection"
 msgstr "Líma val"
 
-#: session/SessionController.cpp:720
+#: session/SessionController.cpp:721
 #, kde-format
 msgid "Web Search"
 msgstr "Vefleit"
 
-#: session/SessionController.cpp:726
+#: session/SessionController.cpp:727
 #, kde-format
 msgid "&Select All"
 msgstr "&Velja allt"
 
-#: session/SessionController.cpp:730
+#: session/SessionController.cpp:731
 #, kde-format
 msgid "Select &Mode"
 msgstr "Velja &snið"
 
-#: session/SessionController.cpp:735
+#: session/SessionController.cpp:736
 #, kde-format
 msgid "Select &Line"
 msgstr "Velja &línu"
 
-#: session/SessionController.cpp:738
+#: session/SessionController.cpp:739
 #, kde-format
 msgid "Save Output &As..."
 msgstr "Vista útt&ak sem..."
 
-#: session/SessionController.cpp:744
+#: session/SessionController.cpp:745
 #, kde-format
 msgid "Auto Save Output As..."
 msgstr "Vista úttak sjálfvirkt sem..."
 
-#: session/SessionController.cpp:748
+#: session/SessionController.cpp:749
 #, kde-format
 msgid "Stop Auto Save"
 msgstr "Stöðva sjálfvirka vistun"
 
-#: session/SessionController.cpp:752
+#: session/SessionController.cpp:753
 #, kde-format
 msgid "&Print Screen..."
 msgstr "&Prenta skjá..."
 
-#: session/SessionController.cpp:756
+#: session/SessionController.cpp:757
 #, kde-format
 msgid "Adjust Scrollback..."
 msgstr "Stilla afturrakningu..."
 
-#: session/SessionController.cpp:760
+#: session/SessionController.cpp:761
 #, kde-format
 msgid "Clear Scrollback"
 msgstr "Hreinsa afturrakningu"
 
-#: session/SessionController.cpp:764
+#: session/SessionController.cpp:765
 #, kde-format
 msgid "Clear Scrollback and Reset"
 msgstr "Hreinsa afturrakningu og endurstilla"
 
-#: session/SessionController.cpp:775
+#: session/SessionController.cpp:776
 #, kde-format
 msgid "Next Profile"
 msgstr "Næsti prófíll"
 
-#: session/SessionController.cpp:780
+#: session/SessionController.cpp:781
 #, kde-format
 msgid "Previous Profile"
 msgstr "Fyrri prófíll"
 
-#: session/SessionController.cpp:783
+#: session/SessionController.cpp:784
 #, kde-format
 msgid "Switch Profile"
 msgstr "Skipta um prófíl"
 
-#: session/SessionController.cpp:808
+#: session/SessionController.cpp:809
 #, kde-format
 msgid "Set &Encoding"
 msgstr "Velja stafa&töflu"
 
-#: session/SessionController.cpp:828
+#: session/SessionController.cpp:829
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow Mouse Tracking"
 msgstr "Leyfa músarrakningu"
 
-#: session/SessionController.cpp:837
+#: session/SessionController.cpp:838
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
 msgstr "Skrifvarið"
 
-#: session/SessionController.cpp:848
+#: session/SessionController.cpp:849
 #, kde-format
 msgid "&Configure or Rename Tab..."
 msgstr "&Grunnstilla eða endurnefna flipa..."
 
-#: session/SessionController.cpp:854
+#: session/SessionController.cpp:855
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr "&Alla flipa í núverandi glugga"
 
-#: session/SessionController.cpp:861
+#: session/SessionController.cpp:862
 #, kde-format
 msgid "&Select Tabs..."
 msgstr "&Velja flipa..."
 
-#: session/SessionController.cpp:867
+#: session/SessionController.cpp:868
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "E&ngan"
 
-#: session/SessionController.cpp:875
+#: session/SessionController.cpp:876
 #, kde-format
 msgid "Copy Input To"
 msgstr "Afrita inntak í"
 
-#: session/SessionController.cpp:883
+#: session/SessionController.cpp:884
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "&ZModem-upphleðsla..."
 
-#: session/SessionController.cpp:888
+#: session/SessionController.cpp:889
 #, kde-format
 msgid "One-Shot Monitors"
 msgstr "Einnota vaktarar (One-Shot)"
 
-#: session/SessionController.cpp:893
+#: session/SessionController.cpp:894
 #, kde-format
 msgid "Monitor for &Prompt"
 msgstr "Vakta &kvaðningu"
 
-#: session/SessionController.cpp:900
+#: session/SessionController.cpp:901
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "Vakta &virkni"
 
-#: session/SessionController.cpp:906
+#: session/SessionController.cpp:907
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "Vakta &þögn"
 
-#: session/SessionController.cpp:912
+#: session/SessionController.cpp:913
 #, kde-format
 msgid "Monitor for Process Finishing"
 msgstr "Vakta að ferli ljúki"
 
-#: session/SessionController.cpp:919
+#: session/SessionController.cpp:920
 #, kde-format
 msgid "Enlarge Font"
 msgstr "Stækka letur"
 
-#: session/SessionController.cpp:927
+#: session/SessionController.cpp:928
 #, kde-format
 msgid "Shrink Font"
 msgstr "Minnka letur"
 
-#: session/SessionController.cpp:932
+#: session/SessionController.cpp:933
 #, kde-format
 msgid "Reset Font Size"
 msgstr "Endurstilla leturstærð"
 
-#: session/SessionController.cpp:938
+#: session/SessionController.cpp:939
 #, kde-format
 msgid "Send Signal"
 msgstr "Senda merki"
 
-#: session/SessionController.cpp:942
+#: session/SessionController.cpp:943
 #, kde-format
 msgid "&Suspend Task"
 msgstr "&Setja verk í bið"
 
-#: session/SessionController.cpp:947
+#: session/SessionController.cpp:948
 #, kde-format
 msgid "&Continue Task"
 msgstr "&Halda verki áfram"
 
-#: session/SessionController.cpp:952
+#: session/SessionController.cpp:953
 #, kde-format
 msgid "&Hangup"
 msgstr "&Leggja á"
 
-#: session/SessionController.cpp:957
+#: session/SessionController.cpp:958
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "&Rjúfa verk"
 
-#: session/SessionController.cpp:962
+#: session/SessionController.cpp:963
 #, kde-format
 msgid "&Terminate Task"
 msgstr "&Ljúka verki"
 
-#: session/SessionController.cpp:967
+#: session/SessionController.cpp:968
 #, kde-format
 msgid "&Kill Task"
 msgstr "&Drepa verk"
 
-#: session/SessionController.cpp:972
+#: session/SessionController.cpp:973
 #, kde-format
 msgid "User Signal &1"
 msgstr "Notandamerki &1"
 
-#: session/SessionController.cpp:977
+#: session/SessionController.cpp:978
 #, kde-format
 msgid "User Signal &2"
 msgstr "Notandamerki &2"
 
-#: session/SessionController.cpp:995
+#: session/SessionController.cpp:996
 #, kde-format
 msgid "Create New Profile..."
 msgstr "Búa til nýjan prófíl..."
 
-#: session/SessionController.cpp:997
+#: session/SessionController.cpp:998
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "Breyta núverandi prófíl..."
 
-#: session/SessionController.cpp:1128
+#: session/SessionController.cpp:1129
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
@@ -2477,7 +2477,7 @@ msgid ""
 msgstr ""
 "Forrit er í gangi í þessari setu. Ertu viss um að þú viljir loka henni?"
 
-#: session/SessionController.cpp:1132
+#: session/SessionController.cpp:1133
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
@@ -2486,18 +2486,18 @@ msgstr ""
 "Forritið '%1' er í gangi í þessari setu.  Ertu viss um að þú viljir loka "
 "henni?"
 
-#: session/SessionController.cpp:1139 session/SessionController.cpp:1174
+#: session/SessionController.cpp:1140 session/SessionController.cpp:1175
 #, kde-format
 msgid "Confirm Close"
 msgstr "Staðfesta lokun"
 
-#: session/SessionController.cpp:1140
+#: session/SessionController.cpp:1141
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "Loka forriti"
 
-#: session/SessionController.cpp:1163
+#: session/SessionController.cpp:1164
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
@@ -2506,7 +2506,7 @@ msgstr ""
 "Forrit í þessari lotu neitar að deyja. Ertu viss um að þú viljir drepa það "
 "með valdi?"
 
-#: session/SessionController.cpp:1167
+#: session/SessionController.cpp:1168
 #, kde-format
 msgid ""
 "The program '%1' in this session would not die.  Are you sure you want to "
@@ -2515,28 +2515,28 @@ msgstr ""
 "Forritið '%1' í þessari lotu neitar að deyja. Ertu viss um að þú viljir "
 "slátra því með valdi?"
 
-#: session/SessionController.cpp:1175
+#: session/SessionController.cpp:1176
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "Drepa forrit"
 
-#: session/SessionController.cpp:1891
+#: session/SessionController.cpp:1897
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "Skeljakvaðningin er birt í setu '%1'"
 
-#: session/SessionController.cpp:2113
+#: session/SessionController.cpp:2126
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "Opna núverandi möppu með"
 
-#: session/SessionController.cpp:2183
+#: session/SessionController.cpp:2196
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Vista ZModem-niðurhal í..."
 
-#: session/SessionController.cpp:2193
+#: session/SessionController.cpp:2206
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2547,13 +2547,13 @@ msgstr ""
 "forrit fannst í tölvunni.</p><p>Þú vilt kannski setja upp pakkann 'rzsz' eða "
 "'lrzsz'.</p>"
 
-#: session/SessionController.cpp:2203
+#: session/SessionController.cpp:2216
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>Núverandi seta er nú þegar með ZModem-skráaflutning í gangi.</p>"
 
-#: session/SessionController.cpp:2216
+#: session/SessionController.cpp:2229
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2562,7 +2562,7 @@ msgstr ""
 "<p>Ekkert viðeigandi ZModem-forrit fannst í tölvunni.</p><p>Þú vilt kannski "
 "setja upp pakkann 'rzsz' eða 'lrzsz'.</p>"
 
-#: session/SessionController.cpp:2221
+#: session/SessionController.cpp:2234
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Velja skrár fyrir ZModem-upphleðslu"
@@ -3384,64 +3384,64 @@ msgstr "Ctrl"
 msgid "Enable thumbnails generation"
 msgstr "Virkja myndun smámynda"
 
-#: terminalDisplay/TerminalDisplay.cpp:660
+#: terminalDisplay/TerminalDisplay.cpp:682
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr "Stærð: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2251
+#: terminalDisplay/TerminalDisplay.cpp:2293
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "Ertu viss um að þú viljir líma %1 staf?"
 msgstr[1] "Ertu viss um að þú viljir líma %1 stafi?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2252
+#: terminalDisplay/TerminalDisplay.cpp:2294
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Staðfesta límingu"
 
-#: terminalDisplay/TerminalDisplay.cpp:2285
+#: terminalDisplay/TerminalDisplay.cpp:2327
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "End Of Text/Interrupt (lok texta/rof): gæti hætt í núverandi ferli"
 
-#: terminalDisplay/TerminalDisplay.cpp:2286
+#: terminalDisplay/TerminalDisplay.cpp:2328
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "End Of Transmission (lok miðlunar): getur hætt í núverandi ferli"
 
-#: terminalDisplay/TerminalDisplay.cpp:2287
+#: terminalDisplay/TerminalDisplay.cpp:2329
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Bell (bjalla): reynir að gefa frá sér hljóðviðvörun"
 
-#: terminalDisplay/TerminalDisplay.cpp:2288
+#: terminalDisplay/TerminalDisplay.cpp:2330
 #, kde-format
 msgid "Backspace"
 msgstr "Backspace (baklykill)"
 
-#: terminalDisplay/TerminalDisplay.cpp:2289
+#: terminalDisplay/TerminalDisplay.cpp:2331
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "Device Control Three/XOFF (tækisstýring þrjú/XOFF): stöðvar úttak"
 
-#: terminalDisplay/TerminalDisplay.cpp:2290
+#: terminalDisplay/TerminalDisplay.cpp:2332
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "Substitute/Suspend (skipta út/í bið): getur sett núverandi ferli í bið"
 
-#: terminalDisplay/TerminalDisplay.cpp:2291
+#: terminalDisplay/TerminalDisplay.cpp:2333
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Escape (Esc): notaður til að stjórna stöðu skjáhermis"
 
-#: terminalDisplay/TerminalDisplay.cpp:2292
+#: terminalDisplay/TerminalDisplay.cpp:2334
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "Skráaskiltákn/Hætta: gæti stöðvað núverandi ferli alveg"
 
-#: terminalDisplay/TerminalDisplay.cpp:2315
+#: terminalDisplay/TerminalDisplay.cpp:2357
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3450,31 +3450,31 @@ msgstr ""
 "Textinn sem þú ert að reyna að líma inniheldur falin stýringartákn, viltu "
 "sía þau út?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2318
+#: terminalDisplay/TerminalDisplay.cpp:2360
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Staðfesta límingu"
 
-#: terminalDisplay/TerminalDisplay.cpp:2319
+#: terminalDisplay/TerminalDisplay.cpp:2361
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Lí&ma án stýristafa"
 
-#: terminalDisplay/TerminalDisplay.cpp:2320
+#: terminalDisplay/TerminalDisplay.cpp:2362
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "&Líma allt"
 
-#: terminalDisplay/TerminalDisplay.cpp:2321
+#: terminalDisplay/TerminalDisplay.cpp:2363
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "&Hætta við"
 
-#: terminalDisplay/TerminalDisplay.cpp:2552
+#: terminalDisplay/TerminalDisplay.cpp:2594
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3485,266 +3485,266 @@ msgstr ""
 "\">sett í bið</a> með því að ýta á Ctrl+S. Ýttu á <b>Ctrl+Q</b> til að halda "
 "áfram.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2607
+#: terminalDisplay/TerminalDisplay.cpp:2649
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Þessi skjáhermir er skrifvarinn."
 
-#: terminalDisplay/TerminalDisplay.cpp:3003
+#: terminalDisplay/TerminalDisplay.cpp:3045
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Breyta &möppu í"
 
-#: terminalDisplay/TerminalDisplay.cpp:3038
+#: terminalDisplay/TerminalDisplay.cpp:3080
 #, kde-format
 msgid "&Paste Location"
 msgstr "&Límingarstaður"
 
-#: ViewManager.cpp:120
+#: ViewManager.cpp:121
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View"
 msgstr "Kljúfa skeljaglugga"
 
-#: ViewManager.cpp:127
+#: ViewManager.cpp:128
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right"
 msgstr "Kljúfa skeljaglugga lóðrétt"
 
-#: ViewManager.cpp:135
+#: ViewManager.cpp:136
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom"
 msgstr "Kljúfa skeljaglugga lárétt"
 
-#: ViewManager.cpp:143
+#: ViewManager.cpp:144
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically"
 msgstr "Kljúfa skeljaglugga sjálfvirkt"
 
-#: ViewManager.cpp:153
+#: ViewManager.cpp:154
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
 msgstr "Kljúfa glugga lóðrétt frá næsta flipa"
 
-#: ViewManager.cpp:161
+#: ViewManager.cpp:162
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
 msgstr "Kljúfa glugga lárétt frá næsta flipa"
 
-#: ViewManager.cpp:169
+#: ViewManager.cpp:170
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
 msgstr "Kljúfa glugga sjálfkrafa frá næsta flipa"
 
-#: ViewManager.cpp:179
+#: ViewManager.cpp:180
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x2 terminals"
 msgstr "Opna nýjan flipa með 2x2 skeljagluggum"
 
-#: ViewManager.cpp:188
+#: ViewManager.cpp:189
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x1 terminals"
 msgstr "Opna nýjan flipa með 2x1 skeljagluggum"
 
-#: ViewManager.cpp:197
+#: ViewManager.cpp:198
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 1x2 terminals"
 msgstr "Opna nýjan flipa með 1x2 skeljagluggum"
 
-#: ViewManager.cpp:205
+#: ViewManager.cpp:206
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Expand View"
 msgstr "Stækka skeljaglugga"
 
-#: ViewManager.cpp:213
+#: ViewManager.cpp:214
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Shrink View"
 msgstr "Minnka skeljaglugga"
 
-#: ViewManager.cpp:223
+#: ViewManager.cpp:224
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &View"
 msgstr "Loka nú&verandi skeljaglugga"
 
-#: ViewManager.cpp:235
+#: ViewManager.cpp:236
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &Tab"
 msgstr "Losa núverandi &flipa frá"
 
-#: ViewManager.cpp:240
+#: ViewManager.cpp:241
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Next Tab"
 msgstr "Næsti flipi"
 
-#: ViewManager.cpp:248
+#: ViewManager.cpp:249
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Previous Tab"
 msgstr "Fyrri flipi"
 
-#: ViewManager.cpp:256
+#: ViewManager.cpp:257
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Above Terminal"
 msgstr "Fókus á skeljaglugga fyrir ofan"
 
-#: ViewManager.cpp:263
+#: ViewManager.cpp:264
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Below Terminal"
 msgstr "Fókus á skeljaglugga fyrir neðan"
 
-#: ViewManager.cpp:270
+#: ViewManager.cpp:271
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Left Terminal"
 msgstr "Fókus á skeljaglugga til vinstri"
 
-#: ViewManager.cpp:276
+#: ViewManager.cpp:277
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Right Terminal"
 msgstr "Fókus á skeljaglugga til hægri"
 
-#: ViewManager.cpp:282
+#: ViewManager.cpp:283
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Next Terminal"
 msgstr "Fókus á næsta skeljarglugga"
 
-#: ViewManager.cpp:288
+#: ViewManager.cpp:289
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Previous Terminal"
 msgstr "Fókus á fyrri skeljarglugga"
 
-#: ViewManager.cpp:294
+#: ViewManager.cpp:295
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Last Tab"
 msgstr "Skipta á síðasta flipa"
 
-#: ViewManager.cpp:299
+#: ViewManager.cpp:300
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs"
 msgstr "Síðast notuðu flipar"
 
-#: ViewManager.cpp:304
+#: ViewManager.cpp:305
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle Between Two Tabs"
 msgstr "Víxla á milli tveggja flipa"
 
-#: ViewManager.cpp:309
+#: ViewManager.cpp:310
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs (Reverse)"
 msgstr "Síðast notuðu flipar (afturábak)"
 
-#: ViewManager.cpp:314
+#: ViewManager.cpp:315
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle maximize current view"
 msgstr "Víxla fullstækkun núverandi skeljaglugga"
 
-#: ViewManager.cpp:315
+#: ViewManager.cpp:316
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle maximize current view"
 msgstr "Víxla fullstækkun núverandi skeljaglugga"
-
-#: ViewManager.cpp:323
-#, kde-format
-msgctxt "@action Shortcut entry"
-msgid "Toggle zoom-maximize current view"
-msgstr "Víxla fullstækkun og aðdrætti núverandi skeljaglugga"
 
 #: ViewManager.cpp:324
 #, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Toggle zoom-maximize current view"
+msgstr "Víxla fullstækkun og aðdrætti núverandi skeljaglugga"
+
+#: ViewManager.cpp:325
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle zoom-maximize current view"
 msgstr "Víxla fullstækkun og aðdrætti núverandi skeljaglugga"
 
-#: ViewManager.cpp:332
+#: ViewManager.cpp:333
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the right"
 msgstr "Færa flipa til hægri"
 
-#: ViewManager.cpp:339
+#: ViewManager.cpp:340
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the left"
 msgstr "Færa flipa til vinstri"
 
-#: ViewManager.cpp:346
+#: ViewManager.cpp:347
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
 msgstr "Setja upp merkingarlega virkni (bash)"
 
-#: ViewManager.cpp:352
+#: ViewManager.cpp:353
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
 msgstr "Víxla af/á birtingu vísbendinga út frá merkingu"
 
-#: ViewManager.cpp:358
+#: ViewManager.cpp:359
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
 msgstr "Víxla birtingu línunúmera"
 
-#: ViewManager.cpp:365
+#: ViewManager.cpp:366
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
 msgstr "Gera alla skeljaglugga jafnstóra"
 
-#: ViewManager.cpp:375
+#: ViewManager.cpp:376
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Tab %1"
 msgstr "Skipta á flipa %1"
 
-#: ViewManager.cpp:598
+#: ViewManager.cpp:599
 #, kde-format
 msgid "Semantic hints "
 msgstr "Vísbendingar út frá merkingu "
 
-#: ViewManager.cpp:614
+#: ViewManager.cpp:615
 #, kde-format
 msgid "Line numbers "
 msgstr "Línunúmer "
 
-#: ViewManager.cpp:1202
+#: ViewManager.cpp:1214
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Vista flipaframsetningu"
 
-#: ViewManager.cpp:1204 ViewManager.cpp:1325
+#: ViewManager.cpp:1216 ViewManager.cpp:1337
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Framsetning Konsole-skeljaglugga (*.json)"
 
-#: ViewManager.cpp:1220
+#: ViewManager.cpp:1232
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3754,7 +3754,7 @@ msgstr ""
 "Vandamál kom upp þegar framsetningin var vistuð.\n"
 "%1"
 
-#: ViewManager.cpp:1312
+#: ViewManager.cpp:1324
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3764,13 +3764,13 @@ msgstr ""
 "Vandamál kom upp við opnun framsetningar.\n"
 "%1"
 
-#: ViewManager.cpp:1323
+#: ViewManager.cpp:1335
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Hlaða inn flipaframsetningu"
 
-#: Vt102Emulation.cpp:2828
+#: Vt102Emulation.cpp:2955
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "

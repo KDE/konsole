@@ -22,6 +22,10 @@
 #include "Screen.h"
 #include "keyboardtranslator/KeyboardTranslator.h"
 
+#ifdef HAVE_XKBCOMMON
+#include <xkbcommon/xkbcommon.h>
+#endif
+
 class QTimer;
 class QKeyEvent;
 
@@ -35,12 +39,15 @@ class QKeyEvent;
 #define MODE_Mouse1006 (MODES_SCREEN + 7) // 2nd Xterm-style extended coordinates
 #define MODE_Mouse1007 (MODES_SCREEN + 8) // XTerm Alternate Scroll mode; also check AlternateScrolling profile property
 #define MODE_Mouse1015 (MODES_SCREEN + 9) // Urxvt-style extended coordinates
-#define MODE_Ansi (MODES_SCREEN + 10) // Use US Ascii for character sets G0-G3 (DECANM)
-#define MODE_132Columns (MODES_SCREEN + 11) // 80 <-> 132 column mode switch (DECCOLM)
-#define MODE_Allow132Columns (MODES_SCREEN + 12) // Allow DECCOLM mode
-#define MODE_BracketedPaste (MODES_SCREEN + 13) // Xterm-style bracketed paste mode
-#define MODE_Sixel (MODES_SCREEN + 14) // Xterm-style bracketed paste mode
-#define MODE_total (MODES_SCREEN + 15)
+#define MODE_Mouse1016 (MODES_SCREEN + 10) // 2nd Xterm-style extended coordinates (in pixels)
+#define MODE_Ansi (MODES_SCREEN + 11) // Use US Ascii for character sets G0-G3 (DECANM)
+#define MODE_132Columns (MODES_SCREEN + 12) // 80 <-> 132 column mode switch (DECCOLM)
+#define MODE_Allow132Columns (MODES_SCREEN + 13) // Allow DECCOLM mode
+#define MODE_BracketedPaste (MODES_SCREEN + 14) // Xterm-style bracketed paste mode
+#define MODE_Sixel (MODES_SCREEN + 15) // Xterm-style bracketed paste mode
+#define MODE_SynchronizedUpdate (MODES_SCREEN + 16) // Synchronized update in progress
+#define MODE_Win32Input (MODES_SCREEN + 17)
+#define MODE_total (MODES_SCREEN + 18)
 
 namespace Konsole
 {
@@ -84,6 +91,7 @@ public Q_SLOTS:
     void sendText(const QString &text) override;
     void sendKeyEvent(QKeyEvent *) override;
     void sendMouseEvent(int buttons, int column, int line, int eventType) override;
+    void sendExactMouseEvent(int buttons, int x, int y, int eventType) override;
     void focusChanged(bool focused) override;
     void clearHistory() override;
 
@@ -181,6 +189,7 @@ private:
         // https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h2-Operating-System-Commands
         ReportColors = 4,
         CursorColor = 12,
+        PointerShape = 22,
         Clipboard = 52,
         KittyNotification = 99,
         ResetColors = 104,
@@ -229,6 +238,16 @@ private:
     QByteArray imageData;
     quint32 imageId;
     QMap<char, qint64> savedKeys;
+
+#ifdef HAVE_XKBCOMMON
+    struct XkbData {
+        struct xkb_context *context = nullptr;
+        struct xkb_keymap *keymap_us = nullptr;
+        struct xkb_state *state_us = nullptr;
+    };
+    XkbData _xkbData;
+#endif
+    bool _win32InputModeAvailable = true;
 
 protected:
     virtual void reportDecodingError(int token);

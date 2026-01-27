@@ -15,6 +15,21 @@ include(ECMAddAppIcon)
 configure_file(config-konsole.h.cmake
               ${CMAKE_CURRENT_BINARY_DIR}/config-konsole.h)
 
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    find_package(PkgConfig QUIET)
+    if(PkgConfig_FOUND)
+        pkg_check_modules(XKBCOMMON QUIET xkbcommon)
+    endif()
+    if(XKBCOMMON_FOUND)
+        message(STATUS "Found xkbcommon, enabling win32-input-mode support")
+        set(KONSOLE_HAVE_XKBCOMMON TRUE)
+    else()
+        message(STATUS "xkbcommon not found — building without win32-input-mode support")
+    endif()
+else()
+    message(STATUS "Not on Linux — building without win32-input-mode support")
+endif()
+
 ### Tests
 if(BUILD_TESTING)
         find_package(Qt6Test ${QT_MIN_VERSION} CONFIG REQUIRED)
@@ -135,6 +150,7 @@ add_subdirectory(colorscheme)
 add_subdirectory(keyboardtranslator)
 add_subdirectory(characters)
 add_subdirectory(decoders)
+add_subdirectory(containers)
 add_subdirectory(plugins)
 if(WIN32)
     set(ptyqt_srcs ptyqt/iptyprocess.cpp ptyqt/conptyprocess.cpp)
@@ -169,6 +185,7 @@ set(konsoleprivate_SRCS ${windowadaptors_SRCS}
                         ViewProperties.cpp
                         Vt102Emulation.cpp
                         WindowSystemInfo.cpp
+                        WinKeys.h
                         ZModemDialog.cpp
                         filterHotSpots/EscapeSequenceUrlFilter.cpp
                         filterHotSpots/EscapeSequenceUrlFilterHotSpot.cpp
@@ -279,6 +296,12 @@ generate_export_header(konsoleprivate BASE_NAME konsoleprivate)
 
 find_package(ZLIB)
 
+if(KONSOLE_HAVE_XKBCOMMON)
+    target_compile_definitions(konsoleprivate PUBLIC HAVE_XKBCOMMON)
+    target_include_directories(konsoleprivate PUBLIC ${XKBCOMMON_INCLUDE_DIRS})
+    target_link_libraries(konsoleprivate PRIVATE ${XKBCOMMON_LIBRARIES})
+endif()
+
 target_link_libraries(konsoleprivate
     PUBLIC
     konsoleprivate_core
@@ -287,6 +310,7 @@ target_link_libraries(konsoleprivate
     konsolehelpers
     konsolecharacters
     konsoledecoders
+    konsolecontainers
     KF6::NewStuffCore
     KF6::NewStuffWidgets
     ${konsole_LIBS}

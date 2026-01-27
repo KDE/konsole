@@ -33,6 +33,12 @@
 #include "terminalDisplay/TerminalDisplay.h"
 #include "terminalDisplay/TerminalFonts.h"
 
+// win32-input-mode
+#include "WinKeys.h"
+#ifdef HAVE_XKBCOMMON
+#include <xkbcommon/xkbcommon.h>
+#endif
+
 #include <konsoledebug.h>
 
 using Konsole::Vt102Emulation;
@@ -87,10 +93,42 @@ Vt102Emulation::Vt102Emulation()
     for (int i = 0; i < 256; i++) {
         colorTable[i] = QColor();
     }
+
+#ifdef HAVE_XKBCOMMON
+    _xkbData.context = xkb_context_new(XKB_CONTEXT_NO_FLAGS);
+    if (!_xkbData.context) {
+        qCDebug(KonsoleDebug) << "win32-input-mode: FAILED to create xkb_context.";
+        _win32InputModeAvailable = false;
+    } else {
+        struct xkb_rule_names rules = { nullptr, nullptr, "us", nullptr, nullptr };
+        _xkbData.keymap_us = xkb_keymap_new_from_names(_xkbData.context, &rules, XKB_KEYMAP_COMPILE_NO_FLAGS);
+        if (!_xkbData.keymap_us) {
+            qCDebug(KonsoleDebug) << "win32-input-mode: FAILED to create US keymap.";
+            _win32InputModeAvailable = false;
+        } else {
+            _xkbData.state_us = xkb_state_new(_xkbData.keymap_us);
+            if (!_xkbData.state_us) {
+                qCDebug(KonsoleDebug) << "win32-input-mode: FAILED to create xkb_state.";
+                _win32InputModeAvailable = false;
+            }
+        }
+    }
+#endif
 }
 
 Vt102Emulation::~Vt102Emulation()
 {
+#ifdef HAVE_XKBCOMMON
+    if (_xkbData.state_us) {
+        xkb_state_unref(_xkbData.state_us);
+    }
+    if (_xkbData.keymap_us) {
+        xkb_keymap_unref(_xkbData.keymap_us);
+    }
+    if (_xkbData.context) {
+        xkb_context_unref(_xkbData.context);
+    }
+#endif
 }
 
 void Vt102Emulation::clearEntireScreen()
@@ -1195,8 +1233,11 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
         }
     }
     if (attribute == Notification) {
-        // Notification
+        // OSC 777 - Emit generic signal first for external handlers
         auto params = value.split(QLatin1Char(';'));
+        Q_EMIT osc777Received(params);
+
+        // Handle "notify" command internally for backward compatibility
         if (params.length() < 1 || params[0] != QLatin1String("notify")) {
             return;
         }
@@ -1695,6 +1736,88 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
         int rows = -1, cols = -1;
         _currentScreen->addPlacement(pixmap, rows, cols, -1, -1, TerminalGraphicsPlacement_t::iTerm, true, moveCursor);
     }
+
+    if (attribute == PointerShape) {
+        static QMap<QString, Qt::CursorShape> cursorShapes = {
+            // CSS shapes
+            {QLatin1String("default"), Qt::ArrowCursor},
+
+            {QLatin1String("context-menu"), Qt::ArrowCursor}, // no exact match
+            {QLatin1String("help"), Qt::WhatsThisCursor},
+            {QLatin1String("pointer"), Qt::PointingHandCursor},
+            {QLatin1String("progress"), Qt::BusyCursor},
+            {QLatin1String("wait"), Qt::WaitCursor},
+
+            {QLatin1String("cell"), Qt::ArrowCursor}, // no exact match
+            {QLatin1String("crosshair"), Qt::CrossCursor},
+            {QLatin1String("text"), Qt::IBeamCursor},
+            {QLatin1String("vertical-text"), Qt::IBeamCursor}, // no exact match
+
+            {QLatin1String("alias"), Qt::DragLinkCursor},
+            {QLatin1String("copy"), Qt::DragCopyCursor},
+            {QLatin1String("move"), Qt::DragMoveCursor},
+            {QLatin1String("no-drop"), Qt::ForbiddenCursor}, // no exact match
+            {QLatin1String("not-allowed"), Qt::ForbiddenCursor},
+            {QLatin1String("grab"), Qt::OpenHandCursor},
+            {QLatin1String("grabbing"), Qt::ClosedHandCursor},
+
+            {QLatin1String("all-scroll"), Qt::ArrowCursor}, // no exact match
+            {QLatin1String("col-resize"), Qt::ArrowCursor}, // no exact match
+            {QLatin1String("row-resize"), Qt::ArrowCursor}, // no exact match
+
+            {QLatin1String("n-resize"), Qt::SizeVerCursor}, // no exact match
+            {QLatin1String("e-resize"), Qt::SizeHorCursor}, // no exact match
+            {QLatin1String("s-resize"), Qt::SizeVerCursor}, // no exact match
+            {QLatin1String("w-resize"), Qt::SizeHorCursor}, // no exact match
+            {QLatin1String("ne-resize"), Qt::SizeBDiagCursor}, // no exact match
+            {QLatin1String("nw-resize"), Qt::SizeFDiagCursor}, // no exact match
+            {QLatin1String("se-resize"), Qt::SizeFDiagCursor}, // no exact match
+            {QLatin1String("sw-resize"), Qt::SizeBDiagCursor}, // no exact match
+
+            {QLatin1String("ew-resize"), Qt::SizeHorCursor},
+            {QLatin1String("ns-resize"), Qt::SizeVerCursor},
+            {QLatin1String("nesw-resize"), Qt::SizeBDiagCursor},
+            {QLatin1String("nwse-resize"), Qt::SizeFDiagCursor},
+
+            {QLatin1String("zoom-in"), Qt::ArrowCursor}, // no exact match
+            {QLatin1String("zoom-out"), Qt::ArrowCursor}, // no exact match
+
+            // XCursor shapes, taken from the Qt docs
+            {QLatin1String("left_ptr"), Qt::ArrowCursor},
+            {QLatin1String("up_arrow"), Qt::UpArrowCursor},
+            {QLatin1String("cross"), Qt::CrossCursor},
+            {QLatin1String("ibeam"), Qt::IBeamCursor},
+            {QLatin1String("wait"), Qt::WaitCursor},
+            {QLatin1String("left_ptr_watch"), Qt::BusyCursor},
+            {QLatin1String("forbidden"), Qt::ForbiddenCursor},
+            {QLatin1String("pointing_hand"), Qt::PointingHandCursor},
+            {QLatin1String("whats_this"), Qt::WhatsThisCursor},
+            {QLatin1String("dnd-move"), Qt::DragMoveCursor},
+            {QLatin1String("move"), Qt::DragMoveCursor},
+            {QLatin1String("dnd-link"), Qt::DragLinkCursor},
+            {QLatin1String("link"), Qt::DragLinkCursor},
+            {QLatin1String("size_ver"), Qt::SizeVerCursor},
+            {QLatin1String("size_hor"), Qt::SizeHorCursor},
+            {QLatin1String("size_bdiag"), Qt::SizeBDiagCursor},
+            {QLatin1String("size_fdiag"), Qt::SizeFDiagCursor},
+            {QLatin1String("size_all"), Qt::SizeAllCursor},
+            {QLatin1String("split_v"), Qt::SplitVCursor},
+            {QLatin1String("split_h"), Qt::SplitHCursor},
+            {QLatin1String("openhand"), Qt::OpenHandCursor},
+            {QLatin1String("closedhand"), Qt::ClosedHandCursor},
+            {QLatin1String("dnd-copy"), Qt::DragCopyCursor},
+            {QLatin1String("copy"), Qt::DragCopyCursor},
+        };
+
+        if (!cursorShapes.contains(value)) {
+            _currentScreen->currentTerminalDisplay()->resetCursor();
+        } else {
+            _currentScreen->currentTerminalDisplay()->setPointerShape(cursorShapes[value]);
+        }
+
+        return;
+    }
+
     _pendingSessionAttributesUpdates[attribute] = value;
     _sessionAttributesUpdateTimer->start(20);
 }
@@ -2108,6 +2231,11 @@ void Vt102Emulation::processToken(int token, int p, int q)
     case token_csi_pr('s', 1015) :         saveMode      (MODE_Mouse1015); break; //URXVT
     case token_csi_pr('r', 1015) :      restoreMode      (MODE_Mouse1015); break; //URXVT
 
+    case token_csi_pr('h', 1016) :          setMode      (MODE_Mouse1016); break; //XTERM
+    case token_csi_pr('l', 1016) :        resetMode      (MODE_Mouse1016); break; //XTERM
+    case token_csi_pr('s', 1016) :         saveMode      (MODE_Mouse1016); break; //XTERM
+    case token_csi_pr('r', 1016) :      restoreMode      (MODE_Mouse1016); break; //XTERM
+
     case token_csi_pr('h', 1034) : /* IGNORED: 8bitinput activation     */ break; //XTERM
 
     case token_csi_pr('h', 1047) :          setMode      (MODE_AppScreen); break; //XTERM
@@ -2130,6 +2258,12 @@ void Vt102Emulation::processToken(int token, int p, int q)
     case token_csi_pr('l', 2004) :        resetMode      (MODE_BracketedPaste); break; //XTERM
     case token_csi_pr('s', 2004) :         saveMode      (MODE_BracketedPaste); break; //XTERM
     case token_csi_pr('r', 2004) :      restoreMode      (MODE_BracketedPaste); break; //XTERM
+
+    case token_csi_pr('h', 9001) :          setMode      (MODE_Win32Input); break; // win32-input-mode
+    case token_csi_pr('l', 9001) :        resetMode      (MODE_Win32Input); break; // win32-input-mode
+
+    case token_csi_pr('h', 2026):           setMode      (MODE_SynchronizedUpdate); break; //ITERM2
+    case token_csi_pr('l', 2026):         resetMode      (MODE_SynchronizedUpdate); break; //ITERM2
 
     case token_csi_pr('S',    1) : if(!p) sixelQuery        (1          ); break;
     case token_csi_pr('S',    2) : if(!p) sixelQuery        (2          ); break;
@@ -2551,6 +2685,10 @@ void Vt102Emulation::reportAnswerBack()
 
 void Vt102Emulation::sendMouseEvent(int cb, int cx, int cy, int eventType)
 {
+    if (getMode(MODE_Mouse1016)) {
+        return;
+    }
+
     if (cx < 1 || cy < 1) {
         return;
     }
@@ -2658,6 +2796,39 @@ void Vt102Emulation::sendMouseEvent(int cb, int cx, int cy, int eventType)
     sendString(command);
 }
 
+void Vt102Emulation::sendExactMouseEvent(int cb, int x, int y, int eventType)
+{
+    if (!getMode(MODE_Mouse1016))
+        return;
+
+    // Don't send move/drag events if only press and release requested
+    if (eventType == 1 && getMode(MODE_Mouse1000)) {
+        return;
+    }
+
+    // Don't send move with no button pressed if button-motion requested
+    if ((cb & 3) == 3 && getMode(MODE_Mouse1002)) {
+        return;
+    }
+
+    // With the exception of the 1006 mode, button release is encoded in cb.
+    // Note that if multiple extensions are enabled, the 1006 is used, so it's okay to check for only that.
+    if (eventType == 2 && !getMode(MODE_Mouse1006)) {
+        cb &= ~3;
+        cb |= 3;
+    }
+
+    // Mouse motion handling
+    if ((getMode(MODE_Mouse1002) || getMode(MODE_Mouse1003)) && eventType == 1) {
+        cb += 0x20; // add 32 to signify motion event
+    }
+    char command[40];
+    command[0] = '\0';
+    snprintf(command, sizeof(command), "\033[<%d;%d;%d%c", cb, x, y, eventType == 2 ? 'm' : 'M');
+
+    sendString(command);
+}
+
 void Vt102Emulation::emulateUpDown(int up, KeyboardTranslator::Entry entry, QByteArray &textToSend, int toCol)
 {
     if (up == 0)
@@ -2720,14 +2891,221 @@ void Vt102Emulation::sendText(const QString &text)
 
 void Vt102Emulation::sendKeyEvent(QKeyEvent *event)
 {
-    const Qt::KeyboardModifiers modifiers = event->modifiers();
-    KeyboardTranslator::States states = KeyboardTranslator::NoState;
-
     TerminalDisplay *currentView = _currentScreen->currentTerminalDisplay();
     bool isReadOnly = false;
     if (currentView != nullptr) {
         isReadOnly = currentView->getReadOnly();
     }
+
+#ifdef HAVE_XKBCOMMON
+    if (getMode(MODE_Win32Input) && _win32InputModeAvailable &&
+        event->nativeScanCode() && !isReadOnly && (event->text().length() <= 1)) {
+
+        bool is_key_down = (event->type() == QEvent::KeyPress);
+
+        // X11 keycodes are offset by 8 from evdev and Wayland scancodes.
+        const xkb_keycode_t keycode = event->nativeScanCode() +
+            (QGuiApplication::platformName() == QLatin1String("xcb") ? 8 : 0);
+
+        xkb_state_update_key(_xkbData.state_us, keycode,
+                             is_key_down ? XKB_KEY_DOWN : XKB_KEY_UP);
+
+        xkb_keysym_t keysym_us = xkb_state_key_get_one_sym(_xkbData.state_us, keycode);
+
+        quint16 virtualKeyCode = 0;
+        quint16 scanCode = 0;
+        quint32 controlKeyState = 0;
+        bool modifier = false;
+        bool m_is_right_alt_pressed = false;
+        bool m_is_right_ctrl_pressed = false;
+
+        switch (keysym_us) {
+            case XKB_KEY_BackSpace:   virtualKeyCode = VK_BACK;   break;
+            case XKB_KEY_Tab:         virtualKeyCode = VK_TAB;    break;
+            case XKB_KEY_Return:      virtualKeyCode = VK_RETURN; break;
+            case XKB_KEY_Pause:       virtualKeyCode = VK_PAUSE;  break;
+            case XKB_KEY_Scroll_Lock: virtualKeyCode = VK_SCROLL; break;
+            case XKB_KEY_Escape:      virtualKeyCode = VK_ESCAPE; break;
+            case XKB_KEY_Shift_L:
+                virtualKeyCode = VK_SHIFT;
+                if (is_key_down) controlKeyState |= SHIFT_PRESSED;
+                modifier = true;
+                break;
+            case XKB_KEY_Shift_R:
+                virtualKeyCode = VK_SHIFT;
+                if (is_key_down) controlKeyState |= SHIFT_PRESSED;
+                modifier = true;
+                break;
+            case XKB_KEY_Control_L:
+                virtualKeyCode = VK_CONTROL;
+                if (is_key_down) controlKeyState |= LEFT_CTRL_PRESSED;
+                modifier = true;
+                break;
+            case XKB_KEY_Control_R:
+                virtualKeyCode = VK_CONTROL;
+                m_is_right_ctrl_pressed = true;
+                if (is_key_down) controlKeyState |= RIGHT_CTRL_PRESSED;
+                controlKeyState |= ENHANCED_KEY;
+                modifier = true;
+                break;
+            case XKB_KEY_Alt_L:
+                virtualKeyCode = VK_MENU;
+                if (is_key_down) controlKeyState |= LEFT_ALT_PRESSED;
+                modifier = true;
+                break;
+            case XKB_KEY_Alt_R:
+                virtualKeyCode = VK_MENU;
+                m_is_right_alt_pressed = true;
+                if (is_key_down) controlKeyState |= RIGHT_ALT_PRESSED;
+                controlKeyState |= ENHANCED_KEY;
+                modifier = true;
+                break;
+            case XKB_KEY_Caps_Lock:    virtualKeyCode = VK_CAPITAL; break;
+            case XKB_KEY_Num_Lock:     virtualKeyCode = VK_NUMLOCK; break;
+            case XKB_KEY_Meta_L:       virtualKeyCode = VK_LWIN;    break;
+            case XKB_KEY_Meta_R:       virtualKeyCode = VK_RWIN;    break;
+            case XKB_KEY_Page_Up:      virtualKeyCode = VK_PRIOR;   controlKeyState |= ENHANCED_KEY; break;
+            case XKB_KEY_Page_Down:    virtualKeyCode = VK_NEXT;    controlKeyState |= ENHANCED_KEY; break;
+            case XKB_KEY_End:          virtualKeyCode = VK_END;     controlKeyState |= ENHANCED_KEY; break;
+            case XKB_KEY_Home:         virtualKeyCode = VK_HOME;    controlKeyState |= ENHANCED_KEY; break;
+            case XKB_KEY_Left:         virtualKeyCode = VK_LEFT;    controlKeyState |= ENHANCED_KEY; break;
+            case XKB_KEY_Up:           virtualKeyCode = VK_UP;      controlKeyState |= ENHANCED_KEY; break;
+            case XKB_KEY_Right:        virtualKeyCode = VK_RIGHT;   controlKeyState |= ENHANCED_KEY; break;
+            case XKB_KEY_Down:         virtualKeyCode = VK_DOWN;    controlKeyState |= ENHANCED_KEY; break;
+            case XKB_KEY_Insert:       virtualKeyCode = VK_INSERT;  controlKeyState |= ENHANCED_KEY; break;
+            case XKB_KEY_Delete:       virtualKeyCode = VK_DELETE;  controlKeyState |= ENHANCED_KEY; break;
+            case XKB_KEY_Print:        virtualKeyCode = VK_PRINT;   break;
+            case XKB_KEY_KP_Page_Up:   virtualKeyCode = VK_PRIOR;   break;
+            case XKB_KEY_KP_Page_Down: virtualKeyCode = VK_NEXT;    break;
+            case XKB_KEY_KP_End:       virtualKeyCode = VK_END;     break;
+            case XKB_KEY_KP_Home:      virtualKeyCode = VK_HOME;    break;
+            case XKB_KEY_KP_Left:      virtualKeyCode = VK_LEFT;    break;
+            case XKB_KEY_KP_Up:        virtualKeyCode = VK_UP;      break;
+            case XKB_KEY_KP_Right:     virtualKeyCode = VK_RIGHT;   break;
+            case XKB_KEY_KP_Down:      virtualKeyCode = VK_DOWN;    break;
+            case XKB_KEY_KP_Insert:    virtualKeyCode = VK_INSERT;  break;
+            case XKB_KEY_KP_Delete:    virtualKeyCode = VK_DELETE;  break;
+            case XKB_KEY_KP_Begin:     virtualKeyCode = VK_NUMPAD5; break;
+            case XKB_KEY_KP_0:         virtualKeyCode = VK_NUMPAD0; break;
+            case XKB_KEY_KP_1:         virtualKeyCode = VK_NUMPAD1; break;
+            case XKB_KEY_KP_2:         virtualKeyCode = VK_NUMPAD2; break;
+            case XKB_KEY_KP_3:         virtualKeyCode = VK_NUMPAD3; break;
+            case XKB_KEY_KP_4:         virtualKeyCode = VK_NUMPAD4; break;
+            case XKB_KEY_KP_5:         virtualKeyCode = VK_NUMPAD5; break;
+            case XKB_KEY_KP_6:         virtualKeyCode = VK_NUMPAD6; break;
+            case XKB_KEY_KP_7:         virtualKeyCode = VK_NUMPAD7; break;
+            case XKB_KEY_KP_8:         virtualKeyCode = VK_NUMPAD8; break;
+            case XKB_KEY_KP_9:         virtualKeyCode = VK_NUMPAD9; break;
+            case XKB_KEY_KP_Decimal:   virtualKeyCode = VK_DECIMAL; break;
+            case XKB_KEY_KP_Add:       virtualKeyCode = VK_ADD;     break;
+            case XKB_KEY_KP_Subtract:  virtualKeyCode = VK_SUBTRACT;    break;
+            case XKB_KEY_KP_Multiply:  virtualKeyCode = VK_MULTIPLY;    break;
+            case XKB_KEY_KP_Divide:    virtualKeyCode = VK_DIVIDE;      controlKeyState |= ENHANCED_KEY; break;
+            case XKB_KEY_KP_Enter:     virtualKeyCode = VK_RETURN;      controlKeyState |= ENHANCED_KEY; break;
+            case XKB_KEY_a: case XKB_KEY_A: virtualKeyCode = 'A'; break;
+            case XKB_KEY_b: case XKB_KEY_B: virtualKeyCode = 'B'; break;
+            case XKB_KEY_c: case XKB_KEY_C: virtualKeyCode = 'C'; break;
+            case XKB_KEY_d: case XKB_KEY_D: virtualKeyCode = 'D'; break;
+            case XKB_KEY_e: case XKB_KEY_E: virtualKeyCode = 'E'; break;
+            case XKB_KEY_f: case XKB_KEY_F: virtualKeyCode = 'F'; break;
+            case XKB_KEY_g: case XKB_KEY_G: virtualKeyCode = 'G'; break;
+            case XKB_KEY_h: case XKB_KEY_H: virtualKeyCode = 'H'; break;
+            case XKB_KEY_i: case XKB_KEY_I: virtualKeyCode = 'I'; break;
+            case XKB_KEY_j: case XKB_KEY_J: virtualKeyCode = 'J'; break;
+            case XKB_KEY_k: case XKB_KEY_K: virtualKeyCode = 'K'; break;
+            case XKB_KEY_l: case XKB_KEY_L: virtualKeyCode = 'L'; break;
+            case XKB_KEY_m: case XKB_KEY_M: virtualKeyCode = 'M'; break;
+            case XKB_KEY_n: case XKB_KEY_N: virtualKeyCode = 'N'; break;
+            case XKB_KEY_o: case XKB_KEY_O: virtualKeyCode = 'O'; break;
+            case XKB_KEY_p: case XKB_KEY_P: virtualKeyCode = 'P'; break;
+            case XKB_KEY_q: case XKB_KEY_Q: virtualKeyCode = 'Q'; break;
+            case XKB_KEY_r: case XKB_KEY_R: virtualKeyCode = 'R'; break;
+            case XKB_KEY_s: case XKB_KEY_S: virtualKeyCode = 'S'; break;
+            case XKB_KEY_t: case XKB_KEY_T: virtualKeyCode = 'T'; break;
+            case XKB_KEY_u: case XKB_KEY_U: virtualKeyCode = 'U'; break;
+            case XKB_KEY_v: case XKB_KEY_V: virtualKeyCode = 'V'; break;
+            case XKB_KEY_w: case XKB_KEY_W: virtualKeyCode = 'W'; break;
+            case XKB_KEY_x: case XKB_KEY_X: virtualKeyCode = 'X'; break;
+            case XKB_KEY_y: case XKB_KEY_Y: virtualKeyCode = 'Y'; break;
+            case XKB_KEY_z: case XKB_KEY_Z: virtualKeyCode = 'Z'; break;
+            case XKB_KEY_0: virtualKeyCode = '0'; break;
+            case XKB_KEY_1: virtualKeyCode = '1'; break;
+            case XKB_KEY_2: virtualKeyCode = '2'; break;
+            case XKB_KEY_3: virtualKeyCode = '3'; break;
+            case XKB_KEY_4: virtualKeyCode = '4'; break;
+            case XKB_KEY_5: virtualKeyCode = '5'; break;
+            case XKB_KEY_6: virtualKeyCode = '6'; break;
+            case XKB_KEY_7: virtualKeyCode = '7'; break;
+            case XKB_KEY_8: virtualKeyCode = '8'; break;
+            case XKB_KEY_9: virtualKeyCode = '9'; break;
+            case XKB_KEY_F1:  virtualKeyCode = VK_F1;  break;
+            case XKB_KEY_F2:  virtualKeyCode = VK_F2;  break;
+            case XKB_KEY_F3:  virtualKeyCode = VK_F3;  break;
+            case XKB_KEY_F4:  virtualKeyCode = VK_F4;  break;
+            case XKB_KEY_F5:  virtualKeyCode = VK_F5;  break;
+            case XKB_KEY_F6:  virtualKeyCode = VK_F6;  break;
+            case XKB_KEY_F7:  virtualKeyCode = VK_F7;  break;
+            case XKB_KEY_F8:  virtualKeyCode = VK_F8;  break;
+            case XKB_KEY_F9:  virtualKeyCode = VK_F9;  break;
+            case XKB_KEY_F10: virtualKeyCode = VK_F10; break;
+            case XKB_KEY_F11: virtualKeyCode = VK_F11; break;
+            case XKB_KEY_F12: virtualKeyCode = VK_F12; break;
+            case XKB_KEY_space:        virtualKeyCode = VK_SPACE;      break;
+            case XKB_KEY_grave:        virtualKeyCode = VK_OEM_3;      break;
+            case XKB_KEY_minus:        virtualKeyCode = VK_OEM_MINUS;  break;
+            case XKB_KEY_equal:        virtualKeyCode = VK_OEM_PLUS;   break;
+            case XKB_KEY_bracketleft:  virtualKeyCode = VK_OEM_4;      break;
+            case XKB_KEY_bracketright: virtualKeyCode = VK_OEM_6;      break;
+            case XKB_KEY_semicolon:    virtualKeyCode = VK_OEM_1;      break;
+            case XKB_KEY_apostrophe:   virtualKeyCode = VK_OEM_7;      break;
+            case XKB_KEY_backslash:    virtualKeyCode = VK_OEM_5;      break;
+            case XKB_KEY_comma:        virtualKeyCode = VK_OEM_COMMA;  break;
+            case XKB_KEY_period:       virtualKeyCode = VK_OEM_PERIOD; break;
+            case XKB_KEY_slash:        virtualKeyCode = VK_OEM_2;      break;
+        }
+
+        if (!modifier) {
+            if (event->modifiers() & Qt::ShiftModifier)   { controlKeyState |= SHIFT_PRESSED; }
+            if (event->modifiers() & Qt::ControlModifier) { controlKeyState |= m_is_right_ctrl_pressed ? RIGHT_CTRL_PRESSED : LEFT_CTRL_PRESSED; }
+            if (event->modifiers() & Qt::AltModifier)     { controlKeyState |= m_is_right_alt_pressed ? RIGHT_ALT_PRESSED : LEFT_ALT_PRESSED; }
+        }
+
+        if (xkb_state_mod_name_is_active(_xkbData.state_us, XKB_MOD_NAME_CAPS, XKB_STATE_MODS_EFFECTIVE)) { controlKeyState |= CAPSLOCK_ON; }
+        if (xkb_state_mod_name_is_active(_xkbData.state_us, XKB_MOD_NAME_NUM, XKB_STATE_MODS_EFFECTIVE)) { controlKeyState |= NUMLOCK_ON; }
+        if (xkb_state_led_name_is_active(_xkbData.state_us, XKB_LED_NAME_SCROLL)) { controlKeyState |= SCROLLLOCK_ON; }
+
+        uint uchar = 0;
+        if (!event->text().isEmpty())
+            uchar = event->text().at(0).unicode();
+
+        char seq_buffer[128];
+
+        if (uchar > 0xFFFF) {
+            quint32 u_prime = uchar - 0x10000;
+            quint16 high_surrogate = (u_prime >> 10) + 0xD800;
+            quint16 low_surrogate = (u_prime & 0x3FF) + 0xDC00;
+
+            int len1 = snprintf(seq_buffer, sizeof(seq_buffer), "\x1B[%d;%d;%d;%d;%d;%d_",
+                            0, 0, high_surrogate, is_key_down, controlKeyState, 1);
+            sendString(QByteArray(seq_buffer, len1));
+
+            int len2 = snprintf(seq_buffer, sizeof(seq_buffer), "\x1B[%d;%d;%d;%d;%d;%d_",
+                            0, 0, low_surrogate, is_key_down, controlKeyState, 1);
+            sendString(QByteArray(seq_buffer, len2));
+
+        } else {
+            int len = snprintf(seq_buffer, sizeof(seq_buffer), "\x1B[%d;%d;%d;%d;%d;%d_",
+                            virtualKeyCode, scanCode, uchar, is_key_down, controlKeyState, 1);
+            sendString(QByteArray(seq_buffer, len));
+        }
+        return;
+    }
+#endif
+
+    if (event->type() != QEvent::KeyPress) return;
+
+    const Qt::KeyboardModifiers modifiers = event->modifiers();
+    KeyboardTranslator::States states = KeyboardTranslator::NoState;
 
     // get current states
     if (getMode(MODE_NewLine)) {
@@ -3004,6 +3382,8 @@ void Vt102Emulation::resetModes()
     saveMode(MODE_Mouse1006);
     resetMode(MODE_Mouse1015);
     saveMode(MODE_Mouse1015);
+    resetMode(MODE_Mouse1016);
+    saveMode(MODE_Mouse1016);
     resetMode(MODE_BracketedPaste);
     saveMode(MODE_BracketedPaste);
 
@@ -3045,14 +3425,20 @@ void Vt102Emulation::setMode(int m)
     case MODE_Mouse1005:
     case MODE_Mouse1006:
     case MODE_Mouse1015:
+    case MODE_Mouse1016:
         _currentModes.mode[MODE_Mouse1005] = false;
         _currentModes.mode[MODE_Mouse1006] = false;
         _currentModes.mode[MODE_Mouse1015] = false;
+        _currentModes.mode[MODE_Mouse1016] = false;
         _currentModes.mode[m] = true;
         break;
 
     case MODE_BracketedPaste:
         Q_EMIT programBracketedPasteModeChanged(true);
+        break;
+
+    case MODE_SynchronizedUpdate:
+        Q_EMIT programRequestedSynchronizedUpdate(true);
         break;
 
     case MODE_AppScreen:
@@ -3100,6 +3486,10 @@ void Vt102Emulation::resetMode(int m)
 
     case MODE_BracketedPaste:
         Q_EMIT programBracketedPasteModeChanged(false);
+        break;
+
+    case MODE_SynchronizedUpdate:
+        Q_EMIT programRequestedSynchronizedUpdate(false);
         break;
 
     case MODE_AppScreen:
