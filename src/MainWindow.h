@@ -38,6 +38,7 @@ class Profile;
 class ProfileList;
 class IKonsolePlugin;
 class BookmarkHandler;
+struct ContainerInfo;
 
 /**
  * The main window.  This contains the menus and an area which contains the terminal displays.
@@ -131,8 +132,9 @@ Q_SIGNALS:
      * @param directory Initial working directory for the new window or empty
      * if the default working directory associated with the profile should
      * be used.
+     * @param container Container context to inherit, or invalid ContainerInfo if none.
      */
-    void newWindowRequest(const QExplicitlySharedDataPointer<Profile> &profile, const QString &directory);
+    void newWindowRequest(const QExplicitlySharedDataPointer<Profile> &profile, const QString &directory, const ContainerInfo &container);
 
     /**
      * Emitted when a view for one session is detached from this window

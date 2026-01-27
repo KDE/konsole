@@ -135,6 +135,7 @@ add_subdirectory(colorscheme)
 add_subdirectory(keyboardtranslator)
 add_subdirectory(characters)
 add_subdirectory(decoders)
+add_subdirectory(containers)
 add_subdirectory(plugins)
 if(WIN32)
     set(ptyqt_srcs ptyqt/iptyprocess.cpp ptyqt/conptyprocess.cpp)
@@ -287,6 +288,7 @@ target_link_libraries(konsoleprivate
     konsolehelpers
     konsolecharacters
     konsoledecoders
+    konsolecontainers
     KF6::NewStuffCore
     KF6::NewStuffWidgets
     ${konsole_LIBS}

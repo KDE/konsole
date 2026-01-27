@@ -115,6 +115,7 @@ private Q_SLOTS:
     void profileNameChanged(const QString &name);
     void initialDirChanged(const QString &dir);
     void startInSameDir(bool);
+    void inheritContainerContext(bool);
     void commandChanged(const QString &command);
     void semanticUpDown(bool);
     void semanticInputClick(bool enable);

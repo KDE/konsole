@@ -426,6 +426,22 @@ Q_SIGNALS:
     void toggleUrlExtractionRequest();
 
     /**
+     * Emitted when an OSC 777 (notification/extension) escape sequence is received.
+     * The params list contains the semicolon-separated values after "777;".
+     *
+     * This is a generic signal that allows external handlers to process
+     * OSC 777 extensions like:
+     *   - notify;title;body - Desktop notifications (handled internally)
+     *   - container;push;name;type - Enter container context
+     *   - container;pop;; - Exit container context
+     *   - precmd;; - Shell is about to show prompt
+     *   - preexec;; - Shell is about to execute command
+     *
+     * @param params The parameters from the OSC sequence, split by semicolons
+     */
+    void osc777Received(const QStringList &params);
+
+    /**
      * Mainly used to communicate dropped lines to active autosave tasks.
      * Takes into account lines dropped by Screen::addHistLine and Screen::fastAddHistLine.
      * Also includes lines dropped by clearing scrollback and resetting the screen.

@@ -28,6 +28,7 @@
 // Konsole
 #include "Shortcut_p.h"
 #include "config-konsole.h"
+#include "containers/ContainerInfo.h"
 #include "konsoleprivate_export.h"
 
 class QColor;
@@ -601,6 +602,25 @@ public Q_SLOTS:
      */
     Q_SCRIPTABLE int foregroundProcessId();
 
+    /**
+     * Returns information about the container environment the foreground
+     * process is running in, if any. Check isValid() on the result.
+     */
+    ContainerInfo containerContext() const;
+
+    /**
+     * Sets the container context for this session. This is used when
+     * creating a new session that should inherit the container context
+     * from another session.
+     */
+    void setContainerContext(const ContainerInfo &container);
+
+    /**
+     * Returns true if the session's foreground process is running inside
+     * a container (Toolbox, Distrobox, etc.)
+     */
+    bool isInContainer() const;
+
     /** Sets the text codec used by this sessions terminal emulation.
      * Overloaded to accept a QByteArray for convenience since DBus
      * does not accept QTextCodec directly.
@@ -778,6 +798,14 @@ Q_SIGNALS:
     void currentDirectoryChanged(const QString &dir);
 
     /**
+     * Emitted when the container context of this session changes.
+     * This occurs when the foreground process enters or exits a container.
+     *
+     * @param container The new container context (may be invalid if exited container)
+     */
+    void containerContextChanged(const ContainerInfo &container);
+
+    /**
      * Emitted when the session text encoding changes.
      */
     void sessionCodecChanged(const QByteArray &codec);
@@ -896,6 +924,12 @@ private Q_SLOTS:
 
     void sessionAttributeRequest(int id, uint terminator);
 
+    /**
+     * Handles OSC 777 escape sequences from the emulation.
+     * Parses container;push/pop commands to update container context.
+     */
+    void handleOsc777(const QStringList &params);
+
 private:
     bool isCalledViaDbusAndForbidden() const;
 
@@ -911,6 +945,7 @@ private:
     void updateSessionProcessInfo();
     bool updateForegroundProcessInfo();
     void updateWorkingDirectory();
+    void updateContainerContext();
     SessionController *controller();
 
     QString validDirectory(const QString &dir) const;
@@ -968,6 +1003,11 @@ private:
     ProcessInfo *_sessionProcessInfo = nullptr;
     ProcessInfo *_foregroundProcessInfo = nullptr;
     int _foregroundPid = 0;
+
+    // Container context tracking
+    ContainerInfo _containerContext;
+    bool _enteredViaContainerCommand = false;
+    int _lastContainerCheckPid = -1;
 
     // ZModem
     bool _zmodemBusy = false;

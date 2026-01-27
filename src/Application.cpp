@@ -142,10 +142,16 @@ MainWindow *Application::newMainWindow()
     return window;
 }
 
-void Application::createWindow(const Profile::Ptr &profile, const QString &directory)
+void Application::createWindow(const Profile::Ptr &profile, const QString &directory, const ContainerInfo &container)
 {
     MainWindow *window = newMainWindow();
-    window->createSession(profile, directory);
+    Session *session = window->createSession(profile, directory);
+
+    // Apply inherited container context if valid
+    if (container.isValid()) {
+        session->setContainerContext(container);
+    }
+
     window->show();
 }
 
