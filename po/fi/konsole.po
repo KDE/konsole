@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-23 00:47+0000\n"
+"POT-Creation-Date: 2026-01-27 00:48+0000\n"
 "PO-Revision-Date: 2026-01-05 17:20+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -1209,66 +1209,66 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Kiitokset monille muille.\n"
 
-#: MainWindow.cpp:339
+#: MainWindow.cpp:342
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "Uusi &välilehti"
 
-#: MainWindow.cpp:349
+#: MainWindow.cpp:352
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "M&onista välilehti"
 
-#: MainWindow.cpp:356
+#: MainWindow.cpp:359
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "Uusi &ikkuna"
 
-#: MainWindow.cpp:363
+#: MainWindow.cpp:366
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Sulje ikkuna"
 
-#: MainWindow.cpp:368
+#: MainWindow.cpp:371
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "&Kirjanmerkit"
 
-#: MainWindow.cpp:395
+#: MainWindow.cpp:398
 #, kde-format
 msgid "&Window Color Scheme"
 msgstr "&Ikkunan väriteema"
 
-#: MainWindow.cpp:407
+#: MainWindow.cpp:410
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Hallitse profiileja…"
 
-#: MainWindow.cpp:413
+#: MainWindow.cpp:416
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Aktivoi valikko"
 
-#: MainWindow.cpp:419
+#: MainWindow.cpp:422
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Tallenna välilehtiasettelu…"
 
-#: MainWindow.cpp:428
+#: MainWindow.cpp:431
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Lataa välilehtiasettelu…"
 
-#: MainWindow.cpp:746 MainWindow.cpp:763
+#: MainWindow.cpp:751 MainWindow.cpp:768
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1278,67 +1278,67 @@ msgstr[0] "Ikkunassa on prosessi käynnissä. Haluatko silti lopettaa ohjelman?"
 msgstr[1] ""
 "Ikkunassa on %1 prosessia käynnissä. Haluatko silti lopettaa ohjelman?"
 
-#: MainWindow.cpp:752 MainWindow.cpp:769 MainWindow.cpp:783
+#: MainWindow.cpp:757 MainWindow.cpp:774 MainWindow.cpp:788
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Vahvista sulkeminen"
 
-#: MainWindow.cpp:753 MainWindow.cpp:770 MainWindow.cpp:784
+#: MainWindow.cpp:758 MainWindow.cpp:775 MainWindow.cpp:789
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "&Sulje ikkuna"
 
-#: MainWindow.cpp:771 MainWindow.cpp:785
+#: MainWindow.cpp:776 MainWindow.cpp:790
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Sulje nykyinen &välilehti"
 
-#: MainWindow.cpp:780
+#: MainWindow.cpp:785
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "Ikkunassa on auki %1 päätettä. Haluatko silti lopettaa?"
 
-#: MainWindow.cpp:887 Part.cpp:298
+#: MainWindow.cpp:892 Part.cpp:303
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profiilit"
 
-#: MainWindow.cpp:905
+#: MainWindow.cpp:910
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Perusasetukset"
 
-#: MainWindow.cpp:917
+#: MainWindow.cpp:922
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr "Muisti"
 
-#: MainWindow.cpp:923
+#: MainWindow.cpp:928
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Välilehtipalkki / Jakoviivat"
 
-#: MainWindow.cpp:928
+#: MainWindow.cpp:933
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Väliaikaistiedostot"
 
-#: MainWindow.cpp:933
+#: MainWindow.cpp:938
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
 msgstr "Pienoiskuvat"
 
-#: Part.cpp:301
+#: Part.cpp:306
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Part Info"
@@ -2124,23 +2124,23 @@ msgstr "Kirjoita etsittävän välilehden nimi tähän"
 msgid "Bell in '%1' (Session '%2')"
 msgstr "Äänimerkki päätteessä ”%1” (istunto ”%2”)"
 
-#: session/Session.cpp:425
+#: session/Session.cpp:432
 #, kde-format
 msgid "Could not find binary: "
 msgstr "Ohjelmaa ei löytynyt:"
 
-#: session/Session.cpp:434
+#: session/Session.cpp:441
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Varoitus: "
 
-#: session/Session.cpp:529
+#: session/Session.cpp:536
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "Ei löytynyt vuorovaikutteista komentotulkkia, jota käynnistää."
 
-#: session/Session.cpp:535 session/Session.cpp:538
+#: session/Session.cpp:542 session/Session.cpp:545
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2149,366 +2149,366 @@ msgstr ""
 "Ohjelmaa ”%1” ei löytynyt, käynnistetään ”%2” sen sijasta. Tarkasta "
 "profiilisi asetukset."
 
-#: session/Session.cpp:612
+#: session/Session.cpp:619
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Ohjelmaa ”%1” ei voitu käynnistää parametrein ”%2”."
 
-#: session/Session.cpp:778
+#: session/Session.cpp:785
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Hiljaisuus päätteessä ”%1” (istunto ”%2”)"
 
-#: session/Session.cpp:779 session/Session.cpp:2122
-#: session/SessionController.cpp:361 session/SessionController.cpp:1892
+#: session/Session.cpp:786 session/Session.cpp:2129
+#: session/SessionController.cpp:362 session/SessionController.cpp:1898
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1214
 #: Vt102Emulation.cpp:1469
 #, kde-format
 msgid "Show session"
 msgstr "Näytä istunto"
 
-#: session/Session.cpp:1095
+#: session/Session.cpp:1102
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Valmis"
 
 # ei-ASCII-lainausmerkit eivät näkyneet oikein
-#: session/Session.cpp:1109 session/Session.cpp:1125
+#: session/Session.cpp:1116 session/Session.cpp:1132
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Ohjelma ”%1” kaatui."
 
-#: session/Session.cpp:1111
+#: session/Session.cpp:1118
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "Ohjelma ”%1” päättyi paluuarvoon %2."
 
-#: session/Session.cpp:1649
+#: session/Session.cpp:1656
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem-tiedonsiirron edistyminen"
 
-#: session/Session.cpp:2121
+#: session/Session.cpp:2128
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Aktiivisuutta päätteessä ”%1” (istunto ”%2”)"
 
-#: session/Session.cpp:2269
+#: session/Session.cpp:2276
 #, kde-format
 msgid "Security sensitive DBus API is disabled in the settings."
 msgstr "Asetuksista on poistettu käytöstä DBus-API, jossa on tietoturvariski"
 
-#: session/SessionController.cpp:142
+#: session/SessionController.cpp:143
 #, kde-format
 msgid "Konsole"
 msgstr "Konsole"
 
-#: session/SessionController.cpp:360
+#: session/SessionController.cpp:361
 #, kde-format
 msgid "The process '%1' has finished running in session '%2'"
 msgstr "Prosessi ”%1” on päättänyt suorituksen istunnossa ”%2”"
 
-#: session/SessionController.cpp:443
+#: session/SessionController.cpp:444
 #, kde-format
 msgid "Konsole does not know how to open the bookmark: "
 msgstr "Konsole ei tiedä, miten avata kirjanmerkkiä: "
 
-#: session/SessionController.cpp:521
+#: session/SessionController.cpp:522
 #, kde-format
 msgid "Search for '%1' with"
 msgstr "Etsi ”%1” hakukoneella"
 
-#: session/SessionController.cpp:537
+#: session/SessionController.cpp:538
 #, kde-format
 msgid "Configure Web Shortcuts..."
 msgstr "Muokkaa WWW-pikavalintoja…"
 
-#: session/SessionController.cpp:648
+#: session/SessionController.cpp:649
 #, kde-format
 msgid "&Close Session"
 msgstr "&Sulje istunto"
 
-#: session/SessionController.cpp:655
+#: session/SessionController.cpp:656
 #, kde-format
 msgid "Open File Manager"
 msgstr "Avaa tiedostonhallinta"
 
-#: session/SessionController.cpp:670
+#: session/SessionController.cpp:671
 #, kde-format
 msgid "Copy"
 msgstr "Kopioi"
 
-#: session/SessionController.cpp:677
+#: session/SessionController.cpp:678
 #, kde-format
 msgid "Split View Left-Right"
 msgstr "Jaa näkymä vasempaan ja oikeaan osaan"
 
-#: session/SessionController.cpp:682
+#: session/SessionController.cpp:683
 #, kde-format
 msgid "Split View Top-Bottom"
 msgstr "Jaa näkymä ylä- ja alaosaan"
 
-#: session/SessionController.cpp:686
+#: session/SessionController.cpp:687
 #, kde-format
 msgid "Copy except prompts"
 msgstr "Kopioi paitsi kehotteet"
 
-#: session/SessionController.cpp:692
+#: session/SessionController.cpp:693
 #, kde-format
 msgid "Copy user input"
 msgstr "Kopioi käyttäjän syöte"
 
-#: session/SessionController.cpp:698
+#: session/SessionController.cpp:699
 #, kde-format
 msgid "Copy command output"
 msgstr "Kopioi komennon tuloste"
 
-#: session/SessionController.cpp:713
+#: session/SessionController.cpp:714
 #, kde-format
 msgid "Paste Selection"
 msgstr "Liitä hiirivalinnan sisältö"
 
-#: session/SessionController.cpp:720
+#: session/SessionController.cpp:721
 #, kde-format
 msgid "Web Search"
 msgstr "Verkkohaku"
 
-#: session/SessionController.cpp:726
+#: session/SessionController.cpp:727
 #, kde-format
 msgid "&Select All"
 msgstr "V&alitse kaikki"
 
-#: session/SessionController.cpp:730
+#: session/SessionController.cpp:731
 #, kde-format
 msgid "Select &Mode"
 msgstr "&Valintatila"
 
-#: session/SessionController.cpp:735
+#: session/SessionController.cpp:736
 #, kde-format
 msgid "Select &Line"
 msgstr "Valitse &rivi"
 
-#: session/SessionController.cpp:738
+#: session/SessionController.cpp:739
 #, kde-format
 msgid "Save Output &As..."
 msgstr "Tallenna tuloste nimellä…"
 
-#: session/SessionController.cpp:744
+#: session/SessionController.cpp:745
 #, kde-format
 msgid "Auto Save Output As..."
 msgstr "Automaattitallenna tuloste nimellä…"
 
-#: session/SessionController.cpp:748
+#: session/SessionController.cpp:749
 #, kde-format
 msgid "Stop Auto Save"
 msgstr "Pysäytä automaattitallennus"
 
-#: session/SessionController.cpp:752
+#: session/SessionController.cpp:753
 #, kde-format
 msgid "&Print Screen..."
 msgstr "T&ulosta näyttö…"
 
-#: session/SessionController.cpp:756
+#: session/SessionController.cpp:757
 #, kde-format
 msgid "Adjust Scrollback..."
 msgstr "Säädä rivihistorian kokoa…"
 
-#: session/SessionController.cpp:760
+#: session/SessionController.cpp:761
 #, kde-format
 msgid "Clear Scrollback"
 msgstr "Tyhjennä rivihistoria"
 
-#: session/SessionController.cpp:764
+#: session/SessionController.cpp:765
 #, kde-format
 msgid "Clear Scrollback and Reset"
 msgstr "Tyhjennä rivihistoria ja alusta näkymä"
 
-#: session/SessionController.cpp:775
+#: session/SessionController.cpp:776
 #, kde-format
 msgid "Next Profile"
 msgstr "Seuraava profiili"
 
-#: session/SessionController.cpp:780
+#: session/SessionController.cpp:781
 #, kde-format
 msgid "Previous Profile"
 msgstr "Edellinen profiiili"
 
 # Tämä muoto, koska kyseessä on alivalikko, jossa on luettelo profiileista.
-#: session/SessionController.cpp:783
+#: session/SessionController.cpp:784
 #, kde-format
 msgid "Switch Profile"
 msgstr "Vaihda profiiliin"
 
-#: session/SessionController.cpp:808
+#: session/SessionController.cpp:809
 #, kde-format
 msgid "Set &Encoding"
 msgstr "Aseta koodaus"
 
-#: session/SessionController.cpp:828
+#: session/SessionController.cpp:829
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow Mouse Tracking"
 msgstr "Salli hiiren jäljitys"
 
-#: session/SessionController.cpp:837
+#: session/SessionController.cpp:838
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
 msgstr "Vain luku"
 
-#: session/SessionController.cpp:848
+#: session/SessionController.cpp:849
 #, kde-format
 msgid "&Configure or Rename Tab..."
 msgstr "&Muuta välilehden asetuksia tai nimeä…"
 
-#: session/SessionController.cpp:854
+#: session/SessionController.cpp:855
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr "K&aikki nykyisen ikkunan välilehdet"
 
-#: session/SessionController.cpp:861
+#: session/SessionController.cpp:862
 #, kde-format
 msgid "&Select Tabs..."
 msgstr "&Valitse välilehdet…"
 
-#: session/SessionController.cpp:867
+#: session/SessionController.cpp:868
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "&Ei mitään"
 
-#: session/SessionController.cpp:875
+#: session/SessionController.cpp:876
 #, kde-format
 msgid "Copy Input To"
 msgstr "Kopioi syöte…"
 
-#: session/SessionController.cpp:883
+#: session/SessionController.cpp:884
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "&ZModem-lähetys…"
 
-#: session/SessionController.cpp:888
+#: session/SessionController.cpp:889
 #, kde-format
 msgid "One-Shot Monitors"
 msgstr "Kertaluonteiset valvonnat"
 
-#: session/SessionController.cpp:893
+#: session/SessionController.cpp:894
 #, kde-format
 msgid "Monitor for &Prompt"
 msgstr "Ke&hotteen valvonta"
 
-#: session/SessionController.cpp:900
+#: session/SessionController.cpp:901
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "&Aktiviteetin valvonta"
 
-#: session/SessionController.cpp:906
+#: session/SessionController.cpp:907
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "&Hiljaisuuden valvonta"
 
-#: session/SessionController.cpp:912
+#: session/SessionController.cpp:913
 #, kde-format
 msgid "Monitor for Process Finishing"
 msgstr "Prosessin valmistumisen valvonta"
 
-#: session/SessionController.cpp:919
+#: session/SessionController.cpp:920
 #, kde-format
 msgid "Enlarge Font"
 msgstr "Suurenna fonttia"
 
-#: session/SessionController.cpp:927
+#: session/SessionController.cpp:928
 #, kde-format
 msgid "Shrink Font"
 msgstr "Pienennä fonttia"
 
-#: session/SessionController.cpp:932
+#: session/SessionController.cpp:933
 #, kde-format
 msgid "Reset Font Size"
 msgstr "Palauta fonttikoko"
 
-#: session/SessionController.cpp:938
+#: session/SessionController.cpp:939
 #, kde-format
 msgid "Send Signal"
 msgstr "Lähetä signaali"
 
-#: session/SessionController.cpp:942
+#: session/SessionController.cpp:943
 #, kde-format
 msgid "&Suspend Task"
 msgstr "&Pysäytä tehtävä"
 
-#: session/SessionController.cpp:947
+#: session/SessionController.cpp:948
 #, kde-format
 msgid "&Continue Task"
 msgstr "&Jatka tehtävää"
 
-#: session/SessionController.cpp:952
+#: session/SessionController.cpp:953
 #, kde-format
 msgid "&Hangup"
 msgstr "K&atkaise yhteys"
 
-#: session/SessionController.cpp:957
+#: session/SessionController.cpp:958
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "K&eskeytä tehtävä"
 
-#: session/SessionController.cpp:962
+#: session/SessionController.cpp:963
 #, kde-format
 msgid "&Terminate Task"
 msgstr "&Lopeta tehtävä"
 
-#: session/SessionController.cpp:967
+#: session/SessionController.cpp:968
 #, kde-format
 msgid "&Kill Task"
 msgstr "&Tapa tehtävä"
 
-#: session/SessionController.cpp:972
+#: session/SessionController.cpp:973
 #, kde-format
 msgid "User Signal &1"
 msgstr "Käyttäjän signaali &1"
 
-#: session/SessionController.cpp:977
+#: session/SessionController.cpp:978
 #, kde-format
 msgid "User Signal &2"
 msgstr "Käyttäjän signaali &2"
 
-#: session/SessionController.cpp:995
+#: session/SessionController.cpp:996
 #, kde-format
 msgid "Create New Profile..."
 msgstr "Luo uusi profiili…"
 
-#: session/SessionController.cpp:997
+#: session/SessionController.cpp:998
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "Muokkaa nykyistä profiilia…"
 
-#: session/SessionController.cpp:1128
+#: session/SessionController.cpp:1129
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
 "close it?"
 msgstr "Tässä istunnossa on ohjelma käynnissä. Haluatko silti sulkea sen?"
 
-#: session/SessionController.cpp:1132
+#: session/SessionController.cpp:1133
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
 "want to close it?"
 msgstr "Tässä istunnossa on käynnissä ohjelma ”%1”. Haluatko silti sulkea sen?"
 
-#: session/SessionController.cpp:1139 session/SessionController.cpp:1174
+#: session/SessionController.cpp:1140 session/SessionController.cpp:1175
 #, kde-format
 msgid "Confirm Close"
 msgstr "Vahvista sulkeminen"
 
-#: session/SessionController.cpp:1140
+#: session/SessionController.cpp:1141
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "Sulje ohjelma"
 
-#: session/SessionController.cpp:1163
+#: session/SessionController.cpp:1164
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
@@ -2517,7 +2517,7 @@ msgstr ""
 "Tämän istunnon ohjelma ei suostu lopettamaan. Haluatko varmasti tappaa sen "
 "väkisin?"
 
-#: session/SessionController.cpp:1167
+#: session/SessionController.cpp:1168
 #, kde-format
 msgid ""
 "The program '%1' in this session would not die.  Are you sure you want to "
@@ -2526,28 +2526,28 @@ msgstr ""
 "Tämän istunnon ohjelma %1 ei suostunut päättymään. Haluatko varmasti tappaa "
 "sen väkisin?"
 
-#: session/SessionController.cpp:1175
+#: session/SessionController.cpp:1176
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "Tapa ohjelma"
 
-#: session/SessionController.cpp:1891
+#: session/SessionController.cpp:1897
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "Istunnossa ”%1” näytetään komentokehote"
 
-#: session/SessionController.cpp:2113
+#: session/SessionController.cpp:2126
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "Avaa nykyinen kansio ohjelmalla"
 
-#: session/SessionController.cpp:2183
+#: session/SessionController.cpp:2196
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Tallenna ZModem-lataus kohteeseen…"
 
-#: session/SessionController.cpp:2193
+#: session/SessionController.cpp:2206
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2558,13 +2558,13 @@ msgstr ""
 "ei löytynyt järjestelmästä.</p><p>Saatat haluta asentaa rzsz- tai lrzsz-"
 "paketin.</p>"
 
-#: session/SessionController.cpp:2203
+#: session/SessionController.cpp:2216
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>Nykyisessä istunnossa on jo ZModem-tiedostonsiirto käynnissä.</p>"
 
-#: session/SessionController.cpp:2216
+#: session/SessionController.cpp:2229
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2573,7 +2573,7 @@ msgstr ""
 "<p>Järjestelmästä ei löytynyt sopivaa ZModem-ohjelmistoa.</p><p>Haluat "
 "luultavasti asentaa rzsz- tai lrzsz-paketin.</p>"
 
-#: session/SessionController.cpp:2221
+#: session/SessionController.cpp:2234
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Valitse ZModem-lähetettävät tiedostot"
@@ -3398,95 +3398,95 @@ msgstr "Ctrl"
 msgid "Enable thumbnails generation"
 msgstr "Käytä pienoiskuvien luontia"
 
-#: terminalDisplay/TerminalDisplay.cpp:660
+#: terminalDisplay/TerminalDisplay.cpp:682
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr "Koko %1×%2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2256
+#: terminalDisplay/TerminalDisplay.cpp:2293
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "Haluatko varmasti liittää %1 merkin?"
 msgstr[1] "Haluatko varmasti liittää %1 merkkiä?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2257
+#: terminalDisplay/TerminalDisplay.cpp:2294
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Vahvista liittäminen"
 
-#: terminalDisplay/TerminalDisplay.cpp:2290
+#: terminalDisplay/TerminalDisplay.cpp:2327
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "Tekstin loppu/Keskeytys: voi lopettaa nykyisen prosessin"
 
-#: terminalDisplay/TerminalDisplay.cpp:2291
+#: terminalDisplay/TerminalDisplay.cpp:2328
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "Siirron loppu: voi lopettaa nykyisen prosessin"
 
-#: terminalDisplay/TerminalDisplay.cpp:2292
+#: terminalDisplay/TerminalDisplay.cpp:2329
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Kello: yrittää tuottaa äänimerkin"
 
-#: terminalDisplay/TerminalDisplay.cpp:2293
+#: terminalDisplay/TerminalDisplay.cpp:2330
 #, kde-format
 msgid "Backspace"
 msgstr "Askelpalautin"
 
-#: terminalDisplay/TerminalDisplay.cpp:2294
+#: terminalDisplay/TerminalDisplay.cpp:2331
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "XOFF: keskeyttää tulostuksen"
 
-#: terminalDisplay/TerminalDisplay.cpp:2295
+#: terminalDisplay/TerminalDisplay.cpp:2332
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "Korvaa/Keskeytä: voi keskeyttää nykyisen prosessin"
 
-#: terminalDisplay/TerminalDisplay.cpp:2296
+#: terminalDisplay/TerminalDisplay.cpp:2333
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Escape: käytetään päätteen tilan muuttamiseen"
 
-#: terminalDisplay/TerminalDisplay.cpp:2297
+#: terminalDisplay/TerminalDisplay.cpp:2334
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "Tiedostoerotin/Lopetus: voi lopettaa nykyisen prosessin"
 
-#: terminalDisplay/TerminalDisplay.cpp:2320
+#: terminalDisplay/TerminalDisplay.cpp:2357
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
 "want to filter them out?"
 msgstr "Liitettävä teksti sisältää ohjausmerkkejä. Haluatko suodattaa ne pois?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2323
+#: terminalDisplay/TerminalDisplay.cpp:2360
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Vahvista liittäminen"
 
-#: terminalDisplay/TerminalDisplay.cpp:2324
+#: terminalDisplay/TerminalDisplay.cpp:2361
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Liitä &ohjausmerkeittä"
 
-#: terminalDisplay/TerminalDisplay.cpp:2325
+#: terminalDisplay/TerminalDisplay.cpp:2362
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "Liitä k&aikki"
 
-#: terminalDisplay/TerminalDisplay.cpp:2326
+#: terminalDisplay/TerminalDisplay.cpp:2363
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "&Peru"
 
-#: terminalDisplay/TerminalDisplay.cpp:2557
+#: terminalDisplay/TerminalDisplay.cpp:2594
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3497,266 +3497,266 @@ msgstr ""
 "\">keskeytetty</a> painamalla Ctrl+S. Jatka suoritusta painamalla <b>Ctrl+Q</"
 "b>.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2612
+#: terminalDisplay/TerminalDisplay.cpp:2649
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Tätä päätettä voi vain lukea."
 
-#: terminalDisplay/TerminalDisplay.cpp:3008
+#: terminalDisplay/TerminalDisplay.cpp:3045
 #, kde-format
 msgid "Change &Directory To"
 msgstr "&Siirry kansioon"
 
-#: terminalDisplay/TerminalDisplay.cpp:3043
+#: terminalDisplay/TerminalDisplay.cpp:3080
 #, kde-format
 msgid "&Paste Location"
 msgstr "Liitä &sijainti"
 
-#: ViewManager.cpp:120
+#: ViewManager.cpp:121
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View"
 msgstr "Jaettu näkymä"
 
-#: ViewManager.cpp:127
+#: ViewManager.cpp:128
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right"
 msgstr "Jaa näkymä pystysuunnassa"
 
-#: ViewManager.cpp:135
+#: ViewManager.cpp:136
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom"
 msgstr "Jaa näkymä vaakasuunnassa"
 
-#: ViewManager.cpp:143
+#: ViewManager.cpp:144
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically"
 msgstr "Jaa näkymä automaattisesti"
 
-#: ViewManager.cpp:153
+#: ViewManager.cpp:154
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
 msgstr "Jaa näkymä vasempaan ja oikeaan osaan seuraavalta välilehdeltä"
 
-#: ViewManager.cpp:161
+#: ViewManager.cpp:162
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
 msgstr "Jaa näkymä ylä- ja alaosaan seuraavalta välilehdeltä"
 
-#: ViewManager.cpp:169
+#: ViewManager.cpp:170
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
 msgstr "Jaa näkymä automaattisesti seuraavalta välilehdeltä"
 
-#: ViewManager.cpp:179
+#: ViewManager.cpp:180
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x2 terminals"
 msgstr "Lataa uusi välilehti 2×2-asettelun päätteille"
 
-#: ViewManager.cpp:188
+#: ViewManager.cpp:189
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x1 terminals"
 msgstr "Lataa uusi välilehti 2×1-asettelun päätteille"
 
-#: ViewManager.cpp:197
+#: ViewManager.cpp:198
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 1x2 terminals"
 msgstr "Lataa uusi välilehti 1×2-asettelun päätteille"
 
-#: ViewManager.cpp:205
+#: ViewManager.cpp:206
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Expand View"
 msgstr "Laajenna näkymää"
 
-#: ViewManager.cpp:213
+#: ViewManager.cpp:214
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Shrink View"
 msgstr "Kavenna näkymää"
 
-#: ViewManager.cpp:223
+#: ViewManager.cpp:224
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &View"
 msgstr "&Irrota nykyinen näkymä"
 
-#: ViewManager.cpp:235
+#: ViewManager.cpp:236
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &Tab"
 msgstr "Irrota nykyinen &välilehti"
 
-#: ViewManager.cpp:240
+#: ViewManager.cpp:241
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Next Tab"
 msgstr "Seuraava välilehti"
 
-#: ViewManager.cpp:248
+#: ViewManager.cpp:249
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Previous Tab"
 msgstr "Edellinen välilehti"
 
-#: ViewManager.cpp:256
+#: ViewManager.cpp:257
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Above Terminal"
 msgstr "Kohdistus päätteen ylle"
 
-#: ViewManager.cpp:263
+#: ViewManager.cpp:264
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Below Terminal"
 msgstr "Kohdistus päätteen alle"
 
-#: ViewManager.cpp:270
+#: ViewManager.cpp:271
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Left Terminal"
 msgstr "Kohdista vasemmanpuoleiseen päätteeseen"
 
-#: ViewManager.cpp:276
+#: ViewManager.cpp:277
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Right Terminal"
 msgstr "Kohdista oikeanpuoleiseen päätteeseen"
 
-#: ViewManager.cpp:282
+#: ViewManager.cpp:283
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Next Terminal"
 msgstr "Kohdista seuraavaan päätteeseen"
 
-#: ViewManager.cpp:288
+#: ViewManager.cpp:289
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Previous Terminal"
 msgstr "Kohdistus edelliseen alle"
 
-#: ViewManager.cpp:294
+#: ViewManager.cpp:295
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Last Tab"
 msgstr "Siirry viimeiselle välilehdelle"
 
-#: ViewManager.cpp:299
+#: ViewManager.cpp:300
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs"
 msgstr "Viimeksi käytetyt välilehdet"
 
-#: ViewManager.cpp:304
+#: ViewManager.cpp:305
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle Between Two Tabs"
 msgstr "Vaihda kahden välilehden välillä"
 
-#: ViewManager.cpp:309
+#: ViewManager.cpp:310
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs (Reverse)"
 msgstr "Viimeksi käytetyt välilehdet (käänteinen)"
 
-#: ViewManager.cpp:314
+#: ViewManager.cpp:315
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle maximize current view"
 msgstr "Suurenna/palauta nykyinen näkymä"
 
-#: ViewManager.cpp:315
+#: ViewManager.cpp:316
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle maximize current view"
 msgstr "Suurenna/palauta nykyinen näkymä"
-
-#: ViewManager.cpp:323
-#, kde-format
-msgctxt "@action Shortcut entry"
-msgid "Toggle zoom-maximize current view"
-msgstr "Suurenna tai palauta nykyinen näkymä"
 
 #: ViewManager.cpp:324
 #, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Toggle zoom-maximize current view"
+msgstr "Suurenna tai palauta nykyinen näkymä"
+
+#: ViewManager.cpp:325
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle zoom-maximize current view"
 msgstr "Suurenna tai palauta nykyinen näkymä"
 
-#: ViewManager.cpp:332
+#: ViewManager.cpp:333
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the right"
 msgstr "Siirrä välilehteä oikealle"
 
-#: ViewManager.cpp:339
+#: ViewManager.cpp:340
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the left"
 msgstr "Siirrä välilehteä vasemmalle"
 
-#: ViewManager.cpp:346
+#: ViewManager.cpp:347
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
 msgstr "Aseta semanttinen integrointi (Bash)"
 
-#: ViewManager.cpp:352
+#: ViewManager.cpp:353
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
 msgstr "Näytä tai piilota semanttiset vihjeet"
 
-#: ViewManager.cpp:358
+#: ViewManager.cpp:359
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
 msgstr "Näytä tai piilota rivinumerointi"
 
-#: ViewManager.cpp:365
+#: ViewManager.cpp:366
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
 msgstr "Sama koko kaikille näkymille"
 
-#: ViewManager.cpp:375
+#: ViewManager.cpp:376
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Tab %1"
 msgstr "Siirry välilehdelle %1"
 
-#: ViewManager.cpp:598
+#: ViewManager.cpp:599
 #, kde-format
 msgid "Semantic hints "
 msgstr "Semanttiset vihjeet"
 
-#: ViewManager.cpp:614
+#: ViewManager.cpp:615
 #, kde-format
 msgid "Line numbers "
 msgstr "Rivinumerointi"
 
-#: ViewManager.cpp:1202
+#: ViewManager.cpp:1214
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Tallenna välilehtiasettelu"
 
-#: ViewManager.cpp:1204 ViewManager.cpp:1325
+#: ViewManager.cpp:1216 ViewManager.cpp:1337
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Konsole-näkymäasettelu (*.json)"
 
-#: ViewManager.cpp:1220
+#: ViewManager.cpp:1232
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3766,7 +3766,7 @@ msgstr ""
 "Asettelua tallennettaessa sattui ongelma.\n"
 "%1"
 
-#: ViewManager.cpp:1312
+#: ViewManager.cpp:1324
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3776,13 +3776,13 @@ msgstr ""
 "Asettelua ladattaessa sattui ongelma.\n"
 "%1"
 
-#: ViewManager.cpp:1323
+#: ViewManager.cpp:1335
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Lataa välilehtiasettelu"
 
-#: Vt102Emulation.cpp:2910
+#: Vt102Emulation.cpp:2955
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
