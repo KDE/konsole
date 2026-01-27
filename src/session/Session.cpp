@@ -807,9 +807,6 @@ void Session::silenceTimerDone()
     TerminalDisplay *view = nullptr;
     if (!_views.isEmpty()) {
         view = _views.first();
-    } else {
-        // Avoid nullptr pointer dereference
-        return;
     }
 
     KNotification *notification =
