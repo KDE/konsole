@@ -289,6 +289,10 @@ public:
          * directory as the currently active session.
          */
         StartInCurrentSessionDir,
+        /** (bool) Whether new sessions should inherit the container context
+         * (Toolbox, Distrobox, etc.) of the currently active session.
+         */
+        InheritContainerContext,
         /** (int) Specifies the threshold of detected silence in seconds. */
         SilenceSeconds,
         /** (BellModeEnum) Specifies the behavior of bell.
@@ -824,6 +828,12 @@ public:
     bool startInCurrentSessionDir() const
     {
         return property<bool>(Profile::StartInCurrentSessionDir);
+    }
+
+    /** Convenience method for property<bool>(Profile::InheritContainerContext) */
+    bool inheritContainerContext() const
+    {
+        return property<bool>(Profile::InheritContainerContext);
     }
 
     /** Convenience method for property<QString>(Profile::SilenceSeconds) */

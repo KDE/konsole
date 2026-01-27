@@ -45,6 +45,8 @@
 
 #include "colorscheme/ColorSchemeManager.h"
 
+#include "containers/ContainerRegistry.h"
+
 #include "keyboardtranslator/KeyboardTranslator.h"
 
 #include "KeyBindingEditor.h"
@@ -511,6 +513,16 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr &profile)
     _generalUi->environmentEditButton->setIcon(QIcon::fromTheme(QStringLiteral("document-edit")));
     _generalUi->startInSameDirButton->setChecked(profile->startInCurrentSessionDir());
 
+    // Container inheritance setup
+    _generalUi->inheritContainerButton->setChecked(profile->inheritContainerContext());
+    auto *containerRegistry = ContainerRegistry::instance();
+    if (!containerRegistry->isEnabled()) {
+        _generalUi->inheritContainerButton->setEnabled(false);
+        _generalUi->containerWarningWidget->setVisible(true);
+        _generalUi->containerWarningWidget->setMessageType(KMessageWidget::Warning);
+        _generalUi->containerWarningWidget->setText(containerRegistry->disabledReason());
+    }
+
     // initial terminal size
     const auto colsSuffix =
         ki18ncp("Suffix of the number of columns (N columns). The leading space is needed to separate it from the number value.", " column", " columns");
@@ -545,6 +557,7 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr &profile)
     connect(_generalUi->dirSelectButton, &QToolButton::clicked, this, &Konsole::EditProfileDialog::selectInitialDir);
     connect(_generalUi->iconSelectButton, &QPushButton::clicked, this, &Konsole::EditProfileDialog::selectIcon);
     connect(_generalUi->startInSameDirButton, &QCheckBox::toggled, this, &Konsole::EditProfileDialog::startInSameDir);
+    connect(_generalUi->inheritContainerButton, &QCheckBox::toggled, this, &Konsole::EditProfileDialog::inheritContainerContext);
     connect(_generalUi->profileNameEdit, &QLineEdit::textChanged, this, &Konsole::EditProfileDialog::profileNameChanged);
     connect(_generalUi->initialDirEdit, &QLineEdit::textChanged, this, &Konsole::EditProfileDialog::initialDirChanged);
     connect(_generalUi->commandEdit, &QLineEdit::textChanged, this, &Konsole::EditProfileDialog::commandChanged);
@@ -758,6 +771,11 @@ void EditProfileDialog::profileNameChanged(const QString &name)
 void EditProfileDialog::startInSameDir(bool sameDir)
 {
     updateTempProfileProperty(Profile::StartInCurrentSessionDir, sameDir);
+}
+
+void EditProfileDialog::inheritContainerContext(bool inherit)
+{
+    updateTempProfileProperty(Profile::InheritContainerContext, inherit);
 }
 
 void EditProfileDialog::semanticUpDown(bool enable)

@@ -1233,8 +1233,11 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
         }
     }
     if (attribute == Notification) {
-        // Notification
+        // OSC 777 - Emit generic signal first for external handlers
         auto params = value.split(QLatin1Char(';'));
+        Q_EMIT osc777Received(params);
+
+        // Handle "notify" command internally for backward compatibility
         if (params.length() < 1 || params[0] != QLatin1String("notify")) {
             return;
         }
