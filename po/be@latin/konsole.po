@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 86ff119b1606fcaa910d6b44fc14b611\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-27 00:48+0000\n"
+"POT-Creation-Date: 2026-01-28 00:48+0000\n"
 "PO-Revision-Date: 2022-09-04 10:59+0300\n"
 "Last-Translator: Zmicier <zmicerturok@gmail.com>\n"
 "Language-Team: Belarusian <kde-i18n-doc@kde.org>\n"
@@ -263,7 +263,7 @@ msgctxt "@info:shell"
 msgid "Arguments passed to command"
 msgstr "Arhumienty, jakija byli adpraŭlienyja zahadu"
 
-#: Application.cpp:529
+#: Application.cpp:535
 #, kde-format
 msgctxt "@item"
 msgid "Toggle Background Window"
@@ -692,6 +692,32 @@ msgstr "Uviersie"
 #, kde-format
 msgid "AaZz09..."
 msgstr "AaJaja09..."
+
+#: containers/ContainerRegistry.cpp:37
+#, kde-format
+msgid ""
+"Container support is not available when Konsole is running inside Flatpak."
+msgstr ""
+
+#: containers/DistroboxDetector.cpp:67
+#, kde-format
+msgid "Distrobox"
+msgstr ""
+
+#: containers/DistroboxDetector.cpp:167
+#, kde-format
+msgid "Distrobox: %1"
+msgstr ""
+
+#: containers/ToolboxDetector.cpp:24
+#, kde-format
+msgid "Toolbox"
+msgstr ""
+
+#: containers/ToolboxDetector.cpp:45
+#, kde-format
+msgid "Toolbox: %1"
+msgstr ""
 
 #: CopyInputDialog.cpp:30
 #, kde-format
@@ -1269,7 +1295,7 @@ msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Zahruzić makiet ukladak z fajla"
 
-#: MainWindow.cpp:751 MainWindow.cpp:768
+#: MainWindow.cpp:779 MainWindow.cpp:796
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1280,67 +1306,67 @@ msgstr[1] "U hetym aknie zapuščanyja %1 pracesy. Chočacie vyjsci?"
 msgstr[2] "U hetym aknie zapuščana %1 pracesaŭ. Chočacie vyjsci?"
 msgstr[3] "U hetym aknie zapuščana %1 pracesy. Chočacie vyjsci?"
 
-#: MainWindow.cpp:757 MainWindow.cpp:774 MainWindow.cpp:788
+#: MainWindow.cpp:785 MainWindow.cpp:802 MainWindow.cpp:816
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Pacvierdzić zakryccio"
 
-#: MainWindow.cpp:758 MainWindow.cpp:775 MainWindow.cpp:789
+#: MainWindow.cpp:786 MainWindow.cpp:803 MainWindow.cpp:817
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "&Zakryć akno"
 
-#: MainWindow.cpp:776 MainWindow.cpp:790
+#: MainWindow.cpp:804 MainWindow.cpp:818
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Zakryć biahučuju &ŭkladku"
 
-#: MainWindow.cpp:785
+#: MainWindow.cpp:813
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "U hetym aknie adkryty(a) %1 terminal(y). Chočacie vyjsci?"
 
-#: MainWindow.cpp:892 Part.cpp:303
+#: MainWindow.cpp:920 Part.cpp:317
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profili"
 
-#: MainWindow.cpp:910
+#: MainWindow.cpp:938
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Asnoŭnyja nalady"
 
-#: MainWindow.cpp:922
+#: MainWindow.cpp:950
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr ""
 
-#: MainWindow.cpp:928
+#: MainWindow.cpp:956
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Paneĺ ukladak / Padzialiaĺniki"
 
-#: MainWindow.cpp:933
+#: MainWindow.cpp:961
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Časovyja fajly"
 
-#: MainWindow.cpp:938
+#: MainWindow.cpp:966
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
 msgstr "Minijaciury"
 
-#: Part.cpp:306
+#: Part.cpp:320
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Part Info"
@@ -1924,13 +1950,13 @@ msgstr "Režym &druku (čorny tekst, biez fonu)"
 msgid "&Scale output"
 msgstr "&Vyvad maštabu"
 
-#: profile/Profile.cpp:268
+#: profile/Profile.cpp:269
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr ""
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:539
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:551
 #, kde-format
 msgid "Default profile"
 msgstr "Pradvyznačany profiĺ"
@@ -2136,29 +2162,29 @@ msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"
 msgstr "Uviadzicie tekst dlia pošuku"
 
-#: session/Session.cpp:129
+#: session/Session.cpp:131
 #, fuzzy, kde-format
 #| msgid "Bell in %1 (Session %2)"
 msgid "Bell in '%1' (Session '%2')"
 msgstr "Hukavoje apaviaščennie ŭ \"%1\" (sieans \"%2\")"
 
-#: session/Session.cpp:432
+#: session/Session.cpp:434
 #, kde-format
 msgid "Could not find binary: "
 msgstr "Nie ŭdalosia znajsci dvajkovy fajl: "
 
-#: session/Session.cpp:441
+#: session/Session.cpp:443
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Uvaha: "
 
-#: session/Session.cpp:536
+#: session/Session.cpp:538
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "Nie ŭdalosia znajsci interaktyŭnuju abalonku dlia zapusku."
 
-#: session/Session.cpp:542 session/Session.cpp:545
+#: session/Session.cpp:544 session/Session.cpp:547
 #, fuzzy, kde-format
 #| msgid ""
 #| "Could not find %1, starting %2 instead.  Please check your profile "
@@ -2170,56 +2196,56 @@ msgstr ""
 "Nie ŭdalosia znajsci \"%1\", zamiest hetaha zapuskajecca \"%2\". Praviercie "
 "nalady profiliu."
 
-#: session/Session.cpp:619
+#: session/Session.cpp:638
 #, fuzzy, kde-format
 #| msgid "Could not start program %1 with arguments %2."
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Nie ŭdalosia zapuscić \"%1\" z arhumientami \"%2\"."
 
-#: session/Session.cpp:785
+#: session/Session.cpp:804
 #, fuzzy, kde-format
 #| msgid "Silence in %1 (Session %2)"
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Biazdziejnasć u \"%1\" (sieans \"%2\")"
 
-#: session/Session.cpp:786 session/Session.cpp:2129
+#: session/Session.cpp:805 session/Session.cpp:2232
 #: session/SessionController.cpp:362 session/SessionController.cpp:1898
-#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1214
-#: Vt102Emulation.cpp:1469
+#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1255
+#: Vt102Emulation.cpp:1510
 #, kde-format
 msgid "Show session"
 msgstr "Pakazać sieans"
 
-#: session/Session.cpp:1102
+#: session/Session.cpp:1121
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Zavieršana"
 
-#: session/Session.cpp:1116 session/Session.cpp:1132
+#: session/Session.cpp:1135 session/Session.cpp:1151
 #, fuzzy, kde-format
 #| msgid "Program %1 crashed."
 msgid "Program '%1' crashed."
 msgstr "Prahrama \"%1\" avaryjna zaviaršyla praces."
 
-#: session/Session.cpp:1118
+#: session/Session.cpp:1137
 #, fuzzy, kde-format
 #| msgid "Program %1 exited with status %2."
 msgid "Program '%1' exited with status %2."
 msgstr "Prahrama \"%1\" zakrylasia sa statusam %2."
 
-#: session/Session.cpp:1656
+#: session/Session.cpp:1688
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Chod vykanannia pracesaŭ ZModem"
 
-#: session/Session.cpp:2128
+#: session/Session.cpp:2231
 #, fuzzy, kde-format
 #| msgid "Activity in %1 (Session %2)"
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Aktyŭnasć u \"%1\" (sieans \"%2\")"
 
-#: session/Session.cpp:2276
+#: session/Session.cpp:2379
 #, kde-format
 msgid "Security sensitive DBus API is disabled in the settings."
 msgstr ""
@@ -3580,41 +3606,41 @@ msgstr ""
 msgid "This terminal is read-only."
 msgstr "Hety terminal dastupny toĺki dlia čytannia."
 
-#: terminalDisplay/TerminalDisplay.cpp:3045
+#: terminalDisplay/TerminalDisplay.cpp:3055
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Z&mianić kataloh na"
 
-#: terminalDisplay/TerminalDisplay.cpp:3080
+#: terminalDisplay/TerminalDisplay.cpp:3090
 #, kde-format
 msgid "&Paste Location"
 msgstr "Ustavić &razmiaščennie"
 
-#: ViewManager.cpp:121
+#: ViewManager.cpp:122
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View"
 msgstr "Padzialić"
 
-#: ViewManager.cpp:128
+#: ViewManager.cpp:129
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right"
 msgstr "Padzialić pa viertykali"
 
-#: ViewManager.cpp:136
+#: ViewManager.cpp:137
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom"
 msgstr "Padzialić pa haryzantali"
 
-#: ViewManager.cpp:144
+#: ViewManager.cpp:145
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically"
 msgstr "Padzialić aŭtamatyčna"
 
-#: ViewManager.cpp:154
+#: ViewManager.cpp:155
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Split View Left/Right"
@@ -3622,7 +3648,7 @@ msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
 msgstr "Padzialić pa viertykali"
 
-#: ViewManager.cpp:162
+#: ViewManager.cpp:163
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Split View Top/Bottom"
@@ -3630,7 +3656,7 @@ msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
 msgstr "Padzialić pa haryzantali"
 
-#: ViewManager.cpp:170
+#: ViewManager.cpp:171
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Split View Automatically"
@@ -3638,85 +3664,85 @@ msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
 msgstr "Padzialić aŭtamatyčna"
 
-#: ViewManager.cpp:180
+#: ViewManager.cpp:181
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x2 terminals"
 msgstr "Zahruzić novuju ŭkladku z makietam terminalaŭ 2ch2"
 
-#: ViewManager.cpp:189
+#: ViewManager.cpp:190
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x1 terminals"
 msgstr "Zahruzić novuju ŭkladku z makietam terminalaŭ 2ch1"
 
-#: ViewManager.cpp:198
+#: ViewManager.cpp:199
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 1x2 terminals"
 msgstr "Zahruzić novuju ŭkladku z makietam terminalaŭ 1ch2"
 
-#: ViewManager.cpp:206
+#: ViewManager.cpp:207
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Expand View"
 msgstr "Razhornuty vyhliad"
 
-#: ViewManager.cpp:214
+#: ViewManager.cpp:215
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Shrink View"
 msgstr "Scisly vyhliad"
 
-#: ViewManager.cpp:224
+#: ViewManager.cpp:225
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &View"
 msgstr "Adčapić biahučy addzielieny &terminal"
 
-#: ViewManager.cpp:236
+#: ViewManager.cpp:237
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &Tab"
 msgstr "Adčapić biahučuju &ŭkladku"
 
-#: ViewManager.cpp:241
+#: ViewManager.cpp:242
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Next Tab"
 msgstr "Nastupnaja ŭkladka"
 
-#: ViewManager.cpp:249
+#: ViewManager.cpp:250
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Previous Tab"
 msgstr "Papiaredniaja ŭkladka"
 
-#: ViewManager.cpp:257
+#: ViewManager.cpp:258
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Above Terminal"
 msgstr "Nad terminalam"
 
-#: ViewManager.cpp:264
+#: ViewManager.cpp:265
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Below Terminal"
 msgstr "Pad terminalam"
 
-#: ViewManager.cpp:271
+#: ViewManager.cpp:272
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Left Terminal"
 msgstr "Zlieva ad terminala"
 
-#: ViewManager.cpp:277
+#: ViewManager.cpp:278
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Right Terminal"
 msgstr "Sprava ad terminala"
 
-#: ViewManager.cpp:283
+#: ViewManager.cpp:284
 #, fuzzy, kde-format
 #| msgctxt "@action Shortcut entry"
 #| msgid "Focus Left Terminal"
@@ -3724,7 +3750,7 @@ msgctxt "@action Shortcut entry"
 msgid "Focus Next Terminal"
 msgstr "Zlieva ad terminala"
 
-#: ViewManager.cpp:289
+#: ViewManager.cpp:290
 #, fuzzy, kde-format
 #| msgctxt "@action Shortcut entry"
 #| msgid "Focus Below Terminal"
@@ -3732,43 +3758,43 @@ msgctxt "@action Shortcut entry"
 msgid "Focus Previous Terminal"
 msgstr "Pad terminalam"
 
-#: ViewManager.cpp:295
+#: ViewManager.cpp:296
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Last Tab"
 msgstr "Pierajsci na apošniuju ŭkladku"
 
-#: ViewManager.cpp:300
+#: ViewManager.cpp:301
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs"
 msgstr "Niadaŭnija ŭkladki"
 
-#: ViewManager.cpp:305
+#: ViewManager.cpp:306
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle Between Two Tabs"
 msgstr "Pierakliučennie pamiž dzviuma ŭkladkami"
 
-#: ViewManager.cpp:310
+#: ViewManager.cpp:311
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs (Reverse)"
 msgstr "Niadaŭnija ŭkladki(advarotny paradak)"
 
-#: ViewManager.cpp:315
+#: ViewManager.cpp:316
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle maximize current view"
 msgstr "Razharnuć biahučyja addzielienyja terminaly"
 
-#: ViewManager.cpp:316
+#: ViewManager.cpp:317
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle maximize current view"
 msgstr "Razharnuć biahučyja addzielienyja terminaly"
 
-#: ViewManager.cpp:324
+#: ViewManager.cpp:325
 #, fuzzy, kde-format
 #| msgctxt "@action Shortcut entry"
 #| msgid "Toggle maximize current view"
@@ -3776,7 +3802,7 @@ msgctxt "@action Shortcut entry"
 msgid "Toggle zoom-maximize current view"
 msgstr "Razharnuć biahučyja addzielienyja terminaly"
 
-#: ViewManager.cpp:325
+#: ViewManager.cpp:326
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Toggle maximize current view"
@@ -3784,61 +3810,61 @@ msgctxt "@action:inmenu"
 msgid "Toggle zoom-maximize current view"
 msgstr "Razharnuć biahučyja addzielienyja terminaly"
 
-#: ViewManager.cpp:333
+#: ViewManager.cpp:334
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the right"
 msgstr "Pieramiascić ukladku ŭprava"
 
-#: ViewManager.cpp:340
+#: ViewManager.cpp:341
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the left"
 msgstr "Pieramiascić ukladku ŭlieva"
 
-#: ViewManager.cpp:347
+#: ViewManager.cpp:348
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
 msgstr "Naladžvannie siemantyčnaj intehracyi (bash)"
 
-#: ViewManager.cpp:353
+#: ViewManager.cpp:354
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
 msgstr ""
 
-#: ViewManager.cpp:359
+#: ViewManager.cpp:360
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
 msgstr ""
 
-#: ViewManager.cpp:366
+#: ViewManager.cpp:367
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
 msgstr "Adnoĺkavy pamier usich addzielienych terminalaŭ"
 
-#: ViewManager.cpp:376
+#: ViewManager.cpp:377
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Tab %1"
 msgstr "Pierajsci na ŭkladku %1"
 
-#: ViewManager.cpp:599
+#: ViewManager.cpp:600
 #, fuzzy, kde-format
 #| msgid "Semantic hints:"
 msgid "Semantic hints "
 msgstr "Siemantyčnyja padkazki:"
 
-#: ViewManager.cpp:615
+#: ViewManager.cpp:616
 #, fuzzy, kde-format
 #| msgid "Fixed number of lines: "
 msgid "Line numbers "
 msgstr "Stalaja koĺkasć radkoŭ: "
 
-#: ViewManager.cpp:1214
+#: ViewManager.cpp:1223
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Save tab layout to file"
@@ -3846,13 +3872,13 @@ msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Zachavać makiet ukladak u fajl"
 
-#: ViewManager.cpp:1216 ViewManager.cpp:1337
+#: ViewManager.cpp:1225 ViewManager.cpp:1346
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Makiet kampanavannia terminalaŭ Konsole (*.json)"
 
-#: ViewManager.cpp:1232
+#: ViewManager.cpp:1241
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3862,7 +3888,7 @@ msgstr ""
 "Padčas zachavannia makieta ŭznikla prabliema.\n"
 "%1"
 
-#: ViewManager.cpp:1324
+#: ViewManager.cpp:1333
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3872,7 +3898,7 @@ msgstr ""
 "Padčas zahruzki makieta ŭznikla prabliema.\n"
 "%1"
 
-#: ViewManager.cpp:1335
+#: ViewManager.cpp:1344
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Load tab layout from file"
@@ -3880,7 +3906,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Zahruzić makiet ukladak z fajla"
 
-#: Vt102Emulation.cpp:2955
+#: Vt102Emulation.cpp:3206
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
@@ -4055,7 +4081,7 @@ msgstr "Redahavać abranuju kolieravuju schiemu"
 #. i18n: ectx: property (text), widget (QPushButton, textEditorCustomBtn)
 #. i18n: ectx: property (text), widget (QPushButton, editColorSchemeButton)
 #: widgets/EditProfileAppearancePage.ui:82
-#: widgets/EditProfileGeneralPage.ui:227 widgets/EditProfileKeyboardPage.ui:73
+#: widgets/EditProfileGeneralPage.ui:250 widgets/EditProfileKeyboardPage.ui:73
 #: widgets/EditProfileMousePage.ui:320
 #, kde-format
 msgid "Edit..."
@@ -4522,54 +4548,54 @@ msgstr "Ustavić &biez kiroŭnych simvalaŭ"
 msgid "Override wcwidth"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:68
+#: widgets/EditProfileDialog.cpp:70
 #, kde-format
 msgid "Edit Profile"
 msgstr "Redahavać profiĺ"
 
-#: widgets/EditProfileDialog.cpp:95
+#: widgets/EditProfileDialog.cpp:97
 #, kde-format
 msgctxt "@title:tab Generic, common options"
 msgid "General"
 msgstr "Asnoŭnyja nalady"
 
-#: widgets/EditProfileDialog.cpp:106
+#: widgets/EditProfileDialog.cpp:108
 #, kde-format
 msgid "Tabs"
 msgstr "Ukladki"
 
-#: widgets/EditProfileDialog.cpp:123
+#: widgets/EditProfileDialog.cpp:125
 #, kde-format
 msgid "Appearance"
 msgstr "Vyhliad"
 
-#: widgets/EditProfileDialog.cpp:139
+#: widgets/EditProfileDialog.cpp:141
 #, kde-format
 msgid "Scrolling"
 msgstr "Prakručvannie"
 
-#: widgets/EditProfileDialog.cpp:153
+#: widgets/EditProfileDialog.cpp:155
 #, kde-format
 msgid "Keyboard"
 msgstr "Klavijatura"
 
-#: widgets/EditProfileDialog.cpp:154
+#: widgets/EditProfileDialog.cpp:156
 #, kde-format
 msgid "Key bindings"
 msgstr "Pryviazvannie klaviš"
 
-#: widgets/EditProfileDialog.cpp:165
+#: widgets/EditProfileDialog.cpp:167
 #, kde-format
 msgid "Mouse"
 msgstr "Myš"
 
-#: widgets/EditProfileDialog.cpp:181
+#: widgets/EditProfileDialog.cpp:183
 #, kde-format
 msgctxt "@title:tab Complex options"
 msgid "Advanced"
 msgstr "Dadatkovyja nalady"
 
-#: widgets/EditProfileDialog.cpp:289
+#: widgets/EditProfileDialog.cpp:291
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -4581,31 +4607,31 @@ msgstr ""
 ">Abo zmianicie pravy dostupu dlia hetaha fajla, abo zmianicie nazvu, kab "
 "zachavać nalady ŭ novym profili."
 
-#: widgets/EditProfileDialog.cpp:306
+#: widgets/EditProfileDialog.cpp:308
 #, kde-format
 msgctxt "@info"
 msgid "Profile Name was empty; please set a name to be able to save settings."
 msgstr "Nazva profiliu pustaja. Kab zachavać nalady, uviadzicie nazvu."
 
-#: widgets/EditProfileDialog.cpp:314
+#: widgets/EditProfileDialog.cpp:316
 #, kde-format
 msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
 msgstr "Užo isnuje profiĺ z nazvaj \"%1\"."
 
-#: widgets/EditProfileDialog.cpp:344
+#: widgets/EditProfileDialog.cpp:346
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:382
+#: widgets/EditProfileDialog.cpp:384
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:418
+#: widgets/EditProfileDialog.cpp:420
 #, fuzzy, kde-format
 #| msgid "Editing profile: %2"
 #| msgid_plural "Editing %1 profiles: %2"
@@ -4616,17 +4642,17 @@ msgstr[1] "Redahavannie %1 profiliaŭ: %2"
 msgstr[2] "Redahavannie %1 profiliaŭ: %2"
 msgstr[3] "Redahavannie %1 profiliaŭ: %2"
 
-#: widgets/EditProfileDialog.cpp:422
+#: widgets/EditProfileDialog.cpp:424
 #, kde-format
 msgid "Create New Profile"
 msgstr "Stvaryć novy profiĺ"
 
-#: widgets/EditProfileDialog.cpp:425
+#: widgets/EditProfileDialog.cpp:427
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "Redahavać profiĺ \"%1\""
 
-#: widgets/EditProfileDialog.cpp:516
+#: widgets/EditProfileDialog.cpp:528
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4638,7 +4664,7 @@ msgstr[1] " slupki"
 msgstr[2] " slupki"
 msgstr[3] " slupki"
 
-#: widgets/EditProfileDialog.cpp:518
+#: widgets/EditProfileDialog.cpp:530
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4650,42 +4676,42 @@ msgstr[1] " radki"
 msgstr[2] " radki"
 msgstr[3] " radki"
 
-#: widgets/EditProfileDialog.cpp:528
+#: widgets/EditProfileDialog.cpp:540
 #, kde-format
 msgid "System Bell"
 msgstr "Sistemnaje hukavoje apaviaščennie"
 
-#: widgets/EditProfileDialog.cpp:528
+#: widgets/EditProfileDialog.cpp:540
 #, kde-format
 msgid "System Notifications"
 msgstr "Sistemnyja apaviaščenni"
 
-#: widgets/EditProfileDialog.cpp:528
+#: widgets/EditProfileDialog.cpp:540
 #, kde-format
 msgid "Visual Bell"
 msgstr "Vizualizacyja hukavoha apaviaščennia"
 
-#: widgets/EditProfileDialog.cpp:528
+#: widgets/EditProfileDialog.cpp:540
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "Nie zvažać na padziei dlia hukavych apaviaščenniaŭ"
 
-#: widgets/EditProfileDialog.cpp:537
+#: widgets/EditProfileDialog.cpp:549
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "Pradvyznačany profiĺ dlia novych sieansaŭ terminala ŭ %1"
 
-#: widgets/EditProfileDialog.cpp:642
+#: widgets/EditProfileDialog.cpp:655
 #, kde-format
 msgid "Edit Environment"
 msgstr "Redahavać asiaroddzie"
 
-#: widgets/EditProfileDialog.cpp:643
+#: widgets/EditProfileDialog.cpp:656
 #, kde-format
 msgid "One environment variable per line"
 msgstr "Adna zmiennaja asiaroddzia na radok"
 
-#: widgets/EditProfileDialog.cpp:674
+#: widgets/EditProfileDialog.cpp:687
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4695,24 +4721,24 @@ msgstr[1] " siekundy"
 msgstr[2] " siekund"
 msgstr[3] " siekundy"
 
-#: widgets/EditProfileDialog.cpp:788
+#: widgets/EditProfileDialog.cpp:806
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "Abrać pačatkovy kataloh"
 
-#: widgets/EditProfileDialog.cpp:948
+#: widgets/EditProfileDialog.cpp:966
 #, fuzzy, kde-format
 #| msgid "New..."
 msgid "Get New..."
 msgstr "Novy..."
 
-#: widgets/EditProfileDialog.cpp:1345
+#: widgets/EditProfileDialog.cpp:1363
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "Nie ŭdalosia zahruzić schiemu <resource>%1</resource>."
 
-#: widgets/EditProfileDialog.cpp:1527
+#: widgets/EditProfileDialog.cpp:1545
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4721,7 +4747,7 @@ msgstr ""
 "U hetaj kolieravaj schiemie vykarystoŭvajecca prazrysty fon, jaki nie "
 "padtrymlivajecca vašym pracoŭnym asiaroddziem"
 
-#: widgets/EditProfileDialog.cpp:1533
+#: widgets/EditProfileDialog.cpp:1551
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4730,13 +4756,13 @@ msgstr ""
 "Prahrama Konsole byla zapuščanaja da ŭkliučennia efiektaŭ pracoŭnaha "
 "asiaroddzia. Kab ubačyć prazrysty fon, vam treba pierazapuscić Konsole."
 
-#: widgets/EditProfileDialog.cpp:1934
+#: widgets/EditProfileDialog.cpp:1952
 #, fuzzy, kde-format
 #| msgid "Default profile"
 msgid "Default for file type"
 msgstr "Pradvyznačany profiĺ"
 
-#: widgets/EditProfileDialog.cpp:1960
+#: widgets/EditProfileDialog.cpp:1978
 #, fuzzy, kde-format
 #| msgid ""
 #| "The format is e.g. editorExec PATH:LINE:COLUMN\n"
@@ -4779,7 +4805,7 @@ msgstr ""
 "budzie praihnaravany, i fajl budzie adkryty ŭ pradvyznačanym tekstavym "
 "redaktary."
 
-#: widgets/EditProfileDialog.cpp:1973
+#: widgets/EditProfileDialog.cpp:1991
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Advoĺny zahad tekstavaha redaktara"
@@ -4871,27 +4897,42 @@ msgstr "Abrać pačatkovy kataloh"
 msgid "Start in same directory as current session"
 msgstr "Pačynać u katalozie biahučaha sieansa"
 
+#. i18n: ectx: property (toolTip), widget (QCheckBox, inheritContainerButton)
+#: widgets/EditProfileGeneralPage.ui:200
+#, kde-format
+msgid ""
+"When opening a new tab or split, automatically enter the same container "
+"(Toolbox, Distrobox) as the current session"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, inheritContainerButton)
+#: widgets/EditProfileGeneralPage.ui:203
+#, fuzzy, kde-format
+#| msgid "Start in same directory as current session"
+msgid "Enter same container as current session"
+msgstr "Pačynać u katalozie biahučaha sieansa"
+
 #. i18n: ectx: property (text), widget (QLabel, label_4)
-#: widgets/EditProfileGeneralPage.ui:206
+#: widgets/EditProfileGeneralPage.ui:229
 #, kde-format
 msgid "Environment:"
 msgstr "Asiaroddzie:"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, environmentEditButton)
-#: widgets/EditProfileGeneralPage.ui:224
+#: widgets/EditProfileGeneralPage.ui:247
 #, kde-format
 msgid "Edit the list of environment variables and associated values"
 msgstr "Redahavać spis zmiennych asiaroddzia i zviazanych značenniaŭ"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
-#: widgets/EditProfileGeneralPage.ui:271
+#: widgets/EditProfileGeneralPage.ui:294
 #, fuzzy, kde-format
 #| msgid "Initial terminal size:"
 msgid "Initial terminal si&ze:"
 msgstr "Pačatkovy pamier terminala:"
 
 #. i18n: ectx: property (text), widget (QLabel, useCurrentWindowSizeNote)
-#: widgets/EditProfileGeneralPage.ui:346
+#: widgets/EditProfileGeneralPage.ui:369
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -4904,32 +4945,32 @@ msgstr ""
 "adkliučany, kab heta pracavala.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, terminalBellLabel)
-#: widgets/EditProfileGeneralPage.ui:362
+#: widgets/EditProfileGeneralPage.ui:385
 #, fuzzy, kde-format
 #| msgid "Terminal bell mode:"
 msgid "&Terminal bell mode:"
 msgstr "Režym hukavoha apaviaščennia terminala:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, semantic)
-#: widgets/EditProfileGeneralPage.ui:380
+#: widgets/EditProfileGeneralPage.ui:403
 #, kde-format
 msgid "Semantic Integration"
 msgstr "Siemantyčnaja intehracyja"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticUpDown)
-#: widgets/EditProfileGeneralPage.ui:386
+#: widgets/EditProfileGeneralPage.ui:409
 #, kde-format
 msgid "Up/Down Arrows emulation"
 msgstr "Emuliacyja strelak Uvierch/Uniz"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticInputClick)
-#: widgets/EditProfileGeneralPage.ui:393
+#: widgets/EditProfileGeneralPage.ui:416
 #, kde-format
 msgid "Mouse click in input line moves cursor"
 msgstr "Pstrykannie myššu ŭ radku ŭvodu pieramiaščaje kursor"
 
 #. i18n: ectx: property (text), widget (QLabel, label_8)
-#: widgets/EditProfileGeneralPage.ui:406
+#: widgets/EditProfileGeneralPage.ui:429
 #, kde-format
 msgid "Semantic hints:"
 msgstr "Siemantyčnyja padkazki:"
@@ -4939,9 +4980,9 @@ msgstr "Siemantyčnyja padkazki:"
 #. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundNever)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsNever)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundNever)
-#: widgets/EditProfileGeneralPage.ui:416 widgets/EditProfileGeneralPage.ui:462
-#: widgets/EditProfileGeneralPage.ui:508 widgets/EditProfileGeneralPage.ui:554
-#: widgets/EditProfileGeneralPage.ui:600
+#: widgets/EditProfileGeneralPage.ui:439 widgets/EditProfileGeneralPage.ui:485
+#: widgets/EditProfileGeneralPage.ui:531 widgets/EditProfileGeneralPage.ui:577
+#: widgets/EditProfileGeneralPage.ui:623
 #, kde-format
 msgctxt "Never"
 msgid "Never"
@@ -4952,9 +4993,9 @@ msgstr "Nikoli"
 #. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundURL)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsURL)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundURL)
-#: widgets/EditProfileGeneralPage.ui:426 widgets/EditProfileGeneralPage.ui:472
-#: widgets/EditProfileGeneralPage.ui:518 widgets/EditProfileGeneralPage.ui:564
-#: widgets/EditProfileGeneralPage.ui:610
+#: widgets/EditProfileGeneralPage.ui:449 widgets/EditProfileGeneralPage.ui:495
+#: widgets/EditProfileGeneralPage.ui:541 widgets/EditProfileGeneralPage.ui:587
+#: widgets/EditProfileGeneralPage.ui:633
 #, kde-format
 msgctxt "When showing URL hints"
 msgid "When URL hints show"
@@ -4965,35 +5006,35 @@ msgstr "Kali pakazvajucca URL-padkazki"
 #. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundAlways)
-#: widgets/EditProfileGeneralPage.ui:436 widgets/EditProfileGeneralPage.ui:482
-#: widgets/EditProfileGeneralPage.ui:528 widgets/EditProfileGeneralPage.ui:574
-#: widgets/EditProfileGeneralPage.ui:620
+#: widgets/EditProfileGeneralPage.ui:459 widgets/EditProfileGeneralPage.ui:505
+#: widgets/EditProfileGeneralPage.ui:551 widgets/EditProfileGeneralPage.ui:597
+#: widgets/EditProfileGeneralPage.ui:643
 #, kde-format
 msgctxt "Always"
 msgid "Always"
 msgstr "Zaŭsiody"
 
 #. i18n: ectx: property (text), widget (QLabel, label_20)
-#: widgets/EditProfileGeneralPage.ui:452
+#: widgets/EditProfileGeneralPage.ui:475
 #, kde-format
 msgid "Red error bars:"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_30)
-#: widgets/EditProfileGeneralPage.ui:498
+#: widgets/EditProfileGeneralPage.ui:521
 #, fuzzy, kde-format
 #| msgid "Blur background"
 msgid "Red error background:"
 msgstr "Razmyccio fonu"
 
 #. i18n: ectx: property (text), widget (QLabel, label_40)
-#: widgets/EditProfileGeneralPage.ui:544
+#: widgets/EditProfileGeneralPage.ui:567
 #, kde-format
 msgid "Alternating bars:"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
-#: widgets/EditProfileGeneralPage.ui:590
+#: widgets/EditProfileGeneralPage.ui:613
 #, fuzzy, kde-format
 #| msgid "Blur background"
 msgid "Alternating background:"
