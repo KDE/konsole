@@ -2167,7 +2167,7 @@ void Session::saveSession(KConfigGroup &group)
     group.writeEntry("LocalTab", tabTitleFormat(LocalTabTitle));
     group.writeEntry("RemoteTab", tabTitleFormat(RemoteTabTitle));
     group.writeEntry("TabColor", color().isValid() ? color().name(QColor::HexArgb) : QString());
-    group.writeEntry("TabActivityColor", activityColor().isValid() ? color().name(QColor::HexArgb) : QString());
+    group.writeEntry("TabActivityColor", activityColor().isValid() ? activityColor().name(QColor::HexArgb) : QString());
     group.writeEntry("SessionGuid", _uniqueIdentifier.toString());
     group.writeEntry("Encoding", QString::fromUtf8(codec()));
 }
@@ -2315,7 +2315,7 @@ QColor Session::color() const
 
 void Session::setTabColor(const QString &colorName)
 {
-    setColor(QColor(colorName));
+    setColor(QColor::fromString(colorName));
 }
 
 QString Session::tabColor() const

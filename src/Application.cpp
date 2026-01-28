@@ -316,8 +316,8 @@ void Application::createTabFromArgs(MainWindow *window, const QHash<QString, QSt
     const QString &title = tokens[QStringLiteral("title")];
     const QString &command = tokens[QStringLiteral("command")];
     const QString &profile = tokens[QStringLiteral("profile")];
-    const QColor &color = tokens[QStringLiteral("tabcolor")];
-    const QColor &activityColor = tokens[QStringLiteral("tabactivitycolor")];
+    const QString &color = tokens[QStringLiteral("tabcolor")];
+    const QString &activityColor = tokens[QStringLiteral("tabactivitycolor")];
 
     Profile::Ptr baseProfile;
     if (!profile.isEmpty()) {
@@ -330,6 +330,7 @@ void Application::createTabFromArgs(MainWindow *window, const QHash<QString, QSt
 
     Profile::Ptr newProfile = Profile::Ptr(new Profile(baseProfile));
     newProfile->setHidden(true);
+    newProfile->setProperty(Profile::Name, ProfileManager::instance()->generateUniqueName());
 
     // FIXME: the method of determining whether to use newProfile does not
     // scale well when we support more fields in the future
@@ -348,14 +349,14 @@ void Application::createTabFromArgs(MainWindow *window, const QHash<QString, QSt
     }
 
     // For tab color support
-    if (color.isValid()) {
-        newProfile->setProperty(Profile::TabColor, color);
+    if (!color.isEmpty() && QColor::isValidColorName(color)) {
+        newProfile->setProperty(Profile::TabColor, QColor::fromString(color));
         shouldUseNewProfile = true;
     }
 
     // For tab color support
-    if (activityColor.isValid()) {
-        newProfile->setProperty(Profile::TabActivityColor, color);
+    if (!activityColor.isEmpty() && QColor::isValidColorName(activityColor)) {
+        newProfile->setProperty(Profile::TabActivityColor, QColor::fromString(activityColor));
         shouldUseNewProfile = true;
     }
 
