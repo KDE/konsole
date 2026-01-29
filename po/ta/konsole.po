@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-28 00:48+0000\n"
+"POT-Creation-Date: 2026-01-29 00:47+0000\n"
 "PO-Revision-Date: 2026-01-04 15:56+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-l10n-ta@kde.org>\n"
@@ -3396,64 +3396,64 @@ msgstr "Ctrl"
 msgid "Enable thumbnails generation"
 msgstr "சிறுபட உருவாக்கத்தை இயக்கு"
 
-#: terminalDisplay/TerminalDisplay.cpp:682
+#: terminalDisplay/TerminalDisplay.cpp:688
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr "அளவு: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2293
+#: terminalDisplay/TerminalDisplay.cpp:2299
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "%1 எழுத்தை உறுதியாக ஒட்ட வேண்டுமா?"
 msgstr[1] "%1 எழுத்துகளை உறுதியாக ஒட்ட வேண்டுமா?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2294
+#: terminalDisplay/TerminalDisplay.cpp:2300
 #, kde-format
 msgid "Confirm Paste"
 msgstr "ஒட்டுவதை உறுதிசெய்யுங்கள்"
 
-#: terminalDisplay/TerminalDisplay.cpp:2327
+#: terminalDisplay/TerminalDisplay.cpp:2333
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "End Of Text/Interrupt: தற்போதைய பணியை வெளியேற செய்யலாம்"
 
-#: terminalDisplay/TerminalDisplay.cpp:2328
+#: terminalDisplay/TerminalDisplay.cpp:2334
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "End Of Transmission: தற்போதைய பணியை வெளியேற செய்யலாம்"
 
-#: terminalDisplay/TerminalDisplay.cpp:2329
+#: terminalDisplay/TerminalDisplay.cpp:2335
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "மணி: கேட்க‍க்கூடிய எச்சரிக்கையை எழுப்ப முயற்சிக்கும்"
 
-#: terminalDisplay/TerminalDisplay.cpp:2330
+#: terminalDisplay/TerminalDisplay.cpp:2336
 #, kde-format
 msgid "Backspace"
 msgstr "Backspace"
 
-#: terminalDisplay/TerminalDisplay.cpp:2331
+#: terminalDisplay/TerminalDisplay.cpp:2337
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "Device Control Three/XOFF: வெளியீட்டை முடக்கும்"
 
-#: terminalDisplay/TerminalDisplay.cpp:2332
+#: terminalDisplay/TerminalDisplay.cpp:2338
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "Substitute/Suspend: தற்போதைய பணியை இடைநிறுத்தலாம்"
 
-#: terminalDisplay/TerminalDisplay.cpp:2333
+#: terminalDisplay/TerminalDisplay.cpp:2339
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Escape: முனையத்தின் நிலையை மாற்றியமைக்கும்"
 
-#: terminalDisplay/TerminalDisplay.cpp:2334
+#: terminalDisplay/TerminalDisplay.cpp:2340
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "File Separator/Quit: தற்போதைய பணியை ரத்து செய்யலாம்"
 
-#: terminalDisplay/TerminalDisplay.cpp:2357
+#: terminalDisplay/TerminalDisplay.cpp:2363
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3461,31 +3461,31 @@ msgid ""
 msgstr ""
 "நீங்கள் ஒட்ட முயற்சிக்கும் உரை, மறைந்த கட்டுப்பாடு குறிகளைக் கொண்டது. அவற்றை நீக்க வேண்டுமா?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2360
+#: terminalDisplay/TerminalDisplay.cpp:2366
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "ஒட்டுவதை உறுதிசெய்யுங்கள்"
 
-#: terminalDisplay/TerminalDisplay.cpp:2361
+#: terminalDisplay/TerminalDisplay.cpp:2367
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "&கட்டுப்பாடு குறிகளை நீக்கி ஒட்டு"
 
-#: terminalDisplay/TerminalDisplay.cpp:2362
+#: terminalDisplay/TerminalDisplay.cpp:2368
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "&அப்படியே ஒட்டு"
 
-#: terminalDisplay/TerminalDisplay.cpp:2363
+#: terminalDisplay/TerminalDisplay.cpp:2369
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "&ரத்து செய்"
 
-#: terminalDisplay/TerminalDisplay.cpp:2594
+#: terminalDisplay/TerminalDisplay.cpp:2600
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3496,17 +3496,17 @@ msgstr ""
 "wiki/Software_flow_control\">இடைநிறுத்தப்பட்டுள்ளது</a>. வெளியீடு தொடர <b>Ctrl+Q</"
 "b> என்பதை அழுத்துங்கள்.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2649
+#: terminalDisplay/TerminalDisplay.cpp:2655
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "இம்முனையம் படிக்க மட்டும் கூடியது."
 
-#: terminalDisplay/TerminalDisplay.cpp:3055
+#: terminalDisplay/TerminalDisplay.cpp:3061
 #, kde-format
 msgid "Change &Directory To"
 msgstr "&இந்த அடைவிற்கு மாறு"
 
-#: terminalDisplay/TerminalDisplay.cpp:3090
+#: terminalDisplay/TerminalDisplay.cpp:3096
 #, kde-format
 msgid "&Paste Location"
 msgstr "&இருப்பிடத்தை ஒட்டு"

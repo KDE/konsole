@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-28 00:48+0000\n"
+"POT-Creation-Date: 2026-01-29 00:47+0000\n"
 "PO-Revision-Date: 2026-01-11 20:49+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -3378,12 +3378,12 @@ msgstr "Ctrl"
 msgid "Enable thumbnails generation"
 msgstr "הפעלת יצירת תמונות ממוזערות"
 
-#: terminalDisplay/TerminalDisplay.cpp:682
+#: terminalDisplay/TerminalDisplay.cpp:688
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr "גודל: %1 על %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2293
+#: terminalDisplay/TerminalDisplay.cpp:2299
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
@@ -3392,83 +3392,83 @@ msgstr[1] "להדביק שני תווים?"
 msgstr[2] "להדביק %1 תווים?"
 msgstr[3] "להדביק %1 תווים?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2294
+#: terminalDisplay/TerminalDisplay.cpp:2300
 #, kde-format
 msgid "Confirm Paste"
 msgstr "אישור הדבקה"
 
-#: terminalDisplay/TerminalDisplay.cpp:2327
+#: terminalDisplay/TerminalDisplay.cpp:2333
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "סוף הטקסט/הפרעה: עשוי לצאת מהתהליך הנוכחי"
 
-#: terminalDisplay/TerminalDisplay.cpp:2328
+#: terminalDisplay/TerminalDisplay.cpp:2334
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "סוף ההעברה: עשוי לצאת מהתהליך הנוכחי"
 
-#: terminalDisplay/TerminalDisplay.cpp:2329
+#: terminalDisplay/TerminalDisplay.cpp:2335
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "פעמון: ינסה להזהיר באמצעות שמע"
 
-#: terminalDisplay/TerminalDisplay.cpp:2330
+#: terminalDisplay/TerminalDisplay.cpp:2336
 #, kde-format
 msgid "Backspace"
 msgstr "Backspace"
 
-#: terminalDisplay/TerminalDisplay.cpp:2331
+#: terminalDisplay/TerminalDisplay.cpp:2337
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "בקרת מכשיר שלוש/XOFF: משהה את הפלט"
 
-#: terminalDisplay/TerminalDisplay.cpp:2332
+#: terminalDisplay/TerminalDisplay.cpp:2338
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "החלפה/השהיה: עשוי להשהות את התהליך הנוכחי"
 
-#: terminalDisplay/TerminalDisplay.cpp:2333
+#: terminalDisplay/TerminalDisplay.cpp:2339
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Escape: משמש לתפעול מצב המסוף"
 
-#: terminalDisplay/TerminalDisplay.cpp:2334
+#: terminalDisplay/TerminalDisplay.cpp:2340
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "מפריד קובץ/יציאה: עשוי להשבית את התהליך הנוכחי"
 
-#: terminalDisplay/TerminalDisplay.cpp:2357
+#: terminalDisplay/TerminalDisplay.cpp:2363
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
 "want to filter them out?"
 msgstr "הטקסט שמיועד להדבקה מכיל תווי בקרה מוסתרים, לסנן אותם החוצה?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2360
+#: terminalDisplay/TerminalDisplay.cpp:2366
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "אישור הדבקה"
 
-#: terminalDisplay/TerminalDisplay.cpp:2361
+#: terminalDisplay/TerminalDisplay.cpp:2367
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "הדבקה &בלי תווי בקרה"
 
-#: terminalDisplay/TerminalDisplay.cpp:2362
+#: terminalDisplay/TerminalDisplay.cpp:2368
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "הדבקה של ה&כול"
 
-#: terminalDisplay/TerminalDisplay.cpp:2363
+#: terminalDisplay/TerminalDisplay.cpp:2369
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "&ביטול"
 
-#: terminalDisplay/TerminalDisplay.cpp:2594
+#: terminalDisplay/TerminalDisplay.cpp:2600
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3479,17 +3479,17 @@ msgstr ""
 "\">הושעה</a> על ידי לחיצה על Ctrl+S. יש ללחוץ על <b>Ctrl+Q</b> כדי להמשיך.</"
 "qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2649
+#: terminalDisplay/TerminalDisplay.cpp:2655
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "המסוף הזה הוא לקריאה בלבד."
 
-#: terminalDisplay/TerminalDisplay.cpp:3055
+#: terminalDisplay/TerminalDisplay.cpp:3061
 #, kde-format
 msgid "Change &Directory To"
 msgstr "מעבר ל&תיקייה"
 
-#: terminalDisplay/TerminalDisplay.cpp:3090
+#: terminalDisplay/TerminalDisplay.cpp:3096
 #, kde-format
 msgid "&Paste Location"
 msgstr "ה&דבקת מיקום"

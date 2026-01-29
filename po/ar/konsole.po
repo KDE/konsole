@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-28 00:48+0000\n"
-"PO-Revision-Date: 2026-01-14 07:51+0400\n"
+"POT-Creation-Date: 2026-01-29 00:47+0000\n"
+"PO-Revision-Date: 2026-01-28 20:53+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -685,27 +685,27 @@ msgstr "AaZz09..."
 #, kde-format
 msgid ""
 "Container support is not available when Konsole is running inside Flatpak."
-msgstr ""
+msgstr "الحاويات غير متاحة عندما يكون كونسول يعمل داخل Flatpak."
 
 #: containers/DistroboxDetector.cpp:67
 #, kde-format
 msgid "Distrobox"
-msgstr ""
+msgstr "Distrobox"
 
 #: containers/DistroboxDetector.cpp:167
 #, kde-format
 msgid "Distrobox: %1"
-msgstr ""
+msgstr "Distrobox: %1"
 
 #: containers/ToolboxDetector.cpp:24
 #, kde-format
 msgid "Toolbox"
-msgstr ""
+msgstr "صندوق الأدوات"
 
 #: containers/ToolboxDetector.cpp:45
 #, kde-format
 msgid "Toolbox: %1"
-msgstr ""
+msgstr "صندوق الأدوات: %1"
 
 #: CopyInputDialog.cpp:30
 #, kde-format
@@ -3390,12 +3390,12 @@ msgstr "Ctrl"
 msgid "Enable thumbnails generation"
 msgstr "مكّن توليد المصغرات"
 
-#: terminalDisplay/TerminalDisplay.cpp:682
+#: terminalDisplay/TerminalDisplay.cpp:688
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr "القياس: %1 × %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2293
+#: terminalDisplay/TerminalDisplay.cpp:2299
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
@@ -3406,83 +3406,83 @@ msgstr[3] "هل أنت متأكد من لصق %1 محارف؟"
 msgstr[4] "هل أنت متأكد من لصق %1 محرفًا؟"
 msgstr[5] "هل أنت متأكد من لصق %1 محرف؟"
 
-#: terminalDisplay/TerminalDisplay.cpp:2294
+#: terminalDisplay/TerminalDisplay.cpp:2300
 #, kde-format
 msgid "Confirm Paste"
 msgstr "تأكيد اللصق"
 
-#: terminalDisplay/TerminalDisplay.cpp:2327
+#: terminalDisplay/TerminalDisplay.cpp:2333
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "نهاية النص/المقاطعة: قد تخرج من العملية الحالية"
 
-#: terminalDisplay/TerminalDisplay.cpp:2328
+#: terminalDisplay/TerminalDisplay.cpp:2334
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "نهاية النقل: قد تخرج من العملية الحالية"
 
-#: terminalDisplay/TerminalDisplay.cpp:2329
+#: terminalDisplay/TerminalDisplay.cpp:2335
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "الجرس: سيحاول إصدار تحذير صوتي"
 
-#: terminalDisplay/TerminalDisplay.cpp:2330
+#: terminalDisplay/TerminalDisplay.cpp:2336
 #, kde-format
 msgid "Backspace"
 msgstr "مسافة للخلف"
 
-#: terminalDisplay/TerminalDisplay.cpp:2331
+#: terminalDisplay/TerminalDisplay.cpp:2337
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "التحكم بالجهاز الثالثة/XOFF: يعلق الخرج"
 
-#: terminalDisplay/TerminalDisplay.cpp:2332
+#: terminalDisplay/TerminalDisplay.cpp:2338
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "بديل/ معلق: قد يوقف العملية الحالية"
 
-#: terminalDisplay/TerminalDisplay.cpp:2333
+#: terminalDisplay/TerminalDisplay.cpp:2339
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "الهروب: يستخدم للتلاعب بالحالة الطرفية"
 
-#: terminalDisplay/TerminalDisplay.cpp:2334
+#: terminalDisplay/TerminalDisplay.cpp:2340
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "فاصل/ إنهاء الملف: قد يحبط العملية الحالية"
 
-#: terminalDisplay/TerminalDisplay.cpp:2357
+#: terminalDisplay/TerminalDisplay.cpp:2363
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
 "want to filter them out?"
 msgstr "يحتوي النص الذي تحاول لصقه على أحرف تحكم مخفية، هل تريد تصفيتها؟ "
 
-#: terminalDisplay/TerminalDisplay.cpp:2360
+#: terminalDisplay/TerminalDisplay.cpp:2366
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "تأكيد اللصق"
 
-#: terminalDisplay/TerminalDisplay.cpp:2361
+#: terminalDisplay/TerminalDisplay.cpp:2367
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "ألصق &دون أحرف التحكم"
 
-#: terminalDisplay/TerminalDisplay.cpp:2362
+#: terminalDisplay/TerminalDisplay.cpp:2368
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "ألصق &كل شيء"
 
-#: terminalDisplay/TerminalDisplay.cpp:2363
+#: terminalDisplay/TerminalDisplay.cpp:2369
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "أل&غِ"
 
-#: terminalDisplay/TerminalDisplay.cpp:2594
+#: terminalDisplay/TerminalDisplay.cpp:2600
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3492,17 +3492,17 @@ msgstr ""
 "<qt>المخرجات <a href=\"https://en.wikipedia.org/wiki/Software_flow_control"
 "\">علقت</a> بواسطة ضغط  Ctrl+S.  اضغط  <b>Ctrl+Q</b> للاستئنافها.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2649
+#: terminalDisplay/TerminalDisplay.cpp:2655
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "الطرفية للقراءة فقط"
 
-#: terminalDisplay/TerminalDisplay.cpp:3055
+#: terminalDisplay/TerminalDisplay.cpp:3061
 #, kde-format
 msgid "Change &Directory To"
 msgstr "غيّر ال&دليل إلى"
 
-#: terminalDisplay/TerminalDisplay.cpp:3090
+#: terminalDisplay/TerminalDisplay.cpp:3096
 #, kde-format
 msgid "&Paste Location"
 msgstr "أ&لصق المكان"
@@ -4732,13 +4732,14 @@ msgid ""
 "When opening a new tab or split, automatically enter the same container "
 "(Toolbox, Distrobox) as the current session"
 msgstr ""
+"عند فتح لسان جديد أو تقسيم جديد، أدخل آليًا نفس الحاوية (Toolbox، Distrobox) "
+"مثل الجلسة الحالية"
 
 #. i18n: ectx: property (text), widget (QCheckBox, inheritContainerButton)
 #: widgets/EditProfileGeneralPage.ui:203
-#, fuzzy, kde-format
-#| msgid "Start in same directory as current session"
+#, kde-format
 msgid "Enter same container as current session"
-msgstr "ابدأ بنفس الدليل الموجود في الجلسة الحالية"
+msgstr "أدخل نفس الحاوية مثل الجلسة الحالية"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/EditProfileGeneralPage.ui:229

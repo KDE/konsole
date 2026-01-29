@@ -21,15 +21,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-28 00:48+0000\n"
-"PO-Revision-Date: 2026-01-11 14:26+0100\n"
+"POT-Creation-Date: 2026-01-29 00:47+0000\n"
+"PO-Revision-Date: 2026-01-28 15:57+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 25.12.0\n"
+"X-Generator: Lokalize 25.12.1\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -699,26 +699,28 @@ msgstr "AaZz09..."
 msgid ""
 "Container support is not available when Konsole is running inside Flatpak."
 msgstr ""
+"Ondersteuning voor container is niet Beschikbaar wanneer Konsole actief is "
+"in Flatpak."
 
 #: containers/DistroboxDetector.cpp:67
 #, kde-format
 msgid "Distrobox"
-msgstr ""
+msgstr "Distrobox"
 
 #: containers/DistroboxDetector.cpp:167
 #, kde-format
 msgid "Distrobox: %1"
-msgstr ""
+msgstr "Distrobox: %1"
 
 #: containers/ToolboxDetector.cpp:24
 #, kde-format
 msgid "Toolbox"
-msgstr ""
+msgstr "Toolbox"
 
 #: containers/ToolboxDetector.cpp:45
 #, kde-format
 msgid "Toolbox: %1"
-msgstr ""
+msgstr "Toolbox: %1"
 
 #: CopyInputDialog.cpp:30
 #, kde-format
@@ -3436,64 +3438,64 @@ msgstr "Ctrl"
 msgid "Enable thumbnails generation"
 msgstr "Generatie van miniaturen inschakelen"
 
-#: terminalDisplay/TerminalDisplay.cpp:682
+#: terminalDisplay/TerminalDisplay.cpp:688
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr "Grootte: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2293
+#: terminalDisplay/TerminalDisplay.cpp:2299
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "Wilt u %1 teken plakken?"
 msgstr[1] "Wilt u %1 tekens plakken?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2294
+#: terminalDisplay/TerminalDisplay.cpp:2300
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Plakken bevestigen"
 
-#: terminalDisplay/TerminalDisplay.cpp:2327
+#: terminalDisplay/TerminalDisplay.cpp:2333
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "Einde tekst/Interrupt: kan het huidige proces afsluiten"
 
-#: terminalDisplay/TerminalDisplay.cpp:2328
+#: terminalDisplay/TerminalDisplay.cpp:2334
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "Einde van overdracht: kan het huidige proces afsluiten"
 
-#: terminalDisplay/TerminalDisplay.cpp:2329
+#: terminalDisplay/TerminalDisplay.cpp:2335
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Bel: zal proberen een hoorbare waarschuwing uit te sturen"
 
-#: terminalDisplay/TerminalDisplay.cpp:2330
+#: terminalDisplay/TerminalDisplay.cpp:2336
 #, kde-format
 msgid "Backspace"
 msgstr "Backspace"
 
-#: terminalDisplay/TerminalDisplay.cpp:2331
+#: terminalDisplay/TerminalDisplay.cpp:2337
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "Apparaatbesturing drie/XOFF: uitvoer onderbreken"
 
-#: terminalDisplay/TerminalDisplay.cpp:2332
+#: terminalDisplay/TerminalDisplay.cpp:2338
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "Substitueren/onderbreken: kan het huidige proces onderbreken"
 
-#: terminalDisplay/TerminalDisplay.cpp:2333
+#: terminalDisplay/TerminalDisplay.cpp:2339
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Escape: gebruikt om status van terminal te manipuleren"
 
-#: terminalDisplay/TerminalDisplay.cpp:2334
+#: terminalDisplay/TerminalDisplay.cpp:2340
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "Bestandsscheiding/afsluiten: kan het huidige proces afbreken"
 
-#: terminalDisplay/TerminalDisplay.cpp:2357
+#: terminalDisplay/TerminalDisplay.cpp:2363
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3502,31 +3504,31 @@ msgstr ""
 "De tekst die u probeert te plakken bevat verborgen besturingstekens, wilt u "
 "ze uitfilteren?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2360
+#: terminalDisplay/TerminalDisplay.cpp:2366
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Plakken bevestigen"
 
-#: terminalDisplay/TerminalDisplay.cpp:2361
+#: terminalDisplay/TerminalDisplay.cpp:2367
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Plakken &zonder besturingstekens"
 
-#: terminalDisplay/TerminalDisplay.cpp:2362
+#: terminalDisplay/TerminalDisplay.cpp:2368
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "Alles &plakken"
 
-#: terminalDisplay/TerminalDisplay.cpp:2363
+#: terminalDisplay/TerminalDisplay.cpp:2369
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "&Annuleren"
 
-#: terminalDisplay/TerminalDisplay.cpp:2594
+#: terminalDisplay/TerminalDisplay.cpp:2600
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3537,17 +3539,17 @@ msgstr ""
 "\">onderbroken</a> door het drukken op Ctrl+S. Druk op <b>Ctrl+Q</b> om te "
 "hervatten.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2649
+#: terminalDisplay/TerminalDisplay.cpp:2655
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Deze terminal is alleen-lezen."
 
-#: terminalDisplay/TerminalDisplay.cpp:3055
+#: terminalDisplay/TerminalDisplay.cpp:3061
 #, kde-format
 msgid "Change &Directory To"
 msgstr "&Map wijzigen naar"
 
-#: terminalDisplay/TerminalDisplay.cpp:3090
+#: terminalDisplay/TerminalDisplay.cpp:3096
 #, kde-format
 msgid "&Paste Location"
 msgstr "Locatie &plakken"
@@ -4777,13 +4779,14 @@ msgid ""
 "When opening a new tab or split, automatically enter the same container "
 "(Toolbox, Distrobox) as the current session"
 msgstr ""
+"Bij openen van een nieuw tabblad of splitsing, ga automatisch in dezelfde "
+"container (Toolbox, Distrobox) als de huidige sessie"
 
 #. i18n: ectx: property (text), widget (QCheckBox, inheritContainerButton)
 #: widgets/EditProfileGeneralPage.ui:203
-#, fuzzy, kde-format
-#| msgid "Start in same directory as current session"
+#, kde-format
 msgid "Enter same container as current session"
-msgstr "In dezelfde map als huidige sessie starten"
+msgstr "Ga dezelfde container in als de huidige sessie"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/EditProfileGeneralPage.ui:229
