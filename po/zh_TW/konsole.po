@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 14:43+0000\n"
-"PO-Revision-Date: 2026-01-09 01:25+0900\n"
+"PO-Revision-Date: 2026-01-28 19:52+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -4578,7 +4578,7 @@ msgstr "選擇啟始目錄"
 #: widgets/EditProfileGeneralPage.ui:193
 #, kde-format
 msgid "Start in same directory as current session"
-msgstr "以目前階段所在的目錄開始"
+msgstr "以目前工作階段所在的目錄開始"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/EditProfileGeneralPage.ui:206
