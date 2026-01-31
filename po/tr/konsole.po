@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-29 00:47+0000\n"
+"POT-Creation-Date: 2026-01-31 00:47+0000\n"
 "PO-Revision-Date: 2026-01-29 16:20+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -3787,7 +3787,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Sekme Yerleşimi Yükle"
 
-#: Vt102Emulation.cpp:3206
+#: Vt102Emulation.cpp:3219
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "

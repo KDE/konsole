@@ -22,8 +22,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-29 00:47+0000\n"
-"PO-Revision-Date: 2026-01-11 20:49+0200\n"
+"POT-Creation-Date: 2026-01-31 00:47+0000\n"
+"PO-Revision-Date: 2026-01-28 08:27+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -687,27 +687,27 @@ msgstr "AaZz09..."
 #, kde-format
 msgid ""
 "Container support is not available when Konsole is running inside Flatpak."
-msgstr ""
+msgstr "אין תמיכה במכולות כש־Konsole רץ מתוך Flatpak."
 
 #: containers/DistroboxDetector.cpp:67
 #, kde-format
 msgid "Distrobox"
-msgstr ""
+msgstr "Distrobox"
 
 #: containers/DistroboxDetector.cpp:167
 #, kde-format
 msgid "Distrobox: %1"
-msgstr ""
+msgstr "Distrobox: %1"
 
 #: containers/ToolboxDetector.cpp:24
 #, kde-format
 msgid "Toolbox"
-msgstr ""
+msgstr "Toolbox"
 
 #: containers/ToolboxDetector.cpp:45
 #, kde-format
 msgid "Toolbox: %1"
-msgstr ""
+msgstr "Toolbox: %1"
 
 #: CopyInputDialog.cpp:30
 #, kde-format
@@ -3764,7 +3764,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "טעינת פריסת לשוניות"
 
-#: Vt102Emulation.cpp:3206
+#: Vt102Emulation.cpp:3219
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
@@ -4708,13 +4708,14 @@ msgid ""
 "When opening a new tab or split, automatically enter the same container "
 "(Toolbox, Distrobox) as the current session"
 msgstr ""
+"בעת פתיחת לשונית חדשה או פיצול, להיכנס אוטומטית לאותה המכולה (Distrobox,‏ "
+"Toolbox) כמו ההפעלה הנוכחית"
 
 #. i18n: ectx: property (text), widget (QCheckBox, inheritContainerButton)
 #: widgets/EditProfileGeneralPage.ui:203
-#, fuzzy, kde-format
-#| msgid "Start in same directory as current session"
+#, kde-format
 msgid "Enter same container as current session"
-msgstr "התחלה באותה התיקייה כמו ההפעלה הנוכחית"
+msgstr "להיכנס לאותה המכולה כמו ההפעלה הנוכחית"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/EditProfileGeneralPage.ui:229

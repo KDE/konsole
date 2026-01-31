@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-29 00:47+0000\n"
+"POT-Creation-Date: 2026-01-31 00:47+0000\n"
 "PO-Revision-Date: 2025-02-23 13:36+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -3804,7 +3804,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Ŝargi Tab Aranĝo"
 
-#: Vt102Emulation.cpp:3206
+#: Vt102Emulation.cpp:3219
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "

@@ -21,8 +21,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-29 00:47+0000\n"
-"PO-Revision-Date: 2026-01-12 10:22+0100\n"
+"POT-Creation-Date: 2026-01-31 00:47+0000\n"
+"PO-Revision-Date: 2026-01-29 09:29+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -712,26 +712,28 @@ msgstr "AaZz09..."
 msgid ""
 "Container support is not available when Konsole is running inside Flatpak."
 msgstr ""
+"La prise en charge des conteneurs n’est pas disponible lorsque Konsole "
+"fonctionne à l’intérieur de Flatpak."
 
 #: containers/DistroboxDetector.cpp:67
 #, kde-format
 msgid "Distrobox"
-msgstr ""
+msgstr "Distrobox"
 
 #: containers/DistroboxDetector.cpp:167
 #, kde-format
 msgid "Distrobox: %1"
-msgstr ""
+msgstr "Distrobox : %1"
 
 #: containers/ToolboxDetector.cpp:24
 #, kde-format
 msgid "Toolbox"
-msgstr ""
+msgstr "Boîte à outils"
 
 #: containers/ToolboxDetector.cpp:45
 #, kde-format
 msgid "Toolbox: %1"
-msgstr ""
+msgstr "Boîte à outils : %1"
 
 #: CopyInputDialog.cpp:30
 #, kde-format
@@ -3866,7 +3868,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Charger une disposition d'onglets"
 
-#: Vt102Emulation.cpp:3206
+#: Vt102Emulation.cpp:3219
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
@@ -4833,13 +4835,15 @@ msgid ""
 "When opening a new tab or split, automatically enter the same container "
 "(Toolbox, Distrobox) as the current session"
 msgstr ""
+"Lors de l'ouverture d'un nouvel onglet ou d'une division, veuillez saisir "
+"automatiquement le même conteneur (Toolbox, Distrobox) que la session en "
+"cours"
 
 #. i18n: ectx: property (text), widget (QCheckBox, inheritContainerButton)
 #: widgets/EditProfileGeneralPage.ui:203
-#, fuzzy, kde-format
-#| msgid "Start in same directory as current session"
+#, kde-format
 msgid "Enter same container as current session"
-msgstr "Démarrer dans le même dossier que la session actuelle"
+msgstr "Saisir le même conteneur que la session courante"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/EditProfileGeneralPage.ui:229
