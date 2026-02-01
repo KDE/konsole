@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-31 00:47+0000\n"
+"POT-Creation-Date: 2026-02-01 00:47+0000\n"
 "PO-Revision-Date: 2025-10-09 01:00+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -1211,66 +1211,66 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "이 외의 많은 사람들에게 감사드립니다.\n"
 
-#: MainWindow.cpp:342
+#: MainWindow.cpp:386
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "새 탭(&N)"
 
-#: MainWindow.cpp:352
+#: MainWindow.cpp:396
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "탭 복제(&C)"
 
-#: MainWindow.cpp:359
+#: MainWindow.cpp:403
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "새 창(&W)"
 
-#: MainWindow.cpp:366
+#: MainWindow.cpp:410
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "창 닫기"
 
-#: MainWindow.cpp:371
+#: MainWindow.cpp:415
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "책갈피(&B)"
 
-#: MainWindow.cpp:398
+#: MainWindow.cpp:442
 #, kde-format
 msgid "&Window Color Scheme"
 msgstr "창 색 구성표(&W)"
 
-#: MainWindow.cpp:410
+#: MainWindow.cpp:454
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "프로필 관리..."
 
-#: MainWindow.cpp:416
+#: MainWindow.cpp:460
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "메뉴 활성화"
 
-#: MainWindow.cpp:422
+#: MainWindow.cpp:466
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "탭 레이아웃 저장..."
 
-#: MainWindow.cpp:431
+#: MainWindow.cpp:475
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "탭 레이아웃 불러오기..."
 
-#: MainWindow.cpp:779 MainWindow.cpp:796
+#: MainWindow.cpp:823 MainWindow.cpp:840
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1278,61 +1278,61 @@ msgid_plural ""
 "There are %1 processes running in this window. Do you still want to quit?"
 msgstr[0] "현재 창에 프로세스 %1개가 실행 중입니다. 종료하시겠습니까?"
 
-#: MainWindow.cpp:785 MainWindow.cpp:802 MainWindow.cpp:816
+#: MainWindow.cpp:829 MainWindow.cpp:846 MainWindow.cpp:860
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "닫기 확인"
 
-#: MainWindow.cpp:786 MainWindow.cpp:803 MainWindow.cpp:817
+#: MainWindow.cpp:830 MainWindow.cpp:847 MainWindow.cpp:861
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "창 닫기(&W)"
 
-#: MainWindow.cpp:804 MainWindow.cpp:818
+#: MainWindow.cpp:848 MainWindow.cpp:862
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "현재 탭 닫기(&T)"
 
-#: MainWindow.cpp:813
+#: MainWindow.cpp:857
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "현재 창에 터미널 %1개가 열려 있습니다. 종료하시겠습니까?"
 
-#: MainWindow.cpp:920 Part.cpp:317
+#: MainWindow.cpp:964 Part.cpp:317
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "프로필"
 
-#: MainWindow.cpp:938
+#: MainWindow.cpp:982
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "일반"
 
-#: MainWindow.cpp:950
+#: MainWindow.cpp:994
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr "메모리"
 
-#: MainWindow.cpp:956
+#: MainWindow.cpp:1000
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "탭 표시줄/구분자"
 
-#: MainWindow.cpp:961
+#: MainWindow.cpp:1005
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "임시 파일"
 
-#: MainWindow.cpp:966
+#: MainWindow.cpp:1010
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -1891,14 +1891,14 @@ msgstr "출력 옵션"
 
 #. i18n: ectx: property (text), widget (QCheckBox, printerFriendly)
 #. i18n: ectx: label, entry (PrinterFriendly), group (PrintOptions)
-#: PrintOptions.ui:39 settings/konsole.kcfg:205
+#: PrintOptions.ui:39 settings/konsole.kcfg:210
 #, kde-format
 msgid "Printer &friendly mode (black text, no background)"
 msgstr "프린터 친화 모드 (검은 텍스트, 배경색 없음)(&F)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, scaleOutput)
 #. i18n: ectx: label, entry (ScaleOutput), group (PrintOptions)
-#: PrintOptions.ui:46 settings/konsole.kcfg:209
+#: PrintOptions.ui:46 settings/konsole.kcfg:214
 #, kde-format
 msgid "&Scale output"
 msgstr "출력 크기 조정(&S)"
@@ -2138,54 +2138,54 @@ msgstr ""
 "'%1'을(를) 찾을 수 없어서 '%2'을(를) 대신 시작합니다. 프로필 설정을 확인하십"
 "시오."
 
-#: session/Session.cpp:638
+#: session/Session.cpp:640
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "프로그램 '%1'을(를) 인자 '%2'을(를) 사용하여 시작할 수 없습니다."
 
-#: session/Session.cpp:804
+#: session/Session.cpp:806
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "'%1'에서 응답 없음(세션 '%2')"
 
-#: session/Session.cpp:805 session/Session.cpp:2232
-#: session/SessionController.cpp:362 session/SessionController.cpp:1898
+#: session/Session.cpp:807 session/Session.cpp:2234
+#: session/SessionController.cpp:369 session/SessionController.cpp:1905
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1255
 #: Vt102Emulation.cpp:1510
 #, kde-format
 msgid "Show session"
 msgstr "세션 표시"
 
-#: session/Session.cpp:1121
+#: session/Session.cpp:1123
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "완료됨"
 
-#: session/Session.cpp:1135 session/Session.cpp:1151
+#: session/Session.cpp:1137 session/Session.cpp:1153
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr ""
 "프로그램 '%1'이(가) 충돌했습니다.|/|프로그램 '%1'$[이가 %1] 충돌했습니다."
 
-#: session/Session.cpp:1137
+#: session/Session.cpp:1139
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr ""
 "프로그램 '%1'이(가) 상태 %2(으)로 끝났습니다.|/|프로그램 '%1'$[이가 %1] 상태 "
 "%2$[으 %2]로 끝났습니다."
 
-#: session/Session.cpp:1688
+#: session/Session.cpp:1690
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem 진행 상황"
 
-#: session/Session.cpp:2231
+#: session/Session.cpp:2233
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "'%1'의 활동(세션 '%2')"
 
-#: session/Session.cpp:2379
+#: session/Session.cpp:2381
 #, kde-format
 msgid "Security sensitive DBus API is disabled in the settings."
 msgstr "보안에 민감한 DBus API가 비활성화되어 있습니다."
@@ -2195,310 +2195,310 @@ msgstr "보안에 민감한 DBus API가 비활성화되어 있습니다."
 msgid "Konsole"
 msgstr "Konsole"
 
-#: session/SessionController.cpp:361
+#: session/SessionController.cpp:368
 #, kde-format
 msgid "The process '%1' has finished running in session '%2'"
 msgstr "세션 '%2'에서 실행 중인 '%1' 프로세스가 종료됨"
 
-#: session/SessionController.cpp:444
+#: session/SessionController.cpp:451
 #, kde-format
 msgid "Konsole does not know how to open the bookmark: "
 msgstr "Konsole에서 책갈피를 여는 방법을 알 수 없습니다: "
 
-#: session/SessionController.cpp:522
+#: session/SessionController.cpp:529
 #, kde-format
 msgid "Search for '%1' with"
 msgstr "다음에서 '%1' 검색"
 
-#: session/SessionController.cpp:538
+#: session/SessionController.cpp:545
 #, kde-format
 msgid "Configure Web Shortcuts..."
 msgstr "웹 바로 가기 설정..."
 
-#: session/SessionController.cpp:649
+#: session/SessionController.cpp:656
 #, kde-format
 msgid "&Close Session"
 msgstr "세션 닫기(&C)"
 
-#: session/SessionController.cpp:656
+#: session/SessionController.cpp:663
 #, kde-format
 msgid "Open File Manager"
 msgstr "파일 관리자 열기"
 
-#: session/SessionController.cpp:671
+#: session/SessionController.cpp:678
 #, kde-format
 msgid "Copy"
 msgstr "복사"
 
-#: session/SessionController.cpp:678
+#: session/SessionController.cpp:685
 #, kde-format
 msgid "Split View Left-Right"
 msgstr "왼쪽/오른쪽으로 보기 나누기"
 
-#: session/SessionController.cpp:683
+#: session/SessionController.cpp:690
 #, kde-format
 msgid "Split View Top-Bottom"
 msgstr "위/아래로 보기 나누기"
 
-#: session/SessionController.cpp:687
+#: session/SessionController.cpp:694
 #, kde-format
 msgid "Copy except prompts"
 msgstr "프롬프트 제외 복사"
 
-#: session/SessionController.cpp:693
+#: session/SessionController.cpp:700
 #, kde-format
 msgid "Copy user input"
 msgstr "사용자 입력 복사"
 
-#: session/SessionController.cpp:699
+#: session/SessionController.cpp:706
 #, kde-format
 msgid "Copy command output"
 msgstr "명령 출력 복사"
 
-#: session/SessionController.cpp:714
+#: session/SessionController.cpp:721
 #, kde-format
 msgid "Paste Selection"
 msgstr "선택 붙여넣기"
 
-#: session/SessionController.cpp:721
+#: session/SessionController.cpp:728
 #, kde-format
 msgid "Web Search"
 msgstr "웹 검색"
 
-#: session/SessionController.cpp:727
+#: session/SessionController.cpp:734
 #, kde-format
 msgid "&Select All"
 msgstr "모두 선택(&S)"
 
-#: session/SessionController.cpp:731
+#: session/SessionController.cpp:738
 #, kde-format
 msgid "Select &Mode"
 msgstr "선택 모드(&M)"
 
-#: session/SessionController.cpp:736
+#: session/SessionController.cpp:743
 #, kde-format
 msgid "Select &Line"
 msgstr "줄 선택(&L)"
 
-#: session/SessionController.cpp:739
+#: session/SessionController.cpp:746
 #, kde-format
 msgid "Save Output &As..."
 msgstr "출력 저장(&A)..."
 
-#: session/SessionController.cpp:745
+#: session/SessionController.cpp:752
 #, kde-format
 msgid "Auto Save Output As..."
 msgstr "자동으로 다른 이름으로 출력 저장..."
 
-#: session/SessionController.cpp:749
+#: session/SessionController.cpp:756
 #, kde-format
 msgid "Stop Auto Save"
 msgstr "자동 저장 정지"
 
-#: session/SessionController.cpp:753
+#: session/SessionController.cpp:760
 #, kde-format
 msgid "&Print Screen..."
 msgstr "화면 인쇄(&P)..."
 
-#: session/SessionController.cpp:757
+#: session/SessionController.cpp:764
 #, kde-format
 msgid "Adjust Scrollback..."
 msgstr "스크롤백 설정..."
 
-#: session/SessionController.cpp:761
+#: session/SessionController.cpp:768
 #, kde-format
 msgid "Clear Scrollback"
 msgstr "스크롤백 삭제"
 
-#: session/SessionController.cpp:765
+#: session/SessionController.cpp:772
 #, kde-format
 msgid "Clear Scrollback and Reset"
 msgstr "스크롤백 지우고 초기화"
 
-#: session/SessionController.cpp:776
+#: session/SessionController.cpp:783
 #, kde-format
 msgid "Next Profile"
 msgstr "다음 프로필"
 
-#: session/SessionController.cpp:781
+#: session/SessionController.cpp:788
 #, kde-format
 msgid "Previous Profile"
 msgstr "이전 프로필"
 
-#: session/SessionController.cpp:784
+#: session/SessionController.cpp:791
 #, kde-format
 msgid "Switch Profile"
 msgstr "프로필 전환"
 
-#: session/SessionController.cpp:809
+#: session/SessionController.cpp:816
 #, kde-format
 msgid "Set &Encoding"
 msgstr "인코딩 설정(&E)"
 
-#: session/SessionController.cpp:829
+#: session/SessionController.cpp:836
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow Mouse Tracking"
 msgstr "마우스 추적 허용"
 
-#: session/SessionController.cpp:838
+#: session/SessionController.cpp:845
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
 msgstr "읽기 전용"
 
-#: session/SessionController.cpp:849
+#: session/SessionController.cpp:856
 #, kde-format
 msgid "&Configure or Rename Tab..."
 msgstr "탭 설정 및 이름 바꾸기(&C)..."
 
-#: session/SessionController.cpp:855
+#: session/SessionController.cpp:862
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr "현재 창의 모든 탭(&A)"
 
-#: session/SessionController.cpp:862
+#: session/SessionController.cpp:869
 #, kde-format
 msgid "&Select Tabs..."
 msgstr "선택한 탭(&S)..."
 
-#: session/SessionController.cpp:868
+#: session/SessionController.cpp:875
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "없음(&N)"
 
-#: session/SessionController.cpp:876
+#: session/SessionController.cpp:883
 #, kde-format
 msgid "Copy Input To"
 msgstr "입력을 다음으로 복사하기"
 
-#: session/SessionController.cpp:884
+#: session/SessionController.cpp:891
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "ZModem 업로드(&Z)..."
 
-#: session/SessionController.cpp:889
+#: session/SessionController.cpp:896
 #, kde-format
 msgid "One-Shot Monitors"
 msgstr "한 번 실행되는 모니터"
 
-#: session/SessionController.cpp:894
+#: session/SessionController.cpp:901
 #, kde-format
 msgid "Monitor for &Prompt"
 msgstr "프롬프트 지켜보기(&P)"
 
-#: session/SessionController.cpp:901
+#: session/SessionController.cpp:908
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "활동 상태 지켜보기(&A)"
 
-#: session/SessionController.cpp:907
+#: session/SessionController.cpp:914
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "응답 없는 상태 지켜보기(&S)"
 
-#: session/SessionController.cpp:913
+#: session/SessionController.cpp:920
 #, kde-format
 msgid "Monitor for Process Finishing"
 msgstr "프로세스 완료 지켜보기"
 
-#: session/SessionController.cpp:920
+#: session/SessionController.cpp:927
 #, kde-format
 msgid "Enlarge Font"
 msgstr "글꼴 크기 확대"
 
-#: session/SessionController.cpp:928
+#: session/SessionController.cpp:935
 #, kde-format
 msgid "Shrink Font"
 msgstr "글꼴 크기 축소"
 
-#: session/SessionController.cpp:933
+#: session/SessionController.cpp:940
 #, kde-format
 msgid "Reset Font Size"
 msgstr "글꼴 크기 초기화"
 
-#: session/SessionController.cpp:939
+#: session/SessionController.cpp:946
 #, kde-format
 msgid "Send Signal"
 msgstr "시그널 보내기"
 
-#: session/SessionController.cpp:943
+#: session/SessionController.cpp:950
 #, kde-format
 msgid "&Suspend Task"
 msgstr "작업 중단(&S)"
 
-#: session/SessionController.cpp:948
+#: session/SessionController.cpp:955
 #, kde-format
 msgid "&Continue Task"
 msgstr "작업 계속(&C)"
 
-#: session/SessionController.cpp:953
+#: session/SessionController.cpp:960
 #, kde-format
 msgid "&Hangup"
 msgstr "행업(&H)"
 
-#: session/SessionController.cpp:958
+#: session/SessionController.cpp:965
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "작업 인터럽트(&I)"
 
-#: session/SessionController.cpp:963
+#: session/SessionController.cpp:970
 #, kde-format
 msgid "&Terminate Task"
 msgstr "작업 종료(&T)"
 
-#: session/SessionController.cpp:968
+#: session/SessionController.cpp:975
 #, kde-format
 msgid "&Kill Task"
 msgstr "작업 죽이기(&K)"
 
-#: session/SessionController.cpp:973
+#: session/SessionController.cpp:980
 #, kde-format
 msgid "User Signal &1"
 msgstr "사용자 시그널 1(&1)"
 
-#: session/SessionController.cpp:978
+#: session/SessionController.cpp:985
 #, kde-format
 msgid "User Signal &2"
 msgstr "사용자 시그널 2(&2)"
 
-#: session/SessionController.cpp:996
+#: session/SessionController.cpp:1003
 #, kde-format
 msgid "Create New Profile..."
 msgstr "새 프로필 만들기..."
 
-#: session/SessionController.cpp:998
+#: session/SessionController.cpp:1005
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "현재 프로필 편집..."
 
-#: session/SessionController.cpp:1129
+#: session/SessionController.cpp:1136
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
 "close it?"
 msgstr "이 세션에서 프로그램이 실행 중입니다. 종료하시겠습니까?"
 
-#: session/SessionController.cpp:1133
+#: session/SessionController.cpp:1140
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
 "want to close it?"
 msgstr "이 세션에서 프로그램 '%1'이(가) 실행 중입니다. 닫으시겠습니까?"
 
-#: session/SessionController.cpp:1140 session/SessionController.cpp:1175
+#: session/SessionController.cpp:1147 session/SessionController.cpp:1182
 #, kde-format
 msgid "Confirm Close"
 msgstr "닫기 확인"
 
-#: session/SessionController.cpp:1141
+#: session/SessionController.cpp:1148
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "프로그램 닫기"
 
-#: session/SessionController.cpp:1164
+#: session/SessionController.cpp:1171
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
@@ -2506,7 +2506,7 @@ msgid ""
 msgstr ""
 "이 세션에서 실행 중인 프로그램이 죽지 않습니다. 강제로 종료하시겠습니까?"
 
-#: session/SessionController.cpp:1168
+#: session/SessionController.cpp:1175
 #, kde-format
 msgid ""
 "The program '%1' in this session would not die.  Are you sure you want to "
@@ -2515,28 +2515,28 @@ msgstr ""
 "이 세션에서 실행 중인 프로그램 '%1'이(가) 죽지 않습니다. 강제로 종료하시겠습"
 "니까?"
 
-#: session/SessionController.cpp:1176
+#: session/SessionController.cpp:1183
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "프로그램 죽이기"
 
-#: session/SessionController.cpp:1897
+#: session/SessionController.cpp:1904
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "세션 '%1'에서 셸 프롬프트가 표시됨"
 
-#: session/SessionController.cpp:2126
+#: session/SessionController.cpp:2133
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "다음으로 현재 폴더 열기"
 
-#: session/SessionController.cpp:2196
+#: session/SessionController.cpp:2203
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "다른 이름으로 ZModem 다운로드 저장..."
 
-#: session/SessionController.cpp:2206
+#: session/SessionController.cpp:2213
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2547,13 +2547,13 @@ msgstr ""
 "웨어를 찾을 수 없습니다.</p><p>'rzsz' 또는 'lrzsz' 패키지를 설치해 보십시오."
 "</p>"
 
-#: session/SessionController.cpp:2216
+#: session/SessionController.cpp:2223
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>현재 세션에서 ZModem 파일 전송이 진행 중입니다.</p>"
 
-#: session/SessionController.cpp:2229
+#: session/SessionController.cpp:2236
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2562,7 +2562,7 @@ msgstr ""
 "<p>시스템에서 ZModem 소프트웨어를 찾을 수 없습니다.</p><p>'rzsz' 또는 "
 "'lrzsz' 패키지를 설치해 보십시오.</p>"
 
-#: session/SessionController.cpp:2234
+#: session/SessionController.cpp:2241
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "ZModem으로 업로드할 파일 선택"
@@ -2585,164 +2585,170 @@ msgctxt "@title:window"
 msgid "Configure"
 msgstr "설정"
 
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableSecuritySensitiveDBusAPI)
-#. i18n: ectx: label, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:43 settings/konsole.kcfg:42
-#, kde-format
-msgid "Enable the security sensitive parts of the DBus API"
-msgstr "보안에 민감한 DBus API 활성화"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchHighlightMatches)
-#: settings/GeneralSettings.ui:56
-#, kde-format
-msgid "Highlight all matches"
-msgstr "모두 강조"
-
-#. i18n: ectx: property (text), widget (QLabel, label_3)
-#: settings/GeneralSettings.ui:63
-#, kde-format
-msgid "Notifications:"
-msgstr "알림:"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_FocusFollowsMouse)
-#. i18n: ectx: label, entry (FocusFollowsMouse), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:70 settings/konsole.kcfg:13
-#, kde-format
-msgid "Focus terminals when the mouse pointer is moved over them"
-msgstr "마우스 포인터가 위에 있을 때 터미널에 포커스 맞추기"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RemoveWindowTitleBarAndFrame)
-#. i18n: ectx: label, entry (RemoveWindowTitleBarAndFrame), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:77 settings/konsole.kcfg:9
-#, kde-format
-msgid "Remove window titlebar and frame"
-msgstr "창 제목 표시줄과 프레임 숨기기"
-
-#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_RememberWindowSize)
-#: settings/GeneralSettings.ui:90
-#, kde-format
-msgid "If enabled, profile settings will be ignored"
-msgstr "선택하면 프로필 설정을 무시합니다"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RememberWindowSize)
-#: settings/GeneralSettings.ui:93
-#, kde-format
-msgid "Remember window size"
-msgstr "창 크기 기억"
-
-#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchNoWrap)
-#. i18n: ectx: tooltip, entry (SearchNoWrap), group (SearchSettings)
-#: settings/GeneralSettings.ui:106 settings/konsole.kcfg:99
-#, kde-format
-msgid "Sets whether search should stop instead of wrapping"
-msgstr "검색을 원점에서 다시 시작하는 대신 중지할지 여부"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchNoWrap)
-#: settings/GeneralSettings.ui:109
-#, kde-format
-msgid "No wrap"
-msgstr "다시 시작하지 않음"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: settings/GeneralSettings.ui:116
-#, kde-format
-msgid "Process and window:"
-msgstr "프로세스와 창:"
-
-#. i18n: ectx: property (toolTip), widget (QPushButton, enableAllMessagesButton)
-#: settings/GeneralSettings.ui:137
-#, kde-format
-msgid "All dialogs will be shown again"
-msgstr "모든 대화 상자를 다시 표시합니다"
-
-#. i18n: ectx: property (text), widget (QPushButton, enableAllMessagesButton)
-#: settings/GeneralSettings.ui:140
-#, kde-format
-msgid "Enable all \"Don't Ask Again\" messages"
-msgstr "모든 \"다시 묻지 않음\" 메시지 활성화"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ForceNewTabs)
-#. i18n: ectx: label, entry (ForceNewTabs), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:178 settings/konsole.kcfg:37
-#, fuzzy, kde-format
-#| msgid "Put new tabs:"
-msgid "Force new tabs"
-msgstr "새 탭 위치:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: settings/GeneralSettings.ui:185
-#, kde-format
-msgctxt "@item:intext Search options"
-msgid "Search:"
-msgstr "검색:"
-
-#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchReverseSearch)
-#. i18n: ectx: tooltip, entry (SearchReverseSearch), group (SearchSettings)
-#: settings/GeneralSettings.ui:198 settings/konsole.kcfg:94
-#, kde-format
-msgid "Sets whether search should start from the bottom"
-msgstr "검색을 맨 밑에서부터 시작할지 여부"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchReverseSearch)
-#. i18n: ectx: label, entry (SearchReverseSearch), group (SearchSettings)
-#: settings/GeneralSettings.ui:201 settings/konsole.kcfg:93
-#, kde-format
-msgid "Search backwards"
-msgstr "뒤로 검색"
-
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_UseSingleInstance)
 #. i18n: ectx: tooltip, entry (UseSingleInstance), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:214 settings/konsole.kcfg:33
+#: settings/GeneralSettings.ui:49 settings/konsole.kcfg:33
 #, kde-format
 msgid "When launching Konsole re-use existing process if possible"
 msgstr "사용 가능한 경우 Konsole을 실행할 때 프로세스 재사용"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSingleInstance)
 #. i18n: ectx: label, entry (UseSingleInstance), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:217 settings/konsole.kcfg:32
+#: settings/GeneralSettings.ui:52 settings/konsole.kcfg:32
 #, kde-format
 msgid "Run all Konsole windows in a single process"
 msgstr "모든 Konsole 창을 단일 프로세스로 실행"
 
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_RememberWindowSize)
+#: settings/GeneralSettings.ui:81
+#, kde-format
+msgid "If enabled, profile settings will be ignored"
+msgstr "선택하면 프로필 설정을 무시합니다"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RememberWindowSize)
+#: settings/GeneralSettings.ui:84
+#, kde-format
+msgid "Remember window size"
+msgstr "창 크기 기억"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ForceNewTabs)
+#. i18n: ectx: label, entry (ForceNewTabs), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:91 settings/konsole.kcfg:37
+#, fuzzy, kde-format
+#| msgid "Put new tabs:"
+msgid "Force new tabs"
+msgstr "새 탭 위치:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ListenForZModemTerminalCodes)
+#: settings/GeneralSettings.ui:98
+#, kde-format
+msgid "Listen for ZModem terminal codes"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowProgressInTaskBar)
+#: settings/GeneralSettings.ui:105
+#, kde-format
+msgid "Show progress in taskbar"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: settings/GeneralSettings.ui:112
+#, kde-format
+msgid "Notifications:"
+msgstr "알림:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchReverseSearch)
+#. i18n: ectx: tooltip, entry (SearchReverseSearch), group (SearchSettings)
+#: settings/GeneralSettings.ui:125 settings/konsole.kcfg:99
+#, kde-format
+msgid "Sets whether search should start from the bottom"
+msgstr "검색을 맨 밑에서부터 시작할지 여부"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchReverseSearch)
+#. i18n: ectx: label, entry (SearchReverseSearch), group (SearchSettings)
+#: settings/GeneralSettings.ui:128 settings/konsole.kcfg:98
+#, kde-format
+msgid "Search backwards"
+msgstr "뒤로 검색"
+
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchCaseSensitive)
 #. i18n: ectx: tooltip, entry (SearchCaseSensitive), group (SearchSettings)
-#: settings/GeneralSettings.ui:230 settings/konsole.kcfg:80
+#: settings/GeneralSettings.ui:141 settings/konsole.kcfg:85
 #, kde-format
 msgid "Sets whether the search is case sensitive"
 msgstr "검색할 텍스트의 대소문자를 구분할지 선택합니다"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchCaseSensitive)
-#: settings/GeneralSettings.ui:233
+#: settings/GeneralSettings.ui:144
 #, kde-format
 msgid "Case sensitive"
 msgstr "대소문자 구분"
 
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowWindowTitleOnTitleBar)
-#. i18n: ectx: label, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:262 settings/konsole.kcfg:17
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: settings/GeneralSettings.ui:151
 #, kde-format
-msgid "Show window title on the titlebar"
-msgstr "제목 표시줄에 창 제목 표시"
+msgid "Process and window:"
+msgstr "프로세스와 창:"
 
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchRegExpression)
-#. i18n: ectx: label, entry (SearchRegExpression), group (SearchSettings)
-#: settings/GeneralSettings.ui:275 settings/konsole.kcfg:84
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchHighlightMatches)
+#: settings/GeneralSettings.ui:167
 #, kde-format
-msgid "Match using regular expressions"
-msgstr "정규 표현식 일치"
+msgid "Highlight all matches"
+msgstr "모두 강조"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: settings/GeneralSettings.ui:174
+#, kde-format
+msgctxt "@item:intext Search options"
+msgid "Search:"
+msgstr "검색:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchNoWrap)
+#. i18n: ectx: tooltip, entry (SearchNoWrap), group (SearchSettings)
+#: settings/GeneralSettings.ui:203 settings/konsole.kcfg:104
+#, kde-format
+msgid "Sets whether search should stop instead of wrapping"
+msgstr "검색을 원점에서 다시 시작하는 대신 중지할지 여부"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchNoWrap)
+#: settings/GeneralSettings.ui:206
+#, kde-format
+msgid "No wrap"
+msgstr "다시 시작하지 않음"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AllowMenuAccelerators)
 #. i18n: ectx: label, entry (AllowMenuAccelerators), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:288 settings/konsole.kcfg:22
+#: settings/GeneralSettings.ui:219 settings/konsole.kcfg:22
 #, kde-format
 msgid "Enable menu accelerators"
 msgstr "메뉴 가속기 키 사용하기"
 
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ListenForZModemTerminalCodes)
-#: settings/GeneralSettings.ui:295
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_FocusFollowsMouse)
+#. i18n: ectx: label, entry (FocusFollowsMouse), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:226 settings/konsole.kcfg:13
 #, kde-format
-msgid "Listen for ZModem terminal codes"
-msgstr ""
+msgid "Focus terminals when the mouse pointer is moved over them"
+msgstr "마우스 포인터가 위에 있을 때 터미널에 포커스 맞추기"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, enableAllMessagesButton)
+#: settings/GeneralSettings.ui:244
+#, kde-format
+msgid "All dialogs will be shown again"
+msgstr "모든 대화 상자를 다시 표시합니다"
+
+#. i18n: ectx: property (text), widget (QPushButton, enableAllMessagesButton)
+#: settings/GeneralSettings.ui:247
+#, kde-format
+msgid "Enable all \"Don't Ask Again\" messages"
+msgstr "모든 \"다시 묻지 않음\" 메시지 활성화"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowWindowTitleOnTitleBar)
+#. i18n: ectx: label, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:275 settings/konsole.kcfg:17
+#, kde-format
+msgid "Show window title on the titlebar"
+msgstr "제목 표시줄에 창 제목 표시"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableSecuritySensitiveDBusAPI)
+#. i18n: ectx: label, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:282 settings/konsole.kcfg:47
+#, kde-format
+msgid "Enable the security sensitive parts of the DBus API"
+msgstr "보안에 민감한 DBus API 활성화"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RemoveWindowTitleBarAndFrame)
+#. i18n: ectx: label, entry (RemoveWindowTitleBarAndFrame), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:289 settings/konsole.kcfg:9
+#, kde-format
+msgid "Remove window titlebar and frame"
+msgstr "창 제목 표시줄과 프레임 숨기기"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchRegExpression)
+#. i18n: ectx: label, entry (SearchRegExpression), group (SearchSettings)
+#: settings/GeneralSettings.ui:302 settings/konsole.kcfg:89
+#, kde-format
+msgid "Match using regular expressions"
+msgstr "정규 표현식 일치"
 
 #. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:18
@@ -2777,89 +2783,101 @@ msgid ""
 "possible"
 msgstr "사용 가능한 경우 Konsole을 실행할 때 프로세스 재사용"
 
-#. i18n: ectx: tooltip, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
+#. i18n: ectx: label, entry (ShowProgressInTaskBar), group (KonsoleWindow)
+#: settings/konsole.kcfg:42
+#, kde-format
+msgid "Show progress in task bar"
+msgstr ""
+
+#. i18n: ectx: tooltip, entry (ShowProgressInTaskBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:43
+#, kde-format
+msgid "When a script reports its progress, it will be shown in the task bar"
+msgstr ""
+
+#. i18n: ectx: tooltip, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
+#: settings/konsole.kcfg:48
 #, kde-format
 msgid "DBus API like runCommand will be enabled"
 msgstr "runCommand와 같은 DBus API가 활성화됨"
 
 #. i18n: ectx: label, entry (ListenForZModemTerminalCodes), group (KonsoleWindow)
-#: settings/konsole.kcfg:47
+#: settings/konsole.kcfg:52
 #, kde-format
 msgid "Listen for ZModem Terminal codes"
 msgstr ""
 
 #. i18n: ectx: tooltip, entry (ListenForZModemTerminalCodes), group (KonsoleWindow)
-#: settings/konsole.kcfg:48
+#: settings/konsole.kcfg:53
 #, kde-format
 msgid "Automatic send/receive files over serial connections"
 msgstr ""
 
 #. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
-#: settings/konsole.kcfg:57
+#: settings/konsole.kcfg:62
 #, kde-format
 msgid "Thumbnail Width"
 msgstr "섬네일 너비"
 
 #. i18n: ectx: tooltip, entry (ThumbnailSize), group (ThumbnailsSettings)
-#: settings/konsole.kcfg:58
+#: settings/konsole.kcfg:63
 #, kde-format
 msgid "Sets the width of the thumbnail"
 msgstr "섬네일 너비 설정"
 
 #. i18n: ectx: label, entry (ThumbnailShift), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailShift), group (ThumbnailsSettings)
-#: settings/konsole.kcfg:62 settings/konsole.kcfg:63
+#: settings/konsole.kcfg:67 settings/konsole.kcfg:68
 #, kde-format
 msgid "Use Shift to display a thumbnail"
 msgstr "Shift 키를 눌러서 섬네일 표시"
 
 #. i18n: ectx: label, entry (ThumbnailAlt), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailAlt), group (ThumbnailsSettings)
-#: settings/konsole.kcfg:67 settings/konsole.kcfg:68
+#: settings/konsole.kcfg:72 settings/konsole.kcfg:73
 #, kde-format
 msgid "Use Alt to display a thumbnail"
 msgstr "Alt 키를 눌러서 섬네일 표시"
 
 #. i18n: ectx: label, entry (ThumbnailCtrl), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailCtrl), group (ThumbnailsSettings)
-#: settings/konsole.kcfg:72 settings/konsole.kcfg:73
+#: settings/konsole.kcfg:77 settings/konsole.kcfg:78
 #, kde-format
 msgid "Use Ctrl to display a thumbnail"
 msgstr "Ctrl 키를 눌러서 섬네일 표시"
 
 #. i18n: ectx: label, entry (SearchCaseSensitive), group (SearchSettings)
-#: settings/konsole.kcfg:79
+#: settings/konsole.kcfg:84
 #, kde-format
 msgid "Search is case sensitive"
 msgstr "검색 시 대소문자 구분"
 
 #. i18n: ectx: label, entry (SearchHighlightMatches), group (SearchSettings)
-#: settings/konsole.kcfg:88
+#: settings/konsole.kcfg:93
 #, kde-format
 msgid "Highlight all search matches"
 msgstr "모든 검색 결과 강조"
 
 #. i18n: ectx: tooltip, entry (SearchHighlightMatches), group (SearchSettings)
-#: settings/konsole.kcfg:89
+#: settings/konsole.kcfg:94
 #, kde-format
 msgid "Sets whether matching text should be highlighted"
 msgstr "일치하는 텍스트가 강조될 지 설정합니다"
 
 #. i18n: ectx: label, entry (SearchNoWrap), group (SearchSettings)
-#: settings/konsole.kcfg:98
+#: settings/konsole.kcfg:103
 #, kde-format
 msgid "Search stops instead of wrapping"
 msgstr "검색을 다시 시작하지 않고 중지함"
 
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
-#: settings/konsole.kcfg:105
+#: settings/konsole.kcfg:110
 #, kde-format
 msgid "Control whether child cgroups are created for individual tabs"
 msgstr "개별 탭별로 자식 cgroup 생성 여부 설정"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
-#: settings/konsole.kcfg:109
+#: settings/konsole.kcfg:114
 #, kde-format
 msgid ""
 "Determines the memory consumption level above which throttling will start"
@@ -2867,97 +2885,97 @@ msgstr "스로틀링을 시작할 메모리 사용량 설정"
 
 #. i18n: ectx: label, entry (SplitViewVisibility), group (SplitView)
 #. i18n: ectx: label, entry (TabBarVisibility), group (TabBar)
-#: settings/konsole.kcfg:115 settings/konsole.kcfg:135
+#: settings/konsole.kcfg:120 settings/konsole.kcfg:140
 #, kde-format
 msgid "Control the visibility of the whole tab bar"
 msgstr "전체 탭 표시줄 표시 여부 결정"
 
 #. i18n: ectx: label, entry (SplitDragHandleSize), group (SplitView)
-#: settings/konsole.kcfg:124
+#: settings/konsole.kcfg:129
 #, kde-format
 msgid "Control the size of the handle between panels"
 msgstr "패널 사이의 손잡이 크기 조정"
 
 #. i18n: ectx: label, entry (TabBarPosition), group (TabBar)
-#: settings/konsole.kcfg:144
+#: settings/konsole.kcfg:149
 #, kde-format
 msgid "Control the position of the tab bar"
 msgstr "탭 표시줄 위치 결정"
 
 #. i18n: ectx: label, entry (TabBarStyleSheet), group (TabBar)
-#: settings/konsole.kcfg:154
+#: settings/konsole.kcfg:159
 #, kde-format
 msgid "Control the visual style of the tab bar"
 msgstr "탭 표시줄 시각 스타일 결정"
 
 #. i18n: ectx: label, entry (TabBarUseUserStyleSheet), group (TabBar)
-#: settings/konsole.kcfg:158
+#: settings/konsole.kcfg:163
 #, kde-format
 msgid "Use a user-defined .css file for the tab bar"
 msgstr "탭 표시줄에 사용자 정의 .css 파일 사용"
 
 #. i18n: ectx: label, entry (TabBarUserStyleSheetFile), group (TabBar)
-#: settings/konsole.kcfg:162
+#: settings/konsole.kcfg:167
 #, kde-format
 msgid "The .css file to use for the tab bar style"
 msgstr "탭 표시줄 스타일에 사용할 .css 파일"
 
 #. i18n: ectx: label, entry (CloseTabOnMiddleMouseButton), group (TabBar)
-#: settings/konsole.kcfg:166
+#: settings/konsole.kcfg:171
 #, kde-format
 msgid "Allow middle-clicking on open tabs to close them"
 msgstr "열린 탭을 가운데 단추로 클릭했을 때 닫기 허용"
 
 #. i18n: ectx: label, entry (NewTabButton), group (TabBar)
-#: settings/konsole.kcfg:170
+#: settings/konsole.kcfg:175
 #, kde-format
 msgid "Control the visibility of 'New Tab' button on the tab bar"
 msgstr "탭 표시줄의 '새 탭' 단추 표시 설정"
 
 #. i18n: ectx: label, entry (SearchTabsButton), group (TabBar)
-#: settings/konsole.kcfg:174
+#: settings/konsole.kcfg:179
 #, kde-format
 msgid "Control the visibility of 'Search Tabs' button on the tab bar"
 msgstr "탭 표시줄의 '탭 검색' 단추 표시 설정"
 
 #. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
-#: settings/konsole.kcfg:182
+#: settings/konsole.kcfg:187
 #, kde-format
 msgid "Control where the \"Close tab\" button will be displayed"
 msgstr "\"탭 닫기\" 단추를 표시할 위치 설정"
 
 #. i18n: ectx: label, entry (NewTabBehavior), group (TabBar)
-#: settings/konsole.kcfg:191
+#: settings/konsole.kcfg:196
 #, kde-format
 msgid "Control where to put the new tab"
 msgstr "새 탭의 위치 결정"
 
 #. i18n: ectx: label, entry (ExpandTabWidth), group (TabBar)
-#: settings/konsole.kcfg:199
+#: settings/konsole.kcfg:204
 #, kde-format
 msgid "Expand the tab widths"
 msgstr "탭 너비 확장"
 
 #. i18n: ectx: label, entry (scrollbackUseSystemLocation), group (FileLocation)
-#: settings/konsole.kcfg:215
+#: settings/konsole.kcfg:220
 #, kde-format
 msgid "For scrollback files, use system-wide folder location"
 msgstr "스크롤백 파일에 시스템 전역 위치 사용"
 
 #. i18n: ectx: label, entry (scrollbackUseCacheLocation), group (FileLocation)
-#: settings/konsole.kcfg:219
+#: settings/konsole.kcfg:224
 #, kde-format
 msgid "For scrollback files, use user's specific folder location"
 msgstr "스크롤백 파일에 사용자 정의 위치 사용"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocation), group (FileLocation)
-#: settings/konsole.kcfg:223
+#: settings/konsole.kcfg:228
 #, kde-format
 msgid "For scrollback files, use specified folder location"
 msgstr "스크롤백 파일에 지정한 폴더 위치 사용"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocationDirectory), group (FileLocation)
-#: settings/konsole.kcfg:227
+#: settings/konsole.kcfg:232
 #, kde-format
 msgid "For scrollback files, use this folder"
 msgstr "스크롤백 파일에 다음 폴더 사용"
@@ -3769,7 +3787,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "탭 레이아웃 불러오기"
 
-#: Vt102Emulation.cpp:3219
+#: Vt102Emulation.cpp:3255
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
@@ -5666,19 +5684,19 @@ msgctxt "@info:tooltip"
 msgid "Close this tab"
 msgstr "이 탭 닫기"
 
-#: widgets/ViewContainer.cpp:102
+#: widgets/ViewContainer.cpp:104
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Detach Tab"
 msgstr "탭 떼내기(&D)"
 
-#: widgets/ViewContainer.cpp:108
+#: widgets/ViewContainer.cpp:110
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Configure or Rename Tab..."
 msgstr "탭 설정 및 이름 바꾸기(&C)..."
 
-#: widgets/ViewContainer.cpp:113
+#: widgets/ViewContainer.cpp:115
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Tab"
