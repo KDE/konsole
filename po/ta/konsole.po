@@ -3,13 +3,13 @@
 #
 # Vasee Vaseeharan <vasee@ieee.org>, 2004, 2008.
 # ஆமாச்சு <amachu@ubuntu.com>, 2008.
-# SPDX-FileCopyrightText: 2021, 2022, 2023, 2024, 2025 Kishore G <kishore96@gmail.com>
+# SPDX-FileCopyrightText: 2021, 2022, 2023, 2024, 2025, 2026 Kishore G <kishore96@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 14:43+0000\n"
-"PO-Revision-Date: 2025-09-28 15:23+0530\n"
+"PO-Revision-Date: 2026-02-01 15:47+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-l10n-ta@kde.org>\n"
 "Language: ta\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.08.1\n"
+"X-Generator: Lokalize 25.12.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -867,7 +867,7 @@ msgstr "ராபர்ட் நைட்"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Previous maintainer, ported to KDE4"
-msgstr ""
+msgstr "முந்தைய பராமரிப்பாளர், KDE4 நிரலகங்களைப் பயன்படுத்த உதவினார்"
 
 #: main.cpp:377
 #, kde-format
@@ -2502,19 +2502,14 @@ msgid "Save ZModem Download to..."
 msgstr "&ZModem பதிவிறக்கத்தை இங்கு சேமி…"
 
 #: session/SessionController.cpp:2193
-#, fuzzy, kde-format
-#| msgid ""
-#| "<p>A ZModem file transfer attempt has been detected, but no suitable "
-#| "ZModem software was found on the system.\n"
-#| "<p>You may wish to install the 'rzsz' or 'lrzsz' package.\n"
+#, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
 "software was found on this system.</p><p>You may wish to install the 'rzsz' "
 "or 'lrzsz' package.</p>"
 msgstr ""
-"<p>ஒரு Zமோடம் கோப்பு மாற்றும் முயற்சி கண்டுபிடிக்கப்பட்டது, ஆனால் பொருத்தமான Zமோடம் "
-"மென்பொருள் அமைப்பில் இல்லை.\n"
-"<p> 'rzsz' அல்லது 'lrzsz' தொகுப்பை வேண்டுமானால் நிறுவலாம்.\n"
+"<p>ஒரு ZModel கோப்பு மாற்றும் முயற்சிக்கப்பட்டுள்ளது, ஆனால் உரிய நிரல் ஏதும் இக்கணினியில் "
+"இல்லை.</p><p><p>விரும்பினால் 'rzsz' அல்லது 'lrzsz' தனை நிறுவவும்.</p>"
 
 #: session/SessionController.cpp:2203
 #, fuzzy, kde-format
