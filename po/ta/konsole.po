@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-01 00:47+0000\n"
-"PO-Revision-Date: 2026-01-31 17:20+0530\n"
+"PO-Revision-Date: 2026-02-01 15:47+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-l10n-ta@kde.org>\n"
 "Language: ta\n"
@@ -905,7 +905,7 @@ msgstr "ராபர்ட் நைட்"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Previous maintainer, ported to KDE4"
-msgstr ""
+msgstr "முந்தைய பராமரிப்பாளர், KDE4 நிரலகங்களைப் பயன்படுத்த உதவினார்"
 
 #: main.cpp:377
 #, kde-format
@@ -2540,19 +2540,14 @@ msgid "Save ZModem Download to..."
 msgstr "&ZModem பதிவிறக்கத்தை இங்கு சேமி…"
 
 #: session/SessionController.cpp:2213
-#, fuzzy, kde-format
-#| msgid ""
-#| "<p>A ZModem file transfer attempt has been detected, but no suitable "
-#| "ZModem software was found on the system.\n"
-#| "<p>You may wish to install the 'rzsz' or 'lrzsz' package.\n"
+#, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
 "software was found on this system.</p><p>You may wish to install the 'rzsz' "
 "or 'lrzsz' package.</p>"
 msgstr ""
-"<p>ஒரு Zமோடம் கோப்பு மாற்றும் முயற்சி கண்டுபிடிக்கப்பட்டது, ஆனால் பொருத்தமான Zமோடம் "
-"மென்பொருள் அமைப்பில் இல்லை.\n"
-"<p> 'rzsz' அல்லது 'lrzsz' தொகுப்பை வேண்டுமானால் நிறுவலாம்.\n"
+"<p>ஒரு ZModel கோப்பு மாற்றும் முயற்சிக்கப்பட்டுள்ளது, ஆனால் உரிய நிரல் ஏதும் இக்கணினியில் "
+"இல்லை.</p><p><p>விரும்பினால் 'rzsz' அல்லது 'lrzsz' தனை நிறுவவும்.</p>"
 
 #: session/SessionController.cpp:2223
 #, kde-format
@@ -2636,7 +2631,7 @@ msgstr "ZModem முனையக் குறிகளை கையாள்"
 #: settings/GeneralSettings.ui:105
 #, kde-format
 msgid "Show progress in taskbar"
-msgstr ""
+msgstr "முன்னேற்றத்தை பணிப்பட்டையில் காட்டு"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/GeneralSettings.ui:112
@@ -2796,13 +2791,14 @@ msgstr ""
 #: settings/konsole.kcfg:42
 #, kde-format
 msgid "Show progress in task bar"
-msgstr ""
+msgstr "முன்னேற்றப் பட்டையைக் காட்டு"
 
 #. i18n: ectx: tooltip, entry (ShowProgressInTaskBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:43
 #, kde-format
 msgid "When a script reports its progress, it will be shown in the task bar"
 msgstr ""
+"ஓடிக்கொண்டிருக்கும் நிரல் அதன் முன்னேற்றத்தை தெரிவித்தால், அது பணிப்பட்டையில் காட்டப்படும்"
 
 #. i18n: ectx: tooltip, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
 #: settings/konsole.kcfg:48

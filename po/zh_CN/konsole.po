@@ -670,27 +670,27 @@ msgstr "AaZz09..."
 #, kde-format
 msgid ""
 "Container support is not available when Konsole is running inside Flatpak."
-msgstr ""
+msgstr "当 Konsole 在 Flatpak 中运行时，容器支持不可用。"
 
 #: containers/DistroboxDetector.cpp:67
 #, kde-format
 msgid "Distrobox"
-msgstr ""
+msgstr "Distrobox"
 
 #: containers/DistroboxDetector.cpp:167
 #, kde-format
 msgid "Distrobox: %1"
-msgstr ""
+msgstr "Distrobox：%1"
 
 #: containers/ToolboxDetector.cpp:24
 #, kde-format
 msgid "Toolbox"
-msgstr ""
+msgstr "Toolbox"
 
 #: containers/ToolboxDetector.cpp:45
 #, kde-format
 msgid "Toolbox: %1"
-msgstr ""
+msgstr "Toolbox：%1"
 
 #: CopyInputDialog.cpp:30
 #, kde-format
@@ -4679,12 +4679,13 @@ msgid ""
 "When opening a new tab or split, automatically enter the same container "
 "(Toolbox, Distrobox) as the current session"
 msgstr ""
+"打开新标签页或拆分视图时，自动输入当前会话的同一个容器 (Toolbox、Distrobox)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, inheritContainerButton)
 #: widgets/EditProfileGeneralPage.ui:203
 #, kde-format
 msgid "Enter same container as current session"
-msgstr ""
+msgstr "输入当前会话的同一个容器"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/EditProfileGeneralPage.ui:229

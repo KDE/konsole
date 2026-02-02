@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-01 00:47+0000\n"
-"PO-Revision-Date: 2026-01-13 09:41+0100\n"
+"PO-Revision-Date: 2026-02-01 15:38+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -688,26 +688,28 @@ msgstr "AaZz09..."
 msgid ""
 "Container support is not available when Konsole is running inside Flatpak."
 msgstr ""
+"Il supporto dei container non è disponibile quando Konsole è in esecuzione "
+"all'interno di Flatpak."
 
 #: containers/DistroboxDetector.cpp:67
 #, kde-format
 msgid "Distrobox"
-msgstr ""
+msgstr "Distrobox"
 
 #: containers/DistroboxDetector.cpp:167
 #, kde-format
 msgid "Distrobox: %1"
-msgstr ""
+msgstr "Distrobox: %1"
 
 #: containers/ToolboxDetector.cpp:24
 #, kde-format
 msgid "Toolbox"
-msgstr ""
+msgstr "Toolbox"
 
 #: containers/ToolboxDetector.cpp:45
 #, kde-format
 msgid "Toolbox: %1"
-msgstr ""
+msgstr "Toolbox: %1"
 
 #: CopyInputDialog.cpp:30
 #, kde-format
@@ -2660,7 +2662,7 @@ msgstr "In ascolto per i codici del terminale ZModem"
 #: settings/GeneralSettings.ui:105
 #, kde-format
 msgid "Show progress in taskbar"
-msgstr ""
+msgstr "Mostra l'avanzamento nella barra delle applicazioni"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/GeneralSettings.ui:112
@@ -2828,13 +2830,15 @@ msgstr ""
 #: settings/konsole.kcfg:42
 #, kde-format
 msgid "Show progress in task bar"
-msgstr ""
+msgstr "Mostra l'avanzamento nella barra delle applicazioni"
 
 #. i18n: ectx: tooltip, entry (ShowProgressInTaskBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:43
 #, kde-format
 msgid "When a script reports its progress, it will be shown in the task bar"
 msgstr ""
+"Quando uno script segnala il suo avanzamento, sarà mostrato nella barra "
+"delle applicazioni"
 
 #. i18n: ectx: tooltip, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
 #: settings/konsole.kcfg:48
@@ -4798,13 +4802,14 @@ msgid ""
 "When opening a new tab or split, automatically enter the same container "
 "(Toolbox, Distrobox) as the current session"
 msgstr ""
+"Quando si apre una nuova scheda o una divisione, entra automaticamente nello "
+"stesso container (Toolbox, Distrobox) della sessione attuale"
 
 #. i18n: ectx: property (text), widget (QCheckBox, inheritContainerButton)
 #: widgets/EditProfileGeneralPage.ui:203
-#, fuzzy, kde-format
-#| msgid "Start in same directory as current session"
+#, kde-format
 msgid "Enter same container as current session"
-msgstr "Avvia nella stessa cartella della sessione attuale"
+msgstr "Inserisci lo stesso container della sessione attuale"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/EditProfileGeneralPage.ui:229
