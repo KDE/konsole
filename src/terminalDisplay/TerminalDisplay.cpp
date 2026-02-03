@@ -533,7 +533,8 @@ void TerminalDisplay::updateImage()
     auto dirtyMask = new char[columnsToUpdate + 2];
     QRegion dirtyRegion;
 
-    std::optional<int> startIndex;
+    std::optional<int> startDirtyIndex;
+    std::optional<int> endDirtyIndex;
 
     for (y = 0; y < linesToUpdate; ++y) {
         const Character *currentLine = &_image[y * _columns];
@@ -550,10 +551,11 @@ void TerminalDisplay::updateImage()
             if (newLine[x] != currentLine[x]) {
                 dirtyMask[x] = 1;
 
-                if (!startIndex) {
-                    const int lineStartIndex = (y * columns) + x;
-                    startIndex = lineStartIndex;
+                const int indexInImage = (y * columns) + x;
+                if (!startDirtyIndex) {
+                    startDirtyIndex = indexInImage;
                 }
+                endDirtyIndex = indexInImage;
             }
         }
 
@@ -677,13 +679,17 @@ void TerminalDisplay::updateImage()
     QAccessibleTextCursorEvent cursorEvent(this, _usedColumns * screenWindow()->screen()->getCursorY() + screenWindow()->screen()->getCursorX());
     QAccessible::updateAccessibility(&cursorEvent);
 
-    if (startIndex) {
-        const auto currentCursor = [&]() -> int {
-            int offset = _usedColumns * screenWindow()->screen()->getCursorY();
-            return offset + screenWindow()->screen()->getCursorX();
-        };
+    if (startDirtyIndex && endDirtyIndex) {
+        const auto maxIndex = _usedLines * _usedColumns;
 
-        const QString newText = screenWindow()->screen()->text(*startIndex, currentCursor(), Screen::PreserveLineBreaks);
+        // Ensure our indices are in-bounds. It can happen that we have more dirty cells than are on the display. Notably when shrinking the window
+        // we may have output stream past the current Display region. Let's make sure we aren't tapping into invalid inices when that happens.
+        startDirtyIndex = qBound(0, *startDirtyIndex, maxIndex);
+        endDirtyIndex = qBound(*startDirtyIndex, *endDirtyIndex, maxIndex);
+
+        Q_ASSERT(endDirtyIndex <= maxIndex);
+        Q_ASSERT(endDirtyIndex >= startDirtyIndex);
+        const QString newText = screenWindow()->screen()->text(*startDirtyIndex, *endDirtyIndex, Screen::PreserveLineBreaks);
         QAccessibleTextUpdateEvent textUpdateEvent(this, 0, QString(), newText);
         QAccessible::updateAccessibility(&textUpdateEvent);
     }

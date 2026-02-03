@@ -401,7 +401,7 @@ void Vt102Emulation::initTokenizer()
     for (i = 0x20; i < 0x30; ++i) {
         charClass[i] |= INT;
     }
-    for (s = (quint8 *)"@ABCDEFGHILMPSTXZbcdfry"; *s != 0U; ++s) {
+    for (s = (quint8 *)"`@ABCDEFGHILMPSTXZabcdefry"; *s != 0U; ++s) {
         charClass[*s] |= CPN;
     }
     // resize = \e[8;<row>;<col>t
@@ -1818,6 +1818,42 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
         return;
     }
 
+    if (attribute == ConEmu) {
+        const auto list = QStringView(value).split(QLatin1Char(';'));
+        if (list.size() >= 2) {
+            // Progress indicator.
+            if (list.at(0) == QLatin1Char('4')) {
+                bool ok;
+                const int st = list.at(1).toInt(&ok);
+                if (ok) {
+                    switch (st) {
+                    case 0:
+                        Q_EMIT progressHidden();
+                        break;
+                    case 1:
+                        if (list.size() >= 3) {
+                            const int pr = list.at(2).toInt(&ok);
+                            if (ok && pr >= 0 && pr <= 100) {
+                                Q_EMIT progressChanged(pr);
+                            }
+                        }
+                        break;
+                    case 2:
+                        // TODO error state.
+                        break;
+                    case 3:
+                        // TODO indeterminate state.
+                        Q_EMIT progressHidden();
+                        break;
+                    case 4:
+                        // TODO paused state.
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
     _pendingSessionAttributesUpdates[attribute] = value;
     _sessionAttributesUpdateTimer->start(20);
 }
@@ -2083,6 +2119,7 @@ void Vt102Emulation::processToken(int token, int p, int q)
     case token_csi_ps('x',   0) :      reportTerminalParms  (         2); break; //VT100
     case token_csi_ps('x',   1) :      reportTerminalParms  (         3); break; //VT100
 
+    case token_csi_pn('`'      ) : _currentScreen->setCursorX           (p         ); break;
     case token_csi_pn('@'      ) : _currentScreen->insertChars          (p         ); break;
     case token_csi_pn('A'      ) : _currentScreen->cursorUp             (p         ); break; //VT100
     case token_csi_pn('B'      ) : _currentScreen->cursorDown           (p         ); break; //VT100
@@ -2100,9 +2137,21 @@ void Vt102Emulation::processToken(int token, int p, int q)
     case token_csi_pn('T'      ) : _currentScreen->scrollDown           (p         ); break;
     case token_csi_pn('X'      ) : _currentScreen->eraseChars           (p         ); break;
     case token_csi_pn('Z'      ) : _currentScreen->backtab              (p         ); break;
+    case token_csi_pn('a'      ) :
+        if (p == 0) {
+            ++p;
+        }
+        _currentScreen->setCursorX(_currentScreen->getCursorX()+1+p);
+        break;
     case token_csi_pn('b'      ) : _currentScreen->repeatChars          (p         ); break;
     case token_csi_pn('c'      ) :      reportTerminalType   (          ); break; //VT100
     case token_csi_pn('d'      ) : _currentScreen->setCursorY           (p         ); break; //LINUX
+    case token_csi_pn('e'      ) :
+        if (p == 0) {
+            ++p;
+        }
+        _currentScreen->setCursorY(_currentScreen->getCursorY()+1+p);
+        break;
     case token_csi_pn('f'      ) : _currentScreen->setCursorYX          (p,      q); break; //VT100
     case token_csi_pn('r'      ) :      setMargins           (p,      q); break; //VT100
     case token_csi_pn('y'      ) : /* IGNORED: Confidence test          */ break; //VT100

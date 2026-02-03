@@ -168,6 +168,12 @@ QString TerminalDisplayAccessible::text(int startOffset, int endOffset) const
         return QString();
     }
 
+    // Ensure our indices are in-bounds. The a11y client is inherently working on outdated information because of the async
+    // nature of the architecture, so what it thinks the offset is may actually be no longer valid by the time it gets back to us.
+    // Let's not fail assertions, or worse yet tap into invalid memory.
+    const auto maxIndex = display()->_usedColumns * display()->_usedLines;
+    startOffset = qBound(0, startOffset, maxIndex);
+    endOffset = qBound(startOffset, endOffset, maxIndex);
     return display()->screenWindow()->screen()->text(startOffset, endOffset, Screen::PreserveLineBreaks);
 }
 

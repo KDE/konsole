@@ -10,12 +10,20 @@
 #include <QCursor>
 #include <QTabBar>
 
+#include <optional>
+
 class QColor;
 class QPaintEvent;
 
 namespace Konsole
 {
 class TabbedViewContainer;
+
+struct DetachableTabData {
+    QColor color;
+    std::optional<int> progress;
+};
+
 class DetachableTabBar : public QTabBar
 {
     Q_OBJECT
@@ -30,6 +38,9 @@ public:
 
     void setColor(int idx, const QColor &color);
     void removeColor(int idx);
+
+    void setProgress(int idx, const std::optional<int> &progress);
+
 Q_SIGNALS:
     void detachTab(int index);
     void moveTabToWindow(int tabIndex, QWidget *otherWindow);
@@ -47,11 +58,15 @@ protected:
     void paintEvent(QPaintEvent *event) override;
 
 private:
+    void setDetachableTabData(int idx, const DetachableTabData &data);
+
     DragType dragType;
     QCursor _originalCursor;
     QList<TabbedViewContainer *> _containers;
     int tabId;
 };
 }
+
+Q_DECLARE_METATYPE(Konsole::DetachableTabData)
 
 #endif

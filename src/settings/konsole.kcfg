@@ -38,6 +38,11 @@
       <tooltip>When launching Konsole create a new tab instead of creating new windows if possible</tooltip>
       <default>false</default>
     </entry>
+    <entry name="ShowProgressInTaskBar" type="Bool">
+      <label>Show progress in task bar</label>
+      <tooltip>When a script reports its progress, it will be shown in the task bar</tooltip>
+      <default>true</default>
+    </entry>
     <entry name="EnableSecuritySensitiveDBusAPI" type="Bool">
       <label>Enable the security sensitive parts of the DBus API</label>
       <tooltip>DBus API like runCommand will be enabled</tooltip>

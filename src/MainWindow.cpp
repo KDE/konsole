@@ -14,6 +14,10 @@
 #include <QMouseEvent>
 #include <QScreen>
 #include <QWindow>
+#if HAVE_DBUS
+#include <QDBusConnection>
+#include <QDBusMessage>
+#endif
 
 // KDE
 #include <KAcceleratorManager>
@@ -232,6 +236,7 @@ void MainWindow::disconnectController(SessionController *controller)
     disconnect(controller, &Konsole::SessionController::titleChanged, this, &Konsole::MainWindow::activeViewTitleChanged);
     disconnect(controller, &Konsole::SessionController::rawTitleChanged, this, &Konsole::MainWindow::updateWindowCaption);
     disconnect(controller, &Konsole::SessionController::iconChanged, this, &Konsole::MainWindow::updateWindowIcon);
+    disconnect(controller, &Konsole::SessionController::progressChanged, this, &Konsole::MainWindow::updateProgress);
 
     if (auto view = controller->view()) {
         view->removeEventFilter(this);
@@ -278,6 +283,7 @@ void MainWindow::activeViewChanged(SessionController *controller)
     connect(controller, &Konsole::SessionController::titleChanged, this, &Konsole::MainWindow::activeViewTitleChanged);
     connect(controller, &Konsole::SessionController::rawTitleChanged, this, &Konsole::MainWindow::updateWindowCaption);
     connect(controller, &Konsole::SessionController::iconChanged, this, &Konsole::MainWindow::updateWindowIcon);
+    connect(controller, &Konsole::SessionController::progressChanged, this, &Konsole::MainWindow::updateProgress);
 
     // to prevent shortcuts conflict
     if (auto hamburgerMenu = _hamburgerMenu->menu()) {
@@ -290,8 +296,9 @@ void MainWindow::activeViewChanged(SessionController *controller)
     // update session title to match newly activated session
     activeViewTitleChanged(controller);
 
-    // Update window icon to newly activated session's icon
+    // Update window icon and progress to newly activated session's icon
     updateWindowIcon();
+    updateProgress();
 
     for (IKonsolePlugin *plugin : _plugins) {
         plugin->activeViewChanged(controller, this);
@@ -332,6 +339,43 @@ void MainWindow::updateWindowIcon()
     if ((!_pluggedController.isNull()) && !_pluggedController->icon().isNull()) {
         setWindowIcon(_pluggedController->icon());
     }
+}
+
+void MainWindow::updateProgress()
+{
+#if HAVE_DBUS
+    std::optional<int> progress;
+    if (KonsoleSettings::showProgressInTaskBar() && _pluggedController) {
+        progress = _pluggedController->progress();
+    }
+
+    if (_progress == progress) {
+        return;
+    }
+
+    _progress = progress;
+
+    QString launcherId;
+    launcherId.append(QLatin1String("application://"));
+    launcherId.append(qApp->desktopFileName());
+    if (constexpr QLatin1String suffix{".desktop"}; !launcherId.endsWith(suffix)) {
+        launcherId.append(suffix);
+    }
+
+    QVariantMap properties;
+    if (progress.has_value()) {
+        properties.insert(QStringLiteral("progress"), progress.value() / 100.0);
+        properties.insert(QStringLiteral("progress-visible"), true);
+    } else {
+        properties.insert(QStringLiteral("progress-visible"), false);
+    }
+
+    QDBusMessage message = QDBusMessage::createSignal(QStringLiteral("/org/kde/konsole/UnityLauncher"),
+                                                      QStringLiteral("com.canonical.Unity.LauncherEntry"),
+                                                      QStringLiteral("Update"));
+    message.setArguments({launcherId, properties});
+    QDBusConnection::sessionBus().send(message);
+#endif
 }
 
 void MainWindow::setupActions()
@@ -990,6 +1034,7 @@ void MainWindow::applyKonsoleSettings()
     setAutoSaveSettings();
 
     updateWindowCaption();
+    updateProgress();
 }
 
 void MainWindow::activateMenuBar()

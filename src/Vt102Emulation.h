@@ -199,6 +199,8 @@ private:
         // https://chromium.googlesource.com/apps/libapps/+/master/hterm/doc/ControlSequences.md#OSC
         Notification = 777,
         Image = 1337,
+        // https://conemu.github.io/en/AnsiEscapeCodes.html#ConEmu_specific_OSC
+        ConEmu = 9,
     };
 
     ParserStates _state = Ground;

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-27 00:48+0000\n"
+"POT-Creation-Date: 2026-02-01 00:47+0000\n"
 "PO-Revision-Date: 2008-08-05 22:26+0200\n"
 "Last-Translator: Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>\n"
 "Language-Team: Occitan (lengadocian) <ubuntu-l10n-oci@lists.ubuntu.com>\n"
@@ -249,7 +249,7 @@ msgctxt "@info:shell"
 msgid "Arguments passed to command"
 msgstr ""
 
-#: Application.cpp:529
+#: Application.cpp:535
 #, fuzzy, kde-format
 #| msgid "Background"
 msgctxt "@item"
@@ -719,6 +719,32 @@ msgstr ""
 #: colorscheme/ColorSchemeViewDelegate.cpp:52
 #, kde-format
 msgid "AaZz09..."
+msgstr ""
+
+#: containers/ContainerRegistry.cpp:37
+#, kde-format
+msgid ""
+"Container support is not available when Konsole is running inside Flatpak."
+msgstr ""
+
+#: containers/DistroboxDetector.cpp:67
+#, kde-format
+msgid "Distrobox"
+msgstr ""
+
+#: containers/DistroboxDetector.cpp:167
+#, kde-format
+msgid "Distrobox: %1"
+msgstr ""
+
+#: containers/ToolboxDetector.cpp:24
+#, kde-format
+msgid "Toolbox"
+msgstr ""
+
+#: containers/ToolboxDetector.cpp:45
+#, kde-format
+msgid "Toolbox: %1"
 msgstr ""
 
 #: CopyInputDialog.cpp:30
@@ -1250,73 +1276,73 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr ""
 
-#: MainWindow.cpp:342
+#: MainWindow.cpp:386
 #, fuzzy, kde-format
 #| msgid "&Close Tab"
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "&Barrar l'onglet"
 
-#: MainWindow.cpp:352
+#: MainWindow.cpp:396
 #, fuzzy, kde-format
 #| msgid "&Close Tab"
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "&Barrar l'onglet"
 
-#: MainWindow.cpp:359
+#: MainWindow.cpp:403
 #, fuzzy, kde-format
 #| msgid "New &Window"
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "&Fenèstra nòva"
 
-#: MainWindow.cpp:366
+#: MainWindow.cpp:410
 #, fuzzy, kde-format
 #| msgid "Konsole"
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Konsole"
 
-#: MainWindow.cpp:371
+#: MainWindow.cpp:415
 #, fuzzy, kde-format
 #| msgid "&Bookmarks"
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "&Favorits"
 
-#: MainWindow.cpp:398
+#: MainWindow.cpp:442
 #, fuzzy, kde-format
 #| msgid "Edit the selected profile"
 msgid "&Window Color Scheme"
 msgstr "Modificar lo perfil seleccionat"
 
-#: MainWindow.cpp:410
+#: MainWindow.cpp:454
 #, fuzzy, kde-format
 #| msgid "New Profile"
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Perfil novèl"
 
-#: MainWindow.cpp:416
+#: MainWindow.cpp:460
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr ""
 
-#: MainWindow.cpp:422
+#: MainWindow.cpp:466
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr ""
 
-#: MainWindow.cpp:431
+#: MainWindow.cpp:475
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr ""
 
-#: MainWindow.cpp:751 MainWindow.cpp:768
+#: MainWindow.cpp:823 MainWindow.cpp:840
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1325,71 +1351,71 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: MainWindow.cpp:757 MainWindow.cpp:774 MainWindow.cpp:788
+#: MainWindow.cpp:829 MainWindow.cpp:846 MainWindow.cpp:860
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr ""
 
-#: MainWindow.cpp:758 MainWindow.cpp:775 MainWindow.cpp:789
+#: MainWindow.cpp:830 MainWindow.cpp:847 MainWindow.cpp:861
 #, fuzzy, kde-format
 #| msgid "Konsole"
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Konsole"
 
-#: MainWindow.cpp:776 MainWindow.cpp:790
+#: MainWindow.cpp:848 MainWindow.cpp:862
 #, fuzzy, kde-format
 #| msgid "&Close Tab"
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "&Barrar l'onglet"
 
-#: MainWindow.cpp:785
+#: MainWindow.cpp:857
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr ""
 
-#: MainWindow.cpp:892 Part.cpp:303
+#: MainWindow.cpp:964 Part.cpp:317
 #, fuzzy, kde-format
 #| msgid "New Profile"
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Perfil novèl"
 
-#: MainWindow.cpp:910
+#: MainWindow.cpp:982
 #, fuzzy, kde-format
 #| msgid "General"
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "General"
 
-#: MainWindow.cpp:922
+#: MainWindow.cpp:994
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr ""
 
-#: MainWindow.cpp:928
+#: MainWindow.cpp:1000
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr ""
 
-#: MainWindow.cpp:933
+#: MainWindow.cpp:1005
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr ""
 
-#: MainWindow.cpp:938
+#: MainWindow.cpp:1010
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
 msgstr ""
 
-#: Part.cpp:306
+#: Part.cpp:320
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Part Info"
@@ -1961,25 +1987,25 @@ msgstr "Sortida"
 
 #. i18n: ectx: property (text), widget (QCheckBox, printerFriendly)
 #. i18n: ectx: label, entry (PrinterFriendly), group (PrintOptions)
-#: PrintOptions.ui:39 settings/konsole.kcfg:205
+#: PrintOptions.ui:39 settings/konsole.kcfg:210
 #, kde-format
 msgid "Printer &friendly mode (black text, no background)"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, scaleOutput)
 #. i18n: ectx: label, entry (ScaleOutput), group (PrintOptions)
-#: PrintOptions.ui:46 settings/konsole.kcfg:209
+#: PrintOptions.ui:46 settings/konsole.kcfg:214
 #, kde-format
 msgid "&Scale output"
 msgstr ""
 
-#: profile/Profile.cpp:268
+#: profile/Profile.cpp:269
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr ""
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:539
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:551
 #, fuzzy, kde-format
 #| msgid "Delete Profile"
 msgid "Default profile"
@@ -2178,83 +2204,83 @@ msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"
 msgstr ""
 
-#: session/Session.cpp:129
+#: session/Session.cpp:131
 #, kde-format
 msgid "Bell in '%1' (Session '%2')"
 msgstr ""
 
-#: session/Session.cpp:432
+#: session/Session.cpp:434
 #, kde-format
 msgid "Could not find binary: "
 msgstr ""
 
-#: session/Session.cpp:441
+#: session/Session.cpp:443
 #, fuzzy, kde-format
 #| msgid "Warning: "
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Atencion : "
 
-#: session/Session.cpp:536
+#: session/Session.cpp:538
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr ""
 
-#: session/Session.cpp:542 session/Session.cpp:545
+#: session/Session.cpp:544 session/Session.cpp:547
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
 "settings."
 msgstr ""
 
-#: session/Session.cpp:619
+#: session/Session.cpp:640
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr ""
 
-#: session/Session.cpp:785
+#: session/Session.cpp:806
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr ""
 
-#: session/Session.cpp:786 session/Session.cpp:2129
-#: session/SessionController.cpp:362 session/SessionController.cpp:1898
-#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1214
-#: Vt102Emulation.cpp:1469
+#: session/Session.cpp:807 session/Session.cpp:2234
+#: session/SessionController.cpp:369 session/SessionController.cpp:1905
+#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1255
+#: Vt102Emulation.cpp:1510
 #, fuzzy, kde-format
 #| msgid "Konsole"
 msgid "Show session"
 msgstr "Konsole"
 
-#: session/Session.cpp:1102
+#: session/Session.cpp:1123
 #, fuzzy, kde-format
 #| msgid "Find:"
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Terminat"
 
-#: session/Session.cpp:1116 session/Session.cpp:1132
+#: session/Session.cpp:1137 session/Session.cpp:1153
 #, fuzzy, kde-format
 #| msgid "Program Name"
 msgid "Program '%1' crashed."
 msgstr "Nom del programa"
 
-#: session/Session.cpp:1118
+#: session/Session.cpp:1139
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr ""
 
-#: session/Session.cpp:1656
+#: session/Session.cpp:1690
 #, kde-format
 msgid "ZModem Progress"
 msgstr ""
 
-#: session/Session.cpp:2128
+#: session/Session.cpp:2233
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr ""
 
-#: session/Session.cpp:2276
+#: session/Session.cpp:2381
 #, kde-format
 msgid "Security sensitive DBus API is disabled in the settings."
 msgstr ""
@@ -2264,365 +2290,365 @@ msgstr ""
 msgid "Konsole"
 msgstr "Konsole"
 
-#: session/SessionController.cpp:361
+#: session/SessionController.cpp:368
 #, kde-format
 msgid "The process '%1' has finished running in session '%2'"
 msgstr ""
 
-#: session/SessionController.cpp:444
+#: session/SessionController.cpp:451
 #, kde-format
 msgid "Konsole does not know how to open the bookmark: "
 msgstr ""
 
-#: session/SessionController.cpp:522
+#: session/SessionController.cpp:529
 #, kde-format
 msgid "Search for '%1' with"
 msgstr ""
 
-#: session/SessionController.cpp:538
+#: session/SessionController.cpp:545
 #, kde-format
 msgid "Configure Web Shortcuts..."
 msgstr ""
 
-#: session/SessionController.cpp:649
+#: session/SessionController.cpp:656
 #, fuzzy, kde-format
 #| msgid "Konsole"
 msgid "&Close Session"
 msgstr "Konsole"
 
-#: session/SessionController.cpp:656
+#: session/SessionController.cpp:663
 #, kde-format
 msgid "Open File Manager"
 msgstr ""
 
-#: session/SessionController.cpp:671
+#: session/SessionController.cpp:678
 #, fuzzy, kde-format
 #| msgid "&Copy"
 msgid "Copy"
 msgstr "&Copiar"
 
-#: session/SessionController.cpp:678
+#: session/SessionController.cpp:685
 #, fuzzy, kde-format
 #| msgid "Next View"
 msgid "Split View Left-Right"
 msgstr "Visualizacion seguenta"
 
-#: session/SessionController.cpp:683
+#: session/SessionController.cpp:690
 #, fuzzy, kde-format
 #| msgid "Next View"
 msgid "Split View Top-Bottom"
 msgstr "Visualizacion seguenta"
 
-#: session/SessionController.cpp:687
+#: session/SessionController.cpp:694
 #, kde-format
 msgid "Copy except prompts"
 msgstr ""
 
-#: session/SessionController.cpp:693
+#: session/SessionController.cpp:700
 #, fuzzy, kde-format
 #| msgid "Input"
 msgid "Copy user input"
 msgstr "Entrada"
 
-#: session/SessionController.cpp:699
+#: session/SessionController.cpp:706
 #, fuzzy, kde-format
 #| msgid "Input"
 msgid "Copy command output"
 msgstr "Entrada"
 
-#: session/SessionController.cpp:714
+#: session/SessionController.cpp:721
 #, kde-format
 msgid "Paste Selection"
 msgstr "Pegar la seleccion"
 
-#: session/SessionController.cpp:721
+#: session/SessionController.cpp:728
 #, kde-format
 msgid "Web Search"
 msgstr ""
 
-#: session/SessionController.cpp:727
+#: session/SessionController.cpp:734
 #, fuzzy, kde-format
 #| msgid "Select"
 msgid "&Select All"
 msgstr "Tot seleccionar"
 
-#: session/SessionController.cpp:731
+#: session/SessionController.cpp:738
 #, fuzzy, kde-format
 #| msgid "Select"
 msgid "Select &Mode"
 msgstr "Seleccionar"
 
-#: session/SessionController.cpp:736
+#: session/SessionController.cpp:743
 #, fuzzy, kde-format
 #| msgid "Select"
 msgid "Select &Line"
 msgstr "Seleccionar"
 
-#: session/SessionController.cpp:739
+#: session/SessionController.cpp:746
 #, kde-format
 msgid "Save Output &As..."
 msgstr ""
 
-#: session/SessionController.cpp:745
+#: session/SessionController.cpp:752
 #, kde-format
 msgid "Auto Save Output As..."
 msgstr ""
 
-#: session/SessionController.cpp:749
+#: session/SessionController.cpp:756
 #, kde-format
 msgid "Stop Auto Save"
 msgstr ""
 
-#: session/SessionController.cpp:753
+#: session/SessionController.cpp:760
 #, kde-format
 msgid "&Print Screen..."
 msgstr ""
 
-#: session/SessionController.cpp:757
+#: session/SessionController.cpp:764
 #, fuzzy, kde-format
 #| msgid "New Profile"
 msgid "Adjust Scrollback..."
 msgstr "Perfil novèl"
 
-#: session/SessionController.cpp:761
+#: session/SessionController.cpp:768
 #, kde-format
 msgid "Clear Scrollback"
 msgstr ""
 
-#: session/SessionController.cpp:765
+#: session/SessionController.cpp:772
 #, kde-format
 msgid "Clear Scrollback and Reset"
 msgstr ""
 
-#: session/SessionController.cpp:776
+#: session/SessionController.cpp:783
 #, fuzzy, kde-format
 #| msgid "Edit Profile"
 msgid "Next Profile"
 msgstr "Modificar lo perfil"
 
-#: session/SessionController.cpp:781
+#: session/SessionController.cpp:788
 #, fuzzy, kde-format
 #| msgid "Previous View"
 msgid "Previous Profile"
 msgstr "Visualizacion precedenta"
 
-#: session/SessionController.cpp:784
+#: session/SessionController.cpp:791
 #, fuzzy, kde-format
 #| msgid "Edit Profile"
 msgid "Switch Profile"
 msgstr "Modificar lo perfil"
 
-#: session/SessionController.cpp:809
+#: session/SessionController.cpp:816
 #, fuzzy, kde-format
 #| msgid "Encoding"
 msgid "Set &Encoding"
 msgstr "Encodatge"
 
-#: session/SessionController.cpp:829
+#: session/SessionController.cpp:836
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow Mouse Tracking"
 msgstr ""
 
-#: session/SessionController.cpp:838
+#: session/SessionController.cpp:845
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
 msgstr ""
 
-#: session/SessionController.cpp:849
+#: session/SessionController.cpp:856
 #, fuzzy, kde-format
 #| msgid "New Profile"
 msgid "&Configure or Rename Tab..."
 msgstr "Perfil novèl"
 
-#: session/SessionController.cpp:855
+#: session/SessionController.cpp:862
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr ""
 
-#: session/SessionController.cpp:862
+#: session/SessionController.cpp:869
 #, kde-format
 msgid "&Select Tabs..."
 msgstr ""
 
-#: session/SessionController.cpp:868
+#: session/SessionController.cpp:875
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr ""
 
-#: session/SessionController.cpp:876
+#: session/SessionController.cpp:883
 #, fuzzy, kde-format
 #| msgid "Input"
 msgid "Copy Input To"
 msgstr "Entrada"
 
-#: session/SessionController.cpp:884
+#: session/SessionController.cpp:891
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr ""
 
-#: session/SessionController.cpp:889
+#: session/SessionController.cpp:896
 #, kde-format
 msgid "One-Shot Monitors"
 msgstr ""
 
-#: session/SessionController.cpp:894
+#: session/SessionController.cpp:901
 #, kde-format
 msgid "Monitor for &Prompt"
 msgstr ""
 
-#: session/SessionController.cpp:901
+#: session/SessionController.cpp:908
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr ""
 
-#: session/SessionController.cpp:907
+#: session/SessionController.cpp:914
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr ""
 
-#: session/SessionController.cpp:913
+#: session/SessionController.cpp:920
 #, kde-format
 msgid "Monitor for Process Finishing"
 msgstr ""
 
-#: session/SessionController.cpp:920
+#: session/SessionController.cpp:927
 #, kde-format
 msgid "Enlarge Font"
 msgstr ""
 
-#: session/SessionController.cpp:928
+#: session/SessionController.cpp:935
 #, kde-format
 msgid "Shrink Font"
 msgstr ""
 
-#: session/SessionController.cpp:933
+#: session/SessionController.cpp:940
 #, kde-format
 msgid "Reset Font Size"
 msgstr ""
 
-#: session/SessionController.cpp:939
+#: session/SessionController.cpp:946
 #, kde-format
 msgid "Send Signal"
 msgstr ""
 
-#: session/SessionController.cpp:943
+#: session/SessionController.cpp:950
 #, kde-format
 msgid "&Suspend Task"
 msgstr ""
 
-#: session/SessionController.cpp:948
+#: session/SessionController.cpp:955
 #, fuzzy, kde-format
 #| msgid "&Close Tab"
 msgid "&Continue Task"
 msgstr "&Barrar l'onglet"
 
-#: session/SessionController.cpp:953
+#: session/SessionController.cpp:960
 #, kde-format
 msgid "&Hangup"
 msgstr ""
 
-#: session/SessionController.cpp:958
+#: session/SessionController.cpp:965
 #, kde-format
 msgid "&Interrupt Task"
 msgstr ""
 
-#: session/SessionController.cpp:963
+#: session/SessionController.cpp:970
 #, kde-format
 msgid "&Terminate Task"
 msgstr ""
 
-#: session/SessionController.cpp:968
+#: session/SessionController.cpp:975
 #, kde-format
 msgid "&Kill Task"
 msgstr ""
 
-#: session/SessionController.cpp:973
+#: session/SessionController.cpp:980
 #, kde-format
 msgid "User Signal &1"
 msgstr ""
 
-#: session/SessionController.cpp:978
+#: session/SessionController.cpp:985
 #, kde-format
 msgid "User Signal &2"
 msgstr ""
 
-#: session/SessionController.cpp:996
+#: session/SessionController.cpp:1003
 #, fuzzy, kde-format
 #| msgid "New Profile"
 msgid "Create New Profile..."
 msgstr "Perfil novèl"
 
-#: session/SessionController.cpp:998
+#: session/SessionController.cpp:1005
 #, fuzzy, kde-format
 #| msgid "New Profile"
 msgid "Edit Current Profile..."
 msgstr "Perfil novèl"
 
-#: session/SessionController.cpp:1129
+#: session/SessionController.cpp:1136
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
 "close it?"
 msgstr ""
 
-#: session/SessionController.cpp:1133
+#: session/SessionController.cpp:1140
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
 "want to close it?"
 msgstr ""
 
-#: session/SessionController.cpp:1140 session/SessionController.cpp:1175
+#: session/SessionController.cpp:1147 session/SessionController.cpp:1182
 #, kde-format
 msgid "Confirm Close"
 msgstr ""
 
-#: session/SessionController.cpp:1141
+#: session/SessionController.cpp:1148
 #, fuzzy, kde-format
 #| msgid "&Close Tab"
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "&Barrar l'onglet"
 
-#: session/SessionController.cpp:1164
+#: session/SessionController.cpp:1171
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
 "by force?"
 msgstr ""
 
-#: session/SessionController.cpp:1168
+#: session/SessionController.cpp:1175
 #, kde-format
 msgid ""
 "The program '%1' in this session would not die.  Are you sure you want to "
 "kill it by force?"
 msgstr ""
 
-#: session/SessionController.cpp:1176
+#: session/SessionController.cpp:1183
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr ""
 
-#: session/SessionController.cpp:1897
+#: session/SessionController.cpp:1904
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr ""
 
-#: session/SessionController.cpp:2126
+#: session/SessionController.cpp:2133
 #, kde-format
 msgid "Open Current Folder With"
 msgstr ""
 
-#: session/SessionController.cpp:2196
+#: session/SessionController.cpp:2203
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr ""
 
-#: session/SessionController.cpp:2206
+#: session/SessionController.cpp:2213
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2630,20 +2656,20 @@ msgid ""
 "or 'lrzsz' package.</p>"
 msgstr ""
 
-#: session/SessionController.cpp:2216
+#: session/SessionController.cpp:2223
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr ""
 
-#: session/SessionController.cpp:2229
+#: session/SessionController.cpp:2236
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
 "to install the 'rzsz' or 'lrzsz' package.</p>"
 msgstr ""
 
-#: session/SessionController.cpp:2234
+#: session/SessionController.cpp:2241
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr ""
@@ -2668,162 +2694,168 @@ msgctxt "@title:window"
 msgid "Configure"
 msgstr ""
 
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableSecuritySensitiveDBusAPI)
-#. i18n: ectx: label, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:43 settings/konsole.kcfg:42
-#, kde-format
-msgid "Enable the security sensitive parts of the DBus API"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchHighlightMatches)
-#: settings/GeneralSettings.ui:56
-#, kde-format
-msgid "Highlight all matches"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QLabel, label_3)
-#: settings/GeneralSettings.ui:63
-#, kde-format
-msgid "Notifications:"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_FocusFollowsMouse)
-#. i18n: ectx: label, entry (FocusFollowsMouse), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:70 settings/konsole.kcfg:13
-#, kde-format
-msgid "Focus terminals when the mouse pointer is moved over them"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RemoveWindowTitleBarAndFrame)
-#. i18n: ectx: label, entry (RemoveWindowTitleBarAndFrame), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:77 settings/konsole.kcfg:9
-#, kde-format
-msgid "Remove window titlebar and frame"
-msgstr ""
-
-#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_RememberWindowSize)
-#: settings/GeneralSettings.ui:90
-#, kde-format
-msgid "If enabled, profile settings will be ignored"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RememberWindowSize)
-#: settings/GeneralSettings.ui:93
-#, kde-format
-msgid "Remember window size"
-msgstr ""
-
-#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchNoWrap)
-#. i18n: ectx: tooltip, entry (SearchNoWrap), group (SearchSettings)
-#: settings/GeneralSettings.ui:106 settings/konsole.kcfg:99
-#, kde-format
-msgid "Sets whether search should stop instead of wrapping"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchNoWrap)
-#: settings/GeneralSettings.ui:109
-#, kde-format
-msgid "No wrap"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: settings/GeneralSettings.ui:116
-#, kde-format
-msgid "Process and window:"
-msgstr ""
-
-#. i18n: ectx: property (toolTip), widget (QPushButton, enableAllMessagesButton)
-#: settings/GeneralSettings.ui:137
-#, kde-format
-msgid "All dialogs will be shown again"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QPushButton, enableAllMessagesButton)
-#: settings/GeneralSettings.ui:140
-#, kde-format
-msgid "Enable all \"Don't Ask Again\" messages"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ForceNewTabs)
-#. i18n: ectx: label, entry (ForceNewTabs), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:178 settings/konsole.kcfg:37
-#, kde-format
-msgid "Force new tabs"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: settings/GeneralSettings.ui:185
-#, kde-format
-msgctxt "@item:intext Search options"
-msgid "Search:"
-msgstr ""
-
-#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchReverseSearch)
-#. i18n: ectx: tooltip, entry (SearchReverseSearch), group (SearchSettings)
-#: settings/GeneralSettings.ui:198 settings/konsole.kcfg:94
-#, kde-format
-msgid "Sets whether search should start from the bottom"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchReverseSearch)
-#. i18n: ectx: label, entry (SearchReverseSearch), group (SearchSettings)
-#: settings/GeneralSettings.ui:201 settings/konsole.kcfg:93
-#, kde-format
-msgid "Search backwards"
-msgstr ""
-
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_UseSingleInstance)
 #. i18n: ectx: tooltip, entry (UseSingleInstance), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:214 settings/konsole.kcfg:33
+#: settings/GeneralSettings.ui:49 settings/konsole.kcfg:33
 #, kde-format
 msgid "When launching Konsole re-use existing process if possible"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSingleInstance)
 #. i18n: ectx: label, entry (UseSingleInstance), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:217 settings/konsole.kcfg:32
+#: settings/GeneralSettings.ui:52 settings/konsole.kcfg:32
 #, kde-format
 msgid "Run all Konsole windows in a single process"
 msgstr ""
 
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_RememberWindowSize)
+#: settings/GeneralSettings.ui:81
+#, kde-format
+msgid "If enabled, profile settings will be ignored"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RememberWindowSize)
+#: settings/GeneralSettings.ui:84
+#, kde-format
+msgid "Remember window size"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ForceNewTabs)
+#. i18n: ectx: label, entry (ForceNewTabs), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:91 settings/konsole.kcfg:37
+#, kde-format
+msgid "Force new tabs"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ListenForZModemTerminalCodes)
+#: settings/GeneralSettings.ui:98
+#, kde-format
+msgid "Listen for ZModem terminal codes"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowProgressInTaskBar)
+#: settings/GeneralSettings.ui:105
+#, kde-format
+msgid "Show progress in taskbar"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: settings/GeneralSettings.ui:112
+#, kde-format
+msgid "Notifications:"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchReverseSearch)
+#. i18n: ectx: tooltip, entry (SearchReverseSearch), group (SearchSettings)
+#: settings/GeneralSettings.ui:125 settings/konsole.kcfg:99
+#, kde-format
+msgid "Sets whether search should start from the bottom"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchReverseSearch)
+#. i18n: ectx: label, entry (SearchReverseSearch), group (SearchSettings)
+#: settings/GeneralSettings.ui:128 settings/konsole.kcfg:98
+#, kde-format
+msgid "Search backwards"
+msgstr ""
+
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchCaseSensitive)
 #. i18n: ectx: tooltip, entry (SearchCaseSensitive), group (SearchSettings)
-#: settings/GeneralSettings.ui:230 settings/konsole.kcfg:80
+#: settings/GeneralSettings.ui:141 settings/konsole.kcfg:85
 #, kde-format
 msgid "Sets whether the search is case sensitive"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchCaseSensitive)
-#: settings/GeneralSettings.ui:233
+#: settings/GeneralSettings.ui:144
 #, kde-format
 msgid "Case sensitive"
 msgstr ""
 
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowWindowTitleOnTitleBar)
-#. i18n: ectx: label, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:262 settings/konsole.kcfg:17
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: settings/GeneralSettings.ui:151
 #, kde-format
-msgid "Show window title on the titlebar"
+msgid "Process and window:"
 msgstr ""
 
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchRegExpression)
-#. i18n: ectx: label, entry (SearchRegExpression), group (SearchSettings)
-#: settings/GeneralSettings.ui:275 settings/konsole.kcfg:84
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchHighlightMatches)
+#: settings/GeneralSettings.ui:167
 #, kde-format
-msgid "Match using regular expressions"
+msgid "Highlight all matches"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: settings/GeneralSettings.ui:174
+#, kde-format
+msgctxt "@item:intext Search options"
+msgid "Search:"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchNoWrap)
+#. i18n: ectx: tooltip, entry (SearchNoWrap), group (SearchSettings)
+#: settings/GeneralSettings.ui:203 settings/konsole.kcfg:104
+#, kde-format
+msgid "Sets whether search should stop instead of wrapping"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchNoWrap)
+#: settings/GeneralSettings.ui:206
+#, kde-format
+msgid "No wrap"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AllowMenuAccelerators)
 #. i18n: ectx: label, entry (AllowMenuAccelerators), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:288 settings/konsole.kcfg:22
+#: settings/GeneralSettings.ui:219 settings/konsole.kcfg:22
 #, kde-format
 msgid "Enable menu accelerators"
 msgstr ""
 
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ListenForZModemTerminalCodes)
-#: settings/GeneralSettings.ui:295
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_FocusFollowsMouse)
+#. i18n: ectx: label, entry (FocusFollowsMouse), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:226 settings/konsole.kcfg:13
 #, kde-format
-msgid "Listen for ZModem terminal codes"
+msgid "Focus terminals when the mouse pointer is moved over them"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, enableAllMessagesButton)
+#: settings/GeneralSettings.ui:244
+#, kde-format
+msgid "All dialogs will be shown again"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QPushButton, enableAllMessagesButton)
+#: settings/GeneralSettings.ui:247
+#, kde-format
+msgid "Enable all \"Don't Ask Again\" messages"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowWindowTitleOnTitleBar)
+#. i18n: ectx: label, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:275 settings/konsole.kcfg:17
+#, kde-format
+msgid "Show window title on the titlebar"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableSecuritySensitiveDBusAPI)
+#. i18n: ectx: label, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:282 settings/konsole.kcfg:47
+#, kde-format
+msgid "Enable the security sensitive parts of the DBus API"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RemoveWindowTitleBarAndFrame)
+#. i18n: ectx: label, entry (RemoveWindowTitleBarAndFrame), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:289 settings/konsole.kcfg:9
+#, kde-format
+msgid "Remove window titlebar and frame"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchRegExpression)
+#. i18n: ectx: label, entry (SearchRegExpression), group (SearchSettings)
+#: settings/GeneralSettings.ui:302 settings/konsole.kcfg:89
+#, kde-format
+msgid "Match using regular expressions"
 msgstr ""
 
 #. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
@@ -2858,89 +2890,101 @@ msgid ""
 "possible"
 msgstr ""
 
-#. i18n: ectx: tooltip, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
+#. i18n: ectx: label, entry (ShowProgressInTaskBar), group (KonsoleWindow)
+#: settings/konsole.kcfg:42
+#, kde-format
+msgid "Show progress in task bar"
+msgstr ""
+
+#. i18n: ectx: tooltip, entry (ShowProgressInTaskBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:43
+#, kde-format
+msgid "When a script reports its progress, it will be shown in the task bar"
+msgstr ""
+
+#. i18n: ectx: tooltip, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
+#: settings/konsole.kcfg:48
 #, kde-format
 msgid "DBus API like runCommand will be enabled"
 msgstr ""
 
 #. i18n: ectx: label, entry (ListenForZModemTerminalCodes), group (KonsoleWindow)
-#: settings/konsole.kcfg:47
+#: settings/konsole.kcfg:52
 #, kde-format
 msgid "Listen for ZModem Terminal codes"
 msgstr ""
 
 #. i18n: ectx: tooltip, entry (ListenForZModemTerminalCodes), group (KonsoleWindow)
-#: settings/konsole.kcfg:48
+#: settings/konsole.kcfg:53
 #, kde-format
 msgid "Automatic send/receive files over serial connections"
 msgstr ""
 
 #. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
-#: settings/konsole.kcfg:57
+#: settings/konsole.kcfg:62
 #, kde-format
 msgid "Thumbnail Width"
 msgstr ""
 
 #. i18n: ectx: tooltip, entry (ThumbnailSize), group (ThumbnailsSettings)
-#: settings/konsole.kcfg:58
+#: settings/konsole.kcfg:63
 #, kde-format
 msgid "Sets the width of the thumbnail"
 msgstr ""
 
 #. i18n: ectx: label, entry (ThumbnailShift), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailShift), group (ThumbnailsSettings)
-#: settings/konsole.kcfg:62 settings/konsole.kcfg:63
+#: settings/konsole.kcfg:67 settings/konsole.kcfg:68
 #, kde-format
 msgid "Use Shift to display a thumbnail"
 msgstr ""
 
 #. i18n: ectx: label, entry (ThumbnailAlt), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailAlt), group (ThumbnailsSettings)
-#: settings/konsole.kcfg:67 settings/konsole.kcfg:68
+#: settings/konsole.kcfg:72 settings/konsole.kcfg:73
 #, kde-format
 msgid "Use Alt to display a thumbnail"
 msgstr ""
 
 #. i18n: ectx: label, entry (ThumbnailCtrl), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailCtrl), group (ThumbnailsSettings)
-#: settings/konsole.kcfg:72 settings/konsole.kcfg:73
+#: settings/konsole.kcfg:77 settings/konsole.kcfg:78
 #, kde-format
 msgid "Use Ctrl to display a thumbnail"
 msgstr ""
 
 #. i18n: ectx: label, entry (SearchCaseSensitive), group (SearchSettings)
-#: settings/konsole.kcfg:79
+#: settings/konsole.kcfg:84
 #, kde-format
 msgid "Search is case sensitive"
 msgstr ""
 
 #. i18n: ectx: label, entry (SearchHighlightMatches), group (SearchSettings)
-#: settings/konsole.kcfg:88
+#: settings/konsole.kcfg:93
 #, kde-format
 msgid "Highlight all search matches"
 msgstr ""
 
 #. i18n: ectx: tooltip, entry (SearchHighlightMatches), group (SearchSettings)
-#: settings/konsole.kcfg:89
+#: settings/konsole.kcfg:94
 #, kde-format
 msgid "Sets whether matching text should be highlighted"
 msgstr ""
 
 #. i18n: ectx: label, entry (SearchNoWrap), group (SearchSettings)
-#: settings/konsole.kcfg:98
+#: settings/konsole.kcfg:103
 #, kde-format
 msgid "Search stops instead of wrapping"
 msgstr ""
 
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
-#: settings/konsole.kcfg:105
+#: settings/konsole.kcfg:110
 #, kde-format
 msgid "Control whether child cgroups are created for individual tabs"
 msgstr ""
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
-#: settings/konsole.kcfg:109
+#: settings/konsole.kcfg:114
 #, kde-format
 msgid ""
 "Determines the memory consumption level above which throttling will start"
@@ -2948,97 +2992,97 @@ msgstr ""
 
 #. i18n: ectx: label, entry (SplitViewVisibility), group (SplitView)
 #. i18n: ectx: label, entry (TabBarVisibility), group (TabBar)
-#: settings/konsole.kcfg:115 settings/konsole.kcfg:135
+#: settings/konsole.kcfg:120 settings/konsole.kcfg:140
 #, kde-format
 msgid "Control the visibility of the whole tab bar"
 msgstr ""
 
 #. i18n: ectx: label, entry (SplitDragHandleSize), group (SplitView)
-#: settings/konsole.kcfg:124
+#: settings/konsole.kcfg:129
 #, kde-format
 msgid "Control the size of the handle between panels"
 msgstr ""
 
 #. i18n: ectx: label, entry (TabBarPosition), group (TabBar)
-#: settings/konsole.kcfg:144
+#: settings/konsole.kcfg:149
 #, kde-format
 msgid "Control the position of the tab bar"
 msgstr ""
 
 #. i18n: ectx: label, entry (TabBarStyleSheet), group (TabBar)
-#: settings/konsole.kcfg:154
+#: settings/konsole.kcfg:159
 #, kde-format
 msgid "Control the visual style of the tab bar"
 msgstr ""
 
 #. i18n: ectx: label, entry (TabBarUseUserStyleSheet), group (TabBar)
-#: settings/konsole.kcfg:158
+#: settings/konsole.kcfg:163
 #, kde-format
 msgid "Use a user-defined .css file for the tab bar"
 msgstr ""
 
 #. i18n: ectx: label, entry (TabBarUserStyleSheetFile), group (TabBar)
-#: settings/konsole.kcfg:162
+#: settings/konsole.kcfg:167
 #, kde-format
 msgid "The .css file to use for the tab bar style"
 msgstr ""
 
 #. i18n: ectx: label, entry (CloseTabOnMiddleMouseButton), group (TabBar)
-#: settings/konsole.kcfg:166
+#: settings/konsole.kcfg:171
 #, kde-format
 msgid "Allow middle-clicking on open tabs to close them"
 msgstr ""
 
 #. i18n: ectx: label, entry (NewTabButton), group (TabBar)
-#: settings/konsole.kcfg:170
+#: settings/konsole.kcfg:175
 #, kde-format
 msgid "Control the visibility of 'New Tab' button on the tab bar"
 msgstr ""
 
 #. i18n: ectx: label, entry (SearchTabsButton), group (TabBar)
-#: settings/konsole.kcfg:174
+#: settings/konsole.kcfg:179
 #, kde-format
 msgid "Control the visibility of 'Search Tabs' button on the tab bar"
 msgstr ""
 
 #. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
-#: settings/konsole.kcfg:182
+#: settings/konsole.kcfg:187
 #, kde-format
 msgid "Control where the \"Close tab\" button will be displayed"
 msgstr ""
 
 #. i18n: ectx: label, entry (NewTabBehavior), group (TabBar)
-#: settings/konsole.kcfg:191
+#: settings/konsole.kcfg:196
 #, kde-format
 msgid "Control where to put the new tab"
 msgstr ""
 
 #. i18n: ectx: label, entry (ExpandTabWidth), group (TabBar)
-#: settings/konsole.kcfg:199
+#: settings/konsole.kcfg:204
 #, kde-format
 msgid "Expand the tab widths"
 msgstr ""
 
 #. i18n: ectx: label, entry (scrollbackUseSystemLocation), group (FileLocation)
-#: settings/konsole.kcfg:215
+#: settings/konsole.kcfg:220
 #, kde-format
 msgid "For scrollback files, use system-wide folder location"
 msgstr ""
 
 #. i18n: ectx: label, entry (scrollbackUseCacheLocation), group (FileLocation)
-#: settings/konsole.kcfg:219
+#: settings/konsole.kcfg:224
 #, kde-format
 msgid "For scrollback files, use user's specific folder location"
 msgstr ""
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocation), group (FileLocation)
-#: settings/konsole.kcfg:223
+#: settings/konsole.kcfg:228
 #, kde-format
 msgid "For scrollback files, use specified folder location"
 msgstr ""
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocationDirectory), group (FileLocation)
-#: settings/konsole.kcfg:227
+#: settings/konsole.kcfg:232
 #, kde-format
 msgid "For scrollback files, use this folder"
 msgstr ""
@@ -3468,96 +3512,96 @@ msgstr ""
 msgid "Enable thumbnails generation"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:682
+#: terminalDisplay/TerminalDisplay.cpp:688
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr "Talha : %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2293
+#: terminalDisplay/TerminalDisplay.cpp:2299
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] ""
 msgstr[1] ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2294
+#: terminalDisplay/TerminalDisplay.cpp:2300
 #, kde-format
 msgid "Confirm Paste"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2327
+#: terminalDisplay/TerminalDisplay.cpp:2333
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2328
+#: terminalDisplay/TerminalDisplay.cpp:2334
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2329
+#: terminalDisplay/TerminalDisplay.cpp:2335
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2330
+#: terminalDisplay/TerminalDisplay.cpp:2336
 #, kde-format
 msgid "Backspace"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2331
+#: terminalDisplay/TerminalDisplay.cpp:2337
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2332
+#: terminalDisplay/TerminalDisplay.cpp:2338
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2333
+#: terminalDisplay/TerminalDisplay.cpp:2339
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2334
+#: terminalDisplay/TerminalDisplay.cpp:2340
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2357
+#: terminalDisplay/TerminalDisplay.cpp:2363
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
 "want to filter them out?"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2360
+#: terminalDisplay/TerminalDisplay.cpp:2366
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2361
+#: terminalDisplay/TerminalDisplay.cpp:2367
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2362
+#: terminalDisplay/TerminalDisplay.cpp:2368
 #, fuzzy, kde-format
 #| msgid "Paste Selection"
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "Pegar la seleccion"
 
-#: terminalDisplay/TerminalDisplay.cpp:2363
+#: terminalDisplay/TerminalDisplay.cpp:2369
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2594
+#: terminalDisplay/TerminalDisplay.cpp:2600
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3565,273 +3609,273 @@ msgid ""
 "b> to resume.</qt>"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2649
+#: terminalDisplay/TerminalDisplay.cpp:2655
 #, kde-format
 msgid "This terminal is read-only."
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:3045
+#: terminalDisplay/TerminalDisplay.cpp:3061
 #, kde-format
 msgid "Change &Directory To"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:3080
+#: terminalDisplay/TerminalDisplay.cpp:3096
 #, fuzzy, kde-format
 #| msgid "Paste Selection"
 msgid "&Paste Location"
 msgstr "Pegar la seleccion"
 
-#: ViewManager.cpp:121
+#: ViewManager.cpp:122
 #, fuzzy, kde-format
 #| msgid "Next View"
 msgctxt "@action:inmenu"
 msgid "Split View"
 msgstr "Visualizacion seguenta"
 
-#: ViewManager.cpp:128
+#: ViewManager.cpp:129
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right"
 msgstr ""
 
-#: ViewManager.cpp:136
+#: ViewManager.cpp:137
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom"
 msgstr ""
 
-#: ViewManager.cpp:144
+#: ViewManager.cpp:145
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically"
 msgstr ""
 
-#: ViewManager.cpp:154
+#: ViewManager.cpp:155
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
 msgstr ""
 
-#: ViewManager.cpp:162
+#: ViewManager.cpp:163
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
 msgstr ""
 
-#: ViewManager.cpp:170
+#: ViewManager.cpp:171
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
 msgstr ""
 
-#: ViewManager.cpp:180
+#: ViewManager.cpp:181
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x2 terminals"
 msgstr ""
 
-#: ViewManager.cpp:189
+#: ViewManager.cpp:190
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x1 terminals"
 msgstr ""
 
-#: ViewManager.cpp:198
+#: ViewManager.cpp:199
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 1x2 terminals"
 msgstr ""
 
-#: ViewManager.cpp:206
+#: ViewManager.cpp:207
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Expand View"
 msgstr ""
 
-#: ViewManager.cpp:214
+#: ViewManager.cpp:215
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Shrink View"
 msgstr ""
 
-#: ViewManager.cpp:224
+#: ViewManager.cpp:225
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &View"
 msgstr ""
 
-#: ViewManager.cpp:236
+#: ViewManager.cpp:237
 #, fuzzy, kde-format
 #| msgid "&Close Tab"
 msgctxt "@action:inmenu"
 msgid "Detach Current &Tab"
 msgstr "&Barrar l'onglet"
 
-#: ViewManager.cpp:241
+#: ViewManager.cpp:242
 #, fuzzy, kde-format
 #| msgid "&Close Tab"
 msgctxt "@action Shortcut entry"
 msgid "Next Tab"
 msgstr "&Barrar l'onglet"
 
-#: ViewManager.cpp:249
+#: ViewManager.cpp:250
 #, fuzzy, kde-format
 #| msgid "Previous"
 msgctxt "@action Shortcut entry"
 msgid "Previous Tab"
 msgstr "Precedent"
 
-#: ViewManager.cpp:257
+#: ViewManager.cpp:258
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Above Terminal"
 msgstr ""
 
-#: ViewManager.cpp:264
+#: ViewManager.cpp:265
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Below Terminal"
 msgstr ""
 
-#: ViewManager.cpp:271
+#: ViewManager.cpp:272
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Left Terminal"
 msgstr ""
 
-#: ViewManager.cpp:277
+#: ViewManager.cpp:278
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Right Terminal"
 msgstr ""
 
-#: ViewManager.cpp:283
+#: ViewManager.cpp:284
 #, fuzzy, kde-format
 #| msgid "&Close Tab"
 msgctxt "@action Shortcut entry"
 msgid "Focus Next Terminal"
 msgstr "&Barrar l'onglet"
 
-#: ViewManager.cpp:289
+#: ViewManager.cpp:290
 #, fuzzy, kde-format
 #| msgid "Previous"
 msgctxt "@action Shortcut entry"
 msgid "Focus Previous Terminal"
 msgstr "Precedent"
 
-#: ViewManager.cpp:295
+#: ViewManager.cpp:296
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Last Tab"
 msgstr ""
 
-#: ViewManager.cpp:300
+#: ViewManager.cpp:301
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs"
 msgstr ""
 
-#: ViewManager.cpp:305
+#: ViewManager.cpp:306
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle Between Two Tabs"
 msgstr ""
 
-#: ViewManager.cpp:310
+#: ViewManager.cpp:311
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs (Reverse)"
 msgstr ""
 
-#: ViewManager.cpp:315
+#: ViewManager.cpp:316
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle maximize current view"
 msgstr ""
 
-#: ViewManager.cpp:316
+#: ViewManager.cpp:317
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle maximize current view"
-msgstr ""
-
-#: ViewManager.cpp:324
-#, kde-format
-msgctxt "@action Shortcut entry"
-msgid "Toggle zoom-maximize current view"
 msgstr ""
 
 #: ViewManager.cpp:325
 #, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Toggle zoom-maximize current view"
+msgstr ""
+
+#: ViewManager.cpp:326
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle zoom-maximize current view"
 msgstr ""
 
-#: ViewManager.cpp:333
+#: ViewManager.cpp:334
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the right"
 msgstr ""
 
-#: ViewManager.cpp:340
+#: ViewManager.cpp:341
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the left"
 msgstr ""
 
-#: ViewManager.cpp:347
+#: ViewManager.cpp:348
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
 msgstr ""
 
-#: ViewManager.cpp:353
+#: ViewManager.cpp:354
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
 msgstr ""
 
-#: ViewManager.cpp:359
+#: ViewManager.cpp:360
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
 msgstr ""
 
-#: ViewManager.cpp:366
+#: ViewManager.cpp:367
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
 msgstr ""
 
-#: ViewManager.cpp:376
+#: ViewManager.cpp:377
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Tab %1"
 msgstr ""
 
-#: ViewManager.cpp:599
+#: ViewManager.cpp:600
 #, kde-format
 msgid "Semantic hints "
 msgstr ""
 
-#: ViewManager.cpp:615
+#: ViewManager.cpp:616
 #, kde-format
 msgid "Line numbers "
 msgstr ""
 
-#: ViewManager.cpp:1214
+#: ViewManager.cpp:1223
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr ""
 
-#: ViewManager.cpp:1216 ViewManager.cpp:1337
+#: ViewManager.cpp:1225 ViewManager.cpp:1346
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr ""
 
-#: ViewManager.cpp:1232
+#: ViewManager.cpp:1241
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3839,7 +3883,7 @@ msgid ""
 "%1"
 msgstr ""
 
-#: ViewManager.cpp:1324
+#: ViewManager.cpp:1333
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3847,13 +3891,13 @@ msgid ""
 "%1"
 msgstr ""
 
-#: ViewManager.cpp:1335
+#: ViewManager.cpp:1344
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr ""
 
-#: Vt102Emulation.cpp:2955
+#: Vt102Emulation.cpp:3255
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
@@ -4021,7 +4065,7 @@ msgstr "Modificar lo perfil seleccionat"
 #. i18n: ectx: property (text), widget (QPushButton, textEditorCustomBtn)
 #. i18n: ectx: property (text), widget (QPushButton, editColorSchemeButton)
 #: widgets/EditProfileAppearancePage.ui:82
-#: widgets/EditProfileGeneralPage.ui:227 widgets/EditProfileKeyboardPage.ui:73
+#: widgets/EditProfileGeneralPage.ui:250 widgets/EditProfileKeyboardPage.ui:73
 #: widgets/EditProfileMousePage.ui:320
 #, kde-format
 msgid "Edit..."
@@ -4481,57 +4525,57 @@ msgstr ""
 msgid "Override wcwidth"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:68
+#: widgets/EditProfileDialog.cpp:70
 #, kde-format
 msgid "Edit Profile"
 msgstr "Modificar lo perfil"
 
-#: widgets/EditProfileDialog.cpp:95
+#: widgets/EditProfileDialog.cpp:97
 #, fuzzy, kde-format
 #| msgid "General"
 msgctxt "@title:tab Generic, common options"
 msgid "General"
 msgstr "General"
 
-#: widgets/EditProfileDialog.cpp:106
+#: widgets/EditProfileDialog.cpp:108
 #, kde-format
 msgid "Tabs"
 msgstr "Onglets"
 
-#: widgets/EditProfileDialog.cpp:123
+#: widgets/EditProfileDialog.cpp:125
 #, kde-format
 msgid "Appearance"
 msgstr "Aparéncia"
 
-#: widgets/EditProfileDialog.cpp:139
+#: widgets/EditProfileDialog.cpp:141
 #, fuzzy, kde-format
 #| msgid "New Profile"
 msgid "Scrolling"
 msgstr "Perfil novèl"
 
-#: widgets/EditProfileDialog.cpp:153
+#: widgets/EditProfileDialog.cpp:155
 #, kde-format
 msgid "Keyboard"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:154
+#: widgets/EditProfileDialog.cpp:156
 #, kde-format
 msgid "Key bindings"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:165
+#: widgets/EditProfileDialog.cpp:167
 #, kde-format
 msgid "Mouse"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:181
+#: widgets/EditProfileDialog.cpp:183
 #, fuzzy, kde-format
 #| msgid "Advanced"
 msgctxt "@title:tab Complex options"
 msgid "Advanced"
 msgstr "A_vançat"
 
-#: widgets/EditProfileDialog.cpp:289
+#: widgets/EditProfileDialog.cpp:291
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -4540,31 +4584,31 @@ msgid ""
 "the settings to a new profile."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:306
+#: widgets/EditProfileDialog.cpp:308
 #, kde-format
 msgctxt "@info"
 msgid "Profile Name was empty; please set a name to be able to save settings."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:314
+#: widgets/EditProfileDialog.cpp:316
 #, kde-format
 msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:344
+#: widgets/EditProfileDialog.cpp:346
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:382
+#: widgets/EditProfileDialog.cpp:384
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:418
+#: widgets/EditProfileDialog.cpp:420
 #, fuzzy, kde-format
 #| msgid "Edit Profile \"%1\""
 msgid "Editing profile: %2"
@@ -4572,18 +4616,18 @@ msgid_plural "Editing %1 profiles: %2"
 msgstr[0] "Modificar lo perfil \"%1\""
 msgstr[1] "Modificar lo perfil \"%1\""
 
-#: widgets/EditProfileDialog.cpp:422
+#: widgets/EditProfileDialog.cpp:424
 #, fuzzy, kde-format
 #| msgid "New Profile"
 msgid "Create New Profile"
 msgstr "Perfil novèl"
 
-#: widgets/EditProfileDialog.cpp:425
+#: widgets/EditProfileDialog.cpp:427
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "Modificar lo perfil \"%1\""
 
-#: widgets/EditProfileDialog.cpp:516
+#: widgets/EditProfileDialog.cpp:528
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4593,7 +4637,7 @@ msgid_plural " columns"
 msgstr[0] ""
 msgstr[1] ""
 
-#: widgets/EditProfileDialog.cpp:518
+#: widgets/EditProfileDialog.cpp:530
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4603,44 +4647,44 @@ msgid_plural " rows"
 msgstr[0] ""
 msgstr[1] ""
 
-#: widgets/EditProfileDialog.cpp:528
+#: widgets/EditProfileDialog.cpp:540
 #, kde-format
 msgid "System Bell"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:528
+#: widgets/EditProfileDialog.cpp:540
 #, fuzzy, kde-format
 #| msgid "Paste Selection"
 msgid "System Notifications"
 msgstr "Pegar la seleccion"
 
-#: widgets/EditProfileDialog.cpp:528
+#: widgets/EditProfileDialog.cpp:540
 #, kde-format
 msgid "Visual Bell"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:528
+#: widgets/EditProfileDialog.cpp:540
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:537
+#: widgets/EditProfileDialog.cpp:549
 #, fuzzy, kde-format
 #| msgid "Edit the selected profile"
 msgid "Default profile for new terminal sessions in %1"
 msgstr "Modificar lo perfil seleccionat"
 
-#: widgets/EditProfileDialog.cpp:642
+#: widgets/EditProfileDialog.cpp:655
 #, kde-format
 msgid "Edit Environment"
 msgstr "Modificar l'environament"
 
-#: widgets/EditProfileDialog.cpp:643
+#: widgets/EditProfileDialog.cpp:656
 #, kde-format
 msgid "One environment variable per line"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:674
+#: widgets/EditProfileDialog.cpp:687
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4648,44 +4692,44 @@ msgid_plural " seconds"
 msgstr[0] ""
 msgstr[1] ""
 
-#: widgets/EditProfileDialog.cpp:788
+#: widgets/EditProfileDialog.cpp:806
 #, kde-format
 msgid "Select Initial Directory"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:948
+#: widgets/EditProfileDialog.cpp:966
 #, fuzzy, kde-format
 #| msgid "New..."
 msgid "Get New..."
 msgstr "Novèl..."
 
-#: widgets/EditProfileDialog.cpp:1345
+#: widgets/EditProfileDialog.cpp:1363
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1527
+#: widgets/EditProfileDialog.cpp:1545
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
 "supported on your desktop"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1533
+#: widgets/EditProfileDialog.cpp:1551
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
 "Konsole to see transparent background."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1934
+#: widgets/EditProfileDialog.cpp:1952
 #, fuzzy, kde-format
 #| msgid "Delete Profile"
 msgid "Default for file type"
 msgstr "Suprimir lo perfil"
 
-#: widgets/EditProfileDialog.cpp:1960
+#: widgets/EditProfileDialog.cpp:1978
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4702,7 +4746,7 @@ msgid ""
 "editor."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1973
+#: widgets/EditProfileDialog.cpp:1991
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr ""
@@ -4793,28 +4837,42 @@ msgstr ""
 msgid "Start in same directory as current session"
 msgstr ""
 
+#. i18n: ectx: property (toolTip), widget (QCheckBox, inheritContainerButton)
+#: widgets/EditProfileGeneralPage.ui:200
+#, kde-format
+msgid ""
+"When opening a new tab or split, automatically enter the same container "
+"(Toolbox, Distrobox) as the current session"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, inheritContainerButton)
+#: widgets/EditProfileGeneralPage.ui:203
+#, kde-format
+msgid "Enter same container as current session"
+msgstr ""
+
 #. i18n: ectx: property (text), widget (QLabel, label_4)
-#: widgets/EditProfileGeneralPage.ui:206
+#: widgets/EditProfileGeneralPage.ui:229
 #, fuzzy, kde-format
 #| msgid "Edit Environment"
 msgid "Environment:"
 msgstr "Modificar l'environament"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, environmentEditButton)
-#: widgets/EditProfileGeneralPage.ui:224
+#: widgets/EditProfileGeneralPage.ui:247
 #, kde-format
 msgid "Edit the list of environment variables and associated values"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
-#: widgets/EditProfileGeneralPage.ui:271
+#: widgets/EditProfileGeneralPage.ui:294
 #, fuzzy, kde-format
 #| msgid "&Close Tab"
 msgid "Initial terminal si&ze:"
 msgstr "&Barrar l'onglet"
 
 #. i18n: ectx: property (text), widget (QLabel, useCurrentWindowSizeNote)
-#: widgets/EditProfileGeneralPage.ui:346
+#: widgets/EditProfileGeneralPage.ui:369
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -4824,31 +4882,31 @@ msgid ""
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, terminalBellLabel)
-#: widgets/EditProfileGeneralPage.ui:362
+#: widgets/EditProfileGeneralPage.ui:385
 #, kde-format
 msgid "&Terminal bell mode:"
 msgstr ""
 
 #. i18n: ectx: attribute (title), widget (QWidget, semantic)
-#: widgets/EditProfileGeneralPage.ui:380
+#: widgets/EditProfileGeneralPage.ui:403
 #, kde-format
 msgid "Semantic Integration"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticUpDown)
-#: widgets/EditProfileGeneralPage.ui:386
+#: widgets/EditProfileGeneralPage.ui:409
 #, kde-format
 msgid "Up/Down Arrows emulation"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticInputClick)
-#: widgets/EditProfileGeneralPage.ui:393
+#: widgets/EditProfileGeneralPage.ui:416
 #, kde-format
 msgid "Mouse click in input line moves cursor"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_8)
-#: widgets/EditProfileGeneralPage.ui:406
+#: widgets/EditProfileGeneralPage.ui:429
 #, kde-format
 msgid "Semantic hints:"
 msgstr ""
@@ -4858,9 +4916,9 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundNever)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsNever)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundNever)
-#: widgets/EditProfileGeneralPage.ui:416 widgets/EditProfileGeneralPage.ui:462
-#: widgets/EditProfileGeneralPage.ui:508 widgets/EditProfileGeneralPage.ui:554
-#: widgets/EditProfileGeneralPage.ui:600
+#: widgets/EditProfileGeneralPage.ui:439 widgets/EditProfileGeneralPage.ui:485
+#: widgets/EditProfileGeneralPage.ui:531 widgets/EditProfileGeneralPage.ui:577
+#: widgets/EditProfileGeneralPage.ui:623
 #, kde-format
 msgctxt "Never"
 msgid "Never"
@@ -4871,9 +4929,9 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundURL)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsURL)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundURL)
-#: widgets/EditProfileGeneralPage.ui:426 widgets/EditProfileGeneralPage.ui:472
-#: widgets/EditProfileGeneralPage.ui:518 widgets/EditProfileGeneralPage.ui:564
-#: widgets/EditProfileGeneralPage.ui:610
+#: widgets/EditProfileGeneralPage.ui:449 widgets/EditProfileGeneralPage.ui:495
+#: widgets/EditProfileGeneralPage.ui:541 widgets/EditProfileGeneralPage.ui:587
+#: widgets/EditProfileGeneralPage.ui:633
 #, kde-format
 msgctxt "When showing URL hints"
 msgid "When URL hints show"
@@ -4884,35 +4942,35 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundAlways)
-#: widgets/EditProfileGeneralPage.ui:436 widgets/EditProfileGeneralPage.ui:482
-#: widgets/EditProfileGeneralPage.ui:528 widgets/EditProfileGeneralPage.ui:574
-#: widgets/EditProfileGeneralPage.ui:620
+#: widgets/EditProfileGeneralPage.ui:459 widgets/EditProfileGeneralPage.ui:505
+#: widgets/EditProfileGeneralPage.ui:551 widgets/EditProfileGeneralPage.ui:597
+#: widgets/EditProfileGeneralPage.ui:643
 #, kde-format
 msgctxt "Always"
 msgid "Always"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_20)
-#: widgets/EditProfileGeneralPage.ui:452
+#: widgets/EditProfileGeneralPage.ui:475
 #, kde-format
 msgid "Red error bars:"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_30)
-#: widgets/EditProfileGeneralPage.ui:498
+#: widgets/EditProfileGeneralPage.ui:521
 #, fuzzy, kde-format
 #| msgid "Background"
 msgid "Red error background:"
 msgstr "Fons"
 
 #. i18n: ectx: property (text), widget (QLabel, label_40)
-#: widgets/EditProfileGeneralPage.ui:544
+#: widgets/EditProfileGeneralPage.ui:567
 #, kde-format
 msgid "Alternating bars:"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
-#: widgets/EditProfileGeneralPage.ui:590
+#: widgets/EditProfileGeneralPage.ui:613
 #, fuzzy, kde-format
 #| msgid "Background"
 msgid "Alternating background:"
@@ -5760,20 +5818,20 @@ msgctxt "@info:tooltip"
 msgid "Close this tab"
 msgstr "&Barrar l'onglet"
 
-#: widgets/ViewContainer.cpp:102
+#: widgets/ViewContainer.cpp:104
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Detach Tab"
 msgstr ""
 
-#: widgets/ViewContainer.cpp:108
+#: widgets/ViewContainer.cpp:110
 #, fuzzy, kde-format
 #| msgid "New Profile"
 msgctxt "@action:inmenu"
 msgid "&Configure or Rename Tab..."
 msgstr "Perfil novèl"
 
-#: widgets/ViewContainer.cpp:113
+#: widgets/ViewContainer.cpp:115
 #, fuzzy, kde-format
 #| msgid "&Close Tab"
 msgctxt "@action:inmenu"

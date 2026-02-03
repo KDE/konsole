@@ -6,6 +6,7 @@
 
 // Own
 #include "GeneralSettings.h"
+#include "config-konsole.h"
 
 #include <KMessageBox>
 
@@ -15,6 +16,9 @@ GeneralSettings::GeneralSettings(QWidget *aParent)
     : QWidget(aParent)
 {
     setupUi(this);
+#if !HAVE_DBUS
+    kcfg_ShowProgressInTaskBar->hide();
+#endif
 
     connect(enableAllMessagesButton, &QPushButton::clicked, this, &Konsole::GeneralSettings::slotEnableAllMessages);
 }
