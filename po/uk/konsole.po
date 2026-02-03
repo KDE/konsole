@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-01 00:47+0000\n"
-"PO-Revision-Date: 2026-01-28 03:51+0200\n"
+"PO-Revision-Date: 2026-02-02 17:58+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -2659,7 +2659,7 @@ msgstr "Очікувати на коди термінала ZModem"
 #: settings/GeneralSettings.ui:105
 #, kde-format
 msgid "Show progress in taskbar"
-msgstr ""
+msgstr "Показувати поступ на панелі задач"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/GeneralSettings.ui:112
@@ -2820,13 +2820,15 @@ msgstr "При запуску Konsole створювати вкладку, а н
 #: settings/konsole.kcfg:42
 #, kde-format
 msgid "Show progress in task bar"
-msgstr ""
+msgstr "Показувати поступ на панелі задач"
 
 #. i18n: ectx: tooltip, entry (ShowProgressInTaskBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:43
 #, kde-format
 msgid "When a script reports its progress, it will be shown in the task bar"
 msgstr ""
+"Коли скрипт повідомляє про поступ обробки, дані щодо поступу буде показано "
+"на панелі задач"
 
 #. i18n: ectx: tooltip, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
 #: settings/konsole.kcfg:48

@@ -688,7 +688,7 @@ msgstr ""
 #: containers/ToolboxDetector.cpp:24
 #, kde-format
 msgid "Toolbox"
-msgstr ""
+msgstr "Nástrojová lišta"
 
 #: containers/ToolboxDetector.cpp:45
 #, kde-format

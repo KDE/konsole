@@ -2608,7 +2608,7 @@ msgstr "监听 ZModem 终端代码"
 #: settings/GeneralSettings.ui:105
 #, kde-format
 msgid "Show progress in taskbar"
-msgstr ""
+msgstr "在任务栏中显示进度"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/GeneralSettings.ui:112
@@ -2765,13 +2765,13 @@ msgstr "启动 Konsole 时，新建标签页而不是新建窗口 (如果可能)
 #: settings/konsole.kcfg:42
 #, kde-format
 msgid "Show progress in task bar"
-msgstr ""
+msgstr "在任务栏中显示进度"
 
 #. i18n: ectx: tooltip, entry (ShowProgressInTaskBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:43
 #, kde-format
 msgid "When a script reports its progress, it will be shown in the task bar"
-msgstr ""
+msgstr "当脚本报告它的进度时，在任务栏中显示进度"
 
 #. i18n: ectx: tooltip, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
 #: settings/konsole.kcfg:48
