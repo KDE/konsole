@@ -42,8 +42,9 @@ namespace Konsole
 {
 QVariant interpolatePolygonF(const QPolygonF &start, const QPolygonF &end, qreal progress)
 {
-    if (start.size() != end.size())
+    if (start.size() != end.size()) {
         return end;
+    }
 
     QPolygonF result;
     for (int i = 0; i < start.size(); ++i) {

@@ -18,8 +18,8 @@
 #include <QVariant>
 
 // Konsole
-#include "Enumeration.h"
 #include "konsoleprivate_export.h"
+#include "Enumeration.h"
 
 #include <map>
 #include <vector>
