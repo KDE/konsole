@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-01 00:47+0000\n"
+"POT-Creation-Date: 2026-02-04 00:48+0000\n"
 "PO-Revision-Date: 2025-02-23 13:36+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -1924,7 +1924,7 @@ msgstr "Presil-amika reĝimo (nigra teksto, sen &fono)"
 msgid "&Scale output"
 msgstr "&Skali eligon"
 
-#: profile/Profile.cpp:269
+#: profile/Profile.cpp:270
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
@@ -2163,12 +2163,12 @@ msgstr ""
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Ne eblis lanĉi programon '%1' kun argumentoj '%2'."
 
-#: session/Session.cpp:806
+#: session/Session.cpp:809
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Silento en '%1' (Seanco '%2')"
 
-#: session/Session.cpp:807 session/Session.cpp:2234
+#: session/Session.cpp:810 session/Session.cpp:2237
 #: session/SessionController.cpp:369 session/SessionController.cpp:1905
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1255
 #: Vt102Emulation.cpp:1510
@@ -2176,33 +2176,33 @@ msgstr "Silento en '%1' (Seanco '%2')"
 msgid "Show session"
 msgstr "Montri seancon"
 
-#: session/Session.cpp:1123
+#: session/Session.cpp:1126
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Finita"
 
-#: session/Session.cpp:1137 session/Session.cpp:1153
+#: session/Session.cpp:1140 session/Session.cpp:1156
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Programo '%1' paneis."
 
-#: session/Session.cpp:1139
+#: session/Session.cpp:1142
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "Programo '%1' finiĝis kun stato %2."
 
-#: session/Session.cpp:1690
+#: session/Session.cpp:1693
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Progreso de ZModem"
 
-#: session/Session.cpp:2233
+#: session/Session.cpp:2236
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Agado en '%1' (Seanco '%2')"
 
-#: session/Session.cpp:2381
+#: session/Session.cpp:2384
 #, kde-format
 msgid "Security sensitive DBus API is disabled in the settings."
 msgstr ""
@@ -3433,64 +3433,64 @@ msgstr "Ctrl"
 msgid "Enable thumbnails generation"
 msgstr "Ebligi la generadon de bildetoj"
 
-#: terminalDisplay/TerminalDisplay.cpp:688
+#: terminalDisplay/TerminalDisplay.cpp:702
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr "Grando: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2299
+#: terminalDisplay/TerminalDisplay.cpp:2319
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "Ĉu vi certas ke vi volas alglui %1 signon?"
 msgstr[1] "Ĉu vi certas ke vi volas alglui %1 signojn?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2300
+#: terminalDisplay/TerminalDisplay.cpp:2320
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Konfirmi Algluon"
 
-#: terminalDisplay/TerminalDisplay.cpp:2333
+#: terminalDisplay/TerminalDisplay.cpp:2353
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "Fino de Teksto/Interrompo: povas eliri la nunan procezon"
 
-#: terminalDisplay/TerminalDisplay.cpp:2334
+#: terminalDisplay/TerminalDisplay.cpp:2354
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "Fino de Transdono: povas eliri la nunan procezon"
 
-#: terminalDisplay/TerminalDisplay.cpp:2335
+#: terminalDisplay/TerminalDisplay.cpp:2355
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Sonorilo: provos elsendi aŭdeblan averton"
 
-#: terminalDisplay/TerminalDisplay.cpp:2336
+#: terminalDisplay/TerminalDisplay.cpp:2356
 #, kde-format
 msgid "Backspace"
 msgstr "Backspace"
 
-#: terminalDisplay/TerminalDisplay.cpp:2337
+#: terminalDisplay/TerminalDisplay.cpp:2357
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "Device Control Three/XOFF: suspendas eliron"
 
-#: terminalDisplay/TerminalDisplay.cpp:2338
+#: terminalDisplay/TerminalDisplay.cpp:2358
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "Anstataŭaĵo/Suspendi: povas suspendi la nunan procezon"
 
-#: terminalDisplay/TerminalDisplay.cpp:2339
+#: terminalDisplay/TerminalDisplay.cpp:2359
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Fuĝo: uzata por manipuli fina staton"
 
-#: terminalDisplay/TerminalDisplay.cpp:2340
+#: terminalDisplay/TerminalDisplay.cpp:2360
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "Dosiera Disigilo/Ĉu: povas ĉesigi la nunan procezon"
 
-#: terminalDisplay/TerminalDisplay.cpp:2363
+#: terminalDisplay/TerminalDisplay.cpp:2383
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3499,31 +3499,31 @@ msgstr ""
 "La teksto, kiun vi provas alglui, enhavas kaŝitajn stirsignojn, ĉu vi volas "
 "filtri ilin?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2366
+#: terminalDisplay/TerminalDisplay.cpp:2386
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Konfirmi Paston"
 
-#: terminalDisplay/TerminalDisplay.cpp:2367
+#: terminalDisplay/TerminalDisplay.cpp:2387
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Alglui &sen stirsignoj"
 
-#: terminalDisplay/TerminalDisplay.cpp:2368
+#: terminalDisplay/TerminalDisplay.cpp:2388
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "&Alglui ĉion"
 
-#: terminalDisplay/TerminalDisplay.cpp:2369
+#: terminalDisplay/TerminalDisplay.cpp:2389
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "&Nuligi"
 
-#: terminalDisplay/TerminalDisplay.cpp:2600
+#: terminalDisplay/TerminalDisplay.cpp:2620
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3533,17 +3533,17 @@ msgstr ""
 "<qt>Eligo estis <a href=\"https://en.wikipedia.org/wiki/Software_flow_control"
 "\">interrompita</a> premante Ctrl+S. Premu <b>Ctrl+Q</b> por rekomenci.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2655
+#: terminalDisplay/TerminalDisplay.cpp:2675
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Ĉi tiu terminalo estas nurlegebla."
 
-#: terminalDisplay/TerminalDisplay.cpp:3061
+#: terminalDisplay/TerminalDisplay.cpp:3081
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Ŝanĝi &Dosierujon Al"
 
-#: terminalDisplay/TerminalDisplay.cpp:3096
+#: terminalDisplay/TerminalDisplay.cpp:3116
 #, kde-format
 msgid "&Paste Location"
 msgstr "&Alglui Lokon"
@@ -3822,7 +3822,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Ŝargi Tab Aranĝo"
 
-#: Vt102Emulation.cpp:3255
+#: Vt102Emulation.cpp:3272
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
@@ -4178,29 +4178,45 @@ msgid "Make the cursor blink regularly"
 msgstr "Pulsigi la kursoron periode"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBlinkingCursorButton)
+#. i18n: ectx: property (text), widget (QCheckBox, enableAnimatingCursorButton)
 #. i18n: ectx: property (text), widget (QCheckBox, alignToCenterButton)
 #: widgets/EditProfileAppearancePage.ui:450
-#: widgets/EditProfileAppearancePage.ui:733
+#: widgets/EditProfileAppearancePage.ui:476
+#: widgets/EditProfileAppearancePage.ui:759
 #, kde-format
 msgid "Enabled"
 msgstr "Ebligita"
 
+#. i18n: ectx: property (text), widget (QLabel, label_12)
+#: widgets/EditProfileAppearancePage.ui:457
+#, fuzzy, kde-format
+#| msgid "Activation:"
+msgid "Animation:"
+msgstr "Aktivigo:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, enableAnimatingCursorButton)
+#: widgets/EditProfileAppearancePage.ui:473
+#, fuzzy, kde-format
+#| msgid "Make the cursor blink regularly"
+msgid "Make the cursor animate smoothly"
+msgstr "Pulsigi la kursoron periode"
+
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #. i18n: ectx: attribute (title), widget (QWidget, miscTab)
-#: widgets/EditProfileAppearancePage.ui:473 widgets/EditProfileMousePage.ui:252
+#: widgets/EditProfileAppearancePage.ui:499 widgets/EditProfileMousePage.ui:252
 #, kde-format
 msgctxt "Items that do not fit in other categories"
 msgid "Miscellaneous"
 msgstr "Diversaj"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: widgets/EditProfileAppearancePage.ui:484
+#: widgets/EditProfileAppearancePage.ui:510
 #, kde-format
 msgid "Window:"
 msgstr "Fenestro:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, showTerminalSizeHintButton)
-#: widgets/EditProfileAppearancePage.ui:491
+#: widgets/EditProfileAppearancePage.ui:517
 #, kde-format
 msgid ""
 "Show terminal size in columns and lines in the center of window after "
@@ -4210,144 +4226,144 @@ msgstr ""
 "regrandigo"
 
 #. i18n: ectx: property (text), widget (QCheckBox, showTerminalSizeHintButton)
-#: widgets/EditProfileAppearancePage.ui:494
+#: widgets/EditProfileAppearancePage.ui:520
 #, kde-format
 msgid "Show hint for terminal size after resizing"
 msgstr "Montri helpeton pri terminalgrandeco post regrandigo"
 
 #. i18n: ectx: property (text), widget (QCheckBox, invertSelectionColorsCheckbox)
-#: widgets/EditProfileAppearancePage.ui:501
+#: widgets/EditProfileAppearancePage.ui:527
 #, kde-format
 msgid "Always invert the colors of selected text"
 msgstr "Ĉiam inversigi la kolorojn de elektita teksto"
 
 #. i18n: ectx: property (text), widget (QLabel, dimLabel)
-#: widgets/EditProfileAppearancePage.ui:510
+#: widgets/EditProfileAppearancePage.ui:536
 #, kde-format
 msgid "Darkening strength:"
 msgstr "Malheliga forto:"
 
 #. i18n: ectx: property (text), widget (QLabel, borderLabel)
-#: widgets/EditProfileAppearancePage.ui:543
+#: widgets/EditProfileAppearancePage.ui:569
 #, kde-format
 msgctxt "Border color options"
 msgid "Color:"
 msgstr "Koloro:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, focusBorderColor)
-#: widgets/EditProfileAppearancePage.ui:559
+#: widgets/EditProfileAppearancePage.ui:585
 #, kde-format
 msgid "Select the color used to draw the border"
 msgstr "Elektu la koloron por desegni la borderon"
 
 #. i18n: ectx: property (text), widget (QLabel, label_10)
-#: widgets/EditProfileAppearancePage.ui:581
+#: widgets/EditProfileAppearancePage.ui:607
 #, kde-format
 msgid "Inactive Terminals:"
 msgstr "Neaktivaj Terminaloj:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_11)
-#: widgets/EditProfileAppearancePage.ui:591
+#: widgets/EditProfileAppearancePage.ui:617
 #, kde-format
 msgid "Active Terminals:"
 msgstr "Aktivaj Terminaloj:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, contentsGroup)
-#: widgets/EditProfileAppearancePage.ui:601
+#: widgets/EditProfileAppearancePage.ui:627
 #, kde-format
 msgctxt "@title:group"
 msgid "Terminal contents"
 msgstr "Terminal-enhavo"
 
 #. i18n: ectx: property (text), widget (QLabel, lineSpacingLabel)
-#: widgets/EditProfileAppearancePage.ui:613
+#: widgets/EditProfileAppearancePage.ui:639
 #, kde-format
 msgid "Line spacing:"
 msgstr "Linia interspaco:"
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, lineSpacingSpinner)
-#: widgets/EditProfileAppearancePage.ui:631
+#: widgets/EditProfileAppearancePage.ui:657
 #, kde-format
 msgid "The number of pixels between two lines"
 msgstr "La nombro da pikseloj inter du linioj"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, lineSpacingSpinner)
 #. i18n: ectx: property (suffix), widget (QSpinBox, marginsSpinner)
-#: widgets/EditProfileAppearancePage.ui:634
-#: widgets/EditProfileAppearancePage.ui:686
+#: widgets/EditProfileAppearancePage.ui:660
+#: widgets/EditProfileAppearancePage.ui:712
 #, kde-format
 msgctxt "(pixels) visual size unit"
 msgid " px"
 msgstr " px"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
-#: widgets/EditProfileAppearancePage.ui:668
+#: widgets/EditProfileAppearancePage.ui:694
 #, kde-format
 msgid "Margins:"
 msgstr "Marĝenoj:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
-#: widgets/EditProfileAppearancePage.ui:720
+#: widgets/EditProfileAppearancePage.ui:746
 #, kde-format
 msgid "Align to center:"
 msgstr "Vicigi al la centro:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dimWhenInactiveCheckbox)
-#: widgets/EditProfileAppearancePage.ui:743
+#: widgets/EditProfileAppearancePage.ui:769
 #, kde-format
 msgid "Indicate whether the window is active by dimming the colors"
 msgstr "Indiki ĉu la fenestro estas aktiva mallumigante la kolorojn"
 
 #. i18n: ectx: property (text), widget (QCheckBox, dimWhenInactiveCheckbox)
-#: widgets/EditProfileAppearancePage.ui:746
+#: widgets/EditProfileAppearancePage.ui:772
 #, kde-format
 msgid "Darken"
 msgstr "Mallumigi"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, borderWhenActiveCheckbox)
-#: widgets/EditProfileAppearancePage.ui:753
+#: widgets/EditProfileAppearancePage.ui:779
 #, kde-format
 msgid "Indicate whether the window is active by drawing a border"
 msgstr "Indiki ĉu la fenestro estas aktiva grafikante borderon"
 
 #. i18n: ectx: property (text), widget (QCheckBox, borderWhenActiveCheckbox)
-#: widgets/EditProfileAppearancePage.ui:756
+#: widgets/EditProfileAppearancePage.ui:782
 #, kde-format
 msgid "Border"
 msgstr "Bordero"
 
 #. i18n: ectx: property (text), widget (QCheckBox, displayVerticalLine)
-#: widgets/EditProfileAppearancePage.ui:798
+#: widgets/EditProfileAppearancePage.ui:824
 #, kde-format
 msgid "Display Vertical line at column:"
 msgstr "Montri Vertikalan linion ĉe kolumno:"
 
 #. i18n: ectx: property (toolTip), widget (QWidget, CTLtab)
-#: widgets/EditProfileAppearancePage.ui:843
+#: widgets/EditProfileAppearancePage.ui:869
 #, kde-format
 msgid "<html><head/><body><p>Complex Text Layout</p></body></html>"
 msgstr "<html><head/><body><p>Kompleksa Teksta Aranĝo</p></body></html>"
 
 #. i18n: ectx: attribute (title), widget (QWidget, CTLtab)
-#: widgets/EditProfileAppearancePage.ui:846
+#: widgets/EditProfileAppearancePage.ui:872
 #, kde-format
 msgid "Complex Text Layout"
 msgstr "Kompleksa Teksta Aranĝo"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
-#: widgets/EditProfileAppearancePage.ui:861
+#: widgets/EditProfileAppearancePage.ui:887
 #, kde-format
 msgid "Enable word mode text rendering"
 msgstr "Ebligi tekstoreĝimon de vortreĝimo"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
-#: widgets/EditProfileAppearancePage.ui:864
+#: widgets/EditProfileAppearancePage.ui:890
 #, kde-format
 msgid "Word mode"
 msgstr "Vorta reĝimo"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAttr)
-#: widgets/EditProfileAppearancePage.ui:877
+#: widgets/EditProfileAppearancePage.ui:903
 #, kde-format
 msgid ""
 "Ignore attribute changes mid-word (otherwise, attribute changes break word "
@@ -4357,43 +4373,43 @@ msgstr ""
 "bildigo)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
-#: widgets/EditProfileAppearancePage.ui:880
+#: widgets/EditProfileAppearancePage.ui:906
 #, kde-format
 msgid "Use the same attributes for whole word"
 msgstr "Uzi la samajn atributojn por tuta vorto"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
-#: widgets/EditProfileAppearancePage.ui:893
+#: widgets/EditProfileAppearancePage.ui:919
 #, kde-format
 msgid "Render words of ASCII characters together"
 msgstr "Redoni vortojn de ASCII-signoj kune"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
-#: widgets/EditProfileAppearancePage.ui:896
+#: widgets/EditProfileAppearancePage.ui:922
 #, kde-format
 msgid "ASCII characters "
 msgstr "ASCII-signoj"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
-#: widgets/EditProfileAppearancePage.ui:909
+#: widgets/EditProfileAppearancePage.ui:935
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
 msgstr "Kunigi vortojn de brahmaj skribaj signoj"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
-#: widgets/EditProfileAppearancePage.ui:912
+#: widgets/EditProfileAppearancePage.ui:938
 #, kde-format
 msgid "Brahmic scripts characters"
 msgstr "Brahmaj skriptosignoj"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
-#: widgets/EditProfileAppearancePage.ui:925
+#: widgets/EditProfileAppearancePage.ui:951
 #, kde-format
 msgid "Emoji Font:"
 msgstr "Emoji-Tiparo:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
-#: widgets/EditProfileAppearancePage.ui:951
+#: widgets/EditProfileAppearancePage.ui:977
 #, kde-format
 msgid ""
 "Enable Bi-Directional display on terminals (valid for Arabic, Farsi or "
@@ -4403,43 +4419,43 @@ msgstr ""
 "aŭ la hebrea)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiRenderingButton)
-#: widgets/EditProfileAppearancePage.ui:954
+#: widgets/EditProfileAppearancePage.ui:980
 #, kde-format
 msgid "Bi-Directional text rendering"
 msgstr "Dudirekta teksta bildigo"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
-#: widgets/EditProfileAppearancePage.ui:967
+#: widgets/EditProfileAppearancePage.ui:993
 #, kde-format
 msgid "Lines are always LTR, rather than determined by first strong character"
 msgstr "Linioj ĉiam estas LTR, prefere ol determinitaj per unua forta signo"
 
 #. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
-#: widgets/EditProfileAppearancePage.ui:970
+#: widgets/EditProfileAppearancePage.ui:996
 #, kde-format
 msgid "force LTR line direction"
 msgstr "devigi LTR-linian direkton"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
-#: widgets/EditProfileAppearancePage.ui:983
+#: widgets/EditProfileAppearancePage.ui:1009
 #, kde-format
 msgid "Treat table drawing characters as strong LTR."
 msgstr "Trakti tabelajn desegnajn signojn kiel fortan LTR."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
-#: widgets/EditProfileAppearancePage.ui:986
+#: widgets/EditProfileAppearancePage.ui:1012
 #, kde-format
 msgid "Table characters BiDi mode override"
 msgstr "Tabelsignoj BiDi reĝimo anstataŭas"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
-#: widgets/EditProfileAppearancePage.ui:999
+#: widgets/EditProfileAppearancePage.ui:1025
 #, kde-format
 msgid "Ignore wcwidth of problematic characters"
 msgstr "Ignori wcwidth de problemecaj signoj"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ignoreWcWidth)
-#: widgets/EditProfileAppearancePage.ui:1002
+#: widgets/EditProfileAppearancePage.ui:1028
 #, kde-format
 msgid "Override wcwidth"
 msgstr "Superregi wcwidth"
@@ -4613,18 +4629,18 @@ msgstr[1] " sekundoj"
 msgid "Select Initial Directory"
 msgstr "Elekti komencan dosierujon"
 
-#: widgets/EditProfileDialog.cpp:966
+#: widgets/EditProfileDialog.cpp:968
 #, kde-format
 msgid "Get New..."
 msgstr "Ekpreni Novan..."
 
-#: widgets/EditProfileDialog.cpp:1363
+#: widgets/EditProfileDialog.cpp:1371
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "Skemo <resource>%1</resource> malsukcesis ŝargi."
 
-#: widgets/EditProfileDialog.cpp:1545
+#: widgets/EditProfileDialog.cpp:1553
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4632,7 +4648,7 @@ msgid ""
 msgstr ""
 "Ĉi tiu koloraro uzas travideblan fonon kiun ŝajne via labortablo ne subtenas."
 
-#: widgets/EditProfileDialog.cpp:1551
+#: widgets/EditProfileDialog.cpp:1559
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4641,12 +4657,12 @@ msgstr ""
 "Konsole estis komencita antaŭ ol labortablaj efikoj estis ebligitaj. Vi "
 "devas rekomenci Konsole por vidi travideblan fonon."
 
-#: widgets/EditProfileDialog.cpp:1952
+#: widgets/EditProfileDialog.cpp:1960
 #, kde-format
 msgid "Default for file type"
 msgstr "Defaŭlto por dosiertipo"
 
-#: widgets/EditProfileDialog.cpp:1978
+#: widgets/EditProfileDialog.cpp:1986
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4675,7 +4691,7 @@ msgstr ""
 "estos ignorita kaj la dosiero estos malfermita per la defaŭlta tekst-\n"
 "redaktilo."
 
-#: widgets/EditProfileDialog.cpp:1991
+#: widgets/EditProfileDialog.cpp:1999
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Tekstredaktilo Propra Komando"

@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-01 00:47+0000\n"
+"POT-Creation-Date: 2026-02-04 00:48+0000\n"
 "PO-Revision-Date: 2026-01-28 19:53+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -1899,7 +1899,7 @@ msgstr "便於列印模式 (黑色文字，不列印背景)(&F)"
 msgid "&Scale output"
 msgstr "調整輸出(&S)"
 
-#: profile/Profile.cpp:269
+#: profile/Profile.cpp:270
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
@@ -2134,12 +2134,12 @@ msgstr "找不到 %1，改啟動 %2。請檢查您的設定檔。"
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "無法啟動程式 %1，參數為 %2。"
 
-#: session/Session.cpp:806
+#: session/Session.cpp:809
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "分頁 %1 目前靜默中（於工作階段 %2）"
 
-#: session/Session.cpp:807 session/Session.cpp:2234
+#: session/Session.cpp:810 session/Session.cpp:2237
 #: session/SessionController.cpp:369 session/SessionController.cpp:1905
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1255
 #: Vt102Emulation.cpp:1510
@@ -2147,33 +2147,33 @@ msgstr "分頁 %1 目前靜默中（於工作階段 %2）"
 msgid "Show session"
 msgstr "顯示工作階段"
 
-#: session/Session.cpp:1123
+#: session/Session.cpp:1126
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "已完成"
 
-#: session/Session.cpp:1137 session/Session.cpp:1153
+#: session/Session.cpp:1140 session/Session.cpp:1156
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "程式 %1 當掉了。"
 
-#: session/Session.cpp:1139
+#: session/Session.cpp:1142
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "程式 %1 以 %2 狀態結束。"
 
-#: session/Session.cpp:1690
+#: session/Session.cpp:1693
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem 進度"
 
-#: session/Session.cpp:2233
+#: session/Session.cpp:2236
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "分頁 %1 目前活躍中（於工作階段 %2）"
 
-#: session/Session.cpp:2381
+#: session/Session.cpp:2384
 #, kde-format
 msgid "Security sensitive DBus API is disabled in the settings."
 msgstr "安全性敏感的 DBus API 已在設定中被停用。"
@@ -3381,94 +3381,94 @@ msgstr "Ctrl"
 msgid "Enable thumbnails generation"
 msgstr "開啟縮圖產生器"
 
-#: terminalDisplay/TerminalDisplay.cpp:688
+#: terminalDisplay/TerminalDisplay.cpp:702
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr "大小: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2299
+#: terminalDisplay/TerminalDisplay.cpp:2319
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "您確定要貼上這 %1 個字元嗎？"
 
-#: terminalDisplay/TerminalDisplay.cpp:2300
+#: terminalDisplay/TerminalDisplay.cpp:2320
 #, kde-format
 msgid "Confirm Paste"
 msgstr "確認貼上"
 
-#: terminalDisplay/TerminalDisplay.cpp:2333
+#: terminalDisplay/TerminalDisplay.cpp:2353
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "文字結尾/中止：可能會退出目前程序"
 
-#: terminalDisplay/TerminalDisplay.cpp:2334
+#: terminalDisplay/TerminalDisplay.cpp:2354
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "傳輸結尾：可能會退出目前程序"
 
-#: terminalDisplay/TerminalDisplay.cpp:2335
+#: terminalDisplay/TerminalDisplay.cpp:2355
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "鈴響 (Bell)：將嘗試發出聲音警告"
 
-#: terminalDisplay/TerminalDisplay.cpp:2336
+#: terminalDisplay/TerminalDisplay.cpp:2356
 #, kde-format
 msgid "Backspace"
 msgstr "Backspace 鍵"
 
-#: terminalDisplay/TerminalDisplay.cpp:2337
+#: terminalDisplay/TerminalDisplay.cpp:2357
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "裝置控制 3 / XOFF: 暫停輸出"
 
-#: terminalDisplay/TerminalDisplay.cpp:2338
+#: terminalDisplay/TerminalDisplay.cpp:2358
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "替代字元/暫停：可能會暫停目前程序"
 
-#: terminalDisplay/TerminalDisplay.cpp:2339
+#: terminalDisplay/TerminalDisplay.cpp:2359
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Esc 鍵：用來控制終端機狀態"
 
-#: terminalDisplay/TerminalDisplay.cpp:2340
+#: terminalDisplay/TerminalDisplay.cpp:2360
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "檔案分隔符/退出：可能會中止目前程序"
 
-#: terminalDisplay/TerminalDisplay.cpp:2363
+#: terminalDisplay/TerminalDisplay.cpp:2383
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
 "want to filter them out?"
 msgstr "您嘗試貼上的文字有隱藏控制字元。是否過濾出這些字元？"
 
-#: terminalDisplay/TerminalDisplay.cpp:2366
+#: terminalDisplay/TerminalDisplay.cpp:2386
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "確認貼上"
 
-#: terminalDisplay/TerminalDisplay.cpp:2367
+#: terminalDisplay/TerminalDisplay.cpp:2387
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "去除控制字元後貼上(&W)"
 
-#: terminalDisplay/TerminalDisplay.cpp:2368
+#: terminalDisplay/TerminalDisplay.cpp:2388
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "全部貼上(&P)"
 
-#: terminalDisplay/TerminalDisplay.cpp:2369
+#: terminalDisplay/TerminalDisplay.cpp:2389
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "取消(&C)"
 
-#: terminalDisplay/TerminalDisplay.cpp:2600
+#: terminalDisplay/TerminalDisplay.cpp:2620
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3478,17 +3478,17 @@ msgstr ""
 "<qt>輸出已經被 Ctrl+S <a href=\"https://en.wikipedia.org/wiki/"
 "Software_flow_control\">暫停</a>。按下 <b>Ctrl+Q</b> 回復。</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2655
+#: terminalDisplay/TerminalDisplay.cpp:2675
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "此終端器為唯讀狀態。"
 
-#: terminalDisplay/TerminalDisplay.cpp:3061
+#: terminalDisplay/TerminalDisplay.cpp:3081
 #, kde-format
 msgid "Change &Directory To"
 msgstr "變更目錄為(&D)"
 
-#: terminalDisplay/TerminalDisplay.cpp:3096
+#: terminalDisplay/TerminalDisplay.cpp:3116
 #, kde-format
 msgid "&Paste Location"
 msgstr "貼上位置(&P)"
@@ -3767,7 +3767,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "載入分頁佈局"
 
-#: Vt102Emulation.cpp:3255
+#: Vt102Emulation.cpp:3272
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
@@ -4116,29 +4116,45 @@ msgid "Make the cursor blink regularly"
 msgstr "讓游標定時閃動"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBlinkingCursorButton)
+#. i18n: ectx: property (text), widget (QCheckBox, enableAnimatingCursorButton)
 #. i18n: ectx: property (text), widget (QCheckBox, alignToCenterButton)
 #: widgets/EditProfileAppearancePage.ui:450
-#: widgets/EditProfileAppearancePage.ui:733
+#: widgets/EditProfileAppearancePage.ui:476
+#: widgets/EditProfileAppearancePage.ui:759
 #, kde-format
 msgid "Enabled"
 msgstr "啟用"
 
+#. i18n: ectx: property (text), widget (QLabel, label_12)
+#: widgets/EditProfileAppearancePage.ui:457
+#, fuzzy, kde-format
+#| msgid "Activation:"
+msgid "Animation:"
+msgstr "觸發方式："
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, enableAnimatingCursorButton)
+#: widgets/EditProfileAppearancePage.ui:473
+#, fuzzy, kde-format
+#| msgid "Make the cursor blink regularly"
+msgid "Make the cursor animate smoothly"
+msgstr "讓游標定時閃動"
+
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #. i18n: ectx: attribute (title), widget (QWidget, miscTab)
-#: widgets/EditProfileAppearancePage.ui:473 widgets/EditProfileMousePage.ui:252
+#: widgets/EditProfileAppearancePage.ui:499 widgets/EditProfileMousePage.ui:252
 #, kde-format
 msgctxt "Items that do not fit in other categories"
 msgid "Miscellaneous"
 msgstr "雜項"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: widgets/EditProfileAppearancePage.ui:484
+#: widgets/EditProfileAppearancePage.ui:510
 #, kde-format
 msgid "Window:"
 msgstr "視窗："
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, showTerminalSizeHintButton)
-#: widgets/EditProfileAppearancePage.ui:491
+#: widgets/EditProfileAppearancePage.ui:517
 #, kde-format
 msgid ""
 "Show terminal size in columns and lines in the center of window after "
@@ -4146,144 +4162,144 @@ msgid ""
 msgstr "調整大小之後在終端機中央顯示欄數與行數"
 
 #. i18n: ectx: property (text), widget (QCheckBox, showTerminalSizeHintButton)
-#: widgets/EditProfileAppearancePage.ui:494
+#: widgets/EditProfileAppearancePage.ui:520
 #, kde-format
 msgid "Show hint for terminal size after resizing"
 msgstr "調整大小之後顯示終端機大小"
 
 #. i18n: ectx: property (text), widget (QCheckBox, invertSelectionColorsCheckbox)
-#: widgets/EditProfileAppearancePage.ui:501
+#: widgets/EditProfileAppearancePage.ui:527
 #, kde-format
 msgid "Always invert the colors of selected text"
 msgstr "總是反轉選取文字的顏色"
 
 #. i18n: ectx: property (text), widget (QLabel, dimLabel)
-#: widgets/EditProfileAppearancePage.ui:510
+#: widgets/EditProfileAppearancePage.ui:536
 #, kde-format
 msgid "Darkening strength:"
 msgstr "黯淡程度"
 
 #. i18n: ectx: property (text), widget (QLabel, borderLabel)
-#: widgets/EditProfileAppearancePage.ui:543
+#: widgets/EditProfileAppearancePage.ui:569
 #, kde-format
 msgctxt "Border color options"
 msgid "Color:"
 msgstr "顏色："
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, focusBorderColor)
-#: widgets/EditProfileAppearancePage.ui:559
+#: widgets/EditProfileAppearancePage.ui:585
 #, kde-format
 msgid "Select the color used to draw the border"
 msgstr "選擇要用於繪製邊框的顏色"
 
 #. i18n: ectx: property (text), widget (QLabel, label_10)
-#: widgets/EditProfileAppearancePage.ui:581
+#: widgets/EditProfileAppearancePage.ui:607
 #, kde-format
 msgid "Inactive Terminals:"
 msgstr "不活躍的終端機："
 
 #. i18n: ectx: property (text), widget (QLabel, label_11)
-#: widgets/EditProfileAppearancePage.ui:591
+#: widgets/EditProfileAppearancePage.ui:617
 #, kde-format
 msgid "Active Terminals:"
 msgstr "活躍的終端機："
 
 #. i18n: ectx: property (title), widget (QGroupBox, contentsGroup)
-#: widgets/EditProfileAppearancePage.ui:601
+#: widgets/EditProfileAppearancePage.ui:627
 #, kde-format
 msgctxt "@title:group"
 msgid "Terminal contents"
 msgstr "終端機內容"
 
 #. i18n: ectx: property (text), widget (QLabel, lineSpacingLabel)
-#: widgets/EditProfileAppearancePage.ui:613
+#: widgets/EditProfileAppearancePage.ui:639
 #, kde-format
 msgid "Line spacing:"
 msgstr "行間距："
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, lineSpacingSpinner)
-#: widgets/EditProfileAppearancePage.ui:631
+#: widgets/EditProfileAppearancePage.ui:657
 #, kde-format
 msgid "The number of pixels between two lines"
 msgstr "兩行間的間距，單位為像素"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, lineSpacingSpinner)
 #. i18n: ectx: property (suffix), widget (QSpinBox, marginsSpinner)
-#: widgets/EditProfileAppearancePage.ui:634
-#: widgets/EditProfileAppearancePage.ui:686
+#: widgets/EditProfileAppearancePage.ui:660
+#: widgets/EditProfileAppearancePage.ui:712
 #, kde-format
 msgctxt "(pixels) visual size unit"
 msgid " px"
 msgstr " 像素(px)"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
-#: widgets/EditProfileAppearancePage.ui:668
+#: widgets/EditProfileAppearancePage.ui:694
 #, kde-format
 msgid "Margins:"
 msgstr "外邊距："
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
-#: widgets/EditProfileAppearancePage.ui:720
+#: widgets/EditProfileAppearancePage.ui:746
 #, kde-format
 msgid "Align to center:"
 msgstr "對齊中央："
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dimWhenInactiveCheckbox)
-#: widgets/EditProfileAppearancePage.ui:743
+#: widgets/EditProfileAppearancePage.ui:769
 #, kde-format
 msgid "Indicate whether the window is active by dimming the colors"
 msgstr "透過調暗顏色來指示視窗是否處於作用中的狀態"
 
 #. i18n: ectx: property (text), widget (QCheckBox, dimWhenInactiveCheckbox)
-#: widgets/EditProfileAppearancePage.ui:746
+#: widgets/EditProfileAppearancePage.ui:772
 #, kde-format
 msgid "Darken"
 msgstr "調暗"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, borderWhenActiveCheckbox)
-#: widgets/EditProfileAppearancePage.ui:753
+#: widgets/EditProfileAppearancePage.ui:779
 #, kde-format
 msgid "Indicate whether the window is active by drawing a border"
 msgstr "透過繪製邊框來指示視窗是否處於作用中的狀態"
 
 #. i18n: ectx: property (text), widget (QCheckBox, borderWhenActiveCheckbox)
-#: widgets/EditProfileAppearancePage.ui:756
+#: widgets/EditProfileAppearancePage.ui:782
 #, kde-format
 msgid "Border"
 msgstr "邊框"
 
 #. i18n: ectx: property (text), widget (QCheckBox, displayVerticalLine)
-#: widgets/EditProfileAppearancePage.ui:798
+#: widgets/EditProfileAppearancePage.ui:824
 #, kde-format
 msgid "Display Vertical line at column:"
 msgstr "在此欄位上標注垂直線"
 
 #. i18n: ectx: property (toolTip), widget (QWidget, CTLtab)
-#: widgets/EditProfileAppearancePage.ui:843
+#: widgets/EditProfileAppearancePage.ui:869
 #, kde-format
 msgid "<html><head/><body><p>Complex Text Layout</p></body></html>"
 msgstr "<html><head/><body><p>複合文字佈局</p></body></html>"
 
 #. i18n: ectx: attribute (title), widget (QWidget, CTLtab)
-#: widgets/EditProfileAppearancePage.ui:846
+#: widgets/EditProfileAppearancePage.ui:872
 #, kde-format
 msgid "Complex Text Layout"
 msgstr "複合文字佈局"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
-#: widgets/EditProfileAppearancePage.ui:861
+#: widgets/EditProfileAppearancePage.ui:887
 #, kde-format
 msgid "Enable word mode text rendering"
 msgstr "啟用字詞模式文字繪製"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
-#: widgets/EditProfileAppearancePage.ui:864
+#: widgets/EditProfileAppearancePage.ui:890
 #, kde-format
 msgid "Word mode"
 msgstr "字詞模式"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAttr)
-#: widgets/EditProfileAppearancePage.ui:877
+#: widgets/EditProfileAppearancePage.ui:903
 #, kde-format
 msgid ""
 "Ignore attribute changes mid-word (otherwise, attribute changes break word "
@@ -4291,43 +4307,43 @@ msgid ""
 msgstr "忽略中間詞的屬性變化（否則屬性變更會在繪製時斷字）"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
-#: widgets/EditProfileAppearancePage.ui:880
+#: widgets/EditProfileAppearancePage.ui:906
 #, kde-format
 msgid "Use the same attributes for whole word"
 msgstr "對整個字詞使用相同的屬性"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
-#: widgets/EditProfileAppearancePage.ui:893
+#: widgets/EditProfileAppearancePage.ui:919
 #, kde-format
 msgid "Render words of ASCII characters together"
 msgstr "一起繪製 ASCII 字元的字詞"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
-#: widgets/EditProfileAppearancePage.ui:896
+#: widgets/EditProfileAppearancePage.ui:922
 #, kde-format
 msgid "ASCII characters "
 msgstr "ASCII 字元"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
-#: widgets/EditProfileAppearancePage.ui:909
+#: widgets/EditProfileAppearancePage.ui:935
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
 msgstr "一起繪製印度系文字字元的字詞"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
-#: widgets/EditProfileAppearancePage.ui:912
+#: widgets/EditProfileAppearancePage.ui:938
 #, kde-format
 msgid "Brahmic scripts characters"
 msgstr "印度系文字字元"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
-#: widgets/EditProfileAppearancePage.ui:925
+#: widgets/EditProfileAppearancePage.ui:951
 #, kde-format
 msgid "Emoji Font:"
 msgstr "表情符號字型："
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
-#: widgets/EditProfileAppearancePage.ui:951
+#: widgets/EditProfileAppearancePage.ui:977
 #, kde-format
 msgid ""
 "Enable Bi-Directional display on terminals (valid for Arabic, Farsi or "
@@ -4335,43 +4351,43 @@ msgid ""
 msgstr "在終端機中開啟雙向顯示（只有在阿拉伯語、波斯語與希伯來語系中有效）"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiRenderingButton)
-#: widgets/EditProfileAppearancePage.ui:954
+#: widgets/EditProfileAppearancePage.ui:980
 #, kde-format
 msgid "Bi-Directional text rendering"
 msgstr "雙向文字繪製"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
-#: widgets/EditProfileAppearancePage.ui:967
+#: widgets/EditProfileAppearancePage.ui:993
 #, kde-format
 msgid "Lines are always LTR, rather than determined by first strong character"
 msgstr "線條一律為左到右，而非由第一個強調字元決定"
 
 #. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
-#: widgets/EditProfileAppearancePage.ui:970
+#: widgets/EditProfileAppearancePage.ui:996
 #, kde-format
 msgid "force LTR line direction"
 msgstr "強制左到右線條方向"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
-#: widgets/EditProfileAppearancePage.ui:983
+#: widgets/EditProfileAppearancePage.ui:1009
 #, kde-format
 msgid "Treat table drawing characters as strong LTR."
 msgstr "將表格繪製字元視為強左到右。"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
-#: widgets/EditProfileAppearancePage.ui:986
+#: widgets/EditProfileAppearancePage.ui:1012
 #, kde-format
 msgid "Table characters BiDi mode override"
 msgstr "表格字元 BiDi 模式覆寫"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
-#: widgets/EditProfileAppearancePage.ui:999
+#: widgets/EditProfileAppearancePage.ui:1025
 #, kde-format
 msgid "Ignore wcwidth of problematic characters"
 msgstr "忽略易造成問題的字元的 wcwidth"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ignoreWcWidth)
-#: widgets/EditProfileAppearancePage.ui:1002
+#: widgets/EditProfileAppearancePage.ui:1028
 #, kde-format
 msgid "Override wcwidth"
 msgstr "覆寫 wcwidth"
@@ -4539,25 +4555,25 @@ msgstr[0] " 秒"
 msgid "Select Initial Directory"
 msgstr "選擇起始目錄"
 
-#: widgets/EditProfileDialog.cpp:966
+#: widgets/EditProfileDialog.cpp:968
 #, kde-format
 msgid "Get New..."
 msgstr "取得更多…"
 
-#: widgets/EditProfileDialog.cpp:1363
+#: widgets/EditProfileDialog.cpp:1371
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "配色 <resource>%1</resource> 無法載入。"
 
-#: widgets/EditProfileDialog.cpp:1545
+#: widgets/EditProfileDialog.cpp:1553
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
 "supported on your desktop"
 msgstr "此配色中含有透明背景，您的桌面似乎不支援。"
 
-#: widgets/EditProfileDialog.cpp:1551
+#: widgets/EditProfileDialog.cpp:1559
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4566,12 +4582,12 @@ msgstr ""
 "在啟用桌面效果前 Konsole 就已經開啟，您需要重新啟動 Konsole 才能看到透明背"
 "景。"
 
-#: widgets/EditProfileDialog.cpp:1952
+#: widgets/EditProfileDialog.cpp:1960
 #, kde-format
 msgid "Default for file type"
 msgstr "檔案類型的預設"
 
-#: widgets/EditProfileDialog.cpp:1978
+#: widgets/EditProfileDialog.cpp:1986
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4598,7 +4614,7 @@ msgstr ""
 "指令未包含「路徑」或「行」的情況，將自動忽略本設定\n"
 "並以預設的文字編輯器開啟。"
 
-#: widgets/EditProfileDialog.cpp:1991
+#: widgets/EditProfileDialog.cpp:1999
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "文字編輯器自訂命令"
