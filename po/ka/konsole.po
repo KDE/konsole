@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-05 00:47+0000\n"
-"PO-Revision-Date: 2026-02-04 04:51+0100\n"
+"PO-Revision-Date: 2026-02-05 08:33+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -5644,10 +5644,9 @@ msgstr "ჩ&ანართის ფერი:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/RenameTabWidget.ui:128
-#, fuzzy, kde-format
-#| msgid "Tab Co&lor:"
+#, kde-format
 msgid "&Activity Tab Color:"
-msgstr "ჩ&ანართის ფერი:"
+msgstr "&აქტივობის ჩანართის ფერი:"
 
 #: widgets/TabTitleFormatButton.cpp:21
 #, c-format

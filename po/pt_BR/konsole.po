@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-05 00:47+0000\n"
-"PO-Revision-Date: 2026-02-04 08:26-0300\n"
+"PO-Revision-Date: 2026-02-05 05:44-0300\n"
 "Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -5683,10 +5683,9 @@ msgstr "&Cor da aba:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/RenameTabWidget.ui:128
-#, fuzzy, kde-format
-#| msgid "Tab Co&lor:"
+#, kde-format
 msgid "&Activity Tab Color:"
-msgstr "&Cor da aba:"
+msgstr "Cor da aba de &atividade:"
 
 #: widgets/TabTitleFormatButton.cpp:21
 #, c-format
