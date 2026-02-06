@@ -250,6 +250,8 @@ private:
     XkbData _xkbData;
 #endif
     bool _win32InputModeAvailable = true;
+    bool _isRightCtrlPressed = false;
+    bool _isRightAltPressed = false;
 
 protected:
     virtual void reportDecodingError(int token);

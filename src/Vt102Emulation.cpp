@@ -2965,8 +2965,6 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent *event)
         quint16 scanCode = 0;
         quint32 controlKeyState = 0;
         bool modifier = false;
-        bool m_is_right_alt_pressed = false;
-        bool m_is_right_ctrl_pressed = false;
 
         switch (keysym_us) {
             case XKB_KEY_BackSpace:   virtualKeyCode = VK_BACK;   break;
@@ -2977,11 +2975,13 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent *event)
             case XKB_KEY_Escape:      virtualKeyCode = VK_ESCAPE; break;
             case XKB_KEY_Shift_L:
                 virtualKeyCode = VK_SHIFT;
+                scanCode = LEFT_SHIFT_SCAN_CODE;
                 if (is_key_down) controlKeyState |= SHIFT_PRESSED;
                 modifier = true;
                 break;
             case XKB_KEY_Shift_R:
                 virtualKeyCode = VK_SHIFT;
+                scanCode = RIGHT_SHIFT_SCAN_CODE;
                 if (is_key_down) controlKeyState |= SHIFT_PRESSED;
                 modifier = true;
                 break;
@@ -2992,7 +2992,7 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent *event)
                 break;
             case XKB_KEY_Control_R:
                 virtualKeyCode = VK_CONTROL;
-                m_is_right_ctrl_pressed = true;
+                _isRightCtrlPressed = is_key_down;
                 if (is_key_down) controlKeyState |= RIGHT_CTRL_PRESSED;
                 controlKeyState |= ENHANCED_KEY;
                 modifier = true;
@@ -3004,7 +3004,7 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent *event)
                 break;
             case XKB_KEY_Alt_R:
                 virtualKeyCode = VK_MENU;
-                m_is_right_alt_pressed = true;
+                _isRightAltPressed = is_key_down;
                 if (is_key_down) controlKeyState |= RIGHT_ALT_PRESSED;
                 controlKeyState |= ENHANCED_KEY;
                 modifier = true;
@@ -3115,8 +3115,8 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent *event)
 
         if (!modifier) {
             if (event->modifiers() & Qt::ShiftModifier)   { controlKeyState |= SHIFT_PRESSED; }
-            if (event->modifiers() & Qt::ControlModifier) { controlKeyState |= m_is_right_ctrl_pressed ? RIGHT_CTRL_PRESSED : LEFT_CTRL_PRESSED; }
-            if (event->modifiers() & Qt::AltModifier)     { controlKeyState |= m_is_right_alt_pressed ? RIGHT_ALT_PRESSED : LEFT_ALT_PRESSED; }
+            if (event->modifiers() & Qt::ControlModifier) { controlKeyState |= _isRightCtrlPressed ? RIGHT_CTRL_PRESSED : LEFT_CTRL_PRESSED; }
+            if (event->modifiers() & Qt::AltModifier)     { controlKeyState |= _isRightAltPressed ? RIGHT_ALT_PRESSED : LEFT_ALT_PRESSED; }
         }
 
         if (xkb_state_mod_name_is_active(_xkbData.state_us, XKB_MOD_NAME_CAPS, XKB_STATE_MODS_EFFECTIVE)) { controlKeyState |= CAPSLOCK_ON; }

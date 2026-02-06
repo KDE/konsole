@@ -3,8 +3,8 @@
 
 // Shift keys scan codes from https://aeb.win.tue.nl/linux/kbd/scancodes-1.html
 
-#define LEFT_SHIFT_SCAN_CODE    0x2A;
-#define RIGHT_SHIFT_SCAN_CODE   0x36;
+#define LEFT_SHIFT_SCAN_CODE    0x2A
+#define RIGHT_SHIFT_SCAN_CODE   0x36
 
 // dwControlKeyState bitmask values from https://github.com/wine-mirror/wine/blob/master/include/wincontypes.h
 
