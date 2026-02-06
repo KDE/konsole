@@ -179,6 +179,23 @@ bool Pty::flowControlEnabled() const
     }
 }
 
+void Pty::setEchoEnabled(bool enable)
+{
+    if (pty()->masterFd() >= 0) {
+        struct ::termios ttmode;
+        pty()->tcGetAttr(&ttmode);
+        if (enable) {
+            ttmode.c_lflag |= ECHO;
+        } else {
+            ttmode.c_lflag &= ~ECHO;
+        }
+
+        if (!pty()->tcSetAttr(&ttmode)) {
+            qCDebug(KonsoleDebug) << "Unable to set terminal attributes.";
+        }
+    }
+}
+
 void Pty::setUtf8Mode(bool enable)
 {
 #if defined(IUTF8) // XXX not a reasonable place to check it.

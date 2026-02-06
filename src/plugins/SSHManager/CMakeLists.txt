@@ -1,4 +1,6 @@
 
+find_package(OpenSSL REQUIRED)
+
 ki18n_wrap_ui(extra_sshplugin_SRCS sshwidget.ui)
 
 ecm_qt_declare_logging_category(
@@ -18,6 +20,7 @@ SOURCES
     sshmanagermodel.cpp
     sshmanagerfiltermodel.cpp
     sshtreeview.cpp
+    sshcryptohelper.cpp
     ${extra_sshplugin_SRCS}
 INSTALL_NAMESPACE
     "konsoleplugins"
@@ -27,4 +30,5 @@ configure_file(konsole_sshmanager.in.json konsole_sshmanager.json)
 target_link_libraries(konsole_sshmanagerplugin
     konsoleprivate
     konsoleapp
+    OpenSSL::Crypto
 )

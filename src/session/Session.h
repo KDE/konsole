@@ -583,6 +583,12 @@ public Q_SLOTS:
     Q_SCRIPTABLE bool flowControlEnabled() const;
 
     /**
+     * Enables or disables local echo on the PTY.
+     * When disabled, text sent to the terminal is not echoed back to the display.
+     */
+    void setEchoEnabled(bool enabled);
+
+    /**
      * @param text to send to the current foreground terminal program.
      * @param eol send this after @p text
      */

@@ -53,9 +53,19 @@ public:
     // starts importing from ~/.ssh/config
     Q_SLOT void requestImport();
 
+    // encryption controls
+    Q_SLOT void toggleEncryption(bool enabled);
+    Q_SLOT void changeMasterPassword();
+    bool ensureDecrypted();
+
+    // import/export
+    Q_SLOT void exportProfiles();
+    Q_SLOT void importProfiles();
+
     Q_SLOT void handleTreeClick(Qt::MouseButton btn, const QModelIndex idx);
 
     Q_SIGNAL void requestNewTab();
+    Q_SIGNAL void requestConnection(const QModelIndex &idx, Konsole::SessionController *controller);
 
     void setEditComponentsEnabled(bool enabled);
 

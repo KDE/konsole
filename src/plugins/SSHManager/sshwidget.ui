@@ -64,6 +64,33 @@
     </layout>
    </item>
    <item>
+    <layout class="QHBoxLayout" name="encryptionLayout">
+     <item>
+      <widget class="QCheckBox" name="btnEncrypt">
+       <property name="toolTip">
+        <string>Encrypt stored passwords using a master password</string>
+       </property>
+       <property name="text">
+        <string>Encrypt passwords</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnChangeMasterPassword">
+       <property name="toolTip">
+        <string>Change the master password used to encrypt stored passwords</string>
+       </property>
+       <property name="text">
+        <string>Change Password</string>
+       </property>
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
     <widget class="SshTreeView" name="treeView">
      <attribute name="headerVisible">
       <bool>false</bool>
@@ -161,7 +188,47 @@
         </item>
        </layout>
       </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_sshKeyPassphrase">
+        <property name="text">
+         <string>Key Passphrase</string>
+        </property>
+       </widget>
+      </item>
       <item row="4" column="1">
+       <layout class="QHBoxLayout" name="sshKeyPassphraseLayout">
+        <item>
+         <widget class="QLineEdit" name="sshKeyPassphrase">
+          <property name="echoMode">
+           <enum>QLineEdit::Password</enum>
+          </property>
+          <property name="placeholderText">
+           <string>Passphrase for the SSH key</string>
+          </property>
+          <property name="toolTip">
+           <string>The passphrase to unlock the SSH private key</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="btnShowSshKeyPassphrase">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset theme="view-visible"/>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="toolTip">
+           <string>Show/Hide Passphrase</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="5" column="1">
        <widget class="QCheckBox" name="useSshConfig">
         <property name="toolTip">
          <string>If this is set, we don't rely on the SSH key set above, but on the configuration on ~/.ssh/config</string>
@@ -171,14 +238,24 @@
         </property>
        </widget>
       </item>
-      <item row="5" column="0">
+      <item row="6" column="1">
+       <widget class="QCheckBox" name="autoAcceptKeys">
+        <property name="toolTip">
+         <string>Automatically accept new host keys (StrictHostKeyChecking=accept-new)</string>
+        </property>
+        <property name="text">
+         <string>Auto-accept New Keys</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="0">
        <widget class="QLabel" name="label_7">
         <property name="text">
          <string>Username</string>
         </property>
        </widget>
       </item>
-      <item row="5" column="1">
+      <item row="7" column="1">
        <widget class="QLineEdit" name="username">
         <property name="toolTip">
          <string>The username for the connection</string>
@@ -188,14 +265,161 @@
         </property>
        </widget>
       </item>
-      <item row="6" column="0">
+      <item row="8" column="0">
+       <widget class="QLabel" name="label_password">
+        <property name="text">
+         <string>Password</string>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="1">
+       <layout class="QHBoxLayout" name="passwordLayout">
+        <item>
+         <widget class="QLineEdit" name="password">
+          <property name="echoMode">
+           <enum>QLineEdit::Password</enum>
+          </property>
+          <property name="placeholderText">
+           <string>Password (saved in plain text)</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="btnShowPassword">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset theme="view-visible"/>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="toolTip">
+            <string>Show/Hide Password</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="9" column="0" colspan="2">
+       <widget class="QGroupBox" name="proxyGroup">
+        <property name="title">
+         <string>Enable SOCKS5 Proxy</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+        <layout class="QFormLayout" name="proxyLayout">
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_proxyIp">
+           <property name="text">
+            <string>Proxy IP</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="proxyIp">
+           <property name="placeholderText">
+            <string>e.g. 127.0.0.1</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_proxyPort">
+           <property name="text">
+            <string>Port</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="proxyPort">
+           <property name="text">
+            <string>1080</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="label_proxyUser">
+           <property name="text">
+            <string>Username</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QLineEdit" name="proxyUsername">
+            <property name="placeholderText">
+             <string>Optional</string>
+            </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="label_proxyPass">
+           <property name="text">
+            <string>Password</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+           <layout class="QHBoxLayout" name="proxyPassLayout">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLineEdit" name="proxyPassword">
+              <property name="echoMode">
+               <enum>QLineEdit::Password</enum>
+              </property>
+               <property name="placeholderText">
+                 <string>Optional</string>
+               </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="btnShowProxyPassword">
+              <property name="icon">
+               <iconset theme="view-visible"/>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="10" column="0" colspan="2">
+        <widget class="QCheckBox" name="enableSshfs">
+         <property name="toolTip">
+          <string>Automatically mount the remote filesystem using Rclone when connecting</string>
+         </property>
+         <property name="text">
+          <string>Mount Remote Filesystem</string>
+         </property>
+        </widget>
+      </item>
+      <item row="11" column="0">
        <widget class="QLabel" name="folderLabel">
         <property name="text">
          <string>Folder</string>
         </property>
        </widget>
       </item>
-      <item row="6" column="1">
+      <item row="11" column="1">
        <widget class="QComboBox" name="folder">
         <property name="sizePolicy">
          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -214,14 +438,14 @@
         </property>
        </widget>
       </item>
-      <item row="7" column="0">
+      <item row="12" column="0">
        <widget class="QLabel" name="label_5">
         <property name="text">
          <string>Profile</string>
         </property>
        </widget>
       </item>
-      <item row="7" column="1">
+      <item row="12" column="1">
        <widget class="QComboBox" name="profile">
         <property name="sizePolicy">
          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -234,7 +458,7 @@
         </property>
        </widget>
       </item>
-      <item row="8" column="1">
+      <item row="13" column="1">
        <spacer name="verticalSpacer">
         <property name="orientation">
          <enum>Qt::Orientation::Vertical</enum>
@@ -252,6 +476,32 @@
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="btnImport">
+       <property name="toolTip">
+        <string>Import SSH profiles from a JSON file</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset theme="document-import"/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnExport">
+       <property name="toolTip">
+        <string>Export SSH profiles to a JSON file</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset theme="document-export"/>
+       </property>
+      </widget>
+     </item>
      <item>
       <spacer name="horizontalSpacer">
        <property name="orientation">

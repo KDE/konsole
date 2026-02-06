@@ -12,6 +12,8 @@
 
 #include <memory>
 
+#include "sshconfigurationdata.h"
+
 namespace Konsole
 {
 class SessionController;
@@ -34,10 +36,11 @@ public:
     void activeViewChanged(Konsole::SessionController *controller, Konsole::MainWindow *mainWindow) override;
     QList<QAction *> menuBarActions(Konsole::MainWindow *mainWindow) const override;
 
-    static void
-    requestConnection(QSortFilterProxyModel *filterModel, QStandardItemModel *model, Konsole::SessionController *controller, const QModelIndex &idx);
+    void requestConnection(const QModelIndex &idx, Konsole::SessionController *controller);
 
 private:
+    void startConnection(const SSHConfigurationData &data, Konsole::SessionController *controller);
+
     std::unique_ptr<SSHManagerPluginPrivate> d;
 };
 

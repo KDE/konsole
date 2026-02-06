@@ -17,10 +17,23 @@ public:
     QString host;
     QString port;
     QString sshKey;
+    QString sshKeyPassphrase;
     QString username;
     QString profileName;
+    QString password;
+    bool autoAcceptKeys = false;
     bool useSshConfig = false;
     bool importedFromSshConfig = false;
+    
+    // Proxy Configuration
+    bool useProxy = false;
+    QString proxyIp;
+    QString proxyPort;
+    QString proxyUsername;
+    QString proxyPassword;
+
+    // SSHFS Configuration
+    bool enableSshfs = false;
 };
 
 Q_DECLARE_METATYPE(SSHConfigurationData)

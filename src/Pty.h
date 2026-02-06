@@ -114,6 +114,13 @@ public:
     bool flowControlEnabled() const;
 
     /**
+     * Enables or disables local echo on the PTY.
+     * When disabled, characters sent to the PTY are not echoed back by the terminal driver.
+     * This is useful for sending commands that should not be visible to the user.
+     */
+    void setEchoEnabled(bool on);
+
+    /**
      * Sets the size of the window (in columns and lines of characters,
      * and width and height in pixels) used by this teletype.
      */

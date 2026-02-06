@@ -1655,6 +1655,14 @@ bool Session::flowControlEnabled() const
         return _flowControlEnabled;
     }
 }
+
+void Session::setEchoEnabled(bool enabled)
+{
+    if (_shellProcess != nullptr) {
+        _shellProcess->setEchoEnabled(enabled);
+    }
+}
+
 void Session::fireZModemDownloadDetected()
 {
     if (!_zmodemBusy) {

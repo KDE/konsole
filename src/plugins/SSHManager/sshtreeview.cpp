@@ -18,6 +18,7 @@ SshTreeView::~SshTreeView() noexcept = default;
 
 void SshTreeView::mouseReleaseEvent(QMouseEvent *ev)
 {
+    QTreeView::mouseReleaseEvent(ev);
     const QModelIndex idxAt = indexAt(ev->pos());
     if (idxAt.isValid()) {
         Q_EMIT mouseButtonClicked(ev->button(), idxAt);

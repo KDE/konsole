@@ -16,6 +16,9 @@
 
 #include <QFile>
 #include <QFileInfo>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <QLoggingCategory>
 #include <QStandardPaths>
 #include <QTextStream>
@@ -29,6 +32,7 @@
 #include "profile/ProfileModel.h"
 
 #include "sshconfigurationdata.h"
+#include "sshcryptohelper.h"
 
 #include "sshmanagerplugindebug.h"
 
@@ -248,10 +252,23 @@ void SSHManagerModel::triggerProfileChange(const QString &sshHost)
 
 void SSHManagerModel::load()
 {
+    m_sshConfigTopLevelItem = nullptr;
+
     auto config = KConfig(QStringLiteral("konsolesshconfig"), KConfig::OpenFlag::SimpleConfig);
+
+    // Load encryption settings first
+    if (config.hasGroup(QStringLiteral("Encryption"))) {
+        KConfigGroup encGroup = config.group(QStringLiteral("Encryption"));
+        m_encryptionEnabled = encGroup.readEntry<bool>("enabled", false);
+        m_encryptionSalt = encGroup.readEntry("salt");
+        m_encryptionVerifier = encGroup.readEntry("verifier");
+    }
 
     const auto groupList = config.groupList();
     for (const QString &groupName : groupList) {
+        if (groupName == QStringLiteral("Encryption")) {
+            continue;
+        }
         KConfigGroup group = config.group(groupName);
         if (groupName == QStringLiteral("Global plugin config")) {
             manageProfile = group.readEntry<bool>("manageProfile", false);
@@ -267,9 +284,21 @@ void SSHManagerModel::load()
             data.port = sessionGroup.readEntry("port");
             data.profileName = sessionGroup.readEntry("profileName");
             data.username = sessionGroup.readEntry("username");
+            data.password = maybeDecrypt(sessionGroup.readEntry("password"));
             data.sshKey = sessionGroup.readEntry("sshkey");
+            data.sshKeyPassphrase = maybeDecrypt(sessionGroup.readEntry("sshKeyPassphrase"));
+            data.autoAcceptKeys = sessionGroup.readEntry<bool>("autoAcceptKeys", false);
             data.useSshConfig = sessionGroup.readEntry<bool>("useSshConfig", false);
             data.importedFromSshConfig = sessionGroup.readEntry<bool>("importedFromSshConfig", false);
+            
+            data.useProxy = sessionGroup.readEntry<bool>("useProxy", false);
+            data.proxyIp = sessionGroup.readEntry("proxyIp");
+            data.proxyPort = sessionGroup.readEntry("proxyPort");
+            data.proxyUsername = sessionGroup.readEntry("proxyUsername");
+            data.proxyPassword = maybeDecrypt(sessionGroup.readEntry("proxyPassword"));
+
+            data.enableSshfs = sessionGroup.readEntry<bool>("enableSshfs", false);
+
             addChildItem(data, groupName);
         }
     }
@@ -286,6 +315,12 @@ void SSHManagerModel::save()
     KConfigGroup globalGroup = config.group(QStringLiteral("Global plugin config"));
     globalGroup.writeEntry("manageProfile", manageProfile);
 
+    // Save encryption settings
+    KConfigGroup encGroup = config.group(QStringLiteral("Encryption"));
+    encGroup.writeEntry("enabled", m_encryptionEnabled);
+    encGroup.writeEntry("salt", m_encryptionSalt);
+    encGroup.writeEntry("verifier", m_encryptionVerifier);
+
     for (int i = 0, end = invisibleRootItem()->rowCount(); i < end; i++) {
         QStandardItem *groupItem = invisibleRootItem()->child(i);
         const QString groupName = groupItem->text();
@@ -299,8 +334,20 @@ void SSHManagerModel::save()
             sshGroup.writeEntry("port", data.port.trimmed());
             sshGroup.writeEntry("profileName", data.profileName.trimmed());
             sshGroup.writeEntry("sshkey", data.sshKey.trimmed());
+            sshGroup.writeEntry("sshKeyPassphrase", maybeEncrypt(data.sshKeyPassphrase));
+            sshGroup.writeEntry("autoAcceptKeys", data.autoAcceptKeys);
             sshGroup.writeEntry("useSshConfig", data.useSshConfig);
             sshGroup.writeEntry("username", data.username);
+            sshGroup.writeEntry("password", maybeEncrypt(data.password));
+            
+            sshGroup.writeEntry("useProxy", data.useProxy);
+            sshGroup.writeEntry("proxyIp", data.proxyIp);
+            sshGroup.writeEntry("proxyPort", data.proxyPort);
+            sshGroup.writeEntry("proxyUsername", data.proxyUsername);
+            sshGroup.writeEntry("proxyPassword", maybeEncrypt(data.proxyPassword));
+            
+            sshGroup.writeEntry("enableSshfs", data.enableSshfs);
+
             sshGroup.writeEntry("importedFromSshConfig", data.importedFromSshConfig);
         }
     }
@@ -434,6 +481,269 @@ void SSHManagerModel::setManageProfile(bool manage)
 bool SSHManagerModel::getManageProfile()
 {
     return manageProfile;
+}
+
+// --- Encryption ---
+
+QString SSHManagerModel::maybeEncrypt(const QString &value) const
+{
+    if (!m_encryptionEnabled || m_masterPassword.isEmpty() || value.isEmpty()) {
+        return value;
+    }
+    return SSHCryptoHelper::encrypt(value, m_masterPassword);
+}
+
+QString SSHManagerModel::maybeDecrypt(const QString &value) const
+{
+    if (!SSHCryptoHelper::isEncrypted(value)) {
+        return value;
+    }
+    if (m_masterPassword.isEmpty()) {
+        // No password yet — return the raw encrypted value;
+        // it will be decrypted after the user provides the password.
+        return value;
+    }
+    const QString decrypted = SSHCryptoHelper::decrypt(value, m_masterPassword);
+    return decrypted.isEmpty() ? value : decrypted;
+}
+
+void SSHManagerModel::setMasterPassword(const QString &password)
+{
+    m_masterPassword = password;
+}
+
+bool SSHManagerModel::hasMasterPassword() const
+{
+    return !m_masterPassword.isEmpty();
+}
+
+bool SSHManagerModel::verifyMasterPassword(const QString &password) const
+{
+    if (m_encryptionVerifier.isEmpty()) {
+        return false;
+    }
+    const QString decrypted = SSHCryptoHelper::decrypt(m_encryptionVerifier, password);
+    return decrypted == QStringLiteral("KONSOLE_SSH_VERIFY");
+}
+
+void SSHManagerModel::enableEncryption(const QString &password)
+{
+    m_masterPassword = password;
+    m_encryptionEnabled = true;
+    m_encryptionVerifier = SSHCryptoHelper::encrypt(QStringLiteral("KONSOLE_SSH_VERIFY"), password);
+    save();
+    // Reload so in-memory data is consistent
+    clear();
+    load();
+}
+
+void SSHManagerModel::disableEncryption()
+{
+    m_encryptionEnabled = false;
+    m_encryptionVerifier.clear();
+    m_encryptionSalt.clear();
+    // Re-save with plaintext
+    save();
+}
+
+bool SSHManagerModel::isEncryptionEnabled() const
+{
+    return m_encryptionEnabled;
+}
+
+void SSHManagerModel::decryptAll()
+{
+    if (m_masterPassword.isEmpty()) {
+        return;
+    }
+
+    for (int i = 0, end = invisibleRootItem()->rowCount(); i < end; i++) {
+        QStandardItem *groupItem = invisibleRootItem()->child(i);
+        for (int e = 0, rend = groupItem->rowCount(); e < rend; e++) {
+            QStandardItem *sshElement = groupItem->child(e);
+            auto data = sshElement->data(SSHRole).value<SSHConfigurationData>();
+            bool changed = false;
+
+            if (SSHCryptoHelper::isEncrypted(data.password)) {
+                data.password = maybeDecrypt(data.password);
+                changed = true;
+            }
+            if (SSHCryptoHelper::isEncrypted(data.sshKeyPassphrase)) {
+                data.sshKeyPassphrase = maybeDecrypt(data.sshKeyPassphrase);
+                changed = true;
+            }
+            if (SSHCryptoHelper::isEncrypted(data.proxyPassword)) {
+                data.proxyPassword = maybeDecrypt(data.proxyPassword);
+                changed = true;
+            }
+
+            if (changed) {
+                sshElement->setData(QVariant::fromValue(data), SSHRole);
+            }
+        }
+    }
+}
+
+// --- Import/Export ---
+
+static QJsonObject dataToJson(const SSHConfigurationData &data)
+{
+    QJsonObject obj;
+    obj[QStringLiteral("name")] = data.name;
+    obj[QStringLiteral("host")] = data.host;
+    obj[QStringLiteral("port")] = data.port;
+    obj[QStringLiteral("sshKey")] = data.sshKey;
+    obj[QStringLiteral("sshKeyPassphrase")] = data.sshKeyPassphrase;
+    obj[QStringLiteral("username")] = data.username;
+    obj[QStringLiteral("profileName")] = data.profileName;
+    obj[QStringLiteral("password")] = data.password;
+    obj[QStringLiteral("autoAcceptKeys")] = data.autoAcceptKeys;
+    obj[QStringLiteral("useSshConfig")] = data.useSshConfig;
+    obj[QStringLiteral("importedFromSshConfig")] = data.importedFromSshConfig;
+    obj[QStringLiteral("useProxy")] = data.useProxy;
+    obj[QStringLiteral("proxyIp")] = data.proxyIp;
+    obj[QStringLiteral("proxyPort")] = data.proxyPort;
+    obj[QStringLiteral("proxyUsername")] = data.proxyUsername;
+    obj[QStringLiteral("proxyPassword")] = data.proxyPassword;
+    obj[QStringLiteral("enableSshfs")] = data.enableSshfs;
+    return obj;
+}
+
+static SSHConfigurationData jsonToData(const QJsonObject &obj)
+{
+    SSHConfigurationData data;
+    data.name = obj[QStringLiteral("name")].toString();
+    data.host = obj[QStringLiteral("host")].toString();
+    data.port = obj[QStringLiteral("port")].toString();
+    data.sshKey = obj[QStringLiteral("sshKey")].toString();
+    data.sshKeyPassphrase = obj[QStringLiteral("sshKeyPassphrase")].toString();
+    data.username = obj[QStringLiteral("username")].toString();
+    data.profileName = obj[QStringLiteral("profileName")].toString();
+    data.password = obj[QStringLiteral("password")].toString();
+    data.autoAcceptKeys = obj[QStringLiteral("autoAcceptKeys")].toBool();
+    data.useSshConfig = obj[QStringLiteral("useSshConfig")].toBool();
+    data.importedFromSshConfig = obj[QStringLiteral("importedFromSshConfig")].toBool();
+    data.useProxy = obj[QStringLiteral("useProxy")].toBool();
+    data.proxyIp = obj[QStringLiteral("proxyIp")].toString();
+    data.proxyPort = obj[QStringLiteral("proxyPort")].toString();
+    data.proxyUsername = obj[QStringLiteral("proxyUsername")].toString();
+    data.proxyPassword = obj[QStringLiteral("proxyPassword")].toString();
+    data.enableSshfs = obj[QStringLiteral("enableSshfs")].toBool();
+    return data;
+}
+
+QJsonDocument SSHManagerModel::exportToJson(const QString &exportPassword) const
+{
+    QJsonArray foldersArray;
+
+    for (int i = 0, end = invisibleRootItem()->rowCount(); i < end; i++) {
+        QStandardItem *groupItem = invisibleRootItem()->child(i);
+        QJsonObject folderObj;
+        folderObj[QStringLiteral("name")] = groupItem->text();
+
+        QJsonArray entriesArray;
+        for (int e = 0, rend = groupItem->rowCount(); e < rend; e++) {
+            QStandardItem *sshElement = groupItem->child(e);
+            const auto data = sshElement->data(SSHRole).value<SSHConfigurationData>();
+            entriesArray.append(dataToJson(data));
+        }
+        folderObj[QStringLiteral("entries")] = entriesArray;
+        foldersArray.append(folderObj);
+    }
+
+    if (!exportPassword.isEmpty()) {
+        // Encrypted export: encrypt the folders payload
+        QJsonDocument foldersDoc(foldersArray);
+        const QByteArray foldersBytes = foldersDoc.toJson(QJsonDocument::Compact);
+        const QByteArray encrypted = SSHCryptoHelper::encryptBlob(foldersBytes, exportPassword);
+        if (encrypted.isEmpty()) {
+            return {};
+        }
+
+        const int saltEnd = SSHCryptoHelper::SALT_SIZE;
+        const int ivEnd = saltEnd + SSHCryptoHelper::IV_SIZE;
+        const int tagEnd = ivEnd + SSHCryptoHelper::TAG_SIZE;
+
+        QJsonObject root;
+        root[QStringLiteral("version")] = 1;
+        root[QStringLiteral("encrypted")] = true;
+        root[QStringLiteral("salt")] = QString::fromLatin1(encrypted.mid(0, saltEnd).toBase64());
+        root[QStringLiteral("iv")] = QString::fromLatin1(encrypted.mid(saltEnd, SSHCryptoHelper::IV_SIZE).toBase64());
+        root[QStringLiteral("tag")] = QString::fromLatin1(encrypted.mid(ivEnd, SSHCryptoHelper::TAG_SIZE).toBase64());
+        root[QStringLiteral("data")] = QString::fromLatin1(encrypted.mid(tagEnd).toBase64());
+        return QJsonDocument(root);
+    }
+
+    // Unencrypted export
+    QJsonObject root;
+    root[QStringLiteral("version")] = 1;
+    root[QStringLiteral("encrypted")] = false;
+    root[QStringLiteral("folders")] = foldersArray;
+    return QJsonDocument(root);
+}
+
+bool SSHManagerModel::importFromJson(const QJsonDocument &doc, const QString &importPassword)
+{
+    if (doc.isNull() || !doc.isObject()) {
+        return false;
+    }
+
+    const QJsonObject root = doc.object();
+    const bool encrypted = root[QStringLiteral("encrypted")].toBool();
+
+    QJsonArray foldersArray;
+
+    if (encrypted) {
+        if (importPassword.isEmpty()) {
+            return false;
+        }
+
+        // Reconstruct the blob: salt || iv || tag || ciphertext
+        const QByteArray salt = QByteArray::fromBase64(root[QStringLiteral("salt")].toString().toLatin1());
+        const QByteArray iv = QByteArray::fromBase64(root[QStringLiteral("iv")].toString().toLatin1());
+        const QByteArray tag = QByteArray::fromBase64(root[QStringLiteral("tag")].toString().toLatin1());
+        const QByteArray cipherData = QByteArray::fromBase64(root[QStringLiteral("data")].toString().toLatin1());
+
+        QByteArray blob;
+        blob.append(salt);
+        blob.append(iv);
+        blob.append(tag);
+        blob.append(cipherData);
+
+        const QByteArray decrypted = SSHCryptoHelper::decryptBlob(blob, importPassword);
+        if (decrypted.isEmpty()) {
+            return false;
+        }
+
+        QJsonParseError parseError;
+        QJsonDocument foldersDoc = QJsonDocument::fromJson(decrypted, &parseError);
+        if (parseError.error != QJsonParseError::NoError || !foldersDoc.isArray()) {
+            return false;
+        }
+        foldersArray = foldersDoc.array();
+    } else {
+        foldersArray = root[QStringLiteral("folders")].toArray();
+    }
+
+    for (const QJsonValue &folderVal : foldersArray) {
+        const QJsonObject folderObj = folderVal.toObject();
+        const QString folderName = folderObj[QStringLiteral("name")].toString();
+        if (folderName.isEmpty()) {
+            continue;
+        }
+
+        const QJsonArray entries = folderObj[QStringLiteral("entries")].toArray();
+        for (const QJsonValue &entryVal : entries) {
+            SSHConfigurationData data = jsonToData(entryVal.toObject());
+            if (data.name.isEmpty() || data.host.isEmpty()) {
+                continue;
+            }
+            addChildItem(data, folderName);
+        }
+    }
+
+    save();
+    return true;
 }
 
 #include "moc_sshmanagermodel.cpp"

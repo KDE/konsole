@@ -9,6 +9,7 @@
 #define SSHMANAGERMODEL_H
 
 #include <QFileSystemWatcher>
+#include <QJsonDocument>
 #include <QStandardItemModel>
 
 #include <memory>
@@ -59,7 +60,23 @@ public:
     void setManageProfile(bool manage);
     bool getManageProfile();
 
+    // Encryption
+    void setMasterPassword(const QString &password);
+    bool hasMasterPassword() const;
+    bool verifyMasterPassword(const QString &password) const;
+    void enableEncryption(const QString &password);
+    void disableEncryption();
+    bool isEncryptionEnabled() const;
+    void decryptAll();
+
+    // Import/Export
+    QJsonDocument exportToJson(const QString &exportPassword = {}) const;
+    bool importFromJson(const QJsonDocument &doc, const QString &importPassword = {});
+
 private:
+    QString maybeEncrypt(const QString &value) const;
+    QString maybeDecrypt(const QString &value) const;
+
     QStandardItem *m_sshConfigTopLevelItem = nullptr;
     QFileSystemWatcher m_sshConfigWatcher;
     Konsole::Session *m_session = nullptr;
@@ -67,6 +84,12 @@ private:
     QHash<Konsole::Session *, QString> m_sessionToProfileName;
 
     bool manageProfile = false;
+
+    // Encryption state (in-memory only, never persisted directly)
+    QString m_masterPassword;
+    bool m_encryptionEnabled = false;
+    QString m_encryptionSalt;
+    QString m_encryptionVerifier;
 };
 
 #endif
