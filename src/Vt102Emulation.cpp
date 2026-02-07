@@ -2956,10 +2956,19 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent *event)
         const xkb_keycode_t keycode = event->nativeScanCode() +
             (QGuiApplication::platformName() == QLatin1String("xcb") ? 8 : 0);
 
-        xkb_state_update_key(_xkbData.state_us, keycode,
-                             is_key_down ? XKB_KEY_DOWN : XKB_KEY_UP);
-
+        /* To correctly determine the Virtual Key Code (which represents a physical key,
+         * e.g. VK_1 regardless of whether '1' or '!' is produced), we need the base keysym.
+         * We achieve this by checking the keysym first, and if it is a Shift key,
+         * we do NOT update the US state. This keeps the state "Shift-less", so subsequent
+         * lookups for '1' return '1' instead of '!'. CapsLock etc. are still updated. */
         xkb_keysym_t keysym_us = xkb_state_key_get_one_sym(_xkbData.state_us, keycode);
+
+        if (keysym_us != XKB_KEY_Shift_L && keysym_us != XKB_KEY_Shift_R) {
+            xkb_state_update_key(_xkbData.state_us, keycode,
+                                 is_key_down ? XKB_KEY_DOWN : XKB_KEY_UP);
+            /* Re-fetch in case a modifier (like CapsLock) changed the result */
+            keysym_us = xkb_state_key_get_one_sym(_xkbData.state_us, keycode);
+        }
 
         quint16 virtualKeyCode = 0;
         quint16 scanCode = 0;
