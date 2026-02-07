@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-05 00:47+0000\n"
-"PO-Revision-Date: 2026-01-19 22:43+0100\n"
+"PO-Revision-Date: 2026-01-29 23:22+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -692,26 +692,28 @@ msgstr "AaZz09..."
 msgid ""
 "Container support is not available when Konsole is running inside Flatpak."
 msgstr ""
+"Поддръжката на контейнери не е налична, когато Konsole се изпълнява във "
+"Flatpak."
 
 #: containers/DistroboxDetector.cpp:67
 #, kde-format
 msgid "Distrobox"
-msgstr ""
+msgstr "Distrobox"
 
 #: containers/DistroboxDetector.cpp:167
 #, kde-format
 msgid "Distrobox: %1"
-msgstr ""
+msgstr "Distrobox: %1"
 
 #: containers/ToolboxDetector.cpp:24
 #, kde-format
 msgid "Toolbox"
-msgstr ""
+msgstr "Toolbox"
 
 #: containers/ToolboxDetector.cpp:45
 #, kde-format
 msgid "Toolbox: %1"
-msgstr ""
+msgstr "Toolbox: %1"
 
 #: CopyInputDialog.cpp:30
 #, kde-format
@@ -4806,13 +4808,14 @@ msgid ""
 "When opening a new tab or split, automatically enter the same container "
 "(Toolbox, Distrobox) as the current session"
 msgstr ""
+"При отваряне на нов раздел или разделяне, автоматично влизайте в същия "
+"контейнер (Toolbox, Distrobox) като текущата сесия."
 
 #. i18n: ectx: property (text), widget (QCheckBox, inheritContainerButton)
 #: widgets/EditProfileGeneralPage.ui:203
-#, fuzzy, kde-format
-#| msgid "Start in same directory as current session"
+#, kde-format
 msgid "Enter same container as current session"
-msgstr "Стартиране в същата директория като текущата сесия"
+msgstr "Влизане в същия контейнер като текущата сесия"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/EditProfileGeneralPage.ui:229
