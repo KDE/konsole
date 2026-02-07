@@ -685,6 +685,7 @@ void SessionController::setupCommonActions()
     action->setText(i18n("Copy"));
     action->setIcon(QIcon::fromTheme(QStringLiteral("edit-copy")));
     action->setVisible(false);
+    KActionCollection::setShortcutsConfigurable(action, false);
     connect(action, &QAction::triggered, this, &SessionController::copy);
 
     action = collection->addAction(QStringLiteral("split-view-left-right"));
