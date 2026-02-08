@@ -105,7 +105,7 @@ MainWindow::MainWindow()
 
     connect(_viewManager, &Konsole::ViewManager::updateWindowIcon, this, &Konsole::MainWindow::updateWindowIcon);
     connect(_viewManager, &Konsole::ViewManager::newViewWithProfileRequest, this, &Konsole::MainWindow::newFromProfile);
-    connect(_viewManager, &Konsole::ViewManager::newViewInContainerRequest, this, &Konsole::MainWindow::newFromContainer);
+    connect(_viewManager, &Konsole::ViewManager::newViewInContainerRequest, this, &Konsole::MainWindow::newInContainer);
     connect(_viewManager, &Konsole::ViewManager::newViewRequest, this, &Konsole::MainWindow::newTab);
     connect(_viewManager, &Konsole::ViewManager::terminalsDetached, this, &Konsole::MainWindow::terminalsDetached);
     connect(_viewManager, &Konsole::ViewManager::activationRequest, this, &Konsole::MainWindow::activationRequest);
@@ -967,7 +967,7 @@ void MainWindow::newFromProfile(const Profile::Ptr &profile)
     createSession(profile, activeSessionDir());
 }
 
-void MainWindow::newFromContainer(const ContainerInfo &container)
+void MainWindow::newInContainer(const ContainerInfo &container)
 {
     Profile::Ptr defaultProfile = ProfileManager::instance()->defaultProfile();
     Session *session = createSession(defaultProfile, activeSessionDir());
@@ -978,8 +978,12 @@ void MainWindow::newFromContainer(const ContainerInfo &container)
 
 void MainWindow::setContainerList(ContainerList *list)
 {
+    if (_containerList) {
+        disconnect(_containerList, &ContainerList::containerSelected, this, &MainWindow::newInContainer);
+    }
+
     _containerList = list;
-    connect(list, &ContainerList::containerSelected, this, &MainWindow::newFromContainer);
+    connect(list, &ContainerList::containerSelected, this, &MainWindow::newInContainer);
 
     // Refresh container data whenever the menu is about to show,
     // then rebuild so the user always sees up-to-date containers

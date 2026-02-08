@@ -174,7 +174,7 @@ private Q_SLOTS:
     void showSettingsDialog(bool showProfilePage = false);
     void showShortcutsDialog();
     void newFromProfile(const QExplicitlySharedDataPointer<Profile> &profile);
-    void newFromContainer(const ContainerInfo &container);
+    void newInContainer(const ContainerInfo &container);
     void activeViewChanged(SessionController *controller);
     void disconnectController(SessionController *controller);
     void activeViewTitleChanged(ViewProperties *);
