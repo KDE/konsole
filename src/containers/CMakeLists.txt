@@ -4,6 +4,7 @@
 set(konsolecontainers_SRCS
     ContainerList.cpp
     ContainerRegistry.cpp
+    IContainerDetector.cpp
     ToolboxDetector.cpp
     DistroboxDetector.cpp
 )

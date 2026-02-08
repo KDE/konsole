@@ -46,7 +46,8 @@ void ContainerList::refreshContainers()
         return;
     }
 
-    _containers = registry->listAllContainers();
+    // Use the already-cached list — returns immediately, never blocks.
+    _containers = registry->cachedContainers();
 
     for (const ContainerInfo &info : _containers) {
         auto *action = new QAction(_group);
@@ -58,6 +59,11 @@ void ContainerList::refreshContainers()
 
         action->setData(QVariant::fromValue(info));
     }
+
+    // Kick off a background refresh so the *next* call picks up any
+    // changes (new/removed containers).  If a refresh is already in
+    // progress this is a no-op.
+    registry->refreshContainers();
 }
 
 void ContainerList::addContainerSections(QMenu *menu)

@@ -58,6 +58,11 @@ public:
 
     /**
      * Refresh the cached container list from ContainerRegistry.
+     *
+     * This returns immediately using cached data from ContainerRegistry,
+     * and also triggers an asynchronous refresh in the background so
+     * that the next call will have up-to-date results.
+     *
      * Call this before hasContainers() / addContainerSections() to
      * ensure the data is up-to-date.
      */

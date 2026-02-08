@@ -57,6 +57,11 @@ const QString getContainerHostname(const QList<QByteArray> &args)
 namespace Konsole
 {
 
+DistroboxDetector::DistroboxDetector(QObject *parent)
+    : IContainerDetector(parent)
+{
+}
+
 QString DistroboxDetector::typeId() const
 {
     return QStringLiteral("distrobox");
@@ -175,44 +180,46 @@ QStringList DistroboxDetector::entryCommand(const QString &containerName) const
     return {QStringLiteral("distrobox"), QStringLiteral("enter"), containerName};
 }
 
-QList<ContainerInfo> DistroboxDetector::listContainers() const
+void DistroboxDetector::startListContainers()
 {
-    QList<ContainerInfo> containers;
+    auto *process = new QProcess(this);
+    process->setProgram(QStringLiteral("distrobox"));
+    process->setArguments({QStringLiteral("list"), QStringLiteral("--no-color")});
 
-    // Run: distrobox list --no-color
-    QProcess process;
-    process.setProgram(QStringLiteral("distrobox"));
-    process.setArguments({QStringLiteral("list"), QStringLiteral("--no-color")});
-    process.start();
+    connect(process, &QProcess::finished, this, [this, process](int exitCode, QProcess::ExitStatus exitStatus) {
+        QList<ContainerInfo> containers;
+        process->deleteLater();
 
-    if (!process.waitForFinished(5000)) {
-        return containers;
-    }
+        if (exitStatus != QProcess::NormalExit || exitCode != 0) {
+            Q_EMIT listContainersFinished(containers);
+            return;
+        }
 
-    if (process.exitCode() != 0) {
-        return containers;
-    }
+        // Parse output - format is typically:
+        // ID           | NAME                 | STATUS          | IMAGE
+        // abc123def456 | ubuntu-22            | Up 2 hours      | ubuntu:22.04
+        const QString output = QString::fromUtf8(process->readAllStandardOutput());
+        const QStringList lines = output.split(QLatin1Char('\n'), Qt::SkipEmptyParts);
 
-    // Parse output - format is typically:
-    // ID           | NAME                 | STATUS          | IMAGE
-    // abc123def456 | ubuntu-22            | Up 2 hours      | ubuntu:22.04
-    const QString output = QString::fromUtf8(process.readAllStandardOutput());
-    const QStringList lines = output.split(QLatin1Char('\n'), Qt::SkipEmptyParts);
-
-    // Skip header line
-    for (int i = 1; i < lines.size(); ++i) {
-        const QString &line = lines[i];
-        // Split by |, container name is second column
-        const QStringList columns = line.split(QLatin1Char('|'));
-        if (columns.size() >= 2) {
-            const QString containerName = columns[1].trimmed();
-            if (!containerName.isEmpty()) {
-                containers.append(buildContainerInfo(containerName));
+        // Skip header line
+        for (int i = 1; i < lines.size(); ++i) {
+            const QString &line = lines[i];
+            // Split by |, container name is second column
+            const QStringList columns = line.split(QLatin1Char('|'));
+            if (columns.size() >= 2) {
+                const QString containerName = columns[1].trimmed();
+                if (!containerName.isEmpty()) {
+                    containers.append(buildContainerInfo(containerName));
+                }
             }
         }
-    }
 
-    return containers;
+        Q_EMIT listContainersFinished(containers);
+    });
+
+    process->start();
 }
 
 } // namespace Konsole
+
+#include "moc_DistroboxDetector.cpp"

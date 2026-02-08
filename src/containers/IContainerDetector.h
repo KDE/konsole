@@ -10,6 +10,7 @@
 #include "ContainerInfo.h"
 
 #include <QList>
+#include <QObject>
 #include <QString>
 #include <QStringList>
 
@@ -23,11 +24,21 @@ namespace Konsole
  *
  * Each implementation handles detection and entry for a specific container
  * technology (Toolbox, Distrobox, systemd-nspawn, etc.)
+ *
+ * Container listing is asynchronous: call startListContainers() and connect
+ * to the listContainersFinished() signal to receive results.
  */
-class IContainerDetector
+class IContainerDetector : public QObject
 {
+    Q_OBJECT
+
 public:
-    virtual ~IContainerDetector() = default;
+    explicit IContainerDetector(QObject *parent = nullptr)
+        : QObject(parent)
+    {
+    }
+
+    ~IContainerDetector() override = default;
 
     /**
      * Unique identifier for this container type (e.g., "toolbox", "distrobox")
@@ -61,11 +72,21 @@ public:
     virtual QStringList entryCommand(const QString &containerName) const = 0;
 
     /**
-     * List all available containers of this type.
+     * Start an asynchronous listing of all available containers of this type.
      *
-     * @return List of available containers (for Phase 3 UI)
+     * When complete, the listContainersFinished() signal is emitted with the
+     * results. If the tool is not installed or fails, the signal is emitted
+     * with an empty list.
      */
-    virtual QList<ContainerInfo> listContainers() const = 0;
+    virtual void startListContainers() = 0;
+
+Q_SIGNALS:
+    /**
+     * Emitted when startListContainers() has finished.
+     *
+     * @param containers The list of discovered containers (may be empty)
+     */
+    void listContainersFinished(const QList<ContainerInfo> &containers);
 };
 
 } // namespace Konsole
