@@ -603,12 +603,6 @@ void MainWindow::rebuildNewTabMenu()
     QMenu *menu = _newTabMenuAction->menu();
     menu->clear();
 
-    const bool showContainers = _containerList && _containerList->hasContainers();
-
-    if (showContainers) {
-        menu->addSection(i18nc("@title:menu Section header for host profiles in New Tab menu", "Host"));
-    }
-
     if (_profileList) {
         const auto profileActions = _profileList->actions();
         for (QAction *sessionAction : profileActions) {
@@ -632,7 +626,7 @@ void MainWindow::rebuildNewTabMenu()
         }
     }
 
-    if (showContainers) {
+    if (_containerList) {
         _containerList->addContainerSections(menu);
     }
 }
