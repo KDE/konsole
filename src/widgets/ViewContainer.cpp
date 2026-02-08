@@ -130,10 +130,6 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
         profileMenu->clear();
         containerList->refreshContainers();
 
-        if (containerList->hasContainers()) {
-            profileMenu->addSection(i18nc("@title:menu Section header for host profiles in New Tab menu", "Host"));
-        }
-
         const auto actions = profileList->actions();
         for (QAction *action : actions) {
             profileMenu->addAction(action);
