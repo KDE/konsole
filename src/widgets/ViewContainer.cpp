@@ -25,6 +25,7 @@
 #include "DetachableTabBar.h"
 #include "KonsoleSettings.h"
 #include "ViewProperties.h"
+#include "containers/ContainerList.h"
 #include "profile/ProfileList.h"
 #include "searchtabs/SearchTabs.h"
 #include "session/SessionController.h"
@@ -122,6 +123,13 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
     auto profileList = new ProfileList(false, profileMenu);
     profileList->syncWidgetActions(profileMenu, true);
     connect(profileList, &Konsole::ProfileList::profileSelected, this, &TabbedViewContainer::newViewWithProfileRequest);
+
+    // Add container submenu below profiles
+    auto containerList = new Konsole::ContainerList(profileMenu);
+    profileMenu->addSeparator();
+    profileMenu->addMenu(containerList->menu());
+    connect(containerList, &Konsole::ContainerList::containerSelected, this, &TabbedViewContainer::newViewInContainerRequest);
+
     _newTabButton->setMenu(profileMenu);
 
     konsoleConfigChanged();
