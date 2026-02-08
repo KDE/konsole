@@ -59,7 +59,7 @@ void ContainerRegistry::registerDetector(std::unique_ptr<IContainerDetector> det
 
 void ContainerRegistry::refreshContainers()
 {
-    if (!_enabled || _refreshInProgress) {
+    if (!_enabled || _pendingDetectors > 0) {
         return;
     }
 
@@ -67,7 +67,6 @@ void ContainerRegistry::refreshContainers()
         return;
     }
 
-    _refreshInProgress = true;
     _pendingDetectors = static_cast<int>(_detectors.size());
     _pendingResults.clear();
 
@@ -87,7 +86,6 @@ void ContainerRegistry::onDetectorFinished(const QList<ContainerInfo> &container
 
     _cachedContainers = _pendingResults;
     _pendingResults.clear();
-    _refreshInProgress = false;
     Q_EMIT containersUpdated();
 }
 
