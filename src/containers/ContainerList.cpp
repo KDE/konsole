@@ -11,27 +11,24 @@
 #include <QActionGroup>
 #include <QMenu>
 
-// KDE
-#include <KLocalizedString>
-
 // Konsole
 #include "ContainerInfo.h"
 #include "ContainerRegistry.h"
+#include "IContainerDetector.h"
 
 using Konsole::ContainerList;
 
 ContainerList::ContainerList(QObject *parent)
     : QObject(parent)
-    , _menu(new QMenu(i18nc("@action:inmenu Submenu title for container list", "New Tab in Container")))
     , _group(new QActionGroup(this))
 {
-    _menu->setIcon(QIcon::fromTheme(QStringLiteral("container")));
-
-    connect(_menu, &QMenu::aboutToShow, this, &ContainerList::refreshContainers);
     connect(_group, &QActionGroup::triggered, this, &ContainerList::triggered);
-
-    // Do an initial check so we can hide the menu entirely when empty
     refreshContainers();
+}
+
+bool ContainerList::hasContainers() const
+{
+    return !_containers.isEmpty();
 }
 
 void ContainerList::refreshContainers()
@@ -42,34 +39,43 @@ void ContainerList::refreshContainers()
         _group->removeAction(action);
         delete action;
     }
-    _menu->clear();
+    _containers.clear();
 
     auto *registry = ContainerRegistry::instance();
     if (!registry->isEnabled()) {
-        _menu->menuAction()->setVisible(false);
         return;
     }
 
-    const QList<ContainerInfo> containers = registry->listAllContainers();
-    if (containers.isEmpty()) {
-        _menu->menuAction()->setVisible(false);
-        return;
-    }
+    _containers = registry->listAllContainers();
 
-    _menu->menuAction()->setVisible(true);
-
-    for (const ContainerInfo &info : containers) {
+    for (const ContainerInfo &info : _containers) {
         auto *action = new QAction(_group);
-        action->setText(info.displayName);
+        action->setText(info.name);
 
         if (!info.iconName.isEmpty()) {
             action->setIcon(QIcon::fromTheme(info.iconName));
         }
 
-        // Store the ContainerInfo in the action's data
         action->setData(QVariant::fromValue(info));
+    }
+}
 
-        _menu->addAction(action);
+void ContainerList::addContainerSections(QMenu *menu)
+{
+    if (_containers.isEmpty()) {
+        return;
+    }
+
+    const IContainerDetector *currentDetector = nullptr;
+    const auto actions = _group->actions();
+
+    for (QAction *action : actions) {
+        const ContainerInfo info = action->data().value<ContainerInfo>();
+        if (info.detector != currentDetector) {
+            currentDetector = info.detector;
+            menu->addSection(currentDetector->displayName());
+        }
+        menu->addAction(action);
     }
 }
 
@@ -79,11 +85,6 @@ void ContainerList::triggered(QAction *action)
     if (info.isValid()) {
         Q_EMIT containerSelected(info);
     }
-}
-
-QMenu *ContainerList::menu() const
-{
-    return _menu;
 }
 
 #include "moc_ContainerList.cpp"

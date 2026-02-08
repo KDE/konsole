@@ -22,14 +22,21 @@ namespace Konsole
 {
 
 /**
- * ContainerList provides a submenu of available containers (Toolbox, Distrobox, etc.)
- * that can be used to open a new tab directly inside a container.
+ * ContainerList provides a list of actions representing available containers
+ * (Toolbox, Distrobox, etc.) that can be used to open a new tab directly
+ * inside a container.
  *
- * The list is populated dynamically when the menu is about to be shown,
- * by calling ContainerRegistry::listAllContainers().
+ * Unlike a submenu, this class is designed to add its actions inline into
+ * an existing menu using addSection() headers grouped by detector type,
+ * e.g.:
  *
- * This class is designed to be plugged into the "New Tab" dropdown menu
- * alongside the existing ProfileList.
+ *   ── Distrobox ──────
+ *     fedora-39
+ *   ── Toolbox ────────
+ *     ubuntu-22
+ *
+ * When no containers are available, nothing is added and the menu appears
+ * unchanged (no section headers, no empty state).
  */
 class ContainerList : public QObject
 {
@@ -44,13 +51,26 @@ public:
     explicit ContainerList(QObject *parent);
 
     /**
-     * Returns the submenu containing the container actions.
-     * The caller should add this menu as a submenu to their
-     * parent menu (e.g., the "New Tab" dropdown).
-     *
-     * The menu is owned by this ContainerList instance.
+     * Returns true if container support is enabled and at least one
+     * container is available.
      */
-    QMenu *menu() const;
+    bool hasContainers() const;
+
+    /**
+     * Refresh the cached container list from ContainerRegistry.
+     * Call this before hasContainers() / addContainerSections() to
+     * ensure the data is up-to-date.
+     */
+    void refreshContainers();
+
+    /**
+     * Adds per-detector container sections to the given menu.
+     * Each detector's containers are preceded by an addSection() header
+     * using the detector's display name (e.g., "Distrobox", "Toolbox").
+     *
+     * Does nothing if no containers are available.
+     */
+    void addContainerSections(QMenu *menu);
 
 Q_SIGNALS:
     /**
@@ -61,14 +81,13 @@ Q_SIGNALS:
     void containerSelected(const ContainerInfo &container);
 
 private Q_SLOTS:
-    void refreshContainers();
     void triggered(QAction *action);
 
 private:
     Q_DISABLE_COPY(ContainerList)
 
-    QMenu *_menu;
     QActionGroup *_group;
+    QList<ContainerInfo> _containers;
 };
 
 } // namespace Konsole

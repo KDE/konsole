@@ -121,14 +121,29 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
 
     auto profileMenu = new QMenu(this);
     auto profileList = new ProfileList(false, profileMenu);
-    profileList->syncWidgetActions(profileMenu, true);
     connect(profileList, &Konsole::ProfileList::profileSelected, this, &TabbedViewContainer::newViewWithProfileRequest);
 
-    // Add container submenu below profiles
     auto containerList = new Konsole::ContainerList(profileMenu);
-    profileMenu->addSeparator();
-    profileMenu->addMenu(containerList->menu());
     connect(containerList, &Konsole::ContainerList::containerSelected, this, &TabbedViewContainer::newViewInContainerRequest);
+
+    auto rebuildProfileMenu = [profileMenu, profileList, containerList]() {
+        profileMenu->clear();
+        containerList->refreshContainers();
+
+        if (containerList->hasContainers()) {
+            profileMenu->addSection(i18nc("@title:menu Section header for host profiles in New Tab menu", "Host"));
+        }
+
+        const auto actions = profileList->actions();
+        for (QAction *action : actions) {
+            profileMenu->addAction(action);
+        }
+
+        containerList->addContainerSections(profileMenu);
+    };
+
+    connect(profileMenu, &QMenu::aboutToShow, profileMenu, rebuildProfileMenu);
+    rebuildProfileMenu();
 
     _newTabButton->setMenu(profileMenu);
 
