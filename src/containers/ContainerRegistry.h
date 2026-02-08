@@ -143,7 +143,6 @@ private:
     void onDetectorFinished(const QList<ContainerInfo> &containers);
 
     bool _enabled = true;
-    bool _refreshInProgress = false;
     int _pendingDetectors = 0;
     QString _disabledReason;
     std::vector<std::unique_ptr<IContainerDetector>> _detectors;
