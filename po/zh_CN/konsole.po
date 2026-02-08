@@ -4115,17 +4115,15 @@ msgstr "已启用"
 
 #. i18n: ectx: property (text), widget (QLabel, label_12)
 #: widgets/EditProfileAppearancePage.ui:457
-#, fuzzy, kde-format
-#| msgid "Activation:"
+#, kde-format
 msgid "Animation:"
-msgstr "激活："
+msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableAnimatingCursorButton)
 #: widgets/EditProfileAppearancePage.ui:473
-#, fuzzy, kde-format
-#| msgid "Make the cursor blink regularly"
+#, kde-format
 msgid "Make the cursor animate smoothly"
-msgstr "让光标定时闪烁"
+msgstr ""
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #. i18n: ectx: attribute (title), widget (QWidget, miscTab)
@@ -5539,10 +5537,9 @@ msgstr "标签页颜色(&L)："
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/RenameTabWidget.ui:128
-#, fuzzy, kde-format
-#| msgid "Tab Co&lor:"
+#, kde-format
 msgid "&Activity Tab Color:"
-msgstr "标签页颜色(&L)："
+msgstr ""
 
 #: widgets/TabTitleFormatButton.cpp:21
 #, c-format

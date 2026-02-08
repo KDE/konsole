@@ -23,7 +23,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-05 00:47+0000\n"
-"PO-Revision-Date: 2026-02-02 20:29+0200\n"
+"PO-Revision-Date: 2026-02-06 10:33+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -4144,17 +4144,15 @@ msgstr "מופעל"
 
 #. i18n: ectx: property (text), widget (QLabel, label_12)
 #: widgets/EditProfileAppearancePage.ui:457
-#, fuzzy, kde-format
-#| msgid "Activation:"
+#, kde-format
 msgid "Animation:"
-msgstr "הפעלה:"
+msgstr "הנפשה:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableAnimatingCursorButton)
 #: widgets/EditProfileAppearancePage.ui:473
-#, fuzzy, kde-format
-#| msgid "Make the cursor blink regularly"
+#, kde-format
 msgid "Make the cursor animate smoothly"
-msgstr "סמן מהבהב באופן קבוע"
+msgstr "הנפשה חלקה של הסמן"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #. i18n: ectx: attribute (title), widget (QWidget, miscTab)
@@ -5600,10 +5598,9 @@ msgstr "&צבע לשונית:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/RenameTabWidget.ui:128
-#, fuzzy, kde-format
-#| msgid "Tab Co&lor:"
+#, kde-format
 msgid "&Activity Tab Color:"
-msgstr "&צבע לשונית:"
+msgstr "&צבע לשונית פעילות:"
 
 #: widgets/TabTitleFormatButton.cpp:21
 #, c-format
