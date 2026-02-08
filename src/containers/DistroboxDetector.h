@@ -22,14 +22,18 @@ namespace Konsole
  */
 class DistroboxDetector : public IContainerDetector
 {
+    Q_OBJECT
+
 public:
+    explicit DistroboxDetector(QObject *parent = nullptr);
+
     QString typeId() const override;
     QString displayName() const override;
     QString iconName() const override;
 
     std::optional<ContainerInfo> detect(int pid) const override;
     QStringList entryCommand(const QString &containerName) const override;
-    QList<ContainerInfo> listContainers() const override;
+    void startListContainers() override;
 
 private:
     /**
