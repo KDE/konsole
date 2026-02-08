@@ -1019,6 +1019,7 @@ TabbedViewContainer *ViewManager::createContainer()
 
     connect(container, &TabbedViewContainer::newViewRequest, this, &ViewManager::newViewRequest);
     connect(container, &Konsole::TabbedViewContainer::newViewWithProfileRequest, this, &Konsole::ViewManager::newViewWithProfileRequest);
+    connect(container, &Konsole::TabbedViewContainer::newViewInContainerRequest, this, &Konsole::ViewManager::newViewInContainerRequest);
     connect(container, &Konsole::TabbedViewContainer::activeViewChanged, this, &Konsole::ViewManager::activateView);
 
     return container;

@@ -7,6 +7,7 @@
 #ifndef CONTAINERINFO_H
 #define CONTAINERINFO_H
 
+#include <QMetaType>
 #include <QString>
 
 #include <optional>
@@ -62,5 +63,7 @@ struct ContainerInfo {
 };
 
 } // namespace Konsole
+
+Q_DECLARE_METATYPE(Konsole::ContainerInfo)
 
 #endif // CONTAINERINFO_H

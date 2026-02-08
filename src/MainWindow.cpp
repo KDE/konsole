@@ -53,6 +53,9 @@
 #include "profile/ProfileList.h"
 #include "profile/ProfileManager.h"
 
+#include "containers/ContainerList.h"
+#include "containers/ContainerRegistry.h"
+
 #include "session/Session.h"
 #include "session/SessionController.h"
 #include "session/SessionManager.h"
@@ -102,6 +105,7 @@ MainWindow::MainWindow()
 
     connect(_viewManager, &Konsole::ViewManager::updateWindowIcon, this, &Konsole::MainWindow::updateWindowIcon);
     connect(_viewManager, &Konsole::ViewManager::newViewWithProfileRequest, this, &Konsole::MainWindow::newFromProfile);
+    connect(_viewManager, &Konsole::ViewManager::newViewInContainerRequest, this, &Konsole::MainWindow::newFromContainer);
     connect(_viewManager, &Konsole::ViewManager::newViewRequest, this, &Konsole::MainWindow::newTab);
     connect(_viewManager, &Konsole::ViewManager::terminalsDetached, this, &Konsole::MainWindow::terminalsDetached);
     connect(_viewManager, &Konsole::ViewManager::activationRequest, this, &Konsole::MainWindow::activationRequest);
@@ -132,6 +136,7 @@ MainWindow::MainWindow()
     correctStandardShortcuts();
 
     setProfileList(new ProfileList(true, this));
+    setContainerList(new ContainerList(this));
 
     // this must come at the end
     applyKonsoleSettings();
@@ -615,6 +620,12 @@ void MainWindow::profileListChanged(const QList<QAction *> &sessionActions)
             setActionFontBold(false);
         }
     }
+
+    // Re-add the container submenu after profiles (it gets cleared above)
+    if (_containerList) {
+        _newTabMenuAction->menu()->addSeparator();
+        _newTabMenuAction->menu()->addMenu(_containerList->menu());
+    }
 }
 
 QString MainWindow::activeSessionDir() const
@@ -951,6 +962,26 @@ void MainWindow::showShortcutsDialog()
 void MainWindow::newFromProfile(const Profile::Ptr &profile)
 {
     createSession(profile, activeSessionDir());
+}
+
+void MainWindow::newFromContainer(const ContainerInfo &container)
+{
+    Profile::Ptr defaultProfile = ProfileManager::instance()->defaultProfile();
+    Session *session = createSession(defaultProfile, activeSessionDir());
+    if (session && container.isValid()) {
+        session->setContainerContext(container);
+    }
+}
+
+void MainWindow::setContainerList(ContainerList *list)
+{
+    _containerList = list;
+    connect(list, &ContainerList::containerSelected, this, &MainWindow::newFromContainer);
+
+    // Add the container submenu to the current menu state
+    // (will also be re-added by profileListChanged on future updates)
+    _newTabMenuAction->menu()->addSeparator();
+    _newTabMenuAction->menu()->addMenu(list->menu());
 }
 
 void MainWindow::showManageProfilesDialog()
