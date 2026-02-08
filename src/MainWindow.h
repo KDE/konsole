@@ -179,7 +179,7 @@ private Q_SLOTS:
     void disconnectController(SessionController *controller);
     void activeViewTitleChanged(ViewProperties *);
 
-    void profileListChanged(const QList<QAction *> &sessionActions);
+    void rebuildNewTabMenu();
     void configureNotifications();
     void setBlur(bool blur);
 
@@ -238,6 +238,7 @@ private:
     KActionMenu *_newTabMenuAction;
     KHamburgerMenu *_hamburgerMenu;
     ContainerList *_containerList = nullptr;
+    ProfileList *_profileList = nullptr;
 
     QPointer<SessionController> _pluggedController;
     std::vector<IKonsolePlugin *> _plugins;

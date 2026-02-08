@@ -592,39 +592,48 @@ BookmarkHandler *MainWindow::bookmarkHandler() const
 
 void MainWindow::setProfileList(ProfileList *list)
 {
-    profileListChanged(list->actions());
-
+    _profileList = list;
     connect(list, &Konsole::ProfileList::profileSelected, this, &MainWindow::newFromProfile);
-    connect(list, &Konsole::ProfileList::actionsChanged, this, &Konsole::MainWindow::profileListChanged);
+    connect(list, &Konsole::ProfileList::actionsChanged, this, &Konsole::MainWindow::rebuildNewTabMenu);
+    rebuildNewTabMenu();
 }
 
-void MainWindow::profileListChanged(const QList<QAction *> &sessionActions)
+void MainWindow::rebuildNewTabMenu()
 {
-    // Update the 'New Tab' KActionMenu
-    _newTabMenuAction->menu()->clear();
-    for (QAction *sessionAction : sessionActions) {
-        _newTabMenuAction->menu()->addAction(sessionAction);
+    QMenu *menu = _newTabMenuAction->menu();
+    menu->clear();
 
-        auto setActionFontBold = [sessionAction](bool isBold) {
-            QFont actionFont = sessionAction->font();
-            actionFont.setBold(isBold);
-            sessionAction->setFont(actionFont);
-        };
+    const bool showContainers = _containerList && _containerList->hasContainers();
 
-        Profile::Ptr profile = ProfileManager::instance()->defaultProfile();
-        if (profile && profile->name() == sessionAction->text().remove(QLatin1Char('&'))) {
-            QIcon icon = KIconUtils::addOverlay(QIcon::fromTheme(profile->icon()), QIcon::fromTheme(QStringLiteral("emblem-favorite")), Qt::BottomRightCorner);
-            sessionAction->setIcon(icon);
-            setActionFontBold(true);
-        } else {
-            setActionFontBold(false);
+    if (showContainers) {
+        menu->addSection(i18nc("@title:menu Section header for host profiles in New Tab menu", "Host"));
+    }
+
+    if (_profileList) {
+        const auto profileActions = _profileList->actions();
+        for (QAction *sessionAction : profileActions) {
+            menu->addAction(sessionAction);
+
+            auto setActionFontBold = [sessionAction](bool isBold) {
+                QFont actionFont = sessionAction->font();
+                actionFont.setBold(isBold);
+                sessionAction->setFont(actionFont);
+            };
+
+            Profile::Ptr profile = ProfileManager::instance()->defaultProfile();
+            if (profile && profile->name() == sessionAction->text().remove(QLatin1Char('&'))) {
+                QIcon icon =
+                    KIconUtils::addOverlay(QIcon::fromTheme(profile->icon()), QIcon::fromTheme(QStringLiteral("emblem-favorite")), Qt::BottomRightCorner);
+                sessionAction->setIcon(icon);
+                setActionFontBold(true);
+            } else {
+                setActionFontBold(false);
+            }
         }
     }
 
-    // Re-add the container submenu after profiles (it gets cleared above)
-    if (_containerList) {
-        _newTabMenuAction->menu()->addSeparator();
-        _newTabMenuAction->menu()->addMenu(_containerList->menu());
+    if (showContainers) {
+        _containerList->addContainerSections(menu);
     }
 }
 
@@ -978,10 +987,16 @@ void MainWindow::setContainerList(ContainerList *list)
     _containerList = list;
     connect(list, &ContainerList::containerSelected, this, &MainWindow::newFromContainer);
 
-    // Add the container submenu to the current menu state
-    // (will also be re-added by profileListChanged on future updates)
-    _newTabMenuAction->menu()->addSeparator();
-    _newTabMenuAction->menu()->addMenu(list->menu());
+    // Refresh container data whenever the menu is about to show,
+    // then rebuild so the user always sees up-to-date containers
+    connect(_newTabMenuAction->menu(), &QMenu::aboutToShow, this, [this]() {
+        if (_containerList) {
+            _containerList->refreshContainers();
+        }
+        rebuildNewTabMenu();
+    });
+
+    rebuildNewTabMenu();
 }
 
 void MainWindow::showManageProfilesDialog()
