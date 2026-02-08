@@ -53,6 +53,7 @@ void ContainerRegistry::registerDetector(std::unique_ptr<IContainerDetector> det
     if (detector) {
         qDebug(KonsoleDebug) << "Registering container detector:" << detector->typeId();
         connect(detector.get(), &IContainerDetector::listContainersFinished, this, &ContainerRegistry::onDetectorFinished);
+        connect(detector.get(), &IContainerDetector::containersChanged, this, &ContainerRegistry::refreshContainers);
         _detectors.push_back(std::move(detector));
     }
 }

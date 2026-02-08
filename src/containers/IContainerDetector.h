@@ -87,6 +87,18 @@ Q_SIGNALS:
      * @param containers The list of discovered containers (may be empty)
      */
     void listContainersFinished(const QList<ContainerInfo> &containers);
+
+    /**
+     * Emitted by detectors that have their own mechanism for watching
+     * container changes (e.g., D-Bus signals, filesystem watchers,
+     * podman events API).
+     *
+     * The ContainerRegistry connects to this signal and triggers a
+     * full refresh when it fires.  Detectors that only support
+     * poll-based listing (startListContainers()) never need to emit
+     * this — the registry already handles periodic polling.
+     */
+    void containersChanged();
 };
 
 } // namespace Konsole
