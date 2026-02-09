@@ -700,17 +700,28 @@ Session *MainWindow::createSession(Profile::Ptr profile, const QString &director
     const QString newSessionDirectory = profile->startInCurrentSessionDir() ? directory : QString();
     Session *session = _viewManager->createSession(profile, newSessionDirectory);
 
-    // Inherit container context from active session if enabled in profile
-    if (profile->inheritContainerContext() && _pluggedController) {
+    // Determine container context for the new session.
+    // Priority: 1) "Always start in container" profile setting
+    //           2) Inherit from active session (if enabled)
+    const QString configuredContainer = profile->containerName();
+    if (!configuredContainer.isEmpty() && ContainerRegistry::instance()->isEnabled()) {
+        // Look up the configured container from the registry's cached list
+        const QList<ContainerInfo> containers = ContainerRegistry::instance()->cachedContainers();
+        for (const auto &container : containers) {
+            const QString key = container.detector ? (container.detector->typeId() + QLatin1Char(':') + container.name) : container.name;
+            if (key == configuredContainer) {
+                session->setContainerContext(container);
+                break;
+            }
+        }
+    } else if (profile->inheritContainerContext() && _pluggedController) {
+        // Inherit container context from active session
         Session *activeSession = _pluggedController->session();
         if (activeSession && activeSession->isInContainer()) {
             session->setContainerContext(activeSession->containerContext());
         } else {
             qDebug(KonsoleDebug) << "Active session is not in a container, cannot inherit container context.";
         }
-    } else {
-        qDebug(KonsoleDebug) << "Not inheriting container context because"
-                             << (profile->inheritContainerContext() ? "no plugged controller." : "inheritance is disabled in profile.");
     }
 
     // create view before starting the session process so that the session
@@ -767,9 +778,21 @@ void MainWindow::newWindow()
         profile = SessionManager::instance()->sessionProfile(_pluggedController->session());
     }
 
-    // Pass container context if inheritance is enabled and we're in a container
+    // Determine container context for the new window.
+    // Priority: 1) "Always start in container" profile setting
+    //           2) Inherit from active session (if enabled)
     ContainerInfo container;
-    if (profile->inheritContainerContext() && _pluggedController) {
+    const QString configuredContainer = profile->containerName();
+    if (!configuredContainer.isEmpty() && ContainerRegistry::instance()->isEnabled()) {
+        const QList<ContainerInfo> containers = ContainerRegistry::instance()->cachedContainers();
+        for (const auto &c : containers) {
+            const QString key = c.detector ? (c.detector->typeId() + QLatin1Char(':') + c.name) : c.name;
+            if (key == configuredContainer) {
+                container = c;
+                break;
+            }
+        }
+    } else if (profile->inheritContainerContext() && _pluggedController) {
         Session *activeSession = _pluggedController->session();
         if (activeSession && activeSession->isInContainer()) {
             container = activeSession->containerContext();

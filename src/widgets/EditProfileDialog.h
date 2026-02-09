@@ -116,6 +116,7 @@ private Q_SLOTS:
     void initialDirChanged(const QString &dir);
     void startInSameDir(bool);
     void inheritContainerContext(bool);
+    void containerComboChanged(int index);
     void commandChanged(const QString &command);
     void semanticUpDown(bool);
     void semanticInputClick(bool enable);
