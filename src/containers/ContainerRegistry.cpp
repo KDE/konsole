@@ -163,6 +163,33 @@ std::optional<ContainerInfo> ContainerRegistry::containerInfoFromOsc777(const QS
     return ContainerInfo{};
 }
 
+ContainerInfo ContainerRegistry::containerInfoFromKey(const QString &key) const
+{
+    if (!_enabled || key.isEmpty()) {
+        return ContainerInfo{};
+    }
+
+    const int separatorIndex = key.indexOf(QLatin1Char(':'));
+    if (separatorIndex <= 0 || separatorIndex >= key.size() - 1) {
+        return ContainerInfo{};
+    }
+
+    const QString containerType = key.left(separatorIndex);
+    const QString containerName = key.mid(separatorIndex + 1);
+
+    for (const auto &detector : _detectors) {
+        if (detector->typeId() == containerType) {
+            return ContainerInfo{.detector = detector.get(),
+                                 .name = containerName,
+                                 .displayName = QStringLiteral("%1: %2").arg(detector->displayName(), containerName),
+                                 .iconName = detector->iconName(),
+                                 .hostPid = std::nullopt};
+        }
+    }
+
+    return ContainerInfo{};
+}
+
 } // namespace Konsole
 
 #include "moc_ContainerRegistry.cpp"
