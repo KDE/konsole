@@ -130,6 +130,15 @@ public:
     std::optional<ContainerInfo> containerInfoFromOsc777(const QStringList &params) const;
 
     /**
+     * Build a storage key from a ContainerInfo (e.g., "toolbox:fedora-39").
+     * Use containerInfoFromKey() to reconstruct.
+     *
+     * @param container The container to build a key for
+     * @return Key string in "type:name" format, or empty if container is invalid
+     */
+    static QString keyFromContainerInfo(const ContainerInfo &container);
+
+    /**
      * Build a ContainerInfo from a "type:name" key string.
      *
      * Parses the key to extract the container type and name, then looks up
@@ -137,8 +146,9 @@ public:
      * This works even before the async container list refresh has completed,
      * since it only depends on the registered detectors (not the cached list).
      *
-     * @param key Container identifier in "type:name" format (e.g. "toolbox:fedora-39")
+     * @param key Container identifier in "type:name" format, as returned by keyFromContainerInfo()
      * @return A valid ContainerInfo if a matching detector was found, invalid otherwise
+     * @see keyFromContainerInfo()
      */
     ContainerInfo containerInfoFromKey(const QString &key) const;
 

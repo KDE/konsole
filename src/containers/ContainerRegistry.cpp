@@ -163,6 +163,14 @@ std::optional<ContainerInfo> ContainerRegistry::containerInfoFromOsc777(const QS
     return ContainerInfo{};
 }
 
+QString ContainerRegistry::keyFromContainerInfo(const ContainerInfo &container)
+{
+    if (!container.isValid()) {
+        return QString();
+    }
+    return container.detector->typeId() + QLatin1Char(':') + container.name;
+}
+
 ContainerInfo ContainerRegistry::containerInfoFromKey(const QString &key) const
 {
     if (!_enabled || key.isEmpty()) {
