@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 86ff119b1606fcaa910d6b44fc14b611\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-05 00:47+0000\n"
+"POT-Creation-Date: 2026-02-11 00:49+0000\n"
 "PO-Revision-Date: 2022-09-04 10:59+0300\n"
 "Last-Translator: Zmicier <zmicerturok@gmail.com>\n"
 "Language-Team: Belarusian <kde-i18n-doc@kde.org>\n"
@@ -3924,7 +3924,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Zahruzić makiet ukladak z fajla"
 
-#: Vt102Emulation.cpp:3272
+#: Vt102Emulation.cpp:3281
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "

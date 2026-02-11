@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-05 00:47+0000\n"
+"POT-Creation-Date: 2026-02-11 00:49+0000\n"
 "PO-Revision-Date: 2026-01-03 11:28+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -3832,7 +3832,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Zamatu fitxen antolaera"
 
-#: Vt102Emulation.cpp:3272
+#: Vt102Emulation.cpp:3281
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "

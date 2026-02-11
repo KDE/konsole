@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-05 00:47+0000\n"
-"PO-Revision-Date: 2026-02-01 15:38+0100\n"
+"POT-Creation-Date: 2026-02-11 00:49+0000\n"
+"PO-Revision-Date: 2026-02-06 09:30+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -3841,7 +3841,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Carica la disposizione delle schede"
 
-#: Vt102Emulation.cpp:3272
+#: Vt102Emulation.cpp:3281
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
@@ -4212,17 +4212,15 @@ msgstr "Abilitato"
 
 #. i18n: ectx: property (text), widget (QLabel, label_12)
 #: widgets/EditProfileAppearancePage.ui:457
-#, fuzzy, kde-format
-#| msgid "Activation:"
+#, kde-format
 msgid "Animation:"
-msgstr "Attivazione:"
+msgstr "Animazione:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableAnimatingCursorButton)
 #: widgets/EditProfileAppearancePage.ui:473
-#, fuzzy, kde-format
-#| msgid "Make the cursor blink regularly"
+#, kde-format
 msgid "Make the cursor animate smoothly"
-msgstr "Fai lampeggiare regolarmente il cursore"
+msgstr "Rendi fluida l'animazione del cursore"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #. i18n: ectx: attribute (title), widget (QWidget, miscTab)
@@ -5703,10 +5701,9 @@ msgstr "Co&lore della scheda:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/RenameTabWidget.ui:128
-#, fuzzy, kde-format
-#| msgid "Select &Tab Color"
+#, kde-format
 msgid "&Activity Tab Color:"
-msgstr "Seleziona colore della &scheda"
+msgstr "Colore della scheda &Attività:"
 
 #: widgets/TabTitleFormatButton.cpp:21
 #, c-format
