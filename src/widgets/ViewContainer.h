@@ -13,6 +13,7 @@
 
 // Konsole
 #include "ViewManager.h"
+#include "containers/ContainerInfo.h"
 #include "session/Session.h"
 
 // Qt
@@ -180,6 +181,9 @@ Q_SIGNALS:
 
     /** Requests creation of a new view, with the selected profile. */
     void newViewWithProfileRequest(const QExplicitlySharedDataPointer<Profile> &profile);
+
+    /** Requests creation of a new view inside the given container. */
+    void newViewInContainerRequest(const ContainerInfo &container);
 
     /** a terminalDisplay was dropped in a child Splitter */
 

@@ -42,14 +42,56 @@ ContainerRegistry::ContainerRegistry()
     // Order matters - first match wins
     registerDetector(std::make_unique<ToolboxDetector>());
     registerDetector(std::make_unique<DistroboxDetector>());
+
+    // Kick off the initial container list fetch so that the cache is
+    // likely populated before the user ever opens a menu.
+    refreshContainers();
 }
 
 void ContainerRegistry::registerDetector(std::unique_ptr<IContainerDetector> detector)
 {
     if (detector) {
         qDebug(KonsoleDebug) << "Registering container detector:" << detector->typeId();
+        connect(detector.get(), &IContainerDetector::listContainersFinished, this, &ContainerRegistry::onDetectorFinished);
         _detectors.push_back(std::move(detector));
     }
+}
+
+void ContainerRegistry::refreshContainers()
+{
+    if (!_enabled || _pendingDetectors > 0) {
+        return;
+    }
+
+    if (_detectors.empty()) {
+        return;
+    }
+
+    _pendingDetectors = static_cast<int>(_detectors.size());
+    _pendingResults.clear();
+
+    for (const auto &detector : _detectors) {
+        detector->startListContainers();
+    }
+}
+
+void ContainerRegistry::onDetectorFinished(const QList<ContainerInfo> &containers)
+{
+    _pendingResults.append(containers);
+    _pendingDetectors--;
+
+    if (_pendingDetectors > 0) {
+        return;
+    }
+
+    _cachedContainers = _pendingResults;
+    _pendingResults.clear();
+    Q_EMIT containersUpdated();
+}
+
+QList<ContainerInfo> ContainerRegistry::cachedContainers() const
+{
+    return _cachedContainers;
 }
 
 ContainerInfo ContainerRegistry::detectContainer(int pid) const
@@ -75,21 +117,6 @@ QStringList ContainerRegistry::entryCommand(const ContainerInfo &container) cons
     }
 
     return container.detector->entryCommand(container.name);
-}
-
-QList<ContainerInfo> ContainerRegistry::listAllContainers() const
-{
-    QList<ContainerInfo> result;
-
-    if (!_enabled) {
-        return result;
-    }
-
-    for (const auto &detector : _detectors) {
-        result.append(detector->listContainers());
-    }
-
-    return result;
 }
 
 std::optional<ContainerInfo> ContainerRegistry::containerInfoFromOsc777(const QStringList &params) const
@@ -137,3 +164,5 @@ std::optional<ContainerInfo> ContainerRegistry::containerInfoFromOsc777(const QS
 }
 
 } // namespace Konsole
+
+#include "moc_ContainerRegistry.cpp"

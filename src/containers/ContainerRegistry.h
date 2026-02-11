@@ -11,6 +11,7 @@
 #include "IContainerDetector.h"
 
 #include <QList>
+#include <QObject>
 #include <QString>
 #include <QStringList>
 
@@ -27,11 +28,18 @@ namespace Konsole
  * for detecting containers, getting entry commands, and listing available
  * containers.
  *
+ * Container listing is asynchronous. Call refreshContainers() to start a
+ * background refresh; when all detectors have reported back, the
+ * containersUpdated() signal is emitted and cachedContainers() returns
+ * the new results. A refresh is also triggered automatically at startup.
+ *
  * Container support is automatically disabled when running inside Flatpak,
  * as the sandboxing prevents reliable process inspection.
  */
-class ContainerRegistry
+class ContainerRegistry : public QObject
 {
+    Q_OBJECT
+
 public:
     /**
      * Get the singleton instance.
@@ -83,11 +91,23 @@ public:
     QStringList entryCommand(const ContainerInfo &container) const;
 
     /**
-     * List all available containers from all registered detectors.
+     * Returns the most recently cached list of all containers.
      *
-     * @return Combined list of containers from all detectors
+     * This returns immediately without blocking. The list may be empty
+     * if no refresh has completed yet.
      */
-    QList<ContainerInfo> listAllContainers() const;
+    QList<ContainerInfo> cachedContainers() const;
+
+    /**
+     * Start an asynchronous refresh of the container list.
+     *
+     * Each registered detector is asked to list its containers in the
+     * background. When all detectors have finished, the cached list is
+     * updated and containersUpdated() is emitted.
+     *
+     * If a refresh is already in progress, this call is ignored.
+     */
+    void refreshContainers();
 
     /**
      * Parse OSC 777 container parameters and return appropriate ContainerInfo.
@@ -110,13 +130,24 @@ public:
     std::optional<ContainerInfo> containerInfoFromOsc777(const QStringList &params) const;
 
     ContainerRegistry();
-    ~ContainerRegistry() = default;
+    ~ContainerRegistry() override = default;
+
+Q_SIGNALS:
+    /**
+     * Emitted when an asynchronous refresh has completed and the
+     * cached container list has been updated.
+     */
+    void containersUpdated();
 
 private:
+    void onDetectorFinished(const QList<ContainerInfo> &containers);
+
     bool _enabled = true;
-    bool _initialized = false;
+    int _pendingDetectors = 0;
     QString _disabledReason;
     std::vector<std::unique_ptr<IContainerDetector>> _detectors;
+    QList<ContainerInfo> _cachedContainers;
+    QList<ContainerInfo> _pendingResults;
 
     Q_DISABLE_COPY(ContainerRegistry)
 };

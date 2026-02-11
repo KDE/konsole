@@ -13,6 +13,7 @@
 #include <QObject>
 #include <QPointer>
 
+#include "containers/ContainerInfo.h"
 #include "konsoleprivate_export.h"
 // Konsole
 
@@ -235,6 +236,9 @@ Q_SIGNALS:
     void newViewRequest();
     /** Requests creation of a new view, with the selected profile. */
     void newViewWithProfileRequest(const QExplicitlySharedDataPointer<Profile> &profile);
+
+    /** Requests creation of a new view inside the given container. */
+    void newViewInContainerRequest(const ContainerInfo &container);
 
     void activationRequest(const QString &xdgActivationToken);
 

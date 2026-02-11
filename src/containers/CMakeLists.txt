@@ -2,7 +2,9 @@
 # Provides support for Toolbox, Distrobox, and other container types
 
 set(konsolecontainers_SRCS
+    ContainerList.cpp
     ContainerRegistry.cpp
+    IContainerDetector.cpp
     ToolboxDetector.cpp
     DistroboxDetector.cpp
 )
@@ -16,6 +18,7 @@ target_compile_features(konsolecontainers PUBLIC cxx_std_20)
 target_link_libraries(konsolecontainers
     PUBLIC
     Qt::Core
+    Qt::Widgets
     KF6::I18n
     KF6::CoreAddons  # For KSandbox
 )

@@ -14,6 +14,11 @@
 namespace Konsole
 {
 
+ToolboxDetector::ToolboxDetector(QObject *parent)
+    : IContainerDetector(parent)
+{
+}
+
 QString ToolboxDetector::typeId() const
 {
     return QStringLiteral("toolbox");
@@ -50,43 +55,45 @@ QStringList ToolboxDetector::entryCommand(const QString &containerName) const
     return {QStringLiteral("toolbox"), QStringLiteral("enter"), containerName};
 }
 
-QList<ContainerInfo> ToolboxDetector::listContainers() const
+void ToolboxDetector::startListContainers()
 {
-    QList<ContainerInfo> containers;
+    auto *process = new QProcess(this);
+    process->setProgram(QStringLiteral("toolbox"));
+    process->setArguments({QStringLiteral("list"), QStringLiteral("--containers")});
 
-    // Run: toolbox list --containers
-    QProcess process;
-    process.setProgram(QStringLiteral("toolbox"));
-    process.setArguments({QStringLiteral("list"), QStringLiteral("--containers")});
-    process.start();
+    connect(process, &QProcess::finished, this, [this, process](int exitCode, QProcess::ExitStatus exitStatus) {
+        QList<ContainerInfo> containers;
+        process->deleteLater();
 
-    if (!process.waitForFinished(5000)) {
-        return containers;
-    }
-
-    if (process.exitCode() != 0) {
-        return containers;
-    }
-
-    // Parse output - format is typically:
-    // CONTAINER ID  CONTAINER NAME  CREATED       STATUS   IMAGE NAME
-    // abc123def456  fedora-39       2 weeks ago   running  registry.fedoraproject.org/fedora-toolbox:39
-    const QString output = QString::fromUtf8(process.readAllStandardOutput());
-    const QStringList lines = output.split(QLatin1Char('\n'), Qt::SkipEmptyParts);
-
-    // Skip header line
-    for (int i = 1; i < lines.size(); ++i) {
-        const QString &line = lines[i];
-        // Split by whitespace, container name is second column
-        static QRegularExpression whitespace(QStringLiteral("\\s+"));
-        const QStringList columns = line.split(whitespace, Qt::SkipEmptyParts);
-        if (columns.size() >= 2) {
-            const QString containerName = columns[1];
-            containers.append(buildContainerInfo(containerName));
+        if (exitStatus != QProcess::NormalExit || exitCode != 0) {
+            Q_EMIT listContainersFinished(containers);
+            return;
         }
-    }
 
-    return containers;
+        // Parse output - format is typically:
+        // CONTAINER ID  CONTAINER NAME  CREATED       STATUS   IMAGE NAME
+        // abc123def456  fedora-39       2 weeks ago   running  registry.fedoraproject.org/fedora-toolbox:39
+        const QString output = QString::fromUtf8(process->readAllStandardOutput());
+        const QStringList lines = output.split(QLatin1Char('\n'), Qt::SkipEmptyParts);
+
+        // Skip header line
+        for (int i = 1; i < lines.size(); ++i) {
+            const QString &line = lines[i];
+            // Split by whitespace, container name is second column
+            static QRegularExpression whitespace(QStringLiteral("\\s+"));
+            const QStringList columns = line.split(whitespace, Qt::SkipEmptyParts);
+            if (columns.size() >= 2) {
+                const QString containerName = columns[1];
+                containers.append(buildContainerInfo(containerName));
+            }
+        }
+
+        Q_EMIT listContainersFinished(containers);
+    });
+
+    process->start();
 }
 
 } // namespace Konsole
+
+#include "moc_ToolboxDetector.cpp"

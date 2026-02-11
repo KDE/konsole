@@ -53,6 +53,9 @@
 #include "profile/ProfileList.h"
 #include "profile/ProfileManager.h"
 
+#include "containers/ContainerList.h"
+#include "containers/ContainerRegistry.h"
+
 #include "session/Session.h"
 #include "session/SessionController.h"
 #include "session/SessionManager.h"
@@ -102,6 +105,7 @@ MainWindow::MainWindow()
 
     connect(_viewManager, &Konsole::ViewManager::updateWindowIcon, this, &Konsole::MainWindow::updateWindowIcon);
     connect(_viewManager, &Konsole::ViewManager::newViewWithProfileRequest, this, &Konsole::MainWindow::newFromProfile);
+    connect(_viewManager, &Konsole::ViewManager::newViewInContainerRequest, this, &Konsole::MainWindow::newInContainer);
     connect(_viewManager, &Konsole::ViewManager::newViewRequest, this, &Konsole::MainWindow::newTab);
     connect(_viewManager, &Konsole::ViewManager::terminalsDetached, this, &Konsole::MainWindow::terminalsDetached);
     connect(_viewManager, &Konsole::ViewManager::activationRequest, this, &Konsole::MainWindow::activationRequest);
@@ -132,6 +136,7 @@ MainWindow::MainWindow()
     correctStandardShortcuts();
 
     setProfileList(new ProfileList(true, this));
+    setContainerList(new ContainerList(this));
 
     // this must come at the end
     applyKonsoleSettings();
@@ -587,33 +592,42 @@ BookmarkHandler *MainWindow::bookmarkHandler() const
 
 void MainWindow::setProfileList(ProfileList *list)
 {
-    profileListChanged(list->actions());
-
+    _profileList = list;
     connect(list, &Konsole::ProfileList::profileSelected, this, &MainWindow::newFromProfile);
-    connect(list, &Konsole::ProfileList::actionsChanged, this, &Konsole::MainWindow::profileListChanged);
+    connect(list, &Konsole::ProfileList::actionsChanged, this, &Konsole::MainWindow::rebuildNewTabMenu);
+    rebuildNewTabMenu();
 }
 
-void MainWindow::profileListChanged(const QList<QAction *> &sessionActions)
+void MainWindow::rebuildNewTabMenu()
 {
-    // Update the 'New Tab' KActionMenu
-    _newTabMenuAction->menu()->clear();
-    for (QAction *sessionAction : sessionActions) {
-        _newTabMenuAction->menu()->addAction(sessionAction);
+    QMenu *menu = _newTabMenuAction->menu();
+    menu->clear();
 
-        auto setActionFontBold = [sessionAction](bool isBold) {
-            QFont actionFont = sessionAction->font();
-            actionFont.setBold(isBold);
-            sessionAction->setFont(actionFont);
-        };
+    if (_profileList) {
+        const auto profileActions = _profileList->actions();
+        for (QAction *sessionAction : profileActions) {
+            menu->addAction(sessionAction);
 
-        Profile::Ptr profile = ProfileManager::instance()->defaultProfile();
-        if (profile && profile->name() == sessionAction->text().remove(QLatin1Char('&'))) {
-            QIcon icon = KIconUtils::addOverlay(QIcon::fromTheme(profile->icon()), QIcon::fromTheme(QStringLiteral("emblem-favorite")), Qt::BottomRightCorner);
-            sessionAction->setIcon(icon);
-            setActionFontBold(true);
-        } else {
-            setActionFontBold(false);
+            auto setActionFontBold = [sessionAction](bool isBold) {
+                QFont actionFont = sessionAction->font();
+                actionFont.setBold(isBold);
+                sessionAction->setFont(actionFont);
+            };
+
+            Profile::Ptr profile = ProfileManager::instance()->defaultProfile();
+            if (profile && profile->name() == sessionAction->text().remove(QLatin1Char('&'))) {
+                QIcon icon =
+                    KIconUtils::addOverlay(QIcon::fromTheme(profile->icon()), QIcon::fromTheme(QStringLiteral("emblem-favorite")), Qt::BottomRightCorner);
+                sessionAction->setIcon(icon);
+                setActionFontBold(true);
+            } else {
+                setActionFontBold(false);
+            }
         }
+    }
+
+    if (_containerList) {
+        _containerList->addContainerSections(menu);
     }
 }
 
@@ -951,6 +965,36 @@ void MainWindow::showShortcutsDialog()
 void MainWindow::newFromProfile(const Profile::Ptr &profile)
 {
     createSession(profile, activeSessionDir());
+}
+
+void MainWindow::newInContainer(const ContainerInfo &container)
+{
+    Profile::Ptr defaultProfile = ProfileManager::instance()->defaultProfile();
+    Session *session = createSession(defaultProfile, activeSessionDir());
+    if (session && container.isValid()) {
+        session->setContainerContext(container);
+    }
+}
+
+void MainWindow::setContainerList(ContainerList *list)
+{
+    if (_containerList) {
+        disconnect(_containerList, &ContainerList::containerSelected, this, &MainWindow::newInContainer);
+    }
+
+    _containerList = list;
+    connect(list, &ContainerList::containerSelected, this, &MainWindow::newInContainer);
+
+    // Refresh container data whenever the menu is about to show,
+    // then rebuild so the user always sees up-to-date containers
+    connect(_newTabMenuAction->menu(), &QMenu::aboutToShow, this, [this]() {
+        if (_containerList) {
+            _containerList->refreshContainers();
+        }
+        rebuildNewTabMenu();
+    });
+
+    rebuildNewTabMenu();
 }
 
 void MainWindow::showManageProfilesDialog()

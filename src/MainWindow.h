@@ -39,6 +39,7 @@ class Session;
 class SessionController;
 class Profile;
 class ProfileList;
+class ContainerList;
 class IKonsolePlugin;
 class BookmarkHandler;
 struct ContainerInfo;
@@ -173,11 +174,12 @@ private Q_SLOTS:
     void showSettingsDialog(bool showProfilePage = false);
     void showShortcutsDialog();
     void newFromProfile(const QExplicitlySharedDataPointer<Profile> &profile);
+    void newInContainer(const ContainerInfo &container);
     void activeViewChanged(SessionController *controller);
     void disconnectController(SessionController *controller);
     void activeViewTitleChanged(ViewProperties *);
 
-    void profileListChanged(const QList<QAction *> &sessionActions);
+    void rebuildNewTabMenu();
     void configureNotifications();
     void setBlur(bool blur);
 
@@ -188,6 +190,9 @@ private Q_SLOTS:
 
     // Sets the list of profiles to be displayed under the "New Tab" action
     void setProfileList(ProfileList *list);
+
+    // Sets up the container submenu in the "New Tab" dropdown
+    void setContainerList(ContainerList *list);
 
     void applyKonsoleSettings();
 
@@ -232,6 +237,8 @@ private:
     KToggleAction *_toggleMenuBarAction;
     KActionMenu *_newTabMenuAction;
     KHamburgerMenu *_hamburgerMenu;
+    ContainerList *_containerList = nullptr;
+    ProfileList *_profileList = nullptr;
 
     QPointer<SessionController> _pluggedController;
     std::vector<IKonsolePlugin *> _plugins;
