@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 14:43+0000\n"
-"PO-Revision-Date: 2026-01-07 20:56+0100\n"
+"PO-Revision-Date: 2026-02-07 13:39+0100\n"
 "Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.08.3\n"
+"X-Generator: Lokalize 25.12.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2185,6 +2185,8 @@ msgstr "Aktivität in „%1“ (Sitzung „%2“)"
 #, kde-format
 msgid "Security sensitive DBus API is disabled in the settings."
 msgstr ""
+"Die sicherheitsrelevanten Teile der D-Bus-Schnittstelle sind in den "
+"Einstellungen deaktiviert."
 
 #: session/SessionController.cpp:142
 #, kde-format
@@ -2605,7 +2607,7 @@ msgstr "Rückwärts suchen"
 #: settings/GeneralSettings.ui:59 settings/konsole.kcfg:37
 #, kde-format
 msgid "Enable the security sensitive parts of the DBus API"
-msgstr ""
+msgstr "Die sicherheitsrelevanten Teile der D-Bus-Schnittstelle aktivieren"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/GeneralSettings.ui:66
@@ -2766,7 +2768,7 @@ msgstr "Speichert die Fenstergröße beim Beenden von Konsole"
 #: settings/konsole.kcfg:38
 #, kde-format
 msgid "DBus API like runCommand will be enabled"
-msgstr ""
+msgstr "D-Bus-Schnittstelle (z. B. „runCommand“) wird aktiviert"
 
 #. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:47
@@ -3643,17 +3645,13 @@ msgid "Toggle maximize current view"
 msgstr "Maximieren der aktuellen Ansicht umschalten"
 
 #: ViewManager.cpp:311
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Toggle maximize current view"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle zoom-maximize current view"
 msgstr "Maximieren der aktuellen Ansicht umschalten"
 
 #: ViewManager.cpp:312
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Toggle maximize current view"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle zoom-maximize current view"
 msgstr "Maximieren der aktuellen Ansicht umschalten"
@@ -5171,7 +5169,7 @@ msgid ""
 "Some terminal applications have mouse support, this allows them to get it by "
 "default. It can be toggled on/off while running as well."
 msgstr ""
-"Einige Terminalanwendungen haben Mausunterstützung, so dass sie diese "
+"Einige Terminalanwendungen haben Mausunterstützung, sodass sie diese "
 "standardmäßig erhalten können. Sie kann auch während der Ausführung ein- und "
 "ausgeschaltet werden."
 
