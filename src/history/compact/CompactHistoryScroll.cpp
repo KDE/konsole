@@ -40,8 +40,8 @@ void CompactHistoryScroll::addCells(const Character a[], const int count)
     // the flag is later updated when addLine is called
     _lineDatas.push_back({static_cast<unsigned int>(_cells.size() + _indexBias), LineProperty()});
 
-    if (_lineDatas.size() > _maxLineCount + 5) {
-        removeLinesFromTop(5);
+    if (_lineDatas.size() > _maxLineCount + 1) {
+        removeLinesFromTop(1);
     }
 }
 
@@ -53,8 +53,8 @@ void CompactHistoryScroll::addCellsMove(Character characters[], const int count)
     // the flag is later updated when addLine is called
     _lineDatas.push_back({static_cast<unsigned int>(_cells.size() + _indexBias), LineProperty()});
 
-    if (_lineDatas.size() > _maxLineCount + 5) {
-        removeLinesFromTop(5);
+    if (_lineDatas.size() > _maxLineCount + 1) {
+        removeLinesFromTop(1);
     }
 }
 
