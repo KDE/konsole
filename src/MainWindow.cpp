@@ -700,19 +700,6 @@ Session *MainWindow::createSession(Profile::Ptr profile, const QString &director
     const QString newSessionDirectory = profile->startInCurrentSessionDir() ? directory : QString();
     Session *session = _viewManager->createSession(profile, newSessionDirectory);
 
-    // Inherit container context from active session if enabled in profile
-    if (profile->inheritContainerContext() && _pluggedController) {
-        Session *activeSession = _pluggedController->session();
-        if (activeSession && activeSession->isInContainer()) {
-            session->setContainerContext(activeSession->containerContext());
-        } else {
-            qDebug(KonsoleDebug) << "Active session is not in a container, cannot inherit container context.";
-        }
-    } else {
-        qDebug(KonsoleDebug) << "Not inheriting container context because"
-                             << (profile->inheritContainerContext() ? "no plugged controller." : "inheritance is disabled in profile.");
-    }
-
     // create view before starting the session process so that the session
     // doesn't suffer a change in terminal size right after the session
     // starts.  Some applications such as GNU Screen and Midnight Commander
@@ -767,7 +754,10 @@ void MainWindow::newWindow()
         profile = SessionManager::instance()->sessionProfile(_pluggedController->session());
     }
 
-    // Pass container context if inheritance is enabled and we're in a container
+    // Pass inherited container context for the new window.
+    // The profile's ContainerName setting is handled automatically by
+    // ViewManager::createSession(), but inheritance needs explicit passing
+    // since the new window won't have a _pluggedController yet.
     ContainerInfo container;
     if (profile->inheritContainerContext() && _pluggedController) {
         Session *activeSession = _pluggedController->session();

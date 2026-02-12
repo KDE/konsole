@@ -78,6 +78,7 @@ const std::vector<Profile::PropertyInfo> Profile::DefaultProperties = {
     {ShowTerminalSizeHint, "ShowTerminalSizeHint", GENERAL_GROUP, true},
     {StartInCurrentSessionDir, "StartInCurrentSessionDir", GENERAL_GROUP, true},
     {InheritContainerContext, "InheritContainerContext", GENERAL_GROUP, false},
+    {ContainerName, "ContainerName", GENERAL_GROUP, QString()},
     {SilenceSeconds, "SilenceSeconds", GENERAL_GROUP, 10},
     {TerminalColumns, "TerminalColumns", GENERAL_GROUP, 110},
     {TerminalRows, "TerminalRows", GENERAL_GROUP, 28},

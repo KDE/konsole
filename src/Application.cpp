@@ -147,7 +147,10 @@ void Application::createWindow(const Profile::Ptr &profile, const QString &direc
     MainWindow *window = newMainWindow();
     Session *session = window->createSession(profile, directory);
 
-    // Apply inherited container context if valid
+    // Apply inherited container context for the new window.
+    // Inheritance takes priority over the profile's ContainerName setting.
+    // ViewManager::createSession already handles in-process inheritance,
+    // but for new windows _pluggedController is null, so we apply it here.
     if (container.isValid()) {
         session->setContainerContext(container);
     }

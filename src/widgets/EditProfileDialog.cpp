@@ -523,6 +523,28 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr &profile)
         _generalUi->containerWarningWidget->setText(containerRegistry->disabledReason());
     }
 
+    // "Always start in container" combo box
+    {
+        _generalUi->containerCombo->clear();
+        _generalUi->containerCombo->addItem(i18n("None"), QString());
+
+        const QList<ContainerInfo> containers = containerRegistry->cachedContainers();
+        for (const auto &container : containers) {
+            _generalUi->containerCombo->addItem(QIcon::fromTheme(container.iconName),
+                                                container.displayName,
+                                                ContainerRegistry::keyFromContainerInfo(container));
+        }
+
+        // Select the currently configured container
+        const QString currentContainer = profile->containerName();
+        const int idx = _generalUi->containerCombo->findData(currentContainer);
+        _generalUi->containerCombo->setCurrentIndex(idx >= 0 ? idx : 0);
+
+        if (!containerRegistry->isEnabled()) {
+            _generalUi->containerCombo->setEnabled(false);
+        }
+    }
+
     // initial terminal size
     const auto colsSuffix =
         ki18ncp("Suffix of the number of columns (N columns). The leading space is needed to separate it from the number value.", " column", " columns");
@@ -558,6 +580,7 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr &profile)
     connect(_generalUi->iconSelectButton, &QPushButton::clicked, this, &Konsole::EditProfileDialog::selectIcon);
     connect(_generalUi->startInSameDirButton, &QCheckBox::toggled, this, &Konsole::EditProfileDialog::startInSameDir);
     connect(_generalUi->inheritContainerButton, &QCheckBox::toggled, this, &Konsole::EditProfileDialog::inheritContainerContext);
+    connect(_generalUi->containerCombo, &QComboBox::currentIndexChanged, this, &Konsole::EditProfileDialog::containerComboChanged);
     connect(_generalUi->profileNameEdit, &QLineEdit::textChanged, this, &Konsole::EditProfileDialog::profileNameChanged);
     connect(_generalUi->initialDirEdit, &QLineEdit::textChanged, this, &Konsole::EditProfileDialog::initialDirChanged);
     connect(_generalUi->commandEdit, &QLineEdit::textChanged, this, &Konsole::EditProfileDialog::commandChanged);
@@ -783,6 +806,12 @@ void EditProfileDialog::startInSameDir(bool sameDir)
 void EditProfileDialog::inheritContainerContext(bool inherit)
 {
     updateTempProfileProperty(Profile::InheritContainerContext, inherit);
+}
+
+void EditProfileDialog::containerComboChanged(int index)
+{
+    const QString containerKey = _generalUi->containerCombo->itemData(index).toString();
+    updateTempProfileProperty(Profile::ContainerName, containerKey);
 }
 
 void EditProfileDialog::semanticUpDown(bool enable)

@@ -41,6 +41,8 @@
 
 #include "profile/ProfileManager.h"
 
+#include "containers/ContainerRegistry.h"
+
 #include "session/Session.h"
 #include "session/SessionController.h"
 #include "session/SessionManager.h"
@@ -657,6 +659,27 @@ Session *ViewManager::createSession(const Profile::Ptr &profile, const QString &
         session->setInitialWorkingDirectory(directory);
     }
     session->addEnvironmentEntry(QStringLiteral("KONSOLE_DBUS_WINDOW=/Windows/%1").arg(managerId()));
+
+    // Determine container context for the new session.
+    // Priority: 1) Inherit from active session (if enabled)
+    //           2) "Always start in container" profile setting
+    if (profile && profile->inheritContainerContext() && _pluggedController) {
+        Session *activeSession = _pluggedController->session();
+        if (activeSession && activeSession->isInContainer()) {
+            session->setContainerContext(activeSession->containerContext());
+        }
+    }
+
+    if (!session->isInContainer()) {
+        const QString configuredContainer = profile ? profile->containerName() : QString();
+        if (!configuredContainer.isEmpty() && ContainerRegistry::instance()->isEnabled()) {
+            const ContainerInfo container = ContainerRegistry::instance()->containerInfoFromKey(configuredContainer);
+            if (container.isValid()) {
+                session->setContainerContext(container);
+            }
+        }
+    }
+
     return session;
 }
 
@@ -810,14 +833,6 @@ void ViewManager::splitView(Qt::Orientation orientation, bool fromNextTab)
 
         const QString directory = profile->startInCurrentSessionDir() ? activeSession->currentWorkingDirectory() : QString();
         auto *session = createSession(profile, directory);
-
-        // Inherit container context if enabled in profile
-        if (profile->inheritContainerContext() && activeSession->isInContainer()) {
-            session->setContainerContext(activeSession->containerContext());
-        } else {
-            qDebug(KonsoleDebug) << "Not inheriting container context for new split session because"
-                                 << (profile->inheritContainerContext() ? "active session is not in a container" : "profile setting disabled");
-        }
 
         focused = terminalDisplay = createView(session);
         Q_EMIT activeViewChanged(activeViewController());
@@ -1476,15 +1491,6 @@ int ViewManager::newSession(const QString &profile, const QString &directory)
     }
 
     Session *session = createSession(profileptr, directory);
-
-    // Inherit container context from currently active session if enabled
-    int activeSessionId = currentSession();
-    if (activeSessionId >= 0 && profileptr->inheritContainerContext()) {
-        Session *activeSession = SessionManager::instance()->idToSession(activeSessionId);
-        if (activeSession && activeSession->isInContainer()) {
-            session->setContainerContext(activeSession->containerContext());
-        }
-    }
 
     auto newView = createView(session);
     activeContainer()->addView(newView);

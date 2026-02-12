@@ -296,6 +296,12 @@ public:
          * (Toolbox, Distrobox, etc.) of the currently active session.
          */
         InheritContainerContext,
+        /** (QString) Name of the container to always start in.
+         * When non-empty, new sessions using this profile will automatically
+         * enter the specified container (Toolbox, Distrobox, etc.).
+         * Format is "type:name" (e.g., "toolbox:fedora-39").
+         */
+        ContainerName,
         /** (int) Specifies the threshold of detected silence in seconds. */
         SilenceSeconds,
         /** (BellModeEnum) Specifies the behavior of bell.
@@ -850,6 +856,15 @@ public:
     bool inheritContainerContext() const
     {
         return property<bool>(Profile::InheritContainerContext);
+    }
+
+    /** Convenience method for property<QString>(Profile::ContainerName)
+     *  Returns the "type:name" identifier of the container to always start in,
+     *  or an empty string if none is configured.
+     */
+    QString containerName() const
+    {
+        return property<QString>(Profile::ContainerName);
     }
 
     /** Convenience method for property<QString>(Profile::SilenceSeconds) */
