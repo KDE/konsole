@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-11 00:49+0000\n"
+"POT-Creation-Date: 2026-02-12 00:46+0000\n"
 "PO-Revision-Date: 2026-02-04 00:04+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -247,7 +247,7 @@ msgctxt "@info:shell"
 msgid "Arguments passed to command"
 msgstr "명령행 인자"
 
-#: Application.cpp:543
+#: Application.cpp:546
 #, kde-format
 msgctxt "@item"
 msgid "Toggle Background Window"
@@ -677,22 +677,22 @@ msgid ""
 msgstr ""
 "Konsole이 Flatpak 내에서 실행 중일 때에는 컨테이너 지원을 사용할 수 없습니다."
 
-#: containers/DistroboxDetector.cpp:67
+#: containers/DistroboxDetector.cpp:72
 #, kde-format
 msgid "Distrobox"
 msgstr "Distrobox"
 
-#: containers/DistroboxDetector.cpp:167
+#: containers/DistroboxDetector.cpp:172
 #, kde-format
 msgid "Distrobox: %1"
 msgstr "Distrobox: %1"
 
-#: containers/ToolboxDetector.cpp:24
+#: containers/ToolboxDetector.cpp:29
 #, kde-format
 msgid "Toolbox"
 msgstr "Toolbox"
 
-#: containers/ToolboxDetector.cpp:45
+#: containers/ToolboxDetector.cpp:50
 #, kde-format
 msgid "Toolbox: %1"
 msgstr "Toolbox: %1"
@@ -1208,66 +1208,66 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "이 외의 많은 사람들에게 감사드립니다.\n"
 
-#: MainWindow.cpp:386
+#: MainWindow.cpp:391
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "새 탭(&N)"
 
-#: MainWindow.cpp:396
+#: MainWindow.cpp:401
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "탭 복제(&C)"
 
-#: MainWindow.cpp:403
+#: MainWindow.cpp:408
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "새 창(&W)"
 
-#: MainWindow.cpp:410
+#: MainWindow.cpp:415
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "창 닫기"
 
-#: MainWindow.cpp:415
+#: MainWindow.cpp:420
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "책갈피(&B)"
 
-#: MainWindow.cpp:442
+#: MainWindow.cpp:447
 #, kde-format
 msgid "&Window Color Scheme"
 msgstr "창 색 구성표(&W)"
 
-#: MainWindow.cpp:454
+#: MainWindow.cpp:459
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "프로필 관리..."
 
-#: MainWindow.cpp:460
+#: MainWindow.cpp:465
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "메뉴 활성화"
 
-#: MainWindow.cpp:466
+#: MainWindow.cpp:471
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "탭 레이아웃 저장..."
 
-#: MainWindow.cpp:475
+#: MainWindow.cpp:480
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "탭 레이아웃 불러오기..."
 
-#: MainWindow.cpp:823 MainWindow.cpp:840
+#: MainWindow.cpp:827 MainWindow.cpp:844
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1275,61 +1275,61 @@ msgid_plural ""
 "There are %1 processes running in this window. Do you still want to quit?"
 msgstr[0] "현재 창에 프로세스 %1개가 실행 중입니다. 종료하시겠습니까?"
 
-#: MainWindow.cpp:829 MainWindow.cpp:846 MainWindow.cpp:860
+#: MainWindow.cpp:833 MainWindow.cpp:850 MainWindow.cpp:864
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "닫기 확인"
 
-#: MainWindow.cpp:830 MainWindow.cpp:847 MainWindow.cpp:861
+#: MainWindow.cpp:834 MainWindow.cpp:851 MainWindow.cpp:865
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "창 닫기(&W)"
 
-#: MainWindow.cpp:848 MainWindow.cpp:862
+#: MainWindow.cpp:852 MainWindow.cpp:866
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "현재 탭 닫기(&T)"
 
-#: MainWindow.cpp:857
+#: MainWindow.cpp:861
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "현재 창에 터미널 %1개가 열려 있습니다. 종료하시겠습니까?"
 
-#: MainWindow.cpp:964 Part.cpp:317
+#: MainWindow.cpp:998 Part.cpp:317
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "프로필"
 
-#: MainWindow.cpp:982
+#: MainWindow.cpp:1016
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "일반"
 
-#: MainWindow.cpp:994
+#: MainWindow.cpp:1028
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr "메모리"
 
-#: MainWindow.cpp:1000
+#: MainWindow.cpp:1034
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "탭 표시줄/구분자"
 
-#: MainWindow.cpp:1005
+#: MainWindow.cpp:1039
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "임시 파일"
 
-#: MainWindow.cpp:1010
+#: MainWindow.cpp:1044
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -1900,13 +1900,13 @@ msgstr "프린터 친화 모드 (검은 텍스트, 배경색 없음)(&F)"
 msgid "&Scale output"
 msgstr "출력 크기 조정(&S)"
 
-#: profile/Profile.cpp:271
+#: profile/Profile.cpp:272
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr "내장"
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:551
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:573
 #, kde-format
 msgid "Default profile"
 msgstr "기본 프로필"
@@ -3508,251 +3508,251 @@ msgstr "다음으로 디렉터리 변경(&D)"
 msgid "&Paste Location"
 msgstr "붙여넣을 위치(&P)"
 
-#: ViewManager.cpp:122
+#: ViewManager.cpp:124
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View"
 msgstr "보기 나누기"
 
-#: ViewManager.cpp:129
+#: ViewManager.cpp:131
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right"
 msgstr "왼쪽/오른쪽으로 보기 나누기"
 
-#: ViewManager.cpp:137
+#: ViewManager.cpp:139
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom"
 msgstr "위/아래로 보기 나누기"
 
-#: ViewManager.cpp:145
+#: ViewManager.cpp:147
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically"
 msgstr "자동으로 보기 나누기"
 
-#: ViewManager.cpp:155
+#: ViewManager.cpp:157
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
 msgstr "다음 탭부터 왼쪽/오른쪽으로 보기 나누기"
 
-#: ViewManager.cpp:163
+#: ViewManager.cpp:165
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
 msgstr "다음 탭부터 위/아래로 보기 나누기"
 
-#: ViewManager.cpp:171
+#: ViewManager.cpp:173
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
 msgstr "다음 탭부터 자동으로 보기 나누기"
 
-#: ViewManager.cpp:181
+#: ViewManager.cpp:183
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x2 terminals"
 msgstr "2x2 터미널 레이아웃이 있는 새 탭 불러오기"
 
-#: ViewManager.cpp:190
+#: ViewManager.cpp:192
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x1 terminals"
 msgstr "2x1 터미널 레이아웃이 있는 새 탭 불러오기"
 
-#: ViewManager.cpp:199
+#: ViewManager.cpp:201
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 1x2 terminals"
 msgstr "1x2 터미널 레이아웃이 있는 새 탭 불러오기"
 
-#: ViewManager.cpp:207
+#: ViewManager.cpp:209
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Expand View"
 msgstr "보기 확대"
 
-#: ViewManager.cpp:215
+#: ViewManager.cpp:217
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Shrink View"
 msgstr "보기 축소"
 
-#: ViewManager.cpp:225
+#: ViewManager.cpp:227
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &View"
 msgstr "현재 보기 떼내기(&V)"
 
-#: ViewManager.cpp:237
+#: ViewManager.cpp:239
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &Tab"
 msgstr "현재 탭 떼내기(&T)"
 
-#: ViewManager.cpp:242
+#: ViewManager.cpp:244
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Next Tab"
 msgstr "다음 탭"
 
-#: ViewManager.cpp:250
+#: ViewManager.cpp:252
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Previous Tab"
 msgstr "이전 탭"
 
-#: ViewManager.cpp:258
+#: ViewManager.cpp:260
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Above Terminal"
 msgstr "위쪽 터미널에 포커스"
 
-#: ViewManager.cpp:265
+#: ViewManager.cpp:267
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Below Terminal"
 msgstr "아래쪽 터미널에 포커스"
 
-#: ViewManager.cpp:272
+#: ViewManager.cpp:274
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Left Terminal"
 msgstr "왼쪽 터미널에 포커스"
 
-#: ViewManager.cpp:278
+#: ViewManager.cpp:280
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Right Terminal"
 msgstr "오른쪽 터미널에 포커스"
 
-#: ViewManager.cpp:284
+#: ViewManager.cpp:286
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Next Terminal"
 msgstr "다음 터미널에 포커스"
 
-#: ViewManager.cpp:290
+#: ViewManager.cpp:292
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Previous Terminal"
 msgstr "이전 터미널에 포커스"
 
-#: ViewManager.cpp:296
+#: ViewManager.cpp:298
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Last Tab"
 msgstr "마지막 탭으로 전환"
 
-#: ViewManager.cpp:301
+#: ViewManager.cpp:303
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs"
 msgstr "마지막으로 사용한 탭"
 
-#: ViewManager.cpp:306
+#: ViewManager.cpp:308
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle Between Two Tabs"
 msgstr "두 탭간 전환"
 
-#: ViewManager.cpp:311
+#: ViewManager.cpp:313
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs (Reverse)"
 msgstr "마지막으로 사용한 탭(역순)"
 
-#: ViewManager.cpp:316
+#: ViewManager.cpp:318
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle maximize current view"
 msgstr "현재 보기 최대화 전환"
 
-#: ViewManager.cpp:317
+#: ViewManager.cpp:319
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle maximize current view"
 msgstr "현재 보기 최소화 전환"
 
-#: ViewManager.cpp:325
+#: ViewManager.cpp:327
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle zoom-maximize current view"
 msgstr "현재 보기 최대화 전환"
 
-#: ViewManager.cpp:326
+#: ViewManager.cpp:328
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle zoom-maximize current view"
 msgstr "현재 보기 최소화 전환"
 
-#: ViewManager.cpp:334
+#: ViewManager.cpp:336
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the right"
 msgstr "탭 오른쪽으로 이동"
 
-#: ViewManager.cpp:341
+#: ViewManager.cpp:343
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the left"
 msgstr "탭 왼쪽으로 이동"
 
-#: ViewManager.cpp:348
+#: ViewManager.cpp:350
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
 msgstr "시맨틱 통합 설정(bash)"
 
-#: ViewManager.cpp:354
+#: ViewManager.cpp:356
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
 msgstr "시맨틱 힌트 표시 전환"
 
-#: ViewManager.cpp:360
+#: ViewManager.cpp:362
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
 msgstr "줄 번호 표시 전환"
 
-#: ViewManager.cpp:367
+#: ViewManager.cpp:369
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
 msgstr "모든 보기 크기 통일"
 
-#: ViewManager.cpp:377
+#: ViewManager.cpp:379
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Tab %1"
 msgstr "탭 %1(으)로 전환"
 
-#: ViewManager.cpp:600
+#: ViewManager.cpp:602
 #, kde-format
 msgid "Semantic hints "
 msgstr "시맨틱 힌트 "
 
-#: ViewManager.cpp:616
+#: ViewManager.cpp:618
 #, kde-format
 msgid "Line numbers "
 msgstr "줄 번호 "
 
-#: ViewManager.cpp:1223
+#: ViewManager.cpp:1239
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "탭 레이아웃 저장"
 
-#: ViewManager.cpp:1225 ViewManager.cpp:1346
+#: ViewManager.cpp:1241 ViewManager.cpp:1362
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Konsole 보기 레이아웃 (*.json)"
 
-#: ViewManager.cpp:1241
+#: ViewManager.cpp:1257
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3762,7 +3762,7 @@ msgstr ""
 "레이아웃을 저장하는 중 문제가 발생했습니다.\n"
 "%1"
 
-#: ViewManager.cpp:1333
+#: ViewManager.cpp:1349
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3772,7 +3772,7 @@ msgstr ""
 "레이아웃을 불러오는 중 문제가 발생했습니다.\n"
 "%1"
 
-#: ViewManager.cpp:1344
+#: ViewManager.cpp:1360
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
@@ -3945,7 +3945,7 @@ msgstr "선택한 색 구성표를 편집합니다"
 #. i18n: ectx: property (text), widget (QPushButton, textEditorCustomBtn)
 #. i18n: ectx: property (text), widget (QPushButton, editColorSchemeButton)
 #: widgets/EditProfileAppearancePage.ui:82
-#: widgets/EditProfileGeneralPage.ui:250 widgets/EditProfileKeyboardPage.ui:73
+#: widgets/EditProfileGeneralPage.ui:276 widgets/EditProfileKeyboardPage.ui:73
 #: widgets/EditProfileMousePage.ui:320
 #, kde-format
 msgid "Edit..."
@@ -4507,7 +4507,14 @@ msgstr "새 프로필 만들기"
 msgid "Edit Profile \"%1\""
 msgstr "\"%1\" 프로필 편집"
 
-#: widgets/EditProfileDialog.cpp:528
+#: widgets/EditProfileDialog.cpp:529
+#, fuzzy, kde-format
+#| msgctxt "Do not show a close button"
+#| msgid "None"
+msgid "None"
+msgstr "없음"
+
+#: widgets/EditProfileDialog.cpp:550
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4516,7 +4523,7 @@ msgid " column"
 msgid_plural " columns"
 msgstr[0] "열"
 
-#: widgets/EditProfileDialog.cpp:530
+#: widgets/EditProfileDialog.cpp:552
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4525,65 +4532,65 @@ msgid " row"
 msgid_plural " rows"
 msgstr[0] "행"
 
-#: widgets/EditProfileDialog.cpp:540
+#: widgets/EditProfileDialog.cpp:562
 #, kde-format
 msgid "System Bell"
 msgstr "시스템 벨"
 
-#: widgets/EditProfileDialog.cpp:540
+#: widgets/EditProfileDialog.cpp:562
 #, kde-format
 msgid "System Notifications"
 msgstr "시스템 알림:"
 
-#: widgets/EditProfileDialog.cpp:540
+#: widgets/EditProfileDialog.cpp:562
 #, kde-format
 msgid "Visual Bell"
 msgstr "벨 시각화"
 
-#: widgets/EditProfileDialog.cpp:540
+#: widgets/EditProfileDialog.cpp:562
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "벨 이벤트 무시"
 
-#: widgets/EditProfileDialog.cpp:549
+#: widgets/EditProfileDialog.cpp:571
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "%1의 새 터미널 세션의 기본 프로필"
 
-#: widgets/EditProfileDialog.cpp:655
+#: widgets/EditProfileDialog.cpp:678
 #, kde-format
 msgid "Edit Environment"
 msgstr "환경 편집"
 
-#: widgets/EditProfileDialog.cpp:656
+#: widgets/EditProfileDialog.cpp:679
 #, kde-format
 msgid "One environment variable per line"
 msgstr "한 줄에 환경 변수 하나씩"
 
-#: widgets/EditProfileDialog.cpp:689
+#: widgets/EditProfileDialog.cpp:712
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
 msgid_plural " seconds"
 msgstr[0] "초"
 
-#: widgets/EditProfileDialog.cpp:813
+#: widgets/EditProfileDialog.cpp:842
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "초기 디렉터리 선택"
 
-#: widgets/EditProfileDialog.cpp:975
+#: widgets/EditProfileDialog.cpp:1004
 #, kde-format
 msgid "Get New..."
 msgstr "새 항목 가져오기..."
 
-#: widgets/EditProfileDialog.cpp:1378
+#: widgets/EditProfileDialog.cpp:1407
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "배열 <resource>%1</resource>을(를) 불러올 수 없습니다."
 
-#: widgets/EditProfileDialog.cpp:1560
+#: widgets/EditProfileDialog.cpp:1589
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4592,7 +4599,7 @@ msgstr ""
 "이 색 구성표는 현재 데스크톱 환경에서 지원하지 않는 투명 배경을 사용하고 있습"
 "니다"
 
-#: widgets/EditProfileDialog.cpp:1566
+#: widgets/EditProfileDialog.cpp:1595
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4601,12 +4608,12 @@ msgstr ""
 "데스크톱 효과를 활성화하기 전에 Konsole을 시작했습니다. 투명한 배경을 보려면 "
 "Konsole을 다시 시작해야 합니다."
 
-#: widgets/EditProfileDialog.cpp:1967
+#: widgets/EditProfileDialog.cpp:1996
 #, kde-format
 msgid "Default for file type"
 msgstr "파일 형식 기본값"
 
-#: widgets/EditProfileDialog.cpp:1993
+#: widgets/EditProfileDialog.cpp:2022
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4634,7 +4641,7 @@ msgstr ""
 "PATH 또는 LINE이 명령에 없으면, 이 설정을 무시하고 \n"
 "기본 텍스트 편집기로 파일을 엽니다."
 
-#: widgets/EditProfileDialog.cpp:2006
+#: widgets/EditProfileDialog.cpp:2035
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "텍스트 편집기 사용자 정의 명령"
@@ -4737,26 +4744,39 @@ msgstr ""
 msgid "Enter same container as current session"
 msgstr "현재 세션과 같은 컨테이너로 들어가기"
 
-#. i18n: ectx: property (text), widget (QLabel, label_4)
+#. i18n: ectx: property (text), widget (QLabel, containerLabel)
 #: widgets/EditProfileGeneralPage.ui:229
+#, kde-format
+msgid "Always start in container:"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QComboBox, containerCombo)
+#: widgets/EditProfileGeneralPage.ui:242
+#, kde-format
+msgid ""
+"Always start new sessions using this profile inside the selected container"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+#: widgets/EditProfileGeneralPage.ui:255
 #, kde-format
 msgid "Environment:"
 msgstr "환경:"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, environmentEditButton)
-#: widgets/EditProfileGeneralPage.ui:247
+#: widgets/EditProfileGeneralPage.ui:273
 #, kde-format
 msgid "Edit the list of environment variables and associated values"
 msgstr "환경 변수와 값 목록 편집"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
-#: widgets/EditProfileGeneralPage.ui:294
+#: widgets/EditProfileGeneralPage.ui:320
 #, kde-format
 msgid "Initial terminal si&ze:"
 msgstr "초기 터미널 크기(&Z):"
 
 #. i18n: ectx: property (text), widget (QLabel, useCurrentWindowSizeNote)
-#: widgets/EditProfileGeneralPage.ui:369
+#: widgets/EditProfileGeneralPage.ui:395
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -4769,31 +4789,31 @@ msgstr ""
 "body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, terminalBellLabel)
-#: widgets/EditProfileGeneralPage.ui:385
+#: widgets/EditProfileGeneralPage.ui:411
 #, kde-format
 msgid "&Terminal bell mode:"
 msgstr "터미널 벨 모드(&T):"
 
 #. i18n: ectx: attribute (title), widget (QWidget, semantic)
-#: widgets/EditProfileGeneralPage.ui:403
+#: widgets/EditProfileGeneralPage.ui:429
 #, kde-format
 msgid "Semantic Integration"
 msgstr "시맨틱 통합"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticUpDown)
-#: widgets/EditProfileGeneralPage.ui:409
+#: widgets/EditProfileGeneralPage.ui:435
 #, kde-format
 msgid "Up/Down Arrows emulation"
 msgstr "위/아래 화살표 에뮬레이션"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticInputClick)
-#: widgets/EditProfileGeneralPage.ui:416
+#: widgets/EditProfileGeneralPage.ui:442
 #, kde-format
 msgid "Mouse click in input line moves cursor"
 msgstr "입력 줄에 마우스 클릭 시 커서 이동"
 
 #. i18n: ectx: property (text), widget (QLabel, label_8)
-#: widgets/EditProfileGeneralPage.ui:429
+#: widgets/EditProfileGeneralPage.ui:455
 #, kde-format
 msgid "Semantic hints:"
 msgstr "시맨틱 힌트:"
@@ -4803,9 +4823,9 @@ msgstr "시맨틱 힌트:"
 #. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundNever)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsNever)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundNever)
-#: widgets/EditProfileGeneralPage.ui:439 widgets/EditProfileGeneralPage.ui:485
-#: widgets/EditProfileGeneralPage.ui:531 widgets/EditProfileGeneralPage.ui:577
-#: widgets/EditProfileGeneralPage.ui:623
+#: widgets/EditProfileGeneralPage.ui:465 widgets/EditProfileGeneralPage.ui:511
+#: widgets/EditProfileGeneralPage.ui:557 widgets/EditProfileGeneralPage.ui:603
+#: widgets/EditProfileGeneralPage.ui:649
 #, kde-format
 msgctxt "Never"
 msgid "Never"
@@ -4816,9 +4836,9 @@ msgstr "하지 않음"
 #. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundURL)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsURL)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundURL)
-#: widgets/EditProfileGeneralPage.ui:449 widgets/EditProfileGeneralPage.ui:495
-#: widgets/EditProfileGeneralPage.ui:541 widgets/EditProfileGeneralPage.ui:587
-#: widgets/EditProfileGeneralPage.ui:633
+#: widgets/EditProfileGeneralPage.ui:475 widgets/EditProfileGeneralPage.ui:521
+#: widgets/EditProfileGeneralPage.ui:567 widgets/EditProfileGeneralPage.ui:613
+#: widgets/EditProfileGeneralPage.ui:659
 #, kde-format
 msgctxt "When showing URL hints"
 msgid "When URL hints show"
@@ -4829,34 +4849,34 @@ msgstr "URL 힌트 표시"
 #. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundAlways)
-#: widgets/EditProfileGeneralPage.ui:459 widgets/EditProfileGeneralPage.ui:505
-#: widgets/EditProfileGeneralPage.ui:551 widgets/EditProfileGeneralPage.ui:597
-#: widgets/EditProfileGeneralPage.ui:643
+#: widgets/EditProfileGeneralPage.ui:485 widgets/EditProfileGeneralPage.ui:531
+#: widgets/EditProfileGeneralPage.ui:577 widgets/EditProfileGeneralPage.ui:623
+#: widgets/EditProfileGeneralPage.ui:669
 #, kde-format
 msgctxt "Always"
 msgid "Always"
 msgstr "항상"
 
 #. i18n: ectx: property (text), widget (QLabel, label_20)
-#: widgets/EditProfileGeneralPage.ui:475
+#: widgets/EditProfileGeneralPage.ui:501
 #, kde-format
 msgid "Red error bars:"
 msgstr "빨간 오류 표시줄:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_30)
-#: widgets/EditProfileGeneralPage.ui:521
+#: widgets/EditProfileGeneralPage.ui:547
 #, kde-format
 msgid "Red error background:"
 msgstr "빨간 오류 배경:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_40)
-#: widgets/EditProfileGeneralPage.ui:567
+#: widgets/EditProfileGeneralPage.ui:593
 #, kde-format
 msgid "Alternating bars:"
 msgstr "전환되는 표시줄:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
-#: widgets/EditProfileGeneralPage.ui:613
+#: widgets/EditProfileGeneralPage.ui:639
 #, kde-format
 msgid "Alternating background:"
 msgstr "전환되는 배경:"
@@ -5681,37 +5701,37 @@ msgctxt "@info:tooltip"
 msgid "Restore terminal"
 msgstr "터미널 복원"
 
-#: widgets/ViewContainer.cpp:59
+#: widgets/ViewContainer.cpp:60
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open a new tab"
 msgstr "새 탭 열기"
 
-#: widgets/ViewContainer.cpp:64
+#: widgets/ViewContainer.cpp:65
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Search Tabs"
 msgstr "탭 검색"
 
-#: widgets/ViewContainer.cpp:69
+#: widgets/ViewContainer.cpp:70
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Close this tab"
 msgstr "이 탭 닫기"
 
-#: widgets/ViewContainer.cpp:105
+#: widgets/ViewContainer.cpp:106
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Detach Tab"
 msgstr "탭 떼내기(&D)"
 
-#: widgets/ViewContainer.cpp:111
+#: widgets/ViewContainer.cpp:112
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Configure or Rename Tab..."
 msgstr "탭 설정 및 이름 바꾸기(&C)..."
 
-#: widgets/ViewContainer.cpp:116
+#: widgets/ViewContainer.cpp:117
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Tab"

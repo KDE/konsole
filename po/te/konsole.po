@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-11 00:49+0000\n"
+"POT-Creation-Date: 2026-02-12 00:46+0000\n"
 "PO-Revision-Date: 2009-01-16 22:16+0530\n"
 "Last-Translator: Krishna Babu K <kkrothap@redhat.com>\n"
 "Language-Team: Telugu <en@li.org>\n"
@@ -252,7 +252,7 @@ msgctxt "@info:shell"
 msgid "Arguments passed to command"
 msgstr "ఆదేశమునకు పంపబడిన ఆర్గుమెంట్లు"
 
-#: Application.cpp:543
+#: Application.cpp:546
 #, fuzzy, kde-format
 #| msgid "Background (Intense)"
 msgctxt "@item"
@@ -759,22 +759,22 @@ msgid ""
 "Container support is not available when Konsole is running inside Flatpak."
 msgstr ""
 
-#: containers/DistroboxDetector.cpp:67
+#: containers/DistroboxDetector.cpp:72
 #, kde-format
 msgid "Distrobox"
 msgstr ""
 
-#: containers/DistroboxDetector.cpp:167
+#: containers/DistroboxDetector.cpp:172
 #, kde-format
 msgid "Distrobox: %1"
 msgstr ""
 
-#: containers/ToolboxDetector.cpp:24
+#: containers/ToolboxDetector.cpp:29
 #, kde-format
 msgid "Toolbox"
 msgstr ""
 
-#: containers/ToolboxDetector.cpp:45
+#: containers/ToolboxDetector.cpp:50
 #, kde-format
 msgid "Toolbox: %1"
 msgstr ""
@@ -1336,74 +1336,74 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "ఇంకా చాలామందికి కృతజ్ఞతలు.\n"
 
-#: MainWindow.cpp:386
+#: MainWindow.cpp:391
 #, fuzzy, kde-format
 #| msgid "New &Tab"
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "(&T) కొత్త టాబ్"
 
-#: MainWindow.cpp:396
+#: MainWindow.cpp:401
 #, fuzzy, kde-format
 #| msgid "&Close Tab"
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "(&C) టాబ్ ను మూసివెయి"
 
-#: MainWindow.cpp:403
+#: MainWindow.cpp:408
 #, fuzzy, kde-format
 #| msgid "New &Window"
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "(&W) కొత్త విండొ"
 
-#: MainWindow.cpp:410
+#: MainWindow.cpp:415
 #, fuzzy, kde-format
 #| msgid "Konsole"
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "కాన్సోల్"
 
-#: MainWindow.cpp:415
+#: MainWindow.cpp:420
 #, fuzzy, kde-format
 #| msgid "&Bookmarks"
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "(&B) పేజీ గుర్తులు"
 
-#: MainWindow.cpp:442
+#: MainWindow.cpp:447
 #, fuzzy, kde-format
 #| msgid "New Color Scheme"
 msgid "&Window Color Scheme"
 msgstr "కొత్త రంగు స్కీము"
 
-#: MainWindow.cpp:454
+#: MainWindow.cpp:459
 #, fuzzy, kde-format
 #| msgid "Manage Profiles"
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "ప్రొఫైల్సును నిర్వహించుము"
 
-#: MainWindow.cpp:460
+#: MainWindow.cpp:465
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr ""
 
-#: MainWindow.cpp:466
+#: MainWindow.cpp:471
 #, fuzzy, kde-format
 #| msgid "Move View Left"
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "వీక్షణం ఎడమకు కదుపుము"
 
-#: MainWindow.cpp:475
+#: MainWindow.cpp:480
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr ""
 
-#: MainWindow.cpp:823 MainWindow.cpp:840
+#: MainWindow.cpp:827 MainWindow.cpp:844
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have multiple tabs in this window, are you sure you want to quit?"
@@ -1422,28 +1422,28 @@ msgstr[3] ""
 msgstr[4] ""
 "ఈ విండోనందు మీరు వివిధ టాబ్లను కలిగివున్నారు, మీరు ఖచ్చితంగా నిష్క్రమించుదామని అనుకొనుచున్నారా?"
 
-#: MainWindow.cpp:829 MainWindow.cpp:846 MainWindow.cpp:860
+#: MainWindow.cpp:833 MainWindow.cpp:850 MainWindow.cpp:864
 #, fuzzy, kde-format
 #| msgid "Confirm Close"
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "ముసివేత నిర్ధారించు"
 
-#: MainWindow.cpp:830 MainWindow.cpp:847 MainWindow.cpp:861
+#: MainWindow.cpp:834 MainWindow.cpp:851 MainWindow.cpp:865
 #, fuzzy, kde-format
 #| msgid "Konsole"
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "కాన్సోల్"
 
-#: MainWindow.cpp:848 MainWindow.cpp:862
+#: MainWindow.cpp:852 MainWindow.cpp:866
 #, fuzzy, kde-format
 #| msgid "Close Current Tab"
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "ప్రస్తుత టాబ్ మూసివేయి"
 
-#: MainWindow.cpp:857
+#: MainWindow.cpp:861
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have multiple tabs in this window, are you sure you want to quit?"
@@ -1451,39 +1451,39 @@ msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "ఈ విండోనందు మీరు వివిధ టాబ్లను కలిగివున్నారు, మీరు ఖచ్చితంగా నిష్క్రమించుదామని అనుకొనుచున్నారా?"
 
-#: MainWindow.cpp:964 Part.cpp:317
+#: MainWindow.cpp:998 Part.cpp:317
 #, fuzzy, kde-format
 #| msgid "New Profile"
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "కొత్త ప్రొఫైల్"
 
-#: MainWindow.cpp:982
+#: MainWindow.cpp:1016
 #, fuzzy, kde-format
 #| msgid "General"
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "సాధారణ"
 
-#: MainWindow.cpp:994
+#: MainWindow.cpp:1028
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr ""
 
-#: MainWindow.cpp:1000
+#: MainWindow.cpp:1034
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr ""
 
-#: MainWindow.cpp:1005
+#: MainWindow.cpp:1039
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr ""
 
-#: MainWindow.cpp:1010
+#: MainWindow.cpp:1044
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -2086,13 +2086,13 @@ msgstr ""
 msgid "&Scale output"
 msgstr ""
 
-#: profile/Profile.cpp:271
+#: profile/Profile.cpp:272
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr ""
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:551
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:573
 #, fuzzy, kde-format
 #| msgid "Delete Profile"
 msgid "Default profile"
@@ -3771,26 +3771,26 @@ msgstr ""
 msgid "&Paste Location"
 msgstr "ఎంచుకొన్న దానిని అతికించు"
 
-#: ViewManager.cpp:122
+#: ViewManager.cpp:124
 #, fuzzy, kde-format
 #| msgid "Split View"
 msgctxt "@action:inmenu"
 msgid "Split View"
 msgstr "వీక్షణం విభజించు"
 
-#: ViewManager.cpp:129
+#: ViewManager.cpp:131
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right"
 msgstr "వీక్షణం ఎడమ/కుడికు విభజించుము"
 
-#: ViewManager.cpp:137
+#: ViewManager.cpp:139
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom"
 msgstr "వీక్షణం పైనకు/క్రిందకు విభజించుము"
 
-#: ViewManager.cpp:145
+#: ViewManager.cpp:147
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Split View Top/Bottom"
@@ -3798,7 +3798,7 @@ msgctxt "@action:inmenu"
 msgid "Split View Automatically"
 msgstr "వీక్షణం పైనకు/క్రిందకు విభజించుము"
 
-#: ViewManager.cpp:155
+#: ViewManager.cpp:157
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Split View Left/Right"
@@ -3806,7 +3806,7 @@ msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
 msgstr "వీక్షణం ఎడమ/కుడికు విభజించుము"
 
-#: ViewManager.cpp:163
+#: ViewManager.cpp:165
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Split View Top/Bottom"
@@ -3814,7 +3814,7 @@ msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
 msgstr "వీక్షణం పైనకు/క్రిందకు విభజించుము"
 
-#: ViewManager.cpp:171
+#: ViewManager.cpp:173
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Split View Top/Bottom"
@@ -3822,224 +3822,224 @@ msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
 msgstr "వీక్షణం పైనకు/క్రిందకు విభజించుము"
 
-#: ViewManager.cpp:181
+#: ViewManager.cpp:183
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x2 terminals"
 msgstr ""
 
-#: ViewManager.cpp:190
+#: ViewManager.cpp:192
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x1 terminals"
 msgstr ""
 
-#: ViewManager.cpp:199
+#: ViewManager.cpp:201
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 1x2 terminals"
 msgstr ""
 
-#: ViewManager.cpp:207
+#: ViewManager.cpp:209
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Expand View"
 msgstr "వీక్షణం విస్తరించుము"
 
-#: ViewManager.cpp:215
+#: ViewManager.cpp:217
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Shrink View"
 msgstr "వీక్షణం కుదించుము"
 
-#: ViewManager.cpp:225
+#: ViewManager.cpp:227
 #, fuzzy, kde-format
 #| msgid "Close Current Tab"
 msgctxt "@action:inmenu"
 msgid "Detach Current &View"
 msgstr "ప్రస్తుత టాబ్ మూసివేయి"
 
-#: ViewManager.cpp:237
+#: ViewManager.cpp:239
 #, fuzzy, kde-format
 #| msgid "Close Current Tab"
 msgctxt "@action:inmenu"
 msgid "Detach Current &Tab"
 msgstr "ప్రస్తుత టాబ్ మూసివేయి"
 
-#: ViewManager.cpp:242
+#: ViewManager.cpp:244
 #, fuzzy, kde-format
 #| msgid "New &Tab"
 msgctxt "@action Shortcut entry"
 msgid "Next Tab"
 msgstr "(&T) కొత్త టాబ్"
 
-#: ViewManager.cpp:250
+#: ViewManager.cpp:252
 #, fuzzy, kde-format
 #| msgid "Previous"
 msgctxt "@action Shortcut entry"
 msgid "Previous Tab"
 msgstr "ముందు"
 
-#: ViewManager.cpp:258
+#: ViewManager.cpp:260
 #, fuzzy, kde-format
 #| msgid "Above Terminal Displays"
 msgctxt "@action Shortcut entry"
 msgid "Focus Above Terminal"
 msgstr "పైని టెర్మినల్ ప్రదర్శిస్తుంది"
 
-#: ViewManager.cpp:265
+#: ViewManager.cpp:267
 #, fuzzy, kde-format
 #| msgid "Below Terminal Displays"
 msgctxt "@action Shortcut entry"
 msgid "Focus Below Terminal"
 msgstr "క్రింది టెర్మినల్ ప్రదర్శిస్తుంది"
 
-#: ViewManager.cpp:272
+#: ViewManager.cpp:274
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Left Terminal"
 msgstr ""
 
-#: ViewManager.cpp:278
+#: ViewManager.cpp:280
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Right Terminal"
 msgstr ""
 
-#: ViewManager.cpp:284
+#: ViewManager.cpp:286
 #, fuzzy, kde-format
 #| msgid "Above Terminal Displays"
 msgctxt "@action Shortcut entry"
 msgid "Focus Next Terminal"
 msgstr "పైని టెర్మినల్ ప్రదర్శిస్తుంది"
 
-#: ViewManager.cpp:290
+#: ViewManager.cpp:292
 #, fuzzy, kde-format
 #| msgid "Below Terminal Displays"
 msgctxt "@action Shortcut entry"
 msgid "Focus Previous Terminal"
 msgstr "క్రింది టెర్మినల్ ప్రదర్శిస్తుంది"
 
-#: ViewManager.cpp:296
+#: ViewManager.cpp:298
 #, fuzzy, kde-format
 #| msgid "Switch to Tab %1"
 msgctxt "@action Shortcut entry"
 msgid "Switch to Last Tab"
 msgstr "టాబ్ %1కు మారుము"
 
-#: ViewManager.cpp:301
+#: ViewManager.cpp:303
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs"
 msgstr ""
 
-#: ViewManager.cpp:306
+#: ViewManager.cpp:308
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle Between Two Tabs"
 msgstr ""
 
-#: ViewManager.cpp:311
+#: ViewManager.cpp:313
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs (Reverse)"
 msgstr ""
 
-#: ViewManager.cpp:316
+#: ViewManager.cpp:318
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle maximize current view"
 msgstr ""
 
-#: ViewManager.cpp:317
+#: ViewManager.cpp:319
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle maximize current view"
 msgstr ""
 
-#: ViewManager.cpp:325
+#: ViewManager.cpp:327
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle zoom-maximize current view"
 msgstr ""
 
-#: ViewManager.cpp:326
+#: ViewManager.cpp:328
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle zoom-maximize current view"
 msgstr ""
 
-#: ViewManager.cpp:334
+#: ViewManager.cpp:336
 #, fuzzy, kde-format
 #| msgid "Move View Right"
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the right"
 msgstr "వీక్షణం కుడికు కదుపుము"
 
-#: ViewManager.cpp:341
+#: ViewManager.cpp:343
 #, fuzzy, kde-format
 #| msgid "Move View Left"
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the left"
 msgstr "వీక్షణం ఎడమకు కదుపుము"
 
-#: ViewManager.cpp:348
+#: ViewManager.cpp:350
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
 msgstr ""
 
-#: ViewManager.cpp:354
+#: ViewManager.cpp:356
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
 msgstr ""
 
-#: ViewManager.cpp:360
+#: ViewManager.cpp:362
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
 msgstr ""
 
-#: ViewManager.cpp:367
+#: ViewManager.cpp:369
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
 msgstr ""
 
-#: ViewManager.cpp:377
+#: ViewManager.cpp:379
 #, fuzzy, kde-format
 #| msgid "Switch to Tab %1"
 msgctxt "@action Shortcut entry"
 msgid "Switch to Tab %1"
 msgstr "టాబ్ %1కు మారుము"
 
-#: ViewManager.cpp:600
+#: ViewManager.cpp:602
 #, fuzzy, kde-format
 #| msgid "Mouse Interaction"
 msgid "Semantic hints "
 msgstr "మౌస్ ఇంటరాక్షన్"
 
-#: ViewManager.cpp:616
+#: ViewManager.cpp:618
 #, fuzzy, kde-format
 #| msgid "Fixed number of lines: "
 msgid "Line numbers "
 msgstr "కొన్ని నిర్ధిష్ట వరుసలు:"
 
-#: ViewManager.cpp:1223
+#: ViewManager.cpp:1239
 #, fuzzy, kde-format
 #| msgid "Move View Left"
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "వీక్షణం ఎడమకు కదుపుము"
 
-#: ViewManager.cpp:1225 ViewManager.cpp:1346
+#: ViewManager.cpp:1241 ViewManager.cpp:1362
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr ""
 
-#: ViewManager.cpp:1241
+#: ViewManager.cpp:1257
 #, fuzzy, kde-format
 #| msgid ""
 #| "A problem occurred when saving the output.\n"
@@ -4052,7 +4052,7 @@ msgstr ""
 "అవుట్పుట్‌ను భద్రపరచుచున్నప్పుడు వొక సమస్య యెదురైంది.\n"
 "%1"
 
-#: ViewManager.cpp:1333
+#: ViewManager.cpp:1349
 #, fuzzy, kde-format
 #| msgid ""
 #| "A problem occurred when saving the output.\n"
@@ -4065,7 +4065,7 @@ msgstr ""
 "అవుట్పుట్‌ను భద్రపరచుచున్నప్పుడు వొక సమస్య యెదురైంది.\n"
 "%1"
 
-#: ViewManager.cpp:1344
+#: ViewManager.cpp:1360
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
@@ -4243,7 +4243,7 @@ msgstr "ఎంపికచేసిన రంగు స్కీమును స
 #. i18n: ectx: property (text), widget (QPushButton, textEditorCustomBtn)
 #. i18n: ectx: property (text), widget (QPushButton, editColorSchemeButton)
 #: widgets/EditProfileAppearancePage.ui:82
-#: widgets/EditProfileGeneralPage.ui:250 widgets/EditProfileKeyboardPage.ui:73
+#: widgets/EditProfileGeneralPage.ui:276 widgets/EditProfileKeyboardPage.ui:73
 #: widgets/EditProfileMousePage.ui:320
 #, kde-format
 msgid "Edit..."
@@ -4835,7 +4835,12 @@ msgstr "కొత్త ప్రొఫైల్..."
 msgid "Edit Profile \"%1\""
 msgstr "ప్రొఫైల్ \"%1\" సరికూర్చు"
 
-#: widgets/EditProfileDialog.cpp:528
+#: widgets/EditProfileDialog.cpp:529
+#, kde-format
+msgid "None"
+msgstr ""
+
+#: widgets/EditProfileDialog.cpp:550
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4845,7 +4850,7 @@ msgid_plural " columns"
 msgstr[0] ""
 msgstr[1] ""
 
-#: widgets/EditProfileDialog.cpp:530
+#: widgets/EditProfileDialog.cpp:552
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4855,45 +4860,45 @@ msgid_plural " rows"
 msgstr[0] ""
 msgstr[1] ""
 
-#: widgets/EditProfileDialog.cpp:540
+#: widgets/EditProfileDialog.cpp:562
 #, kde-format
 msgid "System Bell"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:540
+#: widgets/EditProfileDialog.cpp:562
 #, fuzzy, kde-format
 #| msgid "Paste Selection"
 msgid "System Notifications"
 msgstr "ఎంచుకొన్న దానిని అతికించు"
 
-#: widgets/EditProfileDialog.cpp:540
+#: widgets/EditProfileDialog.cpp:562
 #, fuzzy, kde-format
 #| msgid "Visual effects"
 msgid "Visual Bell"
 msgstr "దృశ్య ప్రభావాలు"
 
-#: widgets/EditProfileDialog.cpp:540
+#: widgets/EditProfileDialog.cpp:562
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:549
+#: widgets/EditProfileDialog.cpp:571
 #, fuzzy, kde-format
 #| msgid "Set the selected profile as the default for new terminal sessions"
 msgid "Default profile for new terminal sessions in %1"
 msgstr "ఎంపికచేసిన ప్రొఫైలు కొత్త టెర్మినల్ సెషన్లకు అప్రమేయంగా అమర్చుము"
 
-#: widgets/EditProfileDialog.cpp:655
+#: widgets/EditProfileDialog.cpp:678
 #, kde-format
 msgid "Edit Environment"
 msgstr "ఎన్విరాన్మెంటు సరికూర్చు"
 
-#: widgets/EditProfileDialog.cpp:656
+#: widgets/EditProfileDialog.cpp:679
 #, kde-format
 msgid "One environment variable per line"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:689
+#: widgets/EditProfileDialog.cpp:712
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4904,44 +4909,44 @@ msgstr[2] ""
 msgstr[3] ""
 msgstr[4] ""
 
-#: widgets/EditProfileDialog.cpp:813
+#: widgets/EditProfileDialog.cpp:842
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "ప్రాధమిక డెరెక్టరీను ఎంపికచేయుము"
 
-#: widgets/EditProfileDialog.cpp:975
+#: widgets/EditProfileDialog.cpp:1004
 #, fuzzy, kde-format
 #| msgid "New..."
 msgid "Get New..."
 msgstr "కొత్త..."
 
-#: widgets/EditProfileDialog.cpp:1378
+#: widgets/EditProfileDialog.cpp:1407
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1560
+#: widgets/EditProfileDialog.cpp:1589
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
 "supported on your desktop"
 msgstr "ఈ రంగు స్కీము మీ డెస్కుటాపు మద్దతీయనటువంటి పారదర్శ బ్యాక్‌గ్రౌండును వుపయోగిస్తోంది"
 
-#: widgets/EditProfileDialog.cpp:1566
+#: widgets/EditProfileDialog.cpp:1595
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
 "Konsole to see transparent background."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1967
+#: widgets/EditProfileDialog.cpp:1996
 #, fuzzy, kde-format
 #| msgid "Delete Profile"
 msgid "Default for file type"
 msgstr "ప్రొఫైల్ తొలగించు"
 
-#: widgets/EditProfileDialog.cpp:1993
+#: widgets/EditProfileDialog.cpp:2022
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4958,7 +4963,7 @@ msgid ""
 "editor."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:2006
+#: widgets/EditProfileDialog.cpp:2035
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr ""
@@ -5067,27 +5072,40 @@ msgstr ""
 msgid "Enter same container as current session"
 msgstr "ప్రస్తుత టాబువలె యిదే డెరెక్టరీనందు ప్రారంభించుము"
 
-#. i18n: ectx: property (text), widget (QLabel, label_4)
+#. i18n: ectx: property (text), widget (QLabel, containerLabel)
 #: widgets/EditProfileGeneralPage.ui:229
+#, kde-format
+msgid "Always start in container:"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QComboBox, containerCombo)
+#: widgets/EditProfileGeneralPage.ui:242
+#, kde-format
+msgid ""
+"Always start new sessions using this profile inside the selected container"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+#: widgets/EditProfileGeneralPage.ui:255
 #, kde-format
 msgid "Environment:"
 msgstr "ఎన్విరాన్మెంట్:"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, environmentEditButton)
-#: widgets/EditProfileGeneralPage.ui:247
+#: widgets/EditProfileGeneralPage.ui:273
 #, kde-format
 msgid "Edit the list of environment variables and associated values"
 msgstr "ఎన్విరాన్మెంట్ వేరియబుల్సు మరియు సంభందిత విలువల జాబితాను సరికూర్చుము"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
-#: widgets/EditProfileGeneralPage.ui:294
+#: widgets/EditProfileGeneralPage.ui:320
 #, fuzzy, kde-format
 #| msgid "Terminal Features"
 msgid "Initial terminal si&ze:"
 msgstr "టెర్మినల్ సౌలభ్యాలు"
 
 #. i18n: ectx: property (text), widget (QLabel, useCurrentWindowSizeNote)
-#: widgets/EditProfileGeneralPage.ui:369
+#: widgets/EditProfileGeneralPage.ui:395
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -5097,33 +5115,33 @@ msgid ""
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, terminalBellLabel)
-#: widgets/EditProfileGeneralPage.ui:385
+#: widgets/EditProfileGeneralPage.ui:411
 #, fuzzy, kde-format
 #| msgid "Terminal emulator"
 msgid "&Terminal bell mode:"
 msgstr "టెర్మినల్ ఎములెటర్"
 
 #. i18n: ectx: attribute (title), widget (QWidget, semantic)
-#: widgets/EditProfileGeneralPage.ui:403
+#: widgets/EditProfileGeneralPage.ui:429
 #, fuzzy, kde-format
 #| msgid "Mouse Interaction"
 msgid "Semantic Integration"
 msgstr "మౌస్ ఇంటరాక్షన్"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticUpDown)
-#: widgets/EditProfileGeneralPage.ui:409
+#: widgets/EditProfileGeneralPage.ui:435
 #, kde-format
 msgid "Up/Down Arrows emulation"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticInputClick)
-#: widgets/EditProfileGeneralPage.ui:416
+#: widgets/EditProfileGeneralPage.ui:442
 #, kde-format
 msgid "Mouse click in input line moves cursor"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_8)
-#: widgets/EditProfileGeneralPage.ui:429
+#: widgets/EditProfileGeneralPage.ui:455
 #, kde-format
 msgid "Semantic hints:"
 msgstr ""
@@ -5133,9 +5151,9 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundNever)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsNever)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundNever)
-#: widgets/EditProfileGeneralPage.ui:439 widgets/EditProfileGeneralPage.ui:485
-#: widgets/EditProfileGeneralPage.ui:531 widgets/EditProfileGeneralPage.ui:577
-#: widgets/EditProfileGeneralPage.ui:623
+#: widgets/EditProfileGeneralPage.ui:465 widgets/EditProfileGeneralPage.ui:511
+#: widgets/EditProfileGeneralPage.ui:557 widgets/EditProfileGeneralPage.ui:603
+#: widgets/EditProfileGeneralPage.ui:649
 #, kde-format
 msgctxt "Never"
 msgid "Never"
@@ -5146,9 +5164,9 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundURL)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsURL)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundURL)
-#: widgets/EditProfileGeneralPage.ui:449 widgets/EditProfileGeneralPage.ui:495
-#: widgets/EditProfileGeneralPage.ui:541 widgets/EditProfileGeneralPage.ui:587
-#: widgets/EditProfileGeneralPage.ui:633
+#: widgets/EditProfileGeneralPage.ui:475 widgets/EditProfileGeneralPage.ui:521
+#: widgets/EditProfileGeneralPage.ui:567 widgets/EditProfileGeneralPage.ui:613
+#: widgets/EditProfileGeneralPage.ui:659
 #, kde-format
 msgctxt "When showing URL hints"
 msgid "When URL hints show"
@@ -5159,35 +5177,35 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundAlways)
-#: widgets/EditProfileGeneralPage.ui:459 widgets/EditProfileGeneralPage.ui:505
-#: widgets/EditProfileGeneralPage.ui:551 widgets/EditProfileGeneralPage.ui:597
-#: widgets/EditProfileGeneralPage.ui:643
+#: widgets/EditProfileGeneralPage.ui:485 widgets/EditProfileGeneralPage.ui:531
+#: widgets/EditProfileGeneralPage.ui:577 widgets/EditProfileGeneralPage.ui:623
+#: widgets/EditProfileGeneralPage.ui:669
 #, kde-format
 msgctxt "Always"
 msgid "Always"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_20)
-#: widgets/EditProfileGeneralPage.ui:475
+#: widgets/EditProfileGeneralPage.ui:501
 #, kde-format
 msgid "Red error bars:"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_30)
-#: widgets/EditProfileGeneralPage.ui:521
+#: widgets/EditProfileGeneralPage.ui:547
 #, fuzzy, kde-format
 #| msgid "Background"
 msgid "Red error background:"
 msgstr "బ్యాక్‌గ్రౌండు"
 
 #. i18n: ectx: property (text), widget (QLabel, label_40)
-#: widgets/EditProfileGeneralPage.ui:567
+#: widgets/EditProfileGeneralPage.ui:593
 #, kde-format
 msgid "Alternating bars:"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
-#: widgets/EditProfileGeneralPage.ui:613
+#: widgets/EditProfileGeneralPage.ui:639
 #, fuzzy, kde-format
 #| msgid "Background"
 msgid "Alternating background:"
@@ -6073,42 +6091,42 @@ msgctxt "@info:tooltip"
 msgid "Restore terminal"
 msgstr "(&C) టాబ్ ను మూసివెయి"
 
-#: widgets/ViewContainer.cpp:59
+#: widgets/ViewContainer.cpp:60
 #, fuzzy, kde-format
 #| msgid "&Detach View"
 msgctxt "@info:tooltip"
 msgid "Open a new tab"
 msgstr "(&D) వీక్షణం వేరుచేయి"
 
-#: widgets/ViewContainer.cpp:64
+#: widgets/ViewContainer.cpp:65
 #, fuzzy, kde-format
 #| msgid "&Detach View"
 msgctxt "@info:tooltip"
 msgid "Search Tabs"
 msgstr "(&D) వీక్షణం వేరుచేయి"
 
-#: widgets/ViewContainer.cpp:69
+#: widgets/ViewContainer.cpp:70
 #, fuzzy, kde-format
 #| msgid "Close the search bar"
 msgctxt "@info:tooltip"
 msgid "Close this tab"
 msgstr "శోధన బార్‌ను మూయుము"
 
-#: widgets/ViewContainer.cpp:105
+#: widgets/ViewContainer.cpp:106
 #, fuzzy, kde-format
 #| msgid "&Detach View"
 msgctxt "@action:inmenu"
 msgid "&Detach Tab"
 msgstr "(&D) వీక్షణం వేరుచేయి"
 
-#: widgets/ViewContainer.cpp:111
+#: widgets/ViewContainer.cpp:112
 #, fuzzy, kde-format
 #| msgid "&Rename Tab..."
 msgctxt "@action:inmenu"
 msgid "&Configure or Rename Tab..."
 msgstr "(&R) టాబ్‌కు మరలాపేరు..."
 
-#: widgets/ViewContainer.cpp:116
+#: widgets/ViewContainer.cpp:117
 #, fuzzy, kde-format
 #| msgid "&Close Tab"
 msgctxt "@action:inmenu"

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-11 00:49+0000\n"
+"POT-Creation-Date: 2026-02-12 00:46+0000\n"
 "PO-Revision-Date: 2025-02-23 13:36+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -262,7 +262,7 @@ msgctxt "@info:shell"
 msgid "Arguments passed to command"
 msgstr "Argumentoj por komando"
 
-#: Application.cpp:543
+#: Application.cpp:546
 #, kde-format
 msgctxt "@item"
 msgid "Toggle Background Window"
@@ -692,22 +692,22 @@ msgid ""
 "Container support is not available when Konsole is running inside Flatpak."
 msgstr ""
 
-#: containers/DistroboxDetector.cpp:67
+#: containers/DistroboxDetector.cpp:72
 #, kde-format
 msgid "Distrobox"
 msgstr ""
 
-#: containers/DistroboxDetector.cpp:167
+#: containers/DistroboxDetector.cpp:172
 #, kde-format
 msgid "Distrobox: %1"
 msgstr ""
 
-#: containers/ToolboxDetector.cpp:24
+#: containers/ToolboxDetector.cpp:29
 #, kde-format
 msgid "Toolbox"
 msgstr ""
 
-#: containers/ToolboxDetector.cpp:45
+#: containers/ToolboxDetector.cpp:50
 #, kde-format
 msgid "Toolbox: %1"
 msgstr ""
@@ -1224,66 +1224,66 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Kaj dankon al multaj aliaj.\n"
 
-#: MainWindow.cpp:386
+#: MainWindow.cpp:391
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "&Nova Langeto"
 
-#: MainWindow.cpp:396
+#: MainWindow.cpp:401
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "&Kloni Langeton"
 
-#: MainWindow.cpp:403
+#: MainWindow.cpp:408
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "Nova &Fenestro"
 
-#: MainWindow.cpp:410
+#: MainWindow.cpp:415
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Fermi Fenestron"
 
-#: MainWindow.cpp:415
+#: MainWindow.cpp:420
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "&Legosignoj"
 
-#: MainWindow.cpp:442
+#: MainWindow.cpp:447
 #, kde-format
 msgid "&Window Color Scheme"
 msgstr "&Fenestra Kolorskemo"
 
-#: MainWindow.cpp:454
+#: MainWindow.cpp:459
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Administri Profilojn..."
 
-#: MainWindow.cpp:460
+#: MainWindow.cpp:465
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Aktivigi Menuon"
 
-#: MainWindow.cpp:466
+#: MainWindow.cpp:471
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Konservi Tab-Aranĝon..."
 
-#: MainWindow.cpp:475
+#: MainWindow.cpp:480
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Ŝargi langeton-aranĝon..."
 
-#: MainWindow.cpp:823 MainWindow.cpp:840
+#: MainWindow.cpp:827 MainWindow.cpp:844
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1293,62 +1293,62 @@ msgstr[0] "Estas procezo rulanta en ĉi fenestro. Ĉu vi tamen volas rezigni?"
 msgstr[1] ""
 "Estas %1 procezoj rulantaj en tiu ĉi fenestro. Ĉu vi tamen volas rezigni?"
 
-#: MainWindow.cpp:829 MainWindow.cpp:846 MainWindow.cpp:860
+#: MainWindow.cpp:833 MainWindow.cpp:850 MainWindow.cpp:864
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Konfirmi Fermon"
 
-#: MainWindow.cpp:830 MainWindow.cpp:847 MainWindow.cpp:861
+#: MainWindow.cpp:834 MainWindow.cpp:851 MainWindow.cpp:865
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Fermi &Fenestron"
 
-#: MainWindow.cpp:848 MainWindow.cpp:862
+#: MainWindow.cpp:852 MainWindow.cpp:866
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Fermi Nunan Lange&ton"
 
-#: MainWindow.cpp:857
+#: MainWindow.cpp:861
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr ""
 "Estas %1 malfermitaj terminaloj en ĉi tiu fenestro. Ĉu vi ankoraŭ volas ĉesi?"
 
-#: MainWindow.cpp:964 Part.cpp:317
+#: MainWindow.cpp:998 Part.cpp:317
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profiloj"
 
-#: MainWindow.cpp:982
+#: MainWindow.cpp:1016
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Ĝenerala"
 
-#: MainWindow.cpp:994
+#: MainWindow.cpp:1028
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr "Memoro"
 
-#: MainWindow.cpp:1000
+#: MainWindow.cpp:1034
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Tab Bar / Splitters"
 
-#: MainWindow.cpp:1005
+#: MainWindow.cpp:1039
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Provizoraj Dosieroj"
 
-#: MainWindow.cpp:1010
+#: MainWindow.cpp:1044
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -1924,13 +1924,13 @@ msgstr "Presil-amika reĝimo (nigra teksto, sen &fono)"
 msgid "&Scale output"
 msgstr "&Skali eligon"
 
-#: profile/Profile.cpp:271
+#: profile/Profile.cpp:272
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr "Enkonstruita"
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:551
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:573
 #, kde-format
 msgid "Default profile"
 msgstr "Defaŭlta profilo"
@@ -3548,127 +3548,127 @@ msgstr "Ŝanĝi &Dosierujon Al"
 msgid "&Paste Location"
 msgstr "&Alglui Lokon"
 
-#: ViewManager.cpp:122
+#: ViewManager.cpp:124
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View"
 msgstr "Dividita rigardo"
 
-#: ViewManager.cpp:129
+#: ViewManager.cpp:131
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right"
 msgstr "Dividi rigardon vertikale"
 
-#: ViewManager.cpp:137
+#: ViewManager.cpp:139
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom"
 msgstr "Dividi rigardon horizontale"
 
-#: ViewManager.cpp:145
+#: ViewManager.cpp:147
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically"
 msgstr "Dividi Vidon Aŭtomate"
 
-#: ViewManager.cpp:155
+#: ViewManager.cpp:157
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
 msgstr "Dividi Vidon Maldekstren/Dekstren de la sekva langeto"
 
-#: ViewManager.cpp:163
+#: ViewManager.cpp:165
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
 msgstr "Dividi Vidon Supre/Malsupre de la sekva langeto"
 
-#: ViewManager.cpp:171
+#: ViewManager.cpp:173
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
 msgstr "Dividi Vidon Aŭtomate de la sekva langeto"
 
-#: ViewManager.cpp:181
+#: ViewManager.cpp:183
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x2 terminals"
 msgstr "Ŝargi novan langeton kun aranĝo 2x2 terminaloj"
 
-#: ViewManager.cpp:190
+#: ViewManager.cpp:192
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x1 terminals"
 msgstr "Ŝargi novan langeton kun aranĝo 2x1-terminaloj"
 
-#: ViewManager.cpp:199
+#: ViewManager.cpp:201
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 1x2 terminals"
 msgstr "Ŝargi novan langeton kun aranĝo 1x2-terminaloj"
 
-#: ViewManager.cpp:207
+#: ViewManager.cpp:209
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Expand View"
 msgstr "Etendi rigardon"
 
-#: ViewManager.cpp:215
+#: ViewManager.cpp:217
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Shrink View"
 msgstr "Maletendi rigardon"
 
-#: ViewManager.cpp:225
+#: ViewManager.cpp:227
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &View"
 msgstr "Forigi Aktualan &Vidon"
 
-#: ViewManager.cpp:237
+#: ViewManager.cpp:239
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &Tab"
 msgstr "Forigi Aktualan Lage&ton"
 
-#: ViewManager.cpp:242
+#: ViewManager.cpp:244
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Next Tab"
 msgstr "Sekva Tab"
 
-#: ViewManager.cpp:250
+#: ViewManager.cpp:252
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Previous Tab"
 msgstr "Antaŭa Tab"
 
-#: ViewManager.cpp:258
+#: ViewManager.cpp:260
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Above Terminal"
 msgstr "Fokuso Super Terminalo"
 
-#: ViewManager.cpp:265
+#: ViewManager.cpp:267
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Below Terminal"
 msgstr "Fokuso Sub Terminalo"
 
-#: ViewManager.cpp:272
+#: ViewManager.cpp:274
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Left Terminal"
 msgstr "Fokuso Maldekstra Terminalo"
 
-#: ViewManager.cpp:278
+#: ViewManager.cpp:280
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Right Terminal"
 msgstr "Fokuso Dekstra Terminalo"
 
-#: ViewManager.cpp:284
+#: ViewManager.cpp:286
 #, fuzzy, kde-format
 #| msgctxt "@action Shortcut entry"
 #| msgid "Focus Left Terminal"
@@ -3676,7 +3676,7 @@ msgctxt "@action Shortcut entry"
 msgid "Focus Next Terminal"
 msgstr "Fokuso Maldekstra Terminalo"
 
-#: ViewManager.cpp:290
+#: ViewManager.cpp:292
 #, fuzzy, kde-format
 #| msgctxt "@action Shortcut entry"
 #| msgid "Focus Below Terminal"
@@ -3684,119 +3684,119 @@ msgctxt "@action Shortcut entry"
 msgid "Focus Previous Terminal"
 msgstr "Fokuso Sub Terminalo"
 
-#: ViewManager.cpp:296
+#: ViewManager.cpp:298
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Last Tab"
 msgstr "Ŝanĝi al Lasta Langeto"
 
-#: ViewManager.cpp:301
+#: ViewManager.cpp:303
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs"
 msgstr "Laste Uzitaj Langetoj"
 
-#: ViewManager.cpp:306
+#: ViewManager.cpp:308
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle Between Two Tabs"
 msgstr "Ŝanĝi inter du langetoj"
 
-#: ViewManager.cpp:311
+#: ViewManager.cpp:313
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs (Reverse)"
 msgstr "Laste Uzitaj Langetoj (Reverso)"
 
-#: ViewManager.cpp:316
+#: ViewManager.cpp:318
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle maximize current view"
 msgstr "Ŝaltigi maksimumigi la nunan vidon"
 
-#: ViewManager.cpp:317
+#: ViewManager.cpp:319
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle maximize current view"
 msgstr "Ŝaltigi maksimumigi la nunan vidon"
 
-#: ViewManager.cpp:325
+#: ViewManager.cpp:327
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle zoom-maximize current view"
 msgstr "Baskuligi zom-maksimumigi aktualan vidon"
 
-#: ViewManager.cpp:326
+#: ViewManager.cpp:328
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle zoom-maximize current view"
 msgstr "Baskuligi zom-maksimumigi nunan vidon"
 
-#: ViewManager.cpp:334
+#: ViewManager.cpp:336
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the right"
 msgstr "Movi langeton dekstren"
 
-#: ViewManager.cpp:341
+#: ViewManager.cpp:343
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the left"
 msgstr "Movi langeton maldekstren"
 
-#: ViewManager.cpp:348
+#: ViewManager.cpp:350
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
 msgstr "Agordi semantikan integriĝon (bash)"
 
-#: ViewManager.cpp:354
+#: ViewManager.cpp:356
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
 msgstr "Baskuligi semantikajn sugestojn"
 
-#: ViewManager.cpp:360
+#: ViewManager.cpp:362
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
 msgstr "Baskuligi lininumerojn montri"
 
-#: ViewManager.cpp:367
+#: ViewManager.cpp:369
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
 msgstr "Egala grandeco al ĉiuj vidoj"
 
-#: ViewManager.cpp:377
+#: ViewManager.cpp:379
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Tab %1"
 msgstr "Ŝalti al langeto %1"
 
-#: ViewManager.cpp:600
+#: ViewManager.cpp:602
 #, kde-format
 msgid "Semantic hints "
 msgstr "Semantikaj sugestoj"
 
-#: ViewManager.cpp:616
+#: ViewManager.cpp:618
 #, kde-format
 msgid "Line numbers "
 msgstr "Linia nombroj"
 
-#: ViewManager.cpp:1223
+#: ViewManager.cpp:1239
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Konservi langetan aranĝon"
 
-#: ViewManager.cpp:1225 ViewManager.cpp:1346
+#: ViewManager.cpp:1241 ViewManager.cpp:1362
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Konsole Vida Aranĝo (*.json)"
 
-#: ViewManager.cpp:1241
+#: ViewManager.cpp:1257
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3806,7 +3806,7 @@ msgstr ""
 "Problemo okazis dum konservado de la Aranĝo.\n"
 "%1"
 
-#: ViewManager.cpp:1333
+#: ViewManager.cpp:1349
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3816,7 +3816,7 @@ msgstr ""
 "Problemo okazis dum ŝargo de la Aranĝo.\n"
 "%1"
 
-#: ViewManager.cpp:1344
+#: ViewManager.cpp:1360
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
@@ -3989,7 +3989,7 @@ msgstr "Modifi la elektitan koloraron"
 #. i18n: ectx: property (text), widget (QPushButton, textEditorCustomBtn)
 #. i18n: ectx: property (text), widget (QPushButton, editColorSchemeButton)
 #: widgets/EditProfileAppearancePage.ui:82
-#: widgets/EditProfileGeneralPage.ui:250 widgets/EditProfileKeyboardPage.ui:73
+#: widgets/EditProfileGeneralPage.ui:276 widgets/EditProfileKeyboardPage.ui:73
 #: widgets/EditProfileMousePage.ui:320
 #, kde-format
 msgid "Edit..."
@@ -4561,7 +4561,14 @@ msgstr "Krei Novan Profilon"
 msgid "Edit Profile \"%1\""
 msgstr "Redakti profilon \"%1\""
 
-#: widgets/EditProfileDialog.cpp:528
+#: widgets/EditProfileDialog.cpp:529
+#, fuzzy, kde-format
+#| msgctxt "Do not show a close button"
+#| msgid "None"
+msgid "None"
+msgstr "Neniu"
+
+#: widgets/EditProfileDialog.cpp:550
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4571,7 +4578,7 @@ msgid_plural " columns"
 msgstr[0] " kolumno"
 msgstr[1] " kolumnoj"
 
-#: widgets/EditProfileDialog.cpp:530
+#: widgets/EditProfileDialog.cpp:552
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4581,42 +4588,42 @@ msgid_plural " rows"
 msgstr[0] " vico"
 msgstr[1] " vicoj"
 
-#: widgets/EditProfileDialog.cpp:540
+#: widgets/EditProfileDialog.cpp:562
 #, kde-format
 msgid "System Bell"
 msgstr "Sistempepo"
 
-#: widgets/EditProfileDialog.cpp:540
+#: widgets/EditProfileDialog.cpp:562
 #, kde-format
 msgid "System Notifications"
 msgstr "Sistema Sciigoj"
 
-#: widgets/EditProfileDialog.cpp:540
+#: widgets/EditProfileDialog.cpp:562
 #, kde-format
 msgid "Visual Bell"
 msgstr "Vida Sonorilo"
 
-#: widgets/EditProfileDialog.cpp:540
+#: widgets/EditProfileDialog.cpp:562
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "Ignori Sonorilajn Events"
 
-#: widgets/EditProfileDialog.cpp:549
+#: widgets/EditProfileDialog.cpp:571
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "Defaŭlta profilo por novaj finaj seancoj en %1"
 
-#: widgets/EditProfileDialog.cpp:655
+#: widgets/EditProfileDialog.cpp:678
 #, kde-format
 msgid "Edit Environment"
 msgstr "Redakti ĉirkaŭaĵon"
 
-#: widgets/EditProfileDialog.cpp:656
+#: widgets/EditProfileDialog.cpp:679
 #, kde-format
 msgid "One environment variable per line"
 msgstr "Unu mediovariablo per linio"
 
-#: widgets/EditProfileDialog.cpp:689
+#: widgets/EditProfileDialog.cpp:712
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4624,23 +4631,23 @@ msgid_plural " seconds"
 msgstr[0] " sekundo"
 msgstr[1] " sekundoj"
 
-#: widgets/EditProfileDialog.cpp:813
+#: widgets/EditProfileDialog.cpp:842
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "Elekti komencan dosierujon"
 
-#: widgets/EditProfileDialog.cpp:975
+#: widgets/EditProfileDialog.cpp:1004
 #, kde-format
 msgid "Get New..."
 msgstr "Ekpreni Novan..."
 
-#: widgets/EditProfileDialog.cpp:1378
+#: widgets/EditProfileDialog.cpp:1407
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "Skemo <resource>%1</resource> malsukcesis ŝargi."
 
-#: widgets/EditProfileDialog.cpp:1560
+#: widgets/EditProfileDialog.cpp:1589
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4648,7 +4655,7 @@ msgid ""
 msgstr ""
 "Ĉi tiu koloraro uzas travideblan fonon kiun ŝajne via labortablo ne subtenas."
 
-#: widgets/EditProfileDialog.cpp:1566
+#: widgets/EditProfileDialog.cpp:1595
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4657,12 +4664,12 @@ msgstr ""
 "Konsole estis komencita antaŭ ol labortablaj efikoj estis ebligitaj. Vi "
 "devas rekomenci Konsole por vidi travideblan fonon."
 
-#: widgets/EditProfileDialog.cpp:1967
+#: widgets/EditProfileDialog.cpp:1996
 #, kde-format
 msgid "Default for file type"
 msgstr "Defaŭlto por dosiertipo"
 
-#: widgets/EditProfileDialog.cpp:1993
+#: widgets/EditProfileDialog.cpp:2022
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4691,7 +4698,7 @@ msgstr ""
 "estos ignorita kaj la dosiero estos malfermita per la defaŭlta tekst-\n"
 "redaktilo."
 
-#: widgets/EditProfileDialog.cpp:2006
+#: widgets/EditProfileDialog.cpp:2035
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Tekstredaktilo Propra Komando"
@@ -4796,26 +4803,39 @@ msgstr ""
 msgid "Enter same container as current session"
 msgstr "Komenci en la sama dosierujo kiel nuna seanco"
 
-#. i18n: ectx: property (text), widget (QLabel, label_4)
+#. i18n: ectx: property (text), widget (QLabel, containerLabel)
 #: widgets/EditProfileGeneralPage.ui:229
+#, kde-format
+msgid "Always start in container:"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QComboBox, containerCombo)
+#: widgets/EditProfileGeneralPage.ui:242
+#, kde-format
+msgid ""
+"Always start new sessions using this profile inside the selected container"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+#: widgets/EditProfileGeneralPage.ui:255
 #, kde-format
 msgid "Environment:"
 msgstr "Mediovariabloj:"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, environmentEditButton)
-#: widgets/EditProfileGeneralPage.ui:247
+#: widgets/EditProfileGeneralPage.ui:273
 #, kde-format
 msgid "Edit the list of environment variables and associated values"
 msgstr "Modifi la liston de mediovariabloj kaj rilataj valoroj"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
-#: widgets/EditProfileGeneralPage.ui:294
+#: widgets/EditProfileGeneralPage.ui:320
 #, kde-format
 msgid "Initial terminal si&ze:"
 msgstr "Komenca terminal-grande&co:"
 
 #. i18n: ectx: property (text), widget (QLabel, useCurrentWindowSizeNote)
-#: widgets/EditProfileGeneralPage.ui:369
+#: widgets/EditProfileGeneralPage.ui:395
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -4828,31 +4848,31 @@ msgstr ""
 "ke ĉi tiuj enskriboj funkciu .</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, terminalBellLabel)
-#: widgets/EditProfileGeneralPage.ui:385
+#: widgets/EditProfileGeneralPage.ui:411
 #, kde-format
 msgid "&Terminal bell mode:"
 msgstr "&Terminalpepa reĝimo:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, semantic)
-#: widgets/EditProfileGeneralPage.ui:403
+#: widgets/EditProfileGeneralPage.ui:429
 #, kde-format
 msgid "Semantic Integration"
 msgstr "Semantika Integriĝo"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticUpDown)
-#: widgets/EditProfileGeneralPage.ui:409
+#: widgets/EditProfileGeneralPage.ui:435
 #, kde-format
 msgid "Up/Down Arrows emulation"
 msgstr "Supren/Malsupren Sagoj emulado"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticInputClick)
-#: widgets/EditProfileGeneralPage.ui:416
+#: widgets/EditProfileGeneralPage.ui:442
 #, kde-format
 msgid "Mouse click in input line moves cursor"
 msgstr "Musklako en eniglinio movas kursoron"
 
 #. i18n: ectx: property (text), widget (QLabel, label_8)
-#: widgets/EditProfileGeneralPage.ui:429
+#: widgets/EditProfileGeneralPage.ui:455
 #, kde-format
 msgid "Semantic hints:"
 msgstr "Semantikaj sugestoj:"
@@ -4862,9 +4882,9 @@ msgstr "Semantikaj sugestoj:"
 #. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundNever)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsNever)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundNever)
-#: widgets/EditProfileGeneralPage.ui:439 widgets/EditProfileGeneralPage.ui:485
-#: widgets/EditProfileGeneralPage.ui:531 widgets/EditProfileGeneralPage.ui:577
-#: widgets/EditProfileGeneralPage.ui:623
+#: widgets/EditProfileGeneralPage.ui:465 widgets/EditProfileGeneralPage.ui:511
+#: widgets/EditProfileGeneralPage.ui:557 widgets/EditProfileGeneralPage.ui:603
+#: widgets/EditProfileGeneralPage.ui:649
 #, kde-format
 msgctxt "Never"
 msgid "Never"
@@ -4875,9 +4895,9 @@ msgstr "Neniam"
 #. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundURL)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsURL)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundURL)
-#: widgets/EditProfileGeneralPage.ui:449 widgets/EditProfileGeneralPage.ui:495
-#: widgets/EditProfileGeneralPage.ui:541 widgets/EditProfileGeneralPage.ui:587
-#: widgets/EditProfileGeneralPage.ui:633
+#: widgets/EditProfileGeneralPage.ui:475 widgets/EditProfileGeneralPage.ui:521
+#: widgets/EditProfileGeneralPage.ui:567 widgets/EditProfileGeneralPage.ui:613
+#: widgets/EditProfileGeneralPage.ui:659
 #, kde-format
 msgctxt "When showing URL hints"
 msgid "When URL hints show"
@@ -4888,34 +4908,34 @@ msgstr "Kiam montriĝas URL-sugestoj"
 #. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundAlways)
-#: widgets/EditProfileGeneralPage.ui:459 widgets/EditProfileGeneralPage.ui:505
-#: widgets/EditProfileGeneralPage.ui:551 widgets/EditProfileGeneralPage.ui:597
-#: widgets/EditProfileGeneralPage.ui:643
+#: widgets/EditProfileGeneralPage.ui:485 widgets/EditProfileGeneralPage.ui:531
+#: widgets/EditProfileGeneralPage.ui:577 widgets/EditProfileGeneralPage.ui:623
+#: widgets/EditProfileGeneralPage.ui:669
 #, kde-format
 msgctxt "Always"
 msgid "Always"
 msgstr "Ĉiam"
 
 #. i18n: ectx: property (text), widget (QLabel, label_20)
-#: widgets/EditProfileGeneralPage.ui:475
+#: widgets/EditProfileGeneralPage.ui:501
 #, kde-format
 msgid "Red error bars:"
 msgstr "Ruĝaj eraraj stangoj:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_30)
-#: widgets/EditProfileGeneralPage.ui:521
+#: widgets/EditProfileGeneralPage.ui:547
 #, kde-format
 msgid "Red error background:"
 msgstr "Ruĝa erarfono:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_40)
-#: widgets/EditProfileGeneralPage.ui:567
+#: widgets/EditProfileGeneralPage.ui:593
 #, kde-format
 msgid "Alternating bars:"
 msgstr "Alternaj stangoj:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
-#: widgets/EditProfileGeneralPage.ui:613
+#: widgets/EditProfileGeneralPage.ui:639
 #, kde-format
 msgid "Alternating background:"
 msgstr "Alterna fono:"
@@ -5756,37 +5776,37 @@ msgctxt "@info:tooltip"
 msgid "Restore terminal"
 msgstr "Restarigi terminalon"
 
-#: widgets/ViewContainer.cpp:59
+#: widgets/ViewContainer.cpp:60
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open a new tab"
 msgstr "Malfermi novan langeton"
 
-#: widgets/ViewContainer.cpp:64
+#: widgets/ViewContainer.cpp:65
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Search Tabs"
 msgstr "Serĉi Langetojn"
 
-#: widgets/ViewContainer.cpp:69
+#: widgets/ViewContainer.cpp:70
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Close this tab"
 msgstr "Fermi ĉi tiun langeton"
 
-#: widgets/ViewContainer.cpp:105
+#: widgets/ViewContainer.cpp:106
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Detach Tab"
 msgstr "&Dekroĉi langeton"
 
-#: widgets/ViewContainer.cpp:111
+#: widgets/ViewContainer.cpp:112
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Configure or Rename Tab..."
 msgstr "&Agordi aŭ Alinomi langeton..."
 
-#: widgets/ViewContainer.cpp:116
+#: widgets/ViewContainer.cpp:117
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Tab"

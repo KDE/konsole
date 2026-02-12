@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-11 00:49+0000\n"
+"POT-Creation-Date: 2026-02-12 00:46+0000\n"
 "PO-Revision-Date: 2026-02-05 15:06+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -270,7 +270,7 @@ msgctxt "@info:shell"
 msgid "Arguments passed to command"
 msgstr "Argumenten om aan het commando door te geven"
 
-#: Application.cpp:543
+#: Application.cpp:546
 #, kde-format
 msgctxt "@item"
 msgid "Toggle Background Window"
@@ -702,22 +702,22 @@ msgstr ""
 "Ondersteuning voor container is niet Beschikbaar wanneer Konsole actief is "
 "in Flatpak."
 
-#: containers/DistroboxDetector.cpp:67
+#: containers/DistroboxDetector.cpp:72
 #, kde-format
 msgid "Distrobox"
 msgstr "Distrobox"
 
-#: containers/DistroboxDetector.cpp:167
+#: containers/DistroboxDetector.cpp:172
 #, kde-format
 msgid "Distrobox: %1"
 msgstr "Distrobox: %1"
 
-#: containers/ToolboxDetector.cpp:24
+#: containers/ToolboxDetector.cpp:29
 #, kde-format
 msgid "Toolbox"
 msgstr "Toolbox"
 
-#: containers/ToolboxDetector.cpp:45
+#: containers/ToolboxDetector.cpp:50
 #, kde-format
 msgid "Toolbox: %1"
 msgstr "Toolbox: %1"
@@ -1236,66 +1236,66 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Met dank aan vele anderen.\n"
 
-#: MainWindow.cpp:386
+#: MainWindow.cpp:391
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "&Nieuw tabblad"
 
-#: MainWindow.cpp:396
+#: MainWindow.cpp:401
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "Tabblad &klonen"
 
-#: MainWindow.cpp:403
+#: MainWindow.cpp:408
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "Nieu&w venster"
 
-#: MainWindow.cpp:410
+#: MainWindow.cpp:415
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Venster sluiten"
 
-#: MainWindow.cpp:415
+#: MainWindow.cpp:420
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "Bladwij&zers"
 
-#: MainWindow.cpp:442
+#: MainWindow.cpp:447
 #, kde-format
 msgid "&Window Color Scheme"
 msgstr "Kleurenschema van &venster"
 
-#: MainWindow.cpp:454
+#: MainWindow.cpp:459
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Profielen beheren..."
 
-#: MainWindow.cpp:460
+#: MainWindow.cpp:465
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Menu activeren"
 
-#: MainWindow.cpp:466
+#: MainWindow.cpp:471
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Tabbladindeling opslaan..."
 
-#: MainWindow.cpp:475
+#: MainWindow.cpp:480
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Tabbladindeling laden..."
 
-#: MainWindow.cpp:823 MainWindow.cpp:840
+#: MainWindow.cpp:827 MainWindow.cpp:844
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1304,61 +1304,61 @@ msgid_plural ""
 msgstr[0] "Er is een actief proces in dit venster. Wilt u toch afsluiten?"
 msgstr[1] "Er zijn %1 actieve processen in dit venster. Wilt u toch afsluiten?"
 
-#: MainWindow.cpp:829 MainWindow.cpp:846 MainWindow.cpp:860
+#: MainWindow.cpp:833 MainWindow.cpp:850 MainWindow.cpp:864
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Sluiten bevestigen"
 
-#: MainWindow.cpp:830 MainWindow.cpp:847 MainWindow.cpp:861
+#: MainWindow.cpp:834 MainWindow.cpp:851 MainWindow.cpp:865
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "&Venster sluiten"
 
-#: MainWindow.cpp:848 MainWindow.cpp:862
+#: MainWindow.cpp:852 MainWindow.cpp:866
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Huidig &tabblad sluiten"
 
-#: MainWindow.cpp:857
+#: MainWindow.cpp:861
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "Er zijn %1 open terminals in dit venster. Wilt u toch afsluiten?"
 
-#: MainWindow.cpp:964 Part.cpp:317
+#: MainWindow.cpp:998 Part.cpp:317
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profielen"
 
-#: MainWindow.cpp:982
+#: MainWindow.cpp:1016
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Algemeen"
 
-#: MainWindow.cpp:994
+#: MainWindow.cpp:1028
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr "Geheugen"
 
-#: MainWindow.cpp:1000
+#: MainWindow.cpp:1034
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Tabbladbalk / Splitters"
 
-#: MainWindow.cpp:1005
+#: MainWindow.cpp:1039
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Tijdelijke bestanden"
 
-#: MainWindow.cpp:1010
+#: MainWindow.cpp:1044
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -1940,13 +1940,13 @@ msgstr "Printer&vriendelijke modus (zwarte tekst, geen achtergrond)"
 msgid "&Scale output"
 msgstr "Uitvoer &schalen"
 
-#: profile/Profile.cpp:271
+#: profile/Profile.cpp:272
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr "Ingebouwd"
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:551
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:573
 #, kde-format
 msgid "Default profile"
 msgstr "Standaard profiel"
@@ -3574,251 +3574,251 @@ msgstr "&Map wijzigen naar"
 msgid "&Paste Location"
 msgstr "Locatie &plakken"
 
-#: ViewManager.cpp:122
+#: ViewManager.cpp:124
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View"
 msgstr "Beeld splitsen"
 
-#: ViewManager.cpp:129
+#: ViewManager.cpp:131
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right"
 msgstr "Beeld verticaal opsplitsen"
 
-#: ViewManager.cpp:137
+#: ViewManager.cpp:139
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom"
 msgstr "Beeld horizontaal opsplitsen"
 
-#: ViewManager.cpp:145
+#: ViewManager.cpp:147
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically"
 msgstr "Beeld automatisch splitsen"
 
-#: ViewManager.cpp:155
+#: ViewManager.cpp:157
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
 msgstr "Beeld verticaal opsplitsen vanaf volgend tabblad"
 
-#: ViewManager.cpp:163
+#: ViewManager.cpp:165
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
 msgstr "Beeld horizontaal opsplitsen vanaf volgend tabblad"
 
-#: ViewManager.cpp:171
+#: ViewManager.cpp:173
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
 msgstr "Beeld automatisch splitsen vanaf volgend tabblad"
 
-#: ViewManager.cpp:181
+#: ViewManager.cpp:183
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x2 terminals"
 msgstr "Een nieuw tabblad met indeling 2x2 terminals laden"
 
-#: ViewManager.cpp:190
+#: ViewManager.cpp:192
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x1 terminals"
 msgstr "Een nieuw tabblad met indeling 2x1 terminals laden"
 
-#: ViewManager.cpp:199
+#: ViewManager.cpp:201
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 1x2 terminals"
 msgstr "Een nieuw tabblad met indeling 1x2 terminals laden"
 
-#: ViewManager.cpp:207
+#: ViewManager.cpp:209
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Expand View"
 msgstr "Beeld uitbreiden"
 
-#: ViewManager.cpp:215
+#: ViewManager.cpp:217
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Shrink View"
 msgstr "Beeld inkrimpen"
 
-#: ViewManager.cpp:225
+#: ViewManager.cpp:227
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &View"
 msgstr "Huidig weerga&ve losmaken"
 
-#: ViewManager.cpp:237
+#: ViewManager.cpp:239
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &Tab"
 msgstr "Huidig &tabblad losmaken"
 
-#: ViewManager.cpp:242
+#: ViewManager.cpp:244
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Next Tab"
 msgstr "Volgend tabblad"
 
-#: ViewManager.cpp:250
+#: ViewManager.cpp:252
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Previous Tab"
 msgstr "Vorig tabblad"
 
-#: ViewManager.cpp:258
+#: ViewManager.cpp:260
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Above Terminal"
 msgstr "Focus boven terminal"
 
-#: ViewManager.cpp:265
+#: ViewManager.cpp:267
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Below Terminal"
 msgstr "Focus onder terminal"
 
-#: ViewManager.cpp:272
+#: ViewManager.cpp:274
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Left Terminal"
 msgstr "Focus linker terminal"
 
-#: ViewManager.cpp:278
+#: ViewManager.cpp:280
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Right Terminal"
 msgstr "Focus rechter terminal"
 
-#: ViewManager.cpp:284
+#: ViewManager.cpp:286
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Next Terminal"
 msgstr "Focus op volgende terminal"
 
-#: ViewManager.cpp:290
+#: ViewManager.cpp:292
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Previous Terminal"
 msgstr "Focus op vorige terminal"
 
-#: ViewManager.cpp:296
+#: ViewManager.cpp:298
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Last Tab"
 msgstr "Ga naar laatste tabblad"
 
-#: ViewManager.cpp:301
+#: ViewManager.cpp:303
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs"
 msgstr "Laatst gebruikte tabbladen"
 
-#: ViewManager.cpp:306
+#: ViewManager.cpp:308
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle Between Two Tabs"
 msgstr "Omschakelen tussen twee tabbladen"
 
-#: ViewManager.cpp:311
+#: ViewManager.cpp:313
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs (Reverse)"
 msgstr "Laatst gebruikte tabbladen (omgekeerd)"
 
-#: ViewManager.cpp:316
+#: ViewManager.cpp:318
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle maximize current view"
 msgstr "Huidige weergave maximaliseren omschakelen"
 
-#: ViewManager.cpp:317
+#: ViewManager.cpp:319
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle maximize current view"
 msgstr "Huidige weergave maximaliseren omschakelen"
 
-#: ViewManager.cpp:325
+#: ViewManager.cpp:327
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle zoom-maximize current view"
 msgstr "Huidige weergave zoom-maximaliseren omschakelen"
 
-#: ViewManager.cpp:326
+#: ViewManager.cpp:328
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle zoom-maximize current view"
 msgstr "Huidige weergave zoom-maximaliseren omschakelen"
 
-#: ViewManager.cpp:334
+#: ViewManager.cpp:336
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the right"
 msgstr "Tabblad naar rechts verplaatsen"
 
-#: ViewManager.cpp:341
+#: ViewManager.cpp:343
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the left"
 msgstr "Tabblad naar links verplaatsen"
 
-#: ViewManager.cpp:348
+#: ViewManager.cpp:350
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
 msgstr "Semantische integratie opzetten (bash)"
 
-#: ViewManager.cpp:354
+#: ViewManager.cpp:356
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
 msgstr "Tonen van semantische hints omschakelen"
 
-#: ViewManager.cpp:360
+#: ViewManager.cpp:362
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
 msgstr "Tonen van regelnummers omschakelen"
 
-#: ViewManager.cpp:367
+#: ViewManager.cpp:369
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
 msgstr "Alle weergaven gelijke grootte"
 
-#: ViewManager.cpp:377
+#: ViewManager.cpp:379
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Tab %1"
 msgstr "Ga naar tabblad %1"
 
-#: ViewManager.cpp:600
+#: ViewManager.cpp:602
 #, kde-format
 msgid "Semantic hints "
 msgstr "Semantische hints "
 
-#: ViewManager.cpp:616
+#: ViewManager.cpp:618
 #, kde-format
 msgid "Line numbers "
 msgstr "Regelnummers "
 
-#: ViewManager.cpp:1223
+#: ViewManager.cpp:1239
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Tabbladindeling opslaan"
 
-#: ViewManager.cpp:1225 ViewManager.cpp:1346
+#: ViewManager.cpp:1241 ViewManager.cpp:1362
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Konsole-weergave-indeling (*.json)"
 
-#: ViewManager.cpp:1241
+#: ViewManager.cpp:1257
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3828,7 +3828,7 @@ msgstr ""
 "Er deed zich een probleem voor tijdens het opslaan van de indeling.\n"
 "%1"
 
-#: ViewManager.cpp:1333
+#: ViewManager.cpp:1349
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3838,7 +3838,7 @@ msgstr ""
 "Er deed zich een probleem voor tijdens het laden van de indeling.\n"
 "%1"
 
-#: ViewManager.cpp:1344
+#: ViewManager.cpp:1360
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
@@ -4015,7 +4015,7 @@ msgstr "Het geselecteerde kleurenschema bewerken"
 #. i18n: ectx: property (text), widget (QPushButton, textEditorCustomBtn)
 #. i18n: ectx: property (text), widget (QPushButton, editColorSchemeButton)
 #: widgets/EditProfileAppearancePage.ui:82
-#: widgets/EditProfileGeneralPage.ui:250 widgets/EditProfileKeyboardPage.ui:73
+#: widgets/EditProfileGeneralPage.ui:276 widgets/EditProfileKeyboardPage.ui:73
 #: widgets/EditProfileMousePage.ui:320
 #, kde-format
 msgid "Edit..."
@@ -4585,7 +4585,14 @@ msgstr "Nieuw profiel aanmaken"
 msgid "Edit Profile \"%1\""
 msgstr "Profiel \"%1\" bewerken"
 
-#: widgets/EditProfileDialog.cpp:528
+#: widgets/EditProfileDialog.cpp:529
+#, fuzzy, kde-format
+#| msgctxt "Do not show a close button"
+#| msgid "None"
+msgid "None"
+msgstr "Geen"
+
+#: widgets/EditProfileDialog.cpp:550
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4595,7 +4602,7 @@ msgid_plural " columns"
 msgstr[0] "Kolom"
 msgstr[1] " kolommen"
 
-#: widgets/EditProfileDialog.cpp:530
+#: widgets/EditProfileDialog.cpp:552
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4605,42 +4612,42 @@ msgid_plural " rows"
 msgstr[0] " rij"
 msgstr[1] " rijen"
 
-#: widgets/EditProfileDialog.cpp:540
+#: widgets/EditProfileDialog.cpp:562
 #, kde-format
 msgid "System Bell"
 msgstr "Systeembel"
 
-#: widgets/EditProfileDialog.cpp:540
+#: widgets/EditProfileDialog.cpp:562
 #, kde-format
 msgid "System Notifications"
 msgstr "Systeemmeldingen"
 
-#: widgets/EditProfileDialog.cpp:540
+#: widgets/EditProfileDialog.cpp:562
 #, kde-format
 msgid "Visual Bell"
 msgstr "Zichtbare bel"
 
-#: widgets/EditProfileDialog.cpp:540
+#: widgets/EditProfileDialog.cpp:562
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "Bel-gebeurtenissen negeren"
 
-#: widgets/EditProfileDialog.cpp:549
+#: widgets/EditProfileDialog.cpp:571
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "Standaard profiel voor nieuwe terminalsessies in %1"
 
-#: widgets/EditProfileDialog.cpp:655
+#: widgets/EditProfileDialog.cpp:678
 #, kde-format
 msgid "Edit Environment"
 msgstr "Omgeving bewerken"
 
-#: widgets/EditProfileDialog.cpp:656
+#: widgets/EditProfileDialog.cpp:679
 #, kde-format
 msgid "One environment variable per line"
 msgstr "Eén omgevingsvariabele per regel"
 
-#: widgets/EditProfileDialog.cpp:689
+#: widgets/EditProfileDialog.cpp:712
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4648,23 +4655,23 @@ msgid_plural " seconds"
 msgstr[0] " seconde"
 msgstr[1] " seconden"
 
-#: widgets/EditProfileDialog.cpp:813
+#: widgets/EditProfileDialog.cpp:842
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "Beginmap selecteren"
 
-#: widgets/EditProfileDialog.cpp:975
+#: widgets/EditProfileDialog.cpp:1004
 #, kde-format
 msgid "Get New..."
 msgstr "Nieuwe ophalen..."
 
-#: widgets/EditProfileDialog.cpp:1378
+#: widgets/EditProfileDialog.cpp:1407
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "Laden van schema <resource>%1</resource> is mislukt."
 
-#: widgets/EditProfileDialog.cpp:1560
+#: widgets/EditProfileDialog.cpp:1589
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4673,7 +4680,7 @@ msgstr ""
 "Dit kleurenschema heeft een transparante achtergrond, maar dit wordt niet "
 "door uw bureaublad ondersteund"
 
-#: widgets/EditProfileDialog.cpp:1566
+#: widgets/EditProfileDialog.cpp:1595
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4682,12 +4689,12 @@ msgstr ""
 "Konsole is opgestart alvorens bureaubladeffecten waren ingeschakeld. U dient "
 "konsole opnieuw te starten om een transparante achtergrond te zien."
 
-#: widgets/EditProfileDialog.cpp:1967
+#: widgets/EditProfileDialog.cpp:1996
 #, kde-format
 msgid "Default for file type"
 msgstr "Standaard voor bestandstype"
 
-#: widgets/EditProfileDialog.cpp:1993
+#: widgets/EditProfileDialog.cpp:2022
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4716,7 +4723,7 @@ msgstr ""
 "genegeerd worden en zal het bestand geopend worden door de standaard\n"
 "tekstbewerker."
 
-#: widgets/EditProfileDialog.cpp:2006
+#: widgets/EditProfileDialog.cpp:2035
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Aangepaste opdracht aan tekstbewerker"
@@ -4822,26 +4829,39 @@ msgstr ""
 msgid "Enter same container as current session"
 msgstr "Ga dezelfde container in als de huidige sessie"
 
-#. i18n: ectx: property (text), widget (QLabel, label_4)
+#. i18n: ectx: property (text), widget (QLabel, containerLabel)
 #: widgets/EditProfileGeneralPage.ui:229
+#, kde-format
+msgid "Always start in container:"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QComboBox, containerCombo)
+#: widgets/EditProfileGeneralPage.ui:242
+#, kde-format
+msgid ""
+"Always start new sessions using this profile inside the selected container"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+#: widgets/EditProfileGeneralPage.ui:255
 #, kde-format
 msgid "Environment:"
 msgstr "Omgeving:"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, environmentEditButton)
-#: widgets/EditProfileGeneralPage.ui:247
+#: widgets/EditProfileGeneralPage.ui:273
 #, kde-format
 msgid "Edit the list of environment variables and associated values"
 msgstr "Bewerk de lijst met omgevingsvariabelen en bijhorende waarden"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
-#: widgets/EditProfileGeneralPage.ui:294
+#: widgets/EditProfileGeneralPage.ui:320
 #, kde-format
 msgid "Initial terminal si&ze:"
 msgstr "Initiële terminal&grootte"
 
 #. i18n: ectx: property (text), widget (QLabel, useCurrentWindowSizeNote)
-#: widgets/EditProfileGeneralPage.ui:369
+#: widgets/EditProfileGeneralPage.ui:395
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -4854,31 +4874,31 @@ msgstr ""
 "moet uitgeschakeld worden om deze items te laten werken.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, terminalBellLabel)
-#: widgets/EditProfileGeneralPage.ui:385
+#: widgets/EditProfileGeneralPage.ui:411
 #, kde-format
 msgid "&Terminal bell mode:"
 msgstr "Modus bel van &terminal:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, semantic)
-#: widgets/EditProfileGeneralPage.ui:403
+#: widgets/EditProfileGeneralPage.ui:429
 #, kde-format
 msgid "Semantic Integration"
 msgstr "Semantische integratie"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticUpDown)
-#: widgets/EditProfileGeneralPage.ui:409
+#: widgets/EditProfileGeneralPage.ui:435
 #, kde-format
 msgid "Up/Down Arrows emulation"
 msgstr "Emulatie van pijltjes omhoog/omlaag"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticInputClick)
-#: widgets/EditProfileGeneralPage.ui:416
+#: widgets/EditProfileGeneralPage.ui:442
 #, kde-format
 msgid "Mouse click in input line moves cursor"
 msgstr "Muisklik in invoerlijn verplaatst cursor"
 
 #. i18n: ectx: property (text), widget (QLabel, label_8)
-#: widgets/EditProfileGeneralPage.ui:429
+#: widgets/EditProfileGeneralPage.ui:455
 #, kde-format
 msgid "Semantic hints:"
 msgstr "Semantische hints:"
@@ -4888,9 +4908,9 @@ msgstr "Semantische hints:"
 #. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundNever)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsNever)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundNever)
-#: widgets/EditProfileGeneralPage.ui:439 widgets/EditProfileGeneralPage.ui:485
-#: widgets/EditProfileGeneralPage.ui:531 widgets/EditProfileGeneralPage.ui:577
-#: widgets/EditProfileGeneralPage.ui:623
+#: widgets/EditProfileGeneralPage.ui:465 widgets/EditProfileGeneralPage.ui:511
+#: widgets/EditProfileGeneralPage.ui:557 widgets/EditProfileGeneralPage.ui:603
+#: widgets/EditProfileGeneralPage.ui:649
 #, kde-format
 msgctxt "Never"
 msgid "Never"
@@ -4901,9 +4921,9 @@ msgstr "Nooit"
 #. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundURL)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsURL)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundURL)
-#: widgets/EditProfileGeneralPage.ui:449 widgets/EditProfileGeneralPage.ui:495
-#: widgets/EditProfileGeneralPage.ui:541 widgets/EditProfileGeneralPage.ui:587
-#: widgets/EditProfileGeneralPage.ui:633
+#: widgets/EditProfileGeneralPage.ui:475 widgets/EditProfileGeneralPage.ui:521
+#: widgets/EditProfileGeneralPage.ui:567 widgets/EditProfileGeneralPage.ui:613
+#: widgets/EditProfileGeneralPage.ui:659
 #, kde-format
 msgctxt "When showing URL hints"
 msgid "When URL hints show"
@@ -4914,34 +4934,34 @@ msgstr "Wanneer hints voor URL's worden getoond"
 #. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundAlways)
-#: widgets/EditProfileGeneralPage.ui:459 widgets/EditProfileGeneralPage.ui:505
-#: widgets/EditProfileGeneralPage.ui:551 widgets/EditProfileGeneralPage.ui:597
-#: widgets/EditProfileGeneralPage.ui:643
+#: widgets/EditProfileGeneralPage.ui:485 widgets/EditProfileGeneralPage.ui:531
+#: widgets/EditProfileGeneralPage.ui:577 widgets/EditProfileGeneralPage.ui:623
+#: widgets/EditProfileGeneralPage.ui:669
 #, kde-format
 msgctxt "Always"
 msgid "Always"
 msgstr "Altijd"
 
 #. i18n: ectx: property (text), widget (QLabel, label_20)
-#: widgets/EditProfileGeneralPage.ui:475
+#: widgets/EditProfileGeneralPage.ui:501
 #, kde-format
 msgid "Red error bars:"
 msgstr "Rode foutbalken:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_30)
-#: widgets/EditProfileGeneralPage.ui:521
+#: widgets/EditProfileGeneralPage.ui:547
 #, kde-format
 msgid "Red error background:"
 msgstr "Rode achtergrond bij fout"
 
 #. i18n: ectx: property (text), widget (QLabel, label_40)
-#: widgets/EditProfileGeneralPage.ui:567
+#: widgets/EditProfileGeneralPage.ui:593
 #, kde-format
 msgid "Alternating bars:"
 msgstr "Afwisselende balken:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
-#: widgets/EditProfileGeneralPage.ui:613
+#: widgets/EditProfileGeneralPage.ui:639
 #, kde-format
 msgid "Alternating background:"
 msgstr "Afwisselende achtergronden:"
@@ -5799,37 +5819,37 @@ msgctxt "@info:tooltip"
 msgid "Restore terminal"
 msgstr "Terminal herstellen"
 
-#: widgets/ViewContainer.cpp:59
+#: widgets/ViewContainer.cpp:60
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open a new tab"
 msgstr "Een nieuw tabblad openen"
 
-#: widgets/ViewContainer.cpp:64
+#: widgets/ViewContainer.cpp:65
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Search Tabs"
 msgstr "Tabbladen zoeken"
 
-#: widgets/ViewContainer.cpp:69
+#: widgets/ViewContainer.cpp:70
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Close this tab"
 msgstr "Dit tabblad sluiten"
 
-#: widgets/ViewContainer.cpp:105
+#: widgets/ViewContainer.cpp:106
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Detach Tab"
 msgstr "Tabblad &losmaken"
 
-#: widgets/ViewContainer.cpp:111
+#: widgets/ViewContainer.cpp:112
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Configure or Rename Tab..."
 msgstr "Tabblad &configureren of hernoemen..."
 
-#: widgets/ViewContainer.cpp:116
+#: widgets/ViewContainer.cpp:117
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Tab"

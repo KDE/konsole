@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-11 00:49+0000\n"
+"POT-Creation-Date: 2026-02-12 00:46+0000\n"
 "PO-Revision-Date: 2026-02-05 06:07+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -257,7 +257,7 @@ msgctxt "@info:shell"
 msgid "Arguments passed to command"
 msgstr "Параметри, що передаються команді"
 
-#: Application.cpp:543
+#: Application.cpp:546
 #, kde-format
 msgctxt "@item"
 msgid "Toggle Background Window"
@@ -690,22 +690,22 @@ msgstr ""
 "Якщо Konsole запущено у Flatpak, не вдасться скористатися підтримкою "
 "контейнерів."
 
-#: containers/DistroboxDetector.cpp:67
+#: containers/DistroboxDetector.cpp:72
 #, kde-format
 msgid "Distrobox"
 msgstr "Distrobox"
 
-#: containers/DistroboxDetector.cpp:167
+#: containers/DistroboxDetector.cpp:172
 #, kde-format
 msgid "Distrobox: %1"
 msgstr "Distrobox: %1"
 
-#: containers/ToolboxDetector.cpp:24
+#: containers/ToolboxDetector.cpp:29
 #, kde-format
 msgid "Toolbox"
 msgstr "Toolbox"
 
-#: containers/ToolboxDetector.cpp:45
+#: containers/ToolboxDetector.cpp:50
 #, kde-format
 msgid "Toolbox: %1"
 msgstr "Toolbox: %1"
@@ -1223,66 +1223,66 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Подяка багатьом іншим.\n"
 
-#: MainWindow.cpp:386
+#: MainWindow.cpp:391
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "Н&ова вкладка"
 
-#: MainWindow.cpp:396
+#: MainWindow.cpp:401
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "&Клонувати вкладку"
 
-#: MainWindow.cpp:403
+#: MainWindow.cpp:408
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "Нове ві&кно"
 
-#: MainWindow.cpp:410
+#: MainWindow.cpp:415
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Закрити вікно"
 
-#: MainWindow.cpp:415
+#: MainWindow.cpp:420
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "&Закладки"
 
-#: MainWindow.cpp:442
+#: MainWindow.cpp:447
 #, kde-format
 msgid "&Window Color Scheme"
 msgstr "Схема кольорів в&ікна"
 
-#: MainWindow.cpp:454
+#: MainWindow.cpp:459
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Керування профілями…"
 
-#: MainWindow.cpp:460
+#: MainWindow.cpp:465
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Задіяти меню"
 
-#: MainWindow.cpp:466
+#: MainWindow.cpp:471
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Зберегти компонування вкладок…"
 
-#: MainWindow.cpp:475
+#: MainWindow.cpp:480
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Завантажити компонування вкладок…"
 
-#: MainWindow.cpp:823 MainWindow.cpp:840
+#: MainWindow.cpp:827 MainWindow.cpp:844
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1293,61 +1293,61 @@ msgstr[1] "У цьому вікні працюють %1 процеси. Ви с�
 msgstr[2] "У цьому вікні працюють %1 процесів. Ви справді хочете його закрити?"
 msgstr[3] "У цьому вікні працює процес. Ви справді хочете його закрити?"
 
-#: MainWindow.cpp:829 MainWindow.cpp:846 MainWindow.cpp:860
+#: MainWindow.cpp:833 MainWindow.cpp:850 MainWindow.cpp:864
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Підтвердження закриття"
 
-#: MainWindow.cpp:830 MainWindow.cpp:847 MainWindow.cpp:861
+#: MainWindow.cpp:834 MainWindow.cpp:851 MainWindow.cpp:865
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Закрити в&ікно"
 
-#: MainWindow.cpp:848 MainWindow.cpp:862
+#: MainWindow.cpp:852 MainWindow.cpp:866
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Закрити поточну в&кладку"
 
-#: MainWindow.cpp:857
+#: MainWindow.cpp:861
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "У цьому вікні відкрито %1 терміналів. Ви справді хочете його закрити?"
 
-#: MainWindow.cpp:964 Part.cpp:317
+#: MainWindow.cpp:998 Part.cpp:317
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Профілі"
 
-#: MainWindow.cpp:982
+#: MainWindow.cpp:1016
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Загальне"
 
-#: MainWindow.cpp:994
+#: MainWindow.cpp:1028
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr "Пам'ять"
 
-#: MainWindow.cpp:1000
+#: MainWindow.cpp:1034
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Вкладки/Поділ на панелі"
 
-#: MainWindow.cpp:1005
+#: MainWindow.cpp:1039
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Тимчасові файли"
 
-#: MainWindow.cpp:1010
+#: MainWindow.cpp:1044
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -1931,13 +1931,13 @@ msgstr "&Оптимізувати для друку (чорний текст б�
 msgid "&Scale output"
 msgstr "&Масштабувати результат"
 
-#: profile/Profile.cpp:271
+#: profile/Profile.cpp:272
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr "Вбудований"
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:551
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:573
 #, kde-format
 msgid "Default profile"
 msgstr "Типовий профіль"
@@ -3558,251 +3558,251 @@ msgstr "Змінити &каталог"
 msgid "&Paste Location"
 msgstr "&Вставити адресу"
 
-#: ViewManager.cpp:122
+#: ViewManager.cpp:124
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View"
 msgstr "Розділений перегляд"
 
-#: ViewManager.cpp:129
+#: ViewManager.cpp:131
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right"
 msgstr "Розділений перегляд: ліворуч/праворуч"
 
-#: ViewManager.cpp:137
+#: ViewManager.cpp:139
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom"
 msgstr "Розділений перегляд: вгорі/внизу"
 
-#: ViewManager.cpp:145
+#: ViewManager.cpp:147
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically"
 msgstr "Розділити перегляд автоматично"
 
-#: ViewManager.cpp:155
+#: ViewManager.cpp:157
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
 msgstr "Розділений перегляд: ліворуч/праворуч від наступної вкладки"
 
-#: ViewManager.cpp:163
+#: ViewManager.cpp:165
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
 msgstr "Розділений перегляд: вгорі/внизу від наступної вкладки"
 
-#: ViewManager.cpp:171
+#: ViewManager.cpp:173
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
 msgstr "Розділити перегляд автоматично від наступної вкладки"
 
-#: ViewManager.cpp:181
+#: ViewManager.cpp:183
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x2 terminals"
 msgstr "Завантажити нову вкладку із компонуванням 2x2 термінали"
 
-#: ViewManager.cpp:190
+#: ViewManager.cpp:192
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x1 terminals"
 msgstr "Завантажити нову вкладку із компонуванням 1x2 термінали"
 
-#: ViewManager.cpp:199
+#: ViewManager.cpp:201
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 1x2 terminals"
 msgstr "Завантажити нову вкладку із компонуванням 1x2 термінали"
 
-#: ViewManager.cpp:207
+#: ViewManager.cpp:209
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Expand View"
 msgstr "Розгорнути перегляд"
 
-#: ViewManager.cpp:215
+#: ViewManager.cpp:217
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Shrink View"
 msgstr "Згорнути перегляд"
 
-#: ViewManager.cpp:225
+#: ViewManager.cpp:227
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &View"
 msgstr "Відокремити &поточну панель"
 
-#: ViewManager.cpp:237
+#: ViewManager.cpp:239
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &Tab"
 msgstr "Від&окремити поточну вкладку"
 
-#: ViewManager.cpp:242
+#: ViewManager.cpp:244
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Next Tab"
 msgstr "Наступна вкладка"
 
-#: ViewManager.cpp:250
+#: ViewManager.cpp:252
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Previous Tab"
 msgstr "Попередня вкладка"
 
-#: ViewManager.cpp:258
+#: ViewManager.cpp:260
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Above Terminal"
 msgstr "Фокус на верхній термінал"
 
-#: ViewManager.cpp:265
+#: ViewManager.cpp:267
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Below Terminal"
 msgstr "Фокус на нижній термінал"
 
-#: ViewManager.cpp:272
+#: ViewManager.cpp:274
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Left Terminal"
 msgstr "Фокус на лівий термінал"
 
-#: ViewManager.cpp:278
+#: ViewManager.cpp:280
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Right Terminal"
 msgstr "Фокус на правий термінал"
 
-#: ViewManager.cpp:284
+#: ViewManager.cpp:286
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Next Terminal"
 msgstr "Фокус на наступний термінал"
 
-#: ViewManager.cpp:290
+#: ViewManager.cpp:292
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Previous Terminal"
 msgstr "Фокус на попередній термінал"
 
-#: ViewManager.cpp:296
+#: ViewManager.cpp:298
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Last Tab"
 msgstr "Перемкнутися на останню вкладку"
 
-#: ViewManager.cpp:301
+#: ViewManager.cpp:303
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs"
 msgstr "Останні використані вкладки"
 
-#: ViewManager.cpp:306
+#: ViewManager.cpp:308
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle Between Two Tabs"
 msgstr "Перемкнутися з однієї вкладки на іншу"
 
-#: ViewManager.cpp:311
+#: ViewManager.cpp:313
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs (Reverse)"
 msgstr "Останні використані вкладки (у зв. порядку)"
 
-#: ViewManager.cpp:316
+#: ViewManager.cpp:318
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle maximize current view"
 msgstr "Перемкнути максимізацію поточної панелі"
 
-#: ViewManager.cpp:317
+#: ViewManager.cpp:319
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle maximize current view"
 msgstr "Перемкнути максимізацію поточної панелі"
 
-#: ViewManager.cpp:325
+#: ViewManager.cpp:327
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle zoom-maximize current view"
 msgstr "Перемкнути максимізацію поточної панелі"
 
-#: ViewManager.cpp:326
+#: ViewManager.cpp:328
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle zoom-maximize current view"
 msgstr "Перемкнути максимізацію поточної панелі"
 
-#: ViewManager.cpp:334
+#: ViewManager.cpp:336
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the right"
 msgstr "Пересунути вкладку праворуч"
 
-#: ViewManager.cpp:341
+#: ViewManager.cpp:343
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the left"
 msgstr "Пересунути вкладку ліворуч"
 
-#: ViewManager.cpp:348
+#: ViewManager.cpp:350
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
 msgstr "Налаштувати семантичну інтеграцію (bash)"
 
-#: ViewManager.cpp:354
+#: ViewManager.cpp:356
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
 msgstr "Перемкнути показ семантичних підказок"
 
-#: ViewManager.cpp:360
+#: ViewManager.cpp:362
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
 msgstr "Перемкнути показ номерів рядків"
 
-#: ViewManager.cpp:367
+#: ViewManager.cpp:369
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
 msgstr "Однаковий розмір усіх панелей"
 
-#: ViewManager.cpp:377
+#: ViewManager.cpp:379
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Tab %1"
 msgstr "Перемкнутися на вкладку %1"
 
-#: ViewManager.cpp:600
+#: ViewManager.cpp:602
 #, kde-format
 msgid "Semantic hints "
 msgstr "Семантичні підказки "
 
-#: ViewManager.cpp:616
+#: ViewManager.cpp:618
 #, kde-format
 msgid "Line numbers "
 msgstr "Номери рядків "
 
-#: ViewManager.cpp:1223
+#: ViewManager.cpp:1239
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Збереження компонування вкладок"
 
-#: ViewManager.cpp:1225 ViewManager.cpp:1346
+#: ViewManager.cpp:1241 ViewManager.cpp:1362
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "компонування перегляду Konsole (*.json)"
 
-#: ViewManager.cpp:1241
+#: ViewManager.cpp:1257
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3812,7 +3812,7 @@ msgstr ""
 "Під час спроби збереження компонування сталася помилка.\n"
 "%1"
 
-#: ViewManager.cpp:1333
+#: ViewManager.cpp:1349
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3822,7 +3822,7 @@ msgstr ""
 "Під час спроби завантажити компонування сталася помилка.\n"
 "%1"
 
-#: ViewManager.cpp:1344
+#: ViewManager.cpp:1360
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
@@ -3996,7 +3996,7 @@ msgstr "Змінити вибрану схему кольорів"
 #. i18n: ectx: property (text), widget (QPushButton, textEditorCustomBtn)
 #. i18n: ectx: property (text), widget (QPushButton, editColorSchemeButton)
 #: widgets/EditProfileAppearancePage.ui:82
-#: widgets/EditProfileGeneralPage.ui:250 widgets/EditProfileKeyboardPage.ui:73
+#: widgets/EditProfileGeneralPage.ui:276 widgets/EditProfileKeyboardPage.ui:73
 #: widgets/EditProfileMousePage.ui:320
 #, kde-format
 msgid "Edit..."
@@ -4567,7 +4567,14 @@ msgstr "Створення профілю"
 msgid "Edit Profile \"%1\""
 msgstr "Змінити профіль «%1»"
 
-#: widgets/EditProfileDialog.cpp:528
+#: widgets/EditProfileDialog.cpp:529
+#, fuzzy, kde-format
+#| msgctxt "Do not show a close button"
+#| msgid "None"
+msgid "None"
+msgstr "Не показувати"
+
+#: widgets/EditProfileDialog.cpp:550
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4579,7 +4586,7 @@ msgstr[1] " стовпчики"
 msgstr[2] " стовпчиків"
 msgstr[3] " стовпчик"
 
-#: widgets/EditProfileDialog.cpp:530
+#: widgets/EditProfileDialog.cpp:552
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4591,42 +4598,42 @@ msgstr[1] " рядки"
 msgstr[2] " рядків"
 msgstr[3] " рядок"
 
-#: widgets/EditProfileDialog.cpp:540
+#: widgets/EditProfileDialog.cpp:562
 #, kde-format
 msgid "System Bell"
 msgstr "Системний дзвінок"
 
-#: widgets/EditProfileDialog.cpp:540
+#: widgets/EditProfileDialog.cpp:562
 #, kde-format
 msgid "System Notifications"
 msgstr "Системні сповіщення"
 
-#: widgets/EditProfileDialog.cpp:540
+#: widgets/EditProfileDialog.cpp:562
 #, kde-format
 msgid "Visual Bell"
 msgstr "Видимий дзвінок"
 
-#: widgets/EditProfileDialog.cpp:540
+#: widgets/EditProfileDialog.cpp:562
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "Ігнорувати події дзвінка"
 
-#: widgets/EditProfileDialog.cpp:549
+#: widgets/EditProfileDialog.cpp:571
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "Типовий профіль для нових сеансів термінала у %1"
 
-#: widgets/EditProfileDialog.cpp:655
+#: widgets/EditProfileDialog.cpp:678
 #, kde-format
 msgid "Edit Environment"
 msgstr "Змінити середовище"
 
-#: widgets/EditProfileDialog.cpp:656
+#: widgets/EditProfileDialog.cpp:679
 #, kde-format
 msgid "One environment variable per line"
 msgstr "Одна змінна середовища на рядок"
 
-#: widgets/EditProfileDialog.cpp:689
+#: widgets/EditProfileDialog.cpp:712
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4636,23 +4643,23 @@ msgstr[1] " секунди"
 msgstr[2] " секунд"
 msgstr[3] " секунда"
 
-#: widgets/EditProfileDialog.cpp:813
+#: widgets/EditProfileDialog.cpp:842
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "Виберіть початковий каталог"
 
-#: widgets/EditProfileDialog.cpp:975
+#: widgets/EditProfileDialog.cpp:1004
 #, kde-format
 msgid "Get New..."
 msgstr "Отримати нову…"
 
-#: widgets/EditProfileDialog.cpp:1378
+#: widgets/EditProfileDialog.cpp:1407
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "Не вдалося завантажити схему <resource>%1</resource>."
 
-#: widgets/EditProfileDialog.cpp:1560
+#: widgets/EditProfileDialog.cpp:1589
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4661,7 +4668,7 @@ msgstr ""
 "Ця схема кольорів використовує прозоре тло, яке, здається, не підтримується "
 "на вашій стільниці"
 
-#: widgets/EditProfileDialog.cpp:1566
+#: widgets/EditProfileDialog.cpp:1595
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4670,12 +4677,12 @@ msgstr ""
 "Konsole було запущено до вмикання стільничних ефектів. Щоб побачити прозоре "
 "тло, вам слід перезапустити Konsole."
 
-#: widgets/EditProfileDialog.cpp:1967
+#: widgets/EditProfileDialog.cpp:1996
 #, kde-format
 msgid "Default for file type"
 msgstr "Типова для типу файлів"
 
-#: widgets/EditProfileDialog.cpp:1993
+#: widgets/EditProfileDialog.cpp:2022
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4705,7 +4712,7 @@ msgstr ""
 "буде проігноровано — файл буде відкрито у типовому текстовому\n"
 "редакторі."
 
-#: widgets/EditProfileDialog.cpp:2006
+#: widgets/EditProfileDialog.cpp:2035
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Нетипова команда текстового редактора:"
@@ -4810,26 +4817,39 @@ msgstr ""
 msgid "Enter same container as current session"
 msgstr "Входити до того самого контейнера, що і у поточному сеансі"
 
-#. i18n: ectx: property (text), widget (QLabel, label_4)
+#. i18n: ectx: property (text), widget (QLabel, containerLabel)
 #: widgets/EditProfileGeneralPage.ui:229
+#, kde-format
+msgid "Always start in container:"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QComboBox, containerCombo)
+#: widgets/EditProfileGeneralPage.ui:242
+#, kde-format
+msgid ""
+"Always start new sessions using this profile inside the selected container"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+#: widgets/EditProfileGeneralPage.ui:255
 #, kde-format
 msgid "Environment:"
 msgstr "Середовище:"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, environmentEditButton)
-#: widgets/EditProfileGeneralPage.ui:247
+#: widgets/EditProfileGeneralPage.ui:273
 #, kde-format
 msgid "Edit the list of environment variables and associated values"
 msgstr "Змінити список змінних середовища і відповідних їм значень"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
-#: widgets/EditProfileGeneralPage.ui:294
+#: widgets/EditProfileGeneralPage.ui:320
 #, kde-format
 msgid "Initial terminal si&ze:"
 msgstr "Початковий роз&мір термінала:"
 
 #. i18n: ectx: property (text), widget (QLabel, useCurrentWindowSizeNote)
-#: widgets/EditProfileGeneralPage.ui:369
+#: widgets/EditProfileGeneralPage.ui:395
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -4842,31 +4862,31 @@ msgstr ""
 "Загальне → Запам'ятовувати розмір вікна</span>.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, terminalBellLabel)
-#: widgets/EditProfileGeneralPage.ui:385
+#: widgets/EditProfileGeneralPage.ui:411
 #, kde-format
 msgid "&Terminal bell mode:"
 msgstr "Режим дзвінка у &терміналі:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, semantic)
-#: widgets/EditProfileGeneralPage.ui:403
+#: widgets/EditProfileGeneralPage.ui:429
 #, kde-format
 msgid "Semantic Integration"
 msgstr "Семантична інтеграція"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticUpDown)
-#: widgets/EditProfileGeneralPage.ui:409
+#: widgets/EditProfileGeneralPage.ui:435
 #, kde-format
 msgid "Up/Down Arrows emulation"
 msgstr "Емуляція стрілок вгору-вниз"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticInputClick)
-#: widgets/EditProfileGeneralPage.ui:416
+#: widgets/EditProfileGeneralPage.ui:442
 #, kde-format
 msgid "Mouse click in input line moves cursor"
 msgstr "Клацання на рядку введення пересуває курсор"
 
 #. i18n: ectx: property (text), widget (QLabel, label_8)
-#: widgets/EditProfileGeneralPage.ui:429
+#: widgets/EditProfileGeneralPage.ui:455
 #, kde-format
 msgid "Semantic hints:"
 msgstr "Семантичні підказки:"
@@ -4876,9 +4896,9 @@ msgstr "Семантичні підказки:"
 #. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundNever)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsNever)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundNever)
-#: widgets/EditProfileGeneralPage.ui:439 widgets/EditProfileGeneralPage.ui:485
-#: widgets/EditProfileGeneralPage.ui:531 widgets/EditProfileGeneralPage.ui:577
-#: widgets/EditProfileGeneralPage.ui:623
+#: widgets/EditProfileGeneralPage.ui:465 widgets/EditProfileGeneralPage.ui:511
+#: widgets/EditProfileGeneralPage.ui:557 widgets/EditProfileGeneralPage.ui:603
+#: widgets/EditProfileGeneralPage.ui:649
 #, kde-format
 msgctxt "Never"
 msgid "Never"
@@ -4889,9 +4909,9 @@ msgstr "Ніколи"
 #. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundURL)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsURL)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundURL)
-#: widgets/EditProfileGeneralPage.ui:449 widgets/EditProfileGeneralPage.ui:495
-#: widgets/EditProfileGeneralPage.ui:541 widgets/EditProfileGeneralPage.ui:587
-#: widgets/EditProfileGeneralPage.ui:633
+#: widgets/EditProfileGeneralPage.ui:475 widgets/EditProfileGeneralPage.ui:521
+#: widgets/EditProfileGeneralPage.ui:567 widgets/EditProfileGeneralPage.ui:613
+#: widgets/EditProfileGeneralPage.ui:659
 #, kde-format
 msgctxt "When showing URL hints"
 msgid "When URL hints show"
@@ -4902,34 +4922,34 @@ msgstr "Якщо показано підказки щодо адрес"
 #. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundAlways)
-#: widgets/EditProfileGeneralPage.ui:459 widgets/EditProfileGeneralPage.ui:505
-#: widgets/EditProfileGeneralPage.ui:551 widgets/EditProfileGeneralPage.ui:597
-#: widgets/EditProfileGeneralPage.ui:643
+#: widgets/EditProfileGeneralPage.ui:485 widgets/EditProfileGeneralPage.ui:531
+#: widgets/EditProfileGeneralPage.ui:577 widgets/EditProfileGeneralPage.ui:623
+#: widgets/EditProfileGeneralPage.ui:669
 #, kde-format
 msgctxt "Always"
 msgid "Always"
 msgstr "Завжди"
 
 #. i18n: ectx: property (text), widget (QLabel, label_20)
-#: widgets/EditProfileGeneralPage.ui:475
+#: widgets/EditProfileGeneralPage.ui:501
 #, kde-format
 msgid "Red error bars:"
 msgstr "Червоні смужки помилок:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_30)
-#: widgets/EditProfileGeneralPage.ui:521
+#: widgets/EditProfileGeneralPage.ui:547
 #, kde-format
 msgid "Red error background:"
 msgstr "Червоне тло помилок:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_40)
-#: widgets/EditProfileGeneralPage.ui:567
+#: widgets/EditProfileGeneralPage.ui:593
 #, kde-format
 msgid "Alternating bars:"
 msgstr "Почергові смужки:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
-#: widgets/EditProfileGeneralPage.ui:613
+#: widgets/EditProfileGeneralPage.ui:639
 #, kde-format
 msgid "Alternating background:"
 msgstr "Почергове тло:"
@@ -5780,37 +5800,37 @@ msgctxt "@info:tooltip"
 msgid "Restore terminal"
 msgstr "Відновити термінал"
 
-#: widgets/ViewContainer.cpp:59
+#: widgets/ViewContainer.cpp:60
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open a new tab"
 msgstr "Відкрити нову вкладку"
 
-#: widgets/ViewContainer.cpp:64
+#: widgets/ViewContainer.cpp:65
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Search Tabs"
 msgstr "Шукати вкладки"
 
-#: widgets/ViewContainer.cpp:69
+#: widgets/ViewContainer.cpp:70
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Close this tab"
 msgstr "Закрити цю вкладку"
 
-#: widgets/ViewContainer.cpp:105
+#: widgets/ViewContainer.cpp:106
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Detach Tab"
 msgstr "В&ідокремити вкладку"
 
-#: widgets/ViewContainer.cpp:111
+#: widgets/ViewContainer.cpp:112
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Configure or Rename Tab..."
 msgstr "&Налаштувати або перейменувати вкладку…"
 
-#: widgets/ViewContainer.cpp:116
+#: widgets/ViewContainer.cpp:117
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Tab"
