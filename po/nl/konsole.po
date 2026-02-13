@@ -22,14 +22,14 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-12 00:46+0000\n"
-"PO-Revision-Date: 2026-02-05 15:06+0100\n"
+"PO-Revision-Date: 2026-02-12 13:16+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 25.12.1\n"
+"X-Generator: Lokalize 25.12.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -4586,9 +4586,7 @@ msgid "Edit Profile \"%1\""
 msgstr "Profiel \"%1\" bewerken"
 
 #: widgets/EditProfileDialog.cpp:529
-#, fuzzy, kde-format
-#| msgctxt "Do not show a close button"
-#| msgid "None"
+#, kde-format
 msgid "None"
 msgstr "Geen"
 
@@ -4833,7 +4831,7 @@ msgstr "Ga dezelfde container in als de huidige sessie"
 #: widgets/EditProfileGeneralPage.ui:229
 #, kde-format
 msgid "Always start in container:"
-msgstr ""
+msgstr "Altijd in container starten:"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, containerCombo)
 #: widgets/EditProfileGeneralPage.ui:242
@@ -4841,6 +4839,8 @@ msgstr ""
 msgid ""
 "Always start new sessions using this profile inside the selected container"
 msgstr ""
+"Nieuwe sessies altijd starten met gebruik van dit profiel in de "
+"geselecteerde container"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/EditProfileGeneralPage.ui:255

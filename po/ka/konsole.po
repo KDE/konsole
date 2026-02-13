@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-12 00:46+0000\n"
-"PO-Revision-Date: 2026-02-05 08:33+0100\n"
+"PO-Revision-Date: 2026-02-12 05:16+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -3185,7 +3185,7 @@ msgstr "ჩანართების &ზოლზე"
 #, kde-format
 msgctxt "Do not show a close button"
 msgid "None"
-msgstr "არაფერი"
+msgstr "არცერთი"
 
 #. i18n: ectx: property (text), widget (QLabel, showSearchTabsButtonLabel)
 #: settings/TabBarSettings.ui:231
@@ -4541,11 +4541,9 @@ msgid "Edit Profile \"%1\""
 msgstr "პროფილის ჩასწორება (\"%1\")"
 
 #: widgets/EditProfileDialog.cpp:529
-#, fuzzy, kde-format
-#| msgctxt "Do not show a close button"
-#| msgid "None"
+#, kde-format
 msgid "None"
-msgstr "არაფერი"
+msgstr "არცერთი"
 
 #: widgets/EditProfileDialog.cpp:550
 #, kde-format
@@ -4792,14 +4790,14 @@ msgstr "იგივე კონტეინერში შესვლა, �
 #: widgets/EditProfileGeneralPage.ui:229
 #, kde-format
 msgid "Always start in container:"
-msgstr ""
+msgstr "ყოველთვის გაშვება კონტეიენერში:"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, containerCombo)
 #: widgets/EditProfileGeneralPage.ui:242
 #, kde-format
 msgid ""
 "Always start new sessions using this profile inside the selected container"
-msgstr ""
+msgstr "ახალი სესიების ყოველთვის გაშვება ამ პროფილით არჩეულ კონტეინერში"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/EditProfileGeneralPage.ui:255
@@ -5501,7 +5499,7 @@ msgstr "წინა გამოტანა დამახსოვრებ�
 #, kde-format
 msgctxt "Do not save any lines to the scrollback history"
 msgid "&None"
-msgstr "&არაფერი"
+msgstr "&არცერთი"
 
 #: widgets/IncrementalSearchBar.cpp:50
 #, kde-format

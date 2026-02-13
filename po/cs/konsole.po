@@ -4485,9 +4485,7 @@ msgstr "Upravit profil \"%1\""
 
 # žádné parametry funkce v inspektoru funkcí
 #: widgets/EditProfileDialog.cpp:529
-#, fuzzy, kde-format
-#| msgctxt "Do not show a close button"
-#| msgid "None"
+#, kde-format
 msgid "None"
 msgstr "Nic"
 
