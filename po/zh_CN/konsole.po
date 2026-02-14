@@ -4477,9 +4477,7 @@ msgid "Edit Profile \"%1\""
 msgstr "编辑配置方案“%1”"
 
 #: widgets/EditProfileDialog.cpp:529
-#, fuzzy, kde-format
-#| msgctxt "Do not show a close button"
-#| msgid "None"
+#, kde-format
 msgid "None"
 msgstr "无"
 
@@ -4712,14 +4710,14 @@ msgstr "输入当前会话的同一个容器"
 #: widgets/EditProfileGeneralPage.ui:229
 #, kde-format
 msgid "Always start in container:"
-msgstr ""
+msgstr "总是在容器中启动："
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, containerCombo)
 #: widgets/EditProfileGeneralPage.ui:242
 #, kde-format
 msgid ""
 "Always start new sessions using this profile inside the selected container"
-msgstr ""
+msgstr "总是使用此配置在选定的容器中启动新会话"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/EditProfileGeneralPage.ui:255

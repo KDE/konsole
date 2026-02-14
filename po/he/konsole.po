@@ -23,7 +23,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-12 00:46+0000\n"
-"PO-Revision-Date: 2026-02-06 10:33+0200\n"
+"PO-Revision-Date: 2026-02-12 10:29+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -4512,11 +4512,9 @@ msgid "Edit Profile \"%1\""
 msgstr "ערוך את הפרופיל \"%1\""
 
 #: widgets/EditProfileDialog.cpp:529
-#, fuzzy, kde-format
-#| msgctxt "Do not show a close button"
-#| msgid "None"
+#, kde-format
 msgid "None"
-msgstr "לא"
+msgstr "ללא"
 
 #: widgets/EditProfileDialog.cpp:550
 #, kde-format
@@ -4760,14 +4758,14 @@ msgstr "להיכנס לאותה המכולה כמו ההפעלה הנוכחית"
 #: widgets/EditProfileGeneralPage.ui:229
 #, kde-format
 msgid "Always start in container:"
-msgstr ""
+msgstr "תמיד להתחיל במכולה:"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, containerCombo)
 #: widgets/EditProfileGeneralPage.ui:242
 #, kde-format
 msgid ""
 "Always start new sessions using this profile inside the selected container"
-msgstr ""
+msgstr "תמיד להקים הפעלות חדשות באמצעות הפרופיל הזה בתוך המכולה הנבחרת"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/EditProfileGeneralPage.ui:255
