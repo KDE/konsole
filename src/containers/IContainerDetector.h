@@ -87,6 +87,13 @@ Q_SIGNALS:
      * @param containers The list of discovered containers (may be empty)
      */
     void listContainersFinished(const QList<ContainerInfo> &containers);
+
+    /**
+     * Emitted when this detector has determined that its containers have
+     * changed (e.g. by listening to a docker socket) and the list should
+     * be refreshed.
+     */
+    void containersChanged();
 };
 
 } // namespace Konsole

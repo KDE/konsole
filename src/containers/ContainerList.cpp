@@ -48,7 +48,7 @@ void ContainerList::refreshContainers()
 
     for (const ContainerInfo &info : _containers) {
         auto *action = new QAction(_group);
-        action->setText(info.name);
+        action->setText(info.displayName);
 
         if (!info.iconName.isEmpty()) {
             action->setIcon(QIcon::fromTheme(info.iconName));

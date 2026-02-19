@@ -30,7 +30,7 @@ struct ContainerInfo {
     /** Container name/identifier */
     QString name;
 
-    /** Human-readable display name (e.g., "Toolbox: fedora-39") */
+    /** Human-readable display name (e.g., "fedora-39") */
     QString displayName;
 
     /** Icon name for UI display */
@@ -48,7 +48,7 @@ struct ContainerInfo {
     /** Returns true if this represents a valid container */
     bool isValid() const
     {
-        return detector != nullptr && !name.isEmpty();
+        return detector != nullptr;
     }
 
     bool operator==(const ContainerInfo &other) const

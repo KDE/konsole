@@ -101,6 +101,13 @@ set_package_properties(KF6DocTools PROPERTIES DESCRIPTION
 
 find_package(ICU 61.0 COMPONENTS uc i18n REQUIRED)
 
+option(WITH_KAPSULE "Build with Kapsule container support" OFF)
+if(WITH_KAPSULE)
+    find_package(QCoro6 REQUIRED COMPONENTS Core)
+    find_package(Kapsule REQUIRED)
+    set(HAVE_KAPSULE 1)
+endif()
+
 if(UNIX AND NOT APPLE AND NOT ANDROID AND NOT HAIKU)
     option(WITH_X11 "Build with X11 integration" ON)
 endif()

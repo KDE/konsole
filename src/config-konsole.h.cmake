@@ -14,3 +14,6 @@
 
 /* Defined if system has the malloc_trim function, which is a GNU extension */
 #cmakedefine01 HAVE_MALLOC_TRIM
+
+/* Defined if libkapsule-qt is available for Kapsule container support */
+#cmakedefine01 HAVE_KAPSULE

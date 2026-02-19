@@ -169,7 +169,7 @@ ContainerInfo DistroboxDetector::buildContainerInfo(const QString &name) const
 {
     return ContainerInfo{.detector = this,
                          .name = name,
-                         .displayName = i18n("Distrobox: %1", name),
+                         .displayName = name,
                          .iconName = iconName(),
                          // only used when entering via OSC777
                          .hostPid = std::nullopt};

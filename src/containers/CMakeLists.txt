@@ -9,6 +9,10 @@ set(konsolecontainers_SRCS
     DistroboxDetector.cpp
 )
 
+if(HAVE_KAPSULE)
+    list(APPEND konsolecontainers_SRCS KapsuleDetector.cpp)
+endif()
+
 add_library(konsolecontainers STATIC ${konsolecontainers_SRCS})
 
 set_target_properties(konsolecontainers PROPERTIES POSITION_INDEPENDENT_CODE ON)
@@ -23,4 +27,12 @@ target_link_libraries(konsolecontainers
     KF6::CoreAddons  # For KSandbox
 )
 
-target_include_directories(konsolecontainers PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+if(HAVE_KAPSULE)
+    target_link_libraries(konsolecontainers PUBLIC Kapsule::KapsuleQt)
+endif()
+
+target_include_directories(konsolecontainers
+    PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_BINARY_DIR}/src  # For config-konsole.h
+)

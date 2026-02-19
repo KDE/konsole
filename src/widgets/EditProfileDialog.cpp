@@ -530,9 +530,8 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr &profile)
 
         const QList<ContainerInfo> containers = containerRegistry->cachedContainers();
         for (const auto &container : containers) {
-            _generalUi->containerCombo->addItem(QIcon::fromTheme(container.iconName),
-                                                container.displayName,
-                                                ContainerRegistry::keyFromContainerInfo(container));
+            const QString label = QStringLiteral("%1: %2").arg(container.detector->displayName(), container.displayName);
+            _generalUi->containerCombo->addItem(QIcon::fromTheme(container.iconName), label, ContainerRegistry::keyFromContainerInfo(container));
         }
 
         // Select the currently configured container

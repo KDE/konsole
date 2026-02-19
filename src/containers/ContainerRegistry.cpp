@@ -10,6 +10,12 @@
 #include "ToolboxDetector.h"
 #include "src/konsoledebug.h"
 
+#include "config-konsole.h"
+
+#if HAVE_KAPSULE
+#include "KapsuleDetector.h"
+#endif
+
 #include <KLocalizedString>
 #include <KSandbox>
 #include <optional>
@@ -42,6 +48,9 @@ ContainerRegistry::ContainerRegistry()
     // Order matters - first match wins
     registerDetector(std::make_unique<ToolboxDetector>());
     registerDetector(std::make_unique<DistroboxDetector>());
+#if HAVE_KAPSULE
+    registerDetector(std::make_unique<KapsuleDetector>());
+#endif
 
     // Kick off the initial container list fetch so that the cache is
     // likely populated before the user ever opens a menu.
@@ -53,6 +62,7 @@ void ContainerRegistry::registerDetector(std::unique_ptr<IContainerDetector> det
     if (detector) {
         qDebug(KonsoleDebug) << "Registering container detector:" << detector->typeId();
         connect(detector.get(), &IContainerDetector::listContainersFinished, this, &ContainerRegistry::onDetectorFinished);
+        connect(detector.get(), &IContainerDetector::containersChanged, this, &ContainerRegistry::refreshContainers);
         _detectors.push_back(std::move(detector));
     }
 }
@@ -152,7 +162,7 @@ std::optional<ContainerInfo> ContainerRegistry::containerInfoFromOsc777(const QS
         if (detector->typeId() == containerType) {
             return ContainerInfo{.detector = detector.get(),
                                  .name = containerName,
-                                 .displayName = QStringLiteral("%1: %2").arg(detector->displayName(), containerName),
+                                 .displayName = containerName,
                                  .iconName = detector->iconName(),
                                  // will get populated in Session::handleOsc777()
                                  .hostPid = std::nullopt};
@@ -178,7 +188,7 @@ ContainerInfo ContainerRegistry::containerInfoFromKey(const QString &key) const
     }
 
     const int separatorIndex = key.indexOf(QLatin1Char(':'));
-    if (separatorIndex <= 0 || separatorIndex >= key.size() - 1) {
+    if (separatorIndex <= 0) {
         return ContainerInfo{};
     }
 
@@ -189,7 +199,7 @@ ContainerInfo ContainerRegistry::containerInfoFromKey(const QString &key) const
         if (detector->typeId() == containerType) {
             return ContainerInfo{.detector = detector.get(),
                                  .name = containerName,
-                                 .displayName = QStringLiteral("%1: %2").arg(detector->displayName(), containerName),
+                                 .displayName = containerName,
                                  .iconName = detector->iconName(),
                                  .hostPid = std::nullopt};
         }

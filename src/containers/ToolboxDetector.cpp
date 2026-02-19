@@ -47,7 +47,7 @@ std::optional<ContainerInfo> ToolboxDetector::detect(int pid) const
 
 ContainerInfo ToolboxDetector::buildContainerInfo(const QString &name) const
 {
-    return ContainerInfo{.detector = this, .name = name, .displayName = i18n("Toolbox: %1", name), .iconName = iconName(), .hostPid = std::nullopt};
+    return ContainerInfo{.detector = this, .name = name, .displayName = name, .iconName = iconName(), .hostPid = std::nullopt};
 }
 
 QStringList ToolboxDetector::entryCommand(const QString &containerName) const
