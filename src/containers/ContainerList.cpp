@@ -10,7 +10,11 @@
 // Qt
 #include <QActionGroup>
 #include <QMenu>
+#include <QSysInfo>
 #include <qalgorithms.h>
+
+// KF
+#include <KLocalizedString>
 
 // Konsole
 #include "ContainerInfo.h"
@@ -68,6 +72,14 @@ void ContainerList::addContainerSections(QMenu *menu)
     if (_containers.isEmpty()) {
         return;
     }
+
+    // Add a "Host" entry so the user can easily open a plain host
+    // session even when a container is set as the default.
+    menu->addSection(i18nc("@title:group section header in new-tab menu", "Host"));
+    auto *hostAction = menu->addAction(QIcon::fromTheme(QStringLiteral("computer")), QSysInfo::machineHostName());
+    connect(hostAction, &QAction::triggered, this, [this]() {
+        Q_EMIT containerSelected(ContainerInfo{});
+    });
 
     const IContainerDetector *currentDetector = nullptr;
     const auto actions = _group->actions();

@@ -69,9 +69,14 @@ public:
     void refreshContainers();
 
     /**
-     * Adds per-detector container sections to the given menu.
-     * Each detector's containers are preceded by an addSection() header
-     * using the detector's display name (e.g., "Distrobox", "Toolbox").
+     * Adds a host section followed by per-detector container sections
+     * to the given menu.
+     *
+     * The host section contains a single action showing the local
+     * hostname, allowing the user to open a plain host session even
+     * when a container is set as default.  Each detector's containers
+     * are preceded by an addSection() header using the detector's
+     * display name (e.g., "Distrobox", "Toolbox").
      *
      * Does nothing if no containers are available.
      */

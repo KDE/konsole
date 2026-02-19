@@ -961,7 +961,10 @@ void MainWindow::newInContainer(const ContainerInfo &container)
 {
     Profile::Ptr defaultProfile = ProfileManager::instance()->defaultProfile();
     Session *session = createSession(defaultProfile, activeSessionDir());
-    if (session && container.isValid()) {
+    if (session) {
+        // Always set the container context: a valid ContainerInfo enters
+        // that container, an invalid one (host selected) clears any
+        // auto-applied default from the profile.
         session->setContainerContext(container);
     }
 }
