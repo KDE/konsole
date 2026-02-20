@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-12 00:46+0000\n"
+"POT-Creation-Date: 2026-02-20 00:50+0000\n"
 "PO-Revision-Date: 2017-12-31 22:42+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -702,7 +702,15 @@ msgstr ""
 msgid "AaZz09..."
 msgstr "AaZz09..."
 
-#: containers/ContainerRegistry.cpp:37
+# >> @item:inlistbox
+#: containers/ContainerList.cpp:78
+#, fuzzy, kde-format
+#| msgid "Local Host: %h"
+msgctxt "@title:group section header in new-tab menu"
+msgid "Host"
+msgstr "lokalni domaćin: %h"
+
+#: containers/ContainerRegistry.cpp:43
 #, kde-format
 msgid ""
 "Container support is not available when Konsole is running inside Flatpak."
@@ -713,19 +721,21 @@ msgstr ""
 msgid "Distrobox"
 msgstr ""
 
-#: containers/DistroboxDetector.cpp:172
+#: containers/KapsuleDetector.cpp:33
 #, kde-format
-msgid "Distrobox: %1"
+msgid "Kapsule"
 msgstr ""
+
+#: containers/KapsuleDetector.cpp:79
+#, fuzzy, kde-format
+#| msgctxt "Name of the default/builtin profile"
+#| msgid "Default"
+msgid " [default]"
+msgstr "Podrazumevano"
 
 #: containers/ToolboxDetector.cpp:29
 #, kde-format
 msgid "Toolbox"
-msgstr ""
-
-#: containers/ToolboxDetector.cpp:50
-#, kde-format
-msgid "Toolbox: %1"
 msgstr ""
 
 # >> @title:window
@@ -1359,37 +1369,37 @@ msgstr ""
 "napustite?|/|U ovom prozoru ima %1 $[množ ^1 'otvoren jezičak' 'otvorena "
 "jezička' 'otvorenih jezičaka'], želite li zaista da ga napustite?"
 
-#: MainWindow.cpp:998 Part.cpp:317
+#: MainWindow.cpp:1001 Part.cpp:317
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profili"
 
-#: MainWindow.cpp:1016
+#: MainWindow.cpp:1019
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Opšte"
 
-#: MainWindow.cpp:1028
+#: MainWindow.cpp:1031
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr ""
 
-#: MainWindow.cpp:1034
+#: MainWindow.cpp:1037
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr ""
 
-#: MainWindow.cpp:1039
+#: MainWindow.cpp:1042
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr ""
 
-#: MainWindow.cpp:1044
+#: MainWindow.cpp:1047
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -2008,7 +2018,7 @@ msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr ""
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:573
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:572
 #, kde-format
 msgid "Default profile"
 msgstr "Podrazumevani profil"
@@ -4840,7 +4850,7 @@ msgstr "Uređivanje profila „%1“"
 msgid "None"
 msgstr "&nigde"
 
-#: widgets/EditProfileDialog.cpp:550
+#: widgets/EditProfileDialog.cpp:549
 #, fuzzy, kde-format
 #| msgid "Columns"
 msgctxt ""
@@ -4853,7 +4863,7 @@ msgstr[1] "Kolone"
 msgstr[2] "Kolone"
 msgstr[3] "Kolone"
 
-#: widgets/EditProfileDialog.cpp:552
+#: widgets/EditProfileDialog.cpp:551
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4865,47 +4875,47 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: widgets/EditProfileDialog.cpp:562
+#: widgets/EditProfileDialog.cpp:561
 #, kde-format
 msgid "System Bell"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:562
+#: widgets/EditProfileDialog.cpp:561
 #, fuzzy, kde-format
 #| msgid "Notifications"
 msgid "System Notifications"
 msgstr "Obaveštenja"
 
-#: widgets/EditProfileDialog.cpp:562
+#: widgets/EditProfileDialog.cpp:561
 #, fuzzy, kde-format
 #| msgctxt "@info:credit"
 #| msgid "Visual effects"
 msgid "Visual Bell"
 msgstr "vizuelni efekti"
 
-#: widgets/EditProfileDialog.cpp:562
+#: widgets/EditProfileDialog.cpp:561
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:571
+#: widgets/EditProfileDialog.cpp:570
 #, fuzzy, kde-format
 #| msgid "Set the selected profile as the default for new terminal sessions"
 msgid "Default profile for new terminal sessions in %1"
 msgstr "Postavi izabrani profil kao podrazumevani za nove sesije"
 
 # >> @title:window
-#: widgets/EditProfileDialog.cpp:678
+#: widgets/EditProfileDialog.cpp:677
 #, kde-format
 msgid "Edit Environment"
 msgstr "Uređivanje okruženja"
 
-#: widgets/EditProfileDialog.cpp:679
+#: widgets/EditProfileDialog.cpp:678
 #, kde-format
 msgid "One environment variable per line"
 msgstr "Jedna promenljiva okruženja po redu."
 
-#: widgets/EditProfileDialog.cpp:712
+#: widgets/EditProfileDialog.cpp:711
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4916,34 +4926,34 @@ msgstr[2] " sekundi"
 msgstr[3] " sekunda"
 
 # >> @title:window
-#: widgets/EditProfileDialog.cpp:842
+#: widgets/EditProfileDialog.cpp:841
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "Izbor početne fascikle"
 
 # >> @action:button New <what>
 # >! Needs contexts, one for color schemes, another for key bindings
-#: widgets/EditProfileDialog.cpp:1004
+#: widgets/EditProfileDialog.cpp:1003
 #, fuzzy, kde-format
 #| msgctxt "@action:button Create an alternate color scheme"
 #| msgid "New..."
 msgid "Get New..."
 msgstr "Nova..."
 
-#: widgets/EditProfileDialog.cpp:1407
+#: widgets/EditProfileDialog.cpp:1406
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1589
+#: widgets/EditProfileDialog.cpp:1588
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
 "supported on your desktop"
 msgstr "Ova šema boja ima providnu pozadinu, što površ izgleda da ne podržava"
 
-#: widgets/EditProfileDialog.cpp:1595
+#: widgets/EditProfileDialog.cpp:1594
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4952,13 +4962,13 @@ msgstr ""
 "Konsole je pokrenuta pre nego što su efekti površi bili uključeni. Morate je "
 "ponovo pokrenuti da biste dobili providnu pozadinu."
 
-#: widgets/EditProfileDialog.cpp:1996
+#: widgets/EditProfileDialog.cpp:1995
 #, fuzzy, kde-format
 #| msgid "Default profile"
 msgid "Default for file type"
 msgstr "Podrazumevani profil"
 
-#: widgets/EditProfileDialog.cpp:2022
+#: widgets/EditProfileDialog.cpp:2021
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4975,7 +4985,7 @@ msgid ""
 "editor."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:2035
+#: widgets/EditProfileDialog.cpp:2034
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr ""

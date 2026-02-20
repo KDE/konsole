@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-12 00:46+0000\n"
+"POT-Creation-Date: 2026-02-20 00:50+0000\n"
 "PO-Revision-Date: 2026-02-07 13:39+0100\n"
 "Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -687,7 +687,14 @@ msgstr "Oben"
 msgid "AaZz09..."
 msgstr "AaZz09 …"
 
-#: containers/ContainerRegistry.cpp:37
+#: containers/ContainerList.cpp:78
+#, fuzzy, kde-format
+#| msgid "Host: %1"
+msgctxt "@title:group section header in new-tab menu"
+msgid "Host"
+msgstr "Rechner: %1"
+
+#: containers/ContainerRegistry.cpp:43
 #, kde-format
 msgid ""
 "Container support is not available when Konsole is running inside Flatpak."
@@ -698,19 +705,21 @@ msgstr ""
 msgid "Distrobox"
 msgstr ""
 
-#: containers/DistroboxDetector.cpp:172
+#: containers/KapsuleDetector.cpp:33
 #, kde-format
-msgid "Distrobox: %1"
+msgid "Kapsule"
 msgstr ""
+
+#: containers/KapsuleDetector.cpp:79
+#, fuzzy, kde-format
+#| msgctxt "@label:textbox added to the name of the current default profile"
+#| msgid " [Default]"
+msgid " [default]"
+msgstr " [Standard]"
 
 #: containers/ToolboxDetector.cpp:29
 #, kde-format
 msgid "Toolbox"
-msgstr ""
-
-#: containers/ToolboxDetector.cpp:50
-#, kde-format
-msgid "Toolbox: %1"
 msgstr ""
 
 #: CopyInputDialog.cpp:30
@@ -1324,37 +1333,37 @@ msgstr ""
 "In diesem Fenster gibt es noch %1 geöffnete Terminals. Möchten Sie dennoch "
 "beenden?"
 
-#: MainWindow.cpp:998 Part.cpp:317
+#: MainWindow.cpp:1001 Part.cpp:317
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profile"
 
-#: MainWindow.cpp:1016
+#: MainWindow.cpp:1019
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Allgemein"
 
-#: MainWindow.cpp:1028
+#: MainWindow.cpp:1031
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr "Speicher"
 
-#: MainWindow.cpp:1034
+#: MainWindow.cpp:1037
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Unterfensterleiste / Geteilte Ansicht"
 
-#: MainWindow.cpp:1039
+#: MainWindow.cpp:1042
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Temporäre Dateien"
 
-#: MainWindow.cpp:1044
+#: MainWindow.cpp:1047
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -1943,7 +1952,7 @@ msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr "Integriert"
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:573
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:572
 #, kde-format
 msgid "Default profile"
 msgstr "Standardprofil"
@@ -4599,7 +4608,7 @@ msgstr "Profil „%1“ bearbeiten"
 msgid "None"
 msgstr "Keine"
 
-#: widgets/EditProfileDialog.cpp:550
+#: widgets/EditProfileDialog.cpp:549
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4609,7 +4618,7 @@ msgid_plural " columns"
 msgstr[0] " Spalte"
 msgstr[1] " Spalten"
 
-#: widgets/EditProfileDialog.cpp:552
+#: widgets/EditProfileDialog.cpp:551
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4619,42 +4628,42 @@ msgid_plural " rows"
 msgstr[0] " Zeile"
 msgstr[1] " Zeilen"
 
-#: widgets/EditProfileDialog.cpp:562
+#: widgets/EditProfileDialog.cpp:561
 #, kde-format
 msgid "System Bell"
 msgstr "Signalton des Systems"
 
-#: widgets/EditProfileDialog.cpp:562
+#: widgets/EditProfileDialog.cpp:561
 #, kde-format
 msgid "System Notifications"
 msgstr "Systembenachrichtigungen"
 
-#: widgets/EditProfileDialog.cpp:562
+#: widgets/EditProfileDialog.cpp:561
 #, kde-format
 msgid "Visual Bell"
 msgstr "Sichtbares Signal"
 
-#: widgets/EditProfileDialog.cpp:562
+#: widgets/EditProfileDialog.cpp:561
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "Signalton-Ereignisse ignorieren"
 
-#: widgets/EditProfileDialog.cpp:571
+#: widgets/EditProfileDialog.cpp:570
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "Standardprofil für neue Terminalsitzungen in %1"
 
-#: widgets/EditProfileDialog.cpp:678
+#: widgets/EditProfileDialog.cpp:677
 #, kde-format
 msgid "Edit Environment"
 msgstr "Umgebungsvariablen bearbeiten"
 
-#: widgets/EditProfileDialog.cpp:679
+#: widgets/EditProfileDialog.cpp:678
 #, kde-format
 msgid "One environment variable per line"
 msgstr "Eine Umgebungsvariable je Zeile"
 
-#: widgets/EditProfileDialog.cpp:712
+#: widgets/EditProfileDialog.cpp:711
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4662,23 +4671,23 @@ msgid_plural " seconds"
 msgstr[0] " Sekunde"
 msgstr[1] " Sekunden"
 
-#: widgets/EditProfileDialog.cpp:842
+#: widgets/EditProfileDialog.cpp:841
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "Wählen Sie den Startordner"
 
-#: widgets/EditProfileDialog.cpp:1004
+#: widgets/EditProfileDialog.cpp:1003
 #, kde-format
 msgid "Get New..."
 msgstr "Neues Schema holen …"
 
-#: widgets/EditProfileDialog.cpp:1407
+#: widgets/EditProfileDialog.cpp:1406
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "Das Schema <resource>%1</resource> kann nicht geladen werden."
 
-#: widgets/EditProfileDialog.cpp:1589
+#: widgets/EditProfileDialog.cpp:1588
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4687,7 +4696,7 @@ msgstr ""
 "Dieses Farbschema verwendet einen transparenten Hintergrund, der von Ihrem "
 "System scheinbar nicht unterstützt wird."
 
-#: widgets/EditProfileDialog.cpp:1595
+#: widgets/EditProfileDialog.cpp:1594
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4696,12 +4705,12 @@ msgstr ""
 "Konsole wurde gestartet, bevor die Desktop-Effekte aktiviert waren. Sie "
 "müssen Konsole neu starten, damit der Hintergrund transparent wird."
 
-#: widgets/EditProfileDialog.cpp:1996
+#: widgets/EditProfileDialog.cpp:1995
 #, kde-format
 msgid "Default for file type"
 msgstr "Standardeinstellung für Dateityp"
 
-#: widgets/EditProfileDialog.cpp:2022
+#: widgets/EditProfileDialog.cpp:2021
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4730,7 +4739,7 @@ msgstr ""
 "diese Einstellung ignoriert und die Datei wird mit dem Standardtext\n"
 "Editor geöffnet."
 
-#: widgets/EditProfileDialog.cpp:2035
+#: widgets/EditProfileDialog.cpp:2034
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Benutzerdefinierter Texteditorbefehl"

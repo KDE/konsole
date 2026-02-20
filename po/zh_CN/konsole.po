@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-12 00:46+0000\n"
+"POT-Creation-Date: 2026-02-20 00:50+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -666,7 +666,14 @@ msgstr "上"
 msgid "AaZz09..."
 msgstr "AaZz09..."
 
-#: containers/ContainerRegistry.cpp:37
+#: containers/ContainerList.cpp:78
+#, fuzzy, kde-format
+#| msgid "Host: %1"
+msgctxt "@title:group section header in new-tab menu"
+msgid "Host"
+msgstr "主机：%1"
+
+#: containers/ContainerRegistry.cpp:43
 #, kde-format
 msgid ""
 "Container support is not available when Konsole is running inside Flatpak."
@@ -677,20 +684,22 @@ msgstr "当 Konsole 在 Flatpak 中运行时，容器支持不可用。"
 msgid "Distrobox"
 msgstr "Distrobox"
 
-#: containers/DistroboxDetector.cpp:172
+#: containers/KapsuleDetector.cpp:33
 #, kde-format
-msgid "Distrobox: %1"
-msgstr "Distrobox：%1"
+msgid "Kapsule"
+msgstr ""
+
+#: containers/KapsuleDetector.cpp:79
+#, fuzzy, kde-format
+#| msgctxt "@label:textbox added to the name of the current default profile"
+#| msgid " [Default]"
+msgid " [default]"
+msgstr " [默认]"
 
 #: containers/ToolboxDetector.cpp:29
 #, kde-format
 msgid "Toolbox"
 msgstr "Toolbox"
-
-#: containers/ToolboxDetector.cpp:50
-#, kde-format
-msgid "Toolbox: %1"
-msgstr "Toolbox：%1"
 
 #: CopyInputDialog.cpp:30
 #, kde-format
@@ -1293,37 +1302,37 @@ msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "此窗口中有 %1 个打开的终端，您确定要退出吗？"
 
-#: MainWindow.cpp:998 Part.cpp:317
+#: MainWindow.cpp:1001 Part.cpp:317
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "配置方案"
 
-#: MainWindow.cpp:1016
+#: MainWindow.cpp:1019
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "常规"
 
-#: MainWindow.cpp:1028
+#: MainWindow.cpp:1031
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr "内存"
 
-#: MainWindow.cpp:1034
+#: MainWindow.cpp:1037
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "标签页栏和拆分视图"
 
-#: MainWindow.cpp:1039
+#: MainWindow.cpp:1042
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "临时文件"
 
-#: MainWindow.cpp:1044
+#: MainWindow.cpp:1047
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -1901,7 +1910,7 @@ msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr "内建"
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:573
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:572
 #, kde-format
 msgid "Default profile"
 msgstr "默认配置方案"
@@ -4481,7 +4490,7 @@ msgstr "编辑配置方案“%1”"
 msgid "None"
 msgstr "无"
 
-#: widgets/EditProfileDialog.cpp:550
+#: widgets/EditProfileDialog.cpp:549
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4490,7 +4499,7 @@ msgid " column"
 msgid_plural " columns"
 msgstr[0] " 列"
 
-#: widgets/EditProfileDialog.cpp:552
+#: widgets/EditProfileDialog.cpp:551
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4499,84 +4508,84 @@ msgid " row"
 msgid_plural " rows"
 msgstr[0] " 行"
 
-#: widgets/EditProfileDialog.cpp:562
+#: widgets/EditProfileDialog.cpp:561
 #, kde-format
 msgid "System Bell"
 msgstr "系统提示"
 
-#: widgets/EditProfileDialog.cpp:562
+#: widgets/EditProfileDialog.cpp:561
 #, kde-format
 msgid "System Notifications"
 msgstr "系统通知"
 
-#: widgets/EditProfileDialog.cpp:562
+#: widgets/EditProfileDialog.cpp:561
 #, kde-format
 msgid "Visual Bell"
 msgstr "视觉提示"
 
-#: widgets/EditProfileDialog.cpp:562
+#: widgets/EditProfileDialog.cpp:561
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "忽略系统提示事件"
 
-#: widgets/EditProfileDialog.cpp:571
+#: widgets/EditProfileDialog.cpp:570
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "%1 中的新建终端会话的默认方案"
 
-#: widgets/EditProfileDialog.cpp:678
+#: widgets/EditProfileDialog.cpp:677
 #, kde-format
 msgid "Edit Environment"
 msgstr "编辑环境"
 
-#: widgets/EditProfileDialog.cpp:679
+#: widgets/EditProfileDialog.cpp:678
 #, kde-format
 msgid "One environment variable per line"
 msgstr "每个环境变量一行"
 
-#: widgets/EditProfileDialog.cpp:712
+#: widgets/EditProfileDialog.cpp:711
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
 msgid_plural " seconds"
 msgstr[0] " 秒"
 
-#: widgets/EditProfileDialog.cpp:842
+#: widgets/EditProfileDialog.cpp:841
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "选择初始目录"
 
-#: widgets/EditProfileDialog.cpp:1004
+#: widgets/EditProfileDialog.cpp:1003
 #, kde-format
 msgid "Get New..."
 msgstr "获取新方案…"
 
-#: widgets/EditProfileDialog.cpp:1407
+#: widgets/EditProfileDialog.cpp:1406
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "方案 <resource>%1</resource> 加载失败。"
 
-#: widgets/EditProfileDialog.cpp:1589
+#: widgets/EditProfileDialog.cpp:1588
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
 "supported on your desktop"
 msgstr "这个配色方案中使用了透明背景，您的桌面不支持此特性"
 
-#: widgets/EditProfileDialog.cpp:1595
+#: widgets/EditProfileDialog.cpp:1594
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
 "Konsole to see transparent background."
 msgstr "Konsole 在桌面特效启用前启动。您需要重启 Konsole 来显示透明背景。"
 
-#: widgets/EditProfileDialog.cpp:1996
+#: widgets/EditProfileDialog.cpp:1995
 #, kde-format
 msgid "Default for file type"
 msgstr "文件类型默认值"
 
-#: widgets/EditProfileDialog.cpp:2022
+#: widgets/EditProfileDialog.cpp:2021
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4604,7 +4613,7 @@ msgstr ""
 "如果 PATH 或者 LINE 任何一个没有出现在命令行中，那么这个设定会被直接忽略，文"
 "件会用默认的文本编辑器打开。"
 
-#: widgets/EditProfileDialog.cpp:2035
+#: widgets/EditProfileDialog.cpp:2034
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "自定义的文本编辑器命令"
@@ -5687,3 +5696,9 @@ msgstr "配置或者重命名标签页(&C)..."
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "关闭标签页"
+
+#~ msgid "Distrobox: %1"
+#~ msgstr "Distrobox：%1"
+
+#~ msgid "Toolbox: %1"
+#~ msgstr "Toolbox：%1"

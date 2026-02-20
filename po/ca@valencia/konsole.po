@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-12 00:46+0000\n"
+"POT-Creation-Date: 2026-02-20 00:50+0000\n"
 "PO-Revision-Date: 2026-02-12 09:27+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -688,7 +688,14 @@ msgstr "A dalt"
 msgid "AaZz09..."
 msgstr "AaZz09…"
 
-#: containers/ContainerRegistry.cpp:37
+#: containers/ContainerList.cpp:78
+#, fuzzy, kde-format
+#| msgid "Host: %1"
+msgctxt "@title:group section header in new-tab menu"
+msgid "Host"
+msgstr "Amfitrió: %1"
+
+#: containers/ContainerRegistry.cpp:43
 #, kde-format
 msgid ""
 "Container support is not available when Konsole is running inside Flatpak."
@@ -701,22 +708,23 @@ msgstr ""
 msgid "Distrobox"
 msgstr "Distrobox"
 
-#: containers/DistroboxDetector.cpp:172
+#: containers/KapsuleDetector.cpp:33
 #, kde-format
-msgid "Distrobox: %1"
-msgstr "Distrobox: %1"
+msgid "Kapsule"
+msgstr ""
+
+#: containers/KapsuleDetector.cpp:79
+#, fuzzy, kde-format
+#| msgctxt "@label:textbox added to the name of the current default profile"
+#| msgid " [Default]"
+msgid " [default]"
+msgstr " [Predeterminat]"
 
 # skip-rule: kct-toolbox
 #: containers/ToolboxDetector.cpp:29
 #, kde-format
 msgid "Toolbox"
 msgstr "ToolboX"
-
-# skip-rule: kct-toolbox
-#: containers/ToolboxDetector.cpp:50
-#, kde-format
-msgid "Toolbox: %1"
-msgstr "ToolboX: %1"
 
 #: CopyInputDialog.cpp:30
 #, kde-format
@@ -1326,37 +1334,37 @@ msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "Hi ha %1 terminals oberts en esta finestra. Encara voleu eixir?"
 
-#: MainWindow.cpp:998 Part.cpp:317
+#: MainWindow.cpp:1001 Part.cpp:317
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Perfils"
 
-#: MainWindow.cpp:1016
+#: MainWindow.cpp:1019
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "General"
 
-#: MainWindow.cpp:1028
+#: MainWindow.cpp:1031
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr "Memòria"
 
-#: MainWindow.cpp:1034
+#: MainWindow.cpp:1037
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Barra de pestanyes / Divisors"
 
-#: MainWindow.cpp:1039
+#: MainWindow.cpp:1042
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Fitxers temporals"
 
-#: MainWindow.cpp:1044
+#: MainWindow.cpp:1047
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -1944,7 +1952,7 @@ msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr "Integrat"
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:573
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:572
 #, kde-format
 msgid "Default profile"
 msgstr "Perfil predeterminat"
@@ -4599,7 +4607,7 @@ msgstr "Editeu el perfil «%1»"
 msgid "None"
 msgstr "Sense"
 
-#: widgets/EditProfileDialog.cpp:550
+#: widgets/EditProfileDialog.cpp:549
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4609,7 +4617,7 @@ msgid_plural " columns"
 msgstr[0] " columna"
 msgstr[1] " columnes"
 
-#: widgets/EditProfileDialog.cpp:552
+#: widgets/EditProfileDialog.cpp:551
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4619,42 +4627,42 @@ msgid_plural " rows"
 msgstr[0] " fila"
 msgstr[1] " files"
 
-#: widgets/EditProfileDialog.cpp:562
+#: widgets/EditProfileDialog.cpp:561
 #, kde-format
 msgid "System Bell"
 msgstr "Timbre del sistema"
 
-#: widgets/EditProfileDialog.cpp:562
+#: widgets/EditProfileDialog.cpp:561
 #, kde-format
 msgid "System Notifications"
 msgstr "Notificacions del sistema"
 
-#: widgets/EditProfileDialog.cpp:562
+#: widgets/EditProfileDialog.cpp:561
 #, kde-format
 msgid "Visual Bell"
 msgstr "Timbre visual"
 
-#: widgets/EditProfileDialog.cpp:562
+#: widgets/EditProfileDialog.cpp:561
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "Ignora els esdeveniments de timbre"
 
-#: widgets/EditProfileDialog.cpp:571
+#: widgets/EditProfileDialog.cpp:570
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "Perfil predeterminat per a les noves sessions de terminal a %1"
 
-#: widgets/EditProfileDialog.cpp:678
+#: widgets/EditProfileDialog.cpp:677
 #, kde-format
 msgid "Edit Environment"
 msgstr "Edita l'entorn"
 
-#: widgets/EditProfileDialog.cpp:679
+#: widgets/EditProfileDialog.cpp:678
 #, kde-format
 msgid "One environment variable per line"
 msgstr "Una variable d'entorn per línia"
 
-#: widgets/EditProfileDialog.cpp:712
+#: widgets/EditProfileDialog.cpp:711
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4662,23 +4670,23 @@ msgid_plural " seconds"
 msgstr[0] " segon"
 msgstr[1] " segons"
 
-#: widgets/EditProfileDialog.cpp:842
+#: widgets/EditProfileDialog.cpp:841
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "Trieu el directori inicial"
 
-#: widgets/EditProfileDialog.cpp:1004
+#: widgets/EditProfileDialog.cpp:1003
 #, kde-format
 msgid "Get New..."
 msgstr "Obtín nous…"
 
-#: widgets/EditProfileDialog.cpp:1407
+#: widgets/EditProfileDialog.cpp:1406
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "Ha fallat mentre es carregava l'esquema <resource>%1</resource>."
 
-#: widgets/EditProfileDialog.cpp:1589
+#: widgets/EditProfileDialog.cpp:1588
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4687,7 +4695,7 @@ msgstr ""
 "Este esquema de color té un fons transparent que pareix que no està admés en "
 "este escriptori"
 
-#: widgets/EditProfileDialog.cpp:1595
+#: widgets/EditProfileDialog.cpp:1594
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4696,12 +4704,12 @@ msgstr ""
 "Konsole es va iniciar abans d'activar els efectes de l'escriptori. Cal "
 "tornar a iniciar Konsole per a veure el fons transparent."
 
-#: widgets/EditProfileDialog.cpp:1996
+#: widgets/EditProfileDialog.cpp:1995
 #, kde-format
 msgid "Default for file type"
 msgstr "Tipus de fitxer predeterminat"
 
-#: widgets/EditProfileDialog.cpp:2022
+#: widgets/EditProfileDialog.cpp:2021
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4730,7 +4738,7 @@ msgstr ""
 "esta configuració i el fitxer s'obrirà amb l'editor\n"
 "de text predeterminat."
 
-#: widgets/EditProfileDialog.cpp:2035
+#: widgets/EditProfileDialog.cpp:2034
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Ordre personalitzada de l'editor de text"
@@ -5867,3 +5875,10 @@ msgstr "&Configura o canvia el nom de la pestanya…"
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "Tanca la pestanya"
+
+#~ msgid "Distrobox: %1"
+#~ msgstr "Distrobox: %1"
+
+# skip-rule: kct-toolbox
+#~ msgid "Toolbox: %1"
+#~ msgstr "ToolboX: %1"
