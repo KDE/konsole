@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-20 00:50+0000\n"
-"PO-Revision-Date: 2026-02-12 11:11+0100\n"
+"PO-Revision-Date: 2026-02-21 00:35+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -697,11 +697,10 @@ msgid "AaZz09..."
 msgstr "AaZz09…"
 
 #: containers/ContainerList.cpp:78
-#, fuzzy, kde-format
-#| msgid "Host: %1"
+#, kde-format
 msgctxt "@title:group section header in new-tab menu"
 msgid "Host"
-msgstr "Máquina: %1"
+msgstr "Máquina"
 
 #: containers/ContainerRegistry.cpp:43
 #, kde-format
@@ -719,14 +718,12 @@ msgstr "Distrobox"
 #: containers/KapsuleDetector.cpp:33
 #, kde-format
 msgid "Kapsule"
-msgstr ""
+msgstr "Kapsule"
 
 #: containers/KapsuleDetector.cpp:79
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox added to the name of the current default profile"
-#| msgid " [Default]"
+#, kde-format
 msgid " [default]"
-msgstr " [Predeterminado]"
+msgstr " [predeterminado]"
 
 #: containers/ToolboxDetector.cpp:29
 #, kde-format
@@ -5867,9 +5864,3 @@ msgstr "&Configurar o cambiar el nombre de la pestaña…"
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "Cerrar pestaña"
-
-#~ msgid "Distrobox: %1"
-#~ msgstr "Distrobox: %1"
-
-#~ msgid "Toolbox: %1"
-#~ msgstr "Toolbox: %1"
