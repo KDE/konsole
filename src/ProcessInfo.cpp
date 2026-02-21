@@ -456,9 +456,45 @@ protected:
         }
 
         path_buffer[length] = '\0';
-        QString path = QFile::decodeName(path_buffer);
+        const QString realPath = QFile::decodeName(path_buffer);
 
-        setCurrentDir(path);
+        // Prefer $PWD if it points to the same directory as /proc/<pid>/cwd.
+        // This preserves symlink-based "logical" paths (what shells typically show),
+        // while still ensuring the path matches the process' actual working directory.
+        QString logicalPwd;
+        QFile envFile(QStringLiteral("/proc/%1/environ").arg(pid));
+        if (envFile.open(QIODevice::ReadOnly)) {
+            const QByteArray env = envFile.readAll();
+            const QByteArray key("PWD=");
+            int idx = env.indexOf(key);
+            while (idx != -1 && idx > 0 && env.at(idx - 1) != '\0') {
+                idx = env.indexOf(key, idx + 1);
+            }
+            if (idx != -1) {
+                const int valueStart = idx + key.size();
+                int end = env.indexOf('\0', valueStart);
+                if (end == -1) {
+                    end = env.size();
+                }
+                logicalPwd = QFile::decodeName(env.mid(valueStart, end - valueStart));
+            }
+        }
+
+        QString chosenPath = realPath;
+        // If PWD is set to an existing, absolute path
+        if (!logicalPwd.isEmpty() && QDir(logicalPwd).exists() && QDir::isAbsolutePath(logicalPwd)) {
+            // and the canonical path of PWD
+            const QString canonicalLogical = QFileInfo(logicalPwd).canonicalFilePath();
+            if (!canonicalLogical.isEmpty()) {
+                const QString canonicalReal = QFileInfo(realPath).canonicalFilePath();
+                // is equal to realPath or equal to the canonical path of realPath, then prefer that.
+                if (canonicalLogical == realPath || canonicalLogical == canonicalReal) {
+                    chosenPath = logicalPwd;
+                }
+            }
+        }
+
+        setCurrentDir(chosenPath);
         return true;
     }
 
