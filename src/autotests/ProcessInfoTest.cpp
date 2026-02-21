@@ -10,6 +10,7 @@
 // Qt
 #include <QDir>
 #include <QString>
+#include <QTemporaryDir>
 #include <QTest>
 
 // Konsole
@@ -20,6 +21,10 @@
 #include <memory>
 
 #include <QTest>
+
+#if defined(Q_OS_LINUX)
+#include <unistd.h>
+#endif
 
 using namespace Konsole;
 
@@ -71,6 +76,38 @@ void ProcessInfoTest::testProcessCwd()
     currDir = procInfo->currentDir(&ok);
     QVERIFY(ok);
     QCOMPARE(currDir, parentDir);
+
+    proc.write(QStringLiteral("exit\n").toLocal8Bit());
+    proc.waitForFinished(1000);
+#endif
+}
+
+void ProcessInfoTest::testProcessCwdSymlink()
+{
+#if defined(Q_OS_LINUX)
+    if (Session::checkProgram(QStringLiteral("bash")).isEmpty())
+        return;
+
+    QTemporaryDir tmp;
+    QVERIFY(tmp.isValid());
+
+    const QString realDir = tmp.path() + QStringLiteral("/real");
+    QVERIFY(QDir().mkpath(realDir));
+
+    const QString linkDir = tmp.path() + QStringLiteral("/link");
+    QCOMPARE(::symlink(realDir.toLocal8Bit().constData(), linkDir.toLocal8Bit().constData()), 0);
+
+    KProcess proc;
+    proc.setWorkingDirectory(linkDir);
+    proc.setEnv(QStringLiteral("PWD"), linkDir);
+    proc.setProgram({QStringLiteral("bash"), QStringLiteral("-x")});
+    proc.start();
+
+    auto procInfo = createProcInfo(proc);
+    bool ok;
+    const QString currDir = procInfo->currentDir(&ok);
+    QVERIFY(ok);
+    QCOMPARE(currDir, linkDir);
 
     proc.write(QStringLiteral("exit\n").toLocal8Bit());
     proc.waitForFinished(1000);

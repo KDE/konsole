@@ -25,6 +25,7 @@ private Q_SLOTS:
     // testing of ProcessInfo::update is itnegrated into the tests
     void testProcessValidity();
     void testProcessCwd();
+    void testProcessCwdSymlink();
     void testProcessNameSpecialChars();
 
 private:
