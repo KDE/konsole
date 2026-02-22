@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-20 00:50+0000\n"
-"PO-Revision-Date: 2026-02-13 16:52+0400\n"
+"PO-Revision-Date: 2026-02-21 17:24+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -682,11 +682,10 @@ msgid "AaZz09..."
 msgstr "AaZz09..."
 
 #: containers/ContainerList.cpp:78
-#, fuzzy, kde-format
-#| msgid "Host: %1"
+#, kde-format
 msgctxt "@title:group section header in new-tab menu"
 msgid "Host"
-msgstr "المضيف: %1"
+msgstr "المضيف"
 
 #: containers/ContainerRegistry.cpp:43
 #, kde-format
@@ -702,14 +701,12 @@ msgstr "Distrobox"
 #: containers/KapsuleDetector.cpp:33
 #, kde-format
 msgid "Kapsule"
-msgstr ""
+msgstr "Kapsule"
 
 #: containers/KapsuleDetector.cpp:79
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox added to the name of the current default profile"
-#| msgid " [Default]"
+#, kde-format
 msgid " [default]"
-msgstr " [المبدئيّ]"
+msgstr " [المبدئي]"
 
 #: containers/ToolboxDetector.cpp:29
 #, kde-format
