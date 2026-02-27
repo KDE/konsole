@@ -667,11 +667,10 @@ msgid "AaZz09..."
 msgstr "AaZz09..."
 
 #: containers/ContainerList.cpp:78
-#, fuzzy, kde-format
-#| msgid "Host: %1"
+#, kde-format
 msgctxt "@title:group section header in new-tab menu"
 msgid "Host"
-msgstr "主机：%1"
+msgstr ""
 
 #: containers/ContainerRegistry.cpp:43
 #, kde-format
@@ -690,11 +689,9 @@ msgid "Kapsule"
 msgstr ""
 
 #: containers/KapsuleDetector.cpp:79
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox added to the name of the current default profile"
-#| msgid " [Default]"
+#, kde-format
 msgid " [default]"
-msgstr " [默认]"
+msgstr ""
 
 #: containers/ToolboxDetector.cpp:29
 #, kde-format
@@ -5696,9 +5693,3 @@ msgstr "配置或者重命名标签页(&C)..."
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "关闭标签页"
-
-#~ msgid "Distrobox: %1"
-#~ msgstr "Distrobox：%1"
-
-#~ msgid "Toolbox: %1"
-#~ msgstr "Toolbox：%1"
