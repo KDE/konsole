@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-20 00:50+0000\n"
-"PO-Revision-Date: 2026-02-01 15:47+0530\n"
+"PO-Revision-Date: 2026-02-27 21:19+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-l10n-ta@kde.org>\n"
 "Language: ta\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.12.1\n"
+"X-Generator: Lokalize 25.12.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -667,11 +667,10 @@ msgid "AaZz09..."
 msgstr "AaZz09..."
 
 #: containers/ContainerList.cpp:78
-#, fuzzy, kde-format
-#| msgid "Host: %1"
+#, kde-format
 msgctxt "@title:group section header in new-tab menu"
 msgid "Host"
-msgstr "புரவன்: %1"
+msgstr "புரவன்"
 
 #: containers/ContainerRegistry.cpp:43
 #, kde-format
@@ -690,9 +689,7 @@ msgid "Kapsule"
 msgstr ""
 
 #: containers/KapsuleDetector.cpp:79
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox added to the name of the current default profile"
-#| msgid " [Default]"
+#, kde-format
 msgid " [default]"
 msgstr " [இயல்பிருப்பு]"
 
@@ -4166,17 +4163,15 @@ msgstr "இயக்கு"
 
 #. i18n: ectx: property (text), widget (QLabel, label_12)
 #: widgets/EditProfileAppearancePage.ui:457
-#, fuzzy, kde-format
-#| msgid "Activation:"
+#, kde-format
 msgid "Animation:"
-msgstr "தூண்டுவது:"
+msgstr "அசைவூட்டம்:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableAnimatingCursorButton)
 #: widgets/EditProfileAppearancePage.ui:473
-#, fuzzy, kde-format
-#| msgid "Make the cursor blink regularly"
+#, kde-format
 msgid "Make the cursor animate smoothly"
-msgstr "இடஞ்சுட்டி தொடர்ச்சியாக மினுக்கச் செய்யும்"
+msgstr "இடஞ்சுட்டியின் அசைவூட்டத்தை மேம்படுத்து"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #. i18n: ectx: attribute (title), widget (QWidget, miscTab)
@@ -4542,11 +4537,9 @@ msgid "Edit Profile \"%1\""
 msgstr "\"%1\" என்ற பயன்முறையை திருத்துவது"
 
 #: widgets/EditProfileDialog.cpp:529
-#, fuzzy, kde-format
-#| msgctxt "Do not show a close button"
-#| msgid "None"
+#, kde-format
 msgid "None"
-msgstr "வேண்டாம்"
+msgstr "ஏதுமில்லை"
 
 #: widgets/EditProfileDialog.cpp:549
 #, kde-format
@@ -4784,7 +4777,7 @@ msgstr "தற்போதைய அமர்விலுள்ள கொள்�
 #: widgets/EditProfileGeneralPage.ui:229
 #, kde-format
 msgid "Always start in container:"
-msgstr ""
+msgstr "கொள்கலனில் எப்போதும் துவக்கு:"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, containerCombo)
 #: widgets/EditProfileGeneralPage.ui:242
@@ -4792,6 +4785,7 @@ msgstr ""
 msgid ""
 "Always start new sessions using this profile inside the selected container"
 msgstr ""
+"இந்தப் பயன்முறையைப் பயன்படுத்தும் அனைத்து அமர்வுகளும் குறிப்பிட்ட கொள்கலனிலேயே துவக்கப்படும்"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/EditProfileGeneralPage.ui:255
