@@ -111,6 +111,11 @@ void ViewSplitter::addTerminalDisplay(TerminalDisplay *terminalDisplay, Qt::Orie
     ViewSplitter *splitter = activeSplitter();
     const int currentIndex = splitter->activeTerminalDisplay() == nullptr ? splitter->count() : splitter->indexOf(splitter->activeTerminalDisplay());
 
+    if (splitter->activeTerminalDisplay()) {
+        auto oldf = splitter->activeTerminalDisplay()->terminalFont()->getVTFont();
+        terminalDisplay->terminalFont()->setVTFont(oldf);
+    }
+
     if (splitter->count() < 2) {
         splitter->insertWidget(behavior == AddBehavior::AddBefore ? currentIndex : currentIndex + 1, terminalDisplay);
         splitter->setOrientation(containerOrientation);
