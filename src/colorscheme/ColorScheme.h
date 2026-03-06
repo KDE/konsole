@@ -154,7 +154,15 @@ public:
     static QString colorNameForIndex(int index);
     static QString translatedColorNameForIndex(int index);
 
+    QList<QColor> generateHarmonicTable();
+
 private:
+    struct CieLAB {
+        qreal L = 0.0;
+        qreal a = 0.0;
+        qreal b = 0.0;
+    };
+
     // returns the active color table.  if none has been set specifically,
     // this is the default color table.
     const QColor *colorTable() const;
@@ -192,6 +200,11 @@ private:
 
     static const char *const colorNames[TABLE_COLORS];
     static const KLazyLocalizedString translatedColorNames[TABLE_COLORS];
+
+    // https://www.easyrgb.com/en/math.php#text2
+    CieLAB rgbToLab(const QColor &rgb);
+    QColor labToRgb(const CieLAB &lab);
+    CieLAB lerpLab(qreal t, const CieLAB &lab1, const CieLAB &lab2);
 };
 }
 

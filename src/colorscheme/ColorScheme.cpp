@@ -192,6 +192,8 @@ ColorScheme::ColorScheme(const ColorScheme &other)
     setName(other.name());
     setDescription(other.description());
 
+    auto harmonicTable = generateHarmonicTable();
+
     if (other._table != nullptr) {
         for (int i = 0; i < TABLE_COLORS; i++) {
             setColorTableEntry(i, other._table[i]);
@@ -210,6 +212,47 @@ ColorScheme::~ColorScheme()
 {
     delete[] _table;
     delete[] _randomTable;
+}
+
+QList<QColor> ColorScheme::generateHarmonicTable()
+{
+    QList<CieLAB> base8lab = {
+        rgbToLab(colorEntry(1)), // background
+        rgbToLab(colorEntry(3)), // red
+        rgbToLab(colorEntry(4)), // green
+        rgbToLab(colorEntry(5)), // yellow
+        rgbToLab(colorEntry(6)), // blue
+        rgbToLab(colorEntry(7)), // magenta
+        rgbToLab(colorEntry(8)), // cyan
+        rgbToLab(colorEntry(0)), // foreground
+    };
+
+    QList<QColor> palette;
+
+    for (qreal r = 0; r < 6; r++) {
+        auto c0 = lerpLab(r / 5, base8lab[0], base8lab[1]);
+        auto c1 = lerpLab(r / 5, base8lab[2], base8lab[3]);
+        auto c2 = lerpLab(r / 5, base8lab[4], base8lab[5]);
+        auto c3 = lerpLab(r / 5, base8lab[6], base8lab[7]);
+
+        for (qreal g = 0; g < 6; g++) {
+            auto c4 = lerpLab(g / 5, c0, c1);
+            auto c5 = lerpLab(g / 5, c2, c3);
+
+            for (qreal b = 0; b < 6; b++) {
+                auto c6 = lerpLab(b / 5, c4, c5);
+                palette.append(labToRgb(c6));
+            }
+        }
+    }
+
+    for (qreal i = 0; i < 24; i++) {
+        auto t = (i + 1) / 25;
+        auto lab = lerpLab(t, base8lab[0], base8lab[7]);
+        palette.append(labToRgb(lab));
+    }
+
+    return palette;
 }
 
 void ColorScheme::setDescription(const QString &description)
@@ -597,4 +640,142 @@ void ColorScheme::setWallpaper(const QString &path, const QString &style, const 
 ColorSchemeWallpaper::Ptr ColorScheme::wallpaper() const
 {
     return _wallpaper;
+}
+
+// https://www.easyrgb.com/en/math.php#text2
+ColorScheme::CieLAB ColorScheme::rgbToLab(const QColor &rgb)
+{
+    qreal R = rgb.red() / 255.0;
+    qreal G = rgb.green() / 255.0;
+    qreal B = rgb.blue() / 255.0;
+
+    // First turn to XYZ
+    if (R > 0.04045) {
+        R = std::pow(((R + 0.055) / 1.055), 2.4);
+    } else {
+        R = R / 12.92;
+    }
+
+    if (G > 0.04045) {
+        G = std::pow(((G + 0.055) / 1.055), 2.4);
+    } else {
+        G = G / 12.92;
+    }
+
+    if (B > 0.04045) {
+        B = std::pow(((B + 0.055) / 1.055), 2.4);
+    } else {
+        B = B / 12.92;
+    }
+
+    R = R * 100;
+    G = G * 100;
+    B = B * 100;
+
+    qreal X = R * 0.4124 + G * 0.3576 + B * 0.1805;
+    qreal Y = R * 0.2126 + G * 0.7152 + B * 0.0722;
+    qreal Z = R * 0.0193 + G * 0.1192 + B * 0.9505;
+
+    // Then turn XYZ to Lab
+    // Observer 2° and Illuminant D65
+    X = X / 95.047;
+    Y = Y / 100.0;
+    Z = Z / 108.883;
+
+    if (X > 0.008856) {
+        X = std::pow(X, (1.0 / 3.0));
+    } else {
+        X = (7.787 * X) + (16.0 / 116.0);
+    }
+    if (Y > 0.008856) {
+        Y = std::pow(Y, (1.0 / 3.0));
+    } else {
+        Y = (7.787 * Y) + (16.0 / 116.0);
+    }
+    if (Z > 0.008856) {
+        Z = std::pow(Z, (1.0 / 3.0));
+    } else {
+        Z = (7.787 * Z) + (16.0 / 116.0);
+    }
+
+    CieLAB Lab;
+    Lab.L = (116 * Y) - 16;
+    Lab.a = 500 * (X - Y);
+    Lab.b = 200 * (Y - Z);
+
+    return Lab;
+}
+
+QColor ColorScheme::labToRgb(const ColorScheme::CieLAB &lab)
+{
+    // First get XYZ values
+    qreal Y = (lab.L + 16) / 116.0;
+    qreal X = lab.a / 500 + Y;
+    qreal Z = Y - lab.b / 200;
+
+    if (std::pow(Y, 3) > 0.008856) {
+        Y = std::pow(Y, 3);
+    } else {
+        Y = (Y - 16 / 116.0) / 7.787;
+    }
+
+    if (std::pow(X, 3) > 0.008856) {
+        X = std::pow(X, 3);
+    } else {
+        X = (X - 16 / 116.0) / 7.787;
+    }
+
+    if (std::pow(Z, 3) > 0.008856) {
+        Z = std::pow(Z, 3);
+    } else {
+        Z = (Z - 16 / 116.0) / 7.787;
+    }
+
+    // Then turn Lab to XYZ
+    // Observer 2° and Illuminant D65
+    X = X * 95.047;
+    Y = Y * 100.0;
+    Z = Z * 108.883;
+
+    // Then turn it into RGB
+    X = X / 100.0;
+    Y = Y / 100.0;
+    Z = Z / 100.0;
+
+    qreal R = X * 3.2406 + Y * -1.5372 + Z * -0.4986;
+    qreal G = X * -0.9689 + Y * 1.8758 + Z * 0.0415;
+    qreal B = X * 0.0557 + Y * -0.2040 + Z * 1.0570;
+
+    if (R > 0.0031308) {
+        R = 1.055 * (std::pow(R, (1 / 2.4) - 0.055));
+    } else {
+        R = 12.92 * R;
+    }
+
+    if (G > 0.0031308) {
+        G = 1.055 * (std::pow(G, (1 / 2.4) - 0.055));
+    } else {
+        G = 12.92 * G;
+    }
+
+    if (B > 0.0031308) {
+        B = 1.055 * (std::pow(B, (1 / 2.4) - 0.055));
+    } else {
+        B = 12.92 * B;
+    }
+
+    R = R * 255;
+    G = G * 255;
+    B = B * 255;
+
+    return QColor(R, G, B);
+}
+
+ColorScheme::CieLAB ColorScheme::lerpLab(qreal t, const CieLAB &lab1, const CieLAB &lab2)
+{
+    CieLAB newLab;
+    newLab.L = lab1.L + t * (lab2.L - lab1.L);
+    newLab.a = lab1.a + t * (lab2.a - lab1.a);
+    newLab.b = lab1.b + t * (lab2.b - lab1.b);
+    return newLab;
 }
