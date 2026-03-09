@@ -14,14 +14,14 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-20 00:50+0000\n"
-"PO-Revision-Date: 2026-01-03 11:28+0100\n"
+"PO-Revision-Date: 2026-03-08 15:00+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 25.12.0\n"
+"X-Generator: Lokalize 25.12.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #, kde-format
@@ -169,29 +169,25 @@ msgstr "Ibili banatutako prozesu batean"
 #, kde-format
 msgctxt "@info:shell"
 msgid "Show the menubar, overriding the default setting"
-msgstr "Erakutsi menu-barra, lehenetsitako ezarpena indargabetuz"
+msgstr "Erakutsi menu-barra, lehenetsitako ezarpena gaindituz"
 
 #: Application.cpp:67
 #, kde-format
 msgctxt "@info:shell"
 msgid "Hide the menubar, overriding the default setting"
-msgstr "Ezkutatu menu-barra, lehenetsitako ezarpena indargabetuz"
+msgstr "Ezkutatu menu-barra, lehenetsitako ezarpena gaindituz"
 
 #: Application.cpp:68
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "Show the tabbar, overriding the default setting"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Show all the toolbars, overriding the default setting"
-msgstr "Erakutsi Fitxa-barra, lehenetsitako ezarpena indargabetuz"
+msgstr "Erakutsi tresna-barra guztiak, lehenetsitako ezarpena gaindituz"
 
 #: Application.cpp:69
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "Hide the tabbar, overriding the default setting"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Hide all the toolbars, overriding the default setting"
-msgstr "Ezkutatu Fitxa-barra, lehenetsitako ezarpena indargabetuz"
+msgstr "Ezkutatu Fitxa-barra, lehenetsitako ezarpena gaindituz"
 
 #: Application.cpp:70
 #, kde-format
@@ -688,39 +684,37 @@ msgid "AaZz09..."
 msgstr "AaZz09..."
 
 #: containers/ContainerList.cpp:78
-#, fuzzy, kde-format
-#| msgid "Host: %1"
+#, kde-format
 msgctxt "@title:group section header in new-tab menu"
 msgid "Host"
-msgstr "Ostalaria: %1"
+msgstr "Ostalaria"
 
 #: containers/ContainerRegistry.cpp:43
 #, kde-format
 msgid ""
 "Container support is not available when Konsole is running inside Flatpak."
 msgstr ""
+"Edukiontzi-euskarria ez dago erabilgarri Konsole Flatpak barruan dabilenean."
 
 #: containers/DistroboxDetector.cpp:72
 #, kde-format
 msgid "Distrobox"
-msgstr ""
+msgstr "Distrobox"
 
 #: containers/KapsuleDetector.cpp:33
 #, kde-format
 msgid "Kapsule"
-msgstr ""
+msgstr "Kapsule"
 
 #: containers/KapsuleDetector.cpp:79
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox added to the name of the current default profile"
-#| msgid " [Default]"
+#, kde-format
 msgid " [default]"
 msgstr " [Lehenetsia]"
 
 #: containers/ToolboxDetector.cpp:29
 #, kde-format
 msgid "Toolbox"
-msgstr ""
+msgstr "Toolbox"
 
 #: CopyInputDialog.cpp:30
 #, kde-format
@@ -2671,7 +2665,7 @@ msgstr "Entzun ZModem terminal-kodeak"
 #: settings/GeneralSettings.ui:105
 #, kde-format
 msgid "Show progress in taskbar"
-msgstr ""
+msgstr "Erakutsi aurrerapena ataza-barran"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/GeneralSettings.ui:112
@@ -2831,13 +2825,14 @@ msgstr ""
 #: settings/konsole.kcfg:42
 #, kde-format
 msgid "Show progress in task bar"
-msgstr ""
+msgstr "Erakutsi aurrerapen ataza-barran"
 
 #. i18n: ectx: tooltip, entry (ShowProgressInTaskBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:43
 #, kde-format
 msgid "When a script reports its progress, it will be shown in the task bar"
 msgstr ""
+"Gidoiak bere aurrerapenaren berri ematen duenean, ataza-barran erakutsiko da"
 
 #. i18n: ectx: tooltip, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
 #: settings/konsole.kcfg:48
@@ -4208,17 +4203,15 @@ msgstr "Gaituta"
 
 #. i18n: ectx: property (text), widget (QLabel, label_12)
 #: widgets/EditProfileAppearancePage.ui:457
-#, fuzzy, kde-format
-#| msgid "Activation:"
+#, kde-format
 msgid "Animation:"
-msgstr "Aktibatzea:"
+msgstr "Animazioa:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableAnimatingCursorButton)
 #: widgets/EditProfileAppearancePage.ui:473
-#, fuzzy, kde-format
-#| msgid "Make the cursor blink regularly"
+#, kde-format
 msgid "Make the cursor animate smoothly"
-msgstr "Egin kurtsorea erregularki keinu egitea"
+msgstr "Kurtsorearen animazioa leundu"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #. i18n: ectx: attribute (title), widget (QWidget, miscTab)
@@ -4467,7 +4460,7 @@ msgstr "Taulak marrazteko karaktereak LTR sendotzat hartu."
 #: widgets/EditProfileAppearancePage.ui:1012
 #, kde-format
 msgid "Table characters BiDi mode override"
-msgstr "Tauletako karaktereen BiDi modua gainidaztea"
+msgstr "Tauletako karaktereen BiDi modua gainditu"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:1025
@@ -4479,7 +4472,7 @@ msgstr "Ezikusi karaktere arazotsuen «wcwidth»"
 #: widgets/EditProfileAppearancePage.ui:1028
 #, kde-format
 msgid "Override wcwidth"
-msgstr "Gainidatzi «wcwidth»"
+msgstr "Gainditu wcwidth"
 
 #: widgets/EditProfileDialog.cpp:70
 #, kde-format
@@ -4584,9 +4577,7 @@ msgid "Edit Profile \"%1\""
 msgstr "Editatu \"%1\" profila"
 
 #: widgets/EditProfileDialog.cpp:529
-#, fuzzy, kde-format
-#| msgctxt "Do not show a close button"
-#| msgid "None"
+#, kde-format
 msgid "None"
 msgstr "Bat ere ez"
 
@@ -4818,19 +4809,20 @@ msgid ""
 "When opening a new tab or split, automatically enter the same container "
 "(Toolbox, Distrobox) as the current session"
 msgstr ""
+"Fitxa edo zatiketa berri bat irekitzean, sartu automatikoki uneko saioaren "
+"edukiontzi berean (Toolbox, Distrobox)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, inheritContainerButton)
 #: widgets/EditProfileGeneralPage.ui:203
-#, fuzzy, kde-format
-#| msgid "Start in same directory as current session"
+#, kde-format
 msgid "Enter same container as current session"
-msgstr "Hasi uneko saioko direktorio berean"
+msgstr "Sartu uneko saioko edukiontzi berean"
 
 #. i18n: ectx: property (text), widget (QLabel, containerLabel)
 #: widgets/EditProfileGeneralPage.ui:229
 #, kde-format
 msgid "Always start in container:"
-msgstr ""
+msgstr "Hasi beti edukiontzian:"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, containerCombo)
 #: widgets/EditProfileGeneralPage.ui:242
@@ -4838,6 +4830,7 @@ msgstr ""
 msgid ""
 "Always start new sessions using this profile inside the selected container"
 msgstr ""
+"Profil hau erabiltzen duten saio berriak beti hautatutako edukiontzian hasi"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/EditProfileGeneralPage.ui:255
@@ -5708,10 +5701,9 @@ msgstr "Fitxaren ko&lorea:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/RenameTabWidget.ui:128
-#, fuzzy, kde-format
-#| msgid "Tab Co&lor:"
+#, kde-format
 msgid "&Activity Tab Color:"
-msgstr "Fitxaren ko&lorea:"
+msgstr "J&arduera-fitxaren kolorea:"
 
 #: widgets/TabTitleFormatButton.cpp:21
 #, c-format
