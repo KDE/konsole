@@ -5748,7 +5748,7 @@ msgstr "أغلق الطرفية"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Restore terminal"
-msgstr "استعد الطّرفيّة"
+msgstr "استعد الطرفية"
 
 #: widgets/ViewContainer.cpp:60
 #, kde-format
