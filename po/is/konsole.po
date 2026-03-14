@@ -7,14 +7,14 @@
 # Arnar Leósson <leosson@frisurf.no>, 2003.
 # Svanur Palsson <svanur@tern.is>, 2004.
 # Arnar Leosson <leosson@frisurf.no>, 2004, 2005.
-# SPDX-FileCopyrightText: 2009, 2010, 2011, 2016, 2023, 2025 Sveinn í Felli <sveinki@nett.is>
+# SPDX-FileCopyrightText: 2009, 2010, 2011, 2016, 2023, 2025, 2026 Sveinn í Felli <sveinki@nett.is>
 # SPDX-FileCopyrightText: 2023, 2024 gummi <gudmundure@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-20 00:50+0000\n"
-"PO-Revision-Date: 2025-12-07 10:46+0000\n"
+"PO-Revision-Date: 2026-03-13 11:30+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
 "Language: is\n"
@@ -180,20 +180,16 @@ msgid "Hide the menubar, overriding the default setting"
 msgstr "Fela valmyndastikuna, hnekkja sjálfgefnum stillingum"
 
 #: Application.cpp:68
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "Show the tabbar, overriding the default setting"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Show all the toolbars, overriding the default setting"
-msgstr "Sýna flipastikuna, hnekkja sjálfgefnum stillingum"
+msgstr "Sýna allar verkfærastikur, hnekkja sjálfgefnum stillingum"
 
 #: Application.cpp:69
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "Hide the tabbar, overriding the default setting"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Hide all the toolbars, overriding the default setting"
-msgstr "Fela flipastikuna, hnekkja sjálfgefnum stillingum"
+msgstr "Fela allar verkfærastikur, hnekkja sjálfgefnum stillingum"
 
 #: Application.cpp:70
 #, kde-format
@@ -689,39 +685,37 @@ msgid "AaZz09..."
 msgstr "AaÖö09..."
 
 #: containers/ContainerList.cpp:78
-#, fuzzy, kde-format
-#| msgid "Host: %1"
+#, kde-format
 msgctxt "@title:group section header in new-tab menu"
 msgid "Host"
-msgstr "Vél: %1"
+msgstr "Hýsitölva"
 
 #: containers/ContainerRegistry.cpp:43
 #, kde-format
 msgid ""
 "Container support is not available when Konsole is running inside Flatpak."
 msgstr ""
+"Stuðningur við gáma er ekki tiltækur þegar Konsole keyrir innan í Flatpak."
 
 #: containers/DistroboxDetector.cpp:72
 #, kde-format
 msgid "Distrobox"
-msgstr ""
+msgstr "Distrobox"
 
 #: containers/KapsuleDetector.cpp:33
 #, kde-format
 msgid "Kapsule"
-msgstr ""
+msgstr "Kapsule"
 
 #: containers/KapsuleDetector.cpp:79
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox added to the name of the current default profile"
-#| msgid " [Default]"
+#, kde-format
 msgid " [default]"
-msgstr "[Sjálfgefið]"
+msgstr " [sjálfgefið]"
 
 #: containers/ToolboxDetector.cpp:29
 #, kde-format
 msgid "Toolbox"
-msgstr ""
+msgstr "Verkfærasafn"
 
 #: CopyInputDialog.cpp:30
 #, kde-format
@@ -2220,6 +2214,7 @@ msgstr "Virkni í '%1' (seta '%2')"
 #, kde-format
 msgid "Security sensitive DBus API is disabled in the settings."
 msgstr ""
+"Öryggisviðkvæmir hlutar í DBus API hafa verið gerðir óvirkir í stillingum."
 
 #: session/SessionController.cpp:143
 #, kde-format
@@ -2650,22 +2645,21 @@ msgstr "Muna gluggastærð"
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ForceNewTabs)
 #. i18n: ectx: label, entry (ForceNewTabs), group (KonsoleWindow)
 #: settings/GeneralSettings.ui:91 settings/konsole.kcfg:37
-#, fuzzy, kde-format
-#| msgid "Put new tabs:"
+#, kde-format
 msgid "Force new tabs"
-msgstr "Setja nýja flipa:"
+msgstr "Þvinga nýja flipa"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ListenForZModemTerminalCodes)
 #: settings/GeneralSettings.ui:98
 #, kde-format
 msgid "Listen for ZModem terminal codes"
-msgstr ""
+msgstr "Vakta kóða fyrir ZModem-útstöð"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowProgressInTaskBar)
 #: settings/GeneralSettings.ui:105
 #, kde-format
 msgid "Show progress in taskbar"
-msgstr ""
+msgstr "Birta framvindu í verkefnastiku"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/GeneralSettings.ui:112
@@ -2770,7 +2764,7 @@ msgstr "Sýna titil glugga á titilstikunni"
 #: settings/GeneralSettings.ui:282 settings/konsole.kcfg:47
 #, kde-format
 msgid "Enable the security sensitive parts of the DBus API"
-msgstr ""
+msgstr "Virkja öryggisviðkvæma hluta í DBus API"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RemoveWindowTitleBarAndFrame)
 #. i18n: ectx: label, entry (RemoveWindowTitleBarAndFrame), group (KonsoleWindow)
@@ -2812,43 +2806,44 @@ msgstr "Gluggastærðin verður vistuð þegar Konsole er lokað"
 
 #. i18n: ectx: tooltip, entry (ForceNewTabs), group (KonsoleWindow)
 #: settings/konsole.kcfg:38
-#, fuzzy, kde-format
-#| msgid "When launching Konsole re-use existing process if possible"
+#, kde-format
 msgid ""
 "When launching Konsole create a new tab instead of creating new windows if "
 "possible"
 msgstr ""
-"Þegar Konsole er keyrt á að endurnýta fyrirliggjandi ferli ef kostur er"
+"Þegar Konsole er keyrt á að útbúa nýja flipa í stað nýrra glugga ef kostur er"
 
 #. i18n: ectx: label, entry (ShowProgressInTaskBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:42
 #, kde-format
 msgid "Show progress in task bar"
-msgstr ""
+msgstr "Birta framvindu í verkefnastiku"
 
 #. i18n: ectx: tooltip, entry (ShowProgressInTaskBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:43
 #, kde-format
 msgid "When a script reports its progress, it will be shown in the task bar"
 msgstr ""
+"Þegar skrifta vill tilkynna framvindu sína, verður það birt í "
+"verkefnastikunni"
 
 #. i18n: ectx: tooltip, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
 #: settings/konsole.kcfg:48
 #, kde-format
 msgid "DBus API like runCommand will be enabled"
-msgstr ""
+msgstr "DBus API eins og runCommand verður virkjað"
 
 #. i18n: ectx: label, entry (ListenForZModemTerminalCodes), group (KonsoleWindow)
 #: settings/konsole.kcfg:52
 #, kde-format
 msgid "Listen for ZModem Terminal codes"
-msgstr ""
+msgstr "Vakta kóða fyrir ZModem-útstöð"
 
 #. i18n: ectx: tooltip, entry (ListenForZModemTerminalCodes), group (KonsoleWindow)
 #: settings/konsole.kcfg:53
 #, kde-format
 msgid "Automatic send/receive files over serial connections"
-msgstr ""
+msgstr "Sjálfvirkt senda og taka við skrám um raðtengingar"
 
 #. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:62
@@ -4187,17 +4182,15 @@ msgstr "Virkt"
 
 #. i18n: ectx: property (text), widget (QLabel, label_12)
 #: widgets/EditProfileAppearancePage.ui:457
-#, fuzzy, kde-format
-#| msgid "Activation:"
+#, kde-format
 msgid "Animation:"
-msgstr "Virkjun:"
+msgstr "Myndhreyfingar:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableAnimatingCursorButton)
 #: widgets/EditProfileAppearancePage.ui:473
-#, fuzzy, kde-format
-#| msgid "Make the cursor blink regularly"
+#, kde-format
 msgid "Make the cursor animate smoothly"
-msgstr "Láta bendilinn blikka reglulega"
+msgstr "Láta bendilinn hreyfast mjúklega"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #. i18n: ectx: attribute (title), widget (QWidget, miscTab)
@@ -4562,11 +4555,9 @@ msgid "Edit Profile \"%1\""
 msgstr "Breyta prófíl \"%1\""
 
 #: widgets/EditProfileDialog.cpp:529
-#, fuzzy, kde-format
-#| msgctxt "Do not show a close button"
-#| msgid "None"
+#, kde-format
 msgid "None"
-msgstr "Hvergi"
+msgstr "Ekkert"
 
 #: widgets/EditProfileDialog.cpp:549
 #, kde-format
@@ -4793,26 +4784,27 @@ msgid ""
 "When opening a new tab or split, automatically enter the same container "
 "(Toolbox, Distrobox) as the current session"
 msgstr ""
+"Þegar opnaður er nýr flipi eða skipting skal fara sjálfkrafa í sama gám "
+"(Verkfærasafn, Distrobox) og núverandi seta"
 
 #. i18n: ectx: property (text), widget (QCheckBox, inheritContainerButton)
 #: widgets/EditProfileGeneralPage.ui:203
-#, fuzzy, kde-format
-#| msgid "Start in same directory as current session"
+#, kde-format
 msgid "Enter same container as current session"
-msgstr "Byrja í sömu möppu og núverandi seta"
+msgstr "Fara á sama gám og núverandi seta"
 
 #. i18n: ectx: property (text), widget (QLabel, containerLabel)
 #: widgets/EditProfileGeneralPage.ui:229
 #, kde-format
 msgid "Always start in container:"
-msgstr ""
+msgstr "Alltaf byrja í gámi:"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, containerCombo)
 #: widgets/EditProfileGeneralPage.ui:242
 #, kde-format
 msgid ""
 "Always start new sessions using this profile inside the selected container"
-msgstr ""
+msgstr "Alltaf byrja nýjar setur með þessu sniði innan í völdum gámi"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/EditProfileGeneralPage.ui:255
@@ -5674,10 +5666,9 @@ msgstr "Flipa&litur:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/RenameTabWidget.ui:128
-#, fuzzy, kde-format
-#| msgid "Tab Co&lor:"
+#, kde-format
 msgid "&Activity Tab Color:"
-msgstr "Flipa&litur:"
+msgstr "Litur virkniflip&a:"
 
 #: widgets/TabTitleFormatButton.cpp:21
 #, c-format
