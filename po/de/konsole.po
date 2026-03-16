@@ -1,11 +1,11 @@
-# SPDX-FileCopyrightText: 2002, 2003, 2004 Thomas Diehl <thd@kde.org>
-# SPDX-FileCopyrightText: 2004, 2005, 2006 Stephan Johach <hunsum@gmx.de>
-# SPDX-FileCopyrightText: 2005, 2006, 2007, 2008, 2009 Thomas Reitelbach <tr@erdfunkstelle.de>
-# SPDX-FileCopyrightText: 2008, 2009, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021 Burkhard Lück <lueck@hube-lueck.de>
+# SPDX-FileCopyrightText: 2002-2004 Thomas Diehl <thd@kde.org>
+# SPDX-FileCopyrightText: 2004-2006 Stephan Johach <hunsum@gmx.de>
+# SPDX-FileCopyrightText: 2005-2009 Thomas Reitelbach <tr@erdfunkstelle.de>
+# SPDX-FileCopyrightText: 2008-2009, 2011-2021 Burkhard Lück <lueck@hube-lueck.de>
 # SPDX-FileCopyrightText: 2010 Johannes Obermayr <johannesobermayr@gmx.de>
-# SPDX-FileCopyrightText: 2010, 2011, 2012, 2013, 2015, 2016, 2017, 2018, 2020, 2021, 2022, 2023 Frederik Schwarzer <schwarzer@kde.org>
+# SPDX-FileCopyrightText: 2010-2013, 2015-2018, 2020-2023 Frederik Schwarzer <schwarzer@kde.org>
 # SPDX-FileCopyrightText: 2011 Panagiotis Papadopoulos <pano_90@gmx.net>
-# SPDX-FileCopyrightText: 2016, 2023, 2024, 2025 Frank Steinmetzger <Warp_7@gmx.de>
+# SPDX-FileCopyrightText: 2016, 2023-2025 Frank Steinmetzger <Warp_7@gmx.de>
 # SPDX-FileCopyrightText: 2022, 2025 Alois Spitzbart <spitz234@hotmail.com>
 # SPDX-FileCopyrightText: 2026 Philipp Kiemle <l10n.daphipz@fastmail.de>
 msgid ""
@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-20 00:50+0000\n"
-"PO-Revision-Date: 2026-02-07 13:39+0100\n"
+"PO-Revision-Date: 2026-03-12 23:57+0100\n"
 "Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.12.1\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -688,39 +688,38 @@ msgid "AaZz09..."
 msgstr "AaZz09 …"
 
 #: containers/ContainerList.cpp:78
-#, fuzzy, kde-format
-#| msgid "Host: %1"
+#, kde-format
 msgctxt "@title:group section header in new-tab menu"
 msgid "Host"
-msgstr "Rechner: %1"
+msgstr "Host"
 
 #: containers/ContainerRegistry.cpp:43
 #, kde-format
 msgid ""
 "Container support is not available when Konsole is running inside Flatpak."
 msgstr ""
+"Die Unterstützung für Container ist nicht verfügbar, wenn die Flatpak-"
+"Version von Konsole ausgeführt wird."
 
 #: containers/DistroboxDetector.cpp:72
 #, kde-format
 msgid "Distrobox"
-msgstr ""
+msgstr "Distrobox"
 
 #: containers/KapsuleDetector.cpp:33
 #, kde-format
 msgid "Kapsule"
-msgstr ""
+msgstr "Kapsule"
 
 #: containers/KapsuleDetector.cpp:79
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox added to the name of the current default profile"
-#| msgid " [Default]"
+#, kde-format
 msgid " [default]"
 msgstr " [Standard]"
 
 #: containers/ToolboxDetector.cpp:29
 #, kde-format
 msgid "Toolbox"
-msgstr ""
+msgstr "Toolbox"
 
 #: CopyInputDialog.cpp:30
 #, kde-format
@@ -2679,7 +2678,7 @@ msgstr "Auf ZModem-Terminalcodes lauschen"
 #: settings/GeneralSettings.ui:105
 #, kde-format
 msgid "Show progress in taskbar"
-msgstr ""
+msgstr "Fortschritt in Taskleiste anzeigen"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/GeneralSettings.ui:112
@@ -2844,13 +2843,15 @@ msgstr ""
 #: settings/konsole.kcfg:42
 #, kde-format
 msgid "Show progress in task bar"
-msgstr ""
+msgstr "Fortschritt in Taskleiste anzeigen"
 
 #. i18n: ectx: tooltip, entry (ShowProgressInTaskBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:43
 #, kde-format
 msgid "When a script reports its progress, it will be shown in the task bar"
 msgstr ""
+"Wenn ein Skript eine Fortschrittsanzeige bietet, wird diese in der "
+"Taskleiste angezeigt"
 
 #. i18n: ectx: tooltip, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
 #: settings/konsole.kcfg:48
@@ -4227,17 +4228,15 @@ msgstr "Aktiviert"
 
 #. i18n: ectx: property (text), widget (QLabel, label_12)
 #: widgets/EditProfileAppearancePage.ui:457
-#, fuzzy, kde-format
-#| msgid "Activation:"
+#, kde-format
 msgid "Animation:"
-msgstr "Aktivierung:"
+msgstr "Animation:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableAnimatingCursorButton)
 #: widgets/EditProfileAppearancePage.ui:473
-#, fuzzy, kde-format
-#| msgid "Make the cursor blink regularly"
+#, kde-format
 msgid "Make the cursor animate smoothly"
-msgstr "Lässt den Cursor regelmäßig blinken"
+msgstr "Den Cursor flüssig animieren"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #. i18n: ectx: attribute (title), widget (QWidget, miscTab)
@@ -4602,11 +4601,9 @@ msgid "Edit Profile \"%1\""
 msgstr "Profil „%1“ bearbeiten"
 
 #: widgets/EditProfileDialog.cpp:529
-#, fuzzy, kde-format
-#| msgctxt "Do not show a close button"
-#| msgid "None"
+#, kde-format
 msgid "None"
-msgstr "Keine"
+msgstr "Kein"
 
 #: widgets/EditProfileDialog.cpp:549
 #, kde-format
@@ -4828,7 +4825,7 @@ msgstr "Startordner auswählen"
 #: widgets/EditProfileGeneralPage.ui:193
 #, kde-format
 msgid "Start in same directory as current session"
-msgstr "Im selbem Ordner als aktuelle Sitzung starten"
+msgstr "Im selben Ordner wie aktuelle Sitzung starten"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, inheritContainerButton)
 #: widgets/EditProfileGeneralPage.ui:200
@@ -4837,19 +4834,21 @@ msgid ""
 "When opening a new tab or split, automatically enter the same container "
 "(Toolbox, Distrobox) as the current session"
 msgstr ""
+"Beim Öffnen eines neuen Unterfensters oder Teilen der Ansicht automatisch "
+"den gleichen Container verwenden (Toolbox, Distrobox) wie die aktuelle "
+"Sitzung"
 
 #. i18n: ectx: property (text), widget (QCheckBox, inheritContainerButton)
 #: widgets/EditProfileGeneralPage.ui:203
-#, fuzzy, kde-format
-#| msgid "Start in same directory as current session"
+#, kde-format
 msgid "Enter same container as current session"
-msgstr "Im selbem Ordner als aktuelle Sitzung starten"
+msgstr "Im selben Container wie aktuelle Sitzung starten"
 
 #. i18n: ectx: property (text), widget (QLabel, containerLabel)
 #: widgets/EditProfileGeneralPage.ui:229
 #, kde-format
 msgid "Always start in container:"
-msgstr ""
+msgstr "Immer in Container starten:"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, containerCombo)
 #: widgets/EditProfileGeneralPage.ui:242
@@ -4857,6 +4856,7 @@ msgstr ""
 msgid ""
 "Always start new sessions using this profile inside the selected container"
 msgstr ""
+"Neue Sitzungen immer mit diesem Profil in dem ausgewählten Container starten"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/EditProfileGeneralPage.ui:255
