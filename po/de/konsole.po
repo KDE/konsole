@@ -5,7 +5,7 @@
 # SPDX-FileCopyrightText: 2010 Johannes Obermayr <johannesobermayr@gmx.de>
 # SPDX-FileCopyrightText: 2010-2013, 2015-2018, 2020-2023 Frederik Schwarzer <schwarzer@kde.org>
 # SPDX-FileCopyrightText: 2011 Panagiotis Papadopoulos <pano_90@gmx.net>
-# SPDX-FileCopyrightText: 2016, 2023-2025 Frank Steinmetzger <Warp_7@gmx.de>
+# SPDX-FileCopyrightText: 2016, 2023-2025, 2026 Frank Steinmetzger <Warp_7@gmx.de>
 # SPDX-FileCopyrightText: 2022, 2025 Alois Spitzbart <spitz234@hotmail.com>
 # SPDX-FileCopyrightText: 2026 Philipp Kiemle <l10n.daphipz@fastmail.de>
 msgid ""
@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-03-22 00:47+0000\n"
-"PO-Revision-Date: 2026-03-12 23:57+0100\n"
-"Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
+"PO-Revision-Date: 2026-03-21 14:51+0100\n"
+"Last-Translator: Frank Steinmetzger <dev-kde@felsenfleischer.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -2850,7 +2850,7 @@ msgstr "Fortschritt in Taskleiste anzeigen"
 #, kde-format
 msgid "When a script reports its progress, it will be shown in the task bar"
 msgstr ""
-"Wenn ein Skript eine Fortschrittsanzeige bietet, wird diese in der "
+"Wenn ein Skript eine Fortschrittsmeldung sendet, wird diese in der "
 "Taskleiste angezeigt"
 
 #. i18n: ectx: tooltip, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
@@ -5740,10 +5740,9 @@ msgstr "&Unterfensterfarbe:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/RenameTabWidget.ui:128
-#, fuzzy, kde-format
-#| msgid "Select &Tab Color"
+#, kde-format
 msgid "&Activity Tab Color:"
-msgstr "&Farbe für Unterfenster wählen"
+msgstr "Farbe bei &Aktivität:"
 
 #: widgets/TabTitleFormatButton.cpp:21
 #, c-format
