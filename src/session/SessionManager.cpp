@@ -241,6 +241,29 @@ void SessionManager::applyProfile(Session *session, const Profile::Ptr &profile,
         session->setActivityColor(profile->tabActivityColor());
     }
 
+    // Badge properties
+    if (apply.shouldApply(Profile::BadgeEnabled)) {
+        session->setBadgeEnabled(profile->badgeEnabled());
+    }
+    if (apply.shouldApply(Profile::BadgeText)) {
+        session->setBadgeText(profile->badgeText());
+    }
+    if (apply.shouldApply(Profile::BadgeFontFamily)) {
+        session->setBadgeFontFamily(profile->badgeFontFamily());
+    }
+    if (apply.shouldApply(Profile::BadgeFontSize)) {
+        session->setBadgeFontSize(profile->badgeFontSize());
+    }
+    if (apply.shouldApply(Profile::BadgeColor)) {
+        session->setBadgeColor(profile->badgeColor());
+    }
+    if (apply.shouldApply(Profile::BadgeTextOnly)) {
+        session->setBadgeTextOnly(profile->badgeTextOnly());
+    }
+    if (apply.shouldApply(Profile::BadgeTransparency)) {
+        session->setBadgeTransparency(profile->badgeTransparency());
+    }
+
     // History
     if (apply.shouldApply(Profile::HistoryMode) || apply.shouldApply(Profile::HistorySize)) {
         const auto mode = profile->property<int>(Profile::HistoryMode);

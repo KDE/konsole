@@ -74,6 +74,13 @@ public:
     Q_PROPERTY(int processId READ processId)
     Q_PROPERTY(QString keyBindings READ keyBindings WRITE setKeyBindings)
     Q_PROPERTY(QSize size READ size WRITE setSize)
+    Q_PROPERTY(bool badgeEnabled READ badgeEnabled WRITE setBadgeEnabled)
+    Q_PROPERTY(QString badgeText READ badgeText WRITE setBadgeText)
+    Q_PROPERTY(QString badgeFontFamily READ badgeFontFamily WRITE setBadgeFontFamily)
+    Q_PROPERTY(int badgeFontSize READ badgeFontSize WRITE setBadgeFontSize)
+    Q_PROPERTY(QColor badgeColor READ badgeColor WRITE setBadgeColor)
+    Q_PROPERTY(bool badgeTextOnly READ badgeTextOnly WRITE setBadgeTextOnly)
+    Q_PROPERTY(int badgeTransparency READ badgeTransparency WRITE setBadgeTransparency)
 
     /**
      * Constructs a new session.
@@ -220,6 +227,55 @@ public:
      * rename-tab dialog.
      */
     bool isTabActivityColorSetByUser() const;
+
+    /**
+     * Sets whether the badge overlay is enabled for this session.
+     */
+    Q_SCRIPTABLE void setBadgeEnabled(bool enabled);
+    /** Returns whether the badge overlay is enabled for this session. */
+    Q_SCRIPTABLE bool badgeEnabled() const;
+
+    /**
+     * Sets the text displayed in the badge overlay.
+     */
+    Q_SCRIPTABLE void setBadgeText(const QString &text);
+    /** Returns the text displayed in the badge overlay. */
+    Q_SCRIPTABLE QString badgeText() const;
+
+    /**
+     * Sets the font family used for the badge overlay.
+     */
+    Q_SCRIPTABLE void setBadgeFontFamily(const QString &family);
+    /** Returns the font family used for the badge overlay. */
+    Q_SCRIPTABLE QString badgeFontFamily() const;
+
+    /**
+     * Sets the font size used for the badge overlay.
+     */
+    Q_SCRIPTABLE void setBadgeFontSize(int size);
+    /** Returns the font size used for the badge overlay. */
+    Q_SCRIPTABLE int badgeFontSize() const;
+
+    /**
+     * Sets the color used for the badge overlay.
+     */
+    Q_SCRIPTABLE void setBadgeColor(const QColor &color);
+    /** Returns the color used for the badge overlay. */
+    Q_SCRIPTABLE QColor badgeColor() const;
+
+    /**
+     * Sets whether the badge should be displayed as text only (without background).
+     */
+    Q_SCRIPTABLE void setBadgeTextOnly(bool textOnly);
+    /** Returns whether the badge is displayed as text only. */
+    Q_SCRIPTABLE bool badgeTextOnly() const;
+
+    /**
+     * Sets the transparency level for the badge (0-255, where 0 is fully transparent and 255 is opaque).
+     */
+    Q_SCRIPTABLE void setBadgeTransparency(int transparency);
+    /** Returns the transparency level of the badge. */
+    Q_SCRIPTABLE int badgeTransparency() const;
 
     /** Returns the arguments passed to the shell process when run() is called. */
     QStringList arguments() const;
@@ -966,6 +1022,8 @@ private:
 
     QString validDirectory(const QString &dir) const;
 
+    QString expandBadgeText(const QString &badgeText) const;
+
     QUuid _uniqueIdentifier; // SHELL_SESSION_ID
 
     Pty *_shellProcess = nullptr;
@@ -1002,6 +1060,15 @@ private:
     bool _tabTitleSetByUser = false;
     bool _tabColorSetByUser = false;
     bool _tabActivityColorSetByUser = false;
+
+    // Badge properties
+    bool _badgeEnabled = false;
+    QString _badgeText;
+    QString _badgeFontFamily;
+    int _badgeFontSize = 12;
+    QColor _badgeColor;
+    bool _badgeTextOnly = false;
+    int _badgeTransparency = 180;
 
     QString _iconName = QString();
     QString _iconText = QString(); // not actually used

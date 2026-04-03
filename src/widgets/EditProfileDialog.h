@@ -244,6 +244,15 @@ private Q_SLOTS:
     void toggleWordModeBrahmic(bool mode);
     void toggleIgnoreWcWidth(bool ignore);
 
+    // badge page
+    void toggleBadgeEnabled(bool enable);
+    void badgeTextChanged(const QString &text);
+    void badgeFontFamilyChanged(const QString &family);
+    void badgeFontSizeChanged(int size);
+    void badgeColorChanged(const QColor &color);
+    void badgeTextOnlyChanged(bool textOnly);
+    void badgeTransparencyChanged(int transparency);
+
 private:
     Q_DISABLE_COPY(EditProfileDialog)
 

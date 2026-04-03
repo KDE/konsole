@@ -27,6 +27,7 @@
 
 // Konsole
 #include "EscapeSequenceUrlExtractor.h"
+#include "session/Session.h"
 #include "session/SessionController.h"
 #include "session/SessionManager.h"
 #include "terminalDisplay/TerminalColor.h"
@@ -1133,8 +1134,7 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
             _currentScreen->currentTerminalDisplay()->terminalColor()->setCursorColor(QColor());
             break;
         default:
-            _pendingSessionAttributesUpdates[attribute] = QString();
-            _sessionAttributesUpdateTimer->start(20);
+            reportDecodingError(token_osc(terminator));
             break;
         }
 

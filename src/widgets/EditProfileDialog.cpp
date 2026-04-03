@@ -1032,6 +1032,45 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr &profile)
 
     _appearanceUi->ignoreWcWidth->setChecked(profile->property<bool>(Profile::IgnoreWcWidth));
     connect(_appearanceUi->ignoreWcWidth, &QPushButton::toggled, this, &EditProfileDialog::toggleIgnoreWcWidth);
+
+    // badge options
+    _appearanceUi->badgeEnabled->setChecked(profile->badgeEnabled());
+    connect(_appearanceUi->badgeEnabled, &QCheckBox::toggled, this, &EditProfileDialog::toggleBadgeEnabled);
+
+    _appearanceUi->badgeTextEdit->setText(profile->badgeText());
+    connect(_appearanceUi->badgeTextEdit, &QLineEdit::textChanged, this, &EditProfileDialog::badgeTextChanged);
+
+    _appearanceUi->badgeFontEdit->setText(profile->badgeFontFamily());
+    connect(_appearanceUi->badgeFontEdit, &QLineEdit::textChanged, this, &EditProfileDialog::badgeFontFamilyChanged);
+
+    _appearanceUi->badgeFontSizeSpinner->setValue(profile->badgeFontSize());
+    connect(_appearanceUi->badgeFontSizeSpinner, &QSpinBox::valueChanged, this, &EditProfileDialog::badgeFontSizeChanged);
+
+    _appearanceUi->badgeColorSelectButton->setColor(profile->badgeColor());
+    connect(_appearanceUi->badgeColorSelectButton, &KColorButton::changed, this, &EditProfileDialog::badgeColorChanged);
+
+    _appearanceUi->badgeTextOnlyCheckBox->setChecked(profile->badgeTextOnly());
+    connect(_appearanceUi->badgeTextOnlyCheckBox, &QCheckBox::toggled, this, &EditProfileDialog::badgeTextOnlyChanged);
+
+    _appearanceUi->badgeTransparencySlider->setValue(profile->badgeTransparency());
+    connect(_appearanceUi->badgeTransparencySlider, &QSlider::valueChanged, this, &EditProfileDialog::badgeTransparencyChanged);
+    connect(_appearanceUi->badgeTransparencySlider, &QSlider::valueChanged, this, [this](int value) {
+        _appearanceUi->badgeTransparencyValueLabel->setText(QString::number(value));
+    });
+
+    // Enable/disable badge controls based on badge enabled state
+    _appearanceUi->badge_label_1->setEnabled(profile->badgeEnabled());
+    _appearanceUi->badgeTextEdit->setEnabled(profile->badgeEnabled());
+    _appearanceUi->badge_label_2->setEnabled(profile->badgeEnabled());
+    _appearanceUi->badgeFontEdit->setEnabled(profile->badgeEnabled());
+    _appearanceUi->badgeFontSizeLabel->setEnabled(profile->badgeEnabled());
+    _appearanceUi->badgeFontSizeSpinner->setEnabled(profile->badgeEnabled());
+    _appearanceUi->badgeColorLabel->setEnabled(profile->badgeEnabled());
+    _appearanceUi->badgeColorSelectButton->setEnabled(profile->badgeEnabled());
+    _appearanceUi->badgeTextOnlyCheckBox->setEnabled(profile->badgeEnabled());
+    _appearanceUi->badgeTransparencyLabel->setEnabled(profile->badgeEnabled());
+    _appearanceUi->badgeTransparencySlider->setEnabled(profile->badgeEnabled());
+    _appearanceUi->badgeTransparencyValueLabel->setEnabled(profile->badgeEnabled());
 }
 
 void EditProfileDialog::setAntialiasText(bool enable)
@@ -2303,6 +2342,55 @@ void EditProfileDialog::toggleWordModeBrahmic(bool mode)
 void EditProfileDialog::toggleIgnoreWcWidth(bool ignore)
 {
     updateTempProfileProperty(Profile::IgnoreWcWidth, ignore);
+}
+
+void EditProfileDialog::toggleBadgeEnabled(bool enable)
+{
+    updateTempProfileProperty(Profile::BadgeEnabled, enable);
+    
+    // Enable/disable badge controls based on badge enabled state
+    _appearanceUi->badge_label_1->setEnabled(enable);
+    _appearanceUi->badgeTextEdit->setEnabled(enable);
+    _appearanceUi->badge_label_2->setEnabled(enable);
+    _appearanceUi->badgeFontEdit->setEnabled(enable);
+    _appearanceUi->badgeFontSizeLabel->setEnabled(enable);
+    _appearanceUi->badgeFontSizeSpinner->setEnabled(enable);
+    _appearanceUi->badgeColorLabel->setEnabled(enable);
+    _appearanceUi->badgeColorSelectButton->setEnabled(enable);
+    _appearanceUi->badgeTextOnlyCheckBox->setEnabled(enable);
+    _appearanceUi->badgeTransparencyLabel->setEnabled(enable);
+    _appearanceUi->badgeTransparencySlider->setEnabled(enable);
+    _appearanceUi->badgeTransparencyValueLabel->setEnabled(enable);
+}
+
+void EditProfileDialog::badgeTextChanged(const QString &text)
+{
+    updateTempProfileProperty(Profile::BadgeText, text);
+}
+
+void EditProfileDialog::badgeFontFamilyChanged(const QString &family)
+{
+    updateTempProfileProperty(Profile::BadgeFontFamily, family);
+}
+
+void EditProfileDialog::badgeFontSizeChanged(int size)
+{
+    updateTempProfileProperty(Profile::BadgeFontSize, size);
+}
+
+void EditProfileDialog::badgeColorChanged(const QColor &color)
+{
+    updateTempProfileProperty(Profile::BadgeColor, color);
+}
+
+void EditProfileDialog::badgeTextOnlyChanged(bool textOnly)
+{
+    updateTempProfileProperty(Profile::BadgeTextOnly, textOnly);
+}
+
+void EditProfileDialog::badgeTransparencyChanged(int transparency)
+{
+    updateTempProfileProperty(Profile::BadgeTransparency, transparency);
 }
 
 #include "moc_EditProfileDialog.cpp"

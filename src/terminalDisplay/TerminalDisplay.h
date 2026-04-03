@@ -634,6 +634,9 @@ private:
 
     void paintFilters(QPainter &painter);
 
+    // draws the badge overlay on the terminal
+    void drawBadge(QPainter &painter);
+
     void setupHeaderVisibility();
 
     // redraws the cursor

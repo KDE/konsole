@@ -808,6 +808,108 @@ void TerminalDisplay::paintEvent(QPaintEvent *pe)
         paint.setBrush(QColor(100, 100, 100, 127));
         paint.drawRect(rect);
     }
+
+    // Draw badge overlay
+    drawBadge(paint);
+}
+
+void TerminalDisplay::drawBadge(QPainter &painter)
+{
+    // Check if we have a session and badge text to display
+    if (!_sessionController || _sessionController->session().isNull()) {
+        return;
+    }
+
+    Session *session = _sessionController->session();
+
+    if (!session->badgeEnabled()) {
+        return;
+    }
+
+    QString badgeText = session->badgeText();
+    
+    // Don't draw if badge text is empty
+    if (badgeText.isEmpty()) {
+        return;
+    }
+
+    // Get badge properties from session
+    QColor badgeColor = session->badgeColor();
+    QString badgeFontFamily = session->badgeFontFamily();
+    int badgeFontSize = session->badgeFontSize();
+    bool badgeTextOnly = session->badgeTextOnly();
+    int badgeTransparency = session->badgeTransparency();
+
+    // Set up default values if not specified
+    if (!badgeColor.isValid()) {
+        badgeColor = QColor(255, 255, 255); // Default white
+    }
+    
+    if (badgeFontFamily.isEmpty()) {
+        badgeFontFamily = _terminalFont->getVTFont().family(); // Use terminal font family as default
+    }
+    
+    if (badgeFontSize <= 0) {
+        badgeFontSize = qMax(12, _terminalFont->fontHeight() * 3 / 4); // Default to 3/4 of terminal font height, minimum 12
+    }
+
+    // Create font for badge
+    QFont badgeFont(badgeFontFamily, badgeFontSize);
+    badgeFont.setBold(true);
+
+    // Calculate text metrics
+    QFontMetrics fontMetrics(badgeFont);
+    QRect textRect = fontMetrics.boundingRect(badgeText);
+    
+    // Position badge in top-right corner with some margin
+    const int margin = 16;
+    const auto headerHeight = _headerBar->isVisible() ? _headerBar->height() : 0;
+    const auto scrollBarWidth = _scrollBar->scrollBarPosition() == Enum::ScrollBarRight ? _scrollBar->width() : 0;
+
+    painter.setRenderHint(QPainter::Antialiasing, true);
+    painter.setFont(badgeFont);
+
+    if (badgeTextOnly) {
+        // Text-only mode: just draw the text with transparency
+        const int textX = width() - textRect.width() - margin - scrollBarWidth;
+        const int textY = headerHeight + margin + fontMetrics.ascent();
+
+        QColor textColor = badgeColor;
+        textColor.setAlpha(badgeTransparency);
+        painter.setPen(textColor);
+        painter.drawText(textX, textY, badgeText);
+    } else {
+        // Badge mode: draw background rectangle and text
+        const int padding = 8;
+        const int badgeWidth = textRect.width() + (padding * 2);
+        const int badgeHeight = textRect.height() + (padding * 2);
+        
+        const int badgeX = width() - badgeWidth - margin - scrollBarWidth;
+        const int badgeY = headerHeight + margin;
+
+        QRect badgeRect(badgeX, badgeY, badgeWidth, badgeHeight);
+
+        // Draw badge background with rounded corners
+        QColor backgroundColor = badgeColor;
+        backgroundColor.setAlpha(badgeTransparency);
+        
+        painter.setPen(Qt::NoPen);
+        painter.setBrush(backgroundColor);
+        painter.drawRoundedRect(badgeRect, 4, 4);
+
+        // Draw badge text
+        // Use contrasting text color based on background brightness
+        qreal brightness = (badgeColor.red() * 0.299 + badgeColor.green() * 0.587 + badgeColor.blue() * 0.114) / 255.0;
+        QColor textColor = (brightness > 0.5) ? Qt::black : Qt::white;
+        textColor.setAlpha(255); // Text should be fully opaque for readability
+        painter.setPen(textColor);
+
+        // Center text in badge
+        QRect textDrawRect = badgeRect.adjusted(padding, padding, -padding, -padding);
+        painter.drawText(textDrawRect, Qt::AlignCenter, badgeText);
+    }
+
+    painter.setRenderHint(QPainter::Antialiasing, false);
 }
 
 QPoint TerminalDisplay::cursorPosition() const
@@ -3163,6 +3265,12 @@ void TerminalDisplay::setSessionController(SessionController *controller)
 {
     _sessionController = controller;
     _headerBar->finishHeaderSetup(controller);
+    
+    // Connect to session attribute changes to update badge display
+    if (_sessionController && !_sessionController->session().isNull()) {
+        connect(_sessionController->session().data(), &Session::sessionAttributeChanged, 
+                this, QOverload<>::of(&QWidget::update));
+    }
 }
 
 SessionController *TerminalDisplay::sessionController()

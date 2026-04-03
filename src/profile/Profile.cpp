@@ -57,6 +57,7 @@ static const char TERMINAL_GROUP[] = "Terminal Features";
 static const char CURSOR_GROUP[] = "Cursor Options";
 static const char INTERACTION_GROUP[] = "Interaction Options";
 static const char ENCODING_GROUP[] = "Encoding Options";
+static const char BADGE_GROUP[] = "Badge Options";
 
 const std::vector<Profile::PropertyInfo> Profile::DefaultProperties = {
     // General
@@ -180,6 +181,15 @@ const std::vector<Profile::PropertyInfo> Profile::DefaultProperties = {
 
     // Encoding
     {DefaultEncoding, "DefaultEncoding", ENCODING_GROUP, DEFAULT_ENCODING},
+
+    // Badge
+    {BadgeText, "BadgeText", BADGE_GROUP, QStringLiteral("Badge text")},
+    {BadgeColor, "BadgeColor", BADGE_GROUP, QColor(Qt::red)},
+    {BadgeFontFamily, "BadgeFontFamily", BADGE_GROUP, QStringLiteral("Arial")},
+    {BadgeFontSize, "BadgeFontSize", BADGE_GROUP, 12},
+    {BadgeEnabled, "BadgeEnabled", BADGE_GROUP, false},
+    {BadgeTextOnly, "BadgeTextOnly", BADGE_GROUP, false},
+    {BadgeTransparency, "BadgeTransparency", BADGE_GROUP, 180},
 };
 
 QHash<QString, Profile::PropertyInfo> Profile::PropertyInfoByName;

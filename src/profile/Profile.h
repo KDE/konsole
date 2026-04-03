@@ -445,6 +445,22 @@ public:
         /** (int) Milliseconds interval between autosave activations
          */
         AutoSaveInterval,
+        /** Badge text, may contain variables */
+        BadgeText,
+        /** (QColor) Badge color */
+        BadgeColor,
+        /** (QString) Font family */
+        BadgeFontFamily,
+        /** (int) Font size */
+        BadgeFontSize,
+        /** (bool) Badge enabled */
+        BadgeEnabled,
+        /** (enum) Badge position */
+        BadgePosition,
+        /** (bool) Badge text only mode (no background) */
+        BadgeTextOnly,
+        /** (int) Badge transparency level (0-255) */
+        BadgeTransparency,
     };
 
     Q_ENUM(Property)
@@ -942,6 +958,41 @@ public:
     bool semanticInputClick() const
     {
         return property<bool>(Profile::SemanticInputClick);
+    }
+
+    QString badgeText() const
+    {
+        return property<QString>(Profile::BadgeText);
+    }
+
+    QColor badgeColor() const
+    {
+        return property<QColor>(Profile::BadgeColor);
+    }
+
+    QString badgeFontFamily() const
+    {
+        return property<QString>(Profile::BadgeFontFamily);
+    }
+
+    int badgeFontSize() const
+    {
+        return property<int>(Profile::BadgeFontSize);
+    }
+
+    bool badgeEnabled() const
+    {
+        return property<bool>(Profile::BadgeEnabled);
+    }
+
+    bool badgeTextOnly() const
+    {
+        return property<bool>(Profile::BadgeTextOnly);
+    }
+
+    int badgeTransparency() const
+    {
+        return property<int>(Profile::BadgeTransparency);
     }
 
     /** Return a list of all properties names and their type

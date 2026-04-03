@@ -26,6 +26,7 @@
 #include <QFile>
 #include <QKeyEvent>
 #include <QRandomGenerator>
+#include <QRegularExpression>
 #include <QThread>
 
 // KDE
@@ -2170,6 +2171,13 @@ void Session::saveSession(KConfigGroup &group)
     group.writeEntry("TabActivityColor", activityColor().isValid() ? activityColor().name(QColor::HexArgb) : QString());
     group.writeEntry("SessionGuid", _uniqueIdentifier.toString());
     group.writeEntry("Encoding", QString::fromUtf8(codec()));
+    
+    // Badge properties
+    group.writeEntry("BadgeEnabled", badgeEnabled());
+    group.writeEntry("BadgeText", badgeText());
+    group.writeEntry("BadgeFontFamily", badgeFontFamily());
+    group.writeEntry("BadgeFontSize", badgeFontSize());
+    group.writeEntry("BadgeColor", badgeColor().isValid() ? badgeColor().name(QColor::HexArgb) : QString());
 }
 
 void Session::restoreSession(KConfigGroup &group)
@@ -2204,6 +2212,16 @@ void Session::restoreSession(KConfigGroup &group)
     if (!value.isEmpty()) {
         setCodec(value.toUtf8());
     }
+    
+    // Badge properties
+    setBadgeEnabled(group.readEntry("BadgeEnabled", false));
+    setBadgeText(group.readEntry("BadgeText", QString()));
+    setBadgeFontFamily(group.readEntry("BadgeFontFamily", QString()));
+    setBadgeFontSize(group.readEntry("BadgeFontSize", 12));
+    value = group.readEntry("BadgeColor");
+    if (!value.isEmpty()) {
+        setBadgeColor(QColor(value));
+    }
 }
 
 QString Session::validDirectory(const QString &dir) const
@@ -2221,6 +2239,65 @@ QString Session::validDirectory(const QString &dir) const
     }
 
     return validDir;
+}
+
+QString Session::expandBadgeText(const QString &badgeText) const
+{
+    QString expandedText = badgeText;
+    
+    // Replace session variables
+    // Available session variables:
+    // - session.title: The current session title (user title if set, otherwise display title)
+    // - session.name: The session name
+    // - session.id: The session ID
+    // - session.directory: Current working directory
+    // - session.hostname: Current hostname
+    // - session.process: Current foreground process name
+    
+    QString sessionTitle = userTitle().isEmpty() ? title(Session::DisplayedTitleRole) : userTitle();
+    expandedText.replace(QStringLiteral("\\(session.title)"), sessionTitle);
+    expandedText.replace(QStringLiteral("\\(session.name)"), nameTitle());
+    expandedText.replace(QStringLiteral("\\(session.id)"), QString::number(_sessionId));
+    expandedText.replace(QStringLiteral("\\(session.directory)"), _currentWorkingDir);
+    expandedText.replace(QStringLiteral("\\(session.hostname)"), _currentHostName);
+    
+    // Get foreground process name safely
+    QString processName;
+    if (_foregroundProcessInfo) {
+        bool ok = false;
+        processName = _foregroundProcessInfo->name(&ok);
+        if (!ok) {
+            processName = QStringLiteral("unknown");
+        }
+    } else {
+        processName = QStringLiteral("unknown");
+    }
+    expandedText.replace(QStringLiteral("\\(session.process)"), processName);
+    
+    // Replace environment variables
+    // Pattern: \(env.VARIABLE_NAME)
+    QRegularExpression envRegex(QStringLiteral("\\\\\\(env\\.([A-Za-z_][A-Za-z0-9_]*)\\)"));
+    QRegularExpressionMatchIterator envIterator = envRegex.globalMatch(expandedText);
+    
+    // Process matches in reverse order to avoid position shifts
+    QList<QRegularExpressionMatch> envMatches;
+    while (envIterator.hasNext()) {
+        envMatches.prepend(envIterator.next());
+    }
+    
+    for (const QRegularExpressionMatch &envMatch : envMatches) {
+        QString varName = envMatch.captured(1);
+        QString varValue = qEnvironmentVariable(varName.toLocal8Bit().constData());
+        
+        // If environment variable is not set, use empty string
+        if (varValue.isNull()) {
+            varValue = QString();
+        }
+        
+        expandedText.replace(envMatch.capturedStart(), envMatch.capturedLength(), varValue);
+    }
+    
+    return expandedText;
 }
 
 void Session::setPendingNotification(Session::Notification notification, bool enable)
@@ -2336,6 +2413,114 @@ void Session::setActivityColor(const QColor &color)
 QColor Session::activityColor() const
 {
     return _tabActivityColor;
+}
+
+void Session::setBadgeEnabled(bool enabled)
+{
+    if (_badgeEnabled == enabled) {
+        return;
+    }
+
+    _badgeEnabled = enabled;
+    Q_EMIT sessionAttributeChanged();
+}
+
+bool Session::badgeEnabled() const
+{
+    return _badgeEnabled;
+}
+
+void Session::setBadgeText(const QString &text)
+{
+    if (_badgeText == text) {
+        return;
+    }
+
+    _badgeText = text;
+    Q_EMIT sessionAttributeChanged();
+}
+
+QString Session::badgeText() const
+{
+    return expandBadgeText(_badgeText);
+}
+
+void Session::setBadgeFontFamily(const QString &family)
+{
+    if (_badgeFontFamily == family) {
+        return;
+    }
+
+    _badgeFontFamily = family;
+    Q_EMIT sessionAttributeChanged();
+}
+
+QString Session::badgeFontFamily() const
+{
+    return _badgeFontFamily;
+}
+
+void Session::setBadgeFontSize(int size)
+{
+    if (_badgeFontSize == size) {
+        return;
+    }
+
+    _badgeFontSize = size;
+    Q_EMIT sessionAttributeChanged();
+}
+
+int Session::badgeFontSize() const
+{
+    return _badgeFontSize;
+}
+
+void Session::setBadgeColor(const QColor &color)
+{
+    if (_badgeColor == color) {
+        return;
+    }
+
+    _badgeColor = color;
+    Q_EMIT sessionAttributeChanged();
+}
+
+QColor Session::badgeColor() const
+{
+    return _badgeColor;
+}
+
+void Session::setBadgeTextOnly(bool textOnly)
+{
+    if (_badgeTextOnly == textOnly) {
+        return;
+    }
+
+    _badgeTextOnly = textOnly;
+    Q_EMIT sessionAttributeChanged();
+}
+
+bool Session::badgeTextOnly() const
+{
+    return _badgeTextOnly;
+}
+
+void Session::setBadgeTransparency(int transparency)
+{
+    // Clamp transparency value between 0 and 255
+    int clampedTransparency = qBound(0, transparency, 255);
+    
+    if (_badgeTransparency == clampedTransparency) {
+        return;
+    }
+
+    _badgeTransparency = clampedTransparency;
+    Q_EMIT sessionAttributeChanged();
+}
+
+int Session::badgeTransparency() const
+{
+    return _badgeTransparency;
 }
 
 SessionController *Session::controller()
