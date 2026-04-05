@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-04 00:49+0000\n"
-"PO-Revision-Date: 2026-02-20 07:36+0100\n"
+"PO-Revision-Date: 2026-04-04 07:34+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -27,7 +27,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
 "Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -4452,11 +4452,9 @@ msgstr "Povozi širino wcwidth"
 
 #. i18n: ectx: property (toolTip), widget (QWidget, badgeTab)
 #: widgets/EditProfileAppearancePage.ui:1049
-#, fuzzy, kde-format
-#| msgid "<html><head/><body><p>Complex Text Layout</p></body></html>"
+#, kde-format
 msgid "<html><head/><body><p>Badge overlay options</p></body></html>"
-msgstr ""
-"<html><head/><body><p>Kompleksna razporeditev besedila</p></body></html>"
+msgstr "<html><head/><body><p>Možnosti prekritja značke</p></body></html>"
 
 #. i18n: ectx: attribute (title), widget (QWidget, badgeTab)
 #. i18n: ectx: property (text), widget (QCheckBox, badgeEnabled)
@@ -4464,20 +4462,19 @@ msgstr ""
 #: widgets/EditProfileAppearancePage.ui:1082
 #, kde-format
 msgid "Badge Overlay"
-msgstr ""
+msgstr "Prekritje značke"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeOverlayLabel)
 #: widgets/EditProfileAppearancePage.ui:1062
 #, kde-format
 msgid "Badge Overlay Options"
-msgstr ""
+msgstr "Možnosti prekritja značke"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, badgeEnabled)
 #: widgets/EditProfileAppearancePage.ui:1079
-#, fuzzy, kde-format
-#| msgid "Enable word mode text rendering"
+#, kde-format
 msgid "Enable badge overlay rendering"
-msgstr "Omogoči besedni način upodabljanja"
+msgstr "Omogoči upodabljanje prekritja značke"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, badge_label_1)
 #. i18n: ectx: property (toolTip), widget (QLineEdit, badgeTextEdit)
@@ -4486,13 +4483,13 @@ msgstr "Omogoči besedni način upodabljanja"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Default text of badge."
-msgstr ""
+msgstr "Privzeto besedilo značke."
 
 #. i18n: ectx: property (text), widget (QLabel, badge_label_1)
 #: widgets/EditProfileAppearancePage.ui:1092
 #, kde-format
 msgid "Badge text:"
-msgstr ""
+msgstr "Besedilo značke:"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeVariablesHelpLabel)
 #: widgets/EditProfileAppearancePage.ui:1118
@@ -4503,6 +4500,10 @@ msgid ""
 "hostname), \\(session.process), \\(env.VARIABLE_NAME)</small></p></body></"
 "html>"
 msgstr ""
+"<html><head/><body><p><small><b>Razpoložljive spremenljivke:</b> \\(session."
+"title), \\(session.name), \\(session.id), \\(session.directory), \\(session."
+"hostname), \\(session.process), \\(env.VARIABLE_NAME)</small></p></body></"
+"html>"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeEscapeSequenceHelpLabel)
 #: widgets/EditProfileAppearancePage.ui:1138
@@ -4512,6 +4513,9 @@ msgid ""
 "settings on this page to configure badge text, color, font, text-only mode "
 "and transparency.</small></p></body></html>"
 msgstr ""
+"<html><head/><body><p><small><b>Konfiguracija značke:</b><br/>Uporabite "
+"nastavitve profila na tej strani za konfiguracijo besedila značke, barve, "
+"pisave, načina samega besedila in prosojnosti.</small></p></body></html>"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, badge_label_2)
 #. i18n: ectx: property (toolTip), widget (QLineEdit, badgeFontEdit)
@@ -4520,65 +4524,61 @@ msgstr ""
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Badge font family."
-msgstr ""
+msgstr "Družina pisav značke."
 
 #. i18n: ectx: property (text), widget (QLabel, badge_label_2)
 #: widgets/EditProfileAppearancePage.ui:1161
 #, kde-format
 msgid "Badge font family:"
-msgstr ""
+msgstr "Družina pisav značke:"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeFontSizeLabel)
 #: widgets/EditProfileAppearancePage.ui:1194
 #, kde-format
 msgid "Badge font size:"
-msgstr ""
+msgstr "Velikost pisave značke."
 
 #. i18n: ectx: property (text), widget (QLabel, badgeColorLabel)
 #: widgets/EditProfileAppearancePage.ui:1224
-#, fuzzy, kde-format
-#| msgid "Tab Co&lor:"
+#, kde-format
 msgid "Badge color:"
-msgstr "Barva zavihka:"
+msgstr "Barva značke:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, badgeColorSelectButton)
 #: widgets/EditProfileAppearancePage.ui:1237
-#, fuzzy, kde-format
-#| msgid "Select the color used to draw the border"
+#, kde-format
 msgid "Select the color used to draw the badge"
-msgstr "Izberite barvo za izris meje"
+msgstr "Izberite barvo za izris značke"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, badgeTextOnlyCheckBox)
 #: widgets/EditProfileAppearancePage.ui:1251
 #, kde-format
 msgid "Display badge as text only without background rectangle"
-msgstr ""
+msgstr "Prikaži značko samo kot besedilo brez pravokotnika v ozadju"
 
 #. i18n: ectx: property (text), widget (QCheckBox, badgeTextOnlyCheckBox)
 #: widgets/EditProfileAppearancePage.ui:1254
-#, fuzzy, kde-format
-#| msgid "Red error background:"
+#, kde-format
 msgid "Text only (no background)"
-msgstr "Rdeče ozadje napak:"
+msgstr "Samo besedilo (brez ozadja)"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeTransparencyLabel)
 #: widgets/EditProfileAppearancePage.ui:1268
-#, fuzzy, kde-format
-#| msgid "Wallpaper transparency:"
+#, kde-format
 msgid "Transparency:"
-msgstr "Prozornost ozadja:"
+msgstr "Prozornost:"
 
 #. i18n: ectx: property (toolTip), widget (QSlider, badgeTransparencySlider)
 #: widgets/EditProfileAppearancePage.ui:1295
 #, kde-format
 msgid "Set badge transparency (0 = fully transparent, 255 = opaque)"
-msgstr ""
+msgstr "Nastavi prosojnost značke (0 = popolnoma prosojna, 255 = neprozorna)"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeTransparencyValueLabel)
 #: widgets/EditProfileAppearancePage.ui:1302
 #, kde-format
 msgid "180"
-msgstr ""
+msgstr "180"
 
 #: widgets/EditProfileDialog.cpp:70
 #, kde-format

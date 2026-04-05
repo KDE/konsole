@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-04 00:49+0000\n"
-"PO-Revision-Date: 2026-02-21 00:35+0100\n"
+"PO-Revision-Date: 2026-04-05 01:22+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -29,7 +29,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "First-Translator: Boris Wesslowski <Boris@Wesslowski.com>\n"
-"X-Generator: Lokalize 25.12.2\n"
+"X-Generator: Lokalize 25.12.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -4504,10 +4504,10 @@ msgstr "Ignorar WcWidth"
 
 #. i18n: ectx: property (toolTip), widget (QWidget, badgeTab)
 #: widgets/EditProfileAppearancePage.ui:1049
-#, fuzzy, kde-format
-#| msgid "<html><head/><body><p>Complex Text Layout</p></body></html>"
+#, kde-format
 msgid "<html><head/><body><p>Badge overlay options</p></body></html>"
-msgstr "<html><head/><body><p>Disposición de texto compleja</p></body></html>"
+msgstr ""
+"<html><head/><body><p>Opciones de superposición de placa</p></body></html>"
 
 #. i18n: ectx: attribute (title), widget (QWidget, badgeTab)
 #. i18n: ectx: property (text), widget (QCheckBox, badgeEnabled)
@@ -4515,20 +4515,19 @@ msgstr "<html><head/><body><p>Disposición de texto compleja</p></body></html>"
 #: widgets/EditProfileAppearancePage.ui:1082
 #, kde-format
 msgid "Badge Overlay"
-msgstr ""
+msgstr "Superposición de placa"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeOverlayLabel)
 #: widgets/EditProfileAppearancePage.ui:1062
 #, kde-format
 msgid "Badge Overlay Options"
-msgstr ""
+msgstr "Opciones de superposición de placa"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, badgeEnabled)
 #: widgets/EditProfileAppearancePage.ui:1079
-#, fuzzy, kde-format
-#| msgid "Enable word mode text rendering"
+#, kde-format
 msgid "Enable badge overlay rendering"
-msgstr "Activar la representación de texto en modo de palabras"
+msgstr "Activar la representación de superposición de placa"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, badge_label_1)
 #. i18n: ectx: property (toolTip), widget (QLineEdit, badgeTextEdit)
@@ -4537,13 +4536,13 @@ msgstr "Activar la representación de texto en modo de palabras"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Default text of badge."
-msgstr ""
+msgstr "Texto predeterminado de la placa."
 
 #. i18n: ectx: property (text), widget (QLabel, badge_label_1)
 #: widgets/EditProfileAppearancePage.ui:1092
 #, kde-format
 msgid "Badge text:"
-msgstr ""
+msgstr "Texto de la placa:"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeVariablesHelpLabel)
 #: widgets/EditProfileAppearancePage.ui:1118
@@ -4554,6 +4553,10 @@ msgid ""
 "hostname), \\(session.process), \\(env.VARIABLE_NAME)</small></p></body></"
 "html>"
 msgstr ""
+"<html><head/><body><p><small><b>Variables disponibles:</b> \\(session."
+"title), \\(session.name), \\(session.id), \\(session.directory), \\(session."
+"hostname), \\(session.process), \\(env.NOMBRE_DE_VARIABLE)</small></p></"
+"body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeEscapeSequenceHelpLabel)
 #: widgets/EditProfileAppearancePage.ui:1138
@@ -4563,6 +4566,10 @@ msgid ""
 "settings on this page to configure badge text, color, font, text-only mode "
 "and transparency.</small></p></body></html>"
 msgstr ""
+"<html><head/><body><p><small><b>Configuración de la placa:</b><br/>Usar las "
+"preferencias del perfil de esta página para configurar el texto, el color, "
+"el tipo de letra, el modo de solo texto y la transparencia de la placa.</"
+"small></p></body></html>"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, badge_label_2)
 #. i18n: ectx: property (toolTip), widget (QLineEdit, badgeFontEdit)
@@ -4571,65 +4578,62 @@ msgstr ""
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Badge font family."
-msgstr ""
+msgstr "Familia del tipo de letra de la placa."
 
 #. i18n: ectx: property (text), widget (QLabel, badge_label_2)
 #: widgets/EditProfileAppearancePage.ui:1161
 #, kde-format
 msgid "Badge font family:"
-msgstr ""
+msgstr "Familia del tipo de letra de la placa:"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeFontSizeLabel)
 #: widgets/EditProfileAppearancePage.ui:1194
 #, kde-format
 msgid "Badge font size:"
-msgstr ""
+msgstr "Tamaño del texto de la placa:"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeColorLabel)
 #: widgets/EditProfileAppearancePage.ui:1224
-#, fuzzy, kde-format
-#| msgid "Tab Co&lor:"
+#, kde-format
 msgid "Badge color:"
-msgstr "Co&lor de las pestañas:"
+msgstr "Color de la placa:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, badgeColorSelectButton)
 #: widgets/EditProfileAppearancePage.ui:1237
-#, fuzzy, kde-format
-#| msgid "Select the color used to draw the border"
+#, kde-format
 msgid "Select the color used to draw the badge"
-msgstr "Seleccione el color para dibujar el borde"
+msgstr "Seleccione el color para dibujar la placa"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, badgeTextOnlyCheckBox)
 #: widgets/EditProfileAppearancePage.ui:1251
 #, kde-format
 msgid "Display badge as text only without background rectangle"
-msgstr ""
+msgstr "Mostrar la placa como solo texto sin el rectángulo del fondo"
 
 #. i18n: ectx: property (text), widget (QCheckBox, badgeTextOnlyCheckBox)
 #: widgets/EditProfileAppearancePage.ui:1254
-#, fuzzy, kde-format
-#| msgid "Red error background:"
+#, kde-format
 msgid "Text only (no background)"
-msgstr "Fondo de error rojo:"
+msgstr "Solo texto (sin fondo)"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeTransparencyLabel)
 #: widgets/EditProfileAppearancePage.ui:1268
-#, fuzzy, kde-format
-#| msgid "Wallpaper transparency:"
+#, kde-format
 msgid "Transparency:"
-msgstr "Transparencia del fondo de escritorio:"
+msgstr "Transparencia:"
 
 #. i18n: ectx: property (toolTip), widget (QSlider, badgeTransparencySlider)
 #: widgets/EditProfileAppearancePage.ui:1295
 #, kde-format
 msgid "Set badge transparency (0 = fully transparent, 255 = opaque)"
 msgstr ""
+"Definir transparencia de la placa (0 = totalmente transparente, 255 = opaca)"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeTransparencyValueLabel)
 #: widgets/EditProfileAppearancePage.ui:1302
 #, kde-format
 msgid "180"
-msgstr ""
+msgstr "180"
 
 #: widgets/EditProfileDialog.cpp:70
 #, kde-format

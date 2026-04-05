@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-04 00:49+0000\n"
-"PO-Revision-Date: 2026-03-11 18:51+0100\n"
+"PO-Revision-Date: 2026-04-04 10:55+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -4474,10 +4474,10 @@ msgstr "Ultrapassa wcwidth"
 
 #. i18n: ectx: property (toolTip), widget (QWidget, badgeTab)
 #: widgets/EditProfileAppearancePage.ui:1049
-#, fuzzy, kde-format
-#| msgid "<html><head/><body><p>Complex Text Layout</p></body></html>"
+#, kde-format
 msgid "<html><head/><body><p>Badge overlay options</p></body></html>"
-msgstr "<html><head/><body><p>Disposition de Texto Complexe</p></body></html>"
+msgstr ""
+"<html><head/><body><p>Optiones de superposition de insignia</p></body></html>"
 
 #. i18n: ectx: attribute (title), widget (QWidget, badgeTab)
 #. i18n: ectx: property (text), widget (QCheckBox, badgeEnabled)
@@ -4485,20 +4485,19 @@ msgstr "<html><head/><body><p>Disposition de Texto Complexe</p></body></html>"
 #: widgets/EditProfileAppearancePage.ui:1082
 #, kde-format
 msgid "Badge Overlay"
-msgstr ""
+msgstr "Superposition de Insignia"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeOverlayLabel)
 #: widgets/EditProfileAppearancePage.ui:1062
 #, kde-format
 msgid "Badge Overlay Options"
-msgstr ""
+msgstr "Optiones de superposition de insignia"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, badgeEnabled)
 #: widgets/EditProfileAppearancePage.ui:1079
-#, fuzzy, kde-format
-#| msgid "Enable word mode text rendering"
+#, kde-format
 msgid "Enable badge overlay rendering"
-msgstr "Habilita rendition (rendering) de texto de modo de parola"
+msgstr "Habilita rendition (rendering) de superposition de insignia"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, badge_label_1)
 #. i18n: ectx: property (toolTip), widget (QLineEdit, badgeTextEdit)
@@ -4507,13 +4506,13 @@ msgstr "Habilita rendition (rendering) de texto de modo de parola"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Default text of badge."
-msgstr ""
+msgstr "Texto predefinite de insignia."
 
 #. i18n: ectx: property (text), widget (QLabel, badge_label_1)
 #: widgets/EditProfileAppearancePage.ui:1092
 #, kde-format
 msgid "Badge text:"
-msgstr ""
+msgstr "Texto de Insignia:"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeVariablesHelpLabel)
 #: widgets/EditProfileAppearancePage.ui:1118
@@ -4524,6 +4523,10 @@ msgid ""
 "hostname), \\(session.process), \\(env.VARIABLE_NAME)</small></p></body></"
 "html>"
 msgstr ""
+"<html><head/><body><p><small><b>Variabiles disponibile:</b> \\(session."
+"title), \\(session.name), \\(session.id), \\(session.directory), \\(session."
+"hostname), \\(session.process), \\(env.VARIABLE_NAME)</small></p></body></"
+"html>"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeEscapeSequenceHelpLabel)
 #: widgets/EditProfileAppearancePage.ui:1138
@@ -4533,6 +4536,9 @@ msgid ""
 "settings on this page to configure badge text, color, font, text-only mode "
 "and transparency.</small></p></body></html>"
 msgstr ""
+"<html><head/><body><p><small><b>Configuration de Insignia:</b><br/>Usa "
+"preferentias de profilo sur iste pagina per configurar texto de insignia, "
+"color, font, modo de sol texto e transparentia.</small></p></body></html>"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, badge_label_2)
 #. i18n: ectx: property (toolTip), widget (QLineEdit, badgeFontEdit)
@@ -4541,65 +4547,62 @@ msgstr ""
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Badge font family."
-msgstr ""
+msgstr "Familia de Font de Insignia"
 
 #. i18n: ectx: property (text), widget (QLabel, badge_label_2)
 #: widgets/EditProfileAppearancePage.ui:1161
 #, kde-format
 msgid "Badge font family:"
-msgstr ""
+msgstr "Familia de Font de Insignia:"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeFontSizeLabel)
 #: widgets/EditProfileAppearancePage.ui:1194
 #, kde-format
 msgid "Badge font size:"
-msgstr ""
+msgstr "Dimension de Font de Insignia:"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeColorLabel)
 #: widgets/EditProfileAppearancePage.ui:1224
-#, fuzzy, kde-format
-#| msgid "Background color:"
+#, kde-format
 msgid "Badge color:"
-msgstr "color de fundo:"
+msgstr "Color de insignia:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, badgeColorSelectButton)
 #: widgets/EditProfileAppearancePage.ui:1237
-#, fuzzy, kde-format
-#| msgid "Select the color used to draw the border"
+#, kde-format
 msgid "Select the color used to draw the badge"
-msgstr "Selige le color usate pro designar le  bordo"
+msgstr "Selige le color usate pro designar le insignia"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, badgeTextOnlyCheckBox)
 #: widgets/EditProfileAppearancePage.ui:1251
 #, kde-format
 msgid "Display badge as text only without background rectangle"
-msgstr ""
+msgstr "Monstra insignia como sol texto sin rectangulo de fundo"
 
 #. i18n: ectx: property (text), widget (QCheckBox, badgeTextOnlyCheckBox)
 #: widgets/EditProfileAppearancePage.ui:1254
-#, fuzzy, kde-format
-#| msgid "Red error background:"
+#, kde-format
 msgid "Text only (no background)"
-msgstr "Fundo de error rubie:"
+msgstr "Solmente texto (necun fundo)"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeTransparencyLabel)
 #: widgets/EditProfileAppearancePage.ui:1268
-#, fuzzy, kde-format
-#| msgid "Wallpaper transparency:"
+#, kde-format
 msgid "Transparency:"
-msgstr "Transparentia de tapete de papiro:"
+msgstr "Transparentia:"
 
 #. i18n: ectx: property (toolTip), widget (QSlider, badgeTransparencySlider)
 #: widgets/EditProfileAppearancePage.ui:1295
 #, kde-format
 msgid "Set badge transparency (0 = fully transparent, 255 = opaque)"
 msgstr ""
+"Fixa Transparentia de Insignia  (0 = plenmente transparente, 255 = opac)"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeTransparencyValueLabel)
 #: widgets/EditProfileAppearancePage.ui:1302
 #, kde-format
 msgid "180"
-msgstr ""
+msgstr "180"
 
 #: widgets/EditProfileDialog.cpp:70
 #, kde-format
