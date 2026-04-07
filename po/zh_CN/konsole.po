@@ -4390,7 +4390,7 @@ msgstr "覆盖 wcwidth"
 #: widgets/EditProfileAppearancePage.ui:1049
 #, kde-format
 msgid "<html><head/><body><p>Badge overlay options</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>徽标叠加选项</p></body></html>"
 
 #. i18n: ectx: attribute (title), widget (QWidget, badgeTab)
 #. i18n: ectx: property (text), widget (QCheckBox, badgeEnabled)
@@ -4398,19 +4398,19 @@ msgstr ""
 #: widgets/EditProfileAppearancePage.ui:1082
 #, kde-format
 msgid "Badge Overlay"
-msgstr ""
+msgstr "徽标叠加"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeOverlayLabel)
 #: widgets/EditProfileAppearancePage.ui:1062
 #, kde-format
 msgid "Badge Overlay Options"
-msgstr ""
+msgstr "徽标叠加选项"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, badgeEnabled)
 #: widgets/EditProfileAppearancePage.ui:1079
 #, kde-format
 msgid "Enable badge overlay rendering"
-msgstr ""
+msgstr "启用徽标叠加渲染"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, badge_label_1)
 #. i18n: ectx: property (toolTip), widget (QLineEdit, badgeTextEdit)
@@ -4419,13 +4419,13 @@ msgstr ""
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Default text of badge."
-msgstr ""
+msgstr "默认徽标文本。"
 
 #. i18n: ectx: property (text), widget (QLabel, badge_label_1)
 #: widgets/EditProfileAppearancePage.ui:1092
 #, kde-format
 msgid "Badge text:"
-msgstr ""
+msgstr "徽标文本："
 
 #. i18n: ectx: property (text), widget (QLabel, badgeVariablesHelpLabel)
 #: widgets/EditProfileAppearancePage.ui:1118
@@ -4436,6 +4436,9 @@ msgid ""
 "hostname), \\(session.process), \\(env.VARIABLE_NAME)</small></p></body></"
 "html>"
 msgstr ""
+"<html><head/><body><p><small><b>可用变量：</b> \\(session.title), \\(session."
+"name), \\(session.id), \\(session.directory), \\(session.hostname), "
+"\\(session.process), \\(env.VARIABLE_NAME)</small></p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeEscapeSequenceHelpLabel)
 #: widgets/EditProfileAppearancePage.ui:1138
@@ -4445,6 +4448,8 @@ msgid ""
 "settings on this page to configure badge text, color, font, text-only mode "
 "and transparency.</small></p></body></html>"
 msgstr ""
+"<html><head/><body><p><small><b>徽标配置：</b><br/>使用此页面的配置方案设置来"
+"配置徽标的文本、颜色、字体、仅文本模式和透明度。</small></p></body></html>"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, badge_label_2)
 #. i18n: ectx: property (toolTip), widget (QLineEdit, badgeFontEdit)
@@ -4453,61 +4458,61 @@ msgstr ""
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Badge font family."
-msgstr ""
+msgstr "徽标字体："
 
 #. i18n: ectx: property (text), widget (QLabel, badge_label_2)
 #: widgets/EditProfileAppearancePage.ui:1161
 #, kde-format
 msgid "Badge font family:"
-msgstr ""
+msgstr "徽标字体："
 
 #. i18n: ectx: property (text), widget (QLabel, badgeFontSizeLabel)
 #: widgets/EditProfileAppearancePage.ui:1194
 #, kde-format
 msgid "Badge font size:"
-msgstr ""
+msgstr "徽标字体大小："
 
 #. i18n: ectx: property (text), widget (QLabel, badgeColorLabel)
 #: widgets/EditProfileAppearancePage.ui:1224
 #, kde-format
 msgid "Badge color:"
-msgstr ""
+msgstr "徽标颜色："
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, badgeColorSelectButton)
 #: widgets/EditProfileAppearancePage.ui:1237
 #, kde-format
 msgid "Select the color used to draw the badge"
-msgstr ""
+msgstr "选择用于绘制徽标的颜色"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, badgeTextOnlyCheckBox)
 #: widgets/EditProfileAppearancePage.ui:1251
 #, kde-format
 msgid "Display badge as text only without background rectangle"
-msgstr ""
+msgstr "将徽标显示为不带背景矩形的文本"
 
 #. i18n: ectx: property (text), widget (QCheckBox, badgeTextOnlyCheckBox)
 #: widgets/EditProfileAppearancePage.ui:1254
 #, kde-format
 msgid "Text only (no background)"
-msgstr ""
+msgstr "仅文本 (无背景)"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeTransparencyLabel)
 #: widgets/EditProfileAppearancePage.ui:1268
 #, kde-format
 msgid "Transparency:"
-msgstr ""
+msgstr "透明度："
 
 #. i18n: ectx: property (toolTip), widget (QSlider, badgeTransparencySlider)
 #: widgets/EditProfileAppearancePage.ui:1295
 #, kde-format
 msgid "Set badge transparency (0 = fully transparent, 255 = opaque)"
-msgstr ""
+msgstr "设置徽标透明度 (0 = 完全透明，255 = 完全不透明)"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeTransparencyValueLabel)
 #: widgets/EditProfileAppearancePage.ui:1302
 #, kde-format
 msgid "180"
-msgstr ""
+msgstr "180"
 
 #: widgets/EditProfileDialog.cpp:70
 #, kde-format
