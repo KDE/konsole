@@ -112,7 +112,11 @@ void DetachableTabBar::mouseMoveEvent(QMouseEvent *event)
 
 void DetachableTabBar::mouseReleaseEvent(QMouseEvent *event)
 {
+    // Block signals on middle mouse release, to prevent QTabBar's own handling
+    // closing the tab, which is not configurable.
+    const bool signalsWereBlocked = blockSignals(event->button() == Qt::MiddleButton);
     QTabBar::mouseReleaseEvent(event);
+    blockSignals(signalsWereBlocked);
 
     switch (event->button()) {
     case Qt::MiddleButton:
