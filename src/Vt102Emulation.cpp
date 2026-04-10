@@ -629,6 +629,11 @@ void Vt102Emulation::osc_put(const uint cc)
         if ((uint)tokenStateChange[tokenState] == tokenBuffer[tokenBufferPos - 1]) {
             tokenState++;
             tokenPos = tokenBufferPos;
+            if ((uint)tokenState == strlen(tokenStateChange) - 1
+                && QString::fromUcs4(&tokenBuffer[0], tokenBufferPos).startsWith(QLatin1String("1337;FilePart="))) {
+                // State machine shortcut
+                tokenState = -2;
+            }
             if ((uint)tokenState == strlen(tokenStateChange)) {
                 tokenState = -2;
                 tokenData.clear();
@@ -1651,11 +1656,26 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
             iTermReportCellSize();
             return;
         }
-        if (!value.startsWith(QLatin1String("File="))) {
+        if (value.startsWith(QLatin1String("MultipartFile="))) {
+            savedValue = value;
+            tokenData.clear();
+        }
+        if (!value.startsWith(QLatin1String("File=")) && !value.startsWith(QLatin1String("FileEnd"))) {
             return;
         }
-        int pos = value.indexOf(QLatin1Char(':'));
-        QStringList params = value.mid(5, pos - 5).split(QLatin1Char(';'));
+        if (value.startsWith(QLatin1String("FileEnd"))) {
+            value = savedValue;
+        }
+        int pos;
+        int start;
+        if (value.startsWith(QLatin1String("File="))) {
+            pos = value.indexOf(QLatin1Char(':'));
+            start = 5;
+        } else {
+            pos = value.length();
+            start = 14;
+        }
+        QStringList params = value.mid(start, pos - start).split(QLatin1Char(';'));
         bool keepAspect = true;
         int scaledWidth = 0;
         int scaledHeight = 0;

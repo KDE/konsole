@@ -231,6 +231,7 @@ private:
     const char *tokenStateChange;
     int tokenPos;
     QByteArray tokenData;
+    QString savedValue;
 
     // Set of flags for each of the ASCII characters which indicates
     // what category they fall into (printable character, control, digit etc.)
