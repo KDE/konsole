@@ -76,15 +76,6 @@ void DetachableTabBar::setDetachableTabData(int idx, const DetachableTabData &da
     }
 }
 
-void DetachableTabBar::middleMouseButtonClickAt(const QPoint &pos)
-{
-    tabId = tabAt(pos);
-
-    if (tabId != -1) {
-        Q_EMIT closeTab(tabId);
-    }
-}
-
 void DetachableTabBar::mousePressEvent(QMouseEvent *event)
 {
     QTabBar::mousePressEvent(event);
@@ -125,13 +116,11 @@ void DetachableTabBar::mouseReleaseEvent(QMouseEvent *event)
 
     switch (event->button()) {
     case Qt::MiddleButton:
-        if (KonsoleSettings::closeTabOnMiddleMouseButton()) {
-            middleMouseButtonClickAt(event->pos());
-        }
-
         tabId = tabAt(event->pos());
         if (tabId == -1) {
             Q_EMIT newTabRequest();
+        } else if (KonsoleSettings::closeTabOnMiddleMouseButton()) {
+            Q_EMIT closeTab(tabId);
         }
         break;
     case Qt::LeftButton:
