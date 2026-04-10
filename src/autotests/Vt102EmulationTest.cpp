@@ -452,8 +452,8 @@ void Vt102EmulationTest::testBufferedUpdates()
     // Test that synchronized updates can time out.
     em.receiveChars({ESC, '[', '?', '2', '0', '2', '6', 'h'});
 
-    QVERIFY(!outputChangedSpy.wait(900));
-    QVERIFY(outputChangedSpy.wait(150));
+    QVERIFY(!outputChangedSpy.wait(800));
+    QVERIFY(outputChangedSpy.wait(300));
     outputChangedSpy.clear();
 
     // Test that synchronized updates work.
