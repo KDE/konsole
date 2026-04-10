@@ -49,7 +49,6 @@ Q_SIGNALS:
     void newTabRequest();
 
 protected:
-    void middleMouseButtonClickAt(const QPoint &pos);
     void mousePressEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
     void mouseReleaseEvent(QMouseEvent *event) override;
