@@ -2952,9 +2952,10 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent *event)
 
         bool is_key_down = (event->type() == QEvent::KeyPress);
 
-        // X11 keycodes are offset by 8 from evdev and Wayland scancodes.
-        const xkb_keycode_t keycode = event->nativeScanCode() +
-            (QGuiApplication::platformName() == QLatin1String("xcb") ? 8 : 0);
+        // Qt's nativeScanCode() returns an XKB-compatible keycode
+        // (evdev + 8) on all Linux platforms, including X11 and Wayland,
+        // so we do not need to add 8 on our side.
+        const xkb_keycode_t keycode = event->nativeScanCode();
 
         /* To correctly determine the Virtual Key Code (which represents a physical key,
          * e.g. VK_1 regardless of whether '1' or '!' is produced), we need the base keysym.
