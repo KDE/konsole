@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-04 00:49+0000\n"
-"PO-Revision-Date: 2026-01-18 16:00+0100\n"
+"PO-Revision-Date: 2026-04-11 08:43+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: pl\n"
 "Language: pl\n"
@@ -3551,7 +3551,7 @@ msgstr "Wklej &położenie"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View"
-msgstr "Widok podzielony"
+msgstr "Podziel widok"
 
 #: ViewManager.cpp:131
 #, kde-format
