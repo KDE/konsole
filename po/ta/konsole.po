@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-20 00:50+0000\n"
-"PO-Revision-Date: 2026-02-27 21:19+0530\n"
+"PO-Revision-Date: 2026-04-12 21:43+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-l10n-ta@kde.org>\n"
 "Language: ta\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.12.2\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2552,8 +2552,8 @@ msgid ""
 "software was found on this system.</p><p>You may wish to install the 'rzsz' "
 "or 'lrzsz' package.</p>"
 msgstr ""
-"<p>ஒரு ZModel கோப்பு மாற்றும் முயற்சிக்கப்பட்டுள்ளது, ஆனால் உரிய நிரல் ஏதும் இக்கணினியில் "
-"இல்லை.</p><p><p>விரும்பினால் 'rzsz' அல்லது 'lrzsz' தனை நிறுவவும்.</p>"
+"<p>ஒரு ZModem கோப்பு மாற்றும் முயற்சிக்கப்பட்டுள்ளது, ஆனால் உரிய நிரல் ஏதும் இக்கணினியில் "
+"இல்லை.</p><p>விரும்பினால் 'rzsz' அல்லது 'lrzsz' தனை நிறுவவும்.</p>"
 
 #: session/SessionController.cpp:2240
 #, kde-format
@@ -5648,10 +5648,9 @@ msgstr "கீற்றின் &நிறம்:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/RenameTabWidget.ui:128
-#, fuzzy, kde-format
-#| msgid "Select &Tab Color"
+#, kde-format
 msgid "&Activity Tab Color:"
-msgstr "தத்தின் &வண்ணத்தைத் தேர்ந்தெடு"
+msgstr "பணி நடைபெறும் கீற்றின் நிறம்:"
 
 #: widgets/TabTitleFormatButton.cpp:21
 #, c-format
