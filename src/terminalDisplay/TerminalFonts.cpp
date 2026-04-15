@@ -81,7 +81,10 @@ void TerminalFont::setVTFont(const QFont &f)
 
     // QFont::ForceIntegerMetrics has been removed.
     // Set full hinting instead to ensure the letters are aligned properly.
-    newFont.setHintingPreference(QFont::PreferFullHinting);
+    // Gate it with a dedicated option to avoid breaking what !1044 fixed.
+    if (m_profile ? m_profile->fontHinting() : false) {
+        newFont.setHintingPreference(QFont::PreferFullHinting);
+    }
 
     // "Draw intense colors in bold font" feature needs to use different font weights. StyleName
     // property, when set, doesn't allow weight changes. Since all properties (weight, stretch,

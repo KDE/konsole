@@ -243,6 +243,7 @@ private Q_SLOTS:
     void toggleWordModeAscii(bool mode);
     void toggleWordModeBrahmic(bool mode);
     void toggleIgnoreWcWidth(bool ignore);
+    void toggleFontHinting(bool enableHinting);
 
     // badge page
     void toggleBadgeEnabled(bool enable);

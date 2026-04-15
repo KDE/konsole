@@ -112,6 +112,7 @@ const std::vector<Profile::PropertyInfo> Profile::DefaultProperties = {
     {WordModeAscii, "WordModeAscii", APPEARANCE_GROUP, true},
     {WordModeBrahmic, "WordModeBrahmic", APPEARANCE_GROUP, false},
     {IgnoreWcWidth, "IgnoreWcWidth", APPEARANCE_GROUP, false},
+    {FontHinting, "FontHinting", APPEARANCE_GROUP, false},
 
 // Keyboard
 #ifdef Q_OS_MACOS

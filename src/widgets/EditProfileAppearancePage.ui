@@ -939,6 +939,22 @@
          </property>
         </widget>
        </item>
+       <item row="40" column="1">
+        <widget class="QCheckBox" name="fontHinting">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="toolTip">
+          <string>Apply hinting to glyphs when rendering, which may improve the legibility of certain fonts with some displays</string>
+         </property>
+         <property name="text">
+          <string>Font hinting</string>
+         </property>
+        </widget>
+       </item>
        <item row="61" column="0">
         <widget class="QLabel" name="label_17">
          <property name="sizePolicy">

@@ -442,6 +442,8 @@ public:
          * soft hyphen (\u00ad) has wcwidth=1, but should not be displayed per Unicode.
          */
         IgnoreWcWidth,
+        /** (bool) Enable full font hinting. */
+        FontHinting,
         /** (int) Milliseconds interval between autosave activations
          */
         AutoSaveInterval,
@@ -993,6 +995,11 @@ public:
     int badgeTransparency() const
     {
         return property<int>(Profile::BadgeTransparency);
+    }
+
+    bool fontHinting() const
+    {
+        return property<bool>(Profile::FontHinting);
     }
 
     /** Return a list of all properties names and their type
