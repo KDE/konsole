@@ -1098,7 +1098,7 @@ msgstr "Francesco Cecconi"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Stephan Kulow"
-msgstr "Stephan Kulow"
+msgstr "Francesco Cecconi"
 
 #: main.cpp:409
 #, kde-format
