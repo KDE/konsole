@@ -2417,12 +2417,12 @@ msgstr "პროცესის დასრულების მონიტ�
 #: session/SessionController.cpp:935
 #, kde-format
 msgid "Enlarge Font"
-msgstr "შრიფტის გაზრდა"
+msgstr "ფონტის გაზრდა"
 
 #: session/SessionController.cpp:943
 #, kde-format
 msgid "Shrink Font"
-msgstr "შრიფტის შემცირება"
+msgstr "ფონტის შემცირება"
 
 #: session/SessionController.cpp:948
 #, kde-format
