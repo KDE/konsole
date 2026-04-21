@@ -176,6 +176,7 @@ const std::vector<Profile::PropertyInfo> Profile::DefaultProperties = {
     {PasteFromSelectionEnabled, "PasteFromSelectionEnabled", INTERACTION_GROUP, true},
     {PasteFromClipboardEnabled, "PasteFromClipboardEnabled", INTERACTION_GROUP, false},
     {MiddleClickPasteMode, "MiddleClickPasteMode", INTERACTION_GROUP, Enum::PasteFromX11Selection},
+    {RightClickPasteMode, "RightClickPasteMode", INTERACTION_GROUP, Enum::RightClickPasteDisabled},
     {MouseWheelZoomEnabled, "MouseWheelZoomEnabled", INTERACTION_GROUP, true},
     {AllowMouseTracking, "AllowMouseTracking", INTERACTION_GROUP, true},
     {AlternateScrolling, "AlternateScrolling", INTERACTION_GROUP, true},

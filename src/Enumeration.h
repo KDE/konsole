@@ -97,6 +97,16 @@ public:
         PasteFromClipboard = 1,
     };
 
+    /** This enum describes the source from which mouse right click pastes data . */
+    enum RightClickPasteModeEnum {
+        /** Right-click paste is disabled. */
+        RightClickPasteDisabled = 0,
+        /** Paste from X11 Selection. */
+        RightClickPasteFromX11Selection = 1,
+        /** Paste from Clipboard. */
+        RightClickPasteFromClipboard = 2,
+    };
+
     /**
      * This enum describes the text editor cmd used to open local text file URLs
      * in Konsole, where line and column data are appended to the file URL, e.g.:

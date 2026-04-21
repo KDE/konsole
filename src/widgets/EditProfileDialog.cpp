@@ -1956,6 +1956,15 @@ void EditProfileDialog::setupMousePage(const Profile::Ptr &profile)
     _mouseUi->pasteFromClipboardButton->setChecked(Enum::PasteFromClipboard == middleClickPasteMode);
     connect(_mouseUi->pasteFromClipboardButton, &QPushButton::clicked, this, &EditProfileDialog::pasteFromClipboard);
 
+    // setup right click paste mode
+    const auto rightClickPasteMode = profile->property<int>(Profile::RightClickPasteMode);
+    _mouseUi->rightClickPasteDisabledButton->setChecked(Enum::RightClickPasteDisabled == rightClickPasteMode);
+    connect(_mouseUi->rightClickPasteDisabledButton, &QPushButton::clicked, this, &EditProfileDialog::rightClickPasteDisabled);
+    _mouseUi->rightClickPasteFromClipboardButton->setChecked(Enum::RightClickPasteFromClipboard == rightClickPasteMode);
+    connect(_mouseUi->rightClickPasteFromClipboardButton, &QPushButton::clicked, this, &EditProfileDialog::rightClickPasteFromClipboard);
+    _mouseUi->rightClickPasteFromX11SelectionButton->setChecked(Enum::RightClickPasteFromX11Selection == rightClickPasteMode);
+    connect(_mouseUi->rightClickPasteFromX11SelectionButton, &QPushButton::clicked, this, &EditProfileDialog::rightClickPasteFromX11Selection);
+
     _mouseUi->textEditorCustomBtn->setIcon(QIcon::fromTheme(QStringLiteral("document-edit")));
 
     // interaction options
@@ -2282,6 +2291,21 @@ void EditProfileDialog::pasteFromX11Selection()
 void EditProfileDialog::pasteFromClipboard()
 {
     updateTempProfileProperty(Profile::MiddleClickPasteMode, Enum::PasteFromClipboard);
+}
+
+void EditProfileDialog::rightClickPasteDisabled()
+{
+    updateTempProfileProperty(Profile::RightClickPasteMode, Enum::RightClickPasteDisabled);
+}
+
+void EditProfileDialog::rightClickPasteFromClipboard()
+{
+    updateTempProfileProperty(Profile::RightClickPasteMode, Enum::RightClickPasteFromClipboard);
+}
+
+void EditProfileDialog::rightClickPasteFromX11Selection()
+{
+    updateTempProfileProperty(Profile::RightClickPasteMode, Enum::RightClickPasteFromX11Selection);
 }
 
 void EditProfileDialog::TripleClickModeChanged(int newValue)

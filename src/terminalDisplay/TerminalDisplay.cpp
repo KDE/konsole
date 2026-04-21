@@ -829,7 +829,7 @@ void TerminalDisplay::drawBadge(QPainter &painter)
     }
 
     QString badgeText = session->badgeText();
-    
+
     // Don't draw if badge text is empty
     if (badgeText.isEmpty()) {
         return;
@@ -846,11 +846,11 @@ void TerminalDisplay::drawBadge(QPainter &painter)
     if (!badgeColor.isValid()) {
         badgeColor = QColor(255, 255, 255); // Default white
     }
-    
+
     if (badgeFontFamily.isEmpty()) {
         badgeFontFamily = _terminalFont->getVTFont().family(); // Use terminal font family as default
     }
-    
+
     if (badgeFontSize <= 0) {
         badgeFontSize = qMax(12, _terminalFont->fontHeight() * 3 / 4); // Default to 3/4 of terminal font height, minimum 12
     }
@@ -862,7 +862,7 @@ void TerminalDisplay::drawBadge(QPainter &painter)
     // Calculate text metrics
     QFontMetrics fontMetrics(badgeFont);
     QRect textRect = fontMetrics.boundingRect(badgeText);
-    
+
     // Position badge in top-right corner with some margin
     const int margin = 16;
     const auto headerHeight = _headerBar->isVisible() ? _headerBar->height() : 0;
@@ -885,7 +885,7 @@ void TerminalDisplay::drawBadge(QPainter &painter)
         const int padding = 8;
         const int badgeWidth = textRect.width() + (padding * 2);
         const int badgeHeight = textRect.height() + (padding * 2);
-        
+
         const int badgeX = width() - badgeWidth - margin - scrollBarWidth;
         const int badgeY = headerHeight + margin;
 
@@ -894,7 +894,7 @@ void TerminalDisplay::drawBadge(QPainter &painter)
         // Draw badge background with rounded corners
         QColor backgroundColor = badgeColor;
         backgroundColor.setAlpha(badgeTransparency);
-        
+
         painter.setPen(Qt::NoPen);
         painter.setBrush(backgroundColor);
         painter.drawRoundedRect(badgeRect, 4, 4);
@@ -1397,8 +1397,17 @@ void TerminalDisplay::mousePressEvent(QMouseEvent *ev)
     } else if (ev->button() == Qt::MiddleButton) {
         processMidButtonClick(ev);
     } else if (ev->button() == Qt::RightButton) {
-        if (usesMouseTracking() && !_readOnly && !ev->modifiers().testFlag(Qt::ShiftModifier)) {
+        if (usesMouseTracking() && !_readOnly && !ev->modifiers().testFlag(Qt::ShiftModifier) &&
+            (_rightClickPasteMode == Enum::RightClickPasteDisabled || ev->modifiers().testFlag(Qt::ControlModifier))) {
+            // Send mouse signal to terminal if mouse tracking is enabled
             sendMouseSignal(mouseButton(2, ev->modifiers()), ev->pos(), 0, true);
+        } else {
+            // Handle right-click paste
+            if (_rightClickPasteMode == Enum::RightClickPasteFromX11Selection) {
+                pasteFromX11Selection();
+            } else if (_rightClickPasteMode == Enum::RightClickPasteFromClipboard) {
+                pasteFromClipboard();
+            }
         }
     }
 }
@@ -2538,6 +2547,11 @@ void TerminalDisplay::setMiddleClickPasteMode(Enum::MiddleClickPasteModeEnum mod
     _middleClickPasteMode = mode;
 }
 
+void TerminalDisplay::setRightClickPasteMode(Enum::RightClickPasteModeEnum mode)
+{
+    _rightClickPasteMode = mode;
+}
+
 void TerminalDisplay::setCopyTextAsHTML(bool enabled)
 {
     _copyTextAsHTML = enabled;
@@ -3274,10 +3288,10 @@ void TerminalDisplay::setSessionController(SessionController *controller)
 {
     _sessionController = controller;
     _headerBar->finishHeaderSetup(controller);
-    
+
     // Connect to session attribute changes to update badge display
     if (_sessionController && !_sessionController->session().isNull()) {
-        connect(_sessionController->session().data(), &Session::sessionAttributeChanged, 
+        connect(_sessionController->session().data(), &Session::sessionAttributeChanged,
                 this, QOverload<>::of(&QWidget::update));
     }
 }
@@ -3334,6 +3348,7 @@ void TerminalDisplay::applyProfile(const Profile::Ptr &profile)
     _clearSelection = profile->property<bool>(Profile::ClearSelectionOnCopy);
     _openLinksByDirectClick = profile->property<bool>(Profile::OpenLinksByDirectClickEnabled);
     setMiddleClickPasteMode(Enum::MiddleClickPasteModeEnum(profile->property<int>(Profile::MiddleClickPasteMode)));
+    setRightClickPasteMode(Enum::RightClickPasteModeEnum(profile->property<int>(Profile::RightClickPasteMode)));
     setCopyTextAsHTML(profile->property<bool>(Profile::CopyTextAsHTML));
 
     // highlight lines scrolled into view (must be applied before margin/center)

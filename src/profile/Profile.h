@@ -277,6 +277,12 @@ public:
          * See Enum::MiddleClickPasteModeEnum
          */
         MiddleClickPasteMode,
+        /** (RightClickPasteModeEnum) Specifies the source from which mouse
+         * right click pastes data.
+         *
+         * See Enum::RightClickPasteModeEnum
+         */
+        RightClickPasteMode,
         /** (String) Default text codec */
         DefaultEncoding,
         /** (bool) Whether fonts should be aliased or not */
@@ -1010,6 +1016,16 @@ public:
     bool fontHinting() const
     {
         return property<bool>(Profile::FontHinting);
+    }
+
+    Enum::MiddleClickPasteModeEnum middleClickPasteMode() const
+    {
+        return static_cast<Enum::MiddleClickPasteModeEnum>(property<int>(Profile::MiddleClickPasteMode));
+    }
+
+    Enum::RightClickPasteModeEnum rightClickPasteMode() const
+    {
+        return static_cast<Enum::RightClickPasteModeEnum>(property<int>(Profile::RightClickPasteMode));
     }
 
     /** Return a list of all properties names and their type

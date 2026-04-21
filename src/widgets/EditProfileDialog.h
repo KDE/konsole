@@ -216,6 +216,9 @@ private Q_SLOTS:
     void toggleClearSelectionOnCopy(bool);
     void pasteFromX11Selection();
     void pasteFromClipboard();
+    void rightClickPasteDisabled();
+    void rightClickPasteFromClipboard();
+    void rightClickPasteFromX11Selection();
     void toggleAlternateScrolling(bool enable);
     void toggleAllowColorFilter(bool enable);
     void toggleAllowMouseTracking(bool allow);
