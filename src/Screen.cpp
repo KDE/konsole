@@ -2368,7 +2368,12 @@ void Screen::addHistLine()
         if (newHistLines <= oldHistLines) {
             _droppedLines += oldHistLines - newHistLines + 1;
 
-            currentTerminalDisplay()->removeLines(oldHistLines - newHistLines + 1);
+            // we could arrive here with already destructed currentTerminalDisplay()
+            // see bug 519274
+            if (currentTerminalDisplay()) {
+                currentTerminalDisplay()->removeLines(oldHistLines - newHistLines + 1);
+            }
+
             // We removed some lines, we need to verify if we need to remove a URL.
             if (_escapeSequenceUrlExtractor) {
                 _escapeSequenceUrlExtractor->historyLinesRemoved(oldHistLines - newHistLines + 1);
