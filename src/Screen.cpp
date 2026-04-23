@@ -2037,13 +2037,20 @@ void Screen::writeToStream(TerminalCharacterDecoder *decoder, int startIndex, in
 
     for (int y = top; y <= bottom; ++y) {
         int start = 0;
-        if (y == top || _blockSelectionMode) {
-            start = left;
-        }
-
         int count = -1;
-        if (y == bottom || _blockSelectionMode) {
-            count = right - start + 1;
+
+        if (_blockSelectionMode) {
+            // Normalize selection bounds to ensure a valid [min, max] column range
+            const auto [minimum, maximum] = std::minmax(left, right);
+            start = minimum;
+            count = maximum - minimum + 1;
+        } else {
+            if (y == top) {
+                start = left;
+            }
+            if (y == bottom) {
+                count = right - start + 1;
+            }
         }
 
         const bool appendNewLine = (y != bottom);
