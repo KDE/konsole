@@ -335,7 +335,7 @@
             <string>Text recognized as a file, link or an email address can be opened by direct mouse click.</string>
            </property>
            <property name="text">
-            <string>Open files/links by direct click</string>
+            <string>Open underlined files/links by direct click</string>
            </property>
           </widget>
          </item>
