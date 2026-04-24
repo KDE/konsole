@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-13 00:47+0000\n"
+"POT-Creation-Date: 2026-04-24 00:47+0000\n"
 "PO-Revision-Date: 2026-04-05 11:55+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -1938,7 +1938,7 @@ msgstr "Modalità per la &stampante (testo nero, nessuno sfondo)"
 msgid "&Scale output"
 msgstr "Ri&scala l'output"
 
-#: profile/Profile.cpp:282
+#: profile/Profile.cpp:283
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
@@ -4320,7 +4320,7 @@ msgstr "Il numero di pixel tra due righe"
 #. i18n: ectx: property (suffix), widget (QSpinBox, badgeFontSizeSpinner)
 #: widgets/EditProfileAppearancePage.ui:660
 #: widgets/EditProfileAppearancePage.ui:712
-#: widgets/EditProfileAppearancePage.ui:1207
+#: widgets/EditProfileAppearancePage.ui:1223
 #, kde-format
 msgctxt "(pixels) visual size unit"
 msgid " px"
@@ -4433,14 +4433,28 @@ msgstr "Rendi insieme le parole di caratteri dell'alfabeto brahmi"
 msgid "Brahmic scripts characters"
 msgstr "Caratteri dell'alfabeto brahmi"
 
-#. i18n: ectx: property (text), widget (QLabel, label_17)
+#. i18n: ectx: property (toolTip), widget (QCheckBox, fontHinting)
 #: widgets/EditProfileAppearancePage.ui:951
+#, kde-format
+msgid ""
+"Apply hinting to glyphs when rendering, which may improve the legibility of "
+"certain fonts with some displays"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, fontHinting)
+#: widgets/EditProfileAppearancePage.ui:954
+#, kde-format
+msgid "Font hinting"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_17)
+#: widgets/EditProfileAppearancePage.ui:967
 #, kde-format
 msgid "Emoji Font:"
 msgstr "Carattere emoji:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
-#: widgets/EditProfileAppearancePage.ui:977
+#: widgets/EditProfileAppearancePage.ui:993
 #, kde-format
 msgid ""
 "Enable Bi-Directional display on terminals (valid for Arabic, Farsi or "
@@ -4450,13 +4464,13 @@ msgstr ""
 "farsi o ebraico)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiRenderingButton)
-#: widgets/EditProfileAppearancePage.ui:980
+#: widgets/EditProfileAppearancePage.ui:996
 #, kde-format
 msgid "Bi-Directional text rendering"
 msgstr "Resa del testo bidirezionale"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
-#: widgets/EditProfileAppearancePage.ui:993
+#: widgets/EditProfileAppearancePage.ui:1009
 #, kde-format
 msgid "Lines are always LTR, rather than determined by first strong character"
 msgstr ""
@@ -4464,37 +4478,37 @@ msgstr ""
 "primo carattere forte"
 
 #. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
-#: widgets/EditProfileAppearancePage.ui:996
+#: widgets/EditProfileAppearancePage.ui:1012
 #, kde-format
 msgid "force LTR line direction"
 msgstr "forza la direzione della riga da sinistra a destra"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
-#: widgets/EditProfileAppearancePage.ui:1009
+#: widgets/EditProfileAppearancePage.ui:1025
 #, kde-format
 msgid "Treat table drawing characters as strong LTR."
 msgstr "Tratta i caratteri di disegno delle tabelle tavolo come LTR forte."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
-#: widgets/EditProfileAppearancePage.ui:1012
+#: widgets/EditProfileAppearancePage.ui:1028
 #, kde-format
 msgid "Table characters BiDi mode override"
 msgstr "Ignora la modalità BiDi dei caratteri delle tabelle"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
-#: widgets/EditProfileAppearancePage.ui:1025
+#: widgets/EditProfileAppearancePage.ui:1041
 #, kde-format
 msgid "Ignore wcwidth of problematic characters"
 msgstr "Ignora wcwidth dei caratteri problematici"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ignoreWcWidth)
-#: widgets/EditProfileAppearancePage.ui:1028
+#: widgets/EditProfileAppearancePage.ui:1044
 #, kde-format
 msgid "Override wcwidth"
 msgstr "Sovrascrivi wcwidth"
 
 #. i18n: ectx: property (toolTip), widget (QWidget, badgeTab)
-#: widgets/EditProfileAppearancePage.ui:1049
+#: widgets/EditProfileAppearancePage.ui:1065
 #, kde-format
 msgid "<html><head/><body><p>Badge overlay options</p></body></html>"
 msgstr ""
@@ -4503,41 +4517,41 @@ msgstr ""
 
 #. i18n: ectx: attribute (title), widget (QWidget, badgeTab)
 #. i18n: ectx: property (text), widget (QCheckBox, badgeEnabled)
-#: widgets/EditProfileAppearancePage.ui:1052
-#: widgets/EditProfileAppearancePage.ui:1082
+#: widgets/EditProfileAppearancePage.ui:1068
+#: widgets/EditProfileAppearancePage.ui:1098
 #, kde-format
 msgid "Badge Overlay"
 msgstr "Sovrapposizione degli emblemi"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeOverlayLabel)
-#: widgets/EditProfileAppearancePage.ui:1062
+#: widgets/EditProfileAppearancePage.ui:1078
 #, kde-format
 msgid "Badge Overlay Options"
 msgstr "Opzioni di sovrapposizione degli emblemi"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, badgeEnabled)
-#: widgets/EditProfileAppearancePage.ui:1079
+#: widgets/EditProfileAppearancePage.ui:1095
 #, kde-format
 msgid "Enable badge overlay rendering"
 msgstr "Abilita la resa in sovrapposizione degli emblemi"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, badge_label_1)
 #. i18n: ectx: property (toolTip), widget (QLineEdit, badgeTextEdit)
-#: widgets/EditProfileAppearancePage.ui:1089
-#: widgets/EditProfileAppearancePage.ui:1110
+#: widgets/EditProfileAppearancePage.ui:1105
+#: widgets/EditProfileAppearancePage.ui:1126
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Default text of badge."
 msgstr "Testo predefinito dell'emblema."
 
 #. i18n: ectx: property (text), widget (QLabel, badge_label_1)
-#: widgets/EditProfileAppearancePage.ui:1092
+#: widgets/EditProfileAppearancePage.ui:1108
 #, kde-format
 msgid "Badge text:"
 msgstr "Testo dell'emblema"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeVariablesHelpLabel)
-#: widgets/EditProfileAppearancePage.ui:1118
+#: widgets/EditProfileAppearancePage.ui:1134
 #, kde-format
 msgid ""
 "<html><head/><body><p><small><b>Available variables:</b> \\(session.title), "
@@ -4551,7 +4565,7 @@ msgstr ""
 "html>"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeEscapeSequenceHelpLabel)
-#: widgets/EditProfileAppearancePage.ui:1138
+#: widgets/EditProfileAppearancePage.ui:1154
 #, kde-format
 msgid ""
 "<html><head/><body><p><small><b>Badge configuration:</b><br/>Use profile "
@@ -4565,57 +4579,57 @@ msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QLabel, badge_label_2)
 #. i18n: ectx: property (toolTip), widget (QLineEdit, badgeFontEdit)
-#: widgets/EditProfileAppearancePage.ui:1158
-#: widgets/EditProfileAppearancePage.ui:1179
+#: widgets/EditProfileAppearancePage.ui:1174
+#: widgets/EditProfileAppearancePage.ui:1195
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Badge font family."
 msgstr "Famiglia di caratteri degli emblemi."
 
 #. i18n: ectx: property (text), widget (QLabel, badge_label_2)
-#: widgets/EditProfileAppearancePage.ui:1161
+#: widgets/EditProfileAppearancePage.ui:1177
 #, kde-format
 msgid "Badge font family:"
 msgstr "Famiglia di caratteri degli emblemi:"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeFontSizeLabel)
-#: widgets/EditProfileAppearancePage.ui:1194
+#: widgets/EditProfileAppearancePage.ui:1210
 #, kde-format
 msgid "Badge font size:"
 msgstr "Dimensione del carattere degli emblemi:"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeColorLabel)
-#: widgets/EditProfileAppearancePage.ui:1224
+#: widgets/EditProfileAppearancePage.ui:1240
 #, kde-format
 msgid "Badge color:"
 msgstr "Colore dell'emblema:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, badgeColorSelectButton)
-#: widgets/EditProfileAppearancePage.ui:1237
+#: widgets/EditProfileAppearancePage.ui:1253
 #, kde-format
 msgid "Select the color used to draw the badge"
 msgstr "Seleziona il colore utilizzato per disegnare l'emblema"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, badgeTextOnlyCheckBox)
-#: widgets/EditProfileAppearancePage.ui:1251
+#: widgets/EditProfileAppearancePage.ui:1267
 #, kde-format
 msgid "Display badge as text only without background rectangle"
 msgstr "Visualizza l'emblema solo come testo senza rettangolo di sfondo"
 
 #. i18n: ectx: property (text), widget (QCheckBox, badgeTextOnlyCheckBox)
-#: widgets/EditProfileAppearancePage.ui:1254
+#: widgets/EditProfileAppearancePage.ui:1270
 #, kde-format
 msgid "Text only (no background)"
 msgstr "Solo testo (senza sfondo)"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeTransparencyLabel)
-#: widgets/EditProfileAppearancePage.ui:1268
+#: widgets/EditProfileAppearancePage.ui:1284
 #, kde-format
 msgid "Transparency:"
 msgstr "Trasparenza:"
 
 #. i18n: ectx: property (toolTip), widget (QSlider, badgeTransparencySlider)
-#: widgets/EditProfileAppearancePage.ui:1295
+#: widgets/EditProfileAppearancePage.ui:1311
 #, kde-format
 msgid "Set badge transparency (0 = fully transparent, 255 = opaque)"
 msgstr ""
@@ -4623,7 +4637,7 @@ msgstr ""
 "opaco)"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeTransparencyValueLabel)
-#: widgets/EditProfileAppearancePage.ui:1302
+#: widgets/EditProfileAppearancePage.ui:1318
 #, kde-format
 msgid "180"
 msgstr "180"
@@ -4807,13 +4821,13 @@ msgstr "Seleziona la cartella iniziale"
 msgid "Get New..."
 msgstr "Ottieni nuovo..."
 
-#: widgets/EditProfileDialog.cpp:1445
+#: widgets/EditProfileDialog.cpp:1448
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "Caricamento dello schema <resource>%1</resource> non riuscito."
 
-#: widgets/EditProfileDialog.cpp:1627
+#: widgets/EditProfileDialog.cpp:1630
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4822,7 +4836,7 @@ msgstr ""
 "Questo schema di colori usa uno sfondo trasparente, che non sembra essere "
 "supportato sul tuo desktop"
 
-#: widgets/EditProfileDialog.cpp:1633
+#: widgets/EditProfileDialog.cpp:1636
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4831,12 +4845,12 @@ msgstr ""
 "Konsole è stato avviato prima che fossero abilitati gli effetti del desktop. "
 "Devi riavviare Konsole per vedere lo sfondo trasparente."
 
-#: widgets/EditProfileDialog.cpp:2034
+#: widgets/EditProfileDialog.cpp:2037
 #, kde-format
 msgid "Default for file type"
 msgstr "Predefinita per tipo di file"
 
-#: widgets/EditProfileDialog.cpp:2060
+#: widgets/EditProfileDialog.cpp:2063
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4865,7 +4879,7 @@ msgstr ""
 "sarà ignorata e il file sarà aperto con l'editor di testo\n"
 "predefinito."
 
-#: widgets/EditProfileDialog.cpp:2073
+#: widgets/EditProfileDialog.cpp:2076
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Comando personalizzato dell'editor di testo"
