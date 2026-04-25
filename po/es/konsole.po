@@ -11,7 +11,7 @@
 # SPDX-FileCopyrightText: 2006 Pablo de Vicente <pablo.devicente@gmail.com>
 # SPDX-FileCopyrightText: 2007 Pablo Pita Leira <pablo.pita@kdemail.net>
 # SPDX-FileCopyrightText: 2007 Enrique Matias Sanchez (aka Quique) <cronopios@gmail.com>
-# SPDX-FileCopyrightText: 2009, 2010, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026 Eloy Cuadra <ecuadra@eloihr.net>
+# SPDX-FileCopyrightText: 2009-2010, 2012-2026 Eloy Cuadra <ecuadra@eloihr.net>
 # SPDX-FileCopyrightText: 2010, 2011, 2012, 2013 Cristina Yenyxe González García <the.blue.valkyrie@gmail.com>
 # SPDX-FileCopyrightText: 2011 Javier Vinal <fjvinal@gmail.com>
 # SPDX-FileCopyrightText: 2011 arklad
@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-24 00:47+0000\n"
-"PO-Revision-Date: 2026-04-05 01:22+0100\n"
+"PO-Revision-Date: 2026-04-24 17:47+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -29,7 +29,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "First-Translator: Boris Wesslowski <Boris@Wesslowski.com>\n"
-"X-Generator: Lokalize 25.12.3\n"
+"X-Generator: Lokalize 26.04.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -4449,12 +4449,14 @@ msgid ""
 "Apply hinting to glyphs when rendering, which may improve the legibility of "
 "certain fonts with some displays"
 msgstr ""
+"Aplicar sugerencias a los glifos durante la renderización puede mejorar la "
+"legibilidad de ciertas fuentes en algunas pantallas."
 
 #. i18n: ectx: property (text), widget (QCheckBox, fontHinting)
 #: widgets/EditProfileAppearancePage.ui:954
 #, kde-format
 msgid "Font hinting"
-msgstr ""
+msgstr "Sugerencia de fuente"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:967

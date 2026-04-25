@@ -738,6 +738,17 @@
 <listitem
 ><para
 ><guilabel
+>Font hinting:</guilabel
+> - This enables applying <ulink url="https://en.wikipedia.org/wiki/Font_hinting"
+>hinting</ulink
+> to the glyphs when rendering them. It may improve the overall legibility of characters when using certain fonts and some displays. It can also help resolve some situations where the characters are not rendered with the correct width or height, especially when word mode is enabled. If set, <ulink url="https://doc.qt.io/qt-6/qfont.html#HintingPreference-enum"
+>full hinting</ulink
+> is used. If not set, the default level of hinting is used. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
 >Lletra dels emojis</guilabel
 >: això permet especificar la lletra a usar per als caràcters Unicode d'emoji. Si no s'estableix, s'usarà la lletra predeterminada del perfil, o el sistema podria utilitzar alguna lletra alternativa si manquen els glifs d'aquesta lletra. </para
 ></listitem>

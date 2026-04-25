@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-24 00:47+0000\n"
-"PO-Revision-Date: 2026-04-04 07:34+0200\n"
+"PO-Revision-Date: 2026-04-24 07:19+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -4399,12 +4399,14 @@ msgid ""
 "Apply hinting to glyphs when rendering, which may improve the legibility of "
 "certain fonts with some displays"
 msgstr ""
+"Pri upodabljanju uporabite namigovanje za glife, kar lahko izboljša "
+"berljivost določenih pisav na nekaterih zaslonih."
 
 #. i18n: ectx: property (text), widget (QCheckBox, fontHinting)
 #: widgets/EditProfileAppearancePage.ui:954
 #, kde-format
 msgid "Font hinting"
-msgstr ""
+msgstr "Namig pisav"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:967
@@ -4550,7 +4552,7 @@ msgstr "Družina pisav značke:"
 #: widgets/EditProfileAppearancePage.ui:1210
 #, kde-format
 msgid "Badge font size:"
-msgstr "Velikost pisave značke."
+msgstr "Velikost pisave značke:"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeColorLabel)
 #: widgets/EditProfileAppearancePage.ui:1240

@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-24 00:47+0000\n"
-"PO-Revision-Date: 2026-04-04 21:37+0300\n"
+"PO-Revision-Date: 2026-04-24 16:17+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -27,7 +27,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.12.2\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -4396,12 +4396,14 @@ msgid ""
 "Apply hinting to glyphs when rendering, which may improve the legibility of "
 "certain fonts with some displays"
 msgstr ""
+"Sunma sırasında glif piksellerini hizalamak, bazı ekranlarda belirli "
+"yazıtiplerinin okunabilirliğini artırabilir."
 
 #. i18n: ectx: property (text), widget (QCheckBox, fontHinting)
 #: widgets/EditProfileAppearancePage.ui:954
 #, kde-format
 msgid "Font hinting"
-msgstr ""
+msgstr "Yazıtipi piksel hizalaması"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:967

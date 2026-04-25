@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-24 00:47+0000\n"
-"PO-Revision-Date: 2026-04-04 04:38+0200\n"
+"PO-Revision-Date: 2026-04-24 03:31+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -4396,12 +4396,14 @@ msgid ""
 "Apply hinting to glyphs when rendering, which may improve the legibility of "
 "certain fonts with some displays"
 msgstr ""
+"ჰინტინგის გადატარება გლიფებზე რენდერისას. ამას შეუძლია ზოგიერთი ფონტების "
+"კითხვადობის გაუმჯობესება ზოგიერთ ეკრანზე"
 
 #. i18n: ectx: property (text), widget (QCheckBox, fontHinting)
 #: widgets/EditProfileAppearancePage.ui:954
 #, kde-format
 msgid "Font hinting"
-msgstr ""
+msgstr "ფონტის ჰინტინგი"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:967

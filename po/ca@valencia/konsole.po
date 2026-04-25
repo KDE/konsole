@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-24 00:47+0000\n"
-"PO-Revision-Date: 2026-04-04 11:08+0200\n"
+"PO-Revision-Date: 2026-04-24 09:43+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -4447,12 +4447,14 @@ msgid ""
 "Apply hinting to glyphs when rendering, which may improve the legibility of "
 "certain fonts with some displays"
 msgstr ""
+"Aplica la correcció als glifs en renderitzar, cosa que pot millorar la "
+"llegibilitat de determinades lletres en algunes pantalles"
 
 #. i18n: ectx: property (text), widget (QCheckBox, fontHinting)
 #: widgets/EditProfileAppearancePage.ui:954
 #, kde-format
 msgid "Font hinting"
-msgstr ""
+msgstr "Correcció de lletres"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:967

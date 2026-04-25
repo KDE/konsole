@@ -14,7 +14,7 @@
 # Sander Koning <sanderkoning@kde.nl>, 2005.
 # Rinse de Vries <RinseDeVries@home.nl>, 2005, 2006.
 # Bram Schoenmakers <bramschoenmakers@kde.nl>, 2006, 2007.
-# SPDX-FileCopyrightText: 2009, 2023, 2024, 2025, 2026 Freek de Kruijf <freekdekruijf@kde.nl>
+# SPDX-FileCopyrightText: 2009, 2023-2026 Freek de Kruijf <freekdekruijf@kde.nl>
 # Freek de Kruijf <freekdekruijf@kde.nl>, 2009, 2010, 2011, 2012.
 # Freek de Kruijf <freekdekruijf@kde.nl>, 2011, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
 msgid ""
@@ -22,14 +22,14 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-24 00:47+0000\n"
-"PO-Revision-Date: 2026-04-05 17:49+0200\n"
+"PO-Revision-Date: 2026-04-24 12:29+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 25.12.3\n"
+"X-Generator: Lokalize 26.04.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -4441,12 +4441,14 @@ msgid ""
 "Apply hinting to glyphs when rendering, which may improve the legibility of "
 "certain fonts with some displays"
 msgstr ""
+"Pas hinting toe op glyphs tijdens het renderen, wat de leesbaarheid van "
+"bepaalde lettertypen op sommige schermen kan verbeteren"
 
 #. i18n: ectx: property (text), widget (QCheckBox, fontHinting)
 #: widgets/EditProfileAppearancePage.ui:954
 #, kde-format
 msgid "Font hinting"
-msgstr ""
+msgstr "Lettertypehinting"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:967

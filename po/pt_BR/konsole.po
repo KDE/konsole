@@ -5,7 +5,7 @@
 # Lisiane Sztoltz <lisiane@conectiva.com.br>, 2002, 2003.
 # Henrique Pinto <stampede@coltec.ufmg.br>, 2003.
 # Lisiane Sztoltz Teixeira <lisiane@conectiva.com.br>, 2004.
-# SPDX-FileCopyrightText: 2004, 2025, 2026 Marcus Gama <marcus.gama@gmail.com>
+# SPDX-FileCopyrightText: 2004, 2025-2026 Marcus Gama <marcus.gama@gmail.com>
 # Lisiane Sztoltz Teixeira <lisiane@kdemail.net>, 2005.
 # doutor.zero <doutor.zero@gmail.com>, 2007.
 # Diniz Bortolotto <diniz.bortolotto@gmail.com>, 2007, 2008.
@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-24 00:47+0000\n"
-"PO-Revision-Date: 2026-04-04 06:19-0300\n"
+"PO-Revision-Date: 2026-04-24 08:53-0300\n"
 "Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -30,7 +30,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.12.3\n"
+"X-Generator: Lokalize 26.04.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -4432,12 +4432,14 @@ msgid ""
 "Apply hinting to glyphs when rendering, which may improve the legibility of "
 "certain fonts with some displays"
 msgstr ""
+"Aplicar suavização aos glifos durante a renderização pode melhorar a "
+"legibilidade de certas fontes em alguns monitores."
 
 #. i18n: ectx: property (text), widget (QCheckBox, fontHinting)
 #: widgets/EditProfileAppearancePage.ui:954
 #, kde-format
 msgid "Font hinting"
-msgstr ""
+msgstr "Suavização de fonte"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:967
