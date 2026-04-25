@@ -195,6 +195,7 @@ private Q_SLOTS:
     void setContainerList(ContainerList *list);
 
     void applyKonsoleSettings();
+    void applyThemeProfile();
 
     // Ask the window manager to show this application window
     void activationRequest(const QString &xdgActivationToken);

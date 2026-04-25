@@ -46,6 +46,8 @@ private Q_SLOTS:
 
     void deleteSelected();
     void setSelectedAsDefault();
+    void setSelectedAsLight();
+    void setSelectedAsDark();
     void createProfile();
     void editSelected();
 

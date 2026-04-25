@@ -13,7 +13,9 @@
 // Qt
 #include <QDir>
 #include <QFileInfo>
+#include <QGuiApplication>
 #include <QString>
+#include <QStyleHints>
 #include <QUrl>
 
 // KDE
@@ -23,6 +25,7 @@
 #include <KMessageBox>
 
 // Konsole
+#include "KonsoleSettings.h"
 #include "ProfileGroup.h"
 #include "ProfileModel.h"
 #include "ProfileReader.h"
@@ -72,6 +75,7 @@ ProfileManager::ProfileManager()
 
     loadAllProfiles(defaultProfileFileName);
     loadShortcuts();
+    loadLightDarkProfiles();
 
     Q_ASSERT(_profiles.size() > 0);
     Q_ASSERT(_defaultProfile);
@@ -241,6 +245,67 @@ void ProfileManager::loadAllProfiles(const QString &defaultProfileFileName)
     }
 }
 
+Profile::Ptr ProfileManager::lightProfile() const
+{
+    return _lightProfile ? _lightProfile : _builtinProfile;
+}
+
+Profile::Ptr ProfileManager::darkProfile() const
+{
+    return _darkProfile ? _darkProfile : _builtinProfile;
+}
+
+void ProfileManager::setLightThemeProfile(const Profile::Ptr &profile)
+{
+    Q_ASSERT(findProfile(profile) != _profiles.cend());
+
+    const auto oldLight = _lightProfile;
+    _lightProfile = profile;
+
+    KonsoleSettings::setLightThemeProfile(profile->isBuiltin() ? QStringLiteral("_builtin_") : profile->name());
+    KonsoleSettings::self()->save();
+
+    if (oldLight && oldLight != profile) {
+        Q_EMIT profileChanged(oldLight);
+    }
+    Q_EMIT profileChanged(profile);
+}
+
+void ProfileManager::setDarkThemeProfile(const Profile::Ptr &profile)
+{
+    Q_ASSERT(findProfile(profile) != _profiles.cend());
+
+    const auto oldDark = _darkProfile;
+    _darkProfile = profile;
+
+    KonsoleSettings::setDarkThemeProfile(profile->isBuiltin() ? QStringLiteral("_builtin_") : profile->name());
+    KonsoleSettings::self()->save();
+
+    if (oldDark && oldDark != profile) {
+        Q_EMIT profileChanged(oldDark);
+    }
+    Q_EMIT profileChanged(profile);
+}
+
+void ProfileManager::loadLightDarkProfiles()
+{
+    _lightProfile = _builtinProfile;
+    _darkProfile = _builtinProfile;
+
+    auto findByName = [this](const QString &name) -> Profile::Ptr {
+        if (name.isEmpty() || name == QLatin1String("_builtin_")) {
+            return _builtinProfile;
+        }
+        auto it = std::find_if(_profiles.cbegin(), _profiles.cend(), [&name](const Profile::Ptr &p) {
+            return p->name() == name;
+        });
+        return it != _profiles.cend() ? *it : _builtinProfile;
+    };
+
+    _lightProfile = findByName(KonsoleSettings::lightThemeProfile());
+    _darkProfile = findByName(KonsoleSettings::darkThemeProfile());
+}
+
 void ProfileManager::saveSettings()
 {
     saveShortcuts();
@@ -264,6 +329,10 @@ QList<Profile::Ptr> ProfileManager::loadedProfiles() const
 
 Profile::Ptr ProfileManager::defaultProfile() const
 {
+    if (KonsoleSettings::syncProfileWithSystemTheme()) {
+        const Qt::ColorScheme scheme = QGuiApplication::styleHints()->colorScheme();
+        return (scheme == Qt::ColorScheme::Dark) ? darkProfile() : lightProfile();
+    }
     return _defaultProfile;
 }
 Profile::Ptr ProfileManager::builtinProfile() const
@@ -375,7 +444,9 @@ void ProfileManager::addProfile(const Profile::Ptr &profile)
 
 bool ProfileManager::deleteProfile(Profile::Ptr profile)
 {
-    bool wasDefault = (profile == defaultProfile());
+    bool wasDefault = (profile == _defaultProfile);
+    bool wasLight = (profile == lightProfile());
+    bool wasDark = (profile == darkProfile());
 
     if (profile) {
         // try to delete the config file
@@ -402,6 +473,14 @@ bool ProfileManager::deleteProfile(Profile::Ptr profile)
     if (wasDefault) {
         const QList<Profile::Ptr> existingProfiles = allProfiles();
         setDefaultProfile(existingProfiles.at(0));
+    }
+    // If we just deleted the light profile, fall back to the built-in profile.
+    if (wasLight) {
+        setLightThemeProfile(_builtinProfile);
+    }
+    // If we just deleted the dark profile, fall back to the built-in profile.
+    if (wasDark) {
+        setDarkThemeProfile(_builtinProfile);
     }
 
     Q_EMIT profileRemoved(profile);

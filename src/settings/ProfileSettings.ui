@@ -94,6 +94,32 @@
          </property>
         </widget>
        </item>
+       <item>
+        <widget class="QPushButton" name="setLightProfileButton">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="toolTip">
+          <string>Set the selected profile as the light theme profile</string>
+         </property>
+         <property name="text">
+          <string>&amp;Set as Light</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="setDarkProfileButton">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="toolTip">
+          <string>Set the selected profile as the dark theme profile</string>
+         </property>
+         <property name="text">
+          <string>&amp;Set as Dark</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </item>
      <item row="1" column="2">

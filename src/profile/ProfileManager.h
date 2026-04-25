@@ -143,6 +143,26 @@ public:
     Profile::Ptr defaultProfile() const;
 
     /**
+     * Sets the @p profile as the light theme profile and persists the setting.
+     */
+    void setLightThemeProfile(const Profile::Ptr &profile);
+
+    /**
+     * Returns the profile assigned to the light system theme.
+     */
+    Profile::Ptr lightProfile() const;
+
+    /**
+     * Sets the @p profile as the dark theme profile and persists the setting.
+     */
+    void setDarkThemeProfile(const Profile::Ptr &profile);
+
+    /**
+     * Returns the profile assigned to the dark system theme.
+     */
+    Profile::Ptr darkProfile() const;
+
+    /**
      * Returns a Profile object with some built-in sane defaults.
      * It is always available, and it is NOT loaded from or saved to a file.
      * This can be used as a parent for new profiles.
@@ -224,11 +244,16 @@ private:
     // Uses std::find to find "profile" _profiles
     Iterator findProfile(const Profile::Ptr &profile) const;
 
+    // loads light/dark theme profile assignments from KonsoleSettings
+    void loadLightDarkProfiles();
+
     // A list of all loaded profiles, sorted by profile name
     std::vector<Profile::Ptr> _profiles;
 
     Profile::Ptr _defaultProfile;
     Profile::Ptr _builtinProfile;
+    Profile::Ptr _lightProfile;
+    Profile::Ptr _darkProfile;
 
     struct ShortcutData {
         Profile::Ptr profileKey;

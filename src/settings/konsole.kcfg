@@ -233,4 +233,18 @@
       <default></default>
     </entry>
   </group>
+  <group name="LightDarkTheme">
+    <entry name="SyncProfileWithSystemTheme" type="Bool">
+      <label>Sync profile with system theme</label>
+      <default>false</default>
+    </entry>
+    <entry name="LightThemeProfile" type="String">
+      <label>Profile to use for light system theme</label>
+      <default>_builtin_</default>
+    </entry>
+    <entry name="DarkThemeProfile" type="String">
+      <label>Profile to use for dark system theme</label>
+      <default>_builtin_</default>
+    </entry>
+  </group>
 </kcfg>

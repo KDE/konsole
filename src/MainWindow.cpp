@@ -9,10 +9,12 @@
 #include "config-konsole.h"
 
 // Qt
+#include <QGuiApplication>
 #include <QMenu>
 #include <QMenuBar>
 #include <QMouseEvent>
 #include <QScreen>
+#include <QStyleHints>
 #include <QWindow>
 #if HAVE_DBUS
 #include <QDBusConnection>
@@ -1067,11 +1069,33 @@ void MainWindow::applyKonsoleSettings()
 
     _viewManager->activeContainer()->setNavigationBehavior(KonsoleSettings::newTabBehavior());
 
+    if (KonsoleSettings::syncProfileWithSystemTheme()) {
+        connect(QGuiApplication::styleHints(), &QStyleHints::colorSchemeChanged, this, &MainWindow::applyThemeProfile, Qt::UniqueConnection);
+        applyThemeProfile();
+    } else {
+        disconnect(QGuiApplication::styleHints(), &QStyleHints::colorSchemeChanged, this, &MainWindow::applyThemeProfile);
+    }
+
     // Save the toolbar/menu/dockwidget states and the window geometry
     setAutoSaveSettings();
 
     updateWindowCaption();
     updateProgress();
+}
+
+void MainWindow::applyThemeProfile()
+{
+    if (!KonsoleSettings::syncProfileWithSystemTheme()) {
+        return;
+    }
+
+    const Qt::ColorScheme scheme = QGuiApplication::styleHints()->colorScheme();
+    Profile::Ptr profile = (scheme == Qt::ColorScheme::Dark) ? ProfileManager::instance()->darkProfile() : ProfileManager::instance()->lightProfile();
+
+    const auto sessions = SessionManager::instance()->sessions();
+    for (Session *session : sessions) {
+        SessionManager::instance()->setSessionProfile(session, profile);
+    }
 }
 
 void MainWindow::activateMenuBar()

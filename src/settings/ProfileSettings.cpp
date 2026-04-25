@@ -12,6 +12,7 @@
 #include <QStandardPaths>
 
 // Konsole
+#include "KonsoleSettings.h"
 #include "delegates/ProfileShortcutDelegate.h"
 #include "profile/ProfileManager.h"
 #include "profile/ProfileModel.h"
@@ -32,7 +33,7 @@ ProfileSettings::ProfileSettings(QWidget *parent)
     profileListView->setItemDelegateForColumn(ProfileModel::SHORTCUT, new ShortcutItemDelegate(this));
     profileListView->setSelectionMode(QAbstractItemView::SingleSelection);
     connect(ProfileModel::instance(), &QAbstractItemModel::modelReset, this, [this] {
-        setAsDefaultButton->setEnabled(currentProfile() != nullptr);
+        tableSelectionChanged(profileListView->selectionModel()->selection());
     });
 
     // double clicking the profile name opens the profile edit dialog
@@ -47,10 +48,25 @@ ProfileSettings::ProfileSettings(QWidget *parent)
     deleteProfileButton->setIcon(QIcon::fromTheme(QStringLiteral("edit-delete")));
     setAsDefaultButton->setIcon(QIcon::fromTheme(QStringLiteral("dialog-ok-apply")));
 
+    setLightProfileButton->setIcon(QIcon::fromTheme(QStringLiteral("weather-clear")));
+    setDarkProfileButton->setIcon(QIcon::fromTheme(QStringLiteral("weather-clear-night")));
+
     connect(newProfileButton, &QPushButton::clicked, this, &Konsole::ProfileSettings::createProfile);
     connect(editProfileButton, &QPushButton::clicked, this, &Konsole::ProfileSettings::editSelected);
     connect(deleteProfileButton, &QPushButton::clicked, this, &Konsole::ProfileSettings::deleteSelected);
     connect(setAsDefaultButton, &QPushButton::clicked, this, &Konsole::ProfileSettings::setSelectedAsDefault);
+    connect(setLightProfileButton, &QPushButton::clicked, this, &Konsole::ProfileSettings::setSelectedAsLight);
+    connect(setDarkProfileButton, &QPushButton::clicked, this, &Konsole::ProfileSettings::setSelectedAsDark);
+
+    auto updateThemeButtonVisibility = [this] {
+        const bool syncEnabled = KonsoleSettings::syncProfileWithSystemTheme();
+        setAsDefaultButton->setVisible(!syncEnabled);
+        setLightProfileButton->setVisible(syncEnabled);
+        setDarkProfileButton->setVisible(syncEnabled);
+        tableSelectionChanged(profileListView->selectionModel()->selection());
+    };
+    updateThemeButtonVisibility();
+    connect(KonsoleSettings::self(), &KonsoleSettings::configChanged, this, updateThemeButtonVisibility);
 }
 
 ProfileSettings::~ProfileSettings() = default;
@@ -98,18 +114,23 @@ void ProfileSettings::tableSelectionChanged(const QItemSelection &selected)
         editProfileButton->setEnabled(false);
         deleteProfileButton->setEnabled(false);
         setAsDefaultButton->setEnabled(false);
+        setLightProfileButton->setEnabled(false);
+        setDarkProfileButton->setEnabled(false);
         return;
     }
 
     const auto profile = currentProfile();
     const bool isNotDefault = profile != ProfileManager::instance()->defaultProfile();
+    const bool syncEnabled = KonsoleSettings::syncProfileWithSystemTheme();
 
     editProfileButton->setEnabled(profile && profile->isEditable());
 
     // Do not allow the current default profile of the session to be removed
     deleteProfileButton->setEnabled(profile && isNotDefault && profile->isDeletable());
 
-    setAsDefaultButton->setEnabled(isNotDefault);
+    setAsDefaultButton->setEnabled(!syncEnabled && isNotDefault);
+    setLightProfileButton->setEnabled(syncEnabled && profile != nullptr);
+    setDarkProfileButton->setEnabled(syncEnabled && profile != nullptr);
 }
 
 void ProfileSettings::deleteSelected()
@@ -131,6 +152,22 @@ void ProfileSettings::setSelectedAsDefault()
     // do not allow the new default session type to be removed
     deleteProfileButton->setEnabled(false);
     setAsDefaultButton->setEnabled(false);
+}
+
+void ProfileSettings::setSelectedAsLight()
+{
+    if (!currentProfile()) {
+        return;
+    }
+    ProfileManager::instance()->setLightThemeProfile(currentProfile());
+}
+
+void ProfileSettings::setSelectedAsDark()
+{
+    if (!currentProfile()) {
+        return;
+    }
+    ProfileManager::instance()->setDarkThemeProfile(currentProfile());
 }
 
 void ProfileSettings::createProfile()
