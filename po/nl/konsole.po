@@ -1668,7 +1668,7 @@ msgstr "Verwijderen"
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:151
 #, kde-format
 msgid "Don't Change"
-msgstr "Nier wijzigen"
+msgstr "Niet wijzigen"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:222
 #, kde-format
