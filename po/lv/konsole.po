@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-24 00:47+0000\n"
+"POT-Creation-Date: 2026-04-26 00:47+0000\n"
 "PO-Revision-Date: 2025-06-21 13:10+0300\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -2176,7 +2176,7 @@ msgid "Silence in '%1' (Session '%2')"
 msgstr "Klusums „%1“ (sesija „%2“)"
 
 #: session/Session.cpp:818 session/Session.cpp:2326
-#: session/SessionController.cpp:376 session/SessionController.cpp:1922
+#: session/SessionController.cpp:381 session/SessionController.cpp:1927
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1255
 #: Vt102Emulation.cpp:1510
 #, kde-format
@@ -2219,310 +2219,310 @@ msgstr ""
 msgid "Konsole"
 msgstr "„Konsole“"
 
-#: session/SessionController.cpp:375
+#: session/SessionController.cpp:380
 #, kde-format
 msgid "The process '%1' has finished running in session '%2'"
 msgstr "Process „%1“ ir beidzis darboties sesijā „%2“"
 
-#: session/SessionController.cpp:458
+#: session/SessionController.cpp:463
 #, kde-format
 msgid "Konsole does not know how to open the bookmark: "
 msgstr "„Konsole“ neprot atvērt grāmatzīmi: "
 
-#: session/SessionController.cpp:536
+#: session/SessionController.cpp:541
 #, kde-format
 msgid "Search for '%1' with"
 msgstr "Meklēt „%1“ ar"
 
-#: session/SessionController.cpp:552
+#: session/SessionController.cpp:557
 #, kde-format
 msgid "Configure Web Shortcuts..."
 msgstr "Konfigurēt tīmekļa saīsnes..."
 
-#: session/SessionController.cpp:663
+#: session/SessionController.cpp:668
 #, kde-format
 msgid "&Close Session"
 msgstr "&Aizvērt sesiju"
 
-#: session/SessionController.cpp:670
+#: session/SessionController.cpp:675
 #, kde-format
 msgid "Open File Manager"
 msgstr "Atvērt datņu pārvaldnieku"
 
-#: session/SessionController.cpp:685
+#: session/SessionController.cpp:690
 #, kde-format
 msgid "Copy"
 msgstr "Kopēt"
 
-#: session/SessionController.cpp:693
+#: session/SessionController.cpp:698
 #, kde-format
 msgid "Split View Left-Right"
 msgstr "Sadalīt skatu kreisajā/labajā"
 
-#: session/SessionController.cpp:698
+#: session/SessionController.cpp:703
 #, kde-format
 msgid "Split View Top-Bottom"
 msgstr "Sadalīt skatu augšējā/apakšējā"
 
-#: session/SessionController.cpp:702
+#: session/SessionController.cpp:707
 #, kde-format
 msgid "Copy except prompts"
 msgstr "Kopēt izņēmumu uzvednes"
 
-#: session/SessionController.cpp:708
+#: session/SessionController.cpp:713
 #, kde-format
 msgid "Copy user input"
 msgstr "Kopēt lietotāja ievadi"
 
-#: session/SessionController.cpp:714
+#: session/SessionController.cpp:719
 #, kde-format
 msgid "Copy command output"
 msgstr "Kopēt komandu izvadi"
 
-#: session/SessionController.cpp:729
+#: session/SessionController.cpp:734
 #, kde-format
 msgid "Paste Selection"
 msgstr "Ielīmēt izvēlēto"
 
-#: session/SessionController.cpp:736
+#: session/SessionController.cpp:741
 #, kde-format
 msgid "Web Search"
 msgstr "Tīmekļa meklēšana"
 
-#: session/SessionController.cpp:742
+#: session/SessionController.cpp:747
 #, kde-format
 msgid "&Select All"
 msgstr "&Atlasīt visu"
 
-#: session/SessionController.cpp:746
+#: session/SessionController.cpp:751
 #, kde-format
 msgid "Select &Mode"
 msgstr "Atlasīšanas &režīms"
 
-#: session/SessionController.cpp:751
+#: session/SessionController.cpp:756
 #, kde-format
 msgid "Select &Line"
 msgstr "A&tlasīt rindu"
 
-#: session/SessionController.cpp:754
+#: session/SessionController.cpp:759
 #, kde-format
 msgid "Save Output &As..."
 msgstr "S&aglabāt izvadi kā..."
 
-#: session/SessionController.cpp:760
+#: session/SessionController.cpp:765
 #, kde-format
 msgid "Auto Save Output As..."
 msgstr "Automātiski saglabāt izvadi kā..."
 
-#: session/SessionController.cpp:764
+#: session/SessionController.cpp:769
 #, kde-format
 msgid "Stop Auto Save"
 msgstr "Apturēt automātisko saglabāšanu"
 
-#: session/SessionController.cpp:768
+#: session/SessionController.cpp:773
 #, kde-format
 msgid "&Print Screen..."
 msgstr "&Drukāt ekrānu..."
 
-#: session/SessionController.cpp:772
+#: session/SessionController.cpp:777
 #, kde-format
 msgid "Adjust Scrollback..."
 msgstr "Pielāgot ritināšanas atmiņu..."
 
-#: session/SessionController.cpp:776
+#: session/SessionController.cpp:781
 #, kde-format
 msgid "Clear Scrollback"
 msgstr "Notīrīt ritināšanas atmiņu"
 
-#: session/SessionController.cpp:780
+#: session/SessionController.cpp:785
 #, kde-format
 msgid "Clear Scrollback and Reset"
 msgstr "Notīrīt ritināšanas atmiņu un atstatīt"
 
-#: session/SessionController.cpp:791
+#: session/SessionController.cpp:796
 #, kde-format
 msgid "Next Profile"
 msgstr "Nākamais profils"
 
-#: session/SessionController.cpp:796
+#: session/SessionController.cpp:801
 #, kde-format
 msgid "Previous Profile"
 msgstr "Iepriekšējais profils"
 
-#: session/SessionController.cpp:799
+#: session/SessionController.cpp:804
 #, kde-format
 msgid "Switch Profile"
 msgstr "Pārslēgt profilu"
 
-#: session/SessionController.cpp:824
+#: session/SessionController.cpp:829
 #, kde-format
 msgid "Set &Encoding"
 msgstr "I&estatīt kodējumu"
 
-#: session/SessionController.cpp:844
+#: session/SessionController.cpp:849
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow Mouse Tracking"
 msgstr "Atļaut peles izsekošanu"
 
-#: session/SessionController.cpp:853
+#: session/SessionController.cpp:858
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
 msgstr "Tikai lasāma"
 
-#: session/SessionController.cpp:864
+#: session/SessionController.cpp:869
 #, kde-format
 msgid "&Configure or Rename Tab..."
 msgstr "&Konfigurēt vai pārsaukt cilni..."
 
-#: session/SessionController.cpp:870
+#: session/SessionController.cpp:875
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr "&Visas cilnes pašreizējā logā"
 
-#: session/SessionController.cpp:877
+#: session/SessionController.cpp:882
 #, kde-format
 msgid "&Select Tabs..."
 msgstr "&Atlasīt cilnes..."
 
-#: session/SessionController.cpp:883
+#: session/SessionController.cpp:888
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "&Nevienu"
 
-#: session/SessionController.cpp:891
+#: session/SessionController.cpp:896
 #, kde-format
 msgid "Copy Input To"
 msgstr "Kopēt ievadi uz"
 
-#: session/SessionController.cpp:899
+#: session/SessionController.cpp:904
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "„&ZModem“ augšupielāde..."
 
-#: session/SessionController.cpp:904
+#: session/SessionController.cpp:909
 #, kde-format
 msgid "One-Shot Monitors"
 msgstr "Vienreizlietojami pārraugi"
 
-#: session/SessionController.cpp:909
+#: session/SessionController.cpp:914
 #, kde-format
 msgid "Monitor for &Prompt"
 msgstr "&Uzvednes pārraugs"
 
-#: session/SessionController.cpp:916
+#: session/SessionController.cpp:921
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "&Aktivitātes pārraugs"
 
-#: session/SessionController.cpp:922
+#: session/SessionController.cpp:927
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "&Klusuma pārraugs"
 
-#: session/SessionController.cpp:928
+#: session/SessionController.cpp:933
 #, kde-format
 msgid "Monitor for Process Finishing"
 msgstr "Procesa pabeigšanas pārraugs"
 
-#: session/SessionController.cpp:935
+#: session/SessionController.cpp:940
 #, kde-format
 msgid "Enlarge Font"
 msgstr "Palielināt fontu"
 
-#: session/SessionController.cpp:943
+#: session/SessionController.cpp:948
 #, kde-format
 msgid "Shrink Font"
 msgstr "Samazināt fontu"
 
-#: session/SessionController.cpp:948
+#: session/SessionController.cpp:953
 #, kde-format
 msgid "Reset Font Size"
 msgstr "Atiestatīt fonta izmēru"
 
-#: session/SessionController.cpp:954
+#: session/SessionController.cpp:959
 #, kde-format
 msgid "Send Signal"
 msgstr "Nosūtīt signālu"
 
-#: session/SessionController.cpp:958
+#: session/SessionController.cpp:963
 #, kde-format
 msgid "&Suspend Task"
 msgstr "&Aizturēt uzdevumu"
 
-#: session/SessionController.cpp:963
+#: session/SessionController.cpp:968
 #, kde-format
 msgid "&Continue Task"
 msgstr "&Turpināt uzdevumu"
 
-#: session/SessionController.cpp:968
+#: session/SessionController.cpp:973
 #, kde-format
 msgid "&Hangup"
 msgstr "&Nolikt"
 
-#: session/SessionController.cpp:973
+#: session/SessionController.cpp:978
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "&Pārtraukt uzdevumu"
 
-#: session/SessionController.cpp:978
+#: session/SessionController.cpp:983
 #, kde-format
 msgid "&Terminate Task"
 msgstr "&Izbeigt uzdevumu"
 
-#: session/SessionController.cpp:983
+#: session/SessionController.cpp:988
 #, kde-format
 msgid "&Kill Task"
 msgstr "&Nobeigt uzdevumu"
 
-#: session/SessionController.cpp:988
+#: session/SessionController.cpp:993
 #, kde-format
 msgid "User Signal &1"
 msgstr "Lietotāja signāls &1"
 
-#: session/SessionController.cpp:993
+#: session/SessionController.cpp:998
 #, kde-format
 msgid "User Signal &2"
 msgstr "Lietotāja signāls &2"
 
-#: session/SessionController.cpp:1011
+#: session/SessionController.cpp:1016
 #, kde-format
 msgid "Create New Profile..."
 msgstr "Izveidot jaunu profilu..."
 
-#: session/SessionController.cpp:1013
+#: session/SessionController.cpp:1018
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "Rediģēt pašreizējo profilu..."
 
-#: session/SessionController.cpp:1153
+#: session/SessionController.cpp:1158
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
 "close it?"
 msgstr "Šajā sesijā darbojas programma. Vai tiešām vēlaties to aizvērt?"
 
-#: session/SessionController.cpp:1157
+#: session/SessionController.cpp:1162
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
 "want to close it?"
 msgstr "Šajā sesijā darbojas programma „%1“. Vai tiešām vēlaties to aizvērt?"
 
-#: session/SessionController.cpp:1164 session/SessionController.cpp:1199
+#: session/SessionController.cpp:1169 session/SessionController.cpp:1204
 #, kde-format
 msgid "Confirm Close"
 msgstr "Apstiprināt aizvēršanu"
 
-#: session/SessionController.cpp:1165
+#: session/SessionController.cpp:1170
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "Aizvērt programmu"
 
-#: session/SessionController.cpp:1188
+#: session/SessionController.cpp:1193
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
@@ -2531,7 +2531,7 @@ msgstr ""
 "Programma šajā sesijā neaizveras. Vai tiešām vēlaties to nobeigt piespiedu "
 "kārtā?"
 
-#: session/SessionController.cpp:1192
+#: session/SessionController.cpp:1197
 #, kde-format
 msgid ""
 "The program '%1' in this session would not die.  Are you sure you want to "
@@ -2540,28 +2540,28 @@ msgstr ""
 "Programma „%1“ šajā sesijā neaizveras. Vai tiešām vēlaties to nobeigt "
 "piespiedu kārtā?"
 
-#: session/SessionController.cpp:1200
+#: session/SessionController.cpp:1205
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "Nobeigt programmu"
 
-#: session/SessionController.cpp:1921
+#: session/SessionController.cpp:1926
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "Čaulas uzvedne ir parādīta sesijā „%1“"
 
-#: session/SessionController.cpp:2151
+#: session/SessionController.cpp:2156
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "Atvērt pašreizējo mapi ar"
 
-#: session/SessionController.cpp:2221
+#: session/SessionController.cpp:2226
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Saglabāt „ZModem“ lejupielādi..."
 
-#: session/SessionController.cpp:2231
+#: session/SessionController.cpp:2236
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2572,13 +2572,13 @@ msgstr ""
 "atrasta derīga „ZModem“ programmatūra.</p><p>Iespējams, ir jāinstalē „rzsz“ "
 "vai „lrzsz“ pakotne.</p>"
 
-#: session/SessionController.cpp:2241
+#: session/SessionController.cpp:2246
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>Aktīvajā sesijā jau notiek „ZModem“ datņu pārsūtīšana.</p>"
 
-#: session/SessionController.cpp:2254
+#: session/SessionController.cpp:2259
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2587,7 +2587,7 @@ msgstr ""
 "<p>Šajā datorā nav atrasta piemērota „ZModem“ programmatūra.</"
 "p><p>Iespējams, jāinstalē „rzsz“ vai „lrzsz“ pakotne.</p>"
 
-#: session/SessionController.cpp:2259
+#: session/SessionController.cpp:2264
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Izvēlieties datnes, ko augšupielādēt ar „ZModem“"
