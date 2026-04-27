@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-20 00:50+0000\n"
-"PO-Revision-Date: 2026-02-04 00:04+0100\n"
+"PO-Revision-Date: 2026-04-26 22:14+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -671,11 +671,10 @@ msgid "AaZz09..."
 msgstr "AaZz09..."
 
 #: containers/ContainerList.cpp:78
-#, fuzzy, kde-format
-#| msgid "Host: %1"
+#, kde-format
 msgctxt "@title:group section header in new-tab menu"
 msgid "Host"
-msgstr "호스트: %1"
+msgstr "호스트"
 
 #: containers/ContainerRegistry.cpp:43
 #, kde-format
@@ -692,14 +691,12 @@ msgstr "Distrobox"
 #: containers/KapsuleDetector.cpp:33
 #, kde-format
 msgid "Kapsule"
-msgstr ""
+msgstr "Kapsule"
 
 #: containers/KapsuleDetector.cpp:79
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox added to the name of the current default profile"
-#| msgid " [Default]"
+#, kde-format
 msgid " [default]"
-msgstr "[기본값]"
+msgstr " [기본값]"
 
 #: containers/ToolboxDetector.cpp:29
 #, kde-format
@@ -4149,17 +4146,15 @@ msgstr "사용함"
 
 #. i18n: ectx: property (text), widget (QLabel, label_12)
 #: widgets/EditProfileAppearancePage.ui:457
-#, fuzzy, kde-format
-#| msgid "Activation:"
+#, kde-format
 msgid "Animation:"
-msgstr "활성화:"
+msgstr "애니메이션:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableAnimatingCursorButton)
 #: widgets/EditProfileAppearancePage.ui:473
-#, fuzzy, kde-format
-#| msgid "Make the cursor blink regularly"
+#, kde-format
 msgid "Make the cursor animate smoothly"
-msgstr "주기적으로 커서를 깜빡이게 합니다"
+msgstr "커서 깜빡임을 부드럽게 만들기"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #. i18n: ectx: attribute (title), widget (QWidget, miscTab)
@@ -4517,9 +4512,7 @@ msgid "Edit Profile \"%1\""
 msgstr "\"%1\" 프로필 편집"
 
 #: widgets/EditProfileDialog.cpp:529
-#, fuzzy, kde-format
-#| msgctxt "Do not show a close button"
-#| msgid "None"
+#, kde-format
 msgid "None"
 msgstr "없음"
 
@@ -4757,14 +4750,14 @@ msgstr "현재 세션과 같은 컨테이너로 들어가기"
 #: widgets/EditProfileGeneralPage.ui:229
 #, kde-format
 msgid "Always start in container:"
-msgstr ""
+msgstr "항상 컨테이너에서 시작:"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, containerCombo)
 #: widgets/EditProfileGeneralPage.ui:242
 #, kde-format
 msgid ""
 "Always start new sessions using this profile inside the selected container"
-msgstr ""
+msgstr "이 프로필을 사용하는 새 세션을 항상 선택한 컨테이너 내에서 시작"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/EditProfileGeneralPage.ui:255
@@ -5612,10 +5605,9 @@ msgstr "탭 색상(&L):"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/RenameTabWidget.ui:128
-#, fuzzy, kde-format
-#| msgid "Tab Co&lor:"
+#, kde-format
 msgid "&Activity Tab Color:"
-msgstr "탭 색상(&L):"
+msgstr "활동이 있는 탭 색상(&A):"
 
 #: widgets/TabTitleFormatButton.cpp:21
 #, c-format
