@@ -88,6 +88,10 @@ QPolygonF createDynamicPolygon(const QRectF &rect, qreal shear, qreal taper)
 
 void TerminalPainter::onCursorPositionChanged(const QRectF &oldRect, const QRectF &newRect)
 {
+    if (!m_parentDisplay->cursorAnimating()) {
+        return;
+    }
+
     m_cursorAnim->stop();
 
     qreal deltaX = oldRect.x() - newRect.x();
