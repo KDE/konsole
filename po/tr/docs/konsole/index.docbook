@@ -766,6 +766,17 @@
 <listitem
 ><para
 ><guilabel
+>Yazıtipi piksel hizalama:</guilabel
+> — Bu, glifleri sunarken onlara <ulink url="https://en.wikipedia.org/wiki/Font_hinting"
+>piksel hizalaması</ulink
+> uygulamaya olanak tanır. Belirli yazıtiplerini veya ekranları kullanırken okunabilirliği iyileştirmeye yardımcı olacaktır. Karakterlerin düzgün yükseklik veya genişlik ile çizilmediği bazı durumları çözmeye de yardımcı olabilir; özellikle sözcük kipi etkinken. Ayarlıysa <ulink url="https://doc.qt.io/qt-6/qfont.html#HintingPreference-enum"
+>tam piksel hizalama</ulink
+> kullanılır; aksi takdirde, öntanımlı hizalama düzeyine geçilir. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
 >Emoji yazısı:</guilabel
 > — Bu, Unicode Emoji karakterleri için kullanılacak yazıtipinin belirlenmesine olanak tanır. Ayarlanmazsa öntanımlı profil yazıtipi kullanılır veya bu yazıtipinde glifler eksikse sistem tarafından bazı yedek yazıtipleri kullanılabilir. </para
 ></listitem>

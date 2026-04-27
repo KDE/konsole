@@ -816,6 +816,17 @@
 <listitem
 ><para
 ><guilabel
+>Hinting del tipo de letra:</guilabel
+>: Esto activa la aplicación de <ulink url="https://en.wikipedia.org/wiki/Font_hinting"
+>hinting</ulink
+> a los glifos cuando se renderizan. Puede mejorar la legibilidad general de los caracteres cuando se usan ciertos tipos de letra y algunas pantallas. También puede ayudar a resolver algunas situaciones en las que los caracteres no se renderizan con la anchura o la altura correcta, especialmente cuando está activo el modo de palabras. Si se activa, se usa <ulink url="https://doc.qt.io/qt-6/qfont.html#HintingPreference-enum"
+>hinting completo</ulink
+>. En caso contrario, se usa el nivel predeterminado de hinting. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
 >Tipo de letra emoji:</guilabel
 >: permite indicar el tipo de letra que se usará para los caracteres emoji Unicode. Si no se define ninguno, se usará el tipo de letra predeterminado del perfil, o el sistema usará algún tipo de letra alternativo si faltan glifos en este tipo de letra. </para
 ></listitem>

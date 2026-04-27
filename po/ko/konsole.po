@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-26 00:47+0000\n"
-"PO-Revision-Date: 2026-02-04 00:04+0100\n"
+"PO-Revision-Date: 2026-04-26 22:14+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -671,11 +671,10 @@ msgid "AaZz09..."
 msgstr "AaZz09..."
 
 #: containers/ContainerList.cpp:78
-#, fuzzy, kde-format
-#| msgid "Host: %1"
+#, kde-format
 msgctxt "@title:group section header in new-tab menu"
 msgid "Host"
-msgstr "호스트: %1"
+msgstr "호스트"
 
 #: containers/ContainerRegistry.cpp:43
 #, kde-format
@@ -692,14 +691,12 @@ msgstr "Distrobox"
 #: containers/KapsuleDetector.cpp:33
 #, kde-format
 msgid "Kapsule"
-msgstr ""
+msgstr "Kapsule"
 
 #: containers/KapsuleDetector.cpp:79
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox added to the name of the current default profile"
-#| msgid " [Default]"
+#, kde-format
 msgid " [default]"
-msgstr "[기본값]"
+msgstr " [기본값]"
 
 #: containers/ToolboxDetector.cpp:29
 #, kde-format
@@ -4149,17 +4146,15 @@ msgstr "사용함"
 
 #. i18n: ectx: property (text), widget (QLabel, label_12)
 #: widgets/EditProfileAppearancePage.ui:457
-#, fuzzy, kde-format
-#| msgid "Activation:"
+#, kde-format
 msgid "Animation:"
-msgstr "활성화:"
+msgstr "애니메이션:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableAnimatingCursorButton)
 #: widgets/EditProfileAppearancePage.ui:473
-#, fuzzy, kde-format
-#| msgid "Make the cursor blink regularly"
+#, kde-format
 msgid "Make the cursor animate smoothly"
-msgstr "주기적으로 커서를 깜빡이게 합니다"
+msgstr "커서 깜빡임을 부드럽게 만들기"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #. i18n: ectx: attribute (title), widget (QWidget, miscTab)
@@ -4369,12 +4364,14 @@ msgid ""
 "Apply hinting to glyphs when rendering, which may improve the legibility of "
 "certain fonts with some displays"
 msgstr ""
+"렌더링 시 글자에 힌팅을 적용합니다. 일부 디스플레이와 글꼴에서 가독성을 향상"
+"시킬 수 있습니다"
 
 #. i18n: ectx: property (text), widget (QCheckBox, fontHinting)
 #: widgets/EditProfileAppearancePage.ui:954
 #, kde-format
 msgid "Font hinting"
-msgstr ""
+msgstr "글꼴 힌팅"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:967
@@ -4435,10 +4432,9 @@ msgstr "wcwidth 재정의"
 
 #. i18n: ectx: property (toolTip), widget (QWidget, badgeTab)
 #: widgets/EditProfileAppearancePage.ui:1065
-#, fuzzy, kde-format
-#| msgid "<html><head/><body><p>Complex Text Layout</p></body></html>"
+#, kde-format
 msgid "<html><head/><body><p>Badge overlay options</p></body></html>"
-msgstr "<html><head/><body><p>복합 텍스트 레이아웃</p></body></html>"
+msgstr "<html><head/><body><p>배지 오버레이 옵션</p></body></html>"
 
 #. i18n: ectx: attribute (title), widget (QWidget, badgeTab)
 #. i18n: ectx: property (text), widget (QCheckBox, badgeEnabled)
@@ -4446,20 +4442,19 @@ msgstr "<html><head/><body><p>복합 텍스트 레이아웃</p></body></html>"
 #: widgets/EditProfileAppearancePage.ui:1098
 #, kde-format
 msgid "Badge Overlay"
-msgstr ""
+msgstr "배지 오버레이"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeOverlayLabel)
 #: widgets/EditProfileAppearancePage.ui:1078
 #, kde-format
 msgid "Badge Overlay Options"
-msgstr ""
+msgstr "배지 오버레이 옵션"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, badgeEnabled)
 #: widgets/EditProfileAppearancePage.ui:1095
-#, fuzzy, kde-format
-#| msgid "Enable word mode text rendering"
+#, kde-format
 msgid "Enable badge overlay rendering"
-msgstr "단어 모드 텍스트 렌더링 활성화"
+msgstr "배지 오버레이 렌더링 활성화"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, badge_label_1)
 #. i18n: ectx: property (toolTip), widget (QLineEdit, badgeTextEdit)
@@ -4468,13 +4463,13 @@ msgstr "단어 모드 텍스트 렌더링 활성화"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Default text of badge."
-msgstr ""
+msgstr "배지의 기본 텍스트입니다."
 
 #. i18n: ectx: property (text), widget (QLabel, badge_label_1)
 #: widgets/EditProfileAppearancePage.ui:1108
 #, kde-format
 msgid "Badge text:"
-msgstr ""
+msgstr "배지 텍스트:"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeVariablesHelpLabel)
 #: widgets/EditProfileAppearancePage.ui:1134
@@ -4485,6 +4480,10 @@ msgid ""
 "hostname), \\(session.process), \\(env.VARIABLE_NAME)</small></p></body></"
 "html>"
 msgstr ""
+"<html><head/><body><p><small><b>사용 가능한 변수:</b> \\(session.title), "
+"\\(session.name), \\(session.id), \\(session.directory), \\(session."
+"hostname), \\(session.process), \\(env.VARIABLE_NAME)</small></p></body></"
+"html>"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeEscapeSequenceHelpLabel)
 #: widgets/EditProfileAppearancePage.ui:1154
@@ -4494,6 +4493,9 @@ msgid ""
 "settings on this page to configure badge text, color, font, text-only mode "
 "and transparency.</small></p></body></html>"
 msgstr ""
+"<html><head/><body><p><small><b>배지 설정:</b><br/>이 페이지의 프로필 설정을 "
+"사용하여 배지 텍스트, 색상, 글꼴, 텍스트 전용 모드, 투명도를 설정할 수 있습니"
+"다.</small></p></body></html>"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, badge_label_2)
 #. i18n: ectx: property (toolTip), widget (QLineEdit, badgeFontEdit)
@@ -4502,65 +4504,61 @@ msgstr ""
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Badge font family."
-msgstr ""
+msgstr "배지 글꼴 종류입니다."
 
 #. i18n: ectx: property (text), widget (QLabel, badge_label_2)
 #: widgets/EditProfileAppearancePage.ui:1177
 #, kde-format
 msgid "Badge font family:"
-msgstr ""
+msgstr "배지 글꼴 종류:"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeFontSizeLabel)
 #: widgets/EditProfileAppearancePage.ui:1210
 #, kde-format
 msgid "Badge font size:"
-msgstr ""
+msgstr "배지 글꼴 크기:"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeColorLabel)
 #: widgets/EditProfileAppearancePage.ui:1240
-#, fuzzy, kde-format
-#| msgid "Tab Co&lor:"
+#, kde-format
 msgid "Badge color:"
-msgstr "탭 색상(&L):"
+msgstr "배지 색상:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, badgeColorSelectButton)
 #: widgets/EditProfileAppearancePage.ui:1253
-#, fuzzy, kde-format
-#| msgid "Select the color used to draw the border"
+#, kde-format
 msgid "Select the color used to draw the badge"
-msgstr "경계선을 그릴 색상을 선택하십시오"
+msgstr "배지를 그릴 색상을 선택하십시오"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, badgeTextOnlyCheckBox)
 #: widgets/EditProfileAppearancePage.ui:1267
 #, kde-format
 msgid "Display badge as text only without background rectangle"
-msgstr ""
+msgstr "배지를 배경 사각형 없이 텍스트로만 표시"
 
 #. i18n: ectx: property (text), widget (QCheckBox, badgeTextOnlyCheckBox)
 #: widgets/EditProfileAppearancePage.ui:1270
-#, fuzzy, kde-format
-#| msgid "Red error background:"
+#, kde-format
 msgid "Text only (no background)"
-msgstr "빨간 오류 배경:"
+msgstr "텍스트만(배경 없음)"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeTransparencyLabel)
 #: widgets/EditProfileAppearancePage.ui:1284
-#, fuzzy, kde-format
-#| msgid "Wallpaper transparency:"
+#, kde-format
 msgid "Transparency:"
-msgstr "배경 그림 투명도:"
+msgstr "투명도:"
 
 #. i18n: ectx: property (toolTip), widget (QSlider, badgeTransparencySlider)
 #: widgets/EditProfileAppearancePage.ui:1311
 #, kde-format
 msgid "Set badge transparency (0 = fully transparent, 255 = opaque)"
-msgstr ""
+msgstr "배지 투명도 설정(0: 완전 투명, 255: 불투명)"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeTransparencyValueLabel)
 #: widgets/EditProfileAppearancePage.ui:1318
 #, kde-format
 msgid "180"
-msgstr ""
+msgstr "180"
 
 #: widgets/EditProfileDialog.cpp:70
 #, kde-format
@@ -4662,9 +4660,7 @@ msgid "Edit Profile \"%1\""
 msgstr "\"%1\" 프로필 편집"
 
 #: widgets/EditProfileDialog.cpp:529
-#, fuzzy, kde-format
-#| msgctxt "Do not show a close button"
-#| msgid "None"
+#, kde-format
 msgid "None"
 msgstr "없음"
 
@@ -4902,14 +4898,14 @@ msgstr "현재 세션과 같은 컨테이너로 들어가기"
 #: widgets/EditProfileGeneralPage.ui:229
 #, kde-format
 msgid "Always start in container:"
-msgstr ""
+msgstr "항상 컨테이너에서 시작:"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, containerCombo)
 #: widgets/EditProfileGeneralPage.ui:242
 #, kde-format
 msgid ""
 "Always start new sessions using this profile inside the selected container"
-msgstr ""
+msgstr "이 프로필을 사용하는 새 세션을 항상 선택한 컨테이너 내에서 시작"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/EditProfileGeneralPage.ui:255
@@ -5757,10 +5753,9 @@ msgstr "탭 색상(&L):"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/RenameTabWidget.ui:128
-#, fuzzy, kde-format
-#| msgid "Tab Co&lor:"
+#, kde-format
 msgid "&Activity Tab Color:"
-msgstr "탭 색상(&L):"
+msgstr "활동이 있는 탭 색상(&A):"
 
 #: widgets/TabTitleFormatButton.cpp:21
 #, c-format
