@@ -1487,7 +1487,7 @@ msgstr "Please fix all the warnings before trying to run this script"
 #: plugins/QuickCommands/quickcommandswidget.cpp:215
 #, kde-format
 msgid "There are some errors on the script, do you really want to run it?"
-msgstr "Existujú some errors on the script, do you really want to run it?"
+msgstr "V skripte sú nejaké chyby, naozaj ho chcete spustiť?"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:216
 #, kde-format
