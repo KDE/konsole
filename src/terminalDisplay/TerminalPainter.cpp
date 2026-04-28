@@ -226,6 +226,7 @@ void TerminalPainter::drawContents(Character *image,
     const bool wordModeAttr = currentProfile ? currentProfile->property<bool>(Profile::WordModeAttr) : true;
     const bool wordModeAscii = currentProfile ? currentProfile->property<bool>(Profile::WordModeAscii) : true;
     const bool wordModeBrahmic = currentProfile ? currentProfile->property<bool>(Profile::WordModeBrahmic) : true;
+    const bool wordModeCoding = currentProfile ? currentProfile->property<bool>(Profile::WordModeCoding) : true;
     const bool invertedRendition = currentProfile ? currentProfile->property<bool>(Profile::InvertSelectionColors) : false;
     const Enum::Hints semanticHints = currentProfile ? static_cast<Enum::Hints>(currentProfile->semanticHints()) : Enum::HintsNever;
     const Enum::Hints lineNumbers = currentProfile ? static_cast<Enum::Hints>(currentProfile->lineNumbers()) : Enum::HintsNever;
@@ -435,6 +436,9 @@ void TerminalPainter::drawContents(Character *image,
                     }
                     if (wordModeBrahmic && char_value.flags & EF_BRAHMIC_WORD) {
                         charType = 2;
+                    }
+                    if (wordModeCoding && char_value.flags & EF_CODING_WORD) {
+                        charType = 3;
                     }
                     if (lastCharType != charType || (!wordModeAttr && lastCharType != 0 && char_value.notSameAttributesText(image[pos + vis2log(x - 1)]))) {
                         if (lastCharType != 0) {

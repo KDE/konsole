@@ -438,6 +438,9 @@ public:
          * Improves display when the font is not strictly monospace
          */
         WordModeBrahmic,
+        /** Use word mode for characters that appear in coding ligatures
+         */
+        WordModeCoding,
         /** Use wcwidth() for problematic characters
          * soft hyphen (\u00ad) has wcwidth=1, but should not be displayed per Unicode.
          */

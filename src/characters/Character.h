@@ -140,6 +140,7 @@ const ExtraFlags EF_UNDERLINE_COLOR_1 = (1 << 3);
 const ExtraFlags EF_EMOJI_REPRESENTATION = (1 << 7);
 const ExtraFlags EF_ASCII_WORD = (1 << 8);
 const ExtraFlags EF_BRAHMIC_WORD = (1 << 9);
+const ExtraFlags EF_CODING_WORD = (1 << 10);
 
 #define SetULColor(f, m) (((f) & ~EF_UNDERLINE_COLOR) | ((m) * EF_UNDERLINE_COLOR_1))
 #define setRepl(f, m) (((f) & ~EF_REPL) | ((m) * EF_REPL_PROMPT))

@@ -1020,6 +1020,7 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr &profile)
     _appearanceUi->wordModeAttr->setEnabled(profile->property<bool>(Profile::WordMode));
     _appearanceUi->wordModeAscii->setEnabled(profile->property<bool>(Profile::WordMode));
     _appearanceUi->wordModeBrahmic->setEnabled(profile->property<bool>(Profile::WordMode));
+    _appearanceUi->wordModeCoding->setEnabled(profile->property<bool>(Profile::WordMode));
 
     _appearanceUi->wordModeAttr->setChecked(profile->property<bool>(Profile::WordModeAttr));
     connect(_appearanceUi->wordModeAttr, &QPushButton::toggled, this, &EditProfileDialog::toggleWordModeAttr);
@@ -1029,6 +1030,9 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr &profile)
 
     _appearanceUi->wordModeBrahmic->setChecked(profile->property<bool>(Profile::WordModeBrahmic));
     connect(_appearanceUi->wordModeBrahmic, &QPushButton::toggled, this, &EditProfileDialog::toggleWordModeBrahmic);
+
+    _appearanceUi->wordModeCoding->setChecked(profile->property<bool>(Profile::WordModeCoding));
+    connect(_appearanceUi->wordModeCoding, &QPushButton::toggled, this, &EditProfileDialog::toggleWordModeCoding);
 
     _appearanceUi->fontHinting->setChecked(profile->fontHinting());
     connect(_appearanceUi->fontHinting, &QPushButton::toggled, this, &EditProfileDialog::toggleFontHinting);
@@ -2325,6 +2329,7 @@ void EditProfileDialog::toggleWordMode(bool mode)
     _appearanceUi->wordModeAttr->setEnabled(mode);
     _appearanceUi->wordModeAscii->setEnabled(mode);
     _appearanceUi->wordModeBrahmic->setEnabled(mode);
+    _appearanceUi->wordModeCoding->setEnabled(mode);
 }
 
 void EditProfileDialog::toggleWordModeAttr(bool mode)
@@ -2340,6 +2345,11 @@ void EditProfileDialog::toggleWordModeAscii(bool mode)
 void EditProfileDialog::toggleWordModeBrahmic(bool mode)
 {
     updateTempProfileProperty(Profile::WordModeBrahmic, mode);
+}
+
+void EditProfileDialog::toggleWordModeCoding(bool mode)
+{
+    updateTempProfileProperty(Profile::WordModeCoding, mode);
 }
 
 void EditProfileDialog::toggleFontHinting(bool enableHinting)

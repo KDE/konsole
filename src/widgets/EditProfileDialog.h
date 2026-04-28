@@ -242,6 +242,7 @@ private Q_SLOTS:
     void toggleWordModeAttr(bool mode);
     void toggleWordModeAscii(bool mode);
     void toggleWordModeBrahmic(bool mode);
+    void toggleWordModeCoding(bool mode);
     void toggleIgnoreWcWidth(bool ignore);
     void toggleFontHinting(bool enableHinting);
 
