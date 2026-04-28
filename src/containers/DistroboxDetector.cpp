@@ -13,6 +13,7 @@
 #include <QProcess>
 #include <QRegularExpression>
 #include <QTextStream>
+#include <QStandardPaths>
 
 bool isContainerRuntime(const QList<QByteArray> &args)
 {
@@ -182,6 +183,11 @@ QStringList DistroboxDetector::entryCommand(const QString &containerName) const
 
 void DistroboxDetector::startListContainers()
 {
+    // Return if distrobox is not found
+    if (QStandardPaths::findExecutable(QStringLiteral("distrobox")).isEmpty()) {
+        Q_EMIT listContainersFinished({});
+        return;
+    }
     auto *process = new QProcess(this);
     process->setProgram(QStringLiteral("distrobox"));
     process->setArguments({QStringLiteral("list"), QStringLiteral("--no-color")});

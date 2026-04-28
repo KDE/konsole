@@ -10,6 +10,7 @@
 
 #include <QProcess>
 #include <QRegularExpression>
+#include <QStandardPaths>
 
 namespace Konsole
 {
@@ -57,6 +58,11 @@ QStringList ToolboxDetector::entryCommand(const QString &containerName) const
 
 void ToolboxDetector::startListContainers()
 {
+    // Return if toolbox is not found
+    if (QStandardPaths::findExecutable(QStringLiteral("toolbox")).isEmpty()) {
+        Q_EMIT listContainersFinished({});
+        return;
+    }
     auto *process = new QProcess(this);
     process->setProgram(QStringLiteral("toolbox"));
     process->setArguments({QStringLiteral("list"), QStringLiteral("--containers")});
