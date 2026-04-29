@@ -3009,11 +3009,11 @@ msgid ""
 "enabling might cause greater slowdowns during high memory consumption and "
 "specifying excessively low values might still cause Konsole to be killed."
 msgstr ""
-"Changes will take effect upon restart. If enabled, sustained memory "
-"consumption by Konsole exceeding zadaný value will cause systemd-oomd to "
-"eliminate the tab(s) containing the memory-intensive process(es). Poznámka: "
-"enabling might cause greater slowdowns during high memory consumption and "
-"specifying excessively low values might still cause Konsole to be killed."
+"Zmeny sa prejavia po reštarte. Ak je povolené, dlhotrvajúca spotreba pamäte "
+"aplikáciou Konsole presahujúca zadanú hodnotu spôsobí, že systemd-oomd "
+"odstráni karty obsahujúce procesy náročné na pamäť. Poznámka: povolenie môže "
+"spôsobiť väčšie spomalenia počas vysokej spotreby pamäte a zadanie príliš "
+"nízkych hodnôt môže napriek tomu spôsobiť ukončenie aplikácie Konsole."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:37
@@ -4769,8 +4769,8 @@ msgid ""
 "When opening a new tab or split, automatically enter the same container "
 "(Toolbox, Distrobox) as the current session"
 msgstr ""
-"When opening a new tab or split, automatically enter rovnaký container "
-"(Toolbox, Distrobox) as aktuálny session"
+"Pri otvorení novej karty alebo rozdelenia automaticky vstúpiť do rovnakého "
+"kontajnera (Toolbox, Distrobox) ako aktuálna relácia"
 
 #. i18n: ectx: property (text), widget (QCheckBox, inheritContainerButton)
 #: widgets/EditProfileGeneralPage.ui:203
