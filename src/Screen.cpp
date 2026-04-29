@@ -1283,6 +1283,27 @@ notcombine:
     // check if selection is still valid.
     checkSelection(_lastPos, _lastPos);
 
+    // Clear non-kitty graphics placements overlapping with the new character.
+    // kitty has its own delete logic.
+    if (_hasGraphics) {
+        auto i = _graphicsPlacements.begin();
+        while (i != _graphicsPlacements.end()) {
+            TerminalGraphicsPlacement_t *p = i->get();
+            if (p->source != TerminalGraphicsPlacement_t::Kitty
+                && p->row == _cuY
+                && _cuX >= p->col
+                && _cuX < p->col + p->cols) {
+                i = _graphicsPlacements.erase(i);
+            } else {
+                ++i;
+            }
+        }
+
+        if (_graphicsPlacements.empty()) {
+            _hasGraphics = false;
+        }
+    }
+
     Character &currentChar = _screenLines[_cuY][_cuX];
 
     currentChar.character = c;
@@ -1545,6 +1566,28 @@ void Screen::clearImage(int loca, int loce, char c, bool resetLineRendition)
 
     if (_escapeSequenceUrlExtractor) {
         _escapeSequenceUrlExtractor->clearBetween(loca, loce);
+    }
+
+    // Clear non-kitty graphics placements in the cleared area.
+    // kitty has its own delete logic.
+    if (_hasGraphics) {
+        auto i = _graphicsPlacements.begin();
+        while (i != _graphicsPlacements.end()) {
+            TerminalGraphicsPlacement_t *p = i->get();
+            const int startCol = loca % _columns;
+            if (p->source != TerminalGraphicsPlacement_t::Kitty
+                && p->row <= bottomLine && p->row + p->rows > topLine
+                && p->col < _columns && p->col + p->cols > 0
+                && (p->row > topLine || p->col + p->cols > startCol)) {
+                i = _graphicsPlacements.erase(i);
+            } else {
+                ++i;
+            }
+        }
+
+        if (_graphicsPlacements.empty()) {
+            _hasGraphics = false;
+        }
     }
 }
 
