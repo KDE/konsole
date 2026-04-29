@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-26 00:47+0000\n"
+"POT-Creation-Date: 2026-04-29 00:49+0000\n"
 "PO-Revision-Date: 2014-07-01 22:04+0200\n"
 "Last-Translator: Sönke Dibbern <s_dibbern@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -737,7 +737,7 @@ msgid ""
 "Container support is not available when Konsole is running inside Flatpak."
 msgstr ""
 
-#: containers/DistroboxDetector.cpp:72
+#: containers/DistroboxDetector.cpp:73
 #, kde-format
 msgid "Distrobox"
 msgstr ""
@@ -753,7 +753,7 @@ msgstr ""
 msgid " [default]"
 msgstr "As &Standard bruken"
 
-#: containers/ToolboxDetector.cpp:29
+#: containers/ToolboxDetector.cpp:30
 #, kde-format
 msgid "Toolbox"
 msgstr ""
@@ -1275,55 +1275,55 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Dank ok an vele annere Lüüd.\n"
 
-#: MainWindow.cpp:391
+#: MainWindow.cpp:393
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "&Nieg Törn"
 
-#: MainWindow.cpp:401
+#: MainWindow.cpp:403
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "Törn ver&dubbeln"
 
-#: MainWindow.cpp:408
+#: MainWindow.cpp:410
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "Nieg &Finster"
 
-#: MainWindow.cpp:415
+#: MainWindow.cpp:417
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Finster tomaken"
 
-#: MainWindow.cpp:420
+#: MainWindow.cpp:422
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "&Leestekens"
 
-#: MainWindow.cpp:447
+#: MainWindow.cpp:449
 #, fuzzy, kde-format
 #| msgid "New Color Scheme"
 msgid "&Window Color Scheme"
 msgstr "Nieg Klöörschema"
 
-#: MainWindow.cpp:459
+#: MainWindow.cpp:461
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Profilen plegen..."
 
-#: MainWindow.cpp:465
+#: MainWindow.cpp:467
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Menü anmaken"
 
-#: MainWindow.cpp:471
+#: MainWindow.cpp:473
 #, fuzzy, kde-format
 #| msgctxt "@action Shortcut entry"
 #| msgid "Move Tab Left"
@@ -1331,13 +1331,13 @@ msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Paneel na links verschuven"
 
-#: MainWindow.cpp:480
+#: MainWindow.cpp:482
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr ""
 
-#: MainWindow.cpp:827 MainWindow.cpp:844
+#: MainWindow.cpp:829 MainWindow.cpp:846
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1346,25 +1346,25 @@ msgid_plural ""
 msgstr[0] "Binnen dat Finster löppt en Perzess. Wullt Du dat redig tomaken?"
 msgstr[1] "Binnen dat Finster loopt %1 Perzessen. Wullt Du dat redig tomaken?"
 
-#: MainWindow.cpp:833 MainWindow.cpp:850 MainWindow.cpp:864
+#: MainWindow.cpp:835 MainWindow.cpp:852 MainWindow.cpp:866
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Tomaken beglöven"
 
-#: MainWindow.cpp:834 MainWindow.cpp:851 MainWindow.cpp:865
+#: MainWindow.cpp:836 MainWindow.cpp:853 MainWindow.cpp:867
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "&Finster tomaken"
 
-#: MainWindow.cpp:852 MainWindow.cpp:866
+#: MainWindow.cpp:854 MainWindow.cpp:868
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Aktuell &Törn tomaken"
 
-#: MainWindow.cpp:861
+#: MainWindow.cpp:863
 #, fuzzy, kde-format
 #| msgctxt "@info"
 #| msgid ""
@@ -1375,7 +1375,7 @@ msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "Binnen dat Finster löppt en Perzess. Wullt Du dat redig tomaken?"
 
-#: MainWindow.cpp:1001 Part.cpp:317
+#: MainWindow.cpp:1003 Part.cpp:317
 #, fuzzy, kde-format
 #| msgctxt "@item This will be used as part of the file name"
 #| msgid "New Profile"
@@ -1383,31 +1383,31 @@ msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Nieg Profil"
 
-#: MainWindow.cpp:1019
+#: MainWindow.cpp:1021
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Allmeen"
 
-#: MainWindow.cpp:1031
+#: MainWindow.cpp:1033
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr ""
 
-#: MainWindow.cpp:1037
+#: MainWindow.cpp:1039
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr ""
 
-#: MainWindow.cpp:1042
+#: MainWindow.cpp:1044
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr ""
 
-#: MainWindow.cpp:1047
+#: MainWindow.cpp:1049
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -2035,19 +2035,19 @@ msgstr ""
 msgid "Default profile"
 msgstr "Standardprofil"
 
-#: profile/ProfileManager.cpp:280
+#: profile/ProfileManager.cpp:349
 #, fuzzy, kde-format
 #| msgid "Edit Profile \"%1\""
 msgctxt "New profile name, %1 is a number"
 msgid "Profile %1"
 msgstr "Profil \"%1\" bewerken"
 
-#: profile/ProfileManager.cpp:294
+#: profile/ProfileManager.cpp:363
 #, kde-format
 msgid "Konsole does not have permission to save this profile to %1"
 msgstr ""
 
-#: profile/ProfileModel.cpp:55
+#: profile/ProfileModel.cpp:57
 #, fuzzy, kde-format
 #| msgctxt "@label:listbox Column header text for color names"
 #| msgid "Name"
@@ -2055,7 +2055,7 @@ msgctxt "@title:column Profile name"
 msgid "Name"
 msgstr "Naam"
 
-#: profile/ProfileModel.cpp:57
+#: profile/ProfileModel.cpp:59
 #, fuzzy, kde-format
 #| msgctxt "@title:column Profile shortcut text"
 #| msgid "Shortcut"
@@ -2063,7 +2063,7 @@ msgctxt "@title:column Profile keyboard shortcut"
 msgid "Shortcut"
 msgstr "Tastkombinatschoon"
 
-#: profile/ProfileModel.cpp:80
+#: profile/ProfileModel.cpp:82
 #, kde-format
 msgctxt ""
 "@label:textbox added to the name of the built-in profile, to point out it's "
@@ -2071,20 +2071,32 @@ msgctxt ""
 msgid " [Read-only]"
 msgstr ""
 
-#: profile/ProfileModel.cpp:84
+#: profile/ProfileModel.cpp:86
 #, fuzzy, kde-format
 #| msgid "&Set as Default"
 msgctxt "@label:textbox added to the name of the current default profile"
 msgid " [Default]"
 msgstr "As &Standard bruken"
 
-#: profile/ProfileModel.cpp:99
+#: profile/ProfileModel.cpp:91
+#, kde-format
+msgctxt "@label:textbox added to profile name when used for light system theme"
+msgid " [Light]"
+msgstr ""
+
+#: profile/ProfileModel.cpp:94
+#, kde-format
+msgctxt "@label:textbox added to profile name when used for dark system theme"
+msgid " [Dark]"
+msgstr ""
+
+#: profile/ProfileModel.cpp:110
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Built-in profile is always available"
 msgstr ""
 
-#: profile/ProfileModel.cpp:111
+#: profile/ProfileModel.cpp:122
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Double click to change shortcut"
@@ -2279,8 +2291,8 @@ msgstr "Törn \"%1\" is still"
 
 #: session/Session.cpp:818 session/Session.cpp:2326
 #: session/SessionController.cpp:381 session/SessionController.cpp:1927
-#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1255
-#: Vt102Emulation.cpp:1510
+#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1260
+#: Vt102Emulation.cpp:1515
 #, fuzzy, kde-format
 #| msgid "&Close Session"
 msgid "Show session"
@@ -2785,8 +2797,14 @@ msgstr ""
 msgid "Show progress in taskbar"
 msgstr ""
 
-#. i18n: ectx: property (text), widget (QLabel, label_3)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SyncProfileWithSystemTheme)
 #: settings/GeneralSettings.ui:112
+#, kde-format
+msgid "Automatically switch profile based on system theme"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: settings/GeneralSettings.ui:119
 #, fuzzy, kde-format
 #| msgid "Notifications"
 msgid "Notifications:"
@@ -2794,21 +2812,21 @@ msgstr "Bescheden"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchReverseSearch)
 #. i18n: ectx: tooltip, entry (SearchReverseSearch), group (SearchSettings)
-#: settings/GeneralSettings.ui:125 settings/konsole.kcfg:99
+#: settings/GeneralSettings.ui:132 settings/konsole.kcfg:99
 #, kde-format
 msgid "Sets whether search should start from the bottom"
 msgstr "Leggt fast, wat de Söök nerrn anfangt"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchReverseSearch)
 #. i18n: ectx: label, entry (SearchReverseSearch), group (SearchSettings)
-#: settings/GeneralSettings.ui:128 settings/konsole.kcfg:98
+#: settings/GeneralSettings.ui:135 settings/konsole.kcfg:98
 #, kde-format
 msgid "Search backwards"
 msgstr "Na baven söken"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchCaseSensitive)
 #. i18n: ectx: tooltip, entry (SearchCaseSensitive), group (SearchSettings)
-#: settings/GeneralSettings.ui:141 settings/konsole.kcfg:85
+#: settings/GeneralSettings.ui:148 settings/konsole.kcfg:85
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid "Sets whether the search is case sensitive"
@@ -2816,7 +2834,7 @@ msgid "Sets whether the search is case sensitive"
 msgstr "Gifft an, wat de Söök op Groot- un Lüttschrieven kiekt"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchCaseSensitive)
-#: settings/GeneralSettings.ui:144
+#: settings/GeneralSettings.ui:151
 #, fuzzy, kde-format
 #| msgctxt "@item:inmenu"
 #| msgid "Case sensitive"
@@ -2824,13 +2842,13 @@ msgid "Case sensitive"
 msgstr "Op Groot- un Lüttschrieven kieken"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: settings/GeneralSettings.ui:151
+#: settings/GeneralSettings.ui:158
 #, kde-format
 msgid "Process and window:"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchHighlightMatches)
-#: settings/GeneralSettings.ui:167
+#: settings/GeneralSettings.ui:174
 #, fuzzy, kde-format
 #| msgctxt "@item:inmenu"
 #| msgid "Highlight all matches"
@@ -2838,7 +2856,7 @@ msgid "Highlight all matches"
 msgstr "All Drepers rutheven"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: settings/GeneralSettings.ui:174
+#: settings/GeneralSettings.ui:181
 #, fuzzy, kde-format
 #| msgid "Web Search"
 msgctxt "@item:intext Search options"
@@ -2847,68 +2865,68 @@ msgstr "Nettsöök"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchNoWrap)
 #. i18n: ectx: tooltip, entry (SearchNoWrap), group (SearchSettings)
-#: settings/GeneralSettings.ui:203 settings/konsole.kcfg:104
+#: settings/GeneralSettings.ui:210 settings/konsole.kcfg:104
 #, fuzzy, kde-format
 #| msgid "Sets whether search should start from the bottom"
 msgid "Sets whether search should stop instead of wrapping"
 msgstr "Leggt fast, wat de Söök nerrn anfangt"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchNoWrap)
-#: settings/GeneralSettings.ui:206
+#: settings/GeneralSettings.ui:213
 #, kde-format
 msgid "No wrap"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AllowMenuAccelerators)
 #. i18n: ectx: label, entry (AllowMenuAccelerators), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:219 settings/konsole.kcfg:22
+#: settings/GeneralSettings.ui:226 settings/konsole.kcfg:22
 #, kde-format
 msgid "Enable menu accelerators"
 msgstr "Menütasten anmaken"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_FocusFollowsMouse)
 #. i18n: ectx: label, entry (FocusFollowsMouse), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:226 settings/konsole.kcfg:13
+#: settings/GeneralSettings.ui:233 settings/konsole.kcfg:13
 #, kde-format
 msgid "Focus terminals when the mouse pointer is moved over them"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, enableAllMessagesButton)
-#: settings/GeneralSettings.ui:244
+#: settings/GeneralSettings.ui:251
 #, kde-format
 msgid "All dialogs will be shown again"
 msgstr "All Dialogen warrt wedder wiest"
 
 #. i18n: ectx: property (text), widget (QPushButton, enableAllMessagesButton)
-#: settings/GeneralSettings.ui:247
+#: settings/GeneralSettings.ui:254
 #, kde-format
 msgid "Enable all \"Don't Ask Again\" messages"
 msgstr "All \"Nich nochmaal fragen\"-Mellen anmaken"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowWindowTitleOnTitleBar)
 #. i18n: ectx: label, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:275 settings/konsole.kcfg:17
+#: settings/GeneralSettings.ui:282 settings/konsole.kcfg:17
 #, kde-format
 msgid "Show window title on the titlebar"
 msgstr "Finstertitel op Titelbalken wiesen"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableSecuritySensitiveDBusAPI)
 #. i18n: ectx: label, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:282 settings/konsole.kcfg:47
+#: settings/GeneralSettings.ui:289 settings/konsole.kcfg:47
 #, kde-format
 msgid "Enable the security sensitive parts of the DBus API"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RemoveWindowTitleBarAndFrame)
 #. i18n: ectx: label, entry (RemoveWindowTitleBarAndFrame), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:289 settings/konsole.kcfg:9
+#: settings/GeneralSettings.ui:296 settings/konsole.kcfg:9
 #, kde-format
 msgid "Remove window titlebar and frame"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchRegExpression)
 #. i18n: ectx: label, entry (SearchRegExpression), group (SearchSettings)
-#: settings/GeneralSettings.ui:302 settings/konsole.kcfg:89
+#: settings/GeneralSettings.ui:309 settings/konsole.kcfg:89
 #, fuzzy, kde-format
 #| msgctxt "@item:inmenu"
 #| msgid "Match regular expression"
@@ -3153,6 +3171,24 @@ msgstr ""
 msgid "For scrollback files, use this folder"
 msgstr ""
 
+#. i18n: ectx: label, entry (SyncProfileWithSystemTheme), group (LightDarkTheme)
+#: settings/konsole.kcfg:238
+#, kde-format
+msgid "Sync profile with system theme"
+msgstr ""
+
+#. i18n: ectx: label, entry (LightThemeProfile), group (LightDarkTheme)
+#: settings/konsole.kcfg:242
+#, kde-format
+msgid "Profile to use for light system theme"
+msgstr ""
+
+#. i18n: ectx: label, entry (DarkThemeProfile), group (LightDarkTheme)
+#: settings/konsole.kcfg:246
+#, kde-format
+msgid "Profile to use for dark system theme"
+msgstr ""
+
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableMemoryMonitoring)
 #: settings/MemorySettings.ui:17
 #, fuzzy, kde-format
@@ -3249,6 +3285,34 @@ msgstr "Dat utsöchte Profil as Standard för nieg Terminaltörns fastleggen"
 #: settings/ProfileSettings.ui:93
 #, kde-format
 msgid "&Set as Default"
+msgstr "As &Standard bruken"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, setLightProfileButton)
+#: settings/ProfileSettings.ui:103
+#, fuzzy, kde-format
+#| msgid "Set the selected profile as the default for new terminal sessions"
+msgid "Set the selected profile as the light theme profile"
+msgstr "Dat utsöchte Profil as Standard för nieg Terminaltörns fastleggen"
+
+#. i18n: ectx: property (text), widget (QPushButton, setLightProfileButton)
+#: settings/ProfileSettings.ui:106
+#, fuzzy, kde-format
+#| msgid "&Set as Default"
+msgid "&Set as Light"
+msgstr "As &Standard bruken"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, setDarkProfileButton)
+#: settings/ProfileSettings.ui:116
+#, fuzzy, kde-format
+#| msgid "Set the selected profile as the default for new terminal sessions"
+msgid "Set the selected profile as the dark theme profile"
+msgstr "Dat utsöchte Profil as Standard för nieg Terminaltörns fastleggen"
+
+#. i18n: ectx: property (text), widget (QPushButton, setDarkProfileButton)
+#: settings/ProfileSettings.ui:119
+#, fuzzy, kde-format
+#| msgid "&Set as Default"
+msgid "&Set as Dark"
 msgstr "As &Standard bruken"
 
 #. i18n: ectx: attribute (title), widget (QWidget, appearanceTab)
@@ -4018,7 +4082,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr ""
 
-#: Vt102Emulation.cpp:3282
+#: Vt102Emulation.cpp:3302
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "

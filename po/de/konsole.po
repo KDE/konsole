@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-26 00:47+0000\n"
+"POT-Creation-Date: 2026-04-29 00:49+0000\n"
 "PO-Revision-Date: 2026-03-21 14:51+0100\n"
 "Last-Translator: Frank Steinmetzger <dev-kde@felsenfleischer.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -701,7 +701,7 @@ msgstr ""
 "Die Unterstützung für Container ist nicht verfügbar, wenn die Flatpak-"
 "Version von Konsole ausgeführt wird."
 
-#: containers/DistroboxDetector.cpp:72
+#: containers/DistroboxDetector.cpp:73
 #, kde-format
 msgid "Distrobox"
 msgstr "Distrobox"
@@ -716,7 +716,7 @@ msgstr "Kapsule"
 msgid " [default]"
 msgstr " [Standard]"
 
-#: containers/ToolboxDetector.cpp:29
+#: containers/ToolboxDetector.cpp:30
 #, kde-format
 msgid "Toolbox"
 msgstr "Toolbox"
@@ -1234,66 +1234,66 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Der Dank geht noch an viele weitere!\n"
 
-#: MainWindow.cpp:391
+#: MainWindow.cpp:393
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "&Neues Unterfenster"
 
-#: MainWindow.cpp:401
+#: MainWindow.cpp:403
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "Unterfenster &duplizieren"
 
-#: MainWindow.cpp:408
+#: MainWindow.cpp:410
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "Neues &Fenster"
 
-#: MainWindow.cpp:415
+#: MainWindow.cpp:417
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Fenster schließen"
 
-#: MainWindow.cpp:420
+#: MainWindow.cpp:422
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "&Lesezeichen"
 
-#: MainWindow.cpp:447
+#: MainWindow.cpp:449
 #, kde-format
 msgid "&Window Color Scheme"
 msgstr "&Fenster-Farbschema"
 
-#: MainWindow.cpp:459
+#: MainWindow.cpp:461
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Profile verwalten …"
 
-#: MainWindow.cpp:465
+#: MainWindow.cpp:467
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Menü aktivieren"
 
-#: MainWindow.cpp:471
+#: MainWindow.cpp:473
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Unterfenster-Layout speichern …"
 
-#: MainWindow.cpp:480
+#: MainWindow.cpp:482
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Unterfenster-Layout laden …"
 
-#: MainWindow.cpp:827 MainWindow.cpp:844
+#: MainWindow.cpp:829 MainWindow.cpp:846
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1306,25 +1306,25 @@ msgstr[1] ""
 "In diesem Fenster werden noch %1 Prozesse ausgeführt. Möchten Sie dennoch "
 "beenden?"
 
-#: MainWindow.cpp:833 MainWindow.cpp:850 MainWindow.cpp:864
+#: MainWindow.cpp:835 MainWindow.cpp:852 MainWindow.cpp:866
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Schließen bestätigen"
 
-#: MainWindow.cpp:834 MainWindow.cpp:851 MainWindow.cpp:865
+#: MainWindow.cpp:836 MainWindow.cpp:853 MainWindow.cpp:867
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "&Fenster schließen"
 
-#: MainWindow.cpp:852 MainWindow.cpp:866
+#: MainWindow.cpp:854 MainWindow.cpp:868
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "A&ktuelles Unterfenster schließen"
 
-#: MainWindow.cpp:861
+#: MainWindow.cpp:863
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
@@ -1332,37 +1332,37 @@ msgstr ""
 "In diesem Fenster gibt es noch %1 geöffnete Terminals. Möchten Sie dennoch "
 "beenden?"
 
-#: MainWindow.cpp:1001 Part.cpp:317
+#: MainWindow.cpp:1003 Part.cpp:317
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profile"
 
-#: MainWindow.cpp:1019
+#: MainWindow.cpp:1021
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Allgemein"
 
-#: MainWindow.cpp:1031
+#: MainWindow.cpp:1033
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr "Speicher"
 
-#: MainWindow.cpp:1037
+#: MainWindow.cpp:1039
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Unterfensterleiste / Geteilte Ansicht"
 
-#: MainWindow.cpp:1042
+#: MainWindow.cpp:1044
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Temporäre Dateien"
 
-#: MainWindow.cpp:1047
+#: MainWindow.cpp:1049
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -1956,30 +1956,30 @@ msgstr "Integriert"
 msgid "Default profile"
 msgstr "Standardprofil"
 
-#: profile/ProfileManager.cpp:280
+#: profile/ProfileManager.cpp:349
 #, kde-format
 msgctxt "New profile name, %1 is a number"
 msgid "Profile %1"
 msgstr "Profil %1"
 
-#: profile/ProfileManager.cpp:294
+#: profile/ProfileManager.cpp:363
 #, kde-format
 msgid "Konsole does not have permission to save this profile to %1"
 msgstr "Konsole fehlen die Berechtigungen, dieses Profil nach %1 zu speichern"
 
-#: profile/ProfileModel.cpp:55
+#: profile/ProfileModel.cpp:57
 #, kde-format
 msgctxt "@title:column Profile name"
 msgid "Name"
 msgstr "Name"
 
-#: profile/ProfileModel.cpp:57
+#: profile/ProfileModel.cpp:59
 #, kde-format
 msgctxt "@title:column Profile keyboard shortcut"
 msgid "Shortcut"
 msgstr "Kurzbefehl"
 
-#: profile/ProfileModel.cpp:80
+#: profile/ProfileModel.cpp:82
 #, kde-format
 msgctxt ""
 "@label:textbox added to the name of the built-in profile, to point out it's "
@@ -1987,19 +1987,32 @@ msgctxt ""
 msgid " [Read-only]"
 msgstr " [Nur lesen]"
 
-#: profile/ProfileModel.cpp:84
+#: profile/ProfileModel.cpp:86
 #, kde-format
 msgctxt "@label:textbox added to the name of the current default profile"
 msgid " [Default]"
 msgstr " [Standard]"
 
-#: profile/ProfileModel.cpp:99
+#: profile/ProfileModel.cpp:91
+#, kde-format
+msgctxt "@label:textbox added to profile name when used for light system theme"
+msgid " [Light]"
+msgstr ""
+
+#: profile/ProfileModel.cpp:94
+#, fuzzy, kde-format
+#| msgid "Darken"
+msgctxt "@label:textbox added to profile name when used for dark system theme"
+msgid " [Dark]"
+msgstr "Abdunkeln"
+
+#: profile/ProfileModel.cpp:110
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Built-in profile is always available"
 msgstr "Integriertes Profil ist immer verfügbar"
 
-#: profile/ProfileModel.cpp:111
+#: profile/ProfileModel.cpp:122
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Double click to change shortcut"
@@ -2195,8 +2208,8 @@ msgstr "Keine Aktivität in „%1“ (Sitzung „%2“)"
 
 #: session/Session.cpp:818 session/Session.cpp:2326
 #: session/SessionController.cpp:381 session/SessionController.cpp:1927
-#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1255
-#: Vt102Emulation.cpp:1510
+#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1260
+#: Vt102Emulation.cpp:1515
 #, kde-format
 msgid "Show session"
 msgstr "Sitzung anzeigen"
@@ -2680,53 +2693,59 @@ msgstr "Auf ZModem-Terminalcodes lauschen"
 msgid "Show progress in taskbar"
 msgstr "Fortschritt in Taskleiste anzeigen"
 
-#. i18n: ectx: property (text), widget (QLabel, label_3)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SyncProfileWithSystemTheme)
 #: settings/GeneralSettings.ui:112
+#, kde-format
+msgid "Automatically switch profile based on system theme"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: settings/GeneralSettings.ui:119
 #, kde-format
 msgid "Notifications:"
 msgstr "Benachrichtigungen:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchReverseSearch)
 #. i18n: ectx: tooltip, entry (SearchReverseSearch), group (SearchSettings)
-#: settings/GeneralSettings.ui:125 settings/konsole.kcfg:99
+#: settings/GeneralSettings.ui:132 settings/konsole.kcfg:99
 #, kde-format
 msgid "Sets whether search should start from the bottom"
 msgstr "Legt fest, ob die Suche von unten beginnen soll"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchReverseSearch)
 #. i18n: ectx: label, entry (SearchReverseSearch), group (SearchSettings)
-#: settings/GeneralSettings.ui:128 settings/konsole.kcfg:98
+#: settings/GeneralSettings.ui:135 settings/konsole.kcfg:98
 #, kde-format
 msgid "Search backwards"
 msgstr "Rückwärts suchen"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchCaseSensitive)
 #. i18n: ectx: tooltip, entry (SearchCaseSensitive), group (SearchSettings)
-#: settings/GeneralSettings.ui:141 settings/konsole.kcfg:85
+#: settings/GeneralSettings.ui:148 settings/konsole.kcfg:85
 #, kde-format
 msgid "Sets whether the search is case sensitive"
 msgstr "Legt fest, ob die Suche Groß-/Kleinschreibung beachten soll"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchCaseSensitive)
-#: settings/GeneralSettings.ui:144
+#: settings/GeneralSettings.ui:151
 #, kde-format
 msgid "Case sensitive"
 msgstr "Groß-/Kleinschreibung beachten"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: settings/GeneralSettings.ui:151
+#: settings/GeneralSettings.ui:158
 #, kde-format
 msgid "Process and window:"
 msgstr "Prozess und Fenster:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchHighlightMatches)
-#: settings/GeneralSettings.ui:167
+#: settings/GeneralSettings.ui:174
 #, kde-format
 msgid "Highlight all matches"
 msgstr "Alle Treffer hervorheben"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: settings/GeneralSettings.ui:174
+#: settings/GeneralSettings.ui:181
 #, kde-format
 msgctxt "@item:intext Search options"
 msgid "Search:"
@@ -2734,7 +2753,7 @@ msgstr "Suchen:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchNoWrap)
 #. i18n: ectx: tooltip, entry (SearchNoWrap), group (SearchSettings)
-#: settings/GeneralSettings.ui:203 settings/konsole.kcfg:104
+#: settings/GeneralSettings.ui:210 settings/konsole.kcfg:104
 #, kde-format
 msgid "Sets whether search should stop instead of wrapping"
 msgstr ""
@@ -2742,61 +2761,61 @@ msgstr ""
 "soll"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchNoWrap)
-#: settings/GeneralSettings.ui:206
+#: settings/GeneralSettings.ui:213
 #, kde-format
 msgid "No wrap"
 msgstr "Nicht fortsetzen"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AllowMenuAccelerators)
 #. i18n: ectx: label, entry (AllowMenuAccelerators), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:219 settings/konsole.kcfg:22
+#: settings/GeneralSettings.ui:226 settings/konsole.kcfg:22
 #, kde-format
 msgid "Enable menu accelerators"
 msgstr "Kurzbefehle im Menü aktivieren"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_FocusFollowsMouse)
 #. i18n: ectx: label, entry (FocusFollowsMouse), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:226 settings/konsole.kcfg:13
+#: settings/GeneralSettings.ui:233 settings/konsole.kcfg:13
 #, kde-format
 msgid "Focus terminals when the mouse pointer is moved over them"
 msgstr "Terminals aktivieren, wenn sich der Mauszeiger über ihnen befindet"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, enableAllMessagesButton)
-#: settings/GeneralSettings.ui:244
+#: settings/GeneralSettings.ui:251
 #, kde-format
 msgid "All dialogs will be shown again"
 msgstr "Alle Dialoge werden wieder angezeigt"
 
 #. i18n: ectx: property (text), widget (QPushButton, enableAllMessagesButton)
-#: settings/GeneralSettings.ui:247
+#: settings/GeneralSettings.ui:254
 #, kde-format
 msgid "Enable all \"Don't Ask Again\" messages"
 msgstr "Alle „Diese Nachfrage nicht mehr anzeigen“-Meldungen aktivieren"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowWindowTitleOnTitleBar)
 #. i18n: ectx: label, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:275 settings/konsole.kcfg:17
+#: settings/GeneralSettings.ui:282 settings/konsole.kcfg:17
 #, kde-format
 msgid "Show window title on the titlebar"
 msgstr "Fenstertitel in der Titelleiste anzeigen"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableSecuritySensitiveDBusAPI)
 #. i18n: ectx: label, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:282 settings/konsole.kcfg:47
+#: settings/GeneralSettings.ui:289 settings/konsole.kcfg:47
 #, kde-format
 msgid "Enable the security sensitive parts of the DBus API"
 msgstr "Die sicherheitsrelevanten Teile der D-Bus-Schnittstelle aktivieren"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RemoveWindowTitleBarAndFrame)
 #. i18n: ectx: label, entry (RemoveWindowTitleBarAndFrame), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:289 settings/konsole.kcfg:9
+#: settings/GeneralSettings.ui:296 settings/konsole.kcfg:9
 #, kde-format
 msgid "Remove window titlebar and frame"
 msgstr "Titelleiste und Rahmen des Fensters entfernen"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchRegExpression)
 #. i18n: ectx: label, entry (SearchRegExpression), group (SearchSettings)
-#: settings/GeneralSettings.ui:302 settings/konsole.kcfg:89
+#: settings/GeneralSettings.ui:309 settings/konsole.kcfg:89
 #, kde-format
 msgid "Match using regular expressions"
 msgstr "Regulären Ausdruck für Übereinstimmung verwenden"
@@ -3046,6 +3065,24 @@ msgstr "Angegebenen Speicherort für Verlaufsdateien verwenden"
 msgid "For scrollback files, use this folder"
 msgstr "Diesen Ordner für Verlaufsdateien verwenden"
 
+#. i18n: ectx: label, entry (SyncProfileWithSystemTheme), group (LightDarkTheme)
+#: settings/konsole.kcfg:238
+#, kde-format
+msgid "Sync profile with system theme"
+msgstr ""
+
+#. i18n: ectx: label, entry (LightThemeProfile), group (LightDarkTheme)
+#: settings/konsole.kcfg:242
+#, kde-format
+msgid "Profile to use for light system theme"
+msgstr ""
+
+#. i18n: ectx: label, entry (DarkThemeProfile), group (LightDarkTheme)
+#: settings/konsole.kcfg:246
+#, kde-format
+msgid "Profile to use for dark system theme"
+msgstr ""
+
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableMemoryMonitoring)
 #: settings/MemorySettings.ui:17
 #, kde-format
@@ -3150,6 +3187,38 @@ msgstr ""
 #: settings/ProfileSettings.ui:93
 #, kde-format
 msgid "&Set as Default"
+msgstr "Als &Standard festlegen"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, setLightProfileButton)
+#: settings/ProfileSettings.ui:103
+#, fuzzy, kde-format
+#| msgid "Set the selected profile as the default for new terminal sessions"
+msgid "Set the selected profile as the light theme profile"
+msgstr ""
+"Das ausgewählte Profil als Voreinstellung für neue Terminalsitzungen "
+"festlegen"
+
+#. i18n: ectx: property (text), widget (QPushButton, setLightProfileButton)
+#: settings/ProfileSettings.ui:106
+#, fuzzy, kde-format
+#| msgid "&Set as Default"
+msgid "&Set as Light"
+msgstr "Als &Standard festlegen"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, setDarkProfileButton)
+#: settings/ProfileSettings.ui:116
+#, fuzzy, kde-format
+#| msgid "Set the selected profile as the default for new terminal sessions"
+msgid "Set the selected profile as the dark theme profile"
+msgstr ""
+"Das ausgewählte Profil als Voreinstellung für neue Terminalsitzungen "
+"festlegen"
+
+#. i18n: ectx: property (text), widget (QPushButton, setDarkProfileButton)
+#: settings/ProfileSettings.ui:119
+#, fuzzy, kde-format
+#| msgid "&Set as Default"
+msgid "&Set as Dark"
 msgstr "Als &Standard festlegen"
 
 #. i18n: ectx: attribute (title), widget (QWidget, appearanceTab)
@@ -3859,7 +3928,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Unterfenster-Layout laden"
 
-#: Vt102Emulation.cpp:3282
+#: Vt102Emulation.cpp:3302
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
