@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-29 00:49+0000\n"
-"PO-Revision-Date: 2026-04-24 08:19+0300\n"
+"POT-Creation-Date: 2026-04-30 00:47+0000\n"
+"PO-Revision-Date: 2026-04-29 08:45+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -1937,7 +1937,7 @@ msgstr "&Оптимізувати для друку (чорний текст б�
 msgid "&Scale output"
 msgstr "&Масштабувати результат"
 
-#: profile/Profile.cpp:283
+#: profile/Profile.cpp:284
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
@@ -1989,14 +1989,13 @@ msgstr " [типовий]"
 #, kde-format
 msgctxt "@label:textbox added to profile name when used for light system theme"
 msgid " [Light]"
-msgstr ""
+msgstr " [Світла]"
 
 #: profile/ProfileModel.cpp:94
-#, fuzzy, kde-format
-#| msgid "Darken"
+#, kde-format
 msgctxt "@label:textbox added to profile name when used for dark system theme"
 msgid " [Dark]"
-msgstr "Затемнення"
+msgstr " [Темна]"
 
 #: profile/ProfileModel.cpp:110
 #, kde-format
@@ -2684,7 +2683,7 @@ msgstr "Показувати поступ на панелі задач"
 #: settings/GeneralSettings.ui:112
 #, kde-format
 msgid "Automatically switch profile based on system theme"
-msgstr ""
+msgstr "Автоматично перемикати профілі на основі загальносистемної теми"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/GeneralSettings.ui:119
@@ -3047,19 +3046,19 @@ msgstr "Для файлів буфера гортання використову
 #: settings/konsole.kcfg:238
 #, kde-format
 msgid "Sync profile with system theme"
-msgstr ""
+msgstr "Синхронізувати профіль із загальносистемною темою"
 
 #. i18n: ectx: label, entry (LightThemeProfile), group (LightDarkTheme)
 #: settings/konsole.kcfg:242
 #, kde-format
 msgid "Profile to use for light system theme"
-msgstr ""
+msgstr "Профіль, який слід використовувати для світлої загальносистемної теми"
 
 #. i18n: ectx: label, entry (DarkThemeProfile), group (LightDarkTheme)
 #: settings/konsole.kcfg:246
 #, kde-format
 msgid "Profile to use for dark system theme"
-msgstr ""
+msgstr "Профіль, який слід використовувати для темної загальносистемної теми"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableMemoryMonitoring)
 #: settings/MemorySettings.ui:17
@@ -3167,31 +3166,27 @@ msgstr "З&робити типовим"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, setLightProfileButton)
 #: settings/ProfileSettings.ui:103
-#, fuzzy, kde-format
-#| msgid "Set the selected profile as the default for new terminal sessions"
+#, kde-format
 msgid "Set the selected profile as the light theme profile"
-msgstr "Зробити вибраний профіль типовим для нових сеансів термінала"
+msgstr "Встановити позначений профіль як профіль світлої теми"
 
 #. i18n: ectx: property (text), widget (QPushButton, setLightProfileButton)
 #: settings/ProfileSettings.ui:106
-#, fuzzy, kde-format
-#| msgid "&Set as Default"
+#, kde-format
 msgid "&Set as Light"
-msgstr "З&робити типовим"
+msgstr "З&робити світлим"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, setDarkProfileButton)
 #: settings/ProfileSettings.ui:116
-#, fuzzy, kde-format
-#| msgid "Set the selected profile as the default for new terminal sessions"
+#, kde-format
 msgid "Set the selected profile as the dark theme profile"
-msgstr "Зробити вибраний профіль типовим для нових сеансів термінала"
+msgstr "Встановити позначений профіль як профіль темної теми"
 
 #. i18n: ectx: property (text), widget (QPushButton, setDarkProfileButton)
 #: settings/ProfileSettings.ui:119
-#, fuzzy, kde-format
-#| msgid "&Set as Default"
+#, kde-format
 msgid "&Set as Dark"
-msgstr "З&робити типовим"
+msgstr "З&робити темним"
 
 #. i18n: ectx: attribute (title), widget (QWidget, appearanceTab)
 #: settings/TabBarSettings.ui:39
@@ -4365,7 +4360,7 @@ msgstr "Кількість пікселів між двома рядками"
 #. i18n: ectx: property (suffix), widget (QSpinBox, badgeFontSizeSpinner)
 #: widgets/EditProfileAppearancePage.ui:660
 #: widgets/EditProfileAppearancePage.ui:712
-#: widgets/EditProfileAppearancePage.ui:1223
+#: widgets/EditProfileAppearancePage.ui:1239
 #, kde-format
 msgctxt "(pixels) visual size unit"
 msgid " px"
@@ -4465,20 +4460,35 @@ msgstr "Обробляти слова символами ASCII разом"
 msgid "ASCII characters "
 msgstr "Символи ASCII "
 
-#. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
+#. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeCoding)
 #: widgets/EditProfileAppearancePage.ui:935
+#, kde-format
+msgid ""
+"Render words of made of charapters the usually appear in coding ligatures "
+"together."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, wordModeCoding)
+#: widgets/EditProfileAppearancePage.ui:938
+#, fuzzy, kde-format
+#| msgid "Word characters:"
+msgid "Coding ligatures characters"
+msgstr "Символи слів:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
+#: widgets/EditProfileAppearancePage.ui:951
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
 msgstr "Обробляти слова символами брахмічних писемностей разом"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
-#: widgets/EditProfileAppearancePage.ui:938
+#: widgets/EditProfileAppearancePage.ui:954
 #, kde-format
 msgid "Brahmic scripts characters"
 msgstr "Символи брахмічних писемностей"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, fontHinting)
-#: widgets/EditProfileAppearancePage.ui:951
+#: widgets/EditProfileAppearancePage.ui:967
 #, kde-format
 msgid ""
 "Apply hinting to glyphs when rendering, which may improve the legibility of "
@@ -4488,19 +4498,19 @@ msgstr ""
 "шрифтів на деяких дисплеях"
 
 #. i18n: ectx: property (text), widget (QCheckBox, fontHinting)
-#: widgets/EditProfileAppearancePage.ui:954
+#: widgets/EditProfileAppearancePage.ui:970
 #, kde-format
 msgid "Font hinting"
 msgstr "Гінтінґ шрифту"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
-#: widgets/EditProfileAppearancePage.ui:967
+#: widgets/EditProfileAppearancePage.ui:983
 #, kde-format
 msgid "Emoji Font:"
 msgstr "Шрифт емодзі:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
-#: widgets/EditProfileAppearancePage.ui:993
+#: widgets/EditProfileAppearancePage.ui:1009
 #, kde-format
 msgid ""
 "Enable Bi-Directional display on terminals (valid for Arabic, Farsi or "
@@ -4510,91 +4520,91 @@ msgstr ""
 "єврейської)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiRenderingButton)
-#: widgets/EditProfileAppearancePage.ui:996
+#: widgets/EditProfileAppearancePage.ui:1012
 #, kde-format
 msgid "Bi-Directional text rendering"
 msgstr "Показ тексту у двох напрямках"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
-#: widgets/EditProfileAppearancePage.ui:1009
+#: widgets/EditProfileAppearancePage.ui:1025
 #, kde-format
 msgid "Lines are always LTR, rather than determined by first strong character"
 msgstr ""
 "Рядки завжди формуються зліва праворуч, а не за першим непробільним символом"
 
 #. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
-#: widgets/EditProfileAppearancePage.ui:1012
+#: widgets/EditProfileAppearancePage.ui:1028
 #, kde-format
 msgid "force LTR line direction"
 msgstr "примусовий напрямок зліва праворуч"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
-#: widgets/EditProfileAppearancePage.ui:1025
+#: widgets/EditProfileAppearancePage.ui:1041
 #, kde-format
 msgid "Treat table drawing characters as strong LTR."
 msgstr "Вважати символи малювання таблиці непробільними символами лівопису."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
-#: widgets/EditProfileAppearancePage.ui:1028
+#: widgets/EditProfileAppearancePage.ui:1044
 #, kde-format
 msgid "Table characters BiDi mode override"
 msgstr "Перевизначення режиму табличних символів BiDi"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
-#: widgets/EditProfileAppearancePage.ui:1041
+#: widgets/EditProfileAppearancePage.ui:1057
 #, kde-format
 msgid "Ignore wcwidth of problematic characters"
 msgstr "Ігнорувати wcwidth проблемних символів"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ignoreWcWidth)
-#: widgets/EditProfileAppearancePage.ui:1044
+#: widgets/EditProfileAppearancePage.ui:1060
 #, kde-format
 msgid "Override wcwidth"
 msgstr "Перевизначити wcwidth"
 
 #. i18n: ectx: property (toolTip), widget (QWidget, badgeTab)
-#: widgets/EditProfileAppearancePage.ui:1065
+#: widgets/EditProfileAppearancePage.ui:1081
 #, kde-format
 msgid "<html><head/><body><p>Badge overlay options</p></body></html>"
 msgstr "<html><head/><body><p>Параметри накладання значка</p></body></html>"
 
 #. i18n: ectx: attribute (title), widget (QWidget, badgeTab)
 #. i18n: ectx: property (text), widget (QCheckBox, badgeEnabled)
-#: widgets/EditProfileAppearancePage.ui:1068
-#: widgets/EditProfileAppearancePage.ui:1098
+#: widgets/EditProfileAppearancePage.ui:1084
+#: widgets/EditProfileAppearancePage.ui:1114
 #, kde-format
 msgid "Badge Overlay"
 msgstr "Накладний значок"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeOverlayLabel)
-#: widgets/EditProfileAppearancePage.ui:1078
+#: widgets/EditProfileAppearancePage.ui:1094
 #, kde-format
 msgid "Badge Overlay Options"
 msgstr "Параметри накладання значка"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, badgeEnabled)
-#: widgets/EditProfileAppearancePage.ui:1095
+#: widgets/EditProfileAppearancePage.ui:1111
 #, kde-format
 msgid "Enable badge overlay rendering"
 msgstr "Увімкнути малювання накладного значка"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, badge_label_1)
 #. i18n: ectx: property (toolTip), widget (QLineEdit, badgeTextEdit)
-#: widgets/EditProfileAppearancePage.ui:1105
-#: widgets/EditProfileAppearancePage.ui:1126
+#: widgets/EditProfileAppearancePage.ui:1121
+#: widgets/EditProfileAppearancePage.ui:1142
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Default text of badge."
 msgstr "Типовий текст значка."
 
 #. i18n: ectx: property (text), widget (QLabel, badge_label_1)
-#: widgets/EditProfileAppearancePage.ui:1108
+#: widgets/EditProfileAppearancePage.ui:1124
 #, kde-format
 msgid "Badge text:"
 msgstr "Текст значка:"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeVariablesHelpLabel)
-#: widgets/EditProfileAppearancePage.ui:1134
+#: widgets/EditProfileAppearancePage.ui:1150
 #, kde-format
 msgid ""
 "<html><head/><body><p><small><b>Available variables:</b> \\(session.title), "
@@ -4608,7 +4618,7 @@ msgstr ""
 "html>"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeEscapeSequenceHelpLabel)
-#: widgets/EditProfileAppearancePage.ui:1154
+#: widgets/EditProfileAppearancePage.ui:1170
 #, kde-format
 msgid ""
 "<html><head/><body><p><small><b>Badge configuration:</b><br/>Use profile "
@@ -4621,63 +4631,63 @@ msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QLabel, badge_label_2)
 #. i18n: ectx: property (toolTip), widget (QLineEdit, badgeFontEdit)
-#: widgets/EditProfileAppearancePage.ui:1174
-#: widgets/EditProfileAppearancePage.ui:1195
+#: widgets/EditProfileAppearancePage.ui:1190
+#: widgets/EditProfileAppearancePage.ui:1211
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Badge font family."
 msgstr "Гарнітура шрифту значка."
 
 #. i18n: ectx: property (text), widget (QLabel, badge_label_2)
-#: widgets/EditProfileAppearancePage.ui:1177
+#: widgets/EditProfileAppearancePage.ui:1193
 #, kde-format
 msgid "Badge font family:"
 msgstr "Гарнітура шрифту значка:"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeFontSizeLabel)
-#: widgets/EditProfileAppearancePage.ui:1210
+#: widgets/EditProfileAppearancePage.ui:1226
 #, kde-format
 msgid "Badge font size:"
 msgstr "Розмір шрифту значка:"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeColorLabel)
-#: widgets/EditProfileAppearancePage.ui:1240
+#: widgets/EditProfileAppearancePage.ui:1256
 #, kde-format
 msgid "Badge color:"
 msgstr "Колір значка:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, badgeColorSelectButton)
-#: widgets/EditProfileAppearancePage.ui:1253
+#: widgets/EditProfileAppearancePage.ui:1269
 #, kde-format
 msgid "Select the color used to draw the badge"
 msgstr "Виберіть колір для малювання значка"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, badgeTextOnlyCheckBox)
-#: widgets/EditProfileAppearancePage.ui:1267
+#: widgets/EditProfileAppearancePage.ui:1283
 #, kde-format
 msgid "Display badge as text only without background rectangle"
 msgstr "Показувати значок лише як текст, без фонового прямокутника"
 
 #. i18n: ectx: property (text), widget (QCheckBox, badgeTextOnlyCheckBox)
-#: widgets/EditProfileAppearancePage.ui:1270
+#: widgets/EditProfileAppearancePage.ui:1286
 #, kde-format
 msgid "Text only (no background)"
 msgstr "Лише текст (без тла)"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeTransparencyLabel)
-#: widgets/EditProfileAppearancePage.ui:1284
+#: widgets/EditProfileAppearancePage.ui:1300
 #, kde-format
 msgid "Transparency:"
 msgstr "Прозорість:"
 
 #. i18n: ectx: property (toolTip), widget (QSlider, badgeTransparencySlider)
-#: widgets/EditProfileAppearancePage.ui:1311
+#: widgets/EditProfileAppearancePage.ui:1327
 #, kde-format
 msgid "Set badge transparency (0 = fully transparent, 255 = opaque)"
 msgstr "Встановити прозорість значка (0 = повністю прозорий, 255 = непрозорий)"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeTransparencyValueLabel)
-#: widgets/EditProfileAppearancePage.ui:1318
+#: widgets/EditProfileAppearancePage.ui:1334
 #, kde-format
 msgid "180"
 msgstr "180"
@@ -4870,13 +4880,13 @@ msgstr "Виберіть початковий каталог"
 msgid "Get New..."
 msgstr "Отримати нову…"
 
-#: widgets/EditProfileDialog.cpp:1448
+#: widgets/EditProfileDialog.cpp:1452
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "Не вдалося завантажити схему <resource>%1</resource>."
 
-#: widgets/EditProfileDialog.cpp:1630
+#: widgets/EditProfileDialog.cpp:1634
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4885,7 +4895,7 @@ msgstr ""
 "Ця схема кольорів використовує прозоре тло, яке, здається, не підтримується "
 "на вашій стільниці"
 
-#: widgets/EditProfileDialog.cpp:1636
+#: widgets/EditProfileDialog.cpp:1640
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4894,12 +4904,12 @@ msgstr ""
 "Konsole було запущено до вмикання стільничних ефектів. Щоб побачити прозоре "
 "тло, вам слід перезапустити Konsole."
 
-#: widgets/EditProfileDialog.cpp:2037
+#: widgets/EditProfileDialog.cpp:2041
 #, kde-format
 msgid "Default for file type"
 msgstr "Типова для типу файлів"
 
-#: widgets/EditProfileDialog.cpp:2063
+#: widgets/EditProfileDialog.cpp:2067
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4929,7 +4939,7 @@ msgstr ""
 "буде проігноровано — файл буде відкрито у типовому текстовому\n"
 "редакторі."
 
-#: widgets/EditProfileDialog.cpp:2076
+#: widgets/EditProfileDialog.cpp:2080
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Нетипова команда текстового редактора:"
