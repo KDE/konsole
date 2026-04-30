@@ -932,7 +932,7 @@
           </sizepolicy>
          </property>
          <property name="toolTip">
-          <string>Render words of made of charapters the usually appear in coding ligatures together.</string>
+          <string>Render words made of characters that usually appear in coding ligatures together.</string>
          </property>
          <property name="text">
           <string>Coding ligatures characters</string>
