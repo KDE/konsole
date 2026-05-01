@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-30 00:47+0000\n"
+"POT-Creation-Date: 2026-05-01 00:47+0000\n"
 "PO-Revision-Date: 2026-04-08 23:50+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -4399,7 +4399,7 @@ msgstr "ASCII 字元"
 #: widgets/EditProfileAppearancePage.ui:935
 #, kde-format
 msgid ""
-"Render words of made of charapters the usually appear in coding ligatures "
+"Render words made of characters that usually appear in coding ligatures "
 "together."
 msgstr ""
 
@@ -5297,8 +5297,9 @@ msgstr "被認為是檔案、連結或電子郵件地址的文字，在滑鼠點
 
 #. i18n: ectx: property (text), widget (QCheckBox, openLinksByDirectClickButton)
 #: widgets/EditProfileMousePage.ui:338
-#, kde-format
-msgid "Open files/links by direct click"
+#, fuzzy, kde-format
+#| msgid "Open files/links by direct click"
+msgid "Open underlined files/links by direct click"
 msgstr "直接點選檔案/連結來開啟它們"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowLinkEscapeSequenceButton)

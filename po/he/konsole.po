@@ -17,13 +17,13 @@
 # tahmar1900 <tahmar1900@gmail.com>, 2008.
 # elkana bardugo <ttv200@gmail.com>, 2016.
 # Elkana Bardugo <ttv200@gmail.com>, 2017. #zanata
-# SPDX-FileCopyrightText: 2023, 2024, 2025, 2026 Yaron Shahrabani <sh.yaron@gmail.com>
+# SPDX-FileCopyrightText: 2023-2026 Yaron Shahrabani <sh.yaron@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-30 00:47+0000\n"
-"PO-Revision-Date: 2026-04-25 10:45+0300\n"
+"POT-Creation-Date: 2026-05-01 00:47+0000\n"
+"PO-Revision-Date: 2026-04-30 13:48+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -32,7 +32,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 25.12.3\n"
+"X-Generator: Lokalize 26.04.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1972,14 +1972,13 @@ msgstr " [ברירת מחדל]"
 #, kde-format
 msgctxt "@label:textbox added to profile name when used for light system theme"
 msgid " [Light]"
-msgstr ""
+msgstr " [בהיר]"
 
 #: profile/ProfileModel.cpp:94
-#, fuzzy, kde-format
-#| msgid "Darken"
+#, kde-format
 msgctxt "@label:textbox added to profile name when used for dark system theme"
 msgid " [Dark]"
-msgstr "הכהיה"
+msgstr " [כהה]"
 
 #: profile/ProfileModel.cpp:110
 #, kde-format
@@ -2653,7 +2652,7 @@ msgstr "הצגת התקדמות בשורת המשימות"
 #: settings/GeneralSettings.ui:112
 #, kde-format
 msgid "Automatically switch profile based on system theme"
-msgstr ""
+msgstr "תמיד להחליף פרופילים לפי ערכת העיצוב של המערכת"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/GeneralSettings.ui:119
@@ -3007,19 +3006,19 @@ msgstr "לקובצי היסטוריה נגללת, להשתמש בתיקייה ה
 #: settings/konsole.kcfg:238
 #, kde-format
 msgid "Sync profile with system theme"
-msgstr ""
+msgstr "סנכרון הפרופיל עם ערכת המערכת"
 
 #. i18n: ectx: label, entry (LightThemeProfile), group (LightDarkTheme)
 #: settings/konsole.kcfg:242
 #, kde-format
 msgid "Profile to use for light system theme"
-msgstr ""
+msgstr "פרופיל לשימוש לערכת עיצוב בהירה של המערכת"
 
 #. i18n: ectx: label, entry (DarkThemeProfile), group (LightDarkTheme)
 #: settings/konsole.kcfg:246
 #, kde-format
 msgid "Profile to use for dark system theme"
-msgstr ""
+msgstr "פרופיל לשימוש לערכת עיצוב כהה של המערכת"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableMemoryMonitoring)
 #: settings/MemorySettings.ui:17
@@ -3124,31 +3123,27 @@ msgstr "ה&גדרה כברירת מחדל"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, setLightProfileButton)
 #: settings/ProfileSettings.ui:103
-#, fuzzy, kde-format
-#| msgid "Set the selected profile as the default for new terminal sessions"
+#, kde-format
 msgid "Set the selected profile as the light theme profile"
-msgstr "קבע את הפרופיל הנבחר בתור פרופיל ברירת מחדל עבור הפעלות חדשות"
+msgstr "הגדרת הפרופיל הנבחר כפרופיל ערכת העיצוב הבהיר"
 
 #. i18n: ectx: property (text), widget (QPushButton, setLightProfileButton)
 #: settings/ProfileSettings.ui:106
-#, fuzzy, kde-format
-#| msgid "&Set as Default"
+#, kde-format
 msgid "&Set as Light"
-msgstr "ה&גדרה כברירת מחדל"
+msgstr "הגדרה כ&בהיר"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, setDarkProfileButton)
 #: settings/ProfileSettings.ui:116
-#, fuzzy, kde-format
-#| msgid "Set the selected profile as the default for new terminal sessions"
+#, kde-format
 msgid "Set the selected profile as the dark theme profile"
-msgstr "קבע את הפרופיל הנבחר בתור פרופיל ברירת מחדל עבור הפעלות חדשות"
+msgstr "הגדרת הפרופיל הנבחר כפרופיל ערכת העיצוב הכהה"
 
 #. i18n: ectx: property (text), widget (QPushButton, setDarkProfileButton)
 #: settings/ProfileSettings.ui:119
-#, fuzzy, kde-format
-#| msgid "&Set as Default"
+#, kde-format
 msgid "&Set as Dark"
-msgstr "ה&גדרה כברירת מחדל"
+msgstr "הגדרה כ&כהה"
 
 #. i18n: ectx: attribute (title), widget (QWidget, appearanceTab)
 #: settings/TabBarSettings.ui:39
@@ -4416,18 +4411,22 @@ msgstr "תווי ASCII "
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeCoding)
 #: widgets/EditProfileAppearancePage.ui:935
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "Render words of made of charapters the usually appear in coding ligatures "
+#| "together."
 msgid ""
-"Render words of made of charapters the usually appear in coding ligatures "
+"Render words made of characters that usually appear in coding ligatures "
 "together."
 msgstr ""
+"לתצג מילים שמורכבות מתווים שבדרך כלל מופיעות בליגטורות (אותיות מחוברות) "
+"שקשורות בקוד יעד."
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeCoding)
 #: widgets/EditProfileAppearancePage.ui:938
-#, fuzzy, kde-format
-#| msgid "Word characters:"
+#, kde-format
 msgid "Coding ligatures characters"
-msgstr "תווי מילים:"
+msgstr "תווי ליגטורת קוד"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:951
@@ -5337,8 +5336,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, openLinksByDirectClickButton)
 #: widgets/EditProfileMousePage.ui:338
-#, kde-format
-msgid "Open files/links by direct click"
+#, fuzzy, kde-format
+#| msgid "Open files/links by direct click"
+msgid "Open underlined files/links by direct click"
 msgstr "פתיחת קבצים/קישורים בלחיצה ישירה"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowLinkEscapeSequenceButton)

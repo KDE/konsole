@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-30 00:47+0000\n"
-"PO-Revision-Date: 2026-04-29 10:25+0200\n"
+"POT-Creation-Date: 2026-05-01 00:47+0000\n"
+"PO-Revision-Date: 2026-04-30 09:11+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -4484,18 +4484,22 @@ msgstr "Caràcters ASCII"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeCoding)
 #: widgets/EditProfileAppearancePage.ui:935
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "Render words of made of charapters the usually appear in coding ligatures "
+#| "together."
 msgid ""
-"Render words of made of charapters the usually appear in coding ligatures "
+"Render words made of characters that usually appear in coding ligatures "
 "together."
 msgstr ""
+"Renderitza paraules fetes de caràcters que normalment apareixen junts en les "
+"lligadures de codificació."
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeCoding)
 #: widgets/EditProfileAppearancePage.ui:938
-#, fuzzy, kde-format
-#| msgid "Word characters:"
+#, kde-format
 msgid "Coding ligatures characters"
-msgstr "Caràcters de paraula:"
+msgstr "Caràcters de lligadures de codificació"
 
 # skip-rule: kct-script
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
@@ -5435,8 +5439,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, openLinksByDirectClickButton)
 #: widgets/EditProfileMousePage.ui:338
-#, kde-format
-msgid "Open files/links by direct click"
+#, fuzzy, kde-format
+#| msgid "Open files/links by direct click"
+msgid "Open underlined files/links by direct click"
 msgstr "Obre fitxers/enllaços amb un clic directe"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowLinkEscapeSequenceButton)

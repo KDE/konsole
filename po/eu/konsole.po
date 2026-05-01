@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-30 00:47+0000\n"
+"POT-Creation-Date: 2026-05-01 00:47+0000\n"
 "PO-Revision-Date: 2026-03-08 15:00+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -4475,7 +4475,7 @@ msgstr "ASCII karaktereak"
 #: widgets/EditProfileAppearancePage.ui:935
 #, kde-format
 msgid ""
-"Render words of made of charapters the usually appear in coding ligatures "
+"Render words made of characters that usually appear in coding ligatures "
 "together."
 msgstr ""
 
@@ -5407,8 +5407,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, openLinksByDirectClickButton)
 #: widgets/EditProfileMousePage.ui:338
-#, kde-format
-msgid "Open files/links by direct click"
+#, fuzzy, kde-format
+#| msgid "Open files/links by direct click"
+msgid "Open underlined files/links by direct click"
 msgstr "Ireki fitxategiak/estekak zuzeneko klik baten bidez"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowLinkEscapeSequenceButton)

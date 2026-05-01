@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-30 00:47+0000\n"
-"PO-Revision-Date: 2026-04-29 09:21+0200\n"
+"POT-Creation-Date: 2026-05-01 00:47+0000\n"
+"PO-Revision-Date: 2026-04-30 07:01+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -4442,18 +4442,22 @@ msgstr "ASCII znaki "
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeCoding)
 #: widgets/EditProfileAppearancePage.ui:935
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "Render words of made of charapters the usually appear in coding ligatures "
+#| "together."
 msgid ""
-"Render words of made of charapters the usually appear in coding ligatures "
+"Render words made of characters that usually appear in coding ligatures "
 "together."
 msgstr ""
+"Upodobi besede, sestavljene iz znakov, ki se običajno pojavljajo skupaj v "
+"kodnih ligaturah."
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeCoding)
 #: widgets/EditProfileAppearancePage.ui:938
-#, fuzzy, kde-format
-#| msgid "Word characters:"
+#, kde-format
 msgid "Coding ligatures characters"
-msgstr "Znaki besede:"
+msgstr "Kodiranje znakov ligatur"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:951
@@ -4475,7 +4479,7 @@ msgid ""
 "certain fonts with some displays"
 msgstr ""
 "Pri upodabljanju uporabite namigovanje za glife, kar lahko izboljša "
-"berljivost določenih pisav na nekaterih zaslonih."
+"berljivost določenih pisav na nekaterih zaslonih"
 
 #. i18n: ectx: property (text), widget (QCheckBox, fontHinting)
 #: widgets/EditProfileAppearancePage.ui:970
@@ -5381,8 +5385,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, openLinksByDirectClickButton)
 #: widgets/EditProfileMousePage.ui:338
-#, kde-format
-msgid "Open files/links by direct click"
+#, fuzzy, kde-format
+#| msgid "Open files/links by direct click"
+msgid "Open underlined files/links by direct click"
 msgstr "Odpri datoteke/povezave z neposrednim klikom"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowLinkEscapeSequenceButton)

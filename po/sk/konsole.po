@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-30 00:47+0000\n"
+"POT-Creation-Date: 2026-05-01 00:47+0000\n"
 "PO-Revision-Date: 2023-12-12 19:29+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -113,7 +113,7 @@ msgstr "Súbor json s rozložením, ktoré sa použije pre novú inštanciu Kons
 #, kde-format
 msgctxt "@info:shell"
 msgid "Use the built-in profile instead of the default profile"
-msgstr "Vytvoriť nový profil založený na vybranom profile"
+msgstr "Použiť vstavaný profil namiesto predvoleného profilu"
 
 #: Application.cpp:56
 #, kde-format
@@ -175,13 +175,13 @@ msgstr "Skryť panel ponuky, prepísať predvolené nastavenie"
 #, kde-format
 msgctxt "@info:shell"
 msgid "Show all the toolbars, overriding the default setting"
-msgstr "Zobraziť panel kariet, prepísať predvolené nastavenie"
+msgstr "Zobraziť všetky panely nástrojov, prepísať predvolené nastavenie"
 
 #: Application.cpp:69
 #, kde-format
 msgctxt "@info:shell"
 msgid "Hide all the toolbars, overriding the default setting"
-msgstr "Skryť panel kariet, prepísať predvolené nastavenie"
+msgstr "Skryť všetky panely nástrojov, prepísať predvolené nastavenie"
 
 #: Application.cpp:70
 #, kde-format
@@ -621,7 +621,7 @@ msgstr "Žiadna mierka"
 #: colorscheme/ColorSchemeEditor.ui:205
 #, kde-format
 msgid "Wallpaper flip:"
-msgstr "Mierka tapety:"
+msgstr "Prevrátiť tapetu:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:213
@@ -657,7 +657,7 @@ msgstr "Horizontálna kotva:"
 #: colorscheme/ColorSchemeEditor.ui:266
 #, kde-format
 msgid "Left"
-msgstr "Ľavá strana"
+msgstr "Ľavá"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperVerticalAnchorLabel)
 #: colorscheme/ColorSchemeEditor.ui:277
@@ -1453,7 +1453,7 @@ msgstr "Rýchle príkazy"
 #: plugins/QuickCommands/quickcommandsplugin.cpp:75
 #, kde-format
 msgid "Show Quick Access"
-msgstr "Zobraziť rýchle príkazy"
+msgstr "Zobraziť rýchly prístup"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:123
 #, kde-format
@@ -1463,7 +1463,7 @@ msgstr "No quick commands found. Môžete add one on Plugins -> Quick Commands"
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
 msgid "Plugins - Quick Commands"
-msgstr "Rýchle príkazy"
+msgstr "Doplňky - rýchle príkazy"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:140
 #, kde-format
@@ -1597,7 +1597,7 @@ msgstr "No saved SSH config found. Môžete add one on Plugins -> SSH Manager"
 #: plugins/SSHManager/sshmanagerplugin.cpp:147
 #, kde-format
 msgid "Plugins - SSH Manager"
-msgstr "Otvoriť správcu súborov"
+msgstr "Doplňky - správca SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:153
 #, kde-format
@@ -2133,7 +2133,7 @@ msgstr "Hľadať:"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"
-msgstr "Sem zadajte text, ktorý chcete hľadať"
+msgstr "Sem zadajte názov karty, ktorú chcete hľadať"
 
 #: session/Session.cpp:132
 #, kde-format
@@ -2181,7 +2181,7 @@ msgstr "Ticho v '%1' (Sedenie '%2')"
 #: Vt102Emulation.cpp:1515
 #, kde-format
 msgid "Show session"
-msgstr "Zavrieť sedenie"
+msgstr "Zobraziť sedenie"
 
 #: session/Session.cpp:1134
 #, kde-format
@@ -2297,7 +2297,7 @@ msgstr "Vybrať &všetko"
 #: session/SessionController.cpp:751
 #, kde-format
 msgid "Select &Mode"
-msgstr "Vybrať riadok"
+msgstr "Vybrať &režim"
 
 #: session/SessionController.cpp:756
 #, kde-format
@@ -2312,7 +2312,7 @@ msgstr "Uložiť výstup &ako..."
 #: session/SessionController.cpp:765
 #, kde-format
 msgid "Auto Save Output As..."
-msgstr "Uložiť výstup &ako..."
+msgstr "Automaticky uložiť výstup ako..."
 
 #: session/SessionController.cpp:769
 #, kde-format
@@ -2342,12 +2342,12 @@ msgstr "Vyčistiť rolovanie a obnoviť"
 #: session/SessionController.cpp:796
 #, kde-format
 msgid "Next Profile"
-msgstr "Upraviť profil"
+msgstr "Nasledujúci profil"
 
 #: session/SessionController.cpp:801
 #, kde-format
 msgid "Previous Profile"
-msgstr "Predchádzajúci"
+msgstr "Predchádzajúci profil"
 
 #: session/SessionController.cpp:804
 #, kde-format
@@ -2410,7 +2410,7 @@ msgstr "One-Shot Monitors"
 #: session/SessionController.cpp:914
 #, kde-format
 msgid "Monitor for &Prompt"
-msgstr "Monitorovať &aktivitu"
+msgstr "Monitorovať &výzvu"
 
 #: session/SessionController.cpp:921
 #, kde-format
@@ -2637,7 +2637,7 @@ msgstr "Pamätať si veľkosť okna"
 #: settings/GeneralSettings.ui:91 settings/konsole.kcfg:37
 #, kde-format
 msgid "Force new tabs"
-msgstr "Ukladať nové záložky:"
+msgstr "Vynútiť nové karty"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ListenForZModemTerminalCodes)
 #: settings/GeneralSettings.ui:98
@@ -2714,7 +2714,7 @@ msgstr "Hľadať:"
 #: settings/GeneralSettings.ui:210 settings/konsole.kcfg:104
 #, kde-format
 msgid "Sets whether search should stop instead of wrapping"
-msgstr "Nastaví, či hľadanie má začať od konca"
+msgstr "Nastaví, či hľadanie má zastaviť namiesto opakovania"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchNoWrap)
 #: settings/GeneralSettings.ui:213
@@ -2807,7 +2807,9 @@ msgstr "Veľkosť okna bude uložená pri ukončení Konsole"
 msgid ""
 "When launching Konsole create a new tab instead of creating new windows if "
 "possible"
-msgstr "Pri spustení Konsole znovu použi existujúci proces, ak je to možné"
+msgstr ""
+"Pri spustení Konsole vytvoriť novú kartu namiesto nových okien, ak je to "
+"možné"
 
 #. i18n: ectx: label, entry (ShowProgressInTaskBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:42
@@ -2870,7 +2872,7 @@ msgstr "Použiť Alt na zobrazenie náhľadu"
 #: settings/konsole.kcfg:77 settings/konsole.kcfg:78
 #, kde-format
 msgid "Use Ctrl to display a thumbnail"
-msgstr "Použiť Alt na zobrazenie náhľadu"
+msgstr "Použiť Ctrl na zobrazenie náhľadu"
 
 #. i18n: ectx: label, entry (SearchCaseSensitive), group (SearchSettings)
 #: settings/konsole.kcfg:84
@@ -2963,7 +2965,7 @@ msgstr "Ovládať viditeľnosť tlačidla \"Nová karta\" na paneli kariet"
 #: settings/konsole.kcfg:179
 #, kde-format
 msgid "Control the visibility of 'Search Tabs' button on the tab bar"
-msgstr "Ovládať viditeľnosť tlačidla \"Nová karta\" na paneli kariet"
+msgstr "Ovládať viditeľnosť tlačidla „Hľadať karty” na paneli kariet"
 
 #. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
 #: settings/konsole.kcfg:187
@@ -3030,7 +3032,7 @@ msgstr "Profil pre tmavú systémovú tému"
 #: settings/MemorySettings.ui:17
 #, kde-format
 msgid "Enable memory monitoring:"
-msgstr "Monitorovanie kariet"
+msgstr "Povoliť monitorovanie pamäte:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:24
@@ -3206,13 +3208,13 @@ msgstr "Pod oblasťou terminálu"
 #: settings/TabBarSettings.ui:139
 #, kde-format
 msgid "To the left of terminal area"
-msgstr "Pod oblasťou terminálu"
+msgstr "Naľavo od oblasti terminálu"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Right)
 #: settings/TabBarSettings.ui:149
 #, kde-format
 msgid "To the &right of terminal area"
-msgstr "Pod oblasťou terminálu"
+msgstr "Napravo od oblasti terminálu"
 
 #. i18n: ectx: property (text), widget (QLabel, showCloseTabButtonLabel)
 #: settings/TabBarSettings.ui:175
@@ -3243,7 +3245,7 @@ msgstr "Žiadne"
 #: settings/TabBarSettings.ui:231
 #, kde-format
 msgid "Show Search Tabs button:"
-msgstr "Tlačidlo Zatvoriť kartu zobraziť:"
+msgstr "Zobraziť tlačidlo Hľadať karty:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSearchTabsButton)
 #: settings/TabBarSettings.ui:241
@@ -3301,7 +3303,7 @@ msgstr "Správanie"
 #: settings/TabBarSettings.ui:364
 #, kde-format
 msgid "Put new tabs:"
-msgstr "Ukladať nové záložky:"
+msgstr "Umiestniť nové karty:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAtTheEnd)
 #: settings/TabBarSettings.ui:374
@@ -3610,25 +3612,25 @@ msgstr "Rozdeliť pohľad horizontálne"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically"
-msgstr "Rozdeliť pohľad horizontálne"
+msgstr "Rozdeliť pohľad automaticky"
 
 #: ViewManager.cpp:157
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
-msgstr "Rozdeliť pohľad vertikálne"
+msgstr "Rozdeliť pohľad vertikálne od nasledujúcej karty"
 
 #: ViewManager.cpp:165
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
-msgstr "Rozdeliť pohľad horizontálne"
+msgstr "Rozdeliť pohľad horizontálne od nasledujúcej karty"
 
 #: ViewManager.cpp:173
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
-msgstr "Rozdeliť pohľad horizontálne"
+msgstr "Rozdeliť pohľad automaticky od nasledujúcej karty"
 
 #: ViewManager.cpp:183
 #, kde-format
@@ -3712,13 +3714,13 @@ msgstr "Zamerať pravý terminál"
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Next Terminal"
-msgstr "Zamerať ľavý terminál"
+msgstr "Zameriť nasledujúci terminál"
 
 #: ViewManager.cpp:292
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Previous Terminal"
-msgstr "Zamerať dolný terminál"
+msgstr "Zameriť predchádzajúci terminál"
 
 #: ViewManager.cpp:298
 #, kde-format
@@ -3760,7 +3762,7 @@ msgstr "Prepnúť maximalizovanie aktuálneho pohľadu"
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle zoom-maximize current view"
-msgstr "Prepnúť maximalizovanie aktuálneho pohľadu"
+msgstr "Prepnúť maximalizovanie zoomom aktuálneho pohľadu"
 
 #: ViewManager.cpp:328
 #, kde-format
@@ -4100,13 +4102,14 @@ msgstr "Použiť znaky riadku obsiahnuté v písme"
 msgid ""
 "Use the selected font for unicode Braille characters instead of the builtin "
 "code"
-msgstr "Použiť vybrané písmo pre znaky riadkov namiesto vstavaného kódu"
+msgstr ""
+"Použiť vybrané písmo pre znaky unicode Braille namiesto vstavaného kódu"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:201
 #, kde-format
 msgid "Use unicode Braille characters contained in font"
-msgstr "Použiť znaky riadku obsiahnuté v písme"
+msgstr "Použiť znaky unicode Braille obsiahnuté v písme"
 
 #. i18n: ectx: attribute (title), widget (QWidget, cursorTab)
 #: widgets/EditProfileAppearancePage.ui:209
@@ -4222,13 +4225,13 @@ msgstr "Povolené"
 #: widgets/EditProfileAppearancePage.ui:457
 #, kde-format
 msgid "Animation:"
-msgstr "Aktivácia:"
+msgstr "Animácia:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableAnimatingCursorButton)
 #: widgets/EditProfileAppearancePage.ui:473
 #, kde-format
 msgid "Make the cursor animate smoothly"
-msgstr "Pravidelne blikať kurzorom"
+msgstr "Animovať kurzor plynule"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #. i18n: ectx: attribute (title), widget (QWidget, miscTab)
@@ -4283,7 +4286,7 @@ msgstr "Farba:"
 #: widgets/EditProfileAppearancePage.ui:585
 #, kde-format
 msgid "Select the color used to draw the border"
-msgstr "Vyberte farbu použitú na kreslenie kurzora"
+msgstr "Vyberte farbu použitú na kreslenie okraja"
 
 #. i18n: ectx: property (text), widget (QLabel, label_10)
 #: widgets/EditProfileAppearancePage.ui:607
@@ -4295,7 +4298,7 @@ msgstr "Neaktívne terminály:"
 #: widgets/EditProfileAppearancePage.ui:617
 #, kde-format
 msgid "Active Terminals:"
-msgstr "Neaktívne terminály:"
+msgstr "Aktívne terminály:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, contentsGroup)
 #: widgets/EditProfileAppearancePage.ui:627
@@ -4355,7 +4358,7 @@ msgstr "Stmaviť"
 #: widgets/EditProfileAppearancePage.ui:779
 #, kde-format
 msgid "Indicate whether the window is active by drawing a border"
-msgstr "Indikovať či je okno aktívne stlmením farieb"
+msgstr "Indikovať či je okno aktívne kreslením okraja"
 
 #. i18n: ectx: property (text), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:782
@@ -4385,7 +4388,7 @@ msgstr "Complex Text Layout"
 #: widgets/EditProfileAppearancePage.ui:887
 #, kde-format
 msgid "Enable word mode text rendering"
-msgstr "Povoliť obojsmerné vykresľovanie textu"
+msgstr "Povoliť vykresľovanie textu v režime slov"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:890
@@ -4419,22 +4422,26 @@ msgstr "Render words of ASCII characters together"
 #: widgets/EditProfileAppearancePage.ui:922
 #, kde-format
 msgid "ASCII characters "
-msgstr "Znaky slova:"
+msgstr "Znaky ASCII:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeCoding)
 #: widgets/EditProfileAppearancePage.ui:935
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "Render words of made of charapters the usually appear in coding ligatures "
+#| "together."
 msgid ""
-"Render words of made of charapters the usually appear in coding ligatures "
+"Render words made of characters that usually appear in coding ligatures "
 "together."
 msgstr ""
+"Vykresliť slová zložené zo znakov, ktoré sa zvyčajne vyskytujú v ligaturách "
+"kódovania, spolu."
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeCoding)
 #: widgets/EditProfileAppearancePage.ui:938
-#, fuzzy, kde-format
-#| msgid "Word characters:"
+#, kde-format
 msgid "Coding ligatures characters"
-msgstr "Znaky slova:"
+msgstr "Znaky ligaturách kódovania"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:951
@@ -4446,7 +4453,7 @@ msgstr "Render words of Brahmic scripts characters together"
 #: widgets/EditProfileAppearancePage.ui:954
 #, kde-format
 msgid "Brahmic scripts characters"
-msgstr "Nastaviť farbu kurzora podľa aktuálneho znaku"
+msgstr "Znaky Brahmic skriptov"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, fontHinting)
 #: widgets/EditProfileAppearancePage.ui:967
@@ -4468,7 +4475,7 @@ msgstr "Hinting písma"
 #: widgets/EditProfileAppearancePage.ui:983
 #, kde-format
 msgid "Emoji Font:"
-msgstr "Písmo:"
+msgstr "Písmo emoji:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAppearancePage.ui:1009
@@ -4514,7 +4521,7 @@ msgstr "Table characters BiDi mode override"
 #: widgets/EditProfileAppearancePage.ui:1057
 #, kde-format
 msgid "Ignore wcwidth of problematic characters"
-msgstr "Prilepiť bez netlačiteľných znakov"
+msgstr "Ignorovať wcwidth problematických znakov"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:1060
@@ -4546,7 +4553,7 @@ msgstr "Badge Overlay Options"
 #: widgets/EditProfileAppearancePage.ui:1111
 #, kde-format
 msgid "Enable badge overlay rendering"
-msgstr "Povoliť obojsmerné vykresľovanie textu"
+msgstr "Povoliť vykresľovania odznaku s prekrytím"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, badge_label_1)
 #. i18n: ectx: property (toolTip), widget (QLineEdit, badgeTextEdit)
@@ -4614,13 +4621,13 @@ msgstr "Veľkosť písma odznaku:"
 #: widgets/EditProfileAppearancePage.ui:1256
 #, kde-format
 msgid "Badge color:"
-msgstr "Farba karty:"
+msgstr "Farba odznaku:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, badgeColorSelectButton)
 #: widgets/EditProfileAppearancePage.ui:1269
 #, kde-format
 msgid "Select the color used to draw the badge"
-msgstr "Vyberte farbu použitú na kreslenie kurzora"
+msgstr "Vyberte farbu použitú na kreslenie odznaku"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, badgeTextOnlyCheckBox)
 #: widgets/EditProfileAppearancePage.ui:1283
@@ -4632,7 +4639,7 @@ msgstr "Zobraziť odznak iba ako text bez pozadia"
 #: widgets/EditProfileAppearancePage.ui:1286
 #, kde-format
 msgid "Text only (no background)"
-msgstr "Rozmazať pozadie"
+msgstr "Iba text (bez pozadia)"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeTransparencyLabel)
 #: widgets/EditProfileAppearancePage.ui:1300
@@ -4865,7 +4872,7 @@ msgstr ""
 #: widgets/EditProfileDialog.cpp:2041
 #, kde-format
 msgid "Default for file type"
-msgstr "Štandardný profil"
+msgstr "Predvolené pre typ súboru"
 
 #: widgets/EditProfileDialog.cpp:2067
 #, kde-format
@@ -4997,7 +5004,7 @@ msgstr ""
 #: widgets/EditProfileGeneralPage.ui:203
 #, kde-format
 msgid "Enter same container as current session"
-msgstr "Začať v rovnakom adresári ako aktuálne sedenie"
+msgstr "Vstúpiť do rovnakého kontajnera ako aktuálne sedenie"
 
 #. i18n: ectx: property (text), widget (QLabel, containerLabel)
 #: widgets/EditProfileGeneralPage.ui:229
@@ -5122,7 +5129,7 @@ msgstr "Red error bars:"
 #: widgets/EditProfileGeneralPage.ui:547
 #, kde-format
 msgid "Red error background:"
-msgstr "Rozmazať pozadie"
+msgstr "Červené pozadie chyby:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_40)
 #: widgets/EditProfileGeneralPage.ui:593
@@ -5134,7 +5141,7 @@ msgstr "Alternating bars:"
 #: widgets/EditProfileGeneralPage.ui:639
 #, kde-format
 msgid "Alternating background:"
-msgstr "Rozmazať pozadie"
+msgstr "Striedajúce sa pozadie:"
 
 #. i18n: ectx: property (text), widget (QLabel, note)
 #: widgets/EditProfileKeyboardPage.ui:17
@@ -5278,14 +5285,14 @@ msgstr "Kopírovať text ako HTML"
 #, kde-format
 msgid "Trim leading spaces in selected text, useful in some instances"
 msgstr ""
-"Odstrihnúť koncové medzery vo vybranom texte, užitočné v niektorých "
+"Odstrihnút počiatočné medzery vo vybratom texte, užitočné v niektorých "
 "inštanciách"
 
 #. i18n: ectx: property (text), widget (QCheckBox, trimLeadingSpacesButton)
 #: widgets/EditProfileMousePage.ui:219
 #, kde-format
 msgid "Trim leading spaces"
-msgstr "Odstrihnúť koncové medzery"
+msgstr "Odstrihnút počiatočné medzery"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, trimTrailingSpacesButton)
 #: widgets/EditProfileMousePage.ui:226
@@ -5361,8 +5368,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, openLinksByDirectClickButton)
 #: widgets/EditProfileMousePage.ui:338
-#, kde-format
-msgid "Open files/links by direct click"
+#, fuzzy, kde-format
+#| msgid "Open files/links by direct click"
+msgid "Open underlined files/links by direct click"
 msgstr "Otvoriť súbory/odkazy priamym kliknutím"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowLinkEscapeSequenceButton)
@@ -5879,7 +5887,7 @@ msgstr "Farba karty:"
 #: widgets/RenameTabWidget.ui:128
 #, kde-format
 msgid "&Activity Tab Color:"
-msgstr "Farba karty:"
+msgstr "Farba karty &aktivity:"
 
 #: widgets/TabTitleFormatButton.cpp:21
 #, c-format
@@ -5984,7 +5992,7 @@ msgstr "Otvoriť novú kartu"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Search Tabs"
-msgstr "O&dpojiť kartu"
+msgstr "Hľadať karty"
 
 #: widgets/ViewContainer.cpp:70
 #, kde-format
