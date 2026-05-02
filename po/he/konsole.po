@@ -23,7 +23,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-05-01 00:47+0000\n"
-"PO-Revision-Date: 2026-04-30 13:48+0300\n"
+"PO-Revision-Date: 2026-05-01 09:09+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -4411,16 +4411,13 @@ msgstr "תווי ASCII "
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeCoding)
 #: widgets/EditProfileAppearancePage.ui:935
-#, fuzzy, kde-format
-#| msgid ""
-#| "Render words of made of charapters the usually appear in coding ligatures "
-#| "together."
+#, kde-format
 msgid ""
 "Render words made of characters that usually appear in coding ligatures "
 "together."
 msgstr ""
 "לתצג מילים שמורכבות מתווים שבדרך כלל מופיעות בליגטורות (אותיות מחוברות) "
-"שקשורות בקוד יעד."
+"שקשורות בקוד יחד."
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeCoding)
 #: widgets/EditProfileAppearancePage.ui:938
@@ -5336,10 +5333,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, openLinksByDirectClickButton)
 #: widgets/EditProfileMousePage.ui:338
-#, fuzzy, kde-format
-#| msgid "Open files/links by direct click"
+#, kde-format
 msgid "Open underlined files/links by direct click"
-msgstr "פתיחת קבצים/קישורים בלחיצה ישירה"
+msgstr "פתיחת קבצים/קישורים עם קווים תחתיים בלחיצה ישירה"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowLinkEscapeSequenceButton)
 #: widgets/EditProfileMousePage.ui:349

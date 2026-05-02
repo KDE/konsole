@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-05-01 00:47+0000\n"
-"PO-Revision-Date: 2026-04-30 09:11+0200\n"
+"PO-Revision-Date: 2026-05-01 10:08+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -4484,10 +4484,7 @@ msgstr "Caràcters ASCII"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeCoding)
 #: widgets/EditProfileAppearancePage.ui:935
-#, fuzzy, kde-format
-#| msgid ""
-#| "Render words of made of charapters the usually appear in coding ligatures "
-#| "together."
+#, kde-format
 msgid ""
 "Render words made of characters that usually appear in coding ligatures "
 "together."
@@ -5439,10 +5436,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, openLinksByDirectClickButton)
 #: widgets/EditProfileMousePage.ui:338
-#, fuzzy, kde-format
-#| msgid "Open files/links by direct click"
+#, kde-format
 msgid "Open underlined files/links by direct click"
-msgstr "Obre fitxers/enllaços amb un clic directe"
+msgstr "Obre fitxers/enllaços subratllats amb un clic directe"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowLinkEscapeSequenceButton)
 #: widgets/EditProfileMousePage.ui:349
