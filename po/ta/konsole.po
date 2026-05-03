@@ -3,13 +3,13 @@
 #
 # Vasee Vaseeharan <vasee@ieee.org>, 2004, 2008.
 # ஆமாச்சு <amachu@ubuntu.com>, 2008.
-# SPDX-FileCopyrightText: 2021, 2022, 2023, 2024, 2025, 2026 Kishore G <kishore96@gmail.com>
+# SPDX-FileCopyrightText: 2021-2026 Kishore G <kishore96@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-05-01 00:47+0000\n"
-"PO-Revision-Date: 2026-04-12 21:43+0530\n"
+"PO-Revision-Date: 2026-05-02 17:47+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-l10n-ta@kde.org>\n"
 "Language: ta\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.12.3\n"
+"X-Generator: Lokalize 26.04.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1968,14 +1968,13 @@ msgstr " [இயல்பிருப்பு]"
 #, kde-format
 msgctxt "@label:textbox added to profile name when used for light system theme"
 msgid " [Light]"
-msgstr ""
+msgstr "[வெளிர்ந்தது]"
 
 #: profile/ProfileModel.cpp:94
-#, fuzzy, kde-format
-#| msgid "Darken"
+#, kde-format
 msgctxt "@label:textbox added to profile name when used for dark system theme"
 msgid " [Dark]"
-msgstr "கருமையாக்கு"
+msgstr "[கருமையானது]"
 
 #: profile/ProfileModel.cpp:110
 #, kde-format
@@ -2656,7 +2655,7 @@ msgstr "முன்னேற்றத்தை பணிப்பட்டை�
 #: settings/GeneralSettings.ui:112
 #, kde-format
 msgid "Automatically switch profile based on system theme"
-msgstr ""
+msgstr "இயங்குதள தோற்றத்திட்டத்திற்கேற்ப பயன்முறையை தானாக மாற்று"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/GeneralSettings.ui:119
@@ -3014,19 +3013,19 @@ msgstr "முந்தைய உரையை சேமிப்பதற்க�
 #: settings/konsole.kcfg:238
 #, kde-format
 msgid "Sync profile with system theme"
-msgstr ""
+msgstr "பயன்முறையை இயங்குதள தோற்றத்திட்டத்துடன் ஒத்திசையசெய்"
 
 #. i18n: ectx: label, entry (LightThemeProfile), group (LightDarkTheme)
 #: settings/konsole.kcfg:242
 #, kde-format
 msgid "Profile to use for light system theme"
-msgstr ""
+msgstr "வெளிர்ந்த இயங்குதள தோற்றத்திட்டத்திற்கு பயன்படுத்தவேண்டிய பயன்முறை"
 
 #. i18n: ectx: label, entry (DarkThemeProfile), group (LightDarkTheme)
 #: settings/konsole.kcfg:246
 #, kde-format
 msgid "Profile to use for dark system theme"
-msgstr ""
+msgstr "கருமையான இயங்குதள தோற்றத்திட்டத்திற்கு பயன்படுத்தவேண்டிய பயன்முறை"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableMemoryMonitoring)
 #: settings/MemorySettings.ui:17
@@ -3134,31 +3133,27 @@ msgstr "&இயல்பிருப்பாக அமை"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, setLightProfileButton)
 #: settings/ProfileSettings.ui:103
-#, fuzzy, kde-format
-#| msgid "Set the selected profile as the default for new terminal sessions"
+#, kde-format
 msgid "Set the selected profile as the light theme profile"
-msgstr "தேர்ந்தெடுத்துள்ள பயன்முறையை புதிய முனைய அமர்வுகளுக்கான இயல்பிருப்பாக அமைக்கும்"
+msgstr "தேர்ந்தெடுத்துள்ள பயன்முறையை வெளிர்ந்த தோற்றத்திட்டத்திற்கானதாக அமைக்கும்"
 
 #. i18n: ectx: property (text), widget (QPushButton, setLightProfileButton)
 #: settings/ProfileSettings.ui:106
-#, fuzzy, kde-format
-#| msgid "&Set as Default"
+#, kde-format
 msgid "&Set as Light"
-msgstr "&இயல்பிருப்பாக அமை"
+msgstr "வெளிர்ந்ததற்கானதாக அமை"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, setDarkProfileButton)
 #: settings/ProfileSettings.ui:116
-#, fuzzy, kde-format
-#| msgid "Set the selected profile as the default for new terminal sessions"
+#, kde-format
 msgid "Set the selected profile as the dark theme profile"
-msgstr "தேர்ந்தெடுத்துள்ள பயன்முறையை புதிய முனைய அமர்வுகளுக்கான இயல்பிருப்பாக அமைக்கும்"
+msgstr "தேர்ந்தெடுத்துள்ள பயன்முறையை கருமையான தோற்றத்திட்டத்திற்கானதாக அமைக்கும்"
 
 #. i18n: ectx: property (text), widget (QPushButton, setDarkProfileButton)
 #: settings/ProfileSettings.ui:119
-#, fuzzy, kde-format
-#| msgid "&Set as Default"
+#, kde-format
 msgid "&Set as Dark"
-msgstr "&இயல்பிருப்பாக அமை"
+msgstr "கருமையானதற்கானதாக அமை"
 
 #. i18n: ectx: attribute (title), widget (QWidget, appearanceTab)
 #: settings/TabBarSettings.ui:39
@@ -4435,14 +4430,13 @@ msgstr "ASCII கூட்டெழுத்துகள்"
 msgid ""
 "Render words made of characters that usually appear in coding ligatures "
 "together."
-msgstr ""
+msgstr "நிரலாக்கத்திற்கு பயன்படுத்தப்படும் கூட்டெழுத்துகளை சேர்த்து வரை"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeCoding)
 #: widgets/EditProfileAppearancePage.ui:938
-#, fuzzy, kde-format
-#| msgid "Word characters:"
+#, kde-format
 msgid "Coding ligatures characters"
-msgstr "சொல்லிலுள்ள குறியீடுகள்:"
+msgstr "நிரலாக்க கூட்டெழுத்துகள்"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:951
@@ -4531,10 +4525,10 @@ msgstr "wcwidth-ஐ மேலெழுது"
 
 #. i18n: ectx: property (toolTip), widget (QWidget, badgeTab)
 #: widgets/EditProfileAppearancePage.ui:1081
-#, fuzzy, kde-format
-#| msgid "<html><head/><body><p>Complex Text Layout</p></body></html>"
+#, kde-format
 msgid "<html><head/><body><p>Badge overlay options</p></body></html>"
-msgstr "<html><head/><body><p>மேம்பட்ட உரைத்தளவமைப்பு</p></body></html>"
+msgstr ""
+"<html><head/><body><p>மேல்தோன்றும் அடையாளக்குறிக்கான அமைப்புகள்</p></body></html>"
 
 #. i18n: ectx: attribute (title), widget (QWidget, badgeTab)
 #. i18n: ectx: property (text), widget (QCheckBox, badgeEnabled)
@@ -5358,10 +5352,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, openLinksByDirectClickButton)
 #: widgets/EditProfileMousePage.ui:338
-#, fuzzy, kde-format
-#| msgid "Open files/links by direct click"
+#, kde-format
 msgid "Open underlined files/links by direct click"
-msgstr "கிளிக் செய்தால் இணைப்புகளையும் கோப்புகளையும் திற"
+msgstr "அடிக்கோடிட்டுள்ள இணைப்புகளையும் கோப்புகளையும் கிளிக் செய்தால் திற"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowLinkEscapeSequenceButton)
 #: widgets/EditProfileMousePage.ui:349

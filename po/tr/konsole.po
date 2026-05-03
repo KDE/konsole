@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-05-01 00:47+0000\n"
-"PO-Revision-Date: 2026-05-01 15:12+0300\n"
+"PO-Revision-Date: 2026-05-02 19:53+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -32,7 +32,7 @@ msgstr ""
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Serdar Soytetir, Volkan Gezer, Kaan Özdinçer, Emir SARI"
+msgstr "Serdar SOYTETİR, Volkan GEZER, Kaan ÖZDİNÇER, Emir SARI"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
@@ -2584,7 +2584,7 @@ msgstr ""
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr ""
-"<p>Geçerli oturumda, halihazırda süren bir ZModem dosya aktarımı var.</p>"
+"<p>Geçerli oturumda, hâlihazırda süren bir ZModem dosya aktarımı var.</p>"
 
 #: session/SessionController.cpp:2259
 #, kde-format
@@ -4741,7 +4741,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
-msgstr "“%1” adında bir profil halihazırda var."
+msgstr "“%1” adında bir profil hâlihazırda var."
 
 #: widgets/EditProfileDialog.cpp:346
 #, kde-format
