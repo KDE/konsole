@@ -4426,15 +4426,12 @@ msgstr "Znaky ASCII:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeCoding)
 #: widgets/EditProfileAppearancePage.ui:935
-#, fuzzy, kde-format
-#| msgid ""
-#| "Render words of made of charapters the usually appear in coding ligatures "
-#| "together."
+#, kde-format
 msgid ""
 "Render words made of characters that usually appear in coding ligatures "
 "together."
 msgstr ""
-"Vykresliť slová zložené zo znakov, ktoré sa zvyčajne vyskytujú v ligaturách "
+"Vykresliť slová zložené zo znakov, ktoré sa zvyčajne vyskytujú v ligatúrach "
 "kódovania, spolu."
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeCoding)
@@ -5368,10 +5365,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, openLinksByDirectClickButton)
 #: widgets/EditProfileMousePage.ui:338
-#, fuzzy, kde-format
-#| msgid "Open files/links by direct click"
+#, kde-format
 msgid "Open underlined files/links by direct click"
-msgstr "Otvoriť súbory/odkazy priamym kliknutím"
+msgstr "Otvoriť podčiarknuté súbory/odkazy priamym kliknutím"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowLinkEscapeSequenceButton)
 #: widgets/EditProfileMousePage.ui:349

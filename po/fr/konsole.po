@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-05-01 00:47+0000\n"
-"PO-Revision-Date: 2026-05-01 17:33+0200\n"
+"PO-Revision-Date: 2026-05-02 11:48+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -4534,6 +4534,8 @@ msgid ""
 "Render words made of characters that usually appear in coding ligatures "
 "together."
 msgstr ""
+"Effectuer un rendu pour les mots composés de caractères apparaissant "
+"généralement ensemble dans les ligatures de codage."
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeCoding)
 #: widgets/EditProfileAppearancePage.ui:938
@@ -5486,10 +5488,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, openLinksByDirectClickButton)
 #: widgets/EditProfileMousePage.ui:338
-#, fuzzy, kde-format
-#| msgid "Open files/links by direct click"
+#, kde-format
 msgid "Open underlined files/links by direct click"
-msgstr "Ouvrir des fichiers et des liens directement avec un clic"
+msgstr "Ouvrir des fichiers et des liens soulignés directement avec un clic"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowLinkEscapeSequenceButton)
 #: widgets/EditProfileMousePage.ui:349
