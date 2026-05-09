@@ -2468,7 +2468,13 @@ void Vt102Emulation::processGraphicsToken(int tokenSize)
             uint32_t byteCount = 0;
             if (keys['f'] == 24 || keys['f'] == 32) {
                 int bpp = keys['f'] / 8;
-                byteCount = bpp * keys['s'] * keys['v'];
+                qint64 bc = bpp * keys['s'] * keys['v'];
+                if (bc < 0 || bc > 0xFFFFFFFFu) {
+                    qCWarning(KonsoleDebug) << "image byteCount overflow:" << bc;
+                    imageData.clear();
+                    return;
+                }
+                byteCount = uint32_t(bc);
             } else {
                 byteCount = 8 * 1024 * 1024;
             }
