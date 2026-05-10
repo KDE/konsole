@@ -22,12 +22,8 @@ EscapeSequenceUrlFilter::EscapeSequenceUrlFilter(Session *session, TerminalDispl
 
 void EscapeSequenceUrlFilter::process()
 {
-    if ((_window->screenWindow() == nullptr) && (_window->screenWindow()->screen() != nullptr)) {
-        return;
-    }
-
     QPointer<ScreenWindow> sWindow = _window->screenWindow();
-    if (!sWindow->screen()->urlExtractor()) {
+    if (!sWindow || !sWindow->screen() || !sWindow->screen()->urlExtractor()) {
         return;
     }
 

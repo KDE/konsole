@@ -100,7 +100,8 @@ QSharedPointer<HotSpot> UrlFilter::newHotSpot(int startLine, int startColumn, in
     // we want URLs in single quotes like the following to work correctly:
     // 'https://en.wikipedia.org/wiki/Earth's_rotation'
     // https://example.com.
-    static const QRegularExpression invalidCharRegex(LS1("[',.:;]+$"));
+    // Visit https://example.com!
+    static const QRegularExpression invalidCharRegex(LS1("[',.:;!]+$"));
 
     // capturedTexts[0] is the full match, the rest are the capture groups
     QString str0 = capturedTexts[0];
