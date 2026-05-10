@@ -45,13 +45,20 @@ void TerminalImageFilterChain::setImage(const Character *const image, int lines,
     decoder.begin(&lineStream);
 
     for (int i = 0; i < lines; i++) {
-        _linePositions->append(_buffer->length());
+        const int lineStart = _buffer->length();
+        _linePositions->append(lineStart);
         decoder.decodeLine(image + i * columns, columns, LineProperty());
+        const int decodedLength = _buffer->length() - lineStart;
 
-        // pretend that each non-wrapped line ends with a newline character.
-        // this prevents a link that occurs at the end of one line
-        // being treated as part of a link that occurs at the start of the next line
-        if ((lineProperties.value(i, LineProperty()).flags.f.wrapped) == 0) {
+        // A line ends with a real newline ('\n') only when it is not soft-wrapped.
+        // Soft-wrap happens in two cases:
+        //   1. The terminal auto-wrapped (wrapped flag set by Screen).
+        //   2. The application did its own word-wrap by inserting '\n' at exactly
+        //      the terminal width — these lines fill all columns with real content.
+        // In both cases we suppress '\n' so that URL detection can span the boundary.
+        const bool terminalWrapped = (lineProperties.value(i, LineProperty()).flags.f.wrapped) != 0;
+        const bool appWordWrapped = !terminalWrapped && (decodedLength == columns);
+        if (!terminalWrapped && !appWordWrapped) {
             lineStream << QLatin1Char('\n');
         }
     }
