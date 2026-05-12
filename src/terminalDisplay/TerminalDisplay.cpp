@@ -2608,6 +2608,10 @@ void TerminalDisplay::copyToClipboard(Screen::DecodingOptions options)
     }
 
     QApplication::clipboard()->setMimeData(mimeData, QClipboard::Clipboard);
+
+    if (_clearSelection) {
+        clearSelection();
+    }
 }
 
 void TerminalDisplay::pasteFromClipboard(bool appendEnter)
@@ -3327,6 +3331,7 @@ void TerminalDisplay::applyProfile(const Profile::Ptr &profile)
     _semanticInputClick = profile->semanticInputClick();
     _trimLeadingSpaces = profile->property<bool>(Profile::TrimLeadingSpacesInSelectedText);
     _trimTrailingSpaces = profile->property<bool>(Profile::TrimTrailingSpacesInSelectedText);
+    _clearSelection = profile->property<bool>(Profile::ClearSelectionOnCopy);
     _openLinksByDirectClick = profile->property<bool>(Profile::OpenLinksByDirectClickEnabled);
     setMiddleClickPasteMode(Enum::MiddleClickPasteModeEnum(profile->property<int>(Profile::MiddleClickPasteMode)));
     setCopyTextAsHTML(profile->property<bool>(Profile::CopyTextAsHTML));

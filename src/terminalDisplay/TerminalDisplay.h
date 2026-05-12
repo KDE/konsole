@@ -802,6 +802,7 @@ private:
 
     bool _trimLeadingSpaces = false; // trim leading spaces in selected text
     bool _trimTrailingSpaces = false; // trim trailing spaces in selected text
+    bool _clearSelection = false; // clear selection after copying
     bool _mouseWheelZoom = false; // enable mouse wheel zooming or not
 
     int _margin = 1; // the contents margin

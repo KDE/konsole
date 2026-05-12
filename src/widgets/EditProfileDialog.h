@@ -213,6 +213,7 @@ private Q_SLOTS:
     void toggleCopyTextAsHTML(bool);
     void toggleTrimLeadingSpacesInSelectedText(bool);
     void toggleTrimTrailingSpacesInSelectedText(bool);
+    void toggleClearSelectionOnCopy(bool);
     void pasteFromX11Selection();
     void pasteFromClipboard();
     void toggleAlternateScrolling(bool enable);

@@ -1936,6 +1936,8 @@ void EditProfileDialog::setupMousePage(const Profile::Ptr &profile)
     connect(_mouseUi->trimLeadingSpacesButton, &QPushButton::toggled, this, &EditProfileDialog::toggleTrimLeadingSpacesInSelectedText);
     _mouseUi->trimTrailingSpacesButton->setChecked(profile->property<bool>(Profile::TrimTrailingSpacesInSelectedText));
     connect(_mouseUi->trimTrailingSpacesButton, &QPushButton::toggled, this, &EditProfileDialog::toggleTrimTrailingSpacesInSelectedText);
+    _mouseUi->clearSelectionButton->setChecked(profile->property<bool>(Profile::ClearSelectionOnCopy));
+    connect(_mouseUi->clearSelectionButton, &QPushButton::toggled, this, &EditProfileDialog::toggleClearSelectionOnCopy);
     _mouseUi->openLinksByDirectClickButton->setChecked(profile->property<bool>(Profile::OpenLinksByDirectClickEnabled));
     connect(_mouseUi->openLinksByDirectClickButton, &QPushButton::toggled, this, &EditProfileDialog::toggleOpenLinksByDirectClick);
     _mouseUi->dropUrlsAsText->setChecked(profile->property<bool>(Profile::DropUrlsAsText));
@@ -2267,6 +2269,11 @@ void EditProfileDialog::toggleTrimTrailingSpacesInSelectedText(bool enable)
     updateTempProfileProperty(Profile::TrimTrailingSpacesInSelectedText, enable);
 }
 
+void EditProfileDialog::toggleClearSelectionOnCopy(bool enable)
+{
+    updateTempProfileProperty(Profile::ClearSelectionOnCopy, enable);
+}
+
 void EditProfileDialog::pasteFromX11Selection()
 {
     updateTempProfileProperty(Profile::MiddleClickPasteMode, Enum::PasteFromX11Selection);
@@ -2372,7 +2379,7 @@ void EditProfileDialog::toggleIgnoreWcWidth(bool ignore)
 void EditProfileDialog::toggleBadgeEnabled(bool enable)
 {
     updateTempProfileProperty(Profile::BadgeEnabled, enable);
-    
+
     // Enable/disable badge controls based on badge enabled state
     _appearanceUi->badge_label_1->setEnabled(enable);
     _appearanceUi->badgeTextEdit->setEnabled(enable);

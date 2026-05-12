@@ -263,6 +263,8 @@ public:
         TrimLeadingSpacesInSelectedText,
         /** (bool) If true, trailing spaces are trimmed in selected text */
         TrimTrailingSpacesInSelectedText,
+        /** (bool) If true, selection is cleared after copying */
+        ClearSelectionOnCopy,
         /** (bool) If true, then dropped URLs will be pasted as text without asking */
         DropUrlsAsText,
         /** (bool) If true, middle mouse button pastes from X Selection */

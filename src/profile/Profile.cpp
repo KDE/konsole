@@ -172,6 +172,7 @@ const std::vector<Profile::PropertyInfo> Profile::DefaultProperties = {
     {CopyTextAsHTML, "CopyTextAsHTML", INTERACTION_GROUP, true},
     {TrimLeadingSpacesInSelectedText, "TrimLeadingSpacesInSelectedText", INTERACTION_GROUP, false},
     {TrimTrailingSpacesInSelectedText, "TrimTrailingSpacesInSelectedText", INTERACTION_GROUP, false},
+    {ClearSelectionOnCopy, "ClearSelectionOnCopy", INTERACTION_GROUP, false},
     {PasteFromSelectionEnabled, "PasteFromSelectionEnabled", INTERACTION_GROUP, true},
     {PasteFromClipboardEnabled, "PasteFromClipboardEnabled", INTERACTION_GROUP, false},
     {MiddleClickPasteMode, "MiddleClickPasteMode", INTERACTION_GROUP, Enum::PasteFromX11Selection},
