@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole-1.1\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-13 00:49+0000\n"
+"POT-Creation-Date: 2026-05-18 00:48+0000\n"
 "PO-Revision-Date: 2004-01-18 20:39+0100\n"
 "Last-Translator: Jañ-Mai Drapier <jdrapier@club-internet.fr>\n"
 "Language-Team: Brezhoneg <Suav.Icb@wanadoo.fr>\n"
@@ -3702,7 +3702,7 @@ msgctxt "@action:button"
 msgid "&Cancel"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2724
+#: terminalDisplay/TerminalDisplay.cpp:2727
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3710,17 +3710,17 @@ msgid ""
 "b> to resume.</qt>"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2779
+#: terminalDisplay/TerminalDisplay.cpp:2782
 #, kde-format
 msgid "This terminal is read-only."
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:3185
+#: terminalDisplay/TerminalDisplay.cpp:3188
 #, fuzzy, kde-format
 msgid "Change &Directory To"
 msgstr "Kemmañ ar renkell labour da 'renkell'"
 
-#: terminalDisplay/TerminalDisplay.cpp:3220
+#: terminalDisplay/TerminalDisplay.cpp:3223
 #, fuzzy, kde-format
 #| msgid "Paste Selection"
 msgid "&Paste Location"

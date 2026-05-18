@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-13 00:49+0000\n"
+"POT-Creation-Date: 2026-05-18 00:48+0000\n"
 "PO-Revision-Date: 2026-03-13 11:30+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
@@ -3587,7 +3587,7 @@ msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "&Hætta við"
 
-#: terminalDisplay/TerminalDisplay.cpp:2724
+#: terminalDisplay/TerminalDisplay.cpp:2727
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3598,17 +3598,17 @@ msgstr ""
 "\">sett í bið</a> með því að ýta á Ctrl+S. Ýttu á <b>Ctrl+Q</b> til að halda "
 "áfram.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2779
+#: terminalDisplay/TerminalDisplay.cpp:2782
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Þessi skjáhermir er skrifvarinn."
 
-#: terminalDisplay/TerminalDisplay.cpp:3185
+#: terminalDisplay/TerminalDisplay.cpp:3188
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Breyta &möppu í"
 
-#: terminalDisplay/TerminalDisplay.cpp:3220
+#: terminalDisplay/TerminalDisplay.cpp:3223
 #, kde-format
 msgid "&Paste Location"
 msgstr "&Límingarstaður"

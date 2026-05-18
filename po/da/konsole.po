@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-13 00:49+0000\n"
+"POT-Creation-Date: 2026-05-18 00:48+0000\n"
 "PO-Revision-Date: 2020-08-01 09:45+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -3677,7 +3677,7 @@ msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "&Annullér"
 
-#: terminalDisplay/TerminalDisplay.cpp:2724
+#: terminalDisplay/TerminalDisplay.cpp:2727
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3688,17 +3688,17 @@ msgstr ""
 "Software_flow_control\">suspenderet</a> ved at trykke Ctrl+S. Tryk <b>Ctrl"
 "+Q</b> for at genoptage.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2779
+#: terminalDisplay/TerminalDisplay.cpp:2782
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Denne terminal er skrivebeskyttet."
 
-#: terminalDisplay/TerminalDisplay.cpp:3185
+#: terminalDisplay/TerminalDisplay.cpp:3188
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Skift m&appe til"
 
-#: terminalDisplay/TerminalDisplay.cpp:3220
+#: terminalDisplay/TerminalDisplay.cpp:3223
 #, kde-format
 msgid "&Paste Location"
 msgstr "Placering af &indsæt"

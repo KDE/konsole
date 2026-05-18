@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-13 00:49+0000\n"
+"POT-Creation-Date: 2026-05-18 00:48+0000\n"
 "PO-Revision-Date: 2026-05-13 12:43+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -3575,7 +3575,7 @@ msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "İ&ptal et"
 
-#: terminalDisplay/TerminalDisplay.cpp:2724
+#: terminalDisplay/TerminalDisplay.cpp:2727
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3586,17 +3586,17 @@ msgstr ""
 "Software_flow_control\">askıya alındı</a>. Sürdürmek için <b>Kontrol+Q</"
 "b>’ya basın.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2779
+#: terminalDisplay/TerminalDisplay.cpp:2782
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Bu uçbirim saltokunurdur."
 
-#: terminalDisplay/TerminalDisplay.cpp:3185
+#: terminalDisplay/TerminalDisplay.cpp:3188
 #, kde-format
 msgid "Change &Directory To"
 msgstr "&Dizini Bu Adresle Değiştir"
 
-#: terminalDisplay/TerminalDisplay.cpp:3220
+#: terminalDisplay/TerminalDisplay.cpp:3223
 #, kde-format
 msgid "&Paste Location"
 msgstr "Konumu &Yapıştır"
