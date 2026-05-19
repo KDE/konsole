@@ -293,6 +293,11 @@ void SessionController::trackOutput(QKeyEvent *event)
         return;
     }
 
+    // Don't jump to bottom on key release (BUG: 519251)
+    if (event->type() == QKeyEvent::KeyRelease) {
+        return;
+    }
+
     view()->screenWindow()->setTrackOutput(true);
 }
 
