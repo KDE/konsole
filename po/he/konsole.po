@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-20 00:50+0000\n"
+"POT-Creation-Date: 2026-05-20 02:43+0000\n"
 "PO-Revision-Date: 2026-05-07 10:30+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -2162,7 +2162,7 @@ msgid "Silence in '%1' (Session '%2')"
 msgstr "שקט אצל ‚%1’ (הפעלה ‚%2’)"
 
 #: session/Session.cpp:817 session/Session.cpp:2249
-#: session/SessionController.cpp:376 session/SessionController.cpp:1921
+#: session/SessionController.cpp:381 session/SessionController.cpp:1926
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1255
 #: Vt102Emulation.cpp:1510
 #, kde-format
@@ -2205,345 +2205,345 @@ msgstr "ה־API של D-Bus שרגיש מבחינת אבטחת מידע מושב�
 msgid "Konsole"
 msgstr "Konsole"
 
-#: session/SessionController.cpp:375
+#: session/SessionController.cpp:380
 #, kde-format
 msgid "The process '%1' has finished running in session '%2'"
 msgstr "התהליך ‚%1’ סיים לרוץ בהפעלה ‚%2’"
 
-#: session/SessionController.cpp:458
+#: session/SessionController.cpp:463
 #, kde-format
 msgid "Konsole does not know how to open the bookmark: "
 msgstr "Konsole לא יודע איך לפתוח את הסימנייה: "
 
-#: session/SessionController.cpp:536
+#: session/SessionController.cpp:541
 #, kde-format
 msgid "Search for '%1' with"
 msgstr "חיפוש אחר ‚%1’ בעזרת"
 
-#: session/SessionController.cpp:552
+#: session/SessionController.cpp:557
 #, kde-format
 msgid "Configure Web Shortcuts..."
 msgstr "הגדרת קיצורי רשת…"
 
-#: session/SessionController.cpp:663
+#: session/SessionController.cpp:668
 #, kde-format
 msgid "&Close Session"
 msgstr "&סגירת הפעלה"
 
-#: session/SessionController.cpp:670
+#: session/SessionController.cpp:675
 #, kde-format
 msgid "Open File Manager"
 msgstr "פתיחת מנהל הקבצים"
 
-#: session/SessionController.cpp:685
+#: session/SessionController.cpp:690
 #, kde-format
 msgid "Copy"
 msgstr "העתקה"
 
-#: session/SessionController.cpp:692
+#: session/SessionController.cpp:697
 #, kde-format
 msgid "Split View Left-Right"
 msgstr "פיצול התצוגה ימין/שמאל"
 
-#: session/SessionController.cpp:697
+#: session/SessionController.cpp:702
 #, kde-format
 msgid "Split View Top-Bottom"
 msgstr "פיצול התצוגה מעלה/מטה"
 
-#: session/SessionController.cpp:701
+#: session/SessionController.cpp:706
 #, kde-format
 msgid "Copy except prompts"
 msgstr "העתקה בלי הקידומות"
 
-#: session/SessionController.cpp:707
+#: session/SessionController.cpp:712
 #, kde-format
 msgid "Copy user input"
 msgstr "העתק קלט משתמש"
 
-#: session/SessionController.cpp:713
+#: session/SessionController.cpp:718
 #, kde-format
 msgid "Copy command output"
 msgstr "העתקת פלט פקודה"
 
-#: session/SessionController.cpp:728
+#: session/SessionController.cpp:733
 #, kde-format
 msgid "Paste Selection"
 msgstr "הדבקת בחירה"
 
-#: session/SessionController.cpp:735
+#: session/SessionController.cpp:740
 #, kde-format
 msgid "Web Search"
 msgstr "חיפוש ברשת"
 
-#: session/SessionController.cpp:741
+#: session/SessionController.cpp:746
 #, kde-format
 msgid "&Select All"
 msgstr "בחירה בה&כול"
 
-#: session/SessionController.cpp:745
+#: session/SessionController.cpp:750
 #, kde-format
 msgid "Select &Mode"
 msgstr "מצב &בחירה"
 
-#: session/SessionController.cpp:750
+#: session/SessionController.cpp:755
 #, kde-format
 msgid "Select &Line"
 msgstr "בחירה ב&שורה"
 
-#: session/SessionController.cpp:753
+#: session/SessionController.cpp:758
 #, kde-format
 msgid "Save Output &As..."
 msgstr "שמירת הפלט &בתור…"
 
-#: session/SessionController.cpp:759
+#: session/SessionController.cpp:764
 #, kde-format
 msgid "Auto Save Output As..."
 msgstr "שמירת הפלט אוטומטית בתור…"
 
-#: session/SessionController.cpp:763
+#: session/SessionController.cpp:768
 #, kde-format
 msgid "Stop Auto Save"
 msgstr "עצירת שמירה אוטומטית"
 
-#: session/SessionController.cpp:767
+#: session/SessionController.cpp:772
 #, kde-format
 msgid "&Print Screen..."
 msgstr "ה&דפסת מסך…"
 
-#: session/SessionController.cpp:771
+#: session/SessionController.cpp:776
 #, kde-format
 msgid "Adjust Scrollback..."
 msgstr "כיוון היסטוריית גלילה…"
 
-#: session/SessionController.cpp:775
+#: session/SessionController.cpp:780
 #, kde-format
 msgid "Clear Scrollback"
 msgstr "פינוי היסטוריית גלילה"
 
-#: session/SessionController.cpp:779
+#: session/SessionController.cpp:784
 #, kde-format
 msgid "Clear Scrollback and Reset"
 msgstr "פינוי היסטוריית הגלילה ואיפוס"
 
-#: session/SessionController.cpp:790
+#: session/SessionController.cpp:795
 #, kde-format
 msgid "Next Profile"
 msgstr "הפרופיל הבא"
 
-#: session/SessionController.cpp:795
+#: session/SessionController.cpp:800
 #, kde-format
 msgid "Previous Profile"
 msgstr "הפרופיל הקודם"
 
-#: session/SessionController.cpp:798
+#: session/SessionController.cpp:803
 #, kde-format
 msgid "Switch Profile"
 msgstr "החלפת פרופיל"
 
-#: session/SessionController.cpp:823
+#: session/SessionController.cpp:828
 #, kde-format
 msgid "Set &Encoding"
 msgstr "הגדרת &קידוד"
 
-#: session/SessionController.cpp:843
+#: session/SessionController.cpp:848
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow Mouse Tracking"
 msgstr "לאפשר מעקב אחרי העכבר"
 
-#: session/SessionController.cpp:852
+#: session/SessionController.cpp:857
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
 msgstr "קריאה בלבד"
 
-#: session/SessionController.cpp:863
+#: session/SessionController.cpp:868
 #, kde-format
 msgid "&Configure or Rename Tab..."
 msgstr "ה&גדרה או שינוי שם לשונית…"
 
-#: session/SessionController.cpp:869
+#: session/SessionController.cpp:874
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr "&כל הלשוניות בחלון הנוכחי"
 
-#: session/SessionController.cpp:876
+#: session/SessionController.cpp:881
 #, kde-format
 msgid "&Select Tabs..."
 msgstr "&בחירת לשוניות…"
 
-#: session/SessionController.cpp:882
+#: session/SessionController.cpp:887
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "&כלום"
 
-#: session/SessionController.cpp:890
+#: session/SessionController.cpp:895
 #, kde-format
 msgid "Copy Input To"
 msgstr "העתקת קלט אל"
 
-#: session/SessionController.cpp:898
+#: session/SessionController.cpp:903
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "ה&עלאת ZModem…"
 
-#: session/SessionController.cpp:903
+#: session/SessionController.cpp:908
 #, kde-format
 msgid "One-Shot Monitors"
 msgstr "צגים להתראה חד־פעמית"
 
-#: session/SessionController.cpp:908
+#: session/SessionController.cpp:913
 #, kde-format
 msgid "Monitor for &Prompt"
 msgstr "מעקב אחר המ&תנה לקלט"
 
-#: session/SessionController.cpp:915
+#: session/SessionController.cpp:920
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "מ&עקב אחר פעילות"
 
-#: session/SessionController.cpp:921
+#: session/SessionController.cpp:926
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "מעקב אחר &חוסר פעילות"
 
-#: session/SessionController.cpp:927
+#: session/SessionController.cpp:932
 #, kde-format
 msgid "Monitor for Process Finishing"
 msgstr "מעקב אחר סיום תהליך"
 
-#: session/SessionController.cpp:934
+#: session/SessionController.cpp:939
 #, kde-format
 msgid "Enlarge Font"
 msgstr "הגדלת כתב"
 
-#: session/SessionController.cpp:942
+#: session/SessionController.cpp:947
 #, kde-format
 msgid "Shrink Font"
 msgstr "הקטנת כתב"
 
-#: session/SessionController.cpp:947
+#: session/SessionController.cpp:952
 #, kde-format
 msgid "Reset Font Size"
 msgstr "איפוס גודל כתב"
 
-#: session/SessionController.cpp:953
+#: session/SessionController.cpp:958
 #, kde-format
 msgid "Send Signal"
 msgstr "שליחת אות"
 
-#: session/SessionController.cpp:957
+#: session/SessionController.cpp:962
 #, kde-format
 msgid "&Suspend Task"
 msgstr "ה&שהיית משימה"
 
-#: session/SessionController.cpp:962
+#: session/SessionController.cpp:967
 #, kde-format
 msgid "&Continue Task"
 msgstr "ה&משך משימה"
 
-#: session/SessionController.cpp:967
+#: session/SessionController.cpp:972
 #, kde-format
 msgid "&Hangup"
 msgstr "&ניתוק"
 
-#: session/SessionController.cpp:972
+#: session/SessionController.cpp:977
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "&עצירת משימה"
 
-#: session/SessionController.cpp:977
+#: session/SessionController.cpp:982
 #, kde-format
 msgid "&Terminate Task"
 msgstr "&סיום משימה"
 
-#: session/SessionController.cpp:982
+#: session/SessionController.cpp:987
 #, kde-format
 msgid "&Kill Task"
 msgstr "&חיסול משימה"
 
-#: session/SessionController.cpp:987
+#: session/SessionController.cpp:992
 #, kde-format
 msgid "User Signal &1"
 msgstr "איתות משתמש &1"
 
-#: session/SessionController.cpp:992
+#: session/SessionController.cpp:997
 #, kde-format
 msgid "User Signal &2"
 msgstr "איתות משתמש &2"
 
-#: session/SessionController.cpp:1010
+#: session/SessionController.cpp:1015
 #, kde-format
 msgid "Create New Profile..."
 msgstr "יצירת פרופיל חדש…"
 
-#: session/SessionController.cpp:1012
+#: session/SessionController.cpp:1017
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "עריכת פרופיל נוכחי…"
 
-#: session/SessionController.cpp:1152
+#: session/SessionController.cpp:1157
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
 "close it?"
 msgstr "יש תוכנית שרצה בהפעלה הזאת. לסגור אותה?"
 
-#: session/SessionController.cpp:1156
+#: session/SessionController.cpp:1161
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
 "want to close it?"
 msgstr "התוכנית ‚%1’ רצה בהפעלה הזאת. לסגור אותה?"
 
-#: session/SessionController.cpp:1163 session/SessionController.cpp:1198
+#: session/SessionController.cpp:1168 session/SessionController.cpp:1203
 #, kde-format
 msgid "Confirm Close"
 msgstr "אישור יציאה"
 
-#: session/SessionController.cpp:1164
+#: session/SessionController.cpp:1169
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "סגירת התוכנית"
 
-#: session/SessionController.cpp:1187
+#: session/SessionController.cpp:1192
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
 "by force?"
 msgstr "התוכנית שרצה בהפעלה הזאת לא נסגרת. לחסל אותה בכוח?"
 
-#: session/SessionController.cpp:1191
+#: session/SessionController.cpp:1196
 #, kde-format
 msgid ""
 "The program '%1' in this session would not die.  Are you sure you want to "
 "kill it by force?"
 msgstr "התוכנית ‚%1’ שרצה בהפעלה הזאת לא נסגרת. לחסל אותה בכוח?"
 
-#: session/SessionController.cpp:1199
+#: session/SessionController.cpp:1204
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "חיסול תוכנית"
 
-#: session/SessionController.cpp:1920
+#: session/SessionController.cpp:1925
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "שורת הפקודה מופיעה בהפעלה ‚%1’"
 
-#: session/SessionController.cpp:2150
+#: session/SessionController.cpp:2155
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "פתיחת התיקייה הנוכחית עם"
 
-#: session/SessionController.cpp:2220
+#: session/SessionController.cpp:2225
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "שמירת הורדת ZModem אל…"
 
-#: session/SessionController.cpp:2230
+#: session/SessionController.cpp:2235
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2553,13 +2553,13 @@ msgstr ""
 "<p> זוהה ניסיון העברה של קובץ בעזרת ZModem, אך לא נמצא יישום מתאים עבור "
 "ZModem במערכת.</p><p> עליך להתקין את חבילה rzsz או lrzsz. </p>"
 
-#: session/SessionController.cpp:2240
+#: session/SessionController.cpp:2245
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p> ההפעלה הנוכחית כבר מכילה העברה של קובץ בעזרת ZModem. </p>"
 
-#: session/SessionController.cpp:2253
+#: session/SessionController.cpp:2258
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2568,7 +2568,7 @@ msgstr ""
 "<p> לא נמצא יישום מתאים עבור ZModem במערכת.</p><p> עליך להתקין את חבילה rzsz "
 "או lrzsz. </p>"
 
-#: session/SessionController.cpp:2258
+#: session/SessionController.cpp:2263
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "בחירת קבצים להעלאת ZModem"

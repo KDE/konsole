@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-20 00:50+0000\n"
+"POT-Creation-Date: 2026-05-20 02:43+0000\n"
 "PO-Revision-Date: 2023-12-12 19:29+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -2167,7 +2167,7 @@ msgid "Silence in '%1' (Session '%2')"
 msgstr "Ticho v '%1' (Sedenie '%2')"
 
 #: session/Session.cpp:817 session/Session.cpp:2249
-#: session/SessionController.cpp:376 session/SessionController.cpp:1921
+#: session/SessionController.cpp:381 session/SessionController.cpp:1926
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1255
 #: Vt102Emulation.cpp:1510
 #, kde-format
@@ -2210,345 +2210,345 @@ msgstr "Security sensitive DBus API is disabled in the settings."
 msgid "Konsole"
 msgstr "Konsole"
 
-#: session/SessionController.cpp:375
+#: session/SessionController.cpp:380
 #, kde-format
 msgid "The process '%1' has finished running in session '%2'"
 msgstr "Proces '%1' bol ukončený v sedení '%2'"
 
-#: session/SessionController.cpp:458
+#: session/SessionController.cpp:463
 #, kde-format
 msgid "Konsole does not know how to open the bookmark: "
 msgstr "Konsole nevie ako má otvoriť záložku: "
 
-#: session/SessionController.cpp:536
+#: session/SessionController.cpp:541
 #, kde-format
 msgid "Search for '%1' with"
 msgstr "Hľadať '%1' pomocou"
 
-#: session/SessionController.cpp:552
+#: session/SessionController.cpp:557
 #, kde-format
 msgid "Configure Web Shortcuts..."
 msgstr "Nastaviť webové skratky..."
 
-#: session/SessionController.cpp:663
+#: session/SessionController.cpp:668
 #, kde-format
 msgid "&Close Session"
 msgstr "Zavrieť sedenie"
 
-#: session/SessionController.cpp:670
+#: session/SessionController.cpp:675
 #, kde-format
 msgid "Open File Manager"
 msgstr "Otvoriť správcu súborov"
 
-#: session/SessionController.cpp:685
+#: session/SessionController.cpp:690
 #, kde-format
 msgid "Copy"
 msgstr "Kopírovať"
 
-#: session/SessionController.cpp:692
+#: session/SessionController.cpp:697
 #, kde-format
 msgid "Split View Left-Right"
 msgstr "Rozdeliť pohľad vertikálne"
 
-#: session/SessionController.cpp:697
+#: session/SessionController.cpp:702
 #, kde-format
 msgid "Split View Top-Bottom"
 msgstr "Rozdeliť pohľad horizontálne"
 
-#: session/SessionController.cpp:701
+#: session/SessionController.cpp:706
 #, kde-format
 msgid "Copy except prompts"
 msgstr "Copy except prompts"
 
-#: session/SessionController.cpp:707
+#: session/SessionController.cpp:712
 #, kde-format
 msgid "Copy user input"
 msgstr "Kopírovať vstup používateľa"
 
-#: session/SessionController.cpp:713
+#: session/SessionController.cpp:718
 #, kde-format
 msgid "Copy command output"
 msgstr "Kopírovať výstup príkazu"
 
-#: session/SessionController.cpp:728
+#: session/SessionController.cpp:733
 #, kde-format
 msgid "Paste Selection"
 msgstr "Vložiť výber"
 
-#: session/SessionController.cpp:735
+#: session/SessionController.cpp:740
 #, kde-format
 msgid "Web Search"
 msgstr "Vyhľadať na webe"
 
-#: session/SessionController.cpp:741
+#: session/SessionController.cpp:746
 #, kde-format
 msgid "&Select All"
 msgstr "Vybrať &všetko"
 
-#: session/SessionController.cpp:745
+#: session/SessionController.cpp:750
 #, kde-format
 msgid "Select &Mode"
 msgstr "Vybrať &režim"
 
-#: session/SessionController.cpp:750
+#: session/SessionController.cpp:755
 #, kde-format
 msgid "Select &Line"
 msgstr "Vybrať riadok"
 
-#: session/SessionController.cpp:753
+#: session/SessionController.cpp:758
 #, kde-format
 msgid "Save Output &As..."
 msgstr "Uložiť výstup &ako..."
 
-#: session/SessionController.cpp:759
+#: session/SessionController.cpp:764
 #, kde-format
 msgid "Auto Save Output As..."
 msgstr "Automaticky uložiť výstup ako..."
 
-#: session/SessionController.cpp:763
+#: session/SessionController.cpp:768
 #, kde-format
 msgid "Stop Auto Save"
 msgstr "Stop Auto Save"
 
-#: session/SessionController.cpp:767
+#: session/SessionController.cpp:772
 #, kde-format
 msgid "&Print Screen..."
 msgstr "Tlačiť obrazovku..."
 
-#: session/SessionController.cpp:771
+#: session/SessionController.cpp:776
 #, kde-format
 msgid "Adjust Scrollback..."
 msgstr "Upraviť rolovanie späť..."
 
-#: session/SessionController.cpp:775
+#: session/SessionController.cpp:780
 #, kde-format
 msgid "Clear Scrollback"
 msgstr "Vyčistiť rolovanie"
 
-#: session/SessionController.cpp:779
+#: session/SessionController.cpp:784
 #, kde-format
 msgid "Clear Scrollback and Reset"
 msgstr "Vyčistiť rolovanie a obnoviť"
 
-#: session/SessionController.cpp:790
+#: session/SessionController.cpp:795
 #, kde-format
 msgid "Next Profile"
 msgstr "Nasledujúci profil"
 
-#: session/SessionController.cpp:795
+#: session/SessionController.cpp:800
 #, kde-format
 msgid "Previous Profile"
 msgstr "Predchádzajúci profil"
 
-#: session/SessionController.cpp:798
+#: session/SessionController.cpp:803
 #, kde-format
 msgid "Switch Profile"
 msgstr "Prepnúť profil"
 
-#: session/SessionController.cpp:823
+#: session/SessionController.cpp:828
 #, kde-format
 msgid "Set &Encoding"
 msgstr "Nastaviť &kódovanie"
 
-#: session/SessionController.cpp:843
+#: session/SessionController.cpp:848
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow Mouse Tracking"
 msgstr "Povoliť sledovanie myši"
 
-#: session/SessionController.cpp:852
+#: session/SessionController.cpp:857
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
 msgstr "Iba na čítanie"
 
-#: session/SessionController.cpp:863
+#: session/SessionController.cpp:868
 #, kde-format
 msgid "&Configure or Rename Tab..."
 msgstr "Nestaviť alebo premenovať kartu..."
 
-#: session/SessionController.cpp:869
+#: session/SessionController.cpp:874
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr "&Všetky karty v aktuálnom okne"
 
-#: session/SessionController.cpp:876
+#: session/SessionController.cpp:881
 #, kde-format
 msgid "&Select Tabs..."
 msgstr "Vybrať &karty..."
 
-#: session/SessionController.cpp:882
+#: session/SessionController.cpp:887
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "Žiad&ne"
 
-#: session/SessionController.cpp:890
+#: session/SessionController.cpp:895
 #, kde-format
 msgid "Copy Input To"
 msgstr "Kopírovať vstup do"
 
-#: session/SessionController.cpp:898
+#: session/SessionController.cpp:903
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "&ZModem odoslanie..."
 
-#: session/SessionController.cpp:903
+#: session/SessionController.cpp:908
 #, kde-format
 msgid "One-Shot Monitors"
 msgstr "One-Shot Monitors"
 
-#: session/SessionController.cpp:908
+#: session/SessionController.cpp:913
 #, kde-format
 msgid "Monitor for &Prompt"
 msgstr "Monitorovať &výzvu"
 
-#: session/SessionController.cpp:915
+#: session/SessionController.cpp:920
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "Monitorovať &aktivitu"
 
-#: session/SessionController.cpp:921
+#: session/SessionController.cpp:926
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "Monitorovať &nečinnosť"
 
-#: session/SessionController.cpp:927
+#: session/SessionController.cpp:932
 #, kde-format
 msgid "Monitor for Process Finishing"
 msgstr "Monitorovať ukončenie procesov"
 
-#: session/SessionController.cpp:934
+#: session/SessionController.cpp:939
 #, kde-format
 msgid "Enlarge Font"
 msgstr "Zväčšiť písmo"
 
-#: session/SessionController.cpp:942
+#: session/SessionController.cpp:947
 #, kde-format
 msgid "Shrink Font"
 msgstr "Zmenšiť písmo"
 
-#: session/SessionController.cpp:947
+#: session/SessionController.cpp:952
 #, kde-format
 msgid "Reset Font Size"
 msgstr "Vynulovať Veľkosť Písma"
 
-#: session/SessionController.cpp:953
+#: session/SessionController.cpp:958
 #, kde-format
 msgid "Send Signal"
 msgstr "Poslať signál"
 
-#: session/SessionController.cpp:957
+#: session/SessionController.cpp:962
 #, kde-format
 msgid "&Suspend Task"
 msgstr "Pozastaviť úlohu"
 
-#: session/SessionController.cpp:962
+#: session/SessionController.cpp:967
 #, kde-format
 msgid "&Continue Task"
 msgstr "Pokračovať úlohu"
 
-#: session/SessionController.cpp:967
+#: session/SessionController.cpp:972
 #, kde-format
 msgid "&Hangup"
 msgstr "Zavesiť"
 
-#: session/SessionController.cpp:972
+#: session/SessionController.cpp:977
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "Prerušiť úlohu"
 
-#: session/SessionController.cpp:977
+#: session/SessionController.cpp:982
 #, kde-format
 msgid "&Terminate Task"
 msgstr "Ukončiť úlohu"
 
-#: session/SessionController.cpp:982
+#: session/SessionController.cpp:987
 #, kde-format
 msgid "&Kill Task"
 msgstr "Zabiť úlohu"
 
-#: session/SessionController.cpp:987
+#: session/SessionController.cpp:992
 #, kde-format
 msgid "User Signal &1"
 msgstr "Používateľský signál 1"
 
-#: session/SessionController.cpp:992
+#: session/SessionController.cpp:997
 #, kde-format
 msgid "User Signal &2"
 msgstr "Používateľský signál 2"
 
-#: session/SessionController.cpp:1010
+#: session/SessionController.cpp:1015
 #, kde-format
 msgid "Create New Profile..."
 msgstr "Vytvoriť nový profil..."
 
-#: session/SessionController.cpp:1012
+#: session/SessionController.cpp:1017
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "Upraviť aktuálny profil..."
 
-#: session/SessionController.cpp:1152
+#: session/SessionController.cpp:1157
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
 "close it?"
 msgstr "V tomto sedení práve beží program. Naozaj chcete skončiť?"
 
-#: session/SessionController.cpp:1156
+#: session/SessionController.cpp:1161
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
 "want to close it?"
 msgstr "V tomto sedení práve beží program '%1'. Naozaj chcete skončiť?"
 
-#: session/SessionController.cpp:1163 session/SessionController.cpp:1198
+#: session/SessionController.cpp:1168 session/SessionController.cpp:1203
 #, kde-format
 msgid "Confirm Close"
 msgstr "Potvrdiť zatvorenie"
 
-#: session/SessionController.cpp:1164
+#: session/SessionController.cpp:1169
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "Zatvoriť program"
 
-#: session/SessionController.cpp:1187
+#: session/SessionController.cpp:1192
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
 "by force?"
 msgstr "Program v tomto sedení nezomrie. Určite ho chcete nasilu zabiť?"
 
-#: session/SessionController.cpp:1191
+#: session/SessionController.cpp:1196
 #, kde-format
 msgid ""
 "The program '%1' in this session would not die.  Are you sure you want to "
 "kill it by force?"
 msgstr "Program '%1' v tomto sedení nezomrie. Určite ho chcete nasilu zabiť?"
 
-#: session/SessionController.cpp:1199
+#: session/SessionController.cpp:1204
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "Zabiť program"
 
-#: session/SessionController.cpp:1920
+#: session/SessionController.cpp:1925
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "The shell prompt is displayed in session '%1'"
 
-#: session/SessionController.cpp:2150
+#: session/SessionController.cpp:2155
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "Otvoriť aktuálny priečinok s"
 
-#: session/SessionController.cpp:2220
+#: session/SessionController.cpp:2225
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Uložiť ZModem sťahovanie do..."
 
-#: session/SessionController.cpp:2230
+#: session/SessionController.cpp:2235
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2559,13 +2559,13 @@ msgstr ""
 "žiadny vhodný ZModem softvér.</p><p>Asi bude potrebné nainštalovať balíček "
 "'rzsz' alebo 'lrzsz'.</p>"
 
-#: session/SessionController.cpp:2240
+#: session/SessionController.cpp:2245
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>Aktuálne sedenie už má spustený ZModem prenos súborov.</p>"
 
-#: session/SessionController.cpp:2253
+#: session/SessionController.cpp:2258
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2574,7 +2574,7 @@ msgstr ""
 "<p>V systéme nebol nájdený žiadny vhodný ZModem softvér.</p><p>Asi bude "
 "potrebné nainštalovať balíček 'rzsz' alebo 'lrzsz'.</p>"
 
-#: session/SessionController.cpp:2258
+#: session/SessionController.cpp:2263
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Vyberte súbory pre ZModem odoslanie"
