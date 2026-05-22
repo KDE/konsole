@@ -429,6 +429,7 @@ void restoreAll(QList<TerminalDisplay *> &&terminalDisplays, QList<ViewSplitter 
     }
     for (auto terminalDisplay : terminalDisplays) {
         terminalDisplay->setVisible(true);
+        containerWidgetForDisplayImpl(terminalDisplay)->setVisible(true);
     }
 }
 }
@@ -447,6 +448,7 @@ bool ViewSplitter::hideRecurse(TerminalDisplay *currentTerminalDisplay)
                 allHidden = false;
             } else {
                 maybeTerminalDisplay->setVisible(false);
+                containerWidgetForDisplay(maybeTerminalDisplay)->setVisible(false);
             }
         }
     }
@@ -497,6 +499,11 @@ void ViewSplitter::handleMinimizeMaximize(bool maximize, bool zoom)
             if (auto *maybeSplitter = qobject_cast<ViewSplitter *>(widgetAt)) {
                 maybeSplitter->hideRecurse(currentTerminalDisplay);
             }
+
+            if (auto *maybeParentSplitter = qobject_cast<ViewSplitter *>(widgetAt->parentWidget())) {
+                maybeParentSplitter->hideRecurse(currentTerminalDisplay);
+            }
+
             if (auto maybeTerminalDisplay = qobject_cast<TerminalDisplay *>(widgetAt)) {
                 if (maybeTerminalDisplay != currentTerminalDisplay) {
                     maybeTerminalDisplay->setVisible(false);
