@@ -48,21 +48,9 @@ TerminalDisplay *terminalDisplayFromWidget(QWidget *widget)
     return widget->findChild<TerminalDisplay *>(QString(), Qt::FindDirectChildrenOnly);
 }
 
-QWidget *containerWidgetForDisplayImpl(TerminalDisplay *display)
-{
-    if (display == nullptr) {
-        return nullptr;
-    }
-    QWidget *parent = display->parentWidget();
-    if (parent != nullptr && parent->property(kTerminalContainerProperty).toBool()) {
-        return parent;
-    }
-    return display;
-}
-
 QWidget *ensureContainerWidget(TerminalDisplay *display)
 {
-    QWidget *container = containerWidgetForDisplayImpl(display);
+    QWidget *container = ViewSplitter::containerWidgetForDisplay(display);
     if (container == nullptr || container != display) {
         return container;
     }
@@ -107,7 +95,14 @@ ViewSplitter::ViewSplitter(QWidget *parent)
 
 QWidget *ViewSplitter::containerWidgetForDisplay(TerminalDisplay *display)
 {
-    return containerWidgetForDisplayImpl(display);
+    if (display == nullptr) {
+        return nullptr;
+    }
+    QWidget *parent = display->parentWidget();
+    if (parent != nullptr && parent->property(kTerminalContainerProperty).toBool()) {
+        return parent;
+    }
+    return display;
 }
 
 TerminalDisplay *ViewSplitter::terminalDisplayForWidget(QWidget *widget)
@@ -429,7 +424,7 @@ void restoreAll(QList<TerminalDisplay *> &&terminalDisplays, QList<ViewSplitter 
     }
     for (auto terminalDisplay : terminalDisplays) {
         terminalDisplay->setVisible(true);
-        containerWidgetForDisplayImpl(terminalDisplay)->setVisible(true);
+        ViewSplitter::containerWidgetForDisplay(terminalDisplay)->setVisible(true);
     }
 }
 }
