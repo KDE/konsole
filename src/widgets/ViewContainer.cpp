@@ -965,7 +965,7 @@ void TabbedViewContainer::updateContainerBadgeForDisplay(TerminalDisplay *displa
     QString containerKey;
     if (container.isValid()) {
         containerName = container.displayName.isEmpty() ? container.name : container.displayName;
-        containerType = container.detector != nullptr ? container.detector->displayName() : i18n("Container");
+        containerType = container.detector != nullptr ? container.detector->displayName() : i18nc("As in Distrobox, Toolbox, Kapsule etc.", "Container");
         containerKey = ContainerRegistry::keyFromContainerInfo(container);
     } else {
         const auto pending = ContainerSessionState::pendingContainerInfo(session);
@@ -974,7 +974,7 @@ void TabbedViewContainer::updateContainerBadgeForDisplay(TerminalDisplay *displa
             containerType = pending.type;
             containerKey = pending.key;
             if (containerType.isEmpty()) {
-                containerType = i18n("Container");
+                containerType = i18nc("As in Distrobox, Toolbox, Kapsule etc.", "Container");
             }
         }
     }
@@ -984,7 +984,7 @@ void TabbedViewContainer::updateContainerBadgeForDisplay(TerminalDisplay *displa
         return;
     }
 
-    badgeText->setText(i18n("%1: %2", containerType, containerName));
+    badgeText->setText(i18nc("%1 is the type of container (e.g. Distrobox, Toolbox, Kapsule etc.), %2 its name", "%1: %2", containerType, containerName));
     const QString colorKey = !containerKey.isEmpty() ? containerKey : containerName;
     badgeColor->setStyleSheet(containerBadgeColorStyle(ContainerSessionState::colorForContainerKey(colorKey)));
     const int h = qMax(22, badgeWidget->sizeHint().height() + 4);
