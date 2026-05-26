@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-18 00:48+0000\n"
+"POT-Creation-Date: 2026-05-26 00:48+0000\n"
 "PO-Revision-Date: 2010-01-22 15:02+0100\n"
 "Last-Translator: Jean Cayron <jean.cayron@gmail.com>\n"
 "Language-Team: Walloon <linux-wa@walon.org>\n"
@@ -2099,7 +2099,7 @@ msgstr ""
 msgid "&Scale output"
 msgstr ""
 
-#: profile/Profile.cpp:285
+#: profile/Profile.cpp:286
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
@@ -3818,7 +3818,7 @@ msgctxt "@action:button"
 msgid "&Cancel"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2727
+#: terminalDisplay/TerminalDisplay.cpp:2731
 #, fuzzy, kde-format
 #| msgid ""
 #| "<qt>Output has been <a href=\"http://en.wikipedia.org/wiki/Flow_control"
@@ -3832,17 +3832,17 @@ msgstr ""
 "\">djokêye</a> tot tchôcant l' tape Ctrl+S. Tchôkîz so <b>Ctrl+Q</b> po "
 "rataker.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2782
+#: terminalDisplay/TerminalDisplay.cpp:2786
 #, kde-format
 msgid "This terminal is read-only."
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:3188
+#: terminalDisplay/TerminalDisplay.cpp:3192
 #, kde-format
 msgid "Change &Directory To"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:3223
+#: terminalDisplay/TerminalDisplay.cpp:3227
 #, fuzzy, kde-format
 #| msgid "Paste Selection"
 msgid "&Paste Location"
@@ -4337,7 +4337,7 @@ msgstr "Candjî l' djeu d' coleurs tchoezi"
 #. i18n: ectx: property (text), widget (QPushButton, editColorSchemeButton)
 #: widgets/EditProfileAppearancePage.ui:82
 #: widgets/EditProfileGeneralPage.ui:276 widgets/EditProfileKeyboardPage.ui:73
-#: widgets/EditProfileMousePage.ui:320
+#: widgets/EditProfileMousePage.ui:330
 #, kde-format
 msgid "Edit..."
 msgstr "Candjî..."
@@ -4560,7 +4560,7 @@ msgstr "Fwait clignoter l' cursoe"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #. i18n: ectx: attribute (title), widget (QWidget, miscTab)
-#: widgets/EditProfileAppearancePage.ui:499 widgets/EditProfileMousePage.ui:252
+#: widgets/EditProfileAppearancePage.ui:499 widgets/EditProfileMousePage.ui:262
 #, kde-format
 msgctxt "Items that do not fit in other categories"
 msgid "Miscellaneous"
@@ -5184,13 +5184,13 @@ msgid ""
 "Konsole to see transparent background."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:2041
+#: widgets/EditProfileDialog.cpp:2043
 #, fuzzy, kde-format
 #| msgid "Delete Profile"
 msgid "Default for file type"
 msgstr "Disfacer profil"
 
-#: widgets/EditProfileDialog.cpp:2067
+#: widgets/EditProfileDialog.cpp:2069
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -5207,7 +5207,7 @@ msgid ""
 "editor."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:2080
+#: widgets/EditProfileDialog.cpp:2082
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr ""
@@ -5633,8 +5633,21 @@ msgstr ""
 msgid "Trim trailing spaces"
 msgstr ""
 
+#. i18n: ectx: property (toolTip), widget (QCheckBox, clearSelectionButton)
+#: widgets/EditProfileMousePage.ui:236
+#, kde-format
+msgid "Clear selection after copying"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, clearSelectionButton)
+#: widgets/EditProfileMousePage.ui:239
+#, fuzzy, kde-format
+#| msgid "Paste Selection"
+msgid "Clear selection"
+msgstr "Aclaper l' tchoes"
+
 #. i18n: ectx: property (toolTip), widget (QCheckBox, underlineLinksButton)
-#: widgets/EditProfileMousePage.ui:266
+#: widgets/EditProfileMousePage.ui:276
 #, kde-format
 msgid ""
 "Text recognized as a link or an email address will be underlined when "
@@ -5642,7 +5655,7 @@ msgid ""
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, underlineLinksButton)
-#: widgets/EditProfileMousePage.ui:269
+#: widgets/EditProfileMousePage.ui:279
 #, fuzzy, kde-format
 #| msgctxt "The shape of the cursor"
 #| msgid "Underline"
@@ -5650,7 +5663,7 @@ msgid "Underline links"
 msgstr "Sorlignî"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, underlineFilesButton)
-#: widgets/EditProfileMousePage.ui:276
+#: widgets/EditProfileMousePage.ui:286
 #, kde-format
 msgid ""
 "Text recognized as a file will be underlined when hovered by the mouse "
@@ -5658,7 +5671,7 @@ msgid ""
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, underlineFilesButton)
-#: widgets/EditProfileMousePage.ui:279
+#: widgets/EditProfileMousePage.ui:289
 #, fuzzy, kde-format
 #| msgctxt "The shape of the cursor"
 #| msgid "Underline"
@@ -5667,20 +5680,20 @@ msgstr "Sorlignî"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, textEditorCommandLabel)
 #. i18n: ectx: property (toolTip), widget (QComboBox, textEditorCombo)
-#: widgets/EditProfileMousePage.ui:288 widgets/EditProfileMousePage.ui:307
+#: widgets/EditProfileMousePage.ui:298 widgets/EditProfileMousePage.ui:317
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Text editor to use when opening text file URLs at a given line/column."
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, textEditorCommandLabel)
-#: widgets/EditProfileMousePage.ui:291
+#: widgets/EditProfileMousePage.ui:301
 #, kde-format
 msgid "Text Editor Command: "
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, openLinksByDirectClickButton)
-#: widgets/EditProfileMousePage.ui:335
+#: widgets/EditProfileMousePage.ui:345
 #, kde-format
 msgid ""
 "Text recognized as a file, link or an email address can be opened by direct "
@@ -5688,19 +5701,19 @@ msgid ""
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, openLinksByDirectClickButton)
-#: widgets/EditProfileMousePage.ui:338
+#: widgets/EditProfileMousePage.ui:348
 #, kde-format
 msgid "Open underlined files/links by direct click"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowLinkEscapeSequenceButton)
-#: widgets/EditProfileMousePage.ui:349
+#: widgets/EditProfileMousePage.ui:359
 #, kde-format
 msgid "Allow escape sequences for links"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, allowLinkEscapeSequenceButtonWarning)
-#: widgets/EditProfileMousePage.ui:356
+#: widgets/EditProfileMousePage.ui:366
 #, kde-format
 msgid ""
 "<b>WARNING</b>: This has security implications as it allows malicious URLs "
@@ -5709,32 +5722,32 @@ msgid ""
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: widgets/EditProfileMousePage.ui:374
+#: widgets/EditProfileMousePage.ui:384
 #, fuzzy, kde-format
 #| msgid "Allow blinking text"
 msgid "Allowed link formats: "
 msgstr "Permete li tecse clignotant"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, linkEscapeSequenceTexts)
-#: widgets/EditProfileMousePage.ui:384
+#: widgets/EditProfileMousePage.ui:394
 #, kde-format
 msgid "The formats of possible links, like http://, https:// and file://"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ctrlRequiredForDragButton)
-#: widgets/EditProfileMousePage.ui:395
+#: widgets/EditProfileMousePage.ui:405
 #, kde-format
 msgid "Selected text will require control key plus click to drag."
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, ctrlRequiredForDragButton)
-#: widgets/EditProfileMousePage.ui:398
+#: widgets/EditProfileMousePage.ui:408
 #, kde-format
 msgid "Require Ctrl key for drag && drop"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableAlternateScrollingButton)
-#: widgets/EditProfileMousePage.ui:405
+#: widgets/EditProfileMousePage.ui:415
 #, kde-format
 msgid ""
 "Mouse scroll wheel will emulate up/down key presses in programs that use the "
@@ -5742,13 +5755,13 @@ msgid ""
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableAlternateScrollingButton)
-#: widgets/EditProfileMousePage.ui:408
+#: widgets/EditProfileMousePage.ui:418
 #, kde-format
 msgid "Enable Alternate Screen buffer scrolling"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dropUrlsAsText)
-#: widgets/EditProfileMousePage.ui:415
+#: widgets/EditProfileMousePage.ui:425
 #, kde-format
 msgid ""
 "Always paste dropped files and URLs as text without offering move, copy and "
@@ -5756,25 +5769,25 @@ msgid ""
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, dropUrlsAsText)
-#: widgets/EditProfileMousePage.ui:418
+#: widgets/EditProfileMousePage.ui:428
 #, kde-format
 msgid "Disable drag && drop menu for files && URLs"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableMouseWheelZoomButton)
-#: widgets/EditProfileMousePage.ui:425
+#: widgets/EditProfileMousePage.ui:435
 #, kde-format
 msgid "Pressing Ctrl+scrollwheel will increase/decrease the text size."
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableMouseWheelZoomButton)
-#: widgets/EditProfileMousePage.ui:428
+#: widgets/EditProfileMousePage.ui:438
 #, kde-format
 msgid "Allow Ctrl+scrollwheel to zoom text size"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, allowColorFilters)
-#: widgets/EditProfileMousePage.ui:435
+#: widgets/EditProfileMousePage.ui:445
 #, kde-format
 msgid ""
 "When positioning the mouse over a hexadecimal color it will be displayed in "
@@ -5782,13 +5795,13 @@ msgid ""
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowColorFilters)
-#: widgets/EditProfileMousePage.ui:438
+#: widgets/EditProfileMousePage.ui:448
 #, kde-format
 msgid "Preview Colors on hover"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, allowMouseTrackingButton)
-#: widgets/EditProfileMousePage.ui:458
+#: widgets/EditProfileMousePage.ui:468
 #, kde-format
 msgid ""
 "Some terminal applications have mouse support, this allows them to get it by "
@@ -5796,7 +5809,7 @@ msgid ""
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowMouseTrackingButton)
-#: widgets/EditProfileMousePage.ui:461
+#: widgets/EditProfileMousePage.ui:471
 #, kde-format
 msgid "Allow terminal applications to handle clicks and drags"
 msgstr ""
