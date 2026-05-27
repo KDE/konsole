@@ -23,7 +23,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-05-26 00:48+0000\n"
-"PO-Revision-Date: 2026-05-12 08:28+0300\n"
+"PO-Revision-Date: 2026-05-26 08:46+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -5298,14 +5298,13 @@ msgstr "הסרת רווחים עודפים"
 #: widgets/EditProfileMousePage.ui:236
 #, kde-format
 msgid "Clear selection after copying"
-msgstr ""
+msgstr "איפוס הבחירה לאחר העתקה"
 
 #. i18n: ectx: property (text), widget (QCheckBox, clearSelectionButton)
 #: widgets/EditProfileMousePage.ui:239
-#, fuzzy, kde-format
-#| msgid "From selection"
+#, kde-format
 msgid "Clear selection"
-msgstr "מהבחירה"
+msgstr "איפוס הבחירה"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, underlineLinksButton)
 #: widgets/EditProfileMousePage.ui:276

@@ -22,14 +22,14 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-05-26 00:48+0000\n"
-"PO-Revision-Date: 2026-05-11 12:20+0200\n"
+"PO-Revision-Date: 2026-05-26 12:28+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 26.04.0\n"
+"X-Generator: Lokalize 26.04.1\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -5387,14 +5387,13 @@ msgstr "Spaties aan het einde van de regel verwijderen"
 #: widgets/EditProfileMousePage.ui:236
 #, kde-format
 msgid "Clear selection after copying"
-msgstr ""
+msgstr "Selectie wissen na kopiëren"
 
 #. i18n: ectx: property (text), widget (QCheckBox, clearSelectionButton)
 #: widgets/EditProfileMousePage.ui:239
-#, fuzzy, kde-format
-#| msgid "From selection"
+#, kde-format
 msgid "Clear selection"
-msgstr "Uit selectie"
+msgstr "Selectie wissen"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, underlineLinksButton)
 #: widgets/EditProfileMousePage.ui:276
