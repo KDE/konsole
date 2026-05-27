@@ -110,6 +110,18 @@ endif()
 
 if(UNIX AND NOT APPLE AND NOT ANDROID AND NOT HAIKU)
     option(WITH_X11 "Build with X11 integration" ON)
+
+    option(WITH_LIBSSH "Build with libssh support for resolving SSH configuration" ON)
+    if(WITH_LIBSSH)
+        find_package(libssh 0.9.8 REQUIRED CONFIG)
+        set_package_properties(libssh PROPERTIES DESCRIPTION "the SSH library"
+                               URL "https://www.libssh.org/"
+                               TYPE OPTIONAL
+                               PURPOSE "Needed to resolve SSH configuration"
+                              )
+
+        set(HAVE_LIBSSH 1)
+    endif()
 endif()
 
 # Check for function GETPWUID

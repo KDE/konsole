@@ -17,3 +17,6 @@
 
 /* Defined if libkapsule-qt is available for Kapsule container support */
 #cmakedefine01 HAVE_KAPSULE
+
+/* Defined if libssh is available */
+#cmakedefine01 HAVE_LIBSSH

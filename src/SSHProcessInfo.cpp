@@ -7,6 +7,8 @@
 // Own
 #include "SSHProcessInfo.h"
 
+#include "config-konsole.h"
+
 // Unix
 #ifndef Q_OS_WIN
 #include <arpa/inet.h>
@@ -20,6 +22,10 @@
 
 // Qt
 #include <QDebug>
+
+#if HAVE_LIBSSH
+#include <libssh/libssh.h>
+#endif
 
 using namespace Konsole;
 
@@ -136,9 +142,41 @@ SSHProcessInfo::SSHProcessInfo(const ProcessInfo &process)
         }
     } else {
         qWarning() << "Could not read arguments";
-
         return;
     }
+
+#if HAVE_LIBSSH
+    if (!_host.isEmpty()) {
+        if (ssh_session session = ssh_new()) {
+            ssh_options_set(session, SSH_OPTIONS_HOST, _host.toLocal8Bit().constData());
+
+            if (ssh_options_parse_config(session, nullptr) == 0) {
+                char *host = nullptr;
+                if (ssh_options_get(session, SSH_OPTIONS_HOST, &host) == SSH_OK) {
+                    _host = QString::fromLocal8Bit(host);
+                    ssh_string_free_char(host);
+                }
+
+                if (_user.isEmpty()) {
+                    char *user = nullptr;
+                    if (ssh_options_get(session, SSH_OPTIONS_USER, &user) == SSH_OK) {
+                        _user = QString::fromLocal8Bit(user);
+                        ssh_string_free_char(user);
+                    }
+                }
+
+                if (_port.isEmpty()) {
+                    uint port = 0;
+                    if (ssh_options_get_port(session, &port) == SSH_OK) {
+                        _port = QString::number(port);
+                    }
+                }
+            }
+
+            ssh_free(session);
+        }
+    }
+#endif
 }
 
 QString SSHProcessInfo::userName() const

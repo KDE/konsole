@@ -21,7 +21,8 @@
             "name": "konsole",
             "buildsystem": "cmake-ninja",
             "config-opts": [
-                "-DINSTALL_ICONS=ON"
+                "-DINSTALL_ICONS=ON",
+                "-DWITH_LIBSSH=OFF"
             ],
             "sources": [
                 { "type": "dir", "path": "." }

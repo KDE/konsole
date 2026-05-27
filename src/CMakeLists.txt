@@ -327,6 +327,10 @@ target_link_libraries(konsoleprivate
     KF6::BookmarksWidgets
 )
 
+if (HAVE_LIBSSH)
+    target_link_libraries(konsoleprivate PRIVATE ssh)
+endif()
+
 set_target_properties(konsoleprivate PROPERTIES
     VERSION ${RELEASE_SERVICE_VERSION}
 )
