@@ -195,8 +195,6 @@ int main(int argc, char *argv[])
                      QStringLiteral("https://konsole.kde.org/"));
     fillAboutData(about);
 
-    KAboutData::setApplicationData(about);
-
     KCrash::initialize();
 
     QSharedPointer<QCommandLineParser> parser(new QCommandLineParser);
@@ -210,6 +208,7 @@ int main(int argc, char *argv[])
 
     parser->process(args);
     about.processCommandLine(parser.data());
+    KAboutData::setApplicationData(about);
 
 #if HAVE_DBUS
     // on wayland: init token if we are launched by Konsole and have none
