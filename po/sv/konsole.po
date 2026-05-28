@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-26 00:48+0000\n"
+"POT-Creation-Date: 2026-05-28 00:47+0000\n"
 "PO-Revision-Date: 2025-09-26 13:44+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -6080,11 +6080,15 @@ msgstr "Stäng flik"
 #: widgets/ViewContainer.cpp:968 widgets/ViewContainer.cpp:977
 #, fuzzy, kde-format
 #| msgid "Maintainer"
+msgctxt "As in Distrobox, Toolbox, Kapsule etc."
 msgid "Container"
 msgstr "Utvecklare"
 
 #: widgets/ViewContainer.cpp:987
 #, kde-format
+msgctxt ""
+"%1 is the type of container (e.g. Distrobox, Toolbox, Kapsule etc.), %2 its "
+"name"
 msgid "%1: %2"
 msgstr ""
 

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-26 00:48+0000\n"
+"POT-Creation-Date: 2026-05-28 00:47+0000\n"
 "PO-Revision-Date: 2007-12-21 03:01+0100\n"
 "Last-Translator: Børre Gaup <boerre@skolelinux.no>\n"
 "Language-Team: Northern Sami <l10n-no@lister.huftis.org>\n"
@@ -5881,10 +5881,14 @@ msgstr ""
 
 #: widgets/ViewContainer.cpp:968 widgets/ViewContainer.cpp:977
 #, kde-format
+msgctxt "As in Distrobox, Toolbox, Kapsule etc."
 msgid "Container"
 msgstr ""
 
 #: widgets/ViewContainer.cpp:987
 #, kde-format
+msgctxt ""
+"%1 is the type of container (e.g. Distrobox, Toolbox, Kapsule etc.), %2 its "
+"name"
 msgid "%1: %2"
 msgstr ""

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-26 00:48+0000\n"
+"POT-Creation-Date: 2026-05-28 00:47+0000\n"
 "PO-Revision-Date: 2008-06-04 01:01+0200\n"
 "Last-Translator: Mashrab Kuvatov <kmashrab@uni-bremen.de>\n"
 "Language-Team: Uzbek <floss-uz-l10n@googlegroups.com>\n"
@@ -6218,11 +6218,15 @@ msgstr "Табни &ёпиш"
 #: widgets/ViewContainer.cpp:968 widgets/ViewContainer.cpp:977
 #, fuzzy, kde-format
 #| msgid "Maintainer"
+msgctxt "As in Distrobox, Toolbox, Kapsule etc."
 msgid "Container"
 msgstr "Таъминловчи"
 
 #: widgets/ViewContainer.cpp:987
 #, kde-format
+msgctxt ""
+"%1 is the type of container (e.g. Distrobox, Toolbox, Kapsule etc.), %2 its "
+"name"
 msgid "%1: %2"
 msgstr ""
 

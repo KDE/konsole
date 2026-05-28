@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdebase\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-26 00:48+0000\n"
+"POT-Creation-Date: 2026-05-28 00:47+0000\n"
 "PO-Revision-Date: 2026-01-01 20:59-0500\n"
 "Last-Translator: Agron Selimaj <as9902613@gmail.com>\n"
 "Language-Team: sq\n"
@@ -6017,11 +6017,15 @@ msgstr "Mbylle Tabelën"
 #: widgets/ViewContainer.cpp:968 widgets/ViewContainer.cpp:977
 #, fuzzy, kde-format
 #| msgid "&Continue Task"
+msgctxt "As in Distrobox, Toolbox, Kapsule etc."
 msgid "Container"
 msgstr "&Vazhdoni detyrën"
 
 #: widgets/ViewContainer.cpp:987
 #, kde-format
+msgctxt ""
+"%1 is the type of container (e.g. Distrobox, Toolbox, Kapsule etc.), %2 its "
+"name"
 msgid "%1: %2"
 msgstr ""
 

@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-26 00:48+0000\n"
+"POT-Creation-Date: 2026-05-28 00:47+0000\n"
 "PO-Revision-Date: 2026-05-26 07:13-0300\n"
 "Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -6098,12 +6098,18 @@ msgid "Close Tab"
 msgstr "Fechar aba"
 
 #: widgets/ViewContainer.cpp:968 widgets/ViewContainer.cpp:977
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Container"
+msgctxt "As in Distrobox, Toolbox, Kapsule etc."
 msgid "Container"
 msgstr "Contêiner"
 
 #: widgets/ViewContainer.cpp:987
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "%1: %2"
+msgctxt ""
+"%1 is the type of container (e.g. Distrobox, Toolbox, Kapsule etc.), %2 its "
+"name"
 msgid "%1: %2"
 msgstr "%1: %2"
 
