@@ -5325,14 +5325,13 @@ msgstr "Odstrihnúť koncové medzery"
 #: widgets/EditProfileMousePage.ui:236
 #, kde-format
 msgid "Clear selection after copying"
-msgstr ""
+msgstr "Vyčistiť výber po skopírovaní"
 
 #. i18n: ectx: property (text), widget (QCheckBox, clearSelectionButton)
 #: widgets/EditProfileMousePage.ui:239
-#, fuzzy, kde-format
-#| msgid "From selection"
+#, kde-format
 msgid "Clear selection"
-msgstr "Z výberu"
+msgstr "Vyčistiť výber"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, underlineLinksButton)
 #: widgets/EditProfileMousePage.ui:276
@@ -6044,15 +6043,13 @@ msgid "Close Tab"
 msgstr "&Zavrieť kartu"
 
 #: widgets/ViewContainer.cpp:968 widgets/ViewContainer.cpp:977
-#, fuzzy, kde-format
-#| msgid "Container"
+#, kde-format
 msgctxt "As in Distrobox, Toolbox, Kapsule etc."
 msgid "Container"
 msgstr "Kontajner"
 
 #: widgets/ViewContainer.cpp:987
-#, fuzzy, kde-format
-#| msgid "%1: %2"
+#, kde-format
 msgctxt ""
 "%1 is the type of container (e.g. Distrobox, Toolbox, Kapsule etc.), %2 its "
 "name"

@@ -4,20 +4,20 @@
 # Zlatko Popov <zlatkopopov@fsa-bg.org>, 2006, 2007, 2008.
 # Yasen Pramatarov <yasen@lindeas.com>, 2009, 2010, 2011, 2013.
 # Kiril Vladimirov <kiril@vladimiroff.org>, 2021.
-# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025, 2026 Mincho Kondarev <mkondarev@yahoo.de>
+# SPDX-FileCopyrightText: 2022-2026 Mincho Kondarev <mkondarev@yahoo.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-05-28 00:47+0000\n"
-"PO-Revision-Date: 2026-02-25 19:25+0100\n"
+"PO-Revision-Date: 2026-05-29 13:50+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 26.03.70\n"
+"X-Generator: Lokalize 26.04.1\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -1992,14 +1992,13 @@ msgstr " [По подразбиране]"
 #, kde-format
 msgctxt "@label:textbox added to profile name when used for light system theme"
 msgid " [Light]"
-msgstr ""
+msgstr " [Светъл]"
 
 #: profile/ProfileModel.cpp:94
-#, fuzzy, kde-format
-#| msgid "Darken"
+#, kde-format
 msgctxt "@label:textbox added to profile name when used for dark system theme"
 msgid " [Dark]"
-msgstr "Потъмняване"
+msgstr " [Тъмна]"
 
 #: profile/ProfileModel.cpp:110
 #, kde-format
@@ -2689,7 +2688,7 @@ msgstr "Показване на лентата за прогрес"
 #: settings/GeneralSettings.ui:112
 #, kde-format
 msgid "Automatically switch profile based on system theme"
-msgstr ""
+msgstr "Автоматично превключване на профила въз основа на системната тема"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/GeneralSettings.ui:119
@@ -3059,19 +3058,19 @@ msgstr "За файлове с история на командите изпол
 #: settings/konsole.kcfg:238
 #, kde-format
 msgid "Sync profile with system theme"
-msgstr ""
+msgstr "Синхронизиране на профила със системната тема"
 
 #. i18n: ectx: label, entry (LightThemeProfile), group (LightDarkTheme)
 #: settings/konsole.kcfg:242
 #, kde-format
 msgid "Profile to use for light system theme"
-msgstr ""
+msgstr "Профил за светлата системна тема"
 
 #. i18n: ectx: label, entry (DarkThemeProfile), group (LightDarkTheme)
 #: settings/konsole.kcfg:246
 #, kde-format
 msgid "Profile to use for dark system theme"
-msgstr ""
+msgstr "Профил за тъмната системна тема"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableMemoryMonitoring)
 #: settings/MemorySettings.ui:17
@@ -3180,31 +3179,27 @@ msgstr "&Задаване по подразбиране"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, setLightProfileButton)
 #: settings/ProfileSettings.ui:103
-#, fuzzy, kde-format
-#| msgid "Set the selected profile as the default for new terminal sessions"
+#, kde-format
 msgid "Set the selected profile as the light theme profile"
-msgstr "Задава избрания профил да бъде използван по подразбиране за нови сесии"
+msgstr "Задаване на избрания профил като профил за светлата тема"
 
 #. i18n: ectx: property (text), widget (QPushButton, setLightProfileButton)
 #: settings/ProfileSettings.ui:106
-#, fuzzy, kde-format
-#| msgid "&Set as Default"
+#, kde-format
 msgid "&Set as Light"
-msgstr "&Задаване по подразбиране"
+msgstr "&Задаване като светъл"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, setDarkProfileButton)
 #: settings/ProfileSettings.ui:116
-#, fuzzy, kde-format
-#| msgid "Set the selected profile as the default for new terminal sessions"
+#, kde-format
 msgid "Set the selected profile as the dark theme profile"
-msgstr "Задава избрания профил да бъде използван по подразбиране за нови сесии"
+msgstr "Задаване на избрания профил като профил за тъмната тема"
 
 #. i18n: ectx: property (text), widget (QPushButton, setDarkProfileButton)
 #: settings/ProfileSettings.ui:119
-#, fuzzy, kde-format
-#| msgid "&Set as Default"
+#, kde-format
 msgid "&Set as Dark"
-msgstr "&Задаване по подразбиране"
+msgstr "&Задаване като тъмен"
 
 #. i18n: ectx: attribute (title), widget (QWidget, appearanceTab)
 #: settings/TabBarSettings.ui:39
@@ -4002,12 +3997,14 @@ msgid ""
 "Allow terminal programs to use the Kitty keyboard protocol for enhanced "
 "keyboard input"
 msgstr ""
+"Позволяване на терминалните програми да използват клавиатурния протокол "
+"Kitty за разширен клавиатурен вход"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableKittyKeyboardButton)
 #: widgets/EditProfileAdvancedPage.ui:215
 #, kde-format
 msgid "Kitty keyboard protocol"
-msgstr ""
+msgstr "Клавиатурен протокол Kitty"
 
 #. i18n: ectx: property (text), widget (QLabel, label_14)
 #: widgets/EditProfileAdvancedPage.ui:238
@@ -4498,13 +4495,14 @@ msgid ""
 "Render words made of characters that usually appear in coding ligatures "
 "together."
 msgstr ""
+"Сливане на думи, съставени от символи, които обикновено образуват лигатури "
+"при програмиране."
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeCoding)
 #: widgets/EditProfileAppearancePage.ui:938
-#, fuzzy, kde-format
-#| msgid "Word characters:"
+#, kde-format
 msgid "Coding ligatures characters"
-msgstr "Буквени символи:"
+msgstr "Символи за програмни лигатури"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:951
@@ -4525,12 +4523,14 @@ msgid ""
 "Apply hinting to glyphs when rendering, which may improve the legibility of "
 "certain fonts with some displays"
 msgstr ""
+"Прилагане на подсказване (hinting) към глифовете при изчертаване, което може "
+"да подобри четимостта на някои шрифтове на определени дисплеи"
 
 #. i18n: ectx: property (text), widget (QCheckBox, fontHinting)
 #: widgets/EditProfileAppearancePage.ui:970
 #, kde-format
 msgid "Font hinting"
-msgstr ""
+msgstr "Хинтиране на шрифта"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:983
@@ -4593,11 +4593,9 @@ msgstr "Заменяне на wcwidth"
 
 #. i18n: ectx: property (toolTip), widget (QWidget, badgeTab)
 #: widgets/EditProfileAppearancePage.ui:1081
-#, fuzzy, kde-format
-#| msgid "<html><head/><body><p>Complex Text Layout</p></body></html>"
+#, kde-format
 msgid "<html><head/><body><p>Badge overlay options</p></body></html>"
-msgstr ""
-"<html><head/><body><p>Комплексно оформление на текста</p></body></html>"
+msgstr "<html><head/><body><p>Опции за наслагване на значки</p></body></html>"
 
 #. i18n: ectx: attribute (title), widget (QWidget, badgeTab)
 #. i18n: ectx: property (text), widget (QCheckBox, badgeEnabled)
@@ -4605,20 +4603,19 @@ msgstr ""
 #: widgets/EditProfileAppearancePage.ui:1114
 #, kde-format
 msgid "Badge Overlay"
-msgstr ""
+msgstr "Насложена значка"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeOverlayLabel)
 #: widgets/EditProfileAppearancePage.ui:1094
 #, kde-format
 msgid "Badge Overlay Options"
-msgstr ""
+msgstr "Опции за насложена значка"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, badgeEnabled)
 #: widgets/EditProfileAppearancePage.ui:1111
-#, fuzzy, kde-format
-#| msgid "Enable word mode text rendering"
+#, kde-format
 msgid "Enable badge overlay rendering"
-msgstr "Активиране на визуализирането на текст в режим думи"
+msgstr "Включване на изчертаването на насложена значка"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, badge_label_1)
 #. i18n: ectx: property (toolTip), widget (QLineEdit, badgeTextEdit)
@@ -4627,13 +4624,13 @@ msgstr "Активиране на визуализирането на текст
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Default text of badge."
-msgstr ""
+msgstr "Текст на значката по подразбиране."
 
 #. i18n: ectx: property (text), widget (QLabel, badge_label_1)
 #: widgets/EditProfileAppearancePage.ui:1124
 #, kde-format
 msgid "Badge text:"
-msgstr ""
+msgstr "Текст на значката:"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeVariablesHelpLabel)
 #: widgets/EditProfileAppearancePage.ui:1150
@@ -4644,6 +4641,10 @@ msgid ""
 "hostname), \\(session.process), \\(env.VARIABLE_NAME)</small></p></body></"
 "html>"
 msgstr ""
+"<html><head/><body><p><small><b>Налични променливи:</b> \\(session.title), "
+"\\(session.name), \\(session.id), \\(session.directory), \\(session."
+"hostname), \\(session.process), \\(env.VARIABLE_NAME)</small></p></body></"
+"html>"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeEscapeSequenceHelpLabel)
 #: widgets/EditProfileAppearancePage.ui:1170
@@ -4653,6 +4654,10 @@ msgid ""
 "settings on this page to configure badge text, color, font, text-only mode "
 "and transparency.</small></p></body></html>"
 msgstr ""
+"<html><head/><body><p><small><b>Конфигуриране на значка:</b><br/>Използвайте "
+"настройките на профила на тази страница, за да настроите текста, цвета, "
+"шрифта, режима \"само текст\" и прозрачността на значката.</small></p></"
+"body></html>"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, badge_label_2)
 #. i18n: ectx: property (toolTip), widget (QLineEdit, badgeFontEdit)
@@ -4661,65 +4666,63 @@ msgstr ""
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Badge font family."
-msgstr ""
+msgstr "Шрифт на значката."
 
 #. i18n: ectx: property (text), widget (QLabel, badge_label_2)
 #: widgets/EditProfileAppearancePage.ui:1193
 #, kde-format
 msgid "Badge font family:"
-msgstr ""
+msgstr "Шрифт на значката:"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeFontSizeLabel)
 #: widgets/EditProfileAppearancePage.ui:1226
 #, kde-format
 msgid "Badge font size:"
-msgstr ""
+msgstr "Размер на шрифта на значката:"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeColorLabel)
 #: widgets/EditProfileAppearancePage.ui:1256
-#, fuzzy, kde-format
-#| msgid "Tab Co&lor:"
+#, kde-format
 msgid "Badge color:"
-msgstr "&Цвят на раздел"
+msgstr "Цвят на значката:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, badgeColorSelectButton)
 #: widgets/EditProfileAppearancePage.ui:1269
-#, fuzzy, kde-format
-#| msgid "Select the color used to draw the border"
+#, kde-format
 msgid "Select the color used to draw the badge"
-msgstr "Изберете цвета, използван за изчертаване на рамката"
+msgstr "Избор на цвета за изчертаване на значката"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, badgeTextOnlyCheckBox)
 #: widgets/EditProfileAppearancePage.ui:1283
 #, kde-format
 msgid "Display badge as text only without background rectangle"
-msgstr ""
+msgstr "Показване на значката само като текст, без фонов правоъгълник"
 
 #. i18n: ectx: property (text), widget (QCheckBox, badgeTextOnlyCheckBox)
 #: widgets/EditProfileAppearancePage.ui:1286
-#, fuzzy, kde-format
-#| msgid "Red error background:"
+#, kde-format
 msgid "Text only (no background)"
-msgstr "Червен фон на грешка:"
+msgstr "Само текст (без фон)"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeTransparencyLabel)
 #: widgets/EditProfileAppearancePage.ui:1300
-#, fuzzy, kde-format
-#| msgid "Wallpaper transparency:"
+#, kde-format
 msgid "Transparency:"
-msgstr "Прозрачност на тапета:"
+msgstr "Прозрачност:"
 
 #. i18n: ectx: property (toolTip), widget (QSlider, badgeTransparencySlider)
 #: widgets/EditProfileAppearancePage.ui:1327
 #, kde-format
 msgid "Set badge transparency (0 = fully transparent, 255 = opaque)"
 msgstr ""
+"Задаване на прозрачност на значката (0 = напълно прозрачна, 255 = "
+"непрозрачна)"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeTransparencyValueLabel)
 #: widgets/EditProfileAppearancePage.ui:1334
 #, kde-format
 msgid "180"
-msgstr ""
+msgstr "180"
 
 #: widgets/EditProfileDialog.cpp:70
 #, kde-format
@@ -5380,14 +5383,13 @@ msgstr "Изрязване на завършващите интервали"
 #: widgets/EditProfileMousePage.ui:236
 #, kde-format
 msgid "Clear selection after copying"
-msgstr ""
+msgstr "Изчистване на селекцията след копиране"
 
 #. i18n: ectx: property (text), widget (QCheckBox, clearSelectionButton)
 #: widgets/EditProfileMousePage.ui:239
-#, fuzzy, kde-format
-#| msgid "From selection"
+#, kde-format
 msgid "Clear selection"
-msgstr "От селекцията"
+msgstr "Изчистване на селекцията"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, underlineLinksButton)
 #: widgets/EditProfileMousePage.ui:276
@@ -5449,10 +5451,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, openLinksByDirectClickButton)
 #: widgets/EditProfileMousePage.ui:348
-#, fuzzy, kde-format
-#| msgid "Open files/links by direct click"
+#, kde-format
 msgid "Open underlined files/links by direct click"
-msgstr "Отваряне на файлове и връзки при директно кликване"
+msgstr "Отваряне на подчертаните файлове/връзки с директно щракване"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowLinkEscapeSequenceButton)
 #: widgets/EditProfileMousePage.ui:359
@@ -6111,11 +6112,10 @@ msgid "Close Tab"
 msgstr "Затваряне на раздел"
 
 #: widgets/ViewContainer.cpp:968 widgets/ViewContainer.cpp:977
-#, fuzzy, kde-format
-#| msgid "&Continue Task"
+#, kde-format
 msgctxt "As in Distrobox, Toolbox, Kapsule etc."
 msgid "Container"
-msgstr "&Продължаване на задачата"
+msgstr "Контейнер"
 
 #: widgets/ViewContainer.cpp:987
 #, kde-format
@@ -6123,7 +6123,7 @@ msgctxt ""
 "%1 is the type of container (e.g. Distrobox, Toolbox, Kapsule etc.), %2 its "
 "name"
 msgid "%1: %2"
-msgstr ""
+msgstr "%1: %2"
 
 #~ msgid "Distrobox: %1"
 #~ msgstr "Distrobox: %1"
