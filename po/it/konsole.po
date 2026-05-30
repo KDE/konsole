@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-05-20 02:43+0000\n"
-"PO-Revision-Date: 2026-02-21 20:41+0100\n"
+"PO-Revision-Date: 2026-05-28 18:03+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -5810,7 +5810,7 @@ msgstr "Massimizza terminale"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Move terminal to new tab"
-msgstr "Sposta i terminale in una nuova scheda"
+msgstr "Sposta il terminale in una nuova scheda"
 
 #: widgets/TerminalHeaderBar.cpp:101
 #, kde-format
