@@ -5,7 +5,7 @@
 # SPDX-FileCopyrightText: 2010 Johannes Obermayr <johannesobermayr@gmx.de>
 # SPDX-FileCopyrightText: 2010-2013, 2015-2018, 2020-2023 Frederik Schwarzer <schwarzer@kde.org>
 # SPDX-FileCopyrightText: 2011 Panagiotis Papadopoulos <pano_90@gmx.net>
-# SPDX-FileCopyrightText: 2016, 2023-2025, 2026 Frank Steinmetzger <Warp_7@gmx.de>
+# SPDX-FileCopyrightText: 2016, 2023-2026 Frank Steinmetzger <Warp_7@gmx.de>
 # SPDX-FileCopyrightText: 2022, 2025 Alois Spitzbart <spitz234@hotmail.com>
 # SPDX-FileCopyrightText: 2026 Philipp Kiemle <l10n.daphipz@fastmail.de>
 msgid ""
@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-05-28 00:47+0000\n"
-"PO-Revision-Date: 2026-03-21 14:51+0100\n"
-"Last-Translator: Frank Steinmetzger <dev-kde@felsenfleischer.de>\n"
+"PO-Revision-Date: 2026-05-26 23:36+0200\n"
+"Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -253,7 +253,7 @@ msgid ""
 "--new-tab. Mostly for debugging."
 msgstr ""
 "Wiederverwendung der bestehenden Instanz erzwingen, auch wenn es die "
-"Funktionalität beeinträchtigt, z. B. --new-tab. Hauptsächlich zur "
+"Funktionalität beeinträchtigt, z. B. --new-tab. Hauptsächlich zur "
 "Fehlersuche."
 
 #: Application.cpp:88
@@ -1647,7 +1647,7 @@ msgstr "Fehler beim Ausführen des SSH-Befehls"
 msgid ""
 "Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"
 msgstr ""
-"SSH-Befehl kann nicht außerhalb der Shell-Anwendung (z. B. bash, zsh, sh) "
+"SSH-Befehl kann nicht außerhalb der Shell-Anwendung (z. B. bash, zsh, sh) "
 "ausgeführt werden"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
@@ -1997,14 +1997,13 @@ msgstr " [Standard]"
 #, kde-format
 msgctxt "@label:textbox added to profile name when used for light system theme"
 msgid " [Light]"
-msgstr ""
+msgstr " [Hell]"
 
 #: profile/ProfileModel.cpp:94
-#, fuzzy, kde-format
-#| msgid "Darken"
+#, kde-format
 msgctxt "@label:textbox added to profile name when used for dark system theme"
 msgid " [Dark]"
-msgstr "Abdunkeln"
+msgstr " [Dunkel]"
 
 #: profile/ProfileModel.cpp:110
 #, kde-format
@@ -3129,7 +3128,7 @@ msgid ""
 "format=guided&product=konsole&component=kpart\">bug report</a> if you desire "
 "a change to how these are handled.</body></html>"
 msgstr ""
-"<html><head/><body><p>Programme, die KonsolePart benutzen, verwenden "
+"<html><head/><body><p>Programme, die KonsolePart verwenden, nutzen "
 "gemeinsame Profile.</p><p>Eigene Einstellungen werden verwendet für:"
 "<ul><li>Standardprofil</li><li>Anzeige im Menü</li><li>Kurzbefehle</li></"
 "ul></p><p>Schreiben Sie einen <a href=\"https://bugs.kde.org/enter_bug.cgi?"
@@ -3200,10 +3199,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, setLightProfileButton)
 #: settings/ProfileSettings.ui:106
-#, fuzzy, kde-format
-#| msgid "&Set as Default"
+#, kde-format
 msgid "&Set as Light"
-msgstr "Als &Standard festlegen"
+msgstr "Als &hell festlegen"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, setDarkProfileButton)
 #: settings/ProfileSettings.ui:116
@@ -3216,10 +3214,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, setDarkProfileButton)
 #: settings/ProfileSettings.ui:119
-#, fuzzy, kde-format
-#| msgid "&Set as Default"
+#, kde-format
 msgid "&Set as Dark"
-msgstr "Als &Standard festlegen"
+msgstr "Als &dunkel festlegen"
 
 #. i18n: ectx: attribute (title), widget (QWidget, appearanceTab)
 #: settings/TabBarSettings.ui:39
@@ -4717,17 +4714,15 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, badgeTextOnlyCheckBox)
 #: widgets/EditProfileAppearancePage.ui:1286
-#, fuzzy, kde-format
-#| msgid "Red error background:"
+#, kde-format
 msgid "Text only (no background)"
-msgstr "Roter Fehlerhintergrund:"
+msgstr "Nur Text (kein Hintergrund)"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeTransparencyLabel)
 #: widgets/EditProfileAppearancePage.ui:1300
-#, fuzzy, kde-format
-#| msgid "Wallpaper transparency:"
+#, kde-format
 msgid "Transparency:"
-msgstr "Hintergrundbild-Transparenz:"
+msgstr "Transparenz:"
 
 #. i18n: ectx: property (toolTip), widget (QSlider, badgeTransparencySlider)
 #: widgets/EditProfileAppearancePage.ui:1327
@@ -4739,7 +4734,7 @@ msgstr ""
 #: widgets/EditProfileAppearancePage.ui:1334
 #, kde-format
 msgid "180"
-msgstr ""
+msgstr "180"
 
 #: widgets/EditProfileDialog.cpp:70
 #, kde-format
@@ -4967,13 +4962,13 @@ msgid ""
 "will be ignored and the file will be opened by the default text\n"
 "editor."
 msgstr ""
-"Das Format ist z.B. 'editorExec PFAD:ZEILE:SPALTE'\n"
+"Das Format ist z. B. 'editorExec PFAD:ZEILE:SPALTE'\n"
 "\n"
 "PFAD wird durch den Pfad zur Textdatei ersetzt\n"
 "ZEILE wird durch die Zeilennummer ersetzt\n"
 "SPALTE (optional) wird durch die Spaltennummer ersetzt\n"
 "Hinweis: Sie müssen 'PFAD:ZEILE:SPALTE' durch die tatsächliche Syntax\n"
-"ersetzen, die der Editor, den Sie verwenden wollen, unterstützt; z. B.:\n"
+"ersetzen, die der Editor, den Sie verwenden möchten, unterstützt; z. B.:\n"
 "gedit +ZEILE:SPALTE PFAD\n"
 "\n"
 "Wenn PFAD oder ZEILE im Befehl nicht vorhanden sind, wird\n"
@@ -5399,14 +5394,13 @@ msgstr "Anhängende Leerzeichen abschneiden"
 #: widgets/EditProfileMousePage.ui:236
 #, kde-format
 msgid "Clear selection after copying"
-msgstr ""
+msgstr "Auswahl nach dem Kopieren aufheben"
 
 #. i18n: ectx: property (text), widget (QCheckBox, clearSelectionButton)
 #: widgets/EditProfileMousePage.ui:239
-#, fuzzy, kde-format
-#| msgid "From selection"
+#, kde-format
 msgid "Clear selection"
-msgstr "Von der Auswahl"
+msgstr "Auswahl aufheben"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, underlineLinksButton)
 #: widgets/EditProfileMousePage.ui:276
@@ -5468,10 +5462,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, openLinksByDirectClickButton)
 #: widgets/EditProfileMousePage.ui:348
-#, fuzzy, kde-format
-#| msgid "Open files/links by direct click"
+#, kde-format
 msgid "Open underlined files/links by direct click"
-msgstr "Dateien/Verknüpfungen mit direktem Klick öffnen"
+msgstr "Unterstrichene Dateien/Verknüpfungen mit direktem Klick öffnen"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowLinkEscapeSequenceButton)
 #: widgets/EditProfileMousePage.ui:359
@@ -5788,7 +5781,7 @@ msgstr ""
 "Wenn Sie diese Einstellung verwenden, werden die Verlaufsdaten "
 "unverschlüsselt in temporären Dateien gespeichert. Diese temporären Dateien "
 "werden automatisch beim normalen Beenden von Konsole gelöscht.<nl/>Verwenden "
-"Sie <emphasis>Einstellungen → Konsole einrichten … →Temporäre Dateien</"
+"Sie <emphasis>Einstellungen → Konsole einrichten … → Temporäre Dateien</"
 "emphasis>, um den Speicherort der temporären Dateien auszuwählen."
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, fixedSizeHistoryButton)
@@ -5970,7 +5963,7 @@ msgid ""
 "computer via SSH) is being executed"
 msgstr ""
 "Beschriftungsformat für Unterfenster, die einen Fernzugriffs-Befehl "
-"ausführen (z. B. zur Verbindung mit einem entfernten Rechner via SSH)."
+"ausführen (z. B. zur Verbindung mit einem entfernten Rechner per SSH)."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: widgets/RenameTabWidget.ui:60
