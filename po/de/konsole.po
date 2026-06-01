@@ -5,7 +5,7 @@
 # SPDX-FileCopyrightText: 2010 Johannes Obermayr <johannesobermayr@gmx.de>
 # SPDX-FileCopyrightText: 2010-2013, 2015-2018, 2020-2023 Frederik Schwarzer <schwarzer@kde.org>
 # SPDX-FileCopyrightText: 2011 Panagiotis Papadopoulos <pano_90@gmx.net>
-# SPDX-FileCopyrightText: 2016, 2023-2025, 2026 Frank Steinmetzger <Warp_7@gmx.de>
+# SPDX-FileCopyrightText: 2016, 2023-2026 Frank Steinmetzger <Warp_7@gmx.de>
 # SPDX-FileCopyrightText: 2022, 2025 Alois Spitzbart <spitz234@hotmail.com>
 # SPDX-FileCopyrightText: 2026 Philipp Kiemle <l10n.daphipz@fastmail.de>
 msgid ""
@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-05-20 02:43+0000\n"
-"PO-Revision-Date: 2026-03-21 14:51+0100\n"
-"Last-Translator: Frank Steinmetzger <dev-kde@felsenfleischer.de>\n"
+"PO-Revision-Date: 2026-05-26 23:36+0200\n"
+"Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -253,7 +253,7 @@ msgid ""
 "--new-tab. Mostly for debugging."
 msgstr ""
 "Wiederverwendung der bestehenden Instanz erzwingen, auch wenn es die "
-"Funktionalität beeinträchtigt, z. B. --new-tab. Hauptsächlich zur "
+"Funktionalität beeinträchtigt, z. B. --new-tab. Hauptsächlich zur "
 "Fehlersuche."
 
 #: Application.cpp:88
@@ -1647,7 +1647,7 @@ msgstr "Fehler beim Ausführen des SSH-Befehls"
 msgid ""
 "Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"
 msgstr ""
-"SSH-Befehl kann nicht außerhalb der Shell-Anwendung (z. B. bash, zsh, sh) "
+"SSH-Befehl kann nicht außerhalb der Shell-Anwendung (z. B. bash, zsh, sh) "
 "ausgeführt werden"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
@@ -3092,7 +3092,7 @@ msgid ""
 "format=guided&product=konsole&component=kpart\">bug report</a> if you desire "
 "a change to how these are handled.</body></html>"
 msgstr ""
-"<html><head/><body><p>Programme, die KonsolePart benutzen, verwenden "
+"<html><head/><body><p>Programme, die KonsolePart verwenden, nutzen "
 "gemeinsame Profile.</p><p>Eigene Einstellungen werden verwendet für:"
 "<ul><li>Standardprofil</li><li>Anzeige im Menü</li><li>Kurzbefehle</li></"
 "ul></p><p>Schreiben Sie einen <a href=\"https://bugs.kde.org/enter_bug.cgi?"
@@ -4723,13 +4723,13 @@ msgid ""
 "will be ignored and the file will be opened by the default text\n"
 "editor."
 msgstr ""
-"Das Format ist z.B. 'editorExec PFAD:ZEILE:SPALTE'\n"
+"Das Format ist z. B. 'editorExec PFAD:ZEILE:SPALTE'\n"
 "\n"
 "PFAD wird durch den Pfad zur Textdatei ersetzt\n"
 "ZEILE wird durch die Zeilennummer ersetzt\n"
 "SPALTE (optional) wird durch die Spaltennummer ersetzt\n"
 "Hinweis: Sie müssen 'PFAD:ZEILE:SPALTE' durch die tatsächliche Syntax\n"
-"ersetzen, die der Editor, den Sie verwenden wollen, unterstützt; z. B.:\n"
+"ersetzen, die der Editor, den Sie verwenden möchten, unterstützt; z. B.:\n"
 "gedit +ZEILE:SPALTE PFAD\n"
 "\n"
 "Wenn PFAD oder ZEILE im Befehl nicht vorhanden sind, wird\n"
@@ -5530,7 +5530,7 @@ msgstr ""
 "Wenn Sie diese Einstellung verwenden, werden die Verlaufsdaten "
 "unverschlüsselt in temporären Dateien gespeichert. Diese temporären Dateien "
 "werden automatisch beim normalen Beenden von Konsole gelöscht.<nl/>Verwenden "
-"Sie <emphasis>Einstellungen → Konsole einrichten … →Temporäre Dateien</"
+"Sie <emphasis>Einstellungen → Konsole einrichten … → Temporäre Dateien</"
 "emphasis>, um den Speicherort der temporären Dateien auszuwählen."
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, fixedSizeHistoryButton)
@@ -5712,7 +5712,7 @@ msgid ""
 "computer via SSH) is being executed"
 msgstr ""
 "Beschriftungsformat für Unterfenster, die einen Fernzugriffs-Befehl "
-"ausführen (z. B. zur Verbindung mit einem entfernten Rechner via SSH)."
+"ausführen (z. B. zur Verbindung mit einem entfernten Rechner per SSH)."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: widgets/RenameTabWidget.ui:60
