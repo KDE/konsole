@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-05-28 00:47+0000\n"
-"PO-Revision-Date: 2026-04-28 12:04-0400\n"
+"PO-Revision-Date: 2026-05-31 19:19-0400\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
 "Language: ug\n"
@@ -1976,11 +1976,10 @@ msgid " [Light]"
 msgstr ""
 
 #: profile/ProfileModel.cpp:94
-#, fuzzy, kde-format
-#| msgid "Darken"
+#, kde-format
 msgctxt "@label:textbox added to profile name when used for dark system theme"
 msgid " [Dark]"
-msgstr "قارايت"
+msgstr ""
 
 #: profile/ProfileModel.cpp:110
 #, kde-format
@@ -3158,35 +3157,27 @@ msgstr "كۆڭۈلدىكى قىلىپ بەلگىلە(&S)"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, setLightProfileButton)
 #: settings/ProfileSettings.ui:103
-#, fuzzy, kde-format
-#| msgid "Set the selected profile as the default for new terminal sessions"
+#, kde-format
 msgid "Set the selected profile as the light theme profile"
 msgstr ""
-"تاللانغان سەپلىمە ھۆججەتنى يېڭى كۆزنەك جەريانچاق ئۈچۈن كۆڭۈلدىكى قىلىپ "
-"ئىشلىتىدۇ"
 
 #. i18n: ectx: property (text), widget (QPushButton, setLightProfileButton)
 #: settings/ProfileSettings.ui:106
-#, fuzzy, kde-format
-#| msgid "&Set as Default"
+#, kde-format
 msgid "&Set as Light"
-msgstr "كۆڭۈلدىكى قىلىپ بەلگىلە(&S)"
+msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, setDarkProfileButton)
 #: settings/ProfileSettings.ui:116
-#, fuzzy, kde-format
-#| msgid "Set the selected profile as the default for new terminal sessions"
+#, kde-format
 msgid "Set the selected profile as the dark theme profile"
 msgstr ""
-"تاللانغان سەپلىمە ھۆججەتنى يېڭى كۆزنەك جەريانچاق ئۈچۈن كۆڭۈلدىكى قىلىپ "
-"ئىشلىتىدۇ"
 
 #. i18n: ectx: property (text), widget (QPushButton, setDarkProfileButton)
 #: settings/ProfileSettings.ui:119
-#, fuzzy, kde-format
-#| msgid "&Set as Default"
+#, kde-format
 msgid "&Set as Dark"
-msgstr "كۆڭۈلدىكى قىلىپ بەلگىلە(&S)"
+msgstr ""
 
 #. i18n: ectx: attribute (title), widget (QWidget, appearanceTab)
 #: settings/TabBarSettings.ui:39
@@ -4484,10 +4475,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeCoding)
 #: widgets/EditProfileAppearancePage.ui:938
-#, fuzzy, kde-format
-#| msgid "Word characters:"
+#, kde-format
 msgid "Coding ligatures characters"
-msgstr "سۆزدىكى ھەرپ:"
+msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:951
@@ -4554,8 +4544,7 @@ msgstr "مەجبۇرىي سولدىن ئوڭغا يۆنىلىشتە"
 #, kde-format
 msgid "Treat table drawing characters as strong LTR."
 msgstr ""
-"جەدۋەل سىزىش بەلگىسىنى مەجبۇرىي سولدىن ئوڭغا يۆنىلىش يەنى LTR دەپ مۇئامىلە "
-"قىلىدۇ."
+"جەدۋەل سىزىش بەلگىسىنى مەجبۇرىي سولدىن ئوڭغا يۆنىلىشتە دەپ مۇئامىلە قىلىدۇ."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
 #: widgets/EditProfileAppearancePage.ui:1044
@@ -5417,10 +5406,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, openLinksByDirectClickButton)
 #: widgets/EditProfileMousePage.ui:348
-#, fuzzy, kde-format
-#| msgid "Open files/links by direct click"
+#, kde-format
 msgid "Open underlined files/links by direct click"
-msgstr "ھۆججەت/ئۇلانمىنى بىۋاسىتە چېكىپ ئاچىدۇ"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowLinkEscapeSequenceButton)
 #: widgets/EditProfileMousePage.ui:359
@@ -6075,18 +6063,19 @@ msgstr "بەتكۈچ ياپ"
 
 #: widgets/ViewContainer.cpp:968 widgets/ViewContainer.cpp:977
 #, fuzzy, kde-format
-#| msgid "Maintainer"
+#| msgid "Container"
 msgctxt "As in Distrobox, Toolbox, Kapsule etc."
 msgid "Container"
-msgstr "مەسئۇل كىشى"
+msgstr "قاچا"
 
 #: widgets/ViewContainer.cpp:987
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "%1: %2"
 msgctxt ""
 "%1 is the type of container (e.g. Distrobox, Toolbox, Kapsule etc.), %2 its "
 "name"
 msgid "%1: %2"
-msgstr ""
+msgstr "%1: %2"
 
 #~ msgctxt "@item:inmenu"
 #~ msgid "Case sensitive"
