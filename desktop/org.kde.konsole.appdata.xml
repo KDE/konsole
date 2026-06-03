@@ -55,6 +55,7 @@
   <name xml:lang="sv">Terminal</name>
   <name xml:lang="ta">கான்சோல்</name>
   <name xml:lang="tr">Konsole</name>
+  <name xml:lang="ug">Konsole</name>
   <name xml:lang="uk">Konsole</name>
   <name xml:lang="zh-CN">Konsole 命令行终端</name>
   <name xml:lang="zh-TW">Konsole</name>
@@ -199,6 +200,7 @@
     <p xml:lang="sv">Funktioner:</p>
     <p xml:lang="ta">அம்சங்கள்:</p>
     <p xml:lang="tr">Özellikler:</p>
+    <p xml:lang="ug">ئىقتىدار:</p>
     <p xml:lang="uk">Можливості:</p>
     <p xml:lang="zh-CN">功能特性：</p>
     <p xml:lang="zh-TW">功能：</p>
@@ -254,6 +256,7 @@
       <li xml:lang="sv">Flikar</li>
       <li xml:lang="ta">கீற்றுகள்</li>
       <li xml:lang="tr">Sekmeler</li>
+      <li xml:lang="ug">بەتكۈچ</li>
       <li xml:lang="uk">Вкладки.</li>
       <li xml:lang="zh-CN">标签页</li>
       <li xml:lang="zh-TW">分頁</li>
@@ -464,6 +467,7 @@
       <li xml:lang="sv">Sökning</li>
       <li xml:lang="ta">தேடல்</li>
       <li xml:lang="tr">Arama</li>
+      <li xml:lang="ug">ئىزدەۋاتىدۇ</li>
       <li xml:lang="uk">Пошук.</li>
       <li xml:lang="zh-CN">搜索</li>
       <li xml:lang="zh-TW">搜尋</li>
