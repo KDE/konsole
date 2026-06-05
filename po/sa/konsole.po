@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-28 00:47+0000\n"
+"POT-Creation-Date: 2026-06-05 00:48+0000\n"
 "PO-Revision-Date: 2024-12-25 19:40+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -1914,7 +1914,7 @@ msgstr "मुद्रकः &अनुकूलः मोडः (कृष्�
 msgid "&Scale output"
 msgstr "&स्केल आउटपुट"
 
-#: profile/Profile.cpp:286
+#: profile/Profile.cpp:287
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
@@ -3490,59 +3490,59 @@ msgstr "लघुचित्रजननं सक्षमं कुर्व�
 msgid "Size: %1 x %2"
 msgstr "आकारः %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2423
+#: terminalDisplay/TerminalDisplay.cpp:2432
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "किं भवान् निश्चितः यत् भवान् %1 वर्णं चिनोतुम् इच्छति?"
 msgstr[1] "किं भवान् निश्चितरूपेण %1 वर्णं चिनोतुम् इच्छति?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2424
+#: terminalDisplay/TerminalDisplay.cpp:2433
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Confirm Paste इति"
 
-#: terminalDisplay/TerminalDisplay.cpp:2457
+#: terminalDisplay/TerminalDisplay.cpp:2466
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "End Of Text/Interrupt: वर्तमानप्रक्रियायाः निर्गमनं कर्तुं शक्नोति"
 
-#: terminalDisplay/TerminalDisplay.cpp:2458
+#: terminalDisplay/TerminalDisplay.cpp:2467
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "End Of Transmission: वर्तमानप्रक्रियायाः निर्गमनं कर्तुं शक्नोति"
 
-#: terminalDisplay/TerminalDisplay.cpp:2459
+#: terminalDisplay/TerminalDisplay.cpp:2468
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "बेल: श्रव्यं चेतावनीम् उत्सर्जयितुं प्रयतते"
 
-#: terminalDisplay/TerminalDisplay.cpp:2460
+#: terminalDisplay/TerminalDisplay.cpp:2469
 #, kde-format
 msgid "Backspace"
 msgstr "पृष्ठभाग"
 
-#: terminalDisplay/TerminalDisplay.cpp:2461
+#: terminalDisplay/TerminalDisplay.cpp:2470
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "उपकरणनियन्त्रणं त्रयः/XOFF: उत्पादनं निलम्बयति"
 
-#: terminalDisplay/TerminalDisplay.cpp:2462
+#: terminalDisplay/TerminalDisplay.cpp:2471
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "प्रतिस्थापन/निलम्बनम्: वर्तमानप्रक्रियायाः निलम्बनं कर्तुं शक्नोति"
 
-#: terminalDisplay/TerminalDisplay.cpp:2463
+#: terminalDisplay/TerminalDisplay.cpp:2472
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "पलायनम् : टर्मिनल् अवस्थायां हेरफेरार्थं प्रयुक्तम्"
 
-#: terminalDisplay/TerminalDisplay.cpp:2464
+#: terminalDisplay/TerminalDisplay.cpp:2473
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "File Separator/Quit: वर्तमान प्रक्रियां निरस्तं कर्तुं शक्नोति"
 
-#: terminalDisplay/TerminalDisplay.cpp:2487
+#: terminalDisplay/TerminalDisplay.cpp:2496
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3551,31 +3551,31 @@ msgstr ""
 "भवन्तः यस्मिन् पाठे चिनोतुम् प्रयतन्ते तस्मिन् गुप्तनियन्त्रणवर्णाः सन्ति, किं भवन्तः तान् "
 "छानयितुम् इच्छन्ति?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2490
+#: terminalDisplay/TerminalDisplay.cpp:2499
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Confirm Paste इति"
 
-#: terminalDisplay/TerminalDisplay.cpp:2491
+#: terminalDisplay/TerminalDisplay.cpp:2500
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "&नियंत्रणवर्णान् विना चिनोतु"
 
-#: terminalDisplay/TerminalDisplay.cpp:2492
+#: terminalDisplay/TerminalDisplay.cpp:2501
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "&सर्वं चिनोतु"
 
-#: terminalDisplay/TerminalDisplay.cpp:2493
+#: terminalDisplay/TerminalDisplay.cpp:2502
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "&निरसयतु"
 
-#: terminalDisplay/TerminalDisplay.cpp:2731
+#: terminalDisplay/TerminalDisplay.cpp:2745
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3586,17 +3586,17 @@ msgstr ""
 "Software_flow_control\">निलम्बितम्</a> अस्ति । पुनः आरम्भं कर्तुं <b>Ctrl+Q</b> नुदन्तु।"
 "</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2786
+#: terminalDisplay/TerminalDisplay.cpp:2800
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "इदं टर्मिनल् केवलं पठनीयम् अस्ति ।"
 
-#: terminalDisplay/TerminalDisplay.cpp:3192
+#: terminalDisplay/TerminalDisplay.cpp:3206
 #, kde-format
 msgid "Change &Directory To"
 msgstr "परिवर्तनं &निर्देशिका To"
 
-#: terminalDisplay/TerminalDisplay.cpp:3227
+#: terminalDisplay/TerminalDisplay.cpp:3241
 #, kde-format
 msgid "&Paste Location"
 msgstr "&Paste स्थान"
@@ -4057,7 +4057,7 @@ msgstr "चयनितवर्णयोजनां सम्पादयन�
 #. i18n: ectx: property (text), widget (QPushButton, editColorSchemeButton)
 #: widgets/EditProfileAppearancePage.ui:82
 #: widgets/EditProfileGeneralPage.ui:276 widgets/EditProfileKeyboardPage.ui:73
-#: widgets/EditProfileMousePage.ui:330
+#: widgets/EditProfileMousePage.ui:395
 #, kde-format
 msgid "Edit..."
 msgstr "सम्पादन..."
@@ -4269,7 +4269,7 @@ msgstr "कर्सरं नियमितरूपेण निमिषं 
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #. i18n: ectx: attribute (title), widget (QWidget, miscTab)
-#: widgets/EditProfileAppearancePage.ui:499 widgets/EditProfileMousePage.ui:262
+#: widgets/EditProfileAppearancePage.ui:499 widgets/EditProfileMousePage.ui:327
 #, kde-format
 msgctxt "Items that do not fit in other categories"
 msgid "Miscellaneous"
@@ -4884,12 +4884,12 @@ msgstr ""
 "डेस्कटॉप् इफेक्ट्स् सक्षमीकरणात् पूर्वं Konsole आरब्धम् आसीत् । पारदर्शी पृष्ठभूमिं द्रष्टुं भवद्भिः "
 "Konsole पुनः आरभ्यत इति आवश्यकम् ।"
 
-#: widgets/EditProfileDialog.cpp:2043
+#: widgets/EditProfileDialog.cpp:2052
 #, kde-format
 msgid "Default for file type"
 msgstr "सञ्चिकाप्रकारस्य कृते पूर्वनिर्धारितम्"
 
-#: widgets/EditProfileDialog.cpp:2069
+#: widgets/EditProfileDialog.cpp:2078
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4918,7 +4918,7 @@ msgstr ""
 "उपेक्षितं भविष्यति तथा च सञ्चिका पूर्वनिर्धारितपाठेन उद्घाटिता भविष्यति\n"
 "सम्पादक।"
 
-#: widgets/EditProfileDialog.cpp:2082
+#: widgets/EditProfileDialog.cpp:2091
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "पाठ सम्पादक कस्टम आदेश"
@@ -5263,76 +5263,117 @@ msgstr "क्लिपबोर्डात्"
 msgid "From selection"
 msgstr "चयनात्"
 
-#. i18n: ectx: property (text), widget (QLabel, label)
+#. i18n: ectx: property (text), widget (QLabel, rightClickPasteLabel)
 #: widgets/EditProfileMousePage.ui:186
+#, kde-format
+msgid "Right-click:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QRadioButton, rightClickPasteDisabledButton)
+#: widgets/EditProfileMousePage.ui:196
+#, kde-format
+msgid "Opens context menu"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, rightClickPasteDisabledButton)
+#: widgets/EditProfileMousePage.ui:199
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Right-click shows context menu"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QRadioButton, rightClickPasteFromClipboardButton)
+#: widgets/EditProfileMousePage.ui:209
+#, fuzzy, kde-format
+#| msgid "From clipboard"
+msgid "Pastes from clipboard"
+msgstr "क्लिपबोर्डात्"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, rightClickPasteFromClipboardButton)
+#. i18n: ectx: property (toolTip), widget (QRadioButton, rightClickPasteFromX11SelectionButton)
+#: widgets/EditProfileMousePage.ui:212 widgets/EditProfileMousePage.ui:225
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Control+right-click shows context menu"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QRadioButton, rightClickPasteFromX11SelectionButton)
+#: widgets/EditProfileMousePage.ui:222
+#, fuzzy, kde-format
+#| msgid "Paste Selection"
+msgid "Pastes from selection"
+msgstr "पेस्ट चयन"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: widgets/EditProfileMousePage.ui:251
 #, kde-format
 msgid "Copy options:"
 msgstr "प्रतिलिपिविकल्पाः :"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, copyTextToClipboardButton)
-#: widgets/EditProfileMousePage.ui:196
+#: widgets/EditProfileMousePage.ui:261
 #, kde-format
 msgid "Automatically copy selected text into clipboard"
 msgstr "चयनितं पाठं स्वयमेव क्लिप्बोर्ड् मध्ये प्रतिलिख्यताम्"
 
 #. i18n: ectx: property (text), widget (QCheckBox, copyTextToClipboardButton)
-#: widgets/EditProfileMousePage.ui:199
+#: widgets/EditProfileMousePage.ui:264
 #, kde-format
 msgid "Copy on select"
 msgstr "select इत्यत्र प्रतिलिख्यताम्"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, copyTextAsHTMLButton)
-#: widgets/EditProfileMousePage.ui:206
+#: widgets/EditProfileMousePage.ui:271
 #, kde-format
 msgid "Copy text as HTML (including formatting, font faces, colors... etc)"
 msgstr ""
 "पाठस्य प्रतिलिपिं HTML रूपेण कुर्वन्तु (स्वरूपणं, फॉन्ट् फेस्, रङ्गाः... इत्यादयः समाविष्टाः)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, copyTextAsHTMLButton)
-#: widgets/EditProfileMousePage.ui:209
+#: widgets/EditProfileMousePage.ui:274
 #, kde-format
 msgid "Copy text as HTML"
 msgstr "पाठं HTML इति प्रतिलिख्यताम्"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, trimLeadingSpacesButton)
-#: widgets/EditProfileMousePage.ui:216
+#: widgets/EditProfileMousePage.ui:281
 #, kde-format
 msgid "Trim leading spaces in selected text, useful in some instances"
 msgstr "चयनितपाठे अग्रणीस्थानानि च्छेदयन्तु, केषुचित् प्रसङ्गेषु उपयोगिनो भवन्ति"
 
 #. i18n: ectx: property (text), widget (QCheckBox, trimLeadingSpacesButton)
-#: widgets/EditProfileMousePage.ui:219
+#: widgets/EditProfileMousePage.ui:284
 #, kde-format
 msgid "Trim leading spaces"
 msgstr "अग्रणीस्थानानि छटां कुर्वन्तु"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, trimTrailingSpacesButton)
-#: widgets/EditProfileMousePage.ui:226
+#: widgets/EditProfileMousePage.ui:291
 #, kde-format
 msgid "Trim trailing spaces in selected text, useful in some instances"
 msgstr "चयनितपाठे अनुवर्तीस्थानानि च्छेदयन्तु, केषुचित् प्रसङ्गेषु उपयोगिनो भवन्ति"
 
 #. i18n: ectx: property (text), widget (QCheckBox, trimTrailingSpacesButton)
-#: widgets/EditProfileMousePage.ui:229
+#: widgets/EditProfileMousePage.ui:294
 #, kde-format
 msgid "Trim trailing spaces"
 msgstr "अनुवर्ती स्थानानि छंटनी कुर्वन्तु"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, clearSelectionButton)
-#: widgets/EditProfileMousePage.ui:236
+#: widgets/EditProfileMousePage.ui:301
 #, kde-format
 msgid "Clear selection after copying"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, clearSelectionButton)
-#: widgets/EditProfileMousePage.ui:239
+#: widgets/EditProfileMousePage.ui:304
 #, fuzzy, kde-format
 #| msgid "From selection"
 msgid "Clear selection"
 msgstr "चयनात्"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, underlineLinksButton)
-#: widgets/EditProfileMousePage.ui:276
+#: widgets/EditProfileMousePage.ui:341
 #, kde-format
 msgid ""
 "Text recognized as a link or an email address will be underlined when "
@@ -5340,13 +5381,13 @@ msgid ""
 msgstr "लिङ्क् अथवा ईमेल-सङ्केतरूपेण ज्ञातः पाठः मूषकसूचकेन भ्रमति चेत् रेखांकितः भविष्यति ।"
 
 #. i18n: ectx: property (text), widget (QCheckBox, underlineLinksButton)
-#: widgets/EditProfileMousePage.ui:279
+#: widgets/EditProfileMousePage.ui:344
 #, kde-format
 msgid "Underline links"
 msgstr "लिङ्कानि रेखांकयन्तु"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, underlineFilesButton)
-#: widgets/EditProfileMousePage.ui:286
+#: widgets/EditProfileMousePage.ui:351
 #, kde-format
 msgid ""
 "Text recognized as a file will be underlined when hovered by the mouse "
@@ -5354,27 +5395,27 @@ msgid ""
 msgstr "सञ्चिकारूपेण ज्ञातः पाठः मूषकसूचकेन भ्रमति चेत् रेखांकितः भविष्यति ।"
 
 #. i18n: ectx: property (text), widget (QCheckBox, underlineFilesButton)
-#: widgets/EditProfileMousePage.ui:289
+#: widgets/EditProfileMousePage.ui:354
 #, kde-format
 msgid "Underline files"
 msgstr "सञ्चिकाः रेखांकयन्तु"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, textEditorCommandLabel)
 #. i18n: ectx: property (toolTip), widget (QComboBox, textEditorCombo)
-#: widgets/EditProfileMousePage.ui:298 widgets/EditProfileMousePage.ui:317
+#: widgets/EditProfileMousePage.ui:363 widgets/EditProfileMousePage.ui:382
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Text editor to use when opening text file URLs at a given line/column."
 msgstr "दत्तपङ्क्तौ/स्तम्भे पाठसञ्चिका URL उद्घाटयति समये उपयोक्तुं पाठसम्पादकः ।"
 
 #. i18n: ectx: property (text), widget (QLabel, textEditorCommandLabel)
-#: widgets/EditProfileMousePage.ui:301
+#: widgets/EditProfileMousePage.ui:366
 #, kde-format
 msgid "Text Editor Command: "
 msgstr "पाठ सम्पादक आदेशः : "
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, openLinksByDirectClickButton)
-#: widgets/EditProfileMousePage.ui:345
+#: widgets/EditProfileMousePage.ui:410
 #, kde-format
 msgid ""
 "Text recognized as a file, link or an email address can be opened by direct "
@@ -5384,20 +5425,20 @@ msgstr ""
 "शक्यते ।"
 
 #. i18n: ectx: property (text), widget (QCheckBox, openLinksByDirectClickButton)
-#: widgets/EditProfileMousePage.ui:348
+#: widgets/EditProfileMousePage.ui:413
 #, fuzzy, kde-format
 #| msgid "Open files/links by direct click"
 msgid "Open underlined files/links by direct click"
 msgstr "प्रत्यक्ष क्लिक् कृत्वा सञ्चिकाः/लिङ्कानि उद्घाटयन्तु"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowLinkEscapeSequenceButton)
-#: widgets/EditProfileMousePage.ui:359
+#: widgets/EditProfileMousePage.ui:424
 #, kde-format
 msgid "Allow escape sequences for links"
 msgstr "लिङ्कानां कृते पलायनक्रमान् अनुमन्यताम्"
 
 #. i18n: ectx: property (text), widget (QLabel, allowLinkEscapeSequenceButtonWarning)
-#: widgets/EditProfileMousePage.ui:366
+#: widgets/EditProfileMousePage.ui:431
 #, kde-format
 msgid ""
 "<b>WARNING</b>: This has security implications as it allows malicious URLs "
@@ -5409,31 +5450,31 @@ msgstr ""
 "सुनिश्चितं कुर्वन्तु।"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: widgets/EditProfileMousePage.ui:384
+#: widgets/EditProfileMousePage.ui:449
 #, kde-format
 msgid "Allowed link formats: "
 msgstr "अनुमतलिङ्कस्वरूपाः : "
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, linkEscapeSequenceTexts)
-#: widgets/EditProfileMousePage.ui:394
+#: widgets/EditProfileMousePage.ui:459
 #, kde-format
 msgid "The formats of possible links, like http://, https:// and file://"
 msgstr "सम्भाव्यलिङ्कानां प्रारूपाणि, यथा http://, https:// तथा file:// ."
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ctrlRequiredForDragButton)
-#: widgets/EditProfileMousePage.ui:405
+#: widgets/EditProfileMousePage.ui:470
 #, kde-format
 msgid "Selected text will require control key plus click to drag."
 msgstr "चयनितपाठस्य कृते नियन्त्रणकुंजी प्लस् क्लिक् इत्यस्य आवश्यकता भविष्यति ।"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ctrlRequiredForDragButton)
-#: widgets/EditProfileMousePage.ui:408
+#: widgets/EditProfileMousePage.ui:473
 #, kde-format
 msgid "Require Ctrl key for drag && drop"
 msgstr "drag && drop कृते Ctrl कीलस्य आवश्यकता अस्ति"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableAlternateScrollingButton)
-#: widgets/EditProfileMousePage.ui:415
+#: widgets/EditProfileMousePage.ui:480
 #, kde-format
 msgid ""
 "Mouse scroll wheel will emulate up/down key presses in programs that use the "
@@ -5443,13 +5484,13 @@ msgstr ""
 "करिष्यति (उदा. न्यूनम्)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableAlternateScrollingButton)
-#: widgets/EditProfileMousePage.ui:418
+#: widgets/EditProfileMousePage.ui:483
 #, kde-format
 msgid "Enable Alternate Screen buffer scrolling"
 msgstr "वैकल्पिकपर्दे बफरस्क्रॉलिंग् सक्षमं कुर्वन्तु"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dropUrlsAsText)
-#: widgets/EditProfileMousePage.ui:425
+#: widgets/EditProfileMousePage.ui:490
 #, kde-format
 msgid ""
 "Always paste dropped files and URLs as text without offering move, copy and "
@@ -5459,25 +5500,25 @@ msgstr ""
 "प्रस्तावयित्वा ।"
 
 #. i18n: ectx: property (text), widget (QCheckBox, dropUrlsAsText)
-#: widgets/EditProfileMousePage.ui:428
+#: widgets/EditProfileMousePage.ui:493
 #, kde-format
 msgid "Disable drag && drop menu for files && URLs"
 msgstr "सञ्चिकानां && URL कृते drag && drop मेन्यू अक्षमम्"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableMouseWheelZoomButton)
-#: widgets/EditProfileMousePage.ui:435
+#: widgets/EditProfileMousePage.ui:500
 #, kde-format
 msgid "Pressing Ctrl+scrollwheel will increase/decrease the text size."
 msgstr "Ctrl+scrollwheel नुदनेन पाठस्य आकारः वर्धते/घटितः भविष्यति ।"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableMouseWheelZoomButton)
-#: widgets/EditProfileMousePage.ui:438
+#: widgets/EditProfileMousePage.ui:503
 #, kde-format
 msgid "Allow Ctrl+scrollwheel to zoom text size"
 msgstr "Ctrl+scrollwheel इत्यस्य पाठस्य आकारं जूम् कर्तुं अनुमतिं ददातु"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, allowColorFilters)
-#: widgets/EditProfileMousePage.ui:445
+#: widgets/EditProfileMousePage.ui:510
 #, kde-format
 msgid ""
 "When positioning the mouse over a hexadecimal color it will be displayed in "
@@ -5486,13 +5527,13 @@ msgstr ""
 "मूषकं षट्दशमलववर्णस्य उपरि स्थापयति सति मूषकसूचकस्य पार्श्वे फ्रेममध्ये प्रदर्शितं भविष्यति"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowColorFilters)
-#: widgets/EditProfileMousePage.ui:448
+#: widgets/EditProfileMousePage.ui:513
 #, kde-format
 msgid "Preview Colors on hover"
 msgstr "पूर्वावलोकनं Colors on hover"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, allowMouseTrackingButton)
-#: widgets/EditProfileMousePage.ui:468
+#: widgets/EditProfileMousePage.ui:533
 #, kde-format
 msgid ""
 "Some terminal applications have mouse support, this allows them to get it by "
@@ -5502,7 +5543,7 @@ msgstr ""
 "चालयन् अपि इदं चालू/निष्क्रान्तं कर्तुं शक्यते ।"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowMouseTrackingButton)
-#: widgets/EditProfileMousePage.ui:471
+#: widgets/EditProfileMousePage.ui:536
 #, kde-format
 msgid "Allow terminal applications to handle clicks and drags"
 msgstr "टर्मिनल् अनुप्रयोगानाम् क्लिक्, ड्रैग् च नियन्त्रयितुं अनुमतिं ददातु"
