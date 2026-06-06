@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-06-05 00:48+0000\n"
-"PO-Revision-Date: 2026-05-28 04:30+0200\n"
+"PO-Revision-Date: 2026-06-05 05:19+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -5282,27 +5282,26 @@ msgstr "მონიშნულიდან"
 #: widgets/EditProfileMousePage.ui:186
 #, kde-format
 msgid "Right-click:"
-msgstr ""
+msgstr "მარჯვენა-წკაპი:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, rightClickPasteDisabledButton)
 #: widgets/EditProfileMousePage.ui:196
 #, kde-format
 msgid "Opens context menu"
-msgstr ""
+msgstr "გახსნის კონტექსტურ მენიუს"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, rightClickPasteDisabledButton)
 #: widgets/EditProfileMousePage.ui:199
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Right-click shows context menu"
-msgstr ""
+msgstr "მარჯვენა წკაპი კონტექსტურ მენიუს აჩვენებს"
 
 #. i18n: ectx: property (text), widget (QRadioButton, rightClickPasteFromClipboardButton)
 #: widgets/EditProfileMousePage.ui:209
-#, fuzzy, kde-format
-#| msgid "From clipboard"
+#, kde-format
 msgid "Pastes from clipboard"
-msgstr "ბაფერიდან"
+msgstr "ჩასვამს ბუფერის შემცველობას"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, rightClickPasteFromClipboardButton)
 #. i18n: ectx: property (toolTip), widget (QRadioButton, rightClickPasteFromX11SelectionButton)
@@ -5310,14 +5309,13 @@ msgstr "ბაფერიდან"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Control+right-click shows context menu"
-msgstr ""
+msgstr "Control+მარჯვენა წკაპი კონტექსტურ მენიუს აჩვენებს"
 
 #. i18n: ectx: property (text), widget (QRadioButton, rightClickPasteFromX11SelectionButton)
 #: widgets/EditProfileMousePage.ui:222
-#, fuzzy, kde-format
-#| msgid "Paste Selection"
+#, kde-format
 msgid "Pastes from selection"
-msgstr "მონიშნულის ჩასმა"
+msgstr "ჩასვამს მონიშნულიდან"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: widgets/EditProfileMousePage.ui:251
