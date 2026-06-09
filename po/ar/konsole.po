@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-06-05 00:48+0000\n"
-"PO-Revision-Date: 2026-06-05 13:51+0400\n"
+"PO-Revision-Date: 2026-06-08 21:22+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -5268,27 +5268,26 @@ msgstr "من التحديد"
 #: widgets/EditProfileMousePage.ui:186
 #, kde-format
 msgid "Right-click:"
-msgstr ""
+msgstr "النقر باليمين:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, rightClickPasteDisabledButton)
 #: widgets/EditProfileMousePage.ui:196
 #, kde-format
 msgid "Opens context menu"
-msgstr ""
+msgstr "تفتح قائمة السياق"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, rightClickPasteDisabledButton)
 #: widgets/EditProfileMousePage.ui:199
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Right-click shows context menu"
-msgstr ""
+msgstr "النقر باليمين يظهر قائمة السياق"
 
 #. i18n: ectx: property (text), widget (QRadioButton, rightClickPasteFromClipboardButton)
 #: widgets/EditProfileMousePage.ui:209
-#, fuzzy, kde-format
-#| msgid "From clipboard"
+#, kde-format
 msgid "Pastes from clipboard"
-msgstr "من الحافظة"
+msgstr "يلصق من الحافظة"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, rightClickPasteFromClipboardButton)
 #. i18n: ectx: property (toolTip), widget (QRadioButton, rightClickPasteFromX11SelectionButton)
@@ -5296,14 +5295,13 @@ msgstr "من الحافظة"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Control+right-click shows context menu"
-msgstr ""
+msgstr "Control+النقر باليمين يظهر قائمة السياق"
 
 #. i18n: ectx: property (text), widget (QRadioButton, rightClickPasteFromX11SelectionButton)
 #: widgets/EditProfileMousePage.ui:222
-#, fuzzy, kde-format
-#| msgid "Paste Selection"
+#, kde-format
 msgid "Pastes from selection"
-msgstr "ألصق المحدد"
+msgstr "يلصق من التحديد"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: widgets/EditProfileMousePage.ui:251
