@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-06-05 00:48+0000\n"
-"PO-Revision-Date: 2026-05-02 17:47+0530\n"
+"PO-Revision-Date: 2026-06-09 21:36+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-l10n-ta@kde.org>\n"
 "Language: ta\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 26.04.0\n"
+"X-Generator: Lokalize 26.04.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -3949,13 +3949,13 @@ msgstr "வெளியீட்டுக் கட்டுப்பாடு"
 msgid ""
 "Allow terminal programs to use the Kitty keyboard protocol for enhanced "
 "keyboard input"
-msgstr ""
+msgstr "Kitty நெறிமுறையை நிரல்கள் பயன்படுத்த விடு (மேம்பட்ட விசை உள்ளீட்டை அனுமதிக்கும்)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableKittyKeyboardButton)
 #: widgets/EditProfileAdvancedPage.ui:215
 #, kde-format
 msgid "Kitty keyboard protocol"
-msgstr ""
+msgstr "Kitty விசைப்பலகை நெறிமுறை"
 
 #. i18n: ectx: property (text), widget (QLabel, label_14)
 #: widgets/EditProfileAdvancedPage.ui:238
@@ -4471,12 +4471,14 @@ msgid ""
 "Apply hinting to glyphs when rendering, which may improve the legibility of "
 "certain fonts with some displays"
 msgstr ""
+"எழுத்துகளை வரையும்போது அவற்றின் வடிவத்தை மேம்படுத்தும் (hinting எனப்படும் முறையில்). "
+"சில திரைகளில் எழுத்துருக்களை எளிதில் படிக்க இது தேவைப்படலாம்"
 
 #. i18n: ectx: property (text), widget (QCheckBox, fontHinting)
 #: widgets/EditProfileAppearancePage.ui:970
 #, kde-format
 msgid "Font hinting"
-msgstr ""
+msgstr "எழுத்துருக்களை மேம்படுத்துவது"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:983

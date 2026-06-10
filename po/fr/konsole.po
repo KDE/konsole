@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-06-05 00:48+0000\n"
-"PO-Revision-Date: 2026-05-29 11:13+0200\n"
+"PO-Revision-Date: 2026-06-08 10:48+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -5388,27 +5388,26 @@ msgstr "Depuis la sélection"
 #: widgets/EditProfileMousePage.ui:186
 #, kde-format
 msgid "Right-click:"
-msgstr ""
+msgstr "Clic droit :"
 
 #. i18n: ectx: property (text), widget (QRadioButton, rightClickPasteDisabledButton)
 #: widgets/EditProfileMousePage.ui:196
 #, kde-format
 msgid "Opens context menu"
-msgstr ""
+msgstr "Ouvre le menu contextuel"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, rightClickPasteDisabledButton)
 #: widgets/EditProfileMousePage.ui:199
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Right-click shows context menu"
-msgstr ""
+msgstr "Un clic droit affiche le menu contextuel"
 
 #. i18n: ectx: property (text), widget (QRadioButton, rightClickPasteFromClipboardButton)
 #: widgets/EditProfileMousePage.ui:209
-#, fuzzy, kde-format
-#| msgid "From clipboard"
+#, kde-format
 msgid "Pastes from clipboard"
-msgstr "À partir du presse-papiers"
+msgstr "Colle à partir du presse-papier"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, rightClickPasteFromClipboardButton)
 #. i18n: ectx: property (toolTip), widget (QRadioButton, rightClickPasteFromX11SelectionButton)
@@ -5417,13 +5416,13 @@ msgstr "À partir du presse-papiers"
 msgctxt "@info:tooltip"
 msgid "Control+right-click shows context menu"
 msgstr ""
+"Le raccourci « CTRL » + clic droit permet l'affichage du menu contextuel"
 
 #. i18n: ectx: property (text), widget (QRadioButton, rightClickPasteFromX11SelectionButton)
 #: widgets/EditProfileMousePage.ui:222
-#, fuzzy, kde-format
-#| msgid "Paste Selection"
+#, kde-format
 msgid "Pastes from selection"
-msgstr "Coller la sélection"
+msgstr "Colle à partir de la sélection"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: widgets/EditProfileMousePage.ui:251
