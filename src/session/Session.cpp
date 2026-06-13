@@ -1856,10 +1856,19 @@ void Session::handleOsc777(const QStringList &params)
     // Delegate OSC 777 container parsing to ContainerRegistry
     auto info = ContainerRegistry::instance()->containerInfoFromOsc777(params);
     if (info.has_value()) {
-        // Capture current foreground PID as the host PID for OSC 777-detected containers
-        // This allows us to detect when the user exits (foreground returns to host shell)
-        if (info->isValid()) {
-            info->hostPid = _foregroundPid;
+        // Use the session shell's PID as the host sentinel, not _foregroundPid.
+        // _foregroundPid at OSC 777 time is the PGID of the entering tool (e.g. kapsule),
+        // which stays the same throughout the container session — causing an immediate
+        // false-positive exit detection. The session shell PID is what the foreground
+        // actually returns to once the container tool and its children have all exited.
+        //
+        // Exception: when kapsule IS the session shell (menu-based "new tab in container"),
+        // processId() == kapsule's PID == _foregroundPid, so hostPid would trigger
+        // immediately. In that case, skip hostPid and rely on the _enteredViaContainerCommand
+        // guard in updateContainerContext() and OSC 777 pop for context clearing.
+        if (info->isValid() && !_enteredViaContainerCommand) {
+            const int shellPid = processId();
+            info->hostPid = (shellPid > 0) ? shellPid : _foregroundPid;
         }
         setContainerContext(info.value());
     }
