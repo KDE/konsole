@@ -526,6 +526,20 @@
       <li xml:lang="zh-TW">儲存輸出</li>
     </ul>
   </description>
+  <keywords>
+    <keyword>terminal</keyword>
+    <keyword>console</keyword>
+    <keyword>shell</keyword>
+    <keyword>command line</keyword>
+    <keyword>command prompt</keyword>
+    <keyword>cmd</keyword>
+    <keyword>cli</keyword>
+    <keyword>bash</keyword>
+    <keyword>zsh</keyword>
+    <keyword>fish</keyword>
+    <keyword>xterm</keyword>
+    <keyword>tty</keyword>
+  </keywords>
   <launchable type="desktop-id">org.kde.konsole.desktop</launchable>
   <url type="homepage">https://konsole.kde.org/</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=konsole</url>

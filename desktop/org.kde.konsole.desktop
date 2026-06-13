@@ -10,7 +10,7 @@ StartupNotify=true
 X-KDE-AuthorizeAction=shell_access
 X-KDE-Shortcuts=Ctrl+Alt+T
 StartupWMClass=konsole
-Keywords=terminal;console;script;run;execute;command;command-line;commandline;cli;bash;sh;shell;zsh;cmd;command prompt
+Keywords=terminal;console;script;run;execute;command;command-line;commandline;cli;bash;sh;shell;zsh;cmd;command prompt;xterm;tty;pty;fish;konsole
 Keywords[ar]=طرفية;كونسول;سكربت;شغل;نفذ;أوامر;سطر-الأوامر;سطر الأوامر;cli;باش;صدفة;شل;zsh
 Keywords[az]=terminal;konsol;skript;başlatmaq;icra;əmr;əmr-sətri;əmrsətri;müştəri;bash;sh;qabıq;zsh;cmd;əmr-lövhəsi
 Keywords[be]=тэрмінал;кансоль;сцэнар;запусціць;выканаць; каманда;камандны радок;cli;bash;sh;абалонка;zsh;cmd;пацвярджэнне каманды
@@ -240,7 +240,7 @@ GenericName[wa]=Terminå
 GenericName[zh_CN]=终端
 GenericName[zh_TW]=終端機
 
-Comment=Command line access
+Comment=Use the command line
 Comment[ar]=الوصول إلى سطر الأوامر
 Comment[az]=Əmrlər sətirinə giriş
 Comment[be]=Доступ да каманднага радка
@@ -297,7 +297,7 @@ Comment[zh_CN]=命令行访问
 Comment[zh_TW]=指令列
 
 [Desktop Action NewWindow]
-Name=Open a New Window
+Name=Open New Window
 Name[ar]=افتح نافذة جديدة
 Name[az]=Yeni pəncərə açmaq
 Name[be]=Адкрыць новае акно
@@ -360,7 +360,7 @@ Icon=window-new
 Exec=konsole
 
 [Desktop Action NewTab]
-Name=Open a New Tab
+Name=Open New Tab
 Name[ar]=افتح لسانًا جديدًا
 Name[az]=Yeni vərəq açmaq
 Name[be]=Адкрыць у новай укладцы
