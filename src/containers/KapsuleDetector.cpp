@@ -11,6 +11,9 @@
 #include <Kapsule/KapsuleClient>
 
 #include <QCoro/QCoroTask>
+#include <QFile>
+#include <QFileInfo>
+#include <QTextStream>
 #include <qhashfunctions.h>
 
 namespace Konsole
@@ -40,8 +43,25 @@ QString KapsuleDetector::iconName() const
 
 std::optional<ContainerInfo> KapsuleDetector::detect(int pid) const
 {
-    Q_UNUSED(pid)
-    return std::nullopt;
+    if (pid <= 0) {
+        return std::nullopt;
+    }
+
+    // All Kapsule container images include a /.kapsule/ directory.
+    // This is the most reliable marker that distinguishes Kapsule containers
+    // from other LXC/Incus containers on the same host.
+    // May change as Kapsule evolves; revisit if detection breaks.
+    if (!QFileInfo(QStringLiteral("/proc/%1/root/.kapsule").arg(pid)).isDir()) {
+        return std::nullopt;
+    }
+
+    // Incus sets the container hostname to the container name by default.
+    QFile hostnameFile(QStringLiteral("/proc/%1/root/etc/hostname").arg(pid));
+    if (!hostnameFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        return buildContainerInfo(QString(), i18n("Kapsule Container"));
+    }
+    const QString name = QString::fromUtf8(hostnameFile.readAll()).trimmed();
+    return buildContainerInfo(name, name.isEmpty() ? i18n("Kapsule Container") : name);
 }
 
 ContainerInfo KapsuleDetector::buildContainerInfo(const QString &name, const QString &displayName, const QString &icon) const

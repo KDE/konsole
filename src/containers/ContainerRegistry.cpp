@@ -169,8 +169,7 @@ std::optional<ContainerInfo> ContainerRegistry::containerInfoFromOsc777(const QS
         }
     }
 
-    // No matching detector found, meaning we can't do anything useful with this info
-    return ContainerInfo{};
+    return std::nullopt;
 }
 
 QString ContainerRegistry::keyFromContainerInfo(const ContainerInfo &container)
