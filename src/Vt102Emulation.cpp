@@ -1222,6 +1222,16 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
             }
         }
     }
+    if (attribute == ActivationToken) {
+        // Query form only: OSC 6969 ; ? ; <command> ST
+        // The Session answers asynchronously by writing the reply to the pty.
+        const auto parts = value.split(QLatin1Char(';'));
+        if (!parts.isEmpty() && parts.at(0) == QLatin1String("?")) {
+            const QString command = parts.size() > 1 ? parts.at(1) : QString();
+            Q_EMIT activationTokenRequested(command);
+        }
+        return;
+    }
     if (attribute == ReportColors) {
         // RGB colors
         QStringList params = value.split(QLatin1Char(';'));

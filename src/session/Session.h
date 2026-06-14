@@ -12,6 +12,8 @@
 #include "config-konsole.h"
 
 // Qt
+#include <functional>
+
 #include <QHash>
 #include <QLoggingCategory>
 #include <QProcess>
@@ -979,6 +981,9 @@ private Q_SLOTS:
     void fireZModemUploadDetected();
 
     void onReceiveBlock(const char *buf, int len);
+    // Answer a shell ActivationToken OSC request: if command maps to a GUI
+    // application, mint a token and write the OSC reply back to the pty.
+    void onActivationTokenRequested(const QString &command);
     void silenceTimerDone();
     void activityTimerDone();
     void resetNotifications();
@@ -1009,6 +1014,11 @@ private Q_SLOTS:
 
 private:
     bool isCalledViaDbusAndForbidden() const;
+
+    // Request an xdg-activation token from the compositor for the currently
+    // active window and deliver it to onToken (empty string if unavailable).
+    // Shared by the activationToken() DBus slot and the ActivationToken OSC.
+    void fetchActivationToken(const QString &appId, std::function<void(const QString &)> onToken) const;
 
     Q_DISABLE_COPY(Session)
 
