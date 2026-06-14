@@ -202,6 +202,11 @@ private:
         Image = 1337,
         // https://conemu.github.io/en/AnsiEscapeCodes.html#ConEmu_specific_OSC
         ConEmu = 9,
+        // Konsole private: shell asks for an xdg-activation token for the next
+        // launched child. Query: OSC 6969 ; ? [ ; app_id ] ST
+        // Reply: OSC 6969 ; <token> ST  (empty token on failure)
+        // NOTE: placeholder number, must be coordinated upstream before merge.
+        ActivationToken = 6969,
     };
 
     ParserStates _state = Ground;

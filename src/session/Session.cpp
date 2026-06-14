@@ -31,12 +31,14 @@
 
 // KDE
 #include <KActionCollection>
+#include <KApplicationTrader>
 #include <KConfigGroup>
 #include <KIO/DesktopExecParser>
 #include <KLocalizedString>
 #include <KNotification>
 #include <KProcess>
 #include <KSelectAction>
+#include <KService>
 #include <KWindowSystem>
 
 #ifndef Q_OS_WIN
@@ -184,6 +186,7 @@ void Session::openTeletype(int fd, bool runShell)
     // connect the I/O between emulator and pty process
     connect(_shellProcess, &Konsole::Pty::receivedData, this, &Konsole::Session::onReceiveBlock);
     connect(_emulation, &Konsole::Emulation::sendData, _shellProcess, &Konsole::Pty::sendData);
+    connect(_emulation, &Konsole::Emulation::activationTokenRequested, this, &Konsole::Session::onActivationTokenRequested);
 
     // UTF8 mode
     connect(_emulation, &Konsole::Emulation::useUtf8Request, _shellProcess, &Konsole::Pty::setUtf8Mode);
@@ -2560,6 +2563,40 @@ void Session::runCommandFromLayout(const QString &command) const
     _emulation->sendText(command + QLatin1Char('\n'));
 }
 
+void Session::fetchActivationToken(const QString &appId, std::function<void(const QString &)> onToken) const
+{
+#if HAVE_WAYLAND
+    // no active window, or not on wayland: no token, answer immediately so
+    // the caller never stalls waiting for a reply.
+    const auto window = qApp->activeWindow();
+    if (!window || !window->window() || !KWindowSystem::isPlatformWayland()) {
+        onToken({});
+        return;
+    }
+
+    // the token is tied to the serial of the event that triggered the request
+    // (e.g. the Enter keypress that started the command).
+    const int launchedSerial = KWaylandExtras::self()->lastInputSerial(window->window()->windowHandle());
+    connect(
+        KWaylandExtras::self(),
+        &KWaylandExtras::xdgActivationTokenArrived,
+        this,
+        [launchedSerial, onToken](int tokenSerial, QString token) {
+            // wrong serial: not our token, reply empty but always reply once.
+            if (tokenSerial != launchedSerial) {
+                token.clear();
+            }
+            onToken(token);
+        },
+        Qt::SingleShotConnection);
+
+    KWaylandExtras::requestXdgActivationToken(window->window()->windowHandle(), launchedSerial, appId);
+#else
+    Q_UNUSED(appId)
+    onToken({});
+#endif
+}
+
 QString Session::activationToken(const QString &cookieForRequest) const
 {
     // safety check, only work if the caller knows our id
@@ -2569,40 +2606,73 @@ QString Session::activationToken(const QString &cookieForRequest) const
     }
 
 #if HAVE_DBUS && HAVE_WAYLAND
-    // no window active, no token
-    // same if we don't run wayland
-    const auto window = qApp->activeWindow();
-    if (!window || !window->window() || !KWindowSystem::isPlatformWayland()) {
-        return {};
-    }
-
     // we will respond delayed, as the token needs to arrive
     Q_ASSERT(calledFromDBus());
     const auto msg = message();
     setDelayedReply(true);
 
-    // we need to filter the response with the request serial
-    const int launchedSerial = KWaylandExtras::self()->lastInputSerial(window->window()->windowHandle());
-    connect(
-        KWaylandExtras::self(),
-        &KWaylandExtras::xdgActivationTokenArrived,
-        this,
-        [msg, launchedSerial](int tokenSerial, QString token) {
-            // if wrong token, ignore it, but we must always reply to not stall the caller
-            // we use here a SingleShotConnection, we will just be called once!
-            if (tokenSerial != launchedSerial) {
-                token.clear();
-            }
-            auto reply = msg.createReply(token);
-            QDBusConnection::sessionBus().send(reply);
-        },
-        Qt::SingleShotConnection);
-
-    KWaylandExtras::requestXdgActivationToken(window->window()->windowHandle(), launchedSerial, {});
-
+    fetchActivationToken({}, [msg](const QString &token) {
+        auto reply = msg.createReply(token);
+        QDBusConnection::sessionBus().send(reply);
+    });
 #endif
 
     return {};
+}
+
+// If command (a bare executable name) maps to an installed application, return
+// its desktop entry name (e.g. org.kde.dolphin), otherwise an empty string.
+// Used to gate token minting to GUI launches and to scope the token.
+static QString desktopAppIdForCommand(const QString &command)
+{
+    if (command.isEmpty()) {
+        return {};
+    }
+
+    // KApplicationTrader queries the in-memory ksycoca cache, but iterating
+    // every application per command is wasteful, so memoize per command name.
+    static QHash<QString, QString> cache;
+    const auto cached = cache.constFind(command);
+    if (cached != cache.constEnd()) {
+        return cached.value();
+    }
+
+    const KService::List apps = KApplicationTrader::query([&command](const KService::Ptr &service) {
+        // service->exec() may carry a path and field codes (e.g. "dolphin %u"),
+        // so compare against the first token's basename.
+        const QString exec = service->exec().section(QLatin1Char(' '), 0, 0);
+        return exec.mid(exec.lastIndexOf(QLatin1Char('/')) + 1) == command;
+    });
+
+    const QString appId = apps.isEmpty() ? QString() : apps.constFirst()->desktopEntryName();
+    cache.insert(command, appId);
+    return appId;
+}
+
+void Session::onActivationTokenRequested(const QString &command)
+{
+    // Reply on the pty with: OSC Vt102Emulation::ActivationToken ; <token> ST
+    // An empty token is still a valid reply so the shell does not block.
+    auto sendReply = [this](const QString &token) {
+        QByteArray reply = QByteArrayLiteral("\033]6969;");
+        reply += token.toUtf8();
+        reply += QByteArrayLiteral("\033\\"); // ST
+        _shellProcess->sendData(reply);
+    };
+
+#if HAVE_WAYLAND
+    // Gate: only mint a token when the command is a known GUI application, and
+    // scope the token to that application's desktop id.
+    if (KWindowSystem::isPlatformWayland()) {
+        const QString appId = desktopAppIdForCommand(command);
+        if (!appId.isEmpty()) {
+            fetchActivationToken(appId, sendReply);
+            return;
+        }
+    }
+#endif
+
+    sendReply({});
 }
 
 bool Session::isCalledViaDbusAndForbidden() const

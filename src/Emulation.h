@@ -272,6 +272,15 @@ Q_SIGNALS:
     void sendData(const QByteArray &data);
 
     /**
+     * Emitted when the shell requests an xdg-activation token via the
+     * private ActivationToken OSC. The Session resolves the command to a
+     * GUI application, mints a token and writes the reply back to the pty.
+     *
+     * @param command The executable name the shell is about to launch
+     */
+    void activationTokenRequested(const QString &command);
+
+    /**
      * Requests that the pty used by the terminal process
      * be set to UTF 8 mode.
      *
