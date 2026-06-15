@@ -1959,7 +1959,7 @@ msgstr "内置配置方案总是可用"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Double click to change shortcut"
-msgstr "双击更改快捷方式"
+msgstr "双击更改快捷键"
 
 #: RenameTabDialog.cpp:25
 #, kde-format
@@ -3080,19 +3080,19 @@ msgstr "显示："
 #: settings/TabBarSettings.ui:63
 #, kde-format
 msgid "When needed"
-msgstr "当需要时"
+msgstr "需要时显示"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysShowTabBar)
 #: settings/TabBarSettings.ui:73
 #, kde-format
 msgid "Alwa&ys"
-msgstr "总是(&Y)"
+msgstr "总是显示(&Y)"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysHideTabBar)
 #: settings/TabBarSettings.ui:83
 #, kde-format
 msgid "&Never"
-msgstr "永不(&N)"
+msgstr "不显示(&N)"
 
 #. i18n: ectx: property (text), widget (QLabel, positionLabel)
 #: settings/TabBarSettings.ui:109
@@ -3104,68 +3104,68 @@ msgstr "位置："
 #: settings/TabBarSettings.ui:119
 #, kde-format
 msgid "Above terminal area"
-msgstr "在终端上方"
+msgstr "终端上方"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Bottom)
 #: settings/TabBarSettings.ui:129
 #, kde-format
 msgid "Be&low terminal area"
-msgstr "在终端下方"
+msgstr "终端下方(&L)"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Left)
 #: settings/TabBarSettings.ui:139
 #, kde-format
 msgid "To the left of terminal area"
-msgstr "在终端左侧"
+msgstr "终端左侧"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Right)
 #: settings/TabBarSettings.ui:149
 #, kde-format
 msgid "To the &right of terminal area"
-msgstr "在终端右侧(&R)"
+msgstr "终端右侧(&R)"
 
 #. i18n: ectx: property (text), widget (QLabel, showCloseTabButtonLabel)
 #: settings/TabBarSettings.ui:175
 #, kde-format
 msgid "Show Close Tab button:"
-msgstr "显示关闭标签页按钮："
+msgstr "关闭标签页按钮："
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnEachTab)
 #: settings/TabBarSettings.ui:185
 #, kde-format
 msgid "On ea&ch tab"
-msgstr "在每个标签页上(&C)"
+msgstr "每个标签页(&C)"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnTabBar)
 #: settings/TabBarSettings.ui:195
 #, kde-format
 msgid "On &the tab bar"
-msgstr "在整条标签页栏上(&T)"
+msgstr "标签页栏(&T)"
 
 #. i18n: ectx: property (text), widget (QRadioButton, None)
 #: settings/TabBarSettings.ui:205
 #, kde-format
 msgctxt "Do not show a close button"
 msgid "None"
-msgstr "无"
+msgstr "不显示"
 
 #. i18n: ectx: property (text), widget (QLabel, showSearchTabsButtonLabel)
 #: settings/TabBarSettings.ui:231
 #, kde-format
 msgid "Show Search Tabs button:"
-msgstr "显示搜索标签页按钮："
+msgstr "搜索标签页按钮："
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSearchTabsButton)
 #: settings/TabBarSettings.ui:241
 #, kde-format
 msgid "Always"
-msgstr "总是"
+msgstr "总是显示"
 
 #. i18n: ectx: property (text), widget (QRadioButton, HideSearchTabsButton)
 #: settings/TabBarSettings.ui:251
 #, kde-format
 msgid "Never"
-msgstr "从不"
+msgstr "不显示"
 
 #. i18n: ectx: property (text), widget (QLabel, miscellaneousAppearanceLabel)
 #. i18n: ectx: property (text), widget (QLabel, miscellaneousBehaviorLabel)
@@ -3173,7 +3173,7 @@ msgstr "从不"
 #, kde-format
 msgctxt "@item:intext Miscellaneous Options"
 msgid "Miscellaneous:"
-msgstr "杂项："
+msgstr "其他："
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_NewTabButton)
 #: settings/TabBarSettings.ui:287
@@ -3185,7 +3185,7 @@ msgstr "显示“新建标签页”按钮"
 #: settings/TabBarSettings.ui:294
 #, kde-format
 msgid "Expand individual tab widths to full window"
-msgstr "扩展单个标签页宽度到全窗口"
+msgstr "单个标签页拉伸到窗口宽度"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabBarUseUserStyleSheet)
 #: settings/TabBarSettings.ui:301
@@ -3217,13 +3217,13 @@ msgstr "新标签页位置："
 #: settings/TabBarSettings.ui:374
 #, kde-format
 msgid "At &the end"
-msgstr "在最后(&T)"
+msgstr "最后(&T)"
 
 #. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAfterCurrentTab)
 #: settings/TabBarSettings.ui:384
 #, kde-format
 msgid "After current &tab"
-msgstr "在当前标签页之后(&T)"
+msgstr "当前标签页之后(&T)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_CloseTabOnMiddleMouseButton)
 #: settings/TabBarSettings.ui:420
@@ -3248,14 +3248,14 @@ msgstr "显示标题："
 #, kde-format
 msgctxt "@option:radio When needed show the split header"
 msgid "When needed"
-msgstr "当需要时"
+msgstr "需要时显示"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysHideSplitHeader)
 #: settings/TabBarSettings.ui:466
 #, kde-format
 msgctxt "@option:radio Never show the split header"
 msgid "Never"
-msgstr "从不"
+msgstr "不显示"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/TabBarSettings.ui:492
@@ -3289,7 +3289,7 @@ msgstr "大"
 #, kde-format
 msgctxt "@option:radio Always show the split header"
 msgid "Always"
-msgstr "总是"
+msgstr "总是显示"
 
 #: settings/TemporaryFilesSettings.cpp:31
 #, kde-format
@@ -3341,7 +3341,7 @@ msgid ""
 "profile settings.</p></body></html>"
 msgstr ""
 "<html><head/><body><p>要使用此特性，请在配置方案的设置中启用<span style=\" "
-"font-weight:600;\">鼠标-&gt;杂项-&gt;文件加下划线</span>。</p></body></html>"
+"font-weight:600;\">鼠标-&gt;其他-&gt;文件加下划线</span>。</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/ThumbnailsSettings.ui:53
@@ -3807,7 +3807,7 @@ msgstr "Meta"
 #, kde-format
 msgctxt "Items that do not fit in other categories"
 msgid "Miscellaneous:"
-msgstr "杂项："
+msgstr "其他："
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableReverseUrlHints)
 #: widgets/EditProfileAdvancedPage.ui:164
