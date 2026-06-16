@@ -22,6 +22,7 @@
 #include <QStandardItem>
 #include <QStandardPaths>
 #include <QStringListModel>
+#include <QTabBar>
 #include <QTimer>
 #include <QUrl>
 
@@ -98,6 +99,8 @@ EditProfileDialog::EditProfileDialog(QWidget *parent)
     auto *generalPageWidget = new QWidget(this);
     _generalUi = new Ui::EditProfileGeneralPage();
     _generalUi->setupUi(generalPageWidget);
+    _generalUi->tabWidget->setDocumentMode(true);
+    _generalUi->tabWidget->tabBar()->setExpanding(true);
     _generalPageItem = addPage(generalPageWidget, generalPageName);
     _generalPageItem->setHeader(generalPageName);
     _generalPageItem->setIcon(QIcon::fromTheme(QStringLiteral("utilities-terminal")));
@@ -126,6 +129,8 @@ EditProfileDialog::EditProfileDialog(QWidget *parent)
     auto *appearancePageWidget = new QWidget(this);
     _appearanceUi = new Ui::EditProfileAppearancePage();
     _appearanceUi->setupUi(appearancePageWidget);
+    _appearanceUi->tabWidget->setDocumentMode(true);
+    _appearanceUi->tabWidget->tabBar()->setExpanding(true);
     auto *appearancePageItem = addPage(appearancePageWidget, appearancePageName);
     appearancePageItem->setHeader(appearancePageName);
     appearancePageItem->setIcon(QIcon::fromTheme(QStringLiteral("kcolorchooser"), defaultIcon));
@@ -168,6 +173,8 @@ EditProfileDialog::EditProfileDialog(QWidget *parent)
     auto *mousePageWidget = new QWidget(this);
     _mouseUi = new Ui::EditProfileMousePage();
     _mouseUi->setupUi(mousePageWidget);
+    _mouseUi->tabWidget->setDocumentMode(true);
+    _mouseUi->tabWidget->tabBar()->setExpanding(true);
 
     const auto regExp = QRegularExpression(QStringLiteral(R"(([a-z]*:\/\/;)*([A-Za-z*]:\/\/))"));
     auto validator = new QRegularExpressionValidator(regExp, this);

@@ -7,12 +7,17 @@
 // Own
 #include "TabBarSettings.h"
 
+#include <QTabBar>
+
 using namespace Konsole;
 
 TabBarSettings::TabBarSettings(QWidget *parent)
     : QWidget(parent)
 {
     setupUi(this);
+
+    tabs->setDocumentMode(true);
+    tabs->tabBar()->setExpanding(true);
 
     kcfg_TabBarUserStyleSheetFile->setMimeTypeFilters({QStringLiteral("text/css")});
 
