@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-05 00:48+0000\n"
+"POT-Creation-Date: 2026-06-17 00:49+0000\n"
 "PO-Revision-Date: 2026-06-06 06:36+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -1926,7 +1926,7 @@ msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr "מובנה"
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:572
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:579
 #, kde-format
 msgid "Default profile"
 msgstr "פרופיל ברירת־המחדל"
@@ -4655,54 +4655,54 @@ msgstr "הגדרת שקיפות עיטור (0 = שקוף לגמרי, 255 = אט�
 msgid "180"
 msgstr "180"
 
-#: widgets/EditProfileDialog.cpp:70
+#: widgets/EditProfileDialog.cpp:71
 #, kde-format
 msgid "Edit Profile"
 msgstr "ערוך פרופיל"
 
-#: widgets/EditProfileDialog.cpp:97
+#: widgets/EditProfileDialog.cpp:98
 #, kde-format
 msgctxt "@title:tab Generic, common options"
 msgid "General"
 msgstr "כללי"
 
-#: widgets/EditProfileDialog.cpp:108
+#: widgets/EditProfileDialog.cpp:111
 #, kde-format
 msgid "Tabs"
 msgstr "כרטיסיות"
 
-#: widgets/EditProfileDialog.cpp:125
+#: widgets/EditProfileDialog.cpp:128
 #, kde-format
 msgid "Appearance"
 msgstr "מראה"
 
-#: widgets/EditProfileDialog.cpp:141
+#: widgets/EditProfileDialog.cpp:146
 #, kde-format
 msgid "Scrolling"
 msgstr "גלילה"
 
-#: widgets/EditProfileDialog.cpp:155
+#: widgets/EditProfileDialog.cpp:160
 #, kde-format
 msgid "Keyboard"
 msgstr "מקלדת"
 
-#: widgets/EditProfileDialog.cpp:156
+#: widgets/EditProfileDialog.cpp:161
 #, kde-format
 msgid "Key bindings"
 msgstr "צירופי תווים"
 
-#: widgets/EditProfileDialog.cpp:167
+#: widgets/EditProfileDialog.cpp:172
 #, kde-format
 msgid "Mouse"
 msgstr "עכבר"
 
-#: widgets/EditProfileDialog.cpp:183
+#: widgets/EditProfileDialog.cpp:190
 #, kde-format
 msgctxt "@title:tab Complex options"
 msgid "Advanced"
 msgstr "מתקדם"
 
-#: widgets/EditProfileDialog.cpp:291
+#: widgets/EditProfileDialog.cpp:298
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -4714,31 +4714,31 @@ msgstr ""
 "לשנות את ההרשאות של הקובץ הזה או להגדיר שם שונה כדי לשמור את ההגדרות לפרופיל "
 "חדש."
 
-#: widgets/EditProfileDialog.cpp:308
+#: widgets/EditProfileDialog.cpp:315
 #, kde-format
 msgctxt "@info"
 msgid "Profile Name was empty; please set a name to be able to save settings."
 msgstr "שם הפרופיל היה ריק, נא להגדיר שם כדי שאפשר יהיה לשמור את ההגדרות."
 
-#: widgets/EditProfileDialog.cpp:316
+#: widgets/EditProfileDialog.cpp:323
 #, kde-format
 msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
 msgstr "כבר קיים פרופיל בשם „%1”."
 
-#: widgets/EditProfileDialog.cpp:346
+#: widgets/EditProfileDialog.cpp:353
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
 msgstr "שם הפרופיל חורג מהאורך המותר (%1)."
 
-#: widgets/EditProfileDialog.cpp:384
+#: widgets/EditProfileDialog.cpp:391
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
 msgstr "התווים המודגשים שגויים לשמות פרופילים: %1."
 
-#: widgets/EditProfileDialog.cpp:420
+#: widgets/EditProfileDialog.cpp:427
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
@@ -4747,22 +4747,22 @@ msgstr[1] "עריכת שני פרופילים: %2"
 msgstr[2] "עריכת %1 פרופילים: %2"
 msgstr[3] "עריכת %1 פרופילים: %2"
 
-#: widgets/EditProfileDialog.cpp:424
+#: widgets/EditProfileDialog.cpp:431
 #, kde-format
 msgid "Create New Profile"
 msgstr "יצירת פרופיל חדש"
 
-#: widgets/EditProfileDialog.cpp:427
+#: widgets/EditProfileDialog.cpp:434
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "ערוך את הפרופיל \"%1\""
 
-#: widgets/EditProfileDialog.cpp:529
+#: widgets/EditProfileDialog.cpp:536
 #, kde-format
 msgid "None"
 msgstr "ללא"
 
-#: widgets/EditProfileDialog.cpp:549
+#: widgets/EditProfileDialog.cpp:556
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4774,7 +4774,7 @@ msgstr[1] " עמודות"
 msgstr[2] " עמודות"
 msgstr[3] " עמודות"
 
-#: widgets/EditProfileDialog.cpp:551
+#: widgets/EditProfileDialog.cpp:558
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4786,42 +4786,42 @@ msgstr[1] " שורות"
 msgstr[2] " שורות"
 msgstr[3] " שורות"
 
-#: widgets/EditProfileDialog.cpp:561
+#: widgets/EditProfileDialog.cpp:568
 #, kde-format
 msgid "System Bell"
 msgstr "פעמון מערכת"
 
-#: widgets/EditProfileDialog.cpp:561
+#: widgets/EditProfileDialog.cpp:568
 #, kde-format
 msgid "System Notifications"
 msgstr "התראות מערכת"
 
-#: widgets/EditProfileDialog.cpp:561
+#: widgets/EditProfileDialog.cpp:568
 #, kde-format
 msgid "Visual Bell"
 msgstr "פעמון חזותי"
 
-#: widgets/EditProfileDialog.cpp:561
+#: widgets/EditProfileDialog.cpp:568
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "התעלמות מאירועי פעמון"
 
-#: widgets/EditProfileDialog.cpp:570
+#: widgets/EditProfileDialog.cpp:577
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "פרופיל ברירת מחדל להפעלות מסוף חדשות ב־%1"
 
-#: widgets/EditProfileDialog.cpp:677
+#: widgets/EditProfileDialog.cpp:684
 #, kde-format
 msgid "Edit Environment"
 msgstr "עריכת הסביבה"
 
-#: widgets/EditProfileDialog.cpp:678
+#: widgets/EditProfileDialog.cpp:685
 #, kde-format
 msgid "One environment variable per line"
 msgstr "משתנה סביבה אחד בשורה"
 
-#: widgets/EditProfileDialog.cpp:711
+#: widgets/EditProfileDialog.cpp:718
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4831,30 +4831,30 @@ msgstr[1] " שניות"
 msgstr[2] " שניות"
 msgstr[3] " שניות"
 
-#: widgets/EditProfileDialog.cpp:841
+#: widgets/EditProfileDialog.cpp:848
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "בחירת ספרייה התחלתית"
 
-#: widgets/EditProfileDialog.cpp:1003
+#: widgets/EditProfileDialog.cpp:1010
 #, kde-format
 msgid "Get New..."
 msgstr "הורדת חדשה…"
 
-#: widgets/EditProfileDialog.cpp:1452
+#: widgets/EditProfileDialog.cpp:1459
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "טעינת הסכמה <resource>%1</resource> נכשלה."
 
-#: widgets/EditProfileDialog.cpp:1634
+#: widgets/EditProfileDialog.cpp:1641
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
 "supported on your desktop"
 msgstr "ערכת נושא זו משתמשת ברקע שקוף שלא נתמך בשולחן העבודה שלך"
 
-#: widgets/EditProfileDialog.cpp:1640
+#: widgets/EditProfileDialog.cpp:1647
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4863,12 +4863,12 @@ msgstr ""
 "היישום Konsole הופעל לפני שהאפקטים של שולחן העבודה הופעלה. עליך להפעיל את "
 "Konsole בכדי לראות רקע שקוף."
 
-#: widgets/EditProfileDialog.cpp:2052
+#: widgets/EditProfileDialog.cpp:2059
 #, kde-format
 msgid "Default for file type"
 msgstr "ברירת המחדל לסוג הקובץ"
 
-#: widgets/EditProfileDialog.cpp:2078
+#: widgets/EditProfileDialog.cpp:2085
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4897,7 +4897,7 @@ msgstr ""
 "לא תהיה השפעה והקובץ הזה ייפתח על ידי עורך\n"
 "הטקסט שמוגדר כברירת המחדל."
 
-#: widgets/EditProfileDialog.cpp:2091
+#: widgets/EditProfileDialog.cpp:2098
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "פקודה מותאמת אישית לעורך טקסט"

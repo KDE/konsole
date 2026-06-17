@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-05 00:48+0000\n"
+"POT-Creation-Date: 2026-06-17 00:49+0000\n"
 "PO-Revision-Date: 2017-12-31 22:42+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -2018,7 +2018,7 @@ msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr ""
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:572
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:579
 #, kde-format
 msgid "Default profile"
 msgstr "Podrazumijevani profil"
@@ -4971,55 +4971,55 @@ msgstr ""
 msgid "180"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:70
+#: widgets/EditProfileDialog.cpp:71
 #, kde-format
 msgid "Edit Profile"
 msgstr "Uredi profil"
 
-#: widgets/EditProfileDialog.cpp:97
+#: widgets/EditProfileDialog.cpp:98
 #, kde-format
 msgctxt "@title:tab Generic, common options"
 msgid "General"
 msgstr "Opšte"
 
-#: widgets/EditProfileDialog.cpp:108
+#: widgets/EditProfileDialog.cpp:111
 #, kde-format
 msgid "Tabs"
 msgstr "Jezičci"
 
-#: widgets/EditProfileDialog.cpp:125
+#: widgets/EditProfileDialog.cpp:128
 #, kde-format
 msgid "Appearance"
 msgstr "Izgled"
 
-#: widgets/EditProfileDialog.cpp:141
+#: widgets/EditProfileDialog.cpp:146
 #, kde-format
 msgid "Scrolling"
 msgstr "Klizanje"
 
-#: widgets/EditProfileDialog.cpp:155
+#: widgets/EditProfileDialog.cpp:160
 #, kde-format
 msgid "Keyboard"
 msgstr "Tastatura"
 
-#: widgets/EditProfileDialog.cpp:156
+#: widgets/EditProfileDialog.cpp:161
 #, fuzzy, kde-format
 #| msgid "Key Bindings"
 msgid "Key bindings"
 msgstr "Sveze tastera"
 
-#: widgets/EditProfileDialog.cpp:167
+#: widgets/EditProfileDialog.cpp:172
 #, kde-format
 msgid "Mouse"
 msgstr "Miš"
 
-#: widgets/EditProfileDialog.cpp:183
+#: widgets/EditProfileDialog.cpp:190
 #, kde-format
 msgctxt "@title:tab Complex options"
 msgid "Advanced"
 msgstr "Napredno"
 
-#: widgets/EditProfileDialog.cpp:291
+#: widgets/EditProfileDialog.cpp:298
 #, fuzzy, kde-kuit-format
 #| msgid ""
 #| "<p>Konsole does not have permission to save this profile to:<br /> "
@@ -5036,33 +5036,33 @@ msgstr ""
 "mogli da sačuvate postavke, treba ili da izmenite dozvole postavnog fajla "
 "profila, ili da promenite ime profila kako bi se sačuvao kao novi profil.</p>"
 
-#: widgets/EditProfileDialog.cpp:308
+#: widgets/EditProfileDialog.cpp:315
 #, kde-format
 msgctxt "@info"
 msgid "Profile Name was empty; please set a name to be able to save settings."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:316
+#: widgets/EditProfileDialog.cpp:323
 #, fuzzy, kde-format
 #| msgid "<p>A profile with this name already exists.</p>"
 msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
 msgstr "<p>Profil sa ovim imenom već postoji.</p>"
 
-#: widgets/EditProfileDialog.cpp:346
+#: widgets/EditProfileDialog.cpp:353
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:384
+#: widgets/EditProfileDialog.cpp:391
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
 msgstr ""
 
 # >> @title:window
-#: widgets/EditProfileDialog.cpp:420
+#: widgets/EditProfileDialog.cpp:427
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
@@ -5071,7 +5071,7 @@ msgstr[1] "Uređivanje %1 profila: %2"
 msgstr[2] "Uređivanje %1 profila: %2"
 msgstr[3] "Uređivanje profila: %2"
 
-#: widgets/EditProfileDialog.cpp:424
+#: widgets/EditProfileDialog.cpp:431
 #, fuzzy, kde-format
 #| msgctxt "@item This will be used as part of the file name"
 #| msgid "New Profile"
@@ -5079,20 +5079,20 @@ msgid "Create New Profile"
 msgstr "novi profil"
 
 # >> @title:window
-#: widgets/EditProfileDialog.cpp:427
+#: widgets/EditProfileDialog.cpp:434
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "Uređivanje profila „%1“"
 
 # >> @action:inmenu Copy Input To
-#: widgets/EditProfileDialog.cpp:529
+#: widgets/EditProfileDialog.cpp:536
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu Do not select any tabs"
 #| msgid "&None"
 msgid "None"
 msgstr "&nigdje"
 
-#: widgets/EditProfileDialog.cpp:549
+#: widgets/EditProfileDialog.cpp:556
 #, fuzzy, kde-format
 #| msgid "Columns"
 msgctxt ""
@@ -5105,7 +5105,7 @@ msgstr[1] "Kolone"
 msgstr[2] "Kolone"
 msgstr[3] "Kolone"
 
-#: widgets/EditProfileDialog.cpp:551
+#: widgets/EditProfileDialog.cpp:558
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -5117,47 +5117,47 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: widgets/EditProfileDialog.cpp:561
+#: widgets/EditProfileDialog.cpp:568
 #, kde-format
 msgid "System Bell"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:561
+#: widgets/EditProfileDialog.cpp:568
 #, fuzzy, kde-format
 #| msgid "Notifications"
 msgid "System Notifications"
 msgstr "Obaveštenja"
 
-#: widgets/EditProfileDialog.cpp:561
+#: widgets/EditProfileDialog.cpp:568
 #, fuzzy, kde-format
 #| msgctxt "@info:credit"
 #| msgid "Visual effects"
 msgid "Visual Bell"
 msgstr "vizuelni efekti"
 
-#: widgets/EditProfileDialog.cpp:561
+#: widgets/EditProfileDialog.cpp:568
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:570
+#: widgets/EditProfileDialog.cpp:577
 #, fuzzy, kde-format
 #| msgid "Set the selected profile as the default for new terminal sessions"
 msgid "Default profile for new terminal sessions in %1"
 msgstr "Postavi izabrani profil kao podrazumijevani za nove sesije"
 
 # >> @title:window
-#: widgets/EditProfileDialog.cpp:677
+#: widgets/EditProfileDialog.cpp:684
 #, kde-format
 msgid "Edit Environment"
 msgstr "Uređivanje okruženja"
 
-#: widgets/EditProfileDialog.cpp:678
+#: widgets/EditProfileDialog.cpp:685
 #, kde-format
 msgid "One environment variable per line"
 msgstr "Jedna promenljiva okruženja po redu."
 
-#: widgets/EditProfileDialog.cpp:711
+#: widgets/EditProfileDialog.cpp:718
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -5168,34 +5168,34 @@ msgstr[2] " sekundi"
 msgstr[3] " sekunda"
 
 # >> @title:window
-#: widgets/EditProfileDialog.cpp:841
+#: widgets/EditProfileDialog.cpp:848
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "Izbor početne fascikle"
 
 # >> @action:button New <what>
 # >! Needs contexts, one for color schemes, another for key bindings
-#: widgets/EditProfileDialog.cpp:1003
+#: widgets/EditProfileDialog.cpp:1010
 #, fuzzy, kde-format
 #| msgctxt "@action:button Create an alternate color scheme"
 #| msgid "New..."
 msgid "Get New..."
 msgstr "Nova..."
 
-#: widgets/EditProfileDialog.cpp:1452
+#: widgets/EditProfileDialog.cpp:1459
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1634
+#: widgets/EditProfileDialog.cpp:1641
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
 "supported on your desktop"
 msgstr "Ova šema boja ima providnu pozadinu, što površ izgleda da ne podržava"
 
-#: widgets/EditProfileDialog.cpp:1640
+#: widgets/EditProfileDialog.cpp:1647
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -5204,13 +5204,13 @@ msgstr ""
 "Konsole je pokrenuta pre nego što su efekti površi bili uključeni. Morate je "
 "ponovo pokrenuti da biste dobili providnu pozadinu."
 
-#: widgets/EditProfileDialog.cpp:2052
+#: widgets/EditProfileDialog.cpp:2059
 #, fuzzy, kde-format
 #| msgid "Default profile"
 msgid "Default for file type"
 msgstr "Podrazumijevani profil"
 
-#: widgets/EditProfileDialog.cpp:2078
+#: widgets/EditProfileDialog.cpp:2085
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -5227,7 +5227,7 @@ msgid ""
 "editor."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:2091
+#: widgets/EditProfileDialog.cpp:2098
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr ""

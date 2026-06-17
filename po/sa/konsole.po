@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-05 00:48+0000\n"
+"POT-Creation-Date: 2026-06-17 00:49+0000\n"
 "PO-Revision-Date: 2024-12-25 19:40+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -1920,7 +1920,7 @@ msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr "अन्तर्निर्मितम्"
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:572
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:579
 #, kde-format
 msgid "Default profile"
 msgstr "पूर्वनिर्धारित प्रोफाइल"
@@ -4683,54 +4683,54 @@ msgstr ""
 msgid "180"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:70
+#: widgets/EditProfileDialog.cpp:71
 #, kde-format
 msgid "Edit Profile"
 msgstr "प्रोफाइल सम्पादयतु"
 
-#: widgets/EditProfileDialog.cpp:97
+#: widgets/EditProfileDialog.cpp:98
 #, kde-format
 msgctxt "@title:tab Generic, common options"
 msgid "General"
 msgstr "सामान्य"
 
-#: widgets/EditProfileDialog.cpp:108
+#: widgets/EditProfileDialog.cpp:111
 #, kde-format
 msgid "Tabs"
 msgstr "टब्स्"
 
-#: widgets/EditProfileDialog.cpp:125
+#: widgets/EditProfileDialog.cpp:128
 #, kde-format
 msgid "Appearance"
 msgstr "स्वरूपम्‌"
 
-#: widgets/EditProfileDialog.cpp:141
+#: widgets/EditProfileDialog.cpp:146
 #, kde-format
 msgid "Scrolling"
 msgstr "स्क्रॉल करणम्"
 
-#: widgets/EditProfileDialog.cpp:155
+#: widgets/EditProfileDialog.cpp:160
 #, kde-format
 msgid "Keyboard"
 msgstr "कीबोर्ड"
 
-#: widgets/EditProfileDialog.cpp:156
+#: widgets/EditProfileDialog.cpp:161
 #, kde-format
 msgid "Key bindings"
 msgstr "कीलबन्धनानि"
 
-#: widgets/EditProfileDialog.cpp:167
+#: widgets/EditProfileDialog.cpp:172
 #, kde-format
 msgid "Mouse"
 msgstr "मूषकः"
 
-#: widgets/EditProfileDialog.cpp:183
+#: widgets/EditProfileDialog.cpp:190
 #, kde-format
 msgctxt "@title:tab Complex options"
 msgid "Advanced"
 msgstr "उन्नतं"
 
-#: widgets/EditProfileDialog.cpp:291
+#: widgets/EditProfileDialog.cpp:298
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -4741,55 +4741,55 @@ msgstr ""
 "सेटिङ्ग्स् रक्षितुं अपर्याप्ताः अनुमतिः: <filename>%1</filename>.<nl/>तस्याः सञ्चिकायाः "
 "अनुमतिः परिवर्तयन्तु अथवा सेटिङ्ग्स् नूतने प्रोफाइल् मध्ये रक्षितुं भिन्नं नाम सेट् कुर्वन्तु ।"
 
-#: widgets/EditProfileDialog.cpp:308
+#: widgets/EditProfileDialog.cpp:315
 #, kde-format
 msgctxt "@info"
 msgid "Profile Name was empty; please set a name to be able to save settings."
 msgstr "प्रोफाइल नाम रिक्तम् आसीत्; कृपया सेटिङ्ग्स् रक्षितुं शक्नुवन्ति इति नाम सेट् कुर्वन्तु ।"
 
-#: widgets/EditProfileDialog.cpp:316
+#: widgets/EditProfileDialog.cpp:323
 #, kde-format
 msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
 msgstr "\"%1\" इति नामयुक्तं प्रोफाइल पूर्वमेव अस्ति ।"
 
-#: widgets/EditProfileDialog.cpp:346
+#: widgets/EditProfileDialog.cpp:353
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
 msgstr "प्रोफाइलनाम अधिकतमं अनुमतदीर्घतां (%1) अतिक्रान्तम् ।"
 
-#: widgets/EditProfileDialog.cpp:384
+#: widgets/EditProfileDialog.cpp:391
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
 msgstr "हाइलाइट् कृतानि वर्णाः प्रोफाइलनाम्नि अमान्यानि सन्ति: %1."
 
-#: widgets/EditProfileDialog.cpp:420
+#: widgets/EditProfileDialog.cpp:427
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
 msgstr[0] "प्रोफाइल सम्पादनम्: %2"
 msgstr[1] "%1 प्रोफाइल सम्पादयति: %2"
 
-#: widgets/EditProfileDialog.cpp:424
+#: widgets/EditProfileDialog.cpp:431
 #, kde-format
 msgid "Create New Profile"
 msgstr "New Profile रचयन्तु"
 
-#: widgets/EditProfileDialog.cpp:427
+#: widgets/EditProfileDialog.cpp:434
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "\"%1\" इति प्रोफाइल सम्पादयतु ।"
 
-#: widgets/EditProfileDialog.cpp:529
+#: widgets/EditProfileDialog.cpp:536
 #, fuzzy, kde-format
 #| msgctxt "Do not show a close button"
 #| msgid "None"
 msgid "None"
 msgstr "न कश्चित्"
 
-#: widgets/EditProfileDialog.cpp:549
+#: widgets/EditProfileDialog.cpp:556
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4799,7 +4799,7 @@ msgid_plural " columns"
 msgstr[0] " स्तम्भ:"
 msgstr[1] " स्तम्भाः"
 
-#: widgets/EditProfileDialog.cpp:551
+#: widgets/EditProfileDialog.cpp:558
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4809,42 +4809,42 @@ msgid_plural " rows"
 msgstr[0] " पंक्ति"
 msgstr[1] " पङ्क्तयः"
 
-#: widgets/EditProfileDialog.cpp:561
+#: widgets/EditProfileDialog.cpp:568
 #, kde-format
 msgid "System Bell"
 msgstr "प्रणाली घण्टी"
 
-#: widgets/EditProfileDialog.cpp:561
+#: widgets/EditProfileDialog.cpp:568
 #, kde-format
 msgid "System Notifications"
 msgstr "प्रणाली सूचनाएँ"
 
-#: widgets/EditProfileDialog.cpp:561
+#: widgets/EditProfileDialog.cpp:568
 #, kde-format
 msgid "Visual Bell"
 msgstr "दृश्य घण्टी"
 
-#: widgets/EditProfileDialog.cpp:561
+#: widgets/EditProfileDialog.cpp:568
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "बेल इवेण्ट्स् इत्यस्य अवहेलना कुर्वन्तु"
 
-#: widgets/EditProfileDialog.cpp:570
+#: widgets/EditProfileDialog.cpp:577
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "%1 मध्ये नूतनटर्मिनलसत्रस्य पूर्वनिर्धारितरूपरेखा"
 
-#: widgets/EditProfileDialog.cpp:677
+#: widgets/EditProfileDialog.cpp:684
 #, kde-format
 msgid "Edit Environment"
 msgstr "परिवेश सम्पादयतु"
 
-#: widgets/EditProfileDialog.cpp:678
+#: widgets/EditProfileDialog.cpp:685
 #, kde-format
 msgid "One environment variable per line"
 msgstr "प्रतिपङ्क्तिः एकः वातावरणचरः"
 
-#: widgets/EditProfileDialog.cpp:711
+#: widgets/EditProfileDialog.cpp:718
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4852,30 +4852,30 @@ msgid_plural " seconds"
 msgstr[0] " क्षण"
 msgstr[1] " सेकण्ड्"
 
-#: widgets/EditProfileDialog.cpp:841
+#: widgets/EditProfileDialog.cpp:848
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "प्रारम्भिकनिर्देशिकां चिनोतु"
 
-#: widgets/EditProfileDialog.cpp:1003
+#: widgets/EditProfileDialog.cpp:1010
 #, kde-format
 msgid "Get New..."
 msgstr "Get New..."
 
-#: widgets/EditProfileDialog.cpp:1452
+#: widgets/EditProfileDialog.cpp:1459
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "योजना <resource>%1</resource> लोड् कर्तुं असफलम् ।"
 
-#: widgets/EditProfileDialog.cpp:1634
+#: widgets/EditProfileDialog.cpp:1641
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
 "supported on your desktop"
 msgstr "एषा वर्णयोजना पारदर्शकं पृष्ठभूमिं प्रयुङ्क्ते यत् भवतः डेस्कटॉप् मध्ये समर्थितं न दृश्यते"
 
-#: widgets/EditProfileDialog.cpp:1640
+#: widgets/EditProfileDialog.cpp:1647
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4884,12 +4884,12 @@ msgstr ""
 "डेस्कटॉप् इफेक्ट्स् सक्षमीकरणात् पूर्वं Konsole आरब्धम् आसीत् । पारदर्शी पृष्ठभूमिं द्रष्टुं भवद्भिः "
 "Konsole पुनः आरभ्यत इति आवश्यकम् ।"
 
-#: widgets/EditProfileDialog.cpp:2052
+#: widgets/EditProfileDialog.cpp:2059
 #, kde-format
 msgid "Default for file type"
 msgstr "सञ्चिकाप्रकारस्य कृते पूर्वनिर्धारितम्"
 
-#: widgets/EditProfileDialog.cpp:2078
+#: widgets/EditProfileDialog.cpp:2085
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4918,7 +4918,7 @@ msgstr ""
 "उपेक्षितं भविष्यति तथा च सञ्चिका पूर्वनिर्धारितपाठेन उद्घाटिता भविष्यति\n"
 "सम्पादक।"
 
-#: widgets/EditProfileDialog.cpp:2091
+#: widgets/EditProfileDialog.cpp:2098
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "पाठ सम्पादक कस्टम आदेश"
