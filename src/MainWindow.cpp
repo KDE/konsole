@@ -468,7 +468,7 @@ void MainWindow::setupActions()
     // Settings Menu
     _toggleMenuBarAction = KStandardAction::showMenubar(menuBar(), &QMenuBar::setVisible, collection);
     collection->setDefaultShortcut(_toggleMenuBarAction, static_cast<Qt::Modifiers>(Konsole::ACCEL) | Qt::Key_M);
-    connect(_toggleMenuBarAction, &QAction::triggered, [=] {
+    connect(_toggleMenuBarAction, &QAction::triggered, [this, collection] {
         // Remove menubar icons set for the hamburger menu, so they don't override
         // the text when they appear in the in-window menubar
         collection->action(QStringLiteral("bookmark"))->setIcon(QIcon());
