@@ -9,12 +9,12 @@
 #include "config-konsole.h"
 
 // Qt
+#include <QColor>
 #include <QDateTime>
 #include <QGuiApplication>
 #include <QMenu>
 #include <QMenuBar>
 #include <QMouseEvent>
-#include <QColor>
 #include <QScreen>
 #include <QStyleHints>
 #include <QWindow>
@@ -431,7 +431,7 @@ void MainWindow::setupActions()
 
     // File Menu
     _newTabMenuAction = new KActionMenu(QIcon::fromTheme(QStringLiteral("tab-new")), i18nc("@action:inmenu", "&New Tab"), collection);
-    collection->setDefaultShortcut(_newTabMenuAction, Konsole::ACCEL | Qt::Key_T);
+    collection->setDefaultShortcut(_newTabMenuAction, static_cast<Qt::Modifiers>(Konsole::ACCEL) | Qt::Key_T);
     collection->setShortcutsConfigurable(_newTabMenuAction, true);
     _newTabMenuAction->setAutoRepeat(false);
     connect(_newTabMenuAction, &KActionMenu::triggered, this, &MainWindow::newTab);
@@ -448,14 +448,14 @@ void MainWindow::setupActions()
     menuAction = collection->addAction(QStringLiteral("new-window"));
     menuAction->setIcon(QIcon::fromTheme(QStringLiteral("window-new")));
     menuAction->setText(i18nc("@action:inmenu", "New &Window"));
-    collection->setDefaultShortcut(menuAction, Konsole::ACCEL | Qt::Key_N);
+    collection->setDefaultShortcut(menuAction, static_cast<Qt::Modifiers>(Konsole::ACCEL) | Qt::Key_N);
     menuAction->setAutoRepeat(false);
     connect(menuAction, &QAction::triggered, this, &Konsole::MainWindow::newWindow);
 
     menuAction = collection->addAction(QStringLiteral("close-window"));
     menuAction->setIcon(QIcon::fromTheme(QStringLiteral("window-close")));
     menuAction->setText(i18nc("@action:inmenu", "Close Window"));
-    collection->setDefaultShortcut(menuAction, Konsole::ACCEL | Qt::Key_Q);
+    collection->setDefaultShortcut(menuAction, static_cast<Qt::Modifiers>(Konsole::ACCEL) | Qt::Key_Q);
     connect(menuAction, &QAction::triggered, this, &Konsole::MainWindow::close);
 
     // Bookmark Menu
@@ -467,7 +467,7 @@ void MainWindow::setupActions()
 
     // Settings Menu
     _toggleMenuBarAction = KStandardAction::showMenubar(menuBar(), &QMenuBar::setVisible, collection);
-    collection->setDefaultShortcut(_toggleMenuBarAction, Konsole::ACCEL | Qt::Key_M);
+    collection->setDefaultShortcut(_toggleMenuBarAction, static_cast<Qt::Modifiers>(Konsole::ACCEL) | Qt::Key_M);
     connect(_toggleMenuBarAction, &QAction::triggered, [=] {
         // Remove menubar icons set for the hamburger menu, so they don't override
         // the text when they appear in the in-window menubar
@@ -505,7 +505,7 @@ void MainWindow::setupActions()
     // Set up an shortcut-only action for activating menu bar.
     menuAction = collection->addAction(QStringLiteral("activate-menu"));
     menuAction->setText(i18nc("@item", "Activate Menu"));
-    collection->setDefaultShortcut(menuAction, Konsole::ACCEL | Qt::Key_F10);
+    collection->setDefaultShortcut(menuAction, static_cast<Qt::Modifiers>(Konsole::ACCEL) | Qt::Key_F10);
     connect(menuAction, &QAction::triggered, this, &Konsole::MainWindow::activateMenuBar);
 
     auto action = collection->addAction(QStringLiteral("save-layout"));

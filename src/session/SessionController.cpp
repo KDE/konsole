@@ -668,7 +668,7 @@ void SessionController::setupCommonActions()
     action->setText(i18n("&Close Session"));
 
     action->setIcon(QIcon::fromTheme(QStringLiteral("tab-close")));
-    collection->setDefaultShortcut(action, Konsole::ACCEL | Qt::Key_W);
+    collection->setDefaultShortcut(action, static_cast<Qt::Modifiers>(Konsole::ACCEL) | Qt::Key_W);
 
     // Open Browser
     action = collection->addAction(QStringLiteral("open-browser"), this, &SessionController::openBrowser);
@@ -678,7 +678,7 @@ void SessionController::setupCommonActions()
     // Copy and Paste
     action = KStandardAction::copy(this, &SessionController::copy, collection);
     QList<QKeySequence> copyShortcut;
-    copyShortcut.append(QKeySequence(Konsole::ACCEL | Qt::Key_C));
+    copyShortcut.append(QKeySequence(static_cast<Qt::Modifiers>(Konsole::ACCEL) | Qt::Key_C));
     copyShortcut.append(QKeySequence(Qt::CTRL | Qt::Key_Insert));
     collection->setDefaultShortcuts(action, copyShortcut);
     // disabled at first, since nothing has been selected now
@@ -723,7 +723,7 @@ void SessionController::setupCommonActions()
 
     action = KStandardAction::paste(this, &SessionController::paste, collection);
     QList<QKeySequence> pasteShortcut;
-    pasteShortcut.append(QKeySequence(Konsole::ACCEL | Qt::Key_V));
+    pasteShortcut.append(QKeySequence(static_cast<Qt::Modifiers>(Konsole::ACCEL) | Qt::Key_V));
 #ifndef Q_OS_MACOS
     // No Insert key on Mac keyboards
     pasteShortcut.append(QKeySequence(Qt::SHIFT | Qt::Key_Insert));
@@ -771,7 +771,7 @@ void SessionController::setupCommonActions()
 
     action = KStandardAction::print(this, &SessionController::requestPrint, collection);
     action->setText(i18n("&Print Screen..."));
-    collection->setDefaultShortcut(action, Konsole::ACCEL | Qt::Key_P);
+    collection->setDefaultShortcut(action, static_cast<Qt::Modifiers>(Konsole::ACCEL) | Qt::Key_P);
 
     action = collection->addAction(QStringLiteral("adjust-history"), this, &SessionController::showHistoryOptions);
     action->setText(i18n("Adjust Scrollback..."));
@@ -784,7 +784,7 @@ void SessionController::setupCommonActions()
     action = collection->addAction(QStringLiteral("clear-history-and-reset"), this, &SessionController::clearHistoryAndReset);
     action->setText(i18n("Clear Scrollback and Reset"));
     action->setIcon(QIcon::fromTheme(QStringLiteral("edit-clear-history")));
-    collection->setDefaultShortcut(action, Konsole::ACCEL | Qt::Key_K);
+    collection->setDefaultShortcut(action, static_cast<Qt::Modifiers>(Konsole::ACCEL) | Qt::Key_K);
 
     // Profile Options
     action = collection->addAction(QStringLiteral("edit-current-profile"), this, &SessionController::editCurrentProfile);
@@ -880,13 +880,13 @@ void SessionController::setupExtraActions()
     // Copy input to ==> selected tabs
     auto *copyInputToSelectedTabsAction = collection->add<KToggleAction>(QStringLiteral("copy-input-to-selected-tabs"));
     copyInputToSelectedTabsAction->setText(i18n("&Select Tabs..."));
-    collection->setDefaultShortcut(copyInputToSelectedTabsAction, Konsole::ACCEL | Qt::Key_Period);
+    collection->setDefaultShortcut(copyInputToSelectedTabsAction, static_cast<Qt::Modifiers>(Konsole::ACCEL) | Qt::Key_Period);
     copyInputToSelectedTabsAction->setData(CopyInputToSelectedTabsMode);
 
     // Copy input to ==> none
     auto *copyInputToNoneAction = collection->add<KToggleAction>(QStringLiteral("copy-input-to-none"));
     copyInputToNoneAction->setText(i18nc("@action:inmenu Do not select any tabs", "&None"));
-    collection->setDefaultShortcut(copyInputToNoneAction, Konsole::ACCEL | Qt::Key_Slash);
+    collection->setDefaultShortcut(copyInputToNoneAction, static_cast<Qt::Modifiers>(Konsole::ACCEL) | Qt::Key_Slash);
     copyInputToNoneAction->setData(CopyInputToNoneMode);
     copyInputToNoneAction->setChecked(true); // the default state
 
@@ -912,20 +912,20 @@ void SessionController::setupExtraActions()
     action->setIcon(QIcon::fromTheme(QStringLiteral("tools-media-optical-burn")));
 
     toggleAction = new KToggleAction(i18n("Monitor for &Prompt"), this);
-    collection->setDefaultShortcut(toggleAction, Konsole::ACCEL | Qt::Key_R);
+    collection->setDefaultShortcut(toggleAction, static_cast<Qt::Modifiers>(Konsole::ACCEL) | Qt::Key_R);
     action = collection->addAction(QStringLiteral("monitor-prompt"), toggleAction);
     connect(action, &QAction::toggled, this, &Konsole::SessionController::monitorPrompt);
     action->setIcon(QIcon::fromTheme(QStringLiteral("tools-media-optical-burn")));
     action->setVisible(false);
 
     toggleAction = new KToggleAction(i18n("Monitor for &Activity"), this);
-    collection->setDefaultShortcut(toggleAction, Konsole::ACCEL | Qt::Key_A);
+    collection->setDefaultShortcut(toggleAction, static_cast<Qt::Modifiers>(Konsole::ACCEL) | Qt::Key_A);
     action = collection->addAction(QStringLiteral("monitor-activity"), toggleAction);
     connect(action, &QAction::toggled, this, &Konsole::SessionController::monitorActivity);
     action->setIcon(QIcon::fromTheme(QStringLiteral("tools-media-optical-burn")));
 
     toggleAction = new KToggleAction(i18n("Monitor for &Silence"), this);
-    collection->setDefaultShortcut(toggleAction, Konsole::ACCEL | Qt::Key_I);
+    collection->setDefaultShortcut(toggleAction, static_cast<Qt::Modifiers>(Konsole::ACCEL) | Qt::Key_I);
     action = collection->addAction(QStringLiteral("monitor-silence"), toggleAction);
     connect(action, &QAction::toggled, this, &Konsole::SessionController::monitorSilence);
     action->setIcon(QIcon::fromTheme(QStringLiteral("tools-media-optical-copy")));
@@ -2111,7 +2111,7 @@ void SessionController::showDisplayContextMenu(const QPoint &position)
 
         // We don't actually use this shortcut, but we need to display it for consistency :/
         QAction *copy = actionCollection()->action(QStringLiteral("edit_copy_contextmenu"));
-        copy->setShortcut(Konsole::ACCEL | Qt::Key_C);
+        copy->setShortcut(static_cast<Qt::Modifiers>(Konsole::ACCEL) | Qt::Key_C);
 
         // Adds a "Open Folder With" action
         const QUrl currentUrl = url().isLocalFile() ? url() : QUrl::fromLocalFile(QDir::homePath());
