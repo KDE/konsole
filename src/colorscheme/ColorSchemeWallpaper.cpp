@@ -98,7 +98,7 @@ bool ColorSchemeWallpaper::isNull() const
     return _path.isEmpty();
 }
 
-bool ColorSchemeWallpaper::draw(QPainter &painter, const QRect& rect, qreal bgColorOpacity, const QColor &backgroundColor)
+bool ColorSchemeWallpaper::draw(QPainter &painter, const QRect &rect, qreal bgColorOpacity, const QColor &backgroundColor)
 {
     if ((_picture == nullptr) || _picture->isNull()) {
         return false;
@@ -200,12 +200,21 @@ Qt::AspectRatioMode ColorSchemeWallpaper::RatioMode()
 QImage ColorSchemeWallpaper::FlipImage(const QImage &image, const ColorSchemeWallpaper::FlipType flipType)
 {
     switch (flipType) {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 9, 0)
+    case Horizontal:
+        return image.flipped(Qt::Horizontal);
+    case Vertical:
+        return image.flipped(Qt::Vertical);
+    case Both:
+        return image.flipped(Qt::Horizontal | Qt::Vertical);
+#else
     case Horizontal:
         return image.mirrored(true, false);
     case Vertical:
         return image.mirrored(false, true);
     case Both:
         return image.mirrored(true, true);
+#endif
     default:
         return image;
     }
