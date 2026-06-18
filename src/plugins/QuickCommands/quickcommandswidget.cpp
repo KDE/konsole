@@ -314,7 +314,10 @@ void QuickCommandsWidget::runShellCheck()
     }
 
     QTemporaryFile file;
-    file.open();
+    if (!file.open()) {
+        qCWarning(KonsoleDebug) << "Failed to open temporary file";
+        return;
+    }
 
     QTextStream ts(&file);
     ts << "#!/bin/bash\n";
