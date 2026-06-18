@@ -24,6 +24,7 @@
 #include <QColor>
 #include <QDir>
 #include <QFile>
+#include <QFutureWatcher>
 #include <QKeyEvent>
 #include <QRandomGenerator>
 #include <QRegularExpression>
@@ -2583,6 +2584,7 @@ QString Session::activationToken(const QString &cookieForRequest) const
 
     // we need to filter the response with the request serial
     const int launchedSerial = KWaylandExtras::self()->lastInputSerial(window->window()->windowHandle());
+#if KWINDOWSYSTEM_VERSION < QT_VERSION_CHECK(6, 19, 0)
     connect(
         KWaylandExtras::self(),
         &KWaylandExtras::xdgActivationTokenArrived,
@@ -2599,6 +2601,17 @@ QString Session::activationToken(const QString &cookieForRequest) const
         Qt::SingleShotConnection);
 
     KWaylandExtras::requestXdgActivationToken(window->window()->windowHandle(), launchedSerial, {});
+#else
+    auto *watch = new QFutureWatcher<QString>();
+    watch->setFuture(KWaylandExtras::xdgActivationToken(window->window()->windowHandle(), launchedSerial, {}));
+    connect(watch, &QFutureWatcher<QString>::finished, this, [msg, watch]() {
+        const auto token = watch->result();
+        auto reply = msg.createReply(token);
+        QDBusConnection::sessionBus().send(reply);
+
+        watch->deleteLater();
+    });
+#endif
 
 #endif
 
