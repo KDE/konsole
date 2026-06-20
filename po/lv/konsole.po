@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-17 00:49+0000\n"
+"POT-Creation-Date: 2026-06-20 00:47+0000\n"
 "PO-Revision-Date: 2025-06-21 13:10+0300\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -698,12 +698,19 @@ msgstr ""
 msgid "Distrobox"
 msgstr ""
 
-#: containers/KapsuleDetector.cpp:33
+#: containers/KapsuleDetector.cpp:36
 #, kde-format
 msgid "Kapsule"
 msgstr ""
 
-#: containers/KapsuleDetector.cpp:79
+#: containers/KapsuleDetector.cpp:61 containers/KapsuleDetector.cpp:64
+#, fuzzy, kde-format
+#| msgctxt "@action Shortcut entry"
+#| msgid "Next View Container"
+msgid "Kapsule Container"
+msgstr "Nākamais skata ietvars"
+
+#: containers/KapsuleDetector.cpp:99
 #, fuzzy, kde-format
 #| msgctxt "@label:textbox added to the name of the current default profile"
 #| msgid " [Default]"
@@ -760,7 +767,7 @@ msgstr ""
 msgid "Copy Location"
 msgstr "Kopēt vietu"
 
-#: filterHotSpots/FileFilterHotspot.cpp:280
+#: filterHotSpots/FileFilterHotspot.cpp:285
 #, kde-format
 msgid "Generating Thumbnail"
 msgstr "Veido sīktēlu"
@@ -1422,7 +1429,7 @@ msgstr "Komanda"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #: plugins/QuickCommands/qcwidget.ui:193
-#: plugins/QuickCommands/quickcommandswidget.cpp:333
+#: plugins/QuickCommands/quickcommandswidget.cpp:336
 #, kde-format
 msgid "Warnings"
 msgstr "Brīdinājumi"
@@ -1547,7 +1554,7 @@ msgstr "Pārdēvēt"
 msgid "Delete"
 msgstr "Dzēst"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:335
+#: plugins/QuickCommands/quickcommandswidget.cpp:338
 #, kde-format
 msgid "Warnings (*)"
 msgstr "Brīdinājumi (*)"
@@ -2149,28 +2156,28 @@ msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"
 msgstr "Ierakstiet meklējamās cilnes nosaukumu"
 
-#: session/Session.cpp:132
+#: session/Session.cpp:133
 #, kde-format
 msgid "Bell in '%1' (Session '%2')"
 msgstr "Zvans „%1“ (sesija „%2“)"
 
-#: session/Session.cpp:435
+#: session/Session.cpp:436
 #, kde-format
 msgid "Could not find binary: "
 msgstr "Neizdevās atrast izpildāmu datni: "
 
-#: session/Session.cpp:444
+#: session/Session.cpp:445
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Brīdinājums: "
 
-#: session/Session.cpp:539
+#: session/Session.cpp:540
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "Neizdevās atrast interaktīvu čaulu, ko palaist."
 
-#: session/Session.cpp:545 session/Session.cpp:548
+#: session/Session.cpp:546 session/Session.cpp:549
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2178,17 +2185,17 @@ msgid ""
 msgstr ""
 "Neizdevās atrast „%1“, tā vietā palaiž „%2“. Pārbaudiet profila iestatījumus."
 
-#: session/Session.cpp:641
+#: session/Session.cpp:642
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Neizdevās palaist programmu „%1“ ar parametriem „%2“."
 
-#: session/Session.cpp:817
+#: session/Session.cpp:818
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Klusums „%1“ (sesija „%2“)"
 
-#: session/Session.cpp:818 session/Session.cpp:2345
+#: session/Session.cpp:819 session/Session.cpp:2355
 #: session/SessionController.cpp:381 session/SessionController.cpp:1927
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1280
 #: Vt102Emulation.cpp:1535
@@ -2196,33 +2203,33 @@ msgstr "Klusums „%1“ (sesija „%2“)"
 msgid "Show session"
 msgstr "Parādīt sesiju"
 
-#: session/Session.cpp:1134
+#: session/Session.cpp:1135
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Pabeigts"
 
-#: session/Session.cpp:1148 session/Session.cpp:1164
+#: session/Session.cpp:1149 session/Session.cpp:1165
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Programma „%1“ avarēja."
 
-#: session/Session.cpp:1150
+#: session/Session.cpp:1151
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "Programma „%1“ beidza darbu ar statusu „%2“."
 
-#: session/Session.cpp:1713
+#: session/Session.cpp:1714
 #, kde-format
 msgid "ZModem Progress"
 msgstr "„ZModem“ progress"
 
-#: session/Session.cpp:2344
+#: session/Session.cpp:2354
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Aktivitāte „%1“ (sesija „%2“)"
 
-#: session/Session.cpp:2615
+#: session/Session.cpp:2637
 #, kde-format
 msgid "Security sensitive DBus API is disabled in the settings."
 msgstr ""
@@ -3858,19 +3865,19 @@ msgstr "Semantiskie ieteikumi "
 msgid "Line numbers "
 msgstr "Rindu numuri "
 
-#: ViewManager.cpp:1283
+#: ViewManager.cpp:1279
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Saglabāt ciļņu izkārtojumu"
 
-#: ViewManager.cpp:1285 ViewManager.cpp:1406
+#: ViewManager.cpp:1281 ViewManager.cpp:1402
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "„Konsole“ skata izkārtojums (*.json)"
 
-#: ViewManager.cpp:1301
+#: ViewManager.cpp:1297
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3880,7 +3887,7 @@ msgstr ""
 "Saglabājot izkārtojumu, radās problēma.\n"
 "%1"
 
-#: ViewManager.cpp:1393
+#: ViewManager.cpp:1389
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3890,7 +3897,7 @@ msgstr ""
 "Ielādējot izkārtojumu, radās problēma.\n"
 "%1"
 
-#: ViewManager.cpp:1404
+#: ViewManager.cpp:1400
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"

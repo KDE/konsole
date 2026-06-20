@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-17 00:49+0000\n"
+"POT-Creation-Date: 2026-06-20 00:47+0000\n"
 "PO-Revision-Date: 2026-06-05 17:24+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -715,12 +715,19 @@ msgstr ""
 msgid "Distrobox"
 msgstr "Distrobox"
 
-#: containers/KapsuleDetector.cpp:33
+#: containers/KapsuleDetector.cpp:36
 #, kde-format
 msgid "Kapsule"
 msgstr "Kapsule"
 
-#: containers/KapsuleDetector.cpp:79
+#: containers/KapsuleDetector.cpp:61 containers/KapsuleDetector.cpp:64
+#, fuzzy, kde-format
+#| msgctxt "As in Distrobox, Toolbox, Kapsule etc."
+#| msgid "Container"
+msgid "Kapsule Container"
+msgstr "Contenedor"
+
+#: containers/KapsuleDetector.cpp:99
 #, kde-format
 msgid " [default]"
 msgstr " [predeterminado]"
@@ -775,7 +782,7 @@ msgstr ""
 msgid "Copy Location"
 msgstr "Copiar ubicación"
 
-#: filterHotSpots/FileFilterHotspot.cpp:280
+#: filterHotSpots/FileFilterHotspot.cpp:285
 #, kde-format
 msgid "Generating Thumbnail"
 msgstr "Generando miniatura"
@@ -1440,7 +1447,7 @@ msgstr "Orden"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #: plugins/QuickCommands/qcwidget.ui:193
-#: plugins/QuickCommands/quickcommandswidget.cpp:333
+#: plugins/QuickCommands/quickcommandswidget.cpp:336
 #, kde-format
 msgid "Warnings"
 msgstr "Advertencias"
@@ -1566,7 +1573,7 @@ msgstr "Cambiar nombre"
 msgid "Delete"
 msgstr "Borrar"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:335
+#: plugins/QuickCommands/quickcommandswidget.cpp:338
 #, kde-format
 msgid "Warnings (*)"
 msgstr "Advertencias (*)"
@@ -2172,28 +2179,28 @@ msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"
 msgstr "Introduzca aquí un nombre de pestaña para buscar"
 
-#: session/Session.cpp:132
+#: session/Session.cpp:133
 #, kde-format
 msgid "Bell in '%1' (Session '%2')"
 msgstr "Timbre en «%1» (sesión «%2»)"
 
-#: session/Session.cpp:435
+#: session/Session.cpp:436
 #, kde-format
 msgid "Could not find binary: "
 msgstr "No fue posible encontrar el binario: "
 
-#: session/Session.cpp:444
+#: session/Session.cpp:445
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Advertencia: "
 
-#: session/Session.cpp:539
+#: session/Session.cpp:540
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "No fue posible encontrar una shell interactiva."
 
-#: session/Session.cpp:545 session/Session.cpp:548
+#: session/Session.cpp:546 session/Session.cpp:549
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2202,17 +2209,17 @@ msgstr ""
 "No fue posible encontrar «%1», iniciando «%2» en su lugar. Revise la "
 "configuración de su perfil."
 
-#: session/Session.cpp:641
+#: session/Session.cpp:642
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "No fue posible iniciar «%1» con los argumentos «%2»."
 
-#: session/Session.cpp:817
+#: session/Session.cpp:818
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Silencio en «%1» (sesión «%2»)"
 
-#: session/Session.cpp:818 session/Session.cpp:2345
+#: session/Session.cpp:819 session/Session.cpp:2355
 #: session/SessionController.cpp:381 session/SessionController.cpp:1927
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1280
 #: Vt102Emulation.cpp:1535
@@ -2220,33 +2227,33 @@ msgstr "Silencio en «%1» (sesión «%2»)"
 msgid "Show session"
 msgstr "Mostrar sesión"
 
-#: session/Session.cpp:1134
+#: session/Session.cpp:1135
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Finalizado"
 
-#: session/Session.cpp:1148 session/Session.cpp:1164
+#: session/Session.cpp:1149 session/Session.cpp:1165
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "El programa «%1» se cerró inesperadamente."
 
-#: session/Session.cpp:1150
+#: session/Session.cpp:1151
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "El programa «%1» finalizó con el estado %2."
 
-#: session/Session.cpp:1713
+#: session/Session.cpp:1714
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Progreso de ZModem"
 
-#: session/Session.cpp:2344
+#: session/Session.cpp:2354
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Actividad en «%1» (sesión «%2»)"
 
-#: session/Session.cpp:2615
+#: session/Session.cpp:2637
 #, kde-format
 msgid "Security sensitive DBus API is disabled in the settings."
 msgstr ""
@@ -3881,19 +3888,19 @@ msgstr "Sugerencias semánticas "
 msgid "Line numbers "
 msgstr "Números de línea "
 
-#: ViewManager.cpp:1283
+#: ViewManager.cpp:1279
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Guardar configuración de pestañas"
 
-#: ViewManager.cpp:1285 ViewManager.cpp:1406
+#: ViewManager.cpp:1281 ViewManager.cpp:1402
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Diseño de vista de Konsole (*.json)"
 
-#: ViewManager.cpp:1301
+#: ViewManager.cpp:1297
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3903,7 +3910,7 @@ msgstr ""
 "Ha ocurrido un problema al guardar el diseño.\n"
 "%1"
 
-#: ViewManager.cpp:1393
+#: ViewManager.cpp:1389
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3913,7 +3920,7 @@ msgstr ""
 "Ha ocurrido un problema al cargar el diseño.\n"
 "%1"
 
-#: ViewManager.cpp:1404
+#: ViewManager.cpp:1400
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"

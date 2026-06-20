@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-17 00:49+0000\n"
+"POT-Creation-Date: 2026-06-20 00:47+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -683,12 +683,19 @@ msgstr "当 Konsole 在 Flatpak 中运行时，容器支持不可用。"
 msgid "Distrobox"
 msgstr "Distrobox"
 
-#: containers/KapsuleDetector.cpp:33
+#: containers/KapsuleDetector.cpp:36
 #, kde-format
 msgid "Kapsule"
 msgstr "Kapsule"
 
-#: containers/KapsuleDetector.cpp:79
+#: containers/KapsuleDetector.cpp:61 containers/KapsuleDetector.cpp:64
+#, fuzzy, kde-format
+#| msgctxt "As in Distrobox, Toolbox, Kapsule etc."
+#| msgid "Container"
+msgid "Kapsule Container"
+msgstr "容器"
+
+#: containers/KapsuleDetector.cpp:99
 #, kde-format
 msgid " [default]"
 msgstr " [默认]"
@@ -742,7 +749,7 @@ msgstr ""
 msgid "Copy Location"
 msgstr "复制地址"
 
-#: filterHotSpots/FileFilterHotspot.cpp:280
+#: filterHotSpots/FileFilterHotspot.cpp:285
 #, kde-format
 msgid "Generating Thumbnail"
 msgstr "正在生成缩略图"
@@ -1400,7 +1407,7 @@ msgstr "命令"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #: plugins/QuickCommands/qcwidget.ui:193
-#: plugins/QuickCommands/quickcommandswidget.cpp:333
+#: plugins/QuickCommands/quickcommandswidget.cpp:336
 #, kde-format
 msgid "Warnings"
 msgstr "警告"
@@ -1523,7 +1530,7 @@ msgstr "重命名"
 msgid "Delete"
 msgstr "删除"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:335
+#: plugins/QuickCommands/quickcommandswidget.cpp:338
 #, kde-format
 msgid "Warnings (*)"
 msgstr "警告 (*)"
@@ -2115,45 +2122,45 @@ msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"
 msgstr "在此输入要搜索的标签页名称"
 
-#: session/Session.cpp:132
+#: session/Session.cpp:133
 #, kde-format
 msgid "Bell in '%1' (Session '%2')"
 msgstr "“%1”中的系统提示 (会话“%2”)"
 
-#: session/Session.cpp:435
+#: session/Session.cpp:436
 #, kde-format
 msgid "Could not find binary: "
 msgstr "找不到二进制文件："
 
-#: session/Session.cpp:444
+#: session/Session.cpp:445
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "警告："
 
-#: session/Session.cpp:539
+#: session/Session.cpp:540
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "找不到可启动的交互式 shell。"
 
-#: session/Session.cpp:545 session/Session.cpp:548
+#: session/Session.cpp:546 session/Session.cpp:549
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
 "settings."
 msgstr "找不到“%1”，已使用“%2”替代启动。请检查配置方案的设置。"
 
-#: session/Session.cpp:641
+#: session/Session.cpp:642
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "无法以参数“%2”启动程序“%1”。"
 
-#: session/Session.cpp:817
+#: session/Session.cpp:818
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "“%1“中的静止 (会话”%2“)"
 
-#: session/Session.cpp:818 session/Session.cpp:2345
+#: session/Session.cpp:819 session/Session.cpp:2355
 #: session/SessionController.cpp:381 session/SessionController.cpp:1927
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1280
 #: Vt102Emulation.cpp:1535
@@ -2161,33 +2168,33 @@ msgstr "“%1“中的静止 (会话”%2“)"
 msgid "Show session"
 msgstr "显示会话"
 
-#: session/Session.cpp:1134
+#: session/Session.cpp:1135
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "已完成"
 
-#: session/Session.cpp:1148 session/Session.cpp:1164
+#: session/Session.cpp:1149 session/Session.cpp:1165
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "程序“%1”崩溃。"
 
-#: session/Session.cpp:1150
+#: session/Session.cpp:1151
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "程序“%1”以状态 %2 退出。"
 
-#: session/Session.cpp:1713
+#: session/Session.cpp:1714
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem 进度"
 
-#: session/Session.cpp:2344
+#: session/Session.cpp:2354
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "“%1“中的活动 (会话”%2“)"
 
-#: session/Session.cpp:2615
+#: session/Session.cpp:2637
 #, kde-format
 msgid "Security sensitive DBus API is disabled in the settings."
 msgstr "安全敏感的 DBus API 在设置中已禁用。"
@@ -3783,19 +3790,19 @@ msgstr "语义提示"
 msgid "Line numbers "
 msgstr "行号 "
 
-#: ViewManager.cpp:1283
+#: ViewManager.cpp:1279
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "保存标签页布局"
 
-#: ViewManager.cpp:1285 ViewManager.cpp:1406
+#: ViewManager.cpp:1281 ViewManager.cpp:1402
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Konsole 视图布局 (*.json)"
 
-#: ViewManager.cpp:1301
+#: ViewManager.cpp:1297
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3805,7 +3812,7 @@ msgstr ""
 "保存布局时发生问题。\n"
 "%1"
 
-#: ViewManager.cpp:1393
+#: ViewManager.cpp:1389
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3815,7 +3822,7 @@ msgstr ""
 "加载布局时发生问题。\n"
 "%1"
 
-#: ViewManager.cpp:1404
+#: ViewManager.cpp:1400
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-17 00:49+0000\n"
+"POT-Creation-Date: 2026-06-20 00:47+0000\n"
 "PO-Revision-Date: 2026-05-31 19:19-0400\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -691,12 +691,18 @@ msgstr ""
 msgid "Distrobox"
 msgstr "تارقىتىش قۇتىسى"
 
-#: containers/KapsuleDetector.cpp:33
+#: containers/KapsuleDetector.cpp:36
 #, kde-format
 msgid "Kapsule"
 msgstr "كاپسۇل"
 
-#: containers/KapsuleDetector.cpp:79
+#: containers/KapsuleDetector.cpp:61 containers/KapsuleDetector.cpp:64
+#, fuzzy, kde-format
+#| msgid "Container"
+msgid "Kapsule Container"
+msgstr "قاچا"
+
+#: containers/KapsuleDetector.cpp:99
 #, kde-format
 msgid " [default]"
 msgstr " [كۆڭۈلدىكى]"
@@ -751,7 +757,7 @@ msgstr ""
 msgid "Copy Location"
 msgstr "ئورنىنى كۆچۈر"
 
-#: filterHotSpots/FileFilterHotspot.cpp:280
+#: filterHotSpots/FileFilterHotspot.cpp:285
 #, kde-format
 msgid "Generating Thumbnail"
 msgstr "كىچىك سۈرەت ھاسىللاۋاتىدۇ"
@@ -1411,7 +1417,7 @@ msgstr "بۇيرۇق"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #: plugins/QuickCommands/qcwidget.ui:193
-#: plugins/QuickCommands/quickcommandswidget.cpp:333
+#: plugins/QuickCommands/quickcommandswidget.cpp:336
 #, kde-format
 msgid "Warnings"
 msgstr "ئاگاھلاندۇرۇش"
@@ -1536,7 +1542,7 @@ msgstr "ئات ئۆزگەرت"
 msgid "Delete"
 msgstr "ئۆچۈر"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:335
+#: plugins/QuickCommands/quickcommandswidget.cpp:338
 #, kde-format
 msgid "Warnings (*)"
 msgstr "ئاگاھلاندۇرۇش (*)"
@@ -2137,28 +2143,28 @@ msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"
 msgstr "بۇ جايغا ئىزدەيدىغان بەتكۈچ ئاتى كىرگۈزۈلىدۇ"
 
-#: session/Session.cpp:132
+#: session/Session.cpp:133
 #, kde-format
 msgid "Bell in '%1' (Session '%2')"
 msgstr "«%1» دىكى قوڭغۇراق (جەريانچاق «%2»)"
 
-#: session/Session.cpp:435
+#: session/Session.cpp:436
 #, kde-format
 msgid "Could not find binary: "
 msgstr "ئىككىلىك ھۆججەتنى تاپالمىدى: "
 
-#: session/Session.cpp:444
+#: session/Session.cpp:445
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "ئاگاھلاندۇرۇش: "
 
-#: session/Session.cpp:539
+#: session/Session.cpp:540
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "قوزغىتىدىغان تەسىرلىشىشچان shell نى تاپالمىدى."
 
-#: session/Session.cpp:545 session/Session.cpp:548
+#: session/Session.cpp:546 session/Session.cpp:549
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2166,17 +2172,17 @@ msgid ""
 msgstr ""
 "«%1» تېپىلمىدى، شۇڭا «%2» نى باشلاڭ. سەپلىمە ھۆججەت تەڭشىكىنى تەكشۈرۈڭ."
 
-#: session/Session.cpp:641
+#: session/Session.cpp:642
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "پىروگرامما «%1» نى «%2» ئۆزگەرگۈچى بىلەن باشلىغىلى بولمىدى."
 
-#: session/Session.cpp:817
+#: session/Session.cpp:818
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "«%1» دا جىمجىت (جەريانچاق «%2»)"
 
-#: session/Session.cpp:818 session/Session.cpp:2345
+#: session/Session.cpp:819 session/Session.cpp:2355
 #: session/SessionController.cpp:381 session/SessionController.cpp:1927
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1280
 #: Vt102Emulation.cpp:1535
@@ -2184,33 +2190,33 @@ msgstr "«%1» دا جىمجىت (جەريانچاق «%2»)"
 msgid "Show session"
 msgstr "جەريانچاقنى كۆرسەت"
 
-#: session/Session.cpp:1134
+#: session/Session.cpp:1135
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "تاماملاندى"
 
-#: session/Session.cpp:1148 session/Session.cpp:1164
+#: session/Session.cpp:1149 session/Session.cpp:1165
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "پىروگرامما «%1» غۇلىدى."
 
-#: session/Session.cpp:1150
+#: session/Session.cpp:1151
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "پىروگرامما «%1» ئاخىرلاشتى. ھالىتى %2."
 
-#: session/Session.cpp:1713
+#: session/Session.cpp:1714
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem ئىلگىرىلىشى"
 
-#: session/Session.cpp:2344
+#: session/Session.cpp:2354
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "«%1» پائالىيەت (جەريانچاق «%2»)"
 
-#: session/Session.cpp:2615
+#: session/Session.cpp:2637
 #, kde-format
 msgid "Security sensitive DBus API is disabled in the settings."
 msgstr "بىخەتەرلىكى سەزگۈر DBus API تەڭشەكتە چەكلەنگەن."
@@ -3842,19 +3848,19 @@ msgstr "مەنە ئەسكەرتىش "
 msgid "Line numbers "
 msgstr "قۇر نومۇرى "
 
-#: ViewManager.cpp:1283
+#: ViewManager.cpp:1279
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "بەتكۈچ جايلاشتۇرۇشنى ساقلا"
 
-#: ViewManager.cpp:1285 ViewManager.cpp:1406
+#: ViewManager.cpp:1281 ViewManager.cpp:1402
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Konsole كۆرۈنۈش جايلاشتۇرۇشى (*.json)"
 
-#: ViewManager.cpp:1301
+#: ViewManager.cpp:1297
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3864,7 +3870,7 @@ msgstr ""
 "جايلاشتۇرۇشنى ساقلاۋاتقاندا مەسىلە كۆرۈلدى.\n"
 "%1"
 
-#: ViewManager.cpp:1393
+#: ViewManager.cpp:1389
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3874,7 +3880,7 @@ msgstr ""
 "جايلاشتۇرۇشنى يۈكلەۋاتقاندا مەسىلە كۆرۈلدى.\n"
 "%1"
 
-#: ViewManager.cpp:1404
+#: ViewManager.cpp:1400
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"

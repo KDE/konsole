@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-17 00:49+0000\n"
+"POT-Creation-Date: 2026-06-20 00:47+0000\n"
 "PO-Revision-Date: 2024-08-04 17:18+0700\n"
 "Last-Translator: OIS <mistresssilvara@hotmail.com>\n"
 "Language-Team: Interlingue <>\n"
@@ -675,12 +675,17 @@ msgstr ""
 msgid "Distrobox"
 msgstr ""
 
-#: containers/KapsuleDetector.cpp:33
+#: containers/KapsuleDetector.cpp:36
 #, kde-format
 msgid "Kapsule"
 msgstr ""
 
-#: containers/KapsuleDetector.cpp:79
+#: containers/KapsuleDetector.cpp:61 containers/KapsuleDetector.cpp:64
+#, fuzzy, kde-format
+msgid "Kapsule Container"
+msgstr "&Interrupter li tache"
+
+#: containers/KapsuleDetector.cpp:99
 #, fuzzy, kde-format
 #| msgctxt "@label:textbox added to the name of the current default profile"
 #| msgid " [Default]"
@@ -734,7 +739,7 @@ msgstr "Parametres"
 msgid "Copy Location"
 msgstr "Copiar li localisation"
 
-#: filterHotSpots/FileFilterHotspot.cpp:280
+#: filterHotSpots/FileFilterHotspot.cpp:285
 #, kde-format
 msgid "Generating Thumbnail"
 msgstr "Generante un miniatura"
@@ -1385,7 +1390,7 @@ msgstr "Comande"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #: plugins/QuickCommands/qcwidget.ui:193
-#: plugins/QuickCommands/quickcommandswidget.cpp:333
+#: plugins/QuickCommands/quickcommandswidget.cpp:336
 #, kde-format
 msgid "Warnings"
 msgstr "Avises"
@@ -1507,7 +1512,7 @@ msgstr "Renominar"
 msgid "Delete"
 msgstr "Remover"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:335
+#: plugins/QuickCommands/quickcommandswidget.cpp:338
 #, kde-format
 msgid "Warnings (*)"
 msgstr "Avises (*)"
@@ -2097,45 +2102,45 @@ msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"
 msgstr "Cluder li panel de sercha"
 
-#: session/Session.cpp:132
+#: session/Session.cpp:133
 #, fuzzy, kde-format
 msgid "Bell in '%1' (Session '%2')"
 msgstr "Activitá in «%1» (Session «%2»)"
 
-#: session/Session.cpp:435
+#: session/Session.cpp:436
 #, fuzzy, kde-format
 msgid "Could not find binary: "
 msgstr "Ne coresponde"
 
-#: session/Session.cpp:444
+#: session/Session.cpp:445
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Avise: "
 
-#: session/Session.cpp:539
+#: session/Session.cpp:540
 #, fuzzy, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "Li titul assignat de shell: %w"
 
-#: session/Session.cpp:545 session/Session.cpp:548
+#: session/Session.cpp:546 session/Session.cpp:549
 #, fuzzy, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
 "settings."
 msgstr "OIS"
 
-#: session/Session.cpp:641
+#: session/Session.cpp:642
 #, fuzzy, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Comande e li argumentes: %c"
 
-#: session/Session.cpp:817
+#: session/Session.cpp:818
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Ínactivitá in «%1» (Session «%2»)"
 
-#: session/Session.cpp:818 session/Session.cpp:2345
+#: session/Session.cpp:819 session/Session.cpp:2355
 #: session/SessionController.cpp:381 session/SessionController.cpp:1927
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1280
 #: Vt102Emulation.cpp:1535
@@ -2143,33 +2148,33 @@ msgstr "Ínactivitá in «%1» (Session «%2»)"
 msgid "Show session"
 msgstr "Monstrar li session"
 
-#: session/Session.cpp:1134
+#: session/Session.cpp:1135
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Completat"
 
-#: session/Session.cpp:1148 session/Session.cpp:1164
+#: session/Session.cpp:1149 session/Session.cpp:1165
 #, fuzzy, kde-format
 msgid "Program '%1' crashed."
 msgstr "Cluder li programma"
 
-#: session/Session.cpp:1150
+#: session/Session.cpp:1151
 #, fuzzy, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "Nómine de programma: %n"
 
-#: session/Session.cpp:1713
+#: session/Session.cpp:1714
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Progresse de ZModem"
 
-#: session/Session.cpp:2344
+#: session/Session.cpp:2354
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Activitá in «%1» (Session «%2»)"
 
-#: session/Session.cpp:2615
+#: session/Session.cpp:2637
 #, kde-format
 msgid "Security sensitive DBus API is disabled in the settings."
 msgstr ""
@@ -3779,19 +3784,19 @@ msgstr "Configurar integration de  semantica (bash)"
 msgid "Line numbers "
 msgstr "Numerós de lineas"
 
-#: ViewManager.cpp:1283
+#: ViewManager.cpp:1279
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "&Configurar o renominar li carte..."
 
-#: ViewManager.cpp:1285 ViewManager.cpp:1406
+#: ViewManager.cpp:1281 ViewManager.cpp:1402
 #, fuzzy, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Fender li vise"
 
-#: ViewManager.cpp:1301
+#: ViewManager.cpp:1297
 #, fuzzy, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3799,7 +3804,7 @@ msgid ""
 "%1"
 msgstr "<html><head/><body><p>Arangeament del complex textu</p></body></html>"
 
-#: ViewManager.cpp:1393
+#: ViewManager.cpp:1389
 #, fuzzy, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3807,7 +3812,7 @@ msgid ""
 "%1"
 msgstr "<html><head/><body><p>Arangeament del complex textu</p></body></html>"
 
-#: ViewManager.cpp:1404
+#: ViewManager.cpp:1400
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"

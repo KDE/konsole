@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-17 00:49+0000\n"
+"POT-Creation-Date: 2026-06-20 00:47+0000\n"
 "PO-Revision-Date: 2009-01-29 20:59+0530\n"
 "Last-Translator: Ravishankar Shrivastava <raviratlami@aol.in>\n"
 "Language-Team: Hindi <kde-i18n-doc@lists.kde.org>\n"
@@ -771,12 +771,18 @@ msgstr ""
 msgid "Distrobox"
 msgstr ""
 
-#: containers/KapsuleDetector.cpp:33
+#: containers/KapsuleDetector.cpp:36
 #, kde-format
 msgid "Kapsule"
 msgstr ""
 
-#: containers/KapsuleDetector.cpp:79
+#: containers/KapsuleDetector.cpp:61 containers/KapsuleDetector.cpp:64
+#, fuzzy, kde-format
+#| msgid "Maintainer"
+msgid "Kapsule Container"
+msgstr "मेंटेनर"
+
+#: containers/KapsuleDetector.cpp:99
 #, fuzzy, kde-format
 #| msgid "Set as Default"
 msgid " [default]"
@@ -831,7 +837,7 @@ msgstr ""
 msgid "Copy Location"
 msgstr "संकेतक विकल्प"
 
-#: filterHotSpots/FileFilterHotspot.cpp:280
+#: filterHotSpots/FileFilterHotspot.cpp:285
 #, kde-format
 msgid "Generating Thumbnail"
 msgstr ""
@@ -1559,7 +1565,7 @@ msgstr "कमांडः"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #: plugins/QuickCommands/qcwidget.ui:193
-#: plugins/QuickCommands/quickcommandswidget.cpp:333
+#: plugins/QuickCommands/quickcommandswidget.cpp:336
 #, fuzzy, kde-format
 #| msgid "Warning: "
 msgid "Warnings"
@@ -1689,7 +1695,7 @@ msgstr "टैब ल नवा नाम देव"
 msgid "Delete"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:335
+#: plugins/QuickCommands/quickcommandswidget.cpp:338
 #, fuzzy, kde-format
 #| msgid "Warning: "
 msgid "Warnings (*)"
@@ -2309,30 +2315,30 @@ msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"
 msgstr "खोजइया पाठ इहां भरव"
 
-#: session/Session.cpp:132
+#: session/Session.cpp:133
 #, fuzzy, kde-format
 #| msgid "Bell in session '%1'"
 msgid "Bell in '%1' (Session '%2')"
 msgstr "'%1' सत्र मं घंटी"
 
-#: session/Session.cpp:435
+#: session/Session.cpp:436
 #, kde-format
 msgid "Could not find binary: "
 msgstr "द्विचर खोज नइ सकिस:"
 
-#: session/Session.cpp:444
+#: session/Session.cpp:445
 #, fuzzy, kde-format
 #| msgid "Warning: "
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "चेतावनी:"
 
-#: session/Session.cpp:539
+#: session/Session.cpp:540
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "सुरू करे बर कोनो इंटरेक्टिव सैल खोज नइ सकिस."
 
-#: session/Session.cpp:545 session/Session.cpp:548
+#: session/Session.cpp:546 session/Session.cpp:549
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2341,18 +2347,18 @@ msgstr ""
 "'%1' ल खोज नइ सकिस, बदला मं '%2' ल चालू करत हे. किरपा करके, अपन प्रोफाइल सेटिंग "
 "जांचव."
 
-#: session/Session.cpp:641
+#: session/Session.cpp:642
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "प्रोग्राम '%1' ल आर्गुमेंट '%2'.के साथ चालू नइ कर सकिस."
 
-#: session/Session.cpp:817
+#: session/Session.cpp:818
 #, fuzzy, kde-format
 #| msgid "Silence in session '%1'"
 msgid "Silence in '%1' (Session '%2')"
 msgstr "'%1' सत्र मं सांति"
 
-#: session/Session.cpp:818 session/Session.cpp:2345
+#: session/Session.cpp:819 session/Session.cpp:2355
 #: session/SessionController.cpp:381 session/SessionController.cpp:1927
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1280
 #: Vt102Emulation.cpp:1535
@@ -2361,35 +2367,35 @@ msgstr "'%1' सत्र मं सांति"
 msgid "Show session"
 msgstr "कंसोल"
 
-#: session/Session.cpp:1134
+#: session/Session.cpp:1135
 #, fuzzy, kde-format
 #| msgid "Finished"
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "पूरा"
 
-#: session/Session.cpp:1148 session/Session.cpp:1164
+#: session/Session.cpp:1149 session/Session.cpp:1165
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "प्रोग्राम '%1' क्रैस होइस."
 
-#: session/Session.cpp:1150
+#: session/Session.cpp:1151
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "प्रोग्राम '%1'  स्थिति %2 के साथ बाहिर होइस."
 
-#: session/Session.cpp:1713
+#: session/Session.cpp:1714
 #, kde-format
 msgid "ZModem Progress"
 msgstr "जेड-माडम प्रगति"
 
-#: session/Session.cpp:2344
+#: session/Session.cpp:2354
 #, fuzzy, kde-format
 #| msgid "Activity in session '%1'"
 msgid "Activity in '%1' (Session '%2')"
 msgstr "'%1' सत्र मं काम"
 
-#: session/Session.cpp:2615
+#: session/Session.cpp:2637
 #, kde-format
 msgid "Security sensitive DBus API is disabled in the settings."
 msgstr ""
@@ -4086,20 +4092,20 @@ msgstr "मुसुवा इंटरेक्सन"
 msgid "Line numbers "
 msgstr "स्थिर लाइन मन के संख्या:"
 
-#: ViewManager.cpp:1283
+#: ViewManager.cpp:1279
 #, fuzzy, kde-format
 #| msgid "Move View Left"
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "दृस्य डेरी खिसकाव"
 
-#: ViewManager.cpp:1285 ViewManager.cpp:1406
+#: ViewManager.cpp:1281 ViewManager.cpp:1402
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr ""
 
-#: ViewManager.cpp:1301
+#: ViewManager.cpp:1297
 #, fuzzy, kde-format
 #| msgid ""
 #| "A problem occurred when saving the output.\n"
@@ -4112,7 +4118,7 @@ msgstr ""
 "आउटपुट सहेजे के समय एक गलती होइस.\n"
 "%1"
 
-#: ViewManager.cpp:1393
+#: ViewManager.cpp:1389
 #, fuzzy, kde-format
 #| msgid ""
 #| "A problem occurred when saving the output.\n"
@@ -4125,7 +4131,7 @@ msgstr ""
 "आउटपुट सहेजे के समय एक गलती होइस.\n"
 "%1"
 
-#: ViewManager.cpp:1404
+#: ViewManager.cpp:1400
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"

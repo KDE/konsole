@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-17 00:49+0000\n"
+"POT-Creation-Date: 2026-06-20 00:47+0000\n"
 "PO-Revision-Date: 2011-10-05 00:26+0330\n"
 "Last-Translator: Mohamad Reza Mirdamadi <mohi@ubuntu.ir>\n"
 "Language-Team: Farsi (Persian) <>\n"
@@ -784,12 +784,18 @@ msgstr ""
 msgid "Distrobox"
 msgstr ""
 
-#: containers/KapsuleDetector.cpp:33
+#: containers/KapsuleDetector.cpp:36
 #, kde-format
 msgid "Kapsule"
 msgstr ""
 
-#: containers/KapsuleDetector.cpp:79
+#: containers/KapsuleDetector.cpp:61 containers/KapsuleDetector.cpp:64
+#, fuzzy, kde-format
+#| msgid "Maintainer"
+msgid "Kapsule Container"
+msgstr "نگه‌دارنده"
+
+#: containers/KapsuleDetector.cpp:99
 #, fuzzy, kde-format
 #| msgid "Set as Default"
 msgid " [default]"
@@ -844,7 +850,7 @@ msgstr ""
 msgid "Copy Location"
 msgstr "گزینه‌های مکان‌نما"
 
-#: filterHotSpots/FileFilterHotspot.cpp:280
+#: filterHotSpots/FileFilterHotspot.cpp:285
 #, kde-format
 msgid "Generating Thumbnail"
 msgstr ""
@@ -1569,7 +1575,7 @@ msgstr "فرمان:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #: plugins/QuickCommands/qcwidget.ui:193
-#: plugins/QuickCommands/quickcommandswidget.cpp:333
+#: plugins/QuickCommands/quickcommandswidget.cpp:336
 #, kde-format
 msgid "Warnings"
 msgstr ""
@@ -1698,7 +1704,7 @@ msgstr "تغییر نام تب"
 msgid "Delete"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:335
+#: plugins/QuickCommands/quickcommandswidget.cpp:338
 #, kde-format
 msgid "Warnings (*)"
 msgstr ""
@@ -2313,47 +2319,47 @@ msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"
 msgstr "متن را برای جستجو اینجا وارد کنید"
 
-#: session/Session.cpp:132
+#: session/Session.cpp:133
 #, fuzzy, kde-format
 #| msgid "Bell in session '%1'"
 msgid "Bell in '%1' (Session '%2')"
 msgstr "زنگ در نشست »%1«"
 
-#: session/Session.cpp:435
+#: session/Session.cpp:436
 #, kde-format
 msgid "Could not find binary: "
 msgstr ""
 
-#: session/Session.cpp:444
+#: session/Session.cpp:445
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr ""
 
-#: session/Session.cpp:539
+#: session/Session.cpp:540
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr ""
 
-#: session/Session.cpp:545 session/Session.cpp:548
+#: session/Session.cpp:546 session/Session.cpp:549
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
 "settings."
 msgstr ""
 
-#: session/Session.cpp:641
+#: session/Session.cpp:642
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr ""
 
-#: session/Session.cpp:817
+#: session/Session.cpp:818
 #, fuzzy, kde-format
 #| msgid "Silence in session '%1'"
 msgid "Silence in '%1' (Session '%2')"
 msgstr "سکوت در نشست »%1«"
 
-#: session/Session.cpp:818 session/Session.cpp:2345
+#: session/Session.cpp:819 session/Session.cpp:2355
 #: session/SessionController.cpp:381 session/SessionController.cpp:1927
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1280
 #: Vt102Emulation.cpp:1535
@@ -2362,34 +2368,34 @@ msgstr "سکوت در نشست »%1«"
 msgid "Show session"
 msgstr "Konsole"
 
-#: session/Session.cpp:1134
+#: session/Session.cpp:1135
 #, fuzzy, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "یافتن:"
 
-#: session/Session.cpp:1148 session/Session.cpp:1164
+#: session/Session.cpp:1149 session/Session.cpp:1165
 #, fuzzy, kde-format
 msgid "Program '%1' crashed."
 msgstr "نشست »%1« به طور غیرمنتظره‌ای خارج شد."
 
-#: session/Session.cpp:1150
+#: session/Session.cpp:1151
 #, fuzzy, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "نشست »%1« با وضعیت %2 خارج شد."
 
-#: session/Session.cpp:1713
+#: session/Session.cpp:1714
 #, kde-format
 msgid "ZModem Progress"
 msgstr "پیشرفت ZModem"
 
-#: session/Session.cpp:2344
+#: session/Session.cpp:2354
 #, fuzzy, kde-format
 #| msgid "Activity in session '%1'"
 msgid "Activity in '%1' (Session '%2')"
 msgstr "فعالیت در نشست »%1«"
 
-#: session/Session.cpp:2615
+#: session/Session.cpp:2637
 #, kde-format
 msgid "Security sensitive DBus API is disabled in the settings."
 msgstr ""
@@ -4065,20 +4071,20 @@ msgstr "گزینه‌های درج"
 msgid "Line numbers "
 msgstr "تعداد ثابت خطوط: "
 
-#: ViewManager.cpp:1283
+#: ViewManager.cpp:1279
 #, fuzzy, kde-format
 #| msgid "Move View Left"
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "حرکت نما به چپ"
 
-#: ViewManager.cpp:1285 ViewManager.cpp:1406
+#: ViewManager.cpp:1281 ViewManager.cpp:1402
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr ""
 
-#: ViewManager.cpp:1301
+#: ViewManager.cpp:1297
 #, fuzzy, kde-format
 #| msgid ""
 #| "A problem occurred when saving the output.\n"
@@ -4091,7 +4097,7 @@ msgstr ""
 "هنگام ذخیره خروجی مسئله‌ای رخ داد.\n"
 "%1"
 
-#: ViewManager.cpp:1393
+#: ViewManager.cpp:1389
 #, fuzzy, kde-format
 #| msgid ""
 #| "A problem occurred when saving the output.\n"
@@ -4104,7 +4110,7 @@ msgstr ""
 "هنگام ذخیره خروجی مسئله‌ای رخ داد.\n"
 "%1"
 
-#: ViewManager.cpp:1404
+#: ViewManager.cpp:1400
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
