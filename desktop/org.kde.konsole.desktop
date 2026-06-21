@@ -11,6 +11,16 @@ X-KDE-AuthorizeAction=shell_access
 X-KDE-Shortcuts=Ctrl+Alt+T
 StartupWMClass=konsole
 Keywords=terminal;console;script;run;execute;command;command-line;commandline;cli;bash;sh;shell;zsh;cmd;command prompt;xterm;tty;pty;fish;konsole
+Keywords[bg]=terminal;console;script;run;execute;command;command-line;commandline;cli;bash;sh;shell;zsh;cmd;command prompt;xterm;tty;pty;fish;konsole
+Keywords[ca]=terminal;consola;script;executar;ordre;línia d'ordres;línia ordres;cli;bash;sh;shell;zsh;cmd;indicador d'ordres;xterm;tty;pty;fish;konsole
+Keywords[ca@valencia]=terminal;consola;script;executar;ordre;línia d'ordres;línia ordres;cli;bash;sh;shell;zsh;cmd;indicador d'ordres;xterm;tty;pty;fish;konsole
+Keywords[es]=terminal;consola;script;guion;guión;lanzar;ejecutar;comando;orden;línea de órdenes;línea de comandos;cli;bash;sh;shell;intérprete;zsh;cmd;introducción de órdenes;xterm;tty;pty;fish;konsole
+Keywords[ka]=terminal;console;script;run;execute;command;command-line;commandline;cli;bash;sh;shell;zsh;cmd;command prompt;xterm;tty;pty;fish;konsole
+Keywords[nl]=terminal;console;script;run;uitvoeren;commando;commandoregel;cli;bash;sh;shell;zsh;cmd;commando-prompt;xterm;tty;pty;fish;konsole
+Keywords[pt_BR]=terminal;console;script;executar;rodar;comando;linha de comando;cli;bash;sh;shell;zsh;cmd;prompt de comando;xterm;tty;pty;fish;konsole
+Keywords[sl]=terminal;konzola;script;zaženi;izvedi;ukaz;ukazna vrstica;ukazna-vrstica;cli;bash;sh;shell;zsh;cmd;ukazni poziv;xterm;tty;pty;fish;konsole
+Keywords[tr]=uçbirim;terminal;konsol;betik;yürüt;komut;komut-satırı;komut satırı;cli;bash;sh;kabuk;shell;zsh;cmd;komut istemi;çalıştır;yürüt;run;execute;cmd;command;xterm;tty;pty;fish;konsole
+Keywords[uk]=terminal;console;script;run;execute;command;command-line;commandline;cli;bash;sh;shell;zsh;cmd;command prompt;термінал;консоль;скрипт;сценарій;виконати;запустити;команда;командний рядок;клі;командний інтерфейс;баш;оболонка;шел;зш;кмд;командний запит;xterm;tty;pty;fish;konsole
 
 Name=Konsole
 Name[af]=Konsole
@@ -195,13 +205,43 @@ GenericName[zh_CN]=终端
 GenericName[zh_TW]=終端機
 
 Comment=Use the command line
+Comment[bg]=Използване на командния ред
+Comment[ca]=Ús de la línia d'ordres
+Comment[ca@valencia]=Ús de la línia d'ordres
+Comment[es]=Usar la línea de órdenes
+Comment[ka]=ბრძანების სტრიქონის გამოყენება
+Comment[nl]=Gebruik de opdrachtregel
+Comment[pt_BR]=Usar a linha de comando
+Comment[sl]=Uporabi ukazno vrstico
+Comment[tr]=Komut satırını kullanın
+Comment[uk]=Командний рядок
 
 [Desktop Action NewWindow]
 Name=Open New Window
+Name[bg]=Отваряне на нов прозорец
+Name[ca]=Obre una finestra nova
+Name[ca@valencia]=Obri una finestra nova
+Name[es]=Abrir nueva ventana
+Name[ka]=ახალo ფანჯრის გახსნა
+Name[nl]=Nieuw venster openen
+Name[pt_BR]=Abrir nova janela
+Name[sl]=Odpri novo okno
+Name[tr]=Yeni Pencere Aç
+Name[uk]=Відкрити нове вікно
 Icon=window-new
 Exec=konsole
 
 [Desktop Action NewTab]
 Name=Open New Tab
+Name[bg]=Отваряне на нов раздел
+Name[ca]=Obre una pestanya nova
+Name[ca@valencia]=Obri una pestanya nova
+Name[es]=Abrir nueva pestaña
+Name[ka]=ახალი ჩანართის გახსნა
+Name[nl]=Nieuw tabblad openen
+Name[pt_BR]=Abrir nova aba
+Name[sl]=Odpri novi zavihek
+Name[tr]=Yeni Sekme Aç
+Name[uk]=Відкрити нову вкладку
 Icon=tab-new
 Exec=konsole --new-tab
