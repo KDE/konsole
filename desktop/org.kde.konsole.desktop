@@ -11,6 +11,7 @@ X-KDE-AuthorizeAction=shell_access
 X-KDE-Shortcuts=Ctrl+Alt+T
 StartupWMClass=konsole
 Keywords=terminal;console;script;run;execute;command;command-line;commandline;cli;bash;sh;shell;zsh;cmd;command prompt;xterm;tty;pty;fish;konsole
+Keywords[ar]=طرفية;كونسول;سكربت;شغل;نفذ;أوامر;سطر-الأوامر;سطر الأوامر;cli;باش;صدفة;شل;pty;fish;كونسول;zsh
 Keywords[bg]=terminal;console;script;run;execute;command;command-line;commandline;cli;bash;sh;shell;zsh;cmd;command prompt;xterm;tty;pty;fish;konsole
 Keywords[ca]=terminal;consola;script;executar;ordre;línia d'ordres;línia ordres;cli;bash;sh;shell;zsh;cmd;indicador d'ordres;xterm;tty;pty;fish;konsole
 Keywords[ca@valencia]=terminal;consola;script;executar;ordre;línia d'ordres;línia ordres;cli;bash;sh;shell;zsh;cmd;indicador d'ordres;xterm;tty;pty;fish;konsole
@@ -21,6 +22,7 @@ Keywords[pt_BR]=terminal;console;script;executar;rodar;comando;linha de comando;
 Keywords[sl]=terminal;konzola;script;zaženi;izvedi;ukaz;ukazna vrstica;ukazna-vrstica;cli;bash;sh;shell;zsh;cmd;ukazni poziv;xterm;tty;pty;fish;konsole
 Keywords[tr]=uçbirim;terminal;konsol;betik;yürüt;komut;komut-satırı;komut satırı;cli;bash;sh;kabuk;shell;zsh;cmd;komut istemi;çalıştır;yürüt;run;execute;cmd;command;xterm;tty;pty;fish;konsole
 Keywords[uk]=terminal;console;script;run;execute;command;command-line;commandline;cli;bash;sh;shell;zsh;cmd;command prompt;термінал;консоль;скрипт;сценарій;виконати;запустити;команда;командний рядок;клі;командний інтерфейс;баш;оболонка;шел;зш;кмд;командний запит;xterm;tty;pty;fish;konsole
+Keywords[zh_CN]=terminal;console;script;run;execute;command;command-line;commandline;cli;bash;sh;shell;zsh;cmd;command prompt;xterm;tty;pty;fish;konsole;终端;控制台;脚本;执行;运行;命令;命令行;命令行界面;外壳;命令行提示;zhongduan;kongzhitai;jiaoben;zhixing;yunxing;mingling;minglinghang;minglinghangjiemian;waike;minglinghangtishi
 
 Name=Konsole
 Name[af]=Konsole
@@ -205,6 +207,7 @@ GenericName[zh_CN]=终端
 GenericName[zh_TW]=終端機
 
 Comment=Use the command line
+Comment[ar]=استخدم سطر الأوامر
 Comment[bg]=Използване на командния ред
 Comment[ca]=Ús de la línia d'ordres
 Comment[ca@valencia]=Ús de la línia d'ordres
@@ -215,9 +218,11 @@ Comment[pt_BR]=Usar a linha de comando
 Comment[sl]=Uporabi ukazno vrstico
 Comment[tr]=Komut satırını kullanın
 Comment[uk]=Командний рядок
+Comment[zh_CN]=使用命令行
 
 [Desktop Action NewWindow]
 Name=Open New Window
+Name[ar]=افتح نافذة جديدة
 Name[bg]=Отваряне на нов прозорец
 Name[ca]=Obre una finestra nova
 Name[ca@valencia]=Obri una finestra nova
@@ -228,11 +233,13 @@ Name[pt_BR]=Abrir nova janela
 Name[sl]=Odpri novo okno
 Name[tr]=Yeni Pencere Aç
 Name[uk]=Відкрити нове вікно
+Name[zh_CN]=打开新窗口
 Icon=window-new
 Exec=konsole
 
 [Desktop Action NewTab]
 Name=Open New Tab
+Name[ar]=افتح لسانًا جديدًا
 Name[bg]=Отваряне на нов раздел
 Name[ca]=Obre una pestanya nova
 Name[ca@valencia]=Obri una pestanya nova
@@ -243,5 +250,6 @@ Name[pt_BR]=Abrir nova aba
 Name[sl]=Odpri novi zavihek
 Name[tr]=Yeni Sekme Aç
 Name[uk]=Відкрити нову вкладку
+Name[zh_CN]=打开新标签页
 Icon=tab-new
 Exec=konsole --new-tab
