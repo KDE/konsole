@@ -691,7 +691,7 @@ msgstr "Kapsule"
 #: containers/KapsuleDetector.cpp:61 containers/KapsuleDetector.cpp:64
 #, kde-format
 msgid "Kapsule Container"
-msgstr ""
+msgstr "Kapsule 容器"
 
 #: containers/KapsuleDetector.cpp:99
 #, kde-format
