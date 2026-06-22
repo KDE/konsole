@@ -271,6 +271,11 @@ void FileFilterHotSpot::thumbnailRequested()
 
     _thumbnailFinished = false;
 
+    const auto fileItem = this->fileItem();
+    if (!fileItem.exists()) {
+        return;
+    }
+
     // Show a "Loading" if Preview takes a long time.
     QTimer::singleShot(10, this, [this] {
         if (_previewJob == nullptr) {
@@ -281,7 +286,7 @@ void FileFilterHotSpot::thumbnailRequested()
         }
     });
 
-    _previewJob = new KIO::PreviewJob(KFileItemList({fileItem()}), QSize(size, size));
+    _previewJob = new KIO::PreviewJob(KFileItemList({fileItem}), QSize(size, size));
     connect(_previewJob, &KIO::PreviewJob::gotPreview, this, &FileFilterHotSpot::showThumbnail);
     connect(_previewJob, &KIO::PreviewJob::failed, this, [] {
         qCDebug(KonsoleDebug) << "Error generating the preview" << _previewJob->errorString();
