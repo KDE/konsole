@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-20 02:43+0000\n"
+"POT-Creation-Date: 2026-06-23 02:43+0000\n"
 "PO-Revision-Date: 2026-03-08 15:00+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -761,7 +761,7 @@ msgstr ""
 msgid "Copy Location"
 msgstr "Kopiatu kokalekua"
 
-#: filterHotSpots/FileFilterHotspot.cpp:280
+#: filterHotSpots/FileFilterHotspot.cpp:285
 #, kde-format
 msgid "Generating Thumbnail"
 msgstr "Koadro-txikiak sortzea"

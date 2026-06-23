@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-20 02:43+0000\n"
+"POT-Creation-Date: 2026-06-23 02:43+0000\n"
 "PO-Revision-Date: 2010-05-30 02:09-0700\n"
 "Last-Translator: Deepayan Sarkar <deepayan.sarkar@gmail.com>\n"
 "Language-Team: Bengali <kde-translation@bengalinux.org>\n"
@@ -825,7 +825,7 @@ msgstr ""
 msgid "Copy Location"
 msgstr "ইনপুট কপি করে পাঠাও"
 
-#: filterHotSpots/FileFilterHotspot.cpp:280
+#: filterHotSpots/FileFilterHotspot.cpp:285
 #, kde-format
 msgid "Generating Thumbnail"
 msgstr ""
