@@ -8,7 +8,6 @@
 #include "EscapeSequenceUrlExtractor.h"
 #include "Screen.h"
 
-#include <QHostInfo>
 #include <QUrl>
 
 namespace Konsole
@@ -42,15 +41,10 @@ void EscapeSequenceUrlExtractor::setUrl(const QString &url)
     QUrl qUrl = QUrl(url);
 
     if (_allowedUriSchemas.contains(qUrl.scheme() + QLatin1String("://"))) {
-        if (qUrl.scheme() == QLatin1String("file") && !qUrl.host().isEmpty()) {
-            if (qUrl.host() != QHostInfo::localHostName() && qUrl.host() != QLatin1String("localhost")) {
-                abortUrlInput();
-                return;
-            }
-
-            qUrl.setHost(QString());
-        }
-
+        // Keep the URL (including any host component) verbatim and let KIO
+        // resolve it when activated. Per RFC 8089 a file:// URL may carry a
+        // host naming the local machine (e.g. produced by `ls --hyperlink`);
+        // KIO's file worker strips a local host before accessing the path.
         _currentUrl.url = qUrl.toString();
     } else {
         abortUrlInput();
