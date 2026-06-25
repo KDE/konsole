@@ -1,7 +1,7 @@
 # Translation for konsole.po to Euskara/Basque (eu).
 # Copyright (C) 2002-2026 This file is copyright:
 # This file is distributed under the same license as the konsole package.
-# SPDX-FileCopyrightText: 2023, 2024, 2025, 2026 KDE euskaratzeko proiektuaren arduraduna <xalba@ni.eus>
+# SPDX-FileCopyrightText: 2023-2026 KDE euskaratzeko proiektuaren arduraduna <xalba@ni.eus>
 #
 # Translators:
 # Marcos  <marcos@euskalgnu.org>, 2002, 2003, 2005, 2006.
@@ -14,14 +14,14 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-06-20 00:47+0000\n"
-"PO-Revision-Date: 2026-03-08 15:00+0100\n"
+"PO-Revision-Date: 2026-06-25 00:20+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 25.12.3\n"
+"X-Generator: Lokalize 26.04.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #, kde-format
@@ -707,10 +707,9 @@ msgid "Kapsule"
 msgstr "Kapsule"
 
 #: containers/KapsuleDetector.cpp:61 containers/KapsuleDetector.cpp:64
-#, fuzzy, kde-format
-#| msgid "Maintainer"
+#, kde-format
 msgid "Kapsule Container"
-msgstr "Mantentzailea"
+msgstr "Kapsule edukiontzia"
 
 #: containers/KapsuleDetector.cpp:99
 #, kde-format
@@ -1994,14 +1993,13 @@ msgstr " [Lehenetsia]"
 #, kde-format
 msgctxt "@label:textbox added to profile name when used for light system theme"
 msgid " [Light]"
-msgstr ""
+msgstr " [Argia]"
 
 #: profile/ProfileModel.cpp:94
-#, fuzzy, kde-format
-#| msgid "Darken"
+#, kde-format
 msgctxt "@label:textbox added to profile name when used for dark system theme"
 msgid " [Dark]"
-msgstr "Ilundu"
+msgstr " [Iluna]"
 
 #: profile/ProfileModel.cpp:110
 #, kde-format
@@ -2690,7 +2688,7 @@ msgstr "Erakutsi aurrerapena ataza-barran"
 #: settings/GeneralSettings.ui:112
 #, kde-format
 msgid "Automatically switch profile based on system theme"
-msgstr ""
+msgstr "Sistemaren gaian oinarrituta profila automatikoki aldatu"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/GeneralSettings.ui:119
@@ -3057,19 +3055,19 @@ msgstr "Atzerantz kiribiltzeko fitxategietarako, erabili karpeta hau"
 #: settings/konsole.kcfg:238
 #, kde-format
 msgid "Sync profile with system theme"
-msgstr ""
+msgstr "Profila sistemaren gaiarekin sinkronizatu"
 
 #. i18n: ectx: label, entry (LightThemeProfile), group (LightDarkTheme)
 #: settings/konsole.kcfg:242
 #, kde-format
 msgid "Profile to use for light system theme"
-msgstr ""
+msgstr "Sistemaren gai argietarako erabili beharreko profila"
 
 #. i18n: ectx: label, entry (DarkThemeProfile), group (LightDarkTheme)
 #: settings/konsole.kcfg:246
 #, kde-format
 msgid "Profile to use for dark system theme"
-msgstr ""
+msgstr "Sistemaren gai ilunetarako erabili beharreko profila"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableMemoryMonitoring)
 #: settings/MemorySettings.ui:17
@@ -3178,31 +3176,27 @@ msgstr "&Ezarri lehenetsi gisa"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, setLightProfileButton)
 #: settings/ProfileSettings.ui:103
-#, fuzzy, kde-format
-#| msgid "Set the selected profile as the default for new terminal sessions"
+#, kde-format
 msgid "Set the selected profile as the light theme profile"
-msgstr "Ezarri hautatutako profila lehenetsi gisa terminal saio berrientzat"
+msgstr "Hautatutako profila gai argiaren profil gisa ezarri"
 
 #. i18n: ectx: property (text), widget (QPushButton, setLightProfileButton)
 #: settings/ProfileSettings.ui:106
-#, fuzzy, kde-format
-#| msgid "&Set as Default"
+#, kde-format
 msgid "&Set as Light"
-msgstr "&Ezarri lehenetsi gisa"
+msgstr "E&zarri Argi gisa"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, setDarkProfileButton)
 #: settings/ProfileSettings.ui:116
-#, fuzzy, kde-format
-#| msgid "Set the selected profile as the default for new terminal sessions"
+#, kde-format
 msgid "Set the selected profile as the dark theme profile"
-msgstr "Ezarri hautatutako profila lehenetsi gisa terminal saio berrientzat"
+msgstr "Hautatutako profila gai ilunaren profil gisa ezarri"
 
 #. i18n: ectx: property (text), widget (QPushButton, setDarkProfileButton)
 #: settings/ProfileSettings.ui:119
-#, fuzzy, kde-format
-#| msgid "&Set as Default"
+#, kde-format
 msgid "&Set as Dark"
-msgstr "&Ezarri lehenetsi gisa"
+msgstr "E&zarri Ilun gisa"
 
 #. i18n: ectx: attribute (title), widget (QWidget, appearanceTab)
 #: settings/TabBarSettings.ui:39
@@ -4000,12 +3994,14 @@ msgid ""
 "Allow terminal programs to use the Kitty keyboard protocol for enhanced "
 "keyboard input"
 msgstr ""
+"Teklatu sarrera hobetzeko, baimendu terminaleko programei Kitty teklatu-"
+"protokola erabiltzea"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableKittyKeyboardButton)
 #: widgets/EditProfileAdvancedPage.ui:215
 #, kde-format
 msgid "Kitty keyboard protocol"
-msgstr ""
+msgstr "Kitty teklatu-protokoloa"
 
 #. i18n: ectx: property (text), widget (QLabel, label_14)
 #: widgets/EditProfileAdvancedPage.ui:238
@@ -4498,19 +4494,19 @@ msgid ""
 "Render words made of characters that usually appear in coding ligatures "
 "together."
 msgstr ""
+"Kode-loturetan agertu ohi diren karakterez osatutako hitzak batera errendatu."
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeCoding)
 #: widgets/EditProfileAppearancePage.ui:938
-#, fuzzy, kde-format
-#| msgid "Word characters:"
+#, kde-format
 msgid "Coding ligatures characters"
-msgstr "Hitzetako karaktereak:"
+msgstr "Kode-loturetako karaktereak"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:951
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
-msgstr "Errendatu Brahma-gidoietako karaktereak elkarrekin"
+msgstr "Brahma-gidoietako karaktereak elkarrekin errendatu"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:954
@@ -4525,12 +4521,14 @@ msgid ""
 "Apply hinting to glyphs when rendering, which may improve the legibility of "
 "certain fonts with some displays"
 msgstr ""
+"Glifoak errendatzean errendatze-doikuntza aplikatu; horrek letra-tipo jakin "
+"batzuen irakurgarritasuna hobetu dezake pantaila batzuetan"
 
 #. i18n: ectx: property (text), widget (QCheckBox, fontHinting)
 #: widgets/EditProfileAppearancePage.ui:970
 #, kde-format
 msgid "Font hinting"
-msgstr ""
+msgstr "Letra-tipoaren errendatze-doikuntza"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:983
@@ -4592,11 +4590,9 @@ msgstr "Gainditu wcwidth"
 
 #. i18n: ectx: property (toolTip), widget (QWidget, badgeTab)
 #: widgets/EditProfileAppearancePage.ui:1081
-#, fuzzy, kde-format
-#| msgid "<html><head/><body><p>Complex Text Layout</p></body></html>"
+#, kde-format
 msgid "<html><head/><body><p>Badge overlay options</p></body></html>"
-msgstr ""
-"<html><head/><body><p>Testuaren antolamendu konplexua</p></body></html>"
+msgstr "<html><head/><body><p>Entseina gainjartzeko aukerak</p></body></html>"
 
 #. i18n: ectx: attribute (title), widget (QWidget, badgeTab)
 #. i18n: ectx: property (text), widget (QCheckBox, badgeEnabled)
@@ -4604,20 +4600,19 @@ msgstr ""
 #: widgets/EditProfileAppearancePage.ui:1114
 #, kde-format
 msgid "Badge Overlay"
-msgstr ""
+msgstr "Entseina gainjarria"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeOverlayLabel)
 #: widgets/EditProfileAppearancePage.ui:1094
 #, kde-format
 msgid "Badge Overlay Options"
-msgstr ""
+msgstr "Entseina gainjartzeko aukerak"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, badgeEnabled)
 #: widgets/EditProfileAppearancePage.ui:1111
-#, fuzzy, kde-format
-#| msgid "Enable word mode text rendering"
+#, kde-format
 msgid "Enable badge overlay rendering"
-msgstr "Gaitu hitz-moduko testu errendatzea"
+msgstr "Gaitu entseina gainjarria errendatzea"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, badge_label_1)
 #. i18n: ectx: property (toolTip), widget (QLineEdit, badgeTextEdit)
@@ -4626,13 +4621,13 @@ msgstr "Gaitu hitz-moduko testu errendatzea"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Default text of badge."
-msgstr ""
+msgstr "Entseinaren testu lehenetsia."
 
 #. i18n: ectx: property (text), widget (QLabel, badge_label_1)
 #: widgets/EditProfileAppearancePage.ui:1124
 #, kde-format
 msgid "Badge text:"
-msgstr ""
+msgstr "Entseinaren testua:"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeVariablesHelpLabel)
 #: widgets/EditProfileAppearancePage.ui:1150
@@ -4643,6 +4638,10 @@ msgid ""
 "hostname), \\(session.process), \\(env.VARIABLE_NAME)</small></p></body></"
 "html>"
 msgstr ""
+"<html><head/><body><p><small><b>Aldagai erabilgarriak:</b> \\(session."
+"title), \\(session.name), \\(session.id), \\(session.directory), \\(session."
+"hostname), \\(session.process), \\(env.VARIABLE_NAME)</small></p></body></"
+"html>"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeEscapeSequenceHelpLabel)
 #: widgets/EditProfileAppearancePage.ui:1170
@@ -4652,6 +4651,10 @@ msgid ""
 "settings on this page to configure badge text, color, font, text-only mode "
 "and transparency.</small></p></body></html>"
 msgstr ""
+"<html><head/><body><p><small><b>Entseinaren konfigurazioa:</b><br/>Erabili "
+"orri honetako profilaren ezarpenak entseinaren testua, kolorea, letra-tipoa, "
+"testu hutseko modua eta gardentasuna konfiguratzeko.</small></p></body></"
+"html>"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, badge_label_2)
 #. i18n: ectx: property (toolTip), widget (QLineEdit, badgeFontEdit)
@@ -4660,65 +4663,61 @@ msgstr ""
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Badge font family."
-msgstr ""
+msgstr "Entseinaren letra-tipo familia."
 
 #. i18n: ectx: property (text), widget (QLabel, badge_label_2)
 #: widgets/EditProfileAppearancePage.ui:1193
 #, kde-format
 msgid "Badge font family:"
-msgstr ""
+msgstr "Entseinaren letra-tipo familia:"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeFontSizeLabel)
 #: widgets/EditProfileAppearancePage.ui:1226
 #, kde-format
 msgid "Badge font size:"
-msgstr ""
+msgstr "Entseinaren letra-tamaina:"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeColorLabel)
 #: widgets/EditProfileAppearancePage.ui:1256
-#, fuzzy, kde-format
-#| msgid "Background color:"
+#, kde-format
 msgid "Badge color:"
-msgstr "Atzeko planoaren kolorea:"
+msgstr "Entseinaren kolorea:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, badgeColorSelectButton)
 #: widgets/EditProfileAppearancePage.ui:1269
-#, fuzzy, kde-format
-#| msgid "Select the color used to draw the border"
+#, kde-format
 msgid "Select the color used to draw the badge"
-msgstr "Hautatu ertza marrazteko erabilitako kolorea"
+msgstr "Hautatu entseina marrazteko erabilitako kolorea"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, badgeTextOnlyCheckBox)
 #: widgets/EditProfileAppearancePage.ui:1283
 #, kde-format
 msgid "Display badge as text only without background rectangle"
-msgstr ""
+msgstr "Erakutsi entseina testu gisa soilik, atzeko planoko laukizuzenik gabe."
 
 #. i18n: ectx: property (text), widget (QCheckBox, badgeTextOnlyCheckBox)
 #: widgets/EditProfileAppearancePage.ui:1286
-#, fuzzy, kde-format
-#| msgid "Red error background:"
+#, kde-format
 msgid "Text only (no background)"
-msgstr "Erroreen atzeko plano gorria:"
+msgstr "Testua bakarrik (atzeko planorik ez)"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeTransparencyLabel)
 #: widgets/EditProfileAppearancePage.ui:1300
-#, fuzzy, kde-format
-#| msgid "Wallpaper transparency:"
+#, kde-format
 msgid "Transparency:"
-msgstr "Horma-paper gardentasuna:"
+msgstr "Gardentasuna:"
 
 #. i18n: ectx: property (toolTip), widget (QSlider, badgeTransparencySlider)
 #: widgets/EditProfileAppearancePage.ui:1327
 #, kde-format
 msgid "Set badge transparency (0 = fully transparent, 255 = opaque)"
-msgstr ""
+msgstr "Ezarri entseinaren gardentasuna (0 = erabat gardena, 255 = opakua)"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeTransparencyValueLabel)
 #: widgets/EditProfileAppearancePage.ui:1334
 #, kde-format
 msgid "180"
-msgstr ""
+msgstr "180"
 
 #: widgets/EditProfileDialog.cpp:71
 #, kde-format
@@ -5316,27 +5315,26 @@ msgstr "Hautapenetik"
 #: widgets/EditProfileMousePage.ui:186
 #, kde-format
 msgid "Right-click:"
-msgstr ""
+msgstr "Eskuineko klik:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, rightClickPasteDisabledButton)
 #: widgets/EditProfileMousePage.ui:196
 #, kde-format
 msgid "Opens context menu"
-msgstr ""
+msgstr "Laster-menua irekitzen du"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, rightClickPasteDisabledButton)
 #: widgets/EditProfileMousePage.ui:199
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Right-click shows context menu"
-msgstr ""
+msgstr "Eskuineko klikak laster-menua erakusten du"
 
 #. i18n: ectx: property (text), widget (QRadioButton, rightClickPasteFromClipboardButton)
 #: widgets/EditProfileMousePage.ui:209
-#, fuzzy, kde-format
-#| msgid "From clipboard"
+#, kde-format
 msgid "Pastes from clipboard"
-msgstr "Arbeletik"
+msgstr "Arbeletik itsasten du"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, rightClickPasteFromClipboardButton)
 #. i18n: ectx: property (toolTip), widget (QRadioButton, rightClickPasteFromX11SelectionButton)
@@ -5344,14 +5342,13 @@ msgstr "Arbeletik"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Control+right-click shows context menu"
-msgstr ""
+msgstr "Kontrol+eskuin-klikak laster-menua erakusten du"
 
 #. i18n: ectx: property (text), widget (QRadioButton, rightClickPasteFromX11SelectionButton)
 #: widgets/EditProfileMousePage.ui:222
-#, fuzzy, kde-format
-#| msgid "Paste Selection"
+#, kde-format
 msgid "Pastes from selection"
-msgstr "Itsatsi hautapena"
+msgstr "Hautapenetik itsasten du"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: widgets/EditProfileMousePage.ui:251
@@ -5412,14 +5409,13 @@ msgstr "Kendu amaierako zuriuneak"
 #: widgets/EditProfileMousePage.ui:301
 #, kde-format
 msgid "Clear selection after copying"
-msgstr ""
+msgstr "Garbitu hautapena kopiatu ondoren"
 
 #. i18n: ectx: property (text), widget (QCheckBox, clearSelectionButton)
 #: widgets/EditProfileMousePage.ui:304
-#, fuzzy, kde-format
-#| msgid "From selection"
+#, kde-format
 msgid "Clear selection"
-msgstr "Hautapenetik"
+msgstr "Garbitu hautapena"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, underlineLinksButton)
 #: widgets/EditProfileMousePage.ui:341
@@ -5481,10 +5477,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, openLinksByDirectClickButton)
 #: widgets/EditProfileMousePage.ui:413
-#, fuzzy, kde-format
-#| msgid "Open files/links by direct click"
+#, kde-format
 msgid "Open underlined files/links by direct click"
-msgstr "Ireki fitxategiak/estekak zuzeneko klik baten bidez"
+msgstr "Ireki azpimarratutako fitxategiak/estekak zuzenean klik eginez"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowLinkEscapeSequenceButton)
 #: widgets/EditProfileMousePage.ui:424
@@ -6136,11 +6131,10 @@ msgid "Close Tab"
 msgstr "Itxi fitxa"
 
 #: widgets/ViewContainer.cpp:968 widgets/ViewContainer.cpp:977
-#, fuzzy, kde-format
-#| msgid "Maintainer"
+#, kde-format
 msgctxt "As in Distrobox, Toolbox, Kapsule etc."
 msgid "Container"
-msgstr "Mantentzailea"
+msgstr "Edukiontzia"
 
 #: widgets/ViewContainer.cpp:987
 #, kde-format
@@ -6148,7 +6142,7 @@ msgctxt ""
 "%1 is the type of container (e.g. Distrobox, Toolbox, Kapsule etc.), %2 its "
 "name"
 msgid "%1: %2"
-msgstr ""
+msgstr "%1: %2"
 
 #~ msgid ""
 #~ "The D-Bus methods sendText/runCommand were just used.  There are security "
