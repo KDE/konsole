@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-06-20 00:47+0000\n"
-"PO-Revision-Date: 2026-06-07 16:19+0900\n"
+"PO-Revision-Date: 2026-06-25 23:58+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -695,11 +695,9 @@ msgid "Kapsule"
 msgstr "Kapsule"
 
 #: containers/KapsuleDetector.cpp:61 containers/KapsuleDetector.cpp:64
-#, fuzzy, kde-format
-#| msgctxt "As in Distrobox, Toolbox, Kapsule etc."
-#| msgid "Container"
+#, kde-format
 msgid "Kapsule Container"
-msgstr "容器"
+msgstr "Kapsule 容器"
 
 #: containers/KapsuleDetector.cpp:99
 #, kde-format
