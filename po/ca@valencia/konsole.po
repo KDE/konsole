@@ -1477,13 +1477,13 @@ msgstr "Mostra l'accés ràpid"
 #, kde-format
 msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
 msgstr ""
-"No s'ha trobat cap ordre ràpida. Podeu afegir-ne una a «Connectors -> "
+"No s'ha trobat cap ordre ràpida. Podeu afegir-ne una en «Connectors → "
 "Ordres» ràpides"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
 msgid "Plugins - Quick Commands"
-msgstr "Connectors - Ordres ràpides"
+msgstr "Connectors – Ordres ràpides"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:140
 #, kde-format
@@ -1613,13 +1613,13 @@ msgstr "Mostra l'accés ràpid per a les accions SSH"
 #, kde-format
 msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
 msgstr ""
-"No s'ha trobat cap configuració SSH guardada. Podeu afegir-ne una a "
-"«Connectors -> Gestor de SSH»"
+"No s'ha trobat cap configuració SSH guardada. Podeu afegir-ne una en "
+"«Connectors → Gestor de SSH»"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:147
 #, kde-format
 msgid "Plugins - SSH Manager"
-msgstr "Connectors - Gestor de SSH"
+msgstr "Connectors – Gestor de SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:153
 #, kde-format
@@ -4428,14 +4428,15 @@ msgstr "Caràcters ASCII"
 #: widgets/EditProfileAppearancePage.ui:935
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
-msgstr "Representa juntes les paraules de caràcters dels alfabets bràmics"
+msgstr ""
+"Representa juntes les paraules de caràcters dels estils cal·ligràfics bràmics"
 
 # skip-rule: kct-script
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:938
 #, kde-format
 msgid "Brahmic scripts characters"
-msgstr "Caràcters dels alfabets bràmics"
+msgstr "Caràcters dels estils cal·ligràfics bràmics"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:951
