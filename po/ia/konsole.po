@@ -552,7 +552,7 @@ msgstr "Percentage"
 #: colorscheme/ColorSchemeEditor.ui:103
 #, kde-format
 msgid "Wallpaper transparency:"
-msgstr "Transparentia de tapete de papiro:"
+msgstr "Transparentia de fundo de schermo:"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperLabel)
 #: colorscheme/ColorSchemeEditor.ui:137
@@ -585,7 +585,7 @@ msgstr "..."
 #: colorscheme/ColorSchemeEditor.ui:165
 #, kde-format
 msgid "Wallpaper scaling:"
-msgstr "Scalar de Tapete de papiro:"
+msgstr "Scalar de Fundo de schermo:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
 #: colorscheme/ColorSchemeEditor.ui:173
@@ -621,7 +621,7 @@ msgstr "Non Scalar"
 #: colorscheme/ColorSchemeEditor.ui:205
 #, kde-format
 msgid "Wallpaper flip:"
-msgstr "Flip (tornear) de Tapete de papiro:"
+msgstr "Flip (tornear) de Fundo de schermo:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:213
@@ -6268,7 +6268,7 @@ msgstr "Claude scheda"
 #~ msgstr "Configura profilos..."
 
 #~ msgid "The wallpaper picture file path"
-#~ msgstr "Le percurso de file de imagine de tapete de papiro"
+#~ msgstr "Le percurso de file de imagine de fundo de schermo"
 
 #~ msgid "&Switch Profile"
 #~ msgstr "&Commuta profilo"

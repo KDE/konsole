@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-06-23 02:43+0000\n"
-"PO-Revision-Date: 2026-06-27 11:46+0200\n"
+"PO-Revision-Date: 2026-06-30 22:15+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
 "Language: nn\n"
@@ -171,20 +171,16 @@ msgid "Hide the menubar, overriding the default setting"
 msgstr "Gøym menylinja og ignorer standardoppsettet"
 
 #: Application.cpp:68
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "Show the tabbar, overriding the default setting"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Show all the toolbars, overriding the default setting"
-msgstr "Vis fanelinja og ignorer standardoppsettet"
+msgstr "Vis alle verktøylinjene og ignorer standardoppsettet"
 
 #: Application.cpp:69
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "Hide the tabbar, overriding the default setting"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Hide all the toolbars, overriding the default setting"
-msgstr "Gøym fanelinja og ignorer standardoppsettet"
+msgstr "Gøym alle verktøylinjene og ignorer standardoppsettet"
 
 #: Application.cpp:70
 #, kde-format
@@ -696,24 +692,22 @@ msgstr ""
 #: containers/DistroboxDetector.cpp:72
 #, kde-format
 msgid "Distrobox"
-msgstr ""
+msgstr "Distrobox"
 
 #: containers/KapsuleDetector.cpp:33
 #, kde-format
 msgid "Kapsule"
-msgstr ""
+msgstr "Kapsule"
 
 #: containers/KapsuleDetector.cpp:79
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox added to the name of the current default profile"
-#| msgid " [Default]"
+#, kde-format
 msgid " [default]"
 msgstr " [standard]"
 
 #: containers/ToolboxDetector.cpp:29
 #, kde-format
 msgid "Toolbox"
-msgstr ""
+msgstr "Verktøykasse"
 
 #: CopyInputDialog.cpp:30
 #, kde-format
@@ -2063,7 +2057,7 @@ msgstr "Breeze"
 #: schemas.cpp:6
 #, kde-format
 msgid "Campbell"
-msgstr ""
+msgstr "Campbell"
 
 #: schemas.cpp:7
 #, kde-format
@@ -2121,16 +2115,16 @@ msgid "Solaris console"
 msgstr "Solaris-konsoll"
 
 #: searchtabs/SearchTabs.cpp:127
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Search..."
-msgstr "Søk:"
+msgstr "Søk …"
 
 #: searchtabs/SearchTabs.cpp:128
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"
-msgstr "Skriv inn søkjeteksten her"
+msgstr "Skriv inn fanenamn å søkja etter"
 
 #: session/Session.cpp:131
 #, kde-format
@@ -2532,7 +2526,7 @@ msgstr ""
 "det med makt?"
 
 #: session/SessionController.cpp:1196
-#, fuzzy, kde-format
+#, kde-format
 msgid ""
 "The program '%1' in this session would not die.  Are you sure you want to "
 "kill it by force?"
@@ -2655,7 +2649,7 @@ msgstr ""
 #: settings/GeneralSettings.ui:105
 #, kde-format
 msgid "Show progress in taskbar"
-msgstr ""
+msgstr "Vis framdriftslinje i oppgåvelinja"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/GeneralSettings.ui:112
@@ -2813,7 +2807,7 @@ msgstr "Bruk om mogleg om att gammal prosess ved start av Konsole"
 #: settings/konsole.kcfg:42
 #, kde-format
 msgid "Show progress in task bar"
-msgstr ""
+msgstr "Vis framdriftslinje i oppgåvelinja"
 
 #. i18n: ectx: tooltip, entry (ShowProgressInTaskBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:43
@@ -3014,16 +3008,7 @@ msgstr "Slå på minneovervaking:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:24
-#, fuzzy, kde-format
-#| msgid ""
-#| "Changes will take effect upon restart. If enabled, sustained memory "
-#| "consumption by Konsole\n"
-#| "exceeding the specified value will cause systemd-oomd to eliminate the "
-#| "tab(s)\n"
-#| "containing the memory-intensive process(es). Note: enabling\n"
-#| "might cause greater slowdowns during high memory consumption and "
-#| "specifying\n"
-#| "excessively low values might still cause Konsole to be killed."
+#, kde-format
 msgid ""
 "Changes will take effect upon restart. If enabled, sustained memory "
 "consumption by Konsole exceeding the specified value will cause systemd-oomd "
@@ -3032,12 +3017,10 @@ msgid ""
 "specifying excessively low values might still cause Konsole to be killed."
 msgstr ""
 "Endringane trer i kraft etter omstart. Viss det er kryssa av her, vil høgare "
-"minnebruk av Konsole\n"
-"over tid føra til at systemd-oomd fjernar fanen(e) som køyrer dei minne­"
-"intensive\n"
-"prosessane. Merk: Med denne funksjonen kan programmet verta tregt ved høg\n"
-"minnebruk, og om du vel ein veldig låg verdi, kan likevel heile Konsole "
-"verta tvangsavslutta."
+"minnebruk av Konsole over tid føra til at systemd-oomd fjernar fanen(e) som "
+"køyrer dei minne­intensive prosessane. Merk: Med denne funksjonen kan "
+"programmet verta tregt ved høg minnebruk, og om du vel ein veldig låg verdi, "
+"kan likevel heile Konsole verta tvangsavslutta."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:37
@@ -3208,19 +3191,19 @@ msgstr "Ingen"
 
 #. i18n: ectx: property (text), widget (QLabel, showSearchTabsButtonLabel)
 #: settings/TabBarSettings.ui:231
-#, fuzzy, kde-format
+#, kde-format
 msgid "Show Search Tabs button:"
-msgstr "Vis knapp for fanelukking:"
+msgstr "Vis knapp for fanesøk:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSearchTabsButton)
 #: settings/TabBarSettings.ui:241
-#, fuzzy, kde-format
+#, kde-format
 msgid "Always"
 msgstr "Alltid"
 
 #. i18n: ectx: property (text), widget (QRadioButton, HideSearchTabsButton)
 #: settings/TabBarSettings.ui:251
-#, fuzzy, kde-format
+#, kde-format
 msgid "Never"
 msgstr "Aldri"
 
@@ -3675,20 +3658,16 @@ msgid "Focus Right Terminal"
 msgstr "Fokus på terminal til høgre"
 
 #: ViewManager.cpp:286
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Focus Left Terminal"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Next Terminal"
-msgstr "Fokus på terminal til venstre"
+msgstr "Fokus på neste terminal"
 
 #: ViewManager.cpp:292
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Focus Below Terminal"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Previous Terminal"
-msgstr "Fokus på terminal under"
+msgstr "Fokus på førre terminal"
 
 #: ViewManager.cpp:298
 #, kde-format
@@ -4199,10 +4178,9 @@ msgstr "På"
 
 #. i18n: ectx: property (text), widget (QLabel, label_12)
 #: widgets/EditProfileAppearancePage.ui:457
-#, fuzzy, kde-format
-#| msgid "Activation:"
+#, kde-format
 msgid "Animation:"
-msgstr "Start:"
+msgstr "Animasjonar:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableAnimatingCursorButton)
 #: widgets/EditProfileAppearancePage.ui:473
@@ -4573,9 +4551,7 @@ msgid "Edit Profile \"%1\""
 msgstr "Endra profilen «%1»"
 
 #: widgets/EditProfileDialog.cpp:529
-#, fuzzy, kde-format
-#| msgctxt "Do not show a close button"
-#| msgid "None"
+#, kde-format
 msgid "None"
 msgstr "Ingen"
 
@@ -5569,8 +5545,7 @@ msgid "Find the previous match for the current search phrase"
 msgstr "Finn førre treff for gjeldande søkjetekst"
 
 #: widgets/IncrementalSearchBar.cpp:102
-#, fuzzy, kde-format
-#| msgid "Case sensitive"
+#, kde-format
 msgctxt "@action:button"
 msgid "Case sensitive"
 msgstr "Skil mellom store og små bokstavar"
