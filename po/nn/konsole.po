@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-06-20 00:47+0000\n"
-"PO-Revision-Date: 2026-06-27 11:46+0200\n"
+"PO-Revision-Date: 2026-06-30 22:15+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
 "Language: nn\n"
@@ -171,20 +171,16 @@ msgid "Hide the menubar, overriding the default setting"
 msgstr "Gøym menylinja og ignorer standardoppsettet"
 
 #: Application.cpp:68
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "Show the tabbar, overriding the default setting"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Show all the toolbars, overriding the default setting"
-msgstr "Vis fanelinja og ignorer standardoppsettet"
+msgstr "Vis alle verktøylinjene og ignorer standardoppsettet"
 
 #: Application.cpp:69
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "Hide the tabbar, overriding the default setting"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Hide all the toolbars, overriding the default setting"
-msgstr "Gøym fanelinja og ignorer standardoppsettet"
+msgstr "Gøym alle verktøylinjene og ignorer standardoppsettet"
 
 #: Application.cpp:70
 #, kde-format
@@ -696,30 +692,27 @@ msgstr ""
 #: containers/DistroboxDetector.cpp:124
 #, kde-format
 msgid "Distrobox"
-msgstr ""
+msgstr "Distrobox"
 
 #: containers/KapsuleDetector.cpp:36
 #, kde-format
 msgid "Kapsule"
-msgstr ""
+msgstr "Kapsule"
 
 #: containers/KapsuleDetector.cpp:61 containers/KapsuleDetector.cpp:64
-#, fuzzy, kde-format
-#| msgid "&Continue Task"
+#, kde-format
 msgid "Kapsule Container"
-msgstr "&Hald fram oppgåve"
+msgstr "Kapsule-behaldar"
 
 #: containers/KapsuleDetector.cpp:99
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox added to the name of the current default profile"
-#| msgid " [Default]"
+#, kde-format
 msgid " [default]"
 msgstr " [standard]"
 
 #: containers/ToolboxDetector.cpp:89
 #, kde-format
 msgid "Toolbox"
-msgstr ""
+msgstr "Verktøykasse"
 
 #: CopyInputDialog.cpp:30
 #, kde-format
@@ -1988,14 +1981,13 @@ msgstr " [standard]"
 #, kde-format
 msgctxt "@label:textbox added to profile name when used for light system theme"
 msgid " [Light]"
-msgstr ""
+msgstr "[lyst]"
 
 #: profile/ProfileModel.cpp:94
-#, fuzzy, kde-format
-#| msgid "Darken"
+#, kde-format
 msgctxt "@label:textbox added to profile name when used for dark system theme"
 msgid " [Dark]"
-msgstr "Formørk"
+msgstr "[mørkt]"
 
 #: profile/ProfileModel.cpp:110
 #, kde-format
@@ -2082,7 +2074,7 @@ msgstr "Breeze"
 #: schemas.cpp:6
 #, kde-format
 msgid "Campbell"
-msgstr ""
+msgstr "Campbell"
 
 #: schemas.cpp:7
 #, kde-format
@@ -2140,16 +2132,16 @@ msgid "Solaris console"
 msgstr "Solaris-konsoll"
 
 #: searchtabs/SearchTabs.cpp:127
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Search..."
-msgstr "Søk:"
+msgstr "Søk …"
 
 #: searchtabs/SearchTabs.cpp:128
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"
-msgstr "Skriv inn søkjeteksten her"
+msgstr "Skriv inn fanenamn å søkja etter"
 
 #: session/Session.cpp:133
 #, kde-format
@@ -2551,7 +2543,7 @@ msgstr ""
 "det med makt?"
 
 #: session/SessionController.cpp:1197
-#, fuzzy, kde-format
+#, kde-format
 msgid ""
 "The program '%1' in this session would not die.  Are you sure you want to "
 "kill it by force?"
@@ -2674,13 +2666,13 @@ msgstr ""
 #: settings/GeneralSettings.ui:105
 #, kde-format
 msgid "Show progress in taskbar"
-msgstr ""
+msgstr "Vis framdriftslinje i oppgåvelinja"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SyncProfileWithSystemTheme)
 #: settings/GeneralSettings.ui:112
 #, kde-format
 msgid "Automatically switch profile based on system theme"
-msgstr ""
+msgstr "Byt automatisk profil basert på systemtema"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/GeneralSettings.ui:119
@@ -2838,7 +2830,7 @@ msgstr "Bruk om mogleg om att gammal prosess ved start av Konsole"
 #: settings/konsole.kcfg:42
 #, kde-format
 msgid "Show progress in task bar"
-msgstr ""
+msgstr "Vis framdriftslinje i oppgåvelinja"
 
 #. i18n: ectx: tooltip, entry (ShowProgressInTaskBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:43
@@ -3035,19 +3027,19 @@ msgstr "Bruk denne mappa for rulleminnefiler"
 #: settings/konsole.kcfg:238
 #, kde-format
 msgid "Sync profile with system theme"
-msgstr ""
+msgstr "Synkroniser profil med systemtemaet"
 
 #. i18n: ectx: label, entry (LightThemeProfile), group (LightDarkTheme)
 #: settings/konsole.kcfg:242
 #, kde-format
 msgid "Profile to use for light system theme"
-msgstr ""
+msgstr "Profil som skal brukast for lyst systemtema"
 
 #. i18n: ectx: label, entry (DarkThemeProfile), group (LightDarkTheme)
 #: settings/konsole.kcfg:246
 #, kde-format
 msgid "Profile to use for dark system theme"
-msgstr ""
+msgstr "Profil som skal brukast for mørkt systemtema"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableMemoryMonitoring)
 #: settings/MemorySettings.ui:17
@@ -3057,16 +3049,7 @@ msgstr "Slå på minneovervaking:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:24
-#, fuzzy, kde-format
-#| msgid ""
-#| "Changes will take effect upon restart. If enabled, sustained memory "
-#| "consumption by Konsole\n"
-#| "exceeding the specified value will cause systemd-oomd to eliminate the "
-#| "tab(s)\n"
-#| "containing the memory-intensive process(es). Note: enabling\n"
-#| "might cause greater slowdowns during high memory consumption and "
-#| "specifying\n"
-#| "excessively low values might still cause Konsole to be killed."
+#, kde-format
 msgid ""
 "Changes will take effect upon restart. If enabled, sustained memory "
 "consumption by Konsole exceeding the specified value will cause systemd-oomd "
@@ -3075,12 +3058,10 @@ msgid ""
 "specifying excessively low values might still cause Konsole to be killed."
 msgstr ""
 "Endringane trer i kraft etter omstart. Viss det er kryssa av her, vil høgare "
-"minnebruk av Konsole\n"
-"over tid føra til at systemd-oomd fjernar fanen(e) som køyrer dei minne­"
-"intensive\n"
-"prosessane. Merk: Med denne funksjonen kan programmet verta tregt ved høg\n"
-"minnebruk, og om du vel ein veldig låg verdi, kan likevel heile Konsole "
-"verta tvangsavslutta."
+"minnebruk av Konsole over tid føra til at systemd-oomd fjernar fanen(e) som "
+"køyrer dei minne­intensive prosessane. Merk: Med denne funksjonen kan "
+"programmet verta tregt ved høg minnebruk, og om du vel ein veldig låg verdi, "
+"kan likevel heile Konsole verta tvangsavslutta."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:37
@@ -3165,31 +3146,27 @@ msgstr "&Bruk som standard"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, setLightProfileButton)
 #: settings/ProfileSettings.ui:103
-#, fuzzy, kde-format
-#| msgid "Set the selected profile as the default for new terminal sessions"
+#, kde-format
 msgid "Set the selected profile as the light theme profile"
-msgstr "Set den valde profilen som standard for nye skaløkter"
+msgstr "Set den valde profilen som profil for lyst tema"
 
 #. i18n: ectx: property (text), widget (QPushButton, setLightProfileButton)
 #: settings/ProfileSettings.ui:106
-#, fuzzy, kde-format
-#| msgid "&Set as Default"
+#, kde-format
 msgid "&Set as Light"
-msgstr "&Bruk som standard"
+msgstr "&Bruk som lyst"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, setDarkProfileButton)
 #: settings/ProfileSettings.ui:116
-#, fuzzy, kde-format
-#| msgid "Set the selected profile as the default for new terminal sessions"
+#, kde-format
 msgid "Set the selected profile as the dark theme profile"
-msgstr "Set den valde profilen som standard for nye skaløkter"
+msgstr "Set den valde profilen som profil for mørkt tema"
 
 #. i18n: ectx: property (text), widget (QPushButton, setDarkProfileButton)
 #: settings/ProfileSettings.ui:119
-#, fuzzy, kde-format
-#| msgid "&Set as Default"
+#, kde-format
 msgid "&Set as Dark"
-msgstr "&Bruk som standard"
+msgstr "&Bruk som mørkt"
 
 #. i18n: ectx: attribute (title), widget (QWidget, appearanceTab)
 #: settings/TabBarSettings.ui:39
@@ -3279,19 +3256,19 @@ msgstr "Ingen"
 
 #. i18n: ectx: property (text), widget (QLabel, showSearchTabsButtonLabel)
 #: settings/TabBarSettings.ui:231
-#, fuzzy, kde-format
+#, kde-format
 msgid "Show Search Tabs button:"
-msgstr "Vis knapp for fanelukking:"
+msgstr "Vis knapp for fanesøk:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSearchTabsButton)
 #: settings/TabBarSettings.ui:241
-#, fuzzy, kde-format
+#, kde-format
 msgid "Always"
 msgstr "Alltid"
 
 #. i18n: ectx: property (text), widget (QRadioButton, HideSearchTabsButton)
 #: settings/TabBarSettings.ui:251
-#, fuzzy, kde-format
+#, kde-format
 msgid "Never"
 msgstr "Aldri"
 
@@ -3746,20 +3723,16 @@ msgid "Focus Right Terminal"
 msgstr "Fokus på terminal til høgre"
 
 #: ViewManager.cpp:287
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Focus Left Terminal"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Next Terminal"
-msgstr "Fokus på terminal til venstre"
+msgstr "Fokus på neste terminal"
 
 #: ViewManager.cpp:293
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Focus Below Terminal"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Previous Terminal"
-msgstr "Fokus på terminal under"
+msgstr "Fokus på førre terminal"
 
 #: ViewManager.cpp:299
 #, kde-format
@@ -4284,10 +4257,9 @@ msgstr "På"
 
 #. i18n: ectx: property (text), widget (QLabel, label_12)
 #: widgets/EditProfileAppearancePage.ui:457
-#, fuzzy, kde-format
-#| msgid "Activation:"
+#, kde-format
 msgid "Animation:"
-msgstr "Start:"
+msgstr "Animasjonar:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableAnimatingCursorButton)
 #: widgets/EditProfileAppearancePage.ui:473
@@ -4526,7 +4498,7 @@ msgstr ""
 #: widgets/EditProfileAppearancePage.ui:970
 #, kde-format
 msgid "Font hinting"
-msgstr ""
+msgstr "Skrifthinting"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:983
@@ -4692,17 +4664,15 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, badgeTextOnlyCheckBox)
 #: widgets/EditProfileAppearancePage.ui:1286
-#, fuzzy, kde-format
-#| msgid "Red error background:"
+#, kde-format
 msgid "Text only (no background)"
-msgstr "Raud feilbakgrunn:"
+msgstr "Berre tekst (ingen bakgrunn)"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeTransparencyLabel)
 #: widgets/EditProfileAppearancePage.ui:1300
-#, fuzzy, kde-format
-#| msgid "Wallpaper transparency:"
+#, kde-format
 msgid "Transparency:"
-msgstr "Gjennomsikt for bakgrunnsbilete:"
+msgstr "Gjennomsikt:"
 
 #. i18n: ectx: property (toolTip), widget (QSlider, badgeTransparencySlider)
 #: widgets/EditProfileAppearancePage.ui:1327
@@ -4714,7 +4684,7 @@ msgstr ""
 #: widgets/EditProfileAppearancePage.ui:1334
 #, kde-format
 msgid "180"
-msgstr ""
+msgstr "180"
 
 #: widgets/EditProfileDialog.cpp:71
 #, kde-format
@@ -4818,9 +4788,7 @@ msgid "Edit Profile \"%1\""
 msgstr "Endra profilen «%1»"
 
 #: widgets/EditProfileDialog.cpp:536
-#, fuzzy, kde-format
-#| msgctxt "Do not show a close button"
-#| msgid "None"
+#, kde-format
 msgid "None"
 msgstr "Ingen"
 
@@ -5308,13 +5276,13 @@ msgstr "Frå utvalet"
 #: widgets/EditProfileMousePage.ui:186
 #, kde-format
 msgid "Right-click:"
-msgstr ""
+msgstr "Høgreklikk:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, rightClickPasteDisabledButton)
 #: widgets/EditProfileMousePage.ui:196
 #, kde-format
 msgid "Opens context menu"
-msgstr ""
+msgstr "Opnar ein sprettoppmeny"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, rightClickPasteDisabledButton)
 #: widgets/EditProfileMousePage.ui:199
@@ -5411,10 +5379,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, clearSelectionButton)
 #: widgets/EditProfileMousePage.ui:304
-#, fuzzy, kde-format
-#| msgid "From selection"
+#, kde-format
 msgid "Clear selection"
-msgstr "Frå utvalet"
+msgstr "Tøm utvalet"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, underlineLinksButton)
 #: widgets/EditProfileMousePage.ui:341
@@ -5475,10 +5442,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, openLinksByDirectClickButton)
 #: widgets/EditProfileMousePage.ui:413
-#, fuzzy, kde-format
-#| msgid "Open files/links by direct click"
+#, kde-format
 msgid "Open underlined files/links by direct click"
-msgstr "Opna filer/lenkjer med eitt trykk"
+msgstr "Opna understreka filer/lenkjer med eitt trykk"
 
 # Skiftsekvensar («magiske teikn») som vert brukt til å markera lenkjer.
 #. i18n: ectx: property (text), widget (QCheckBox, allowLinkEscapeSequenceButton)
@@ -5869,8 +5835,7 @@ msgid "Find the previous match for the current search phrase"
 msgstr "Finn førre treff for gjeldande søkjetekst"
 
 #: widgets/IncrementalSearchBar.cpp:102
-#, fuzzy, kde-format
-#| msgid "Case sensitive"
+#, kde-format
 msgctxt "@action:button"
 msgid "Case sensitive"
 msgstr "Skil mellom store og små bokstavar"
@@ -6141,4 +6106,4 @@ msgctxt ""
 "%1 is the type of container (e.g. Distrobox, Toolbox, Kapsule etc.), %2 its "
 "name"
 msgid "%1: %2"
-msgstr ""
+msgstr "%1: %2"
