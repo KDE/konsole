@@ -84,7 +84,11 @@ QString TerminalDisplayAccessible::visibleText() const
         return QString();
     }
 
-    return display->screenWindow()->screen()->text(0, display->_usedColumns * display->_usedLines, Screen::PreserveLineBreaks);
+    return display->screenWindow()->screen()->text(
+        0,
+        display->_usedColumns * display->_usedLines,
+        Screen::PreserveLineBreaks | Screen::IgnoreBlockSelection
+    );
 }
 
 void TerminalDisplayAccessible::addSelection(int startOffset, int endOffset)
@@ -174,7 +178,9 @@ QString TerminalDisplayAccessible::text(int startOffset, int endOffset) const
     const auto maxIndex = display()->_usedColumns * display()->_usedLines;
     startOffset = qBound(0, startOffset, maxIndex);
     endOffset = qBound(startOffset, endOffset, maxIndex);
-    return display()->screenWindow()->screen()->text(startOffset, endOffset, Screen::PreserveLineBreaks);
+    return display()->screenWindow()->screen()->text(
+        startOffset, endOffset, Screen::PreserveLineBreaks | Screen::IgnoreBlockSelection
+    );
 }
 
 TerminalDisplay *TerminalDisplayAccessible::display() const

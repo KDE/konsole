@@ -90,6 +90,8 @@ public:
      *      trimmed in the returned text.
      * TrimTrailingWhitespace: Specifies whether trailing spaces should be
      *      trimmed in the returned text.
+     * IgnoreBlockSelection: Specifies whether active block selection bounds
+     *      should be ignored during text extraction.
      */
     enum DecodingOption {
         PlainText = 0x0,
@@ -100,6 +102,7 @@ public:
         ExcludePrompt = 0x10,
         ExcludeInput = 0x20,
         ExcludeOutput = 0x40,
+        IgnoreBlockSelection = 0x80,
     };
     Q_DECLARE_FLAGS(DecodingOptions, DecodingOption)
 

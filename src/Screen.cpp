@@ -2086,7 +2086,8 @@ void Screen::writeToStream(TerminalCharacterDecoder *decoder, int startIndex, in
         int start = 0;
         int count = -1;
 
-        if (_blockSelectionMode) {
+        // Bypass block selection bounds for non-selection text extraction.
+        if (_blockSelectionMode && !options.testFlag(IgnoreBlockSelection)) {
             // Normalize selection bounds to ensure a valid [min, max] column range
             const auto [minimum, maximum] = std::minmax(left, right);
             start = minimum;
