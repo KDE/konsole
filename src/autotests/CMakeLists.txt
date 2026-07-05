@@ -87,3 +87,8 @@ ecm_add_test(
     ViewManagerTest.cpp
     LINK_LIBRARIES konsoleapp konsoleprivate Qt::Test ${KONSOLE_TEST_LIBS}
 )
+
+ecm_add_test(
+    TerminalDisplayAccessibleTest.cpp
+    LINK_LIBRARIES konsoleprivate konsolecolorscheme Qt::Test ${KONSOLE_TEST_LIBS}
+)
