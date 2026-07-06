@@ -3811,7 +3811,7 @@ msgstr "Slå på/av vising av semantiske hint"
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
-msgstr "Slå av/på vising av linjenummer"
+msgstr "Slå på/av vising av linjenummer"
 
 #: ViewManager.cpp:370
 #, kde-format
