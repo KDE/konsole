@@ -5,7 +5,7 @@
 # Anders Widell <d95-awi@nada.kth.se>, 1998.
 # Per Lindström <pelinstr@algonet.se>, 2000.
 # Mattias Newzella <newzella@linux.nu>, 2000, 2001, 2002,2003, 2004.
-# SPDX-FileCopyrightText: 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2024, 2025 Stefan Asserhäll <stefan.asserhall@gmail.com>
+# SPDX-FileCopyrightText: 2004-2010, 2024-2026 Stefan Asserhäll <stefan.asserhall@gmail.com>
 # Stefan Asserhall <stefan.asserhall@gmail.com>, 2005, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
 # Arve Eriksson <031299870@telia.com>, 2011.
 msgid ""
@@ -13,14 +13,14 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-06-20 00:47+0000\n"
-"PO-Revision-Date: 2025-09-26 13:44+0200\n"
+"PO-Revision-Date: 2026-07-06 08:34+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 25.08.0\n"
+"X-Generator: Lokalize 26.04.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -177,20 +177,16 @@ msgid "Hide the menubar, overriding the default setting"
 msgstr "Dölj menyraden, överskrid standardinställningen"
 
 #: Application.cpp:68
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "Show the tabbar, overriding the default setting"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Show all the toolbars, overriding the default setting"
-msgstr "Visa flikraden, överskrid standardinställningen"
+msgstr "Visa alla verktygsrader, överskrid standardinställningen"
 
 #: Application.cpp:69
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "Hide the tabbar, overriding the default setting"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Hide all the toolbars, overriding the default setting"
-msgstr "Dölj flikraden, överskrid standardinställningen"
+msgstr "Dölj alla verktygsrader, överskrid standardinställningen"
 
 #: Application.cpp:70
 #, kde-format
@@ -686,45 +682,41 @@ msgid "AaZz09..."
 msgstr "AaZz09..."
 
 #: containers/ContainerList.cpp:78
-#, fuzzy, kde-format
-#| msgid "Host: %1"
+#, kde-format
 msgctxt "@title:group section header in new-tab menu"
 msgid "Host"
-msgstr "Värddator: %1"
+msgstr "Värddator"
 
 #: containers/ContainerRegistry.cpp:43
 #, kde-format
 msgid ""
 "Container support is not available when Konsole is running inside Flatpak."
-msgstr ""
+msgstr "Stöd för behållare är inte aktiverat när Terminal kör inne i Flatpak"
 
 #: containers/DistroboxDetector.cpp:124
 #, kde-format
 msgid "Distrobox"
-msgstr ""
+msgstr "Distrobox"
 
 #: containers/KapsuleDetector.cpp:36
 #, kde-format
 msgid "Kapsule"
-msgstr ""
+msgstr "Kapsule"
 
 #: containers/KapsuleDetector.cpp:61 containers/KapsuleDetector.cpp:64
-#, fuzzy, kde-format
-#| msgid "Maintainer"
+#, kde-format
 msgid "Kapsule Container"
-msgstr "Utvecklare"
+msgstr "Kapsule behållare"
 
 #: containers/KapsuleDetector.cpp:99
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox added to the name of the current default profile"
-#| msgid " [Default]"
+#, kde-format
 msgid " [default]"
-msgstr " [Standard]"
+msgstr " [standard]"
 
 #: containers/ToolboxDetector.cpp:89
 #, kde-format
 msgid "Toolbox"
-msgstr ""
+msgstr "Toolbox"
 
 #: CopyInputDialog.cpp:30
 #, kde-format
@@ -1994,14 +1986,13 @@ msgstr " [Standard]"
 #, kde-format
 msgctxt "@label:textbox added to profile name when used for light system theme"
 msgid " [Light]"
-msgstr ""
+msgstr " [Ljus]"
 
 #: profile/ProfileModel.cpp:94
-#, fuzzy, kde-format
-#| msgid "Darken"
+#, kde-format
 msgctxt "@label:textbox added to profile name when used for dark system theme"
 msgid " [Dark]"
-msgstr "Gör mörkare"
+msgstr " [Mörk]"
 
 #: profile/ProfileModel.cpp:110
 #, kde-format
@@ -2672,28 +2663,27 @@ msgstr "Kom ihåg fönsterstorlek"
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ForceNewTabs)
 #. i18n: ectx: label, entry (ForceNewTabs), group (KonsoleWindow)
 #: settings/GeneralSettings.ui:91 settings/konsole.kcfg:37
-#, fuzzy, kde-format
-#| msgid "Put new tabs:"
+#, kde-format
 msgid "Force new tabs"
-msgstr "Placera nya flikar:"
+msgstr "Tvinga nya flikar"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ListenForZModemTerminalCodes)
 #: settings/GeneralSettings.ui:98
 #, kde-format
 msgid "Listen for ZModem terminal codes"
-msgstr ""
+msgstr "Lyssna efter ZModem-terminalkoder"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowProgressInTaskBar)
 #: settings/GeneralSettings.ui:105
 #, kde-format
 msgid "Show progress in taskbar"
-msgstr ""
+msgstr "Visa förlopp i aktivitetsrad"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SyncProfileWithSystemTheme)
 #: settings/GeneralSettings.ui:112
 #, kde-format
 msgid "Automatically switch profile based on system theme"
-msgstr ""
+msgstr "Byt automatiskt profil baserat på systemtema"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/GeneralSettings.ui:119
@@ -2841,24 +2831,25 @@ msgstr "Fönsterstorleken sparas när Terminal avslutas"
 
 #. i18n: ectx: tooltip, entry (ForceNewTabs), group (KonsoleWindow)
 #: settings/konsole.kcfg:38
-#, fuzzy, kde-format
-#| msgid "When launching Konsole re-use existing process if possible"
+#, kde-format
 msgid ""
 "When launching Konsole create a new tab instead of creating new windows if "
 "possible"
-msgstr "Återanvänd befintlig process om möjligt när Terminal startas"
+msgstr ""
+"Skapa en ny flik istället för att skapa nya fönster om möjligt när Terminal "
+"startas"
 
 #. i18n: ectx: label, entry (ShowProgressInTaskBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:42
 #, kde-format
 msgid "Show progress in task bar"
-msgstr ""
+msgstr "Visa förlopp i aktivitetsrad"
 
 #. i18n: ectx: tooltip, entry (ShowProgressInTaskBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:43
 #, kde-format
 msgid "When a script reports its progress, it will be shown in the task bar"
-msgstr ""
+msgstr "När ett skript rapporterar sitt förlopp visas det i aktivitetsraden"
 
 #. i18n: ectx: tooltip, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
 #: settings/konsole.kcfg:48
@@ -2870,13 +2861,13 @@ msgstr "DBus-programmeringsgränssnitt som runCommand aktiveras"
 #: settings/konsole.kcfg:52
 #, kde-format
 msgid "Listen for ZModem Terminal codes"
-msgstr ""
+msgstr "Lyssna efter ZModem-terminalkoder"
 
 #. i18n: ectx: tooltip, entry (ListenForZModemTerminalCodes), group (KonsoleWindow)
 #: settings/konsole.kcfg:53
 #, kde-format
 msgid "Automatic send/receive files over serial connections"
-msgstr ""
+msgstr "Skicka och ta emot filer via seriella anslutningar automatiskt"
 
 #. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:62
@@ -3049,19 +3040,19 @@ msgstr "Använd den här katalogen för historikfiler"
 #: settings/konsole.kcfg:238
 #, kde-format
 msgid "Sync profile with system theme"
-msgstr ""
+msgstr "Synkronisera profil med systemtema"
 
 #. i18n: ectx: label, entry (LightThemeProfile), group (LightDarkTheme)
 #: settings/konsole.kcfg:242
 #, kde-format
 msgid "Profile to use for light system theme"
-msgstr ""
+msgstr "Profil att använda för ljust systemtema"
 
 #. i18n: ectx: label, entry (DarkThemeProfile), group (LightDarkTheme)
 #: settings/konsole.kcfg:246
 #, kde-format
 msgid "Profile to use for dark system theme"
-msgstr ""
+msgstr "Profil att använda för mörkt systemtema"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableMemoryMonitoring)
 #: settings/MemorySettings.ui:17
@@ -3169,31 +3160,27 @@ msgstr "&Spara som förval"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, setLightProfileButton)
 #: settings/ProfileSettings.ui:103
-#, fuzzy, kde-format
-#| msgid "Set the selected profile as the default for new terminal sessions"
+#, kde-format
 msgid "Set the selected profile as the light theme profile"
-msgstr "Ställ in den valda profilen som förval för nya terminalsessioner"
+msgstr "Ställ in den valda profilen till den ljusa temaprofilen"
 
 #. i18n: ectx: property (text), widget (QPushButton, setLightProfileButton)
 #: settings/ProfileSettings.ui:106
-#, fuzzy, kde-format
-#| msgid "&Set as Default"
+#, kde-format
 msgid "&Set as Light"
-msgstr "&Spara som förval"
+msgstr "&Ställ in till ljus"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, setDarkProfileButton)
 #: settings/ProfileSettings.ui:116
-#, fuzzy, kde-format
-#| msgid "Set the selected profile as the default for new terminal sessions"
+#, kde-format
 msgid "Set the selected profile as the dark theme profile"
-msgstr "Ställ in den valda profilen som förval för nya terminalsessioner"
+msgstr "Ställ in den valda profilen till den mörka temaprofilen"
 
 #. i18n: ectx: property (text), widget (QPushButton, setDarkProfileButton)
 #: settings/ProfileSettings.ui:119
-#, fuzzy, kde-format
-#| msgid "&Set as Default"
+#, kde-format
 msgid "&Set as Dark"
-msgstr "&Spara som förval"
+msgstr "&Ställ in till mörk"
 
 #. i18n: ectx: attribute (title), widget (QWidget, appearanceTab)
 #: settings/TabBarSettings.ui:39
@@ -3749,20 +3736,16 @@ msgid "Focus Right Terminal"
 msgstr "Fokus till höger om terminalen"
 
 #: ViewManager.cpp:287
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Focus Left Terminal"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Next Terminal"
-msgstr "Fokus till vänster om terminalen"
+msgstr "Fokus till nästa terminal"
 
 #: ViewManager.cpp:293
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Focus Below Terminal"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Previous Terminal"
-msgstr "Fokus under terminalen"
+msgstr "Fokus till föregående terminal"
 
 #: ViewManager.cpp:299
 #, kde-format
@@ -3996,12 +3979,14 @@ msgid ""
 "Allow terminal programs to use the Kitty keyboard protocol for enhanced "
 "keyboard input"
 msgstr ""
+"Tillåt terminalprogram att använda Kitty tangentbordsprotokollet för "
+"förbättrad tangentbordsinmatning"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableKittyKeyboardButton)
 #: widgets/EditProfileAdvancedPage.ui:215
 #, kde-format
 msgid "Kitty keyboard protocol"
-msgstr ""
+msgstr "Kitty tangentbordsprotokoll"
 
 #. i18n: ectx: property (text), widget (QLabel, label_14)
 #: widgets/EditProfileAdvancedPage.ui:238
@@ -4282,17 +4267,15 @@ msgstr "Aktiverad"
 
 #. i18n: ectx: property (text), widget (QLabel, label_12)
 #: widgets/EditProfileAppearancePage.ui:457
-#, fuzzy, kde-format
-#| msgid "Activation:"
+#, kde-format
 msgid "Animation:"
-msgstr "Aktivering:"
+msgstr "Animering:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableAnimatingCursorButton)
 #: widgets/EditProfileAppearancePage.ui:473
-#, fuzzy, kde-format
-#| msgid "Make the cursor blink regularly"
+#, kde-format
 msgid "Make the cursor animate smoothly"
-msgstr "Gör att markören blinkar regelbundet"
+msgstr "Gör att markören animeras regelbundet"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #. i18n: ectx: attribute (title), widget (QWidget, miscTab)
@@ -4492,13 +4475,14 @@ msgid ""
 "Render words made of characters that usually appear in coding ligatures "
 "together."
 msgstr ""
+"Återge ord som består av tecken som vanligtvis förekommer i "
+"kodningsligaturer tillsammans."
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeCoding)
 #: widgets/EditProfileAppearancePage.ui:938
-#, fuzzy, kde-format
-#| msgid "Word characters:"
+#, kde-format
 msgid "Coding ligatures characters"
-msgstr "Ordtecken:"
+msgstr "Kodningsligaturtecken"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:951
@@ -4519,12 +4503,14 @@ msgid ""
 "Apply hinting to glyphs when rendering, which may improve the legibility of "
 "certain fonts with some displays"
 msgstr ""
+"Använd antydning för glyfer vid återgivning, vilket kan förbättra "
+"läsbarheten för vissa teckensnitt på en del skärmar"
 
 #. i18n: ectx: property (text), widget (QCheckBox, fontHinting)
 #: widgets/EditProfileAppearancePage.ui:970
 #, kde-format
 msgid "Font hinting"
-msgstr ""
+msgstr "Teckensnittsantydning"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:983
@@ -4588,10 +4574,11 @@ msgstr "Överskrid bredd för breda tecken"
 
 #. i18n: ectx: property (toolTip), widget (QWidget, badgeTab)
 #: widgets/EditProfileAppearancePage.ui:1081
-#, fuzzy, kde-format
-#| msgid "<html><head/><body><p>Complex Text Layout</p></body></html>"
+#, kde-format
 msgid "<html><head/><body><p>Badge overlay options</p></body></html>"
-msgstr "<html><head/><body><p>Komplex textlayout</p></body></html>"
+msgstr ""
+"<html><head/><body><p>Alternativ för överlagrad bakgrundstext</p></body></"
+"html>"
 
 #. i18n: ectx: attribute (title), widget (QWidget, badgeTab)
 #. i18n: ectx: property (text), widget (QCheckBox, badgeEnabled)
@@ -4599,20 +4586,19 @@ msgstr "<html><head/><body><p>Komplex textlayout</p></body></html>"
 #: widgets/EditProfileAppearancePage.ui:1114
 #, kde-format
 msgid "Badge Overlay"
-msgstr ""
+msgstr "Överlagrad bakgrundstext"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeOverlayLabel)
 #: widgets/EditProfileAppearancePage.ui:1094
 #, kde-format
 msgid "Badge Overlay Options"
-msgstr ""
+msgstr "Alternativ för överlagrad bakgrundstext"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, badgeEnabled)
 #: widgets/EditProfileAppearancePage.ui:1111
-#, fuzzy, kde-format
-#| msgid "Enable word mode text rendering"
+#, kde-format
 msgid "Enable badge overlay rendering"
-msgstr "Aktivera textåtergivning med ordläge"
+msgstr "Aktivera återgivning av överlagrad bakgrundstext"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, badge_label_1)
 #. i18n: ectx: property (toolTip), widget (QLineEdit, badgeTextEdit)
@@ -4621,13 +4607,13 @@ msgstr "Aktivera textåtergivning med ordläge"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Default text of badge."
-msgstr ""
+msgstr "Bakgrundens standardtext."
 
 #. i18n: ectx: property (text), widget (QLabel, badge_label_1)
 #: widgets/EditProfileAppearancePage.ui:1124
 #, kde-format
 msgid "Badge text:"
-msgstr ""
+msgstr "Bakgrundstext:"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeVariablesHelpLabel)
 #: widgets/EditProfileAppearancePage.ui:1150
@@ -4638,6 +4624,10 @@ msgid ""
 "hostname), \\(session.process), \\(env.VARIABLE_NAME)</small></p></body></"
 "html>"
 msgstr ""
+"<html><head/><body><p><small><b>Tillgängliga variabler:</b> \\(session."
+"title), \\(session.name), \\(session.id), \\(session.directory), \\(session."
+"hostname), \\(session.process), \\(env.VARIABLE_NAME)</small></p></body></"
+"html>"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeEscapeSequenceHelpLabel)
 #: widgets/EditProfileAppearancePage.ui:1170
@@ -4647,6 +4637,10 @@ msgid ""
 "settings on this page to configure badge text, color, font, text-only mode "
 "and transparency.</small></p></body></html>"
 msgstr ""
+"<html><head/><body><p><small><b>Bakgrundstextinställning:</b><br/>Använd "
+"profilinställningarna på den här sidan för att ställa in bakgrundstextens "
+"innehåll, färg, teckensnitt, textläge och genomskinlighet.</small></p></"
+"body></html>"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, badge_label_2)
 #. i18n: ectx: property (toolTip), widget (QLineEdit, badgeFontEdit)
@@ -4655,65 +4649,63 @@ msgstr ""
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Badge font family."
-msgstr ""
+msgstr "Bakgrundsteckenfamilj."
 
 #. i18n: ectx: property (text), widget (QLabel, badge_label_2)
 #: widgets/EditProfileAppearancePage.ui:1193
 #, kde-format
 msgid "Badge font family:"
-msgstr ""
+msgstr "Bakgrundsteckenfamilj:"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeFontSizeLabel)
 #: widgets/EditProfileAppearancePage.ui:1226
 #, kde-format
 msgid "Badge font size:"
-msgstr ""
+msgstr "Bakgrundsteckenstorlek:"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeColorLabel)
 #: widgets/EditProfileAppearancePage.ui:1256
-#, fuzzy, kde-format
-#| msgid "Background color:"
+#, kde-format
 msgid "Badge color:"
 msgstr "Bakgrundsfärg:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, badgeColorSelectButton)
 #: widgets/EditProfileAppearancePage.ui:1269
-#, fuzzy, kde-format
-#| msgid "Select the color used to draw the border"
+#, kde-format
 msgid "Select the color used to draw the badge"
-msgstr "Välj färg som används för att rita kanten"
+msgstr "Välj färg som används för att rita bakgrundstexten"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, badgeTextOnlyCheckBox)
 #: widgets/EditProfileAppearancePage.ui:1283
 #, kde-format
 msgid "Display badge as text only without background rectangle"
-msgstr ""
+msgstr "Visa bara bakgrundstexten utan rektangel"
 
 #. i18n: ectx: property (text), widget (QCheckBox, badgeTextOnlyCheckBox)
 #: widgets/EditProfileAppearancePage.ui:1286
-#, fuzzy, kde-format
-#| msgid "Red error background:"
+#, kde-format
 msgid "Text only (no background)"
-msgstr "Röd felbakgrund:"
+msgstr "Bara text (ingen bakgrund)"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeTransparencyLabel)
 #: widgets/EditProfileAppearancePage.ui:1300
-#, fuzzy, kde-format
-#| msgid "Wallpaper transparency:"
+#, kde-format
 msgid "Transparency:"
-msgstr "Skrivbordsunderläggets genomskinlighet:"
+msgstr "Genomskinlighet:"
 
 #. i18n: ectx: property (toolTip), widget (QSlider, badgeTransparencySlider)
 #: widgets/EditProfileAppearancePage.ui:1327
 #, kde-format
 msgid "Set badge transparency (0 = fully transparent, 255 = opaque)"
 msgstr ""
+"Ange bakgrundstextens genomskinlighet (0 = helt genomskinligt, 255 = "
+"ogenomskinligt)"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeTransparencyValueLabel)
 #: widgets/EditProfileAppearancePage.ui:1334
 #, kde-format
 msgid "180"
-msgstr ""
+msgstr "180"
 
 #: widgets/EditProfileDialog.cpp:71
 #, kde-format
@@ -4817,9 +4809,7 @@ msgid "Edit Profile \"%1\""
 msgstr "Redigera profilen \"%1\""
 
 #: widgets/EditProfileDialog.cpp:536
-#, fuzzy, kde-format
-#| msgctxt "Do not show a close button"
-#| msgid "None"
+#, kde-format
 msgid "None"
 msgstr "Ingen"
 
@@ -5050,19 +5040,20 @@ msgid ""
 "When opening a new tab or split, automatically enter the same container "
 "(Toolbox, Distrobox) as the current session"
 msgstr ""
+"Ange automatiskt samma behållare (Toolbox, Distrobox) som den aktuella "
+"sessionen när en ny flik eller delning öppnas"
 
 #. i18n: ectx: property (text), widget (QCheckBox, inheritContainerButton)
 #: widgets/EditProfileGeneralPage.ui:203
-#, fuzzy, kde-format
-#| msgid "Start in same directory as current session"
+#, kde-format
 msgid "Enter same container as current session"
-msgstr "Starta i samma katalog som aktuell session"
+msgstr "Gå till samma behållare som aktuell session"
 
 #. i18n: ectx: property (text), widget (QLabel, containerLabel)
 #: widgets/EditProfileGeneralPage.ui:229
 #, kde-format
 msgid "Always start in container:"
-msgstr ""
+msgstr "Starta alltid i behållare:"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, containerCombo)
 #: widgets/EditProfileGeneralPage.ui:242
@@ -5070,6 +5061,7 @@ msgstr ""
 msgid ""
 "Always start new sessions using this profile inside the selected container"
 msgstr ""
+"Starta alltid nya sessioner med den här profilen inne i den valda behållaren"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/EditProfileGeneralPage.ui:255
@@ -5305,27 +5297,26 @@ msgstr "Från markering"
 #: widgets/EditProfileMousePage.ui:186
 #, kde-format
 msgid "Right-click:"
-msgstr ""
+msgstr "Högerklick:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, rightClickPasteDisabledButton)
 #: widgets/EditProfileMousePage.ui:196
 #, kde-format
 msgid "Opens context menu"
-msgstr ""
+msgstr "Visar sammanhangsberoende meny"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, rightClickPasteDisabledButton)
 #: widgets/EditProfileMousePage.ui:199
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Right-click shows context menu"
-msgstr ""
+msgstr "Högerklick visar sammanhangsberoende meny"
 
 #. i18n: ectx: property (text), widget (QRadioButton, rightClickPasteFromClipboardButton)
 #: widgets/EditProfileMousePage.ui:209
-#, fuzzy, kde-format
-#| msgid "From clipboard"
+#, kde-format
 msgid "Pastes from clipboard"
-msgstr "Från klippbordet"
+msgstr "Klistrar in från klippbordet"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, rightClickPasteFromClipboardButton)
 #. i18n: ectx: property (toolTip), widget (QRadioButton, rightClickPasteFromX11SelectionButton)
@@ -5333,14 +5324,13 @@ msgstr "Från klippbordet"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Control+right-click shows context menu"
-msgstr ""
+msgstr "Ctrl+högerklick visar sammanhangsberoende meny"
 
 #. i18n: ectx: property (text), widget (QRadioButton, rightClickPasteFromX11SelectionButton)
 #: widgets/EditProfileMousePage.ui:222
-#, fuzzy, kde-format
-#| msgid "Paste Selection"
+#, kde-format
 msgid "Pastes from selection"
-msgstr "Klistra in markering"
+msgstr "Klistrar in från markering"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: widgets/EditProfileMousePage.ui:251
@@ -5405,14 +5395,13 @@ msgstr "Ta bort avslutande mellanslag"
 #: widgets/EditProfileMousePage.ui:301
 #, kde-format
 msgid "Clear selection after copying"
-msgstr ""
+msgstr "Rensa markering efter kopiering"
 
 #. i18n: ectx: property (text), widget (QCheckBox, clearSelectionButton)
 #: widgets/EditProfileMousePage.ui:304
-#, fuzzy, kde-format
-#| msgid "From selection"
+#, kde-format
 msgid "Clear selection"
-msgstr "Från markering"
+msgstr "Rensa markering"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, underlineLinksButton)
 #: widgets/EditProfileMousePage.ui:341
@@ -5474,10 +5463,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, openLinksByDirectClickButton)
 #: widgets/EditProfileMousePage.ui:413
-#, fuzzy, kde-format
-#| msgid "Open files/links by direct click"
+#, kde-format
 msgid "Open underlined files/links by direct click"
-msgstr "Öppna filer och länkar med direktklick"
+msgstr "Öppna understrukna filer och länkar med direktklick"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowLinkEscapeSequenceButton)
 #: widgets/EditProfileMousePage.ui:424
@@ -5990,10 +5978,9 @@ msgstr "&Flikfärg:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/RenameTabWidget.ui:128
-#, fuzzy, kde-format
-#| msgid "Tab Co&lor:"
+#, kde-format
 msgid "&Activity Tab Color:"
-msgstr "&Flikfärg:"
+msgstr "Flikfärg för &aktivitet:"
 
 #: widgets/TabTitleFormatButton.cpp:21
 #, c-format
@@ -6125,11 +6112,10 @@ msgid "Close Tab"
 msgstr "Stäng flik"
 
 #: widgets/ViewContainer.cpp:968 widgets/ViewContainer.cpp:977
-#, fuzzy, kde-format
-#| msgid "Maintainer"
+#, kde-format
 msgctxt "As in Distrobox, Toolbox, Kapsule etc."
 msgid "Container"
-msgstr "Utvecklare"
+msgstr "Behållare"
 
 #: widgets/ViewContainer.cpp:987
 #, kde-format
@@ -6137,7 +6123,7 @@ msgctxt ""
 "%1 is the type of container (e.g. Distrobox, Toolbox, Kapsule etc.), %2 its "
 "name"
 msgid "%1: %2"
-msgstr ""
+msgstr "%1: %2"
 
 #~ msgid ""
 #~ "The D-Bus methods sendText/runCommand were just used.  There are security "
