@@ -33,6 +33,10 @@ public:
      */
     void activate(QObject *object = nullptr) override;
 
+    bool hasDragOperation() const override;
+
+    void startDrag() override;
+
 private:
     enum UrlType {
         StandardUrl,

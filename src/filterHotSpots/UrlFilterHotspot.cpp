@@ -10,6 +10,8 @@
 #include <QAction>
 #include <QApplication>
 #include <QClipboard>
+#include <QDrag>
+#include <QMimeData>
 
 #include <KIO/OpenUrlJob>
 #include <KLocalizedString>
@@ -112,4 +114,22 @@ QList<QAction *> UrlFilterHotSpot::actions()
     });
 
     return {openAction, copyAction};
+}
+
+bool UrlFilterHotSpot::hasDragOperation() const
+{
+    return true;
+}
+
+void UrlFilterHotSpot::startDrag()
+{
+    const QString urlString = capturedTexts().at(0);
+    auto *drag = new QDrag(this);
+    auto *mimeData = new QMimeData();
+    mimeData->setText(urlString);
+    mimeData->setUrls({QUrl(urlString)});
+
+    drag->setMimeData(mimeData);
+    // TODO add drag pixmap containing the URL.
+    drag->exec(Qt::CopyAction);
 }
