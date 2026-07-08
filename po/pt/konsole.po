@@ -487,7 +487,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Select wallpaper image file"
-msgstr "Seleccionar o ficheiro do papel de parede"
+msgstr "Seleccionar o ficheiro da imagem de fundo"
 
 #: colorscheme/ColorSchemeEditor.cpp:190
 #, kde-format
@@ -576,7 +576,7 @@ msgstr "Percentagem"
 #: colorscheme/ColorSchemeEditor.ui:103
 #, kde-format
 msgid "Wallpaper transparency:"
-msgstr "Transparência do papel de parede:"
+msgstr "Transparência da imagem de fundo:"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperLabel)
 #: colorscheme/ColorSchemeEditor.ui:137
@@ -609,7 +609,7 @@ msgstr "..."
 #: colorscheme/ColorSchemeEditor.ui:165
 #, kde-format
 msgid "Wallpaper scaling:"
-msgstr "Escala do papel de parede:"
+msgstr "Escala da imagem de fundo:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
 #: colorscheme/ColorSchemeEditor.ui:173
@@ -645,7 +645,7 @@ msgstr "Sem Escala"
 #: colorscheme/ColorSchemeEditor.ui:205
 #, kde-format
 msgid "Wallpaper flip:"
-msgstr "Inversão do papel de parede:"
+msgstr "Inversão da imagem de fundo:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:213
@@ -4779,7 +4779,7 @@ msgstr "Fundo de erro a vermelho:"
 #, fuzzy, kde-format
 #| msgid "Wallpaper transparency:"
 msgid "Transparency:"
-msgstr "Transparência do papel de parede:"
+msgstr "Transparência da imagem de fundo:"
 
 #. i18n: ectx: property (toolTip), widget (QSlider, badgeTransparencySlider)
 #: widgets/EditProfileAppearancePage.ui:1327
