@@ -2673,6 +2673,13 @@ void TerminalDisplay::pasteFromX11Selection(bool appendEnter)
 
 void TerminalDisplay::inputMethodEvent(QInputMethodEvent *event)
 {
+    if (event->replacementLength() > 0 && event->replacementStart() < 0) {
+        int backspaces = -event->replacementStart();
+        for (int i = 0; i < backspaces; ++i) {
+            QKeyEvent bsEvent(QEvent::KeyPress, Qt::Key_Backspace, Qt::NoModifier, QStringLiteral("\b"));
+            Q_EMIT keyPressedSignal(&bsEvent);
+        }
+    }
     if (!event->commitString().isEmpty()) {
         QKeyEvent keyEvent(QEvent::KeyPress, 0, Qt::NoModifier, event->commitString());
         Q_EMIT keyPressedSignal(&keyEvent);
