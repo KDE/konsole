@@ -23,7 +23,7 @@ K_PLUGIN_CLASS_WITH_JSON(QuickCommandsPlugin, "konsole_quickcommands.json")
 
 struct QuickCommandsPlugin::Private {
     QuickCommandsModel model;
-    QAction *showQuickAccess = nullptr;
+    std::unique_ptr<QAction> showQuickAccess = nullptr;
     QMap<Konsole::MainWindow *, QuickCommandsWidget *> widgetForWindow;
     QMap<Konsole::MainWindow *, QDockWidget *> dockForWindow;
 };
@@ -32,7 +32,7 @@ QuickCommandsPlugin::QuickCommandsPlugin(QObject *object, const QVariantList &ar
     : Konsole::IKonsolePlugin(object, args)
     , priv(std::make_unique<Private>())
 {
-    priv->showQuickAccess = new QAction();
+    priv->showQuickAccess = std::make_unique<QAction>();
     setName(QStringLiteral("QuickCommands"));
 }
 
@@ -51,7 +51,7 @@ void QuickCommandsPlugin::createWidgetsForMainWindow(Konsole::MainWindow *mainWi
 
     mainWindow->addDockWidget(Qt::LeftDockWidgetArea, qcDockWidget);
     connect(qcWidget, &QuickCommandsWidget::quickAccessShortcutChanged, this, [this, mainWindow](QKeySequence s) {
-        mainWindow->actionCollection()->setDefaultShortcut(priv->showQuickAccess, s);
+        mainWindow->actionCollection()->setDefaultShortcut(priv->showQuickAccess.get(), s);
 
         QString sequenceText = s.toString();
         QSettings settings;
@@ -71,8 +71,7 @@ void QuickCommandsPlugin::activeViewChanged(Konsole::SessionController *controll
         return;
     }
 
-    priv->showQuickAccess->deleteLater();
-    priv->showQuickAccess = new QAction(i18n("Show Quick Access"));
+    priv->showQuickAccess = std::make_unique<QAction>(i18n("Show Quick Access"));
 
     QSettings settings;
     settings.beginGroup(QStringLiteral("plugins"));
@@ -83,17 +82,17 @@ void QuickCommandsPlugin::activeViewChanged(Konsole::SessionController *controll
     const QString entry = settings.value(QStringLiteral("shortcut"), defText).toString();
     const QKeySequence shortcutEntry(entry);
 
-    mainWindow->actionCollection()->setDefaultShortcut(priv->showQuickAccess, shortcutEntry);
+    mainWindow->actionCollection()->setDefaultShortcut(priv->showQuickAccess.get(), shortcutEntry);
 
     // controller may exist while its view is being torn down
     QPointer<Konsole::TerminalDisplay> terminalDisplay = controller->view();
     if (terminalDisplay == nullptr) {
         return;
     }
-    terminalDisplay->addAction(priv->showQuickAccess);
+    terminalDisplay->addAction(priv->showQuickAccess.get());
 
     QPointer<Konsole::SessionController> controllerPtr(controller);
-    connect(priv->showQuickAccess, &QAction::triggered, this, [this, terminalDisplay, controllerPtr] {
+    connect(priv->showQuickAccess.get(), &QAction::triggered, this, [this, terminalDisplay, controllerPtr] {
         if (terminalDisplay == nullptr) {
             return;
         }

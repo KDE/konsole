@@ -40,14 +40,14 @@ struct SSHManagerPluginPrivate {
 
     QMap<Konsole::MainWindow *, SSHManagerTreeWidget *> widgetForWindow;
     QMap<Konsole::MainWindow *, QDockWidget *> dockForWindow;
-    QAction *showQuickAccess = nullptr;
+    std::unique_ptr<QAction> showQuickAccess = nullptr;
 };
 
 SSHManagerPlugin::SSHManagerPlugin(QObject *object, const QVariantList &args)
     : Konsole::IKonsolePlugin(object, args)
     , d(std::make_unique<SSHManagerPluginPrivate>())
 {
-    d->showQuickAccess = new QAction();
+    d->showQuickAccess = std::make_unique<QAction>();
 
     setName(QStringLiteral("SshManager"));
     KCrash::initialize();
@@ -78,7 +78,7 @@ void SSHManagerPlugin::createWidgetsForMainWindow(Konsole::MainWindow *mainWindo
     });
 
     connect(managerWidget, &SSHManagerTreeWidget::quickAccessShortcutChanged, this, [this, mainWindow](QKeySequence s) {
-        mainWindow->actionCollection()->setDefaultShortcut(d->showQuickAccess, s);
+        mainWindow->actionCollection()->setDefaultShortcut(d->showQuickAccess.get(), s);
 
         QString sequenceText = s.toString();
         QSettings settings;
@@ -111,8 +111,7 @@ void SSHManagerPlugin::activeViewChanged(Konsole::SessionController *controller,
 
     auto terminalDisplay = controller->view();
 
-    d->showQuickAccess->deleteLater();
-    d->showQuickAccess = new QAction(i18n("Show Quick Access for SSH Actions"));
+    d->showQuickAccess = std::make_unique<QAction>(i18n("Show Quick Access for SSH Actions"));
 
     QSettings settings;
     settings.beginGroup(QStringLiteral("plugins"));
@@ -123,10 +122,10 @@ void SSHManagerPlugin::activeViewChanged(Konsole::SessionController *controller,
     const QString entry = settings.value(QStringLiteral("ssh_shortcut"), defText).toString();
     const QKeySequence shortcutEntry(entry);
 
-    mainWindow->actionCollection()->setDefaultShortcut(d->showQuickAccess, shortcutEntry);
-    terminalDisplay->addAction(d->showQuickAccess);
+    mainWindow->actionCollection()->setDefaultShortcut(d->showQuickAccess.get(), shortcutEntry);
+    terminalDisplay->addAction(d->showQuickAccess.get());
 
-    connect(d->showQuickAccess, &QAction::triggered, this, [this, terminalDisplay, controller] {
+    connect(d->showQuickAccess.get(), &QAction::triggered, this, [this, terminalDisplay, controller] {
         auto bar = new KCommandBar(terminalDisplay->topLevelWidget());
         QList<QAction *> actions;
         for (int i = 0; i < d->model.rowCount(); i++) {
