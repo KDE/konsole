@@ -8,6 +8,8 @@
 
 #include <QApplication>
 #include <QBuffer>
+#include <QClipboard>
+#include <QMimeData>
 #include <QMouseEvent>
 #include <QPainter>
 #include <QPixmap>
@@ -27,6 +29,25 @@ ColorFilterHotSpot::ColorFilterHotSpot(int startLine, int startColumn, int endLi
     , _color(color)
 {
     setType(Color);
+}
+
+QMimeData *ColorFilterHotSpot::createMimeData() const
+{
+    auto *mimeData = new QMimeData();
+    mimeData->setColorData(_color);
+    mimeData->setText(_color.name());
+    return mimeData;
+}
+
+QList<QAction *> ColorFilterHotSpot::actions()
+{
+    auto *action = new QAction(i18nc("@action:inmenu", "Copy Color"), this);
+    action->setIcon(QIcon::fromTheme(QStringLiteral("edit-copy")));
+    connect(action, &QAction::triggered, this, [this] {
+        auto *mimeData = createMimeData();
+        QApplication::clipboard()->setMimeData(mimeData);
+    });
+    return {action};
 }
 
 void ColorFilterHotSpot::mouseEnterEvent(TerminalDisplay *td, QMouseEvent *ev)
