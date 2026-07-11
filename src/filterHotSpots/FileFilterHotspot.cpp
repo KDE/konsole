@@ -264,7 +264,6 @@ void FileFilterHotSpot::thumbnailRequested()
 
     _thumbnailPos = QPoint(_eventPos.x() + 100, _eventPos.y() - settings->thumbnailSize() / 2);
 
-    const int size = KonsoleSettings::thumbnailSize();
     if (_previewJob != nullptr) {
         _previewJob->deleteLater();
     }
@@ -286,6 +285,7 @@ void FileFilterHotSpot::thumbnailRequested()
         }
     });
 
+    const int size = KonsoleSettings::thumbnailSize();
     _previewJob = new KIO::PreviewJob(KFileItemList({fileItem}), QSize(size, size));
     connect(_previewJob, &KIO::PreviewJob::gotPreview, this, &FileFilterHotSpot::showThumbnail);
     connect(_previewJob, &KIO::PreviewJob::failed, this, [] {
