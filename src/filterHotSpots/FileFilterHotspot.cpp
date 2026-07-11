@@ -286,15 +286,13 @@ void FileFilterHotSpot::thumbnailRequested()
         }
     });
 
+    // preview job is auto-started & auto-deleted
     _previewJob = new KIO::PreviewJob(KFileItemList({fileItem}), QSize(size, size));
     connect(_previewJob, &KIO::PreviewJob::gotPreview, this, &FileFilterHotSpot::showThumbnail);
     connect(_previewJob, &KIO::PreviewJob::failed, this, [] {
         qCDebug(KonsoleDebug) << "Error generating the preview" << _previewJob->errorString();
         QToolTip::hideText();
     });
-
-    _previewJob->setAutoDelete(true);
-    _previewJob->start();
 }
 
 KFileItem FileFilterHotSpot::fileItem() const
