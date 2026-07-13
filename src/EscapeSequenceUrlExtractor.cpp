@@ -8,7 +8,13 @@
 #include "EscapeSequenceUrlExtractor.h"
 #include "Screen.h"
 
+#include <kio_version.h>
+
 #include <QUrl>
+
+#if KIO_VERSION < QT_VERSION_CHECK(6, 29, 0)
+#include <QHostInfo>
+#endif
 
 namespace Konsole
 {
@@ -41,10 +47,21 @@ void EscapeSequenceUrlExtractor::setUrl(const QString &url)
     QUrl qUrl = QUrl(url);
 
     if (_allowedUriSchemas.contains(qUrl.scheme() + QLatin1String("://"))) {
-        // Keep the URL (including any host component) verbatim and let KIO
-        // resolve it when activated. Per RFC 8089 a file:// URL may carry a
-        // host naming the local machine (e.g. produced by `ls --hyperlink`);
-        // KIO's file worker strips a local host before accessing the path.
+        // Per RFC 8089 a file:// URL may carry a host naming the local machine
+        // (e.g. produced by `ls --hyperlink`). From KIO 6.29 on, the file worker
+        // resolves such a host itself, so pass the URL through verbatim. Against
+        // older KIO (which mishandles it, see https://bugs.kde.org/483297) strip
+        // a local host here and drop links to genuinely remote hosts.
+#if KIO_VERSION < QT_VERSION_CHECK(6, 29, 0)
+        if (qUrl.scheme() == QLatin1String("file") && !qUrl.host().isEmpty()) {
+            if (qUrl.host() != QHostInfo::localHostName() && qUrl.host() != QLatin1String("localhost")) {
+                abortUrlInput();
+                return;
+            }
+
+            qUrl.setHost(QString());
+        }
+#endif
         _currentUrl.url = qUrl.toString();
     } else {
         abortUrlInput();
