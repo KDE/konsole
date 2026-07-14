@@ -268,12 +268,12 @@ void FileFilterHotSpot::thumbnailRequested()
         _previewJob->deleteLater();
     }
 
-    _thumbnailFinished = false;
-
     const auto fileItem = this->fileItem();
     if (!fileItem.exists()) {
         return;
     }
+
+    _thumbnailFinished = false;
 
     // Show a "Loading" if Preview takes a long time.
     QTimer::singleShot(10, this, [this] {
