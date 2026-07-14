@@ -319,6 +319,8 @@ target_link_libraries(konsoleprivate
     ZLIB::ZLIB
     ICU::uc
     ICU::i18n
+    PRIVATE
+    Qt6::Concurrent
 )
 
 target_link_libraries(konsoleprivate

@@ -20,6 +20,7 @@
 #include <QRegularExpression>
 #include <QTimer>
 #include <QToolTip>
+#include <QtConcurrentRun>
 
 #include <KIO/ApplicationLauncherJob>
 #include <KIO/OpenUrlJob>
@@ -268,33 +269,40 @@ void FileFilterHotSpot::thumbnailRequested()
         _previewJob->deleteLater();
     }
 
-    const auto fileItem = this->fileItem();
-    if (!fileItem.exists()) {
-        return;
-    }
-
-    _thumbnailFinished = false;
-
-    // Show a "Loading" if Preview takes a long time.
-    QTimer::singleShot(10, this, [this] {
-        if (_previewJob == nullptr) {
+    // _filePath is local path.
+    // KFileItem::exists() cannot be used easily, as the property is not set by default (see docs)
+    // so using plain QFile instead for sync query.
+    // const QString filePath(_filePath);
+    QtConcurrent::run([filePath = _filePath]() {
+        return QFile::exists(filePath);
+    }).then(this, [this](bool fileExists) {
+        if (!fileExists) {
             return;
         }
-        if (!_thumbnailFinished) {
-            QToolTip::showText(_thumbnailPos, i18n("Generating Thumbnail"), qApp->focusWidget());
-        }
-    });
 
-    const int size = KonsoleSettings::thumbnailSize();
-    _previewJob = new KIO::PreviewJob(KFileItemList({fileItem}), QSize(size, size));
-    connect(_previewJob, &KIO::PreviewJob::gotPreview, this, &FileFilterHotSpot::showThumbnail);
-    connect(_previewJob, &KIO::PreviewJob::failed, this, [] {
-        qCDebug(KonsoleDebug) << "Error generating the preview" << _previewJob->errorString();
-        QToolTip::hideText();
-    });
+        _thumbnailFinished = false;
 
-    _previewJob->setAutoDelete(true);
-    _previewJob->start();
+        // Show a "Loading" if Preview takes a long time.
+        QTimer::singleShot(10, this, [this] {
+            if (_previewJob == nullptr) {
+                return;
+            }
+            if (!_thumbnailFinished) {
+                QToolTip::showText(_thumbnailPos, i18n("Generating Thumbnail"), qApp->focusWidget());
+            }
+        });
+
+        const int size = KonsoleSettings::thumbnailSize();
+        _previewJob = new KIO::PreviewJob(KFileItemList({fileItem()}), QSize(size, size));
+        connect(_previewJob, &KIO::PreviewJob::gotPreview, this, &FileFilterHotSpot::showThumbnail);
+        connect(_previewJob, &KIO::PreviewJob::failed, this, [] {
+            qCDebug(KonsoleDebug) << "Error generating the preview" << _previewJob->errorString();
+            QToolTip::hideText();
+        });
+
+        _previewJob->setAutoDelete(true);
+        _previewJob->start();
+    });
 }
 
 KFileItem FileFilterHotSpot::fileItem() const
