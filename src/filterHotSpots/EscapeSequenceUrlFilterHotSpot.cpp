@@ -12,6 +12,8 @@
 
 #include <QApplication>
 #include <QDebug>
+#include <QDrag>
+#include <QMimeData>
 #include <QMouseEvent>
 
 #include "terminalDisplay/TerminalDisplay.h"
@@ -33,6 +35,23 @@ void EscapeSequenceUrlHotSpot::activate(QObject *obj)
     auto *job = new KIO::OpenUrlJob(QUrl(_url));
     job->setUiDelegate(KIO::createDefaultJobUiDelegate(KJobUiDelegate::AutoHandlingEnabled, QApplication::activeWindow()));
     job->start();
+}
+
+bool EscapeSequenceUrlHotSpot::hasDragOperation() const
+{
+    return true;
+}
+
+void EscapeSequenceUrlHotSpot::startDrag()
+{
+    auto *drag = new QDrag(this);
+    auto *mimeData = new QMimeData();
+    mimeData->setText(_url);
+    mimeData->setUrls({QUrl(_url)});
+
+    drag->setMimeData(mimeData);
+    // TODO add drag pixmap containing the URL.
+    drag->exec(Qt::CopyAction);
 }
 
 void EscapeSequenceUrlHotSpot::mouseEnterEvent(TerminalDisplay *td, QMouseEvent *ev)

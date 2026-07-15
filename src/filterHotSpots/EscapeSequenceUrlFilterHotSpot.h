@@ -17,6 +17,10 @@ class KONSOLEPRIVATE_EXPORT EscapeSequenceUrlHotSpot : public HotSpot
 public:
     EscapeSequenceUrlHotSpot(int startLine, int startColumn, int endLine, int endColumn, const QString &text, const QString &url);
     void activate(QObject *obj) override;
+
+    bool hasDragOperation() const override;
+    void startDrag() override;
+
     void mouseEnterEvent(TerminalDisplay *td, QMouseEvent *ev) override;
     void mouseLeaveEvent(TerminalDisplay *td, QMouseEvent *ev) override;
 
