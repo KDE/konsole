@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-20 00:47+0000\n"
+"POT-Creation-Date: 2026-07-15 00:49+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -1436,27 +1436,27 @@ msgid "Cancel"
 msgstr "取消"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:46
-#: plugins/QuickCommands/quickcommandsplugin.cpp:130
+#: plugins/QuickCommands/quickcommandsplugin.cpp:129
 #, kde-format
 msgid "Quick Commands"
 msgstr "快速命令"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:75
+#: plugins/QuickCommands/quickcommandsplugin.cpp:74
 #, kde-format
 msgid "Show Quick Access"
 msgstr "显示快速访问"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:123
+#: plugins/QuickCommands/quickcommandsplugin.cpp:122
 #, kde-format
 msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
 msgstr "找不到快速命令。您可以通过菜单栏的：插件 -> 快速命令 添加一个"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:124
+#: plugins/QuickCommands/quickcommandsplugin.cpp:123
 #, kde-format
 msgid "Plugins - Quick Commands"
 msgstr "插件 - 快速命令"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:140
+#: plugins/QuickCommands/quickcommandsplugin.cpp:139
 #, kde-format
 msgid "Show Quick Commands"
 msgstr "显示快速命令"
@@ -1575,40 +1575,40 @@ msgstr "SSH 管理器"
 msgid "Show SSH Manager"
 msgstr "显示 SSH 管理器"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:115
+#: plugins/SSHManager/sshmanagerplugin.cpp:114
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
 msgstr "显示 SSH 操作快速访问"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:146
+#: plugins/SSHManager/sshmanagerplugin.cpp:145
 #, kde-format
 msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
 msgstr ""
 "没有找到已保存的 SSH 配置。您可以通过菜单栏的：插件 -> SSH 管理器 添加一个"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:147
+#: plugins/SSHManager/sshmanagerplugin.cpp:146
 #, kde-format
 msgid "Plugins - SSH Manager"
 msgstr "插件 - SSH 管理器"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:153
+#: plugins/SSHManager/sshmanagerplugin.cpp:152
 #, kde-format
 msgid "SSH Entries"
 msgstr "SSH 条目"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:182
+#: plugins/SSHManager/sshmanagerplugin.cpp:181
 #, kde-format
 msgid ""
 "Could not get the process name, assume that we can't request a connection"
 msgstr "无法获取进程名称，假定无法请求连接"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:182
-#: plugins/SSHManager/sshmanagerplugin.cpp:194
+#: plugins/SSHManager/sshmanagerplugin.cpp:181
+#: plugins/SSHManager/sshmanagerplugin.cpp:193
 #, kde-format
 msgid "Error issuing SSH Command"
 msgstr "发出 SSH 命令时出错"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:194
+#: plugins/SSHManager/sshmanagerplugin.cpp:193
 #, kde-format
 msgid ""
 "Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"

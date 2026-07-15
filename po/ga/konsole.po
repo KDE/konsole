@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-20 00:47+0000\n"
+"POT-Creation-Date: 2026-07-15 00:49+0000\n"
 "PO-Revision-Date: 2025-12-19 17:46+0000\n"
 "Last-Translator: Charlotte <altronic25@protonmail.com>\n"
 "Language-Team: Irish <kde-i18n-doc@kde.org>\n"
@@ -1452,29 +1452,29 @@ msgid "Cancel"
 msgstr "Cealaigh"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:46
-#: plugins/QuickCommands/quickcommandsplugin.cpp:130
+#: plugins/QuickCommands/quickcommandsplugin.cpp:129
 #, kde-format
 msgid "Quick Commands"
 msgstr "Orduithe Tapa"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:75
+#: plugins/QuickCommands/quickcommandsplugin.cpp:74
 #, kde-format
 msgid "Show Quick Access"
 msgstr "Taispeáin Rochtain Thapa"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:123
+#: plugins/QuickCommands/quickcommandsplugin.cpp:122
 #, kde-format
 msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
 msgstr ""
 "Níor aimsíodh aon orduithe tapa. Is féidir leat ceann a chur leis ar "
 "Bhreiseáin -> Orduithe Tapa"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:124
+#: plugins/QuickCommands/quickcommandsplugin.cpp:123
 #, kde-format
 msgid "Plugins - Quick Commands"
 msgstr "Breiseáin - Orduithe Tapa"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:140
+#: plugins/QuickCommands/quickcommandsplugin.cpp:139
 #, kde-format
 msgid "Show Quick Commands"
 msgstr "Taispeáin Orduithe Tapa"
@@ -1595,29 +1595,29 @@ msgstr "Bainisteoir SSH"
 msgid "Show SSH Manager"
 msgstr "Taispeáin Bainisteoir SSH"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:115
+#: plugins/SSHManager/sshmanagerplugin.cpp:114
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
 msgstr "Taispeáin Rochtain Thapa do Ghníomhartha SSH"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:146
+#: plugins/SSHManager/sshmanagerplugin.cpp:145
 #, kde-format
 msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
 msgstr ""
 "Níor aimsíodh aon chumraíocht SSH shábháilte. Is féidir leat ceann a chur "
 "leis ar Bhreiseáin -> Bainisteoir SSH."
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:147
+#: plugins/SSHManager/sshmanagerplugin.cpp:146
 #, kde-format
 msgid "Plugins - SSH Manager"
 msgstr "Breiseáin - Bainisteoir SSH"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:153
+#: plugins/SSHManager/sshmanagerplugin.cpp:152
 #, kde-format
 msgid "SSH Entries"
 msgstr "Iontrálacha SSH"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:182
+#: plugins/SSHManager/sshmanagerplugin.cpp:181
 #, kde-format
 msgid ""
 "Could not get the process name, assume that we can't request a connection"
@@ -1625,13 +1625,13 @@ msgstr ""
 "Níorbh fhéidir ainm an phróisis a fháil, glactar leis nach féidir linn nasc "
 "a iarraidh"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:182
-#: plugins/SSHManager/sshmanagerplugin.cpp:194
+#: plugins/SSHManager/sshmanagerplugin.cpp:181
+#: plugins/SSHManager/sshmanagerplugin.cpp:193
 #, kde-format
 msgid "Error issuing SSH Command"
 msgstr "Earráid ag eisiúint Ordú SSH"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:194
+#: plugins/SSHManager/sshmanagerplugin.cpp:193
 #, kde-format
 msgid ""
 "Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"

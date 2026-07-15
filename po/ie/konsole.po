@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-20 00:47+0000\n"
+"POT-Creation-Date: 2026-07-15 00:49+0000\n"
 "PO-Revision-Date: 2024-08-04 17:18+0700\n"
 "Last-Translator: OIS <mistresssilvara@hotmail.com>\n"
 "Language-Team: Interlingue <>\n"
@@ -1421,28 +1421,28 @@ msgid "Cancel"
 msgstr "Anullar"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:46
-#: plugins/QuickCommands/quickcommandsplugin.cpp:130
+#: plugins/QuickCommands/quickcommandsplugin.cpp:129
 #, kde-format
 msgid "Quick Commands"
 msgstr "Rapid comandes"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:75
+#: plugins/QuickCommands/quickcommandsplugin.cpp:74
 #, fuzzy, kde-format
 msgid "Show Quick Access"
 msgstr "Rapid comandes"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:123
+#: plugins/QuickCommands/quickcommandsplugin.cpp:122
 #, fuzzy, kde-format
 msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
 msgstr "Rapid comandes"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:124
+#: plugins/QuickCommands/quickcommandsplugin.cpp:123
 #, fuzzy, kde-format
 #| msgid "Quick Commands"
 msgid "Plugins - Quick Commands"
 msgstr "Rapid comandes"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:140
+#: plugins/QuickCommands/quickcommandsplugin.cpp:139
 #, kde-format
 msgid "Show Quick Commands"
 msgstr "Monstrar rapid comandes"
@@ -1559,40 +1559,40 @@ msgstr "Gerente de SSH"
 msgid "Show SSH Manager"
 msgstr "Gerente de SSH"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:115
+#: plugins/SSHManager/sshmanagerplugin.cpp:114
 #, fuzzy, kde-format
 msgid "Show Quick Access for SSH Actions"
 msgstr "Rapid comandes"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:146
+#: plugins/SSHManager/sshmanagerplugin.cpp:145
 #, fuzzy, kde-format
 msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
 msgstr "Gerente de SSH"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:147
+#: plugins/SSHManager/sshmanagerplugin.cpp:146
 #, fuzzy, kde-format
 #| msgid "SSH Manager"
 msgid "Plugins - SSH Manager"
 msgstr "Gerente de SSH"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:153
+#: plugins/SSHManager/sshmanagerplugin.cpp:152
 #, kde-format
 msgid "SSH Entries"
 msgstr "Inscritiones SSH"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:182
+#: plugins/SSHManager/sshmanagerplugin.cpp:181
 #, fuzzy, kde-format
 msgid ""
 "Could not get the process name, assume that we can't request a connection"
 msgstr "Nómine"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:182
-#: plugins/SSHManager/sshmanagerplugin.cpp:194
+#: plugins/SSHManager/sshmanagerplugin.cpp:181
+#: plugins/SSHManager/sshmanagerplugin.cpp:193
 #, fuzzy, kde-format
 msgid "Error issuing SSH Command"
 msgstr "Comande"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:194
+#: plugins/SSHManager/sshmanagerplugin.cpp:193
 #, fuzzy, kde-format
 msgid ""
 "Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"

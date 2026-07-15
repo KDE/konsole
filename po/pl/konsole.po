@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-20 00:47+0000\n"
+"POT-Creation-Date: 2026-07-15 00:49+0000\n"
 "PO-Revision-Date: 2026-04-11 08:43+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: pl\n"
@@ -1455,29 +1455,29 @@ msgid "Cancel"
 msgstr "Anuluj"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:46
-#: plugins/QuickCommands/quickcommandsplugin.cpp:130
+#: plugins/QuickCommands/quickcommandsplugin.cpp:129
 #, kde-format
 msgid "Quick Commands"
 msgstr "Szybkie polecenia"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:75
+#: plugins/QuickCommands/quickcommandsplugin.cpp:74
 #, kde-format
 msgid "Show Quick Access"
 msgstr "Pokaż szybki dostęp"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:123
+#: plugins/QuickCommands/quickcommandsplugin.cpp:122
 #, kde-format
 msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
 msgstr ""
 "Nie znaleziono żadnego szybkiego polecenia. Możesz doda takie we Wtyczki -> "
 "Szybkie polecenia"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:124
+#: plugins/QuickCommands/quickcommandsplugin.cpp:123
 #, kde-format
 msgid "Plugins - Quick Commands"
 msgstr "Wtyczki - Szybkie polecenia"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:140
+#: plugins/QuickCommands/quickcommandsplugin.cpp:139
 #, kde-format
 msgid "Show Quick Commands"
 msgstr "Pokaż szybkie polecenia"
@@ -1596,42 +1596,42 @@ msgstr "Zarządzanie SSH"
 msgid "Show SSH Manager"
 msgstr "Pokaż zarządzanie SSH"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:115
+#: plugins/SSHManager/sshmanagerplugin.cpp:114
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
 msgstr "Pokaż Szybki Dostęp dla Działań SSH"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:146
+#: plugins/SSHManager/sshmanagerplugin.cpp:145
 #, kde-format
 msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
 msgstr ""
 "Nie znaleziono żadnych ustawień SSH. Możesz doda takie we Wtyczki -> "
 "Zarządzanie SSH"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:147
+#: plugins/SSHManager/sshmanagerplugin.cpp:146
 #, kde-format
 msgid "Plugins - SSH Manager"
 msgstr "Wtyczki - Zarządzanie SSH"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:153
+#: plugins/SSHManager/sshmanagerplugin.cpp:152
 #, kde-format
 msgid "SSH Entries"
 msgstr "Wpisy SSH"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:182
+#: plugins/SSHManager/sshmanagerplugin.cpp:181
 #, kde-format
 msgid ""
 "Could not get the process name, assume that we can't request a connection"
 msgstr ""
 "Nie można uzyskać nazwy procesu, założono, że nie możemy żądać połączenia"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:182
-#: plugins/SSHManager/sshmanagerplugin.cpp:194
+#: plugins/SSHManager/sshmanagerplugin.cpp:181
+#: plugins/SSHManager/sshmanagerplugin.cpp:193
 #, kde-format
 msgid "Error issuing SSH Command"
 msgstr "Błąd wydawania polecenia SSH"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:194
+#: plugins/SSHManager/sshmanagerplugin.cpp:193
 #, kde-format
 msgid ""
 "Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"

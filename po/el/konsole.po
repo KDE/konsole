@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-20 00:47+0000\n"
+"POT-Creation-Date: 2026-07-15 00:49+0000\n"
 "PO-Revision-Date: 2024-09-05 12:59+0300\n"
 "Last-Translator: Αντώνης Γέραλης <capoiosct@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -1473,29 +1473,29 @@ msgid "Cancel"
 msgstr "Ακύρωση"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:46
-#: plugins/QuickCommands/quickcommandsplugin.cpp:130
+#: plugins/QuickCommands/quickcommandsplugin.cpp:129
 #, kde-format
 msgid "Quick Commands"
 msgstr "Γρήγορες εντολές"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:75
+#: plugins/QuickCommands/quickcommandsplugin.cpp:74
 #, kde-format
 msgid "Show Quick Access"
 msgstr "Εμφάνιση γρήγορης πρόσβασης"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:123
+#: plugins/QuickCommands/quickcommandsplugin.cpp:122
 #, kde-format
 msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
 msgstr ""
 "Δεν βρέθηκαν γρήγορες εντολές. Μπορείτε να προσθέσετε μία στο Πρόσθετα -> "
 "Γρήγορες εντολές"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:124
+#: plugins/QuickCommands/quickcommandsplugin.cpp:123
 #, kde-format
 msgid "Plugins - Quick Commands"
 msgstr "Πρόσθετα - Γρήγορες εντολές"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:140
+#: plugins/QuickCommands/quickcommandsplugin.cpp:139
 #, kde-format
 msgid "Show Quick Commands"
 msgstr "Εμφάνιση γρήγορων εντολών"
@@ -1618,29 +1618,29 @@ msgstr "Διαχειριστής SSH"
 msgid "Show SSH Manager"
 msgstr "Εμφάνιση διαχειριστή SSH"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:115
+#: plugins/SSHManager/sshmanagerplugin.cpp:114
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
 msgstr "Εμφάνιση γρήγορης πρόσβασης για ενέργειες SSH"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:146
+#: plugins/SSHManager/sshmanagerplugin.cpp:145
 #, kde-format
 msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
 msgstr ""
 "Δεν βρέθηκε αποθηκευμένη ρύθμιση SSH. Μπορείτε να προσθέσετε μία στο "
 "Πρόσθετα -> Διαχειριστής SSH"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:147
+#: plugins/SSHManager/sshmanagerplugin.cpp:146
 #, kde-format
 msgid "Plugins - SSH Manager"
 msgstr "Πρόσθετα - Διαχειριστής SSH"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:153
+#: plugins/SSHManager/sshmanagerplugin.cpp:152
 #, kde-format
 msgid "SSH Entries"
 msgstr "SSH εγγραφές"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:182
+#: plugins/SSHManager/sshmanagerplugin.cpp:181
 #, kde-format
 msgid ""
 "Could not get the process name, assume that we can't request a connection"
@@ -1648,13 +1648,13 @@ msgstr ""
 "Αδυναμία ανάκτησης του ονόματος της διεργασίας, άρα δεν μπορούμε να "
 "αιτηθούμε σύνδεση"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:182
-#: plugins/SSHManager/sshmanagerplugin.cpp:194
+#: plugins/SSHManager/sshmanagerplugin.cpp:181
+#: plugins/SSHManager/sshmanagerplugin.cpp:193
 #, kde-format
 msgid "Error issuing SSH Command"
 msgstr "Σφάλμα έκδοσης SSH εντολής"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:194
+#: plugins/SSHManager/sshmanagerplugin.cpp:193
 #, kde-format
 msgid ""
 "Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"
