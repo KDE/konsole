@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-15 00:49+0000\n"
+"POT-Creation-Date: 2026-07-16 00:48+0000\n"
 "PO-Revision-Date: 2013-03-28 14:37+0530\n"
 "Last-Translator: Chetan Khona <chetan@kompkin.com>\n"
 "Language-Team: Marathi <kde-i18n-doc@kde.org>\n"
@@ -777,7 +777,15 @@ msgstr "सर्व निवडा"
 msgid "Deselect All"
 msgstr "सर्व निवडू नका"
 
-#: filterHotSpots/ColorFilterHotSpot.cpp:84
+#: filterHotSpots/ColorFilterHotSpot.cpp:85
+#, fuzzy, kde-format
+#| msgctxt "@label:listbox Column header text for the actual colors"
+#| msgid "Color"
+msgctxt "@action:inmenu"
+msgid "Copy Color"
+msgstr "रंग"
+
+#: filterHotSpots/ColorFilterHotSpot.cpp:148
 #, fuzzy, kde-format
 #| msgid "Preview:"
 msgctxt "Caption of hover tooltip"
@@ -802,22 +810,22 @@ msgstr "इनपुट यावर प्रतिकृत करा"
 msgid "Generating Thumbnail"
 msgstr ""
 
-#: filterHotSpots/UrlFilterHotspot.cpp:90
+#: filterHotSpots/UrlFilterHotspot.cpp:92
 #, kde-format
 msgid "Open Link"
 msgstr "लिंक उघडा"
 
-#: filterHotSpots/UrlFilterHotspot.cpp:92
+#: filterHotSpots/UrlFilterHotspot.cpp:94
 #, kde-format
 msgid "Copy Link Address"
 msgstr "लिंक पत्ता प्रतिकृत करा"
 
-#: filterHotSpots/UrlFilterHotspot.cpp:95
+#: filterHotSpots/UrlFilterHotspot.cpp:97
 #, kde-format
 msgid "Send Email To..."
 msgstr "इमेल पाठवा..."
 
-#: filterHotSpots/UrlFilterHotspot.cpp:97
+#: filterHotSpots/UrlFilterHotspot.cpp:99
 #, kde-format
 msgid "Copy Email Address"
 msgstr "इमेल पत्ता प्रतिकृत करा"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-15 00:49+0000\n"
+"POT-Creation-Date: 2026-07-16 00:48+0000\n"
 "PO-Revision-Date: 2013-11-18 03:40+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -793,7 +793,15 @@ msgstr "Барлығын таңдау"
 msgid "Deselect All"
 msgstr "Барлығын таңдаудан айну"
 
-#: filterHotSpots/ColorFilterHotSpot.cpp:84
+#: filterHotSpots/ColorFilterHotSpot.cpp:85
+#, fuzzy, kde-format
+#| msgctxt "@label:listbox Column header text for the actual colors"
+#| msgid "Color"
+msgctxt "@action:inmenu"
+msgid "Copy Color"
+msgstr "Түсі"
+
+#: filterHotSpots/ColorFilterHotSpot.cpp:148
 #, fuzzy, kde-format
 #| msgid "Preview:"
 msgctxt "Caption of hover tooltip"
@@ -818,22 +826,22 @@ msgstr "Кірісті мынаған көшірмелеу"
 msgid "Generating Thumbnail"
 msgstr ""
 
-#: filterHotSpots/UrlFilterHotspot.cpp:90
+#: filterHotSpots/UrlFilterHotspot.cpp:92
 #, kde-format
 msgid "Open Link"
 msgstr "Сілтемені ашу"
 
-#: filterHotSpots/UrlFilterHotspot.cpp:92
+#: filterHotSpots/UrlFilterHotspot.cpp:94
 #, kde-format
 msgid "Copy Link Address"
 msgstr "Сілтеменің адресін көшіріп алу"
 
-#: filterHotSpots/UrlFilterHotspot.cpp:95
+#: filterHotSpots/UrlFilterHotspot.cpp:97
 #, kde-format
 msgid "Send Email To..."
 msgstr "Мынаған эл.пошта жолдау..."
 
-#: filterHotSpots/UrlFilterHotspot.cpp:97
+#: filterHotSpots/UrlFilterHotspot.cpp:99
 #, kde-format
 msgid "Copy Email Address"
 msgstr "Эл.пошта адресін көшіріп алу"

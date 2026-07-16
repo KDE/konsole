@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-15 00:49+0000\n"
+"POT-Creation-Date: 2026-07-16 00:48+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -727,7 +727,15 @@ msgstr "全部选择"
 msgid "Deselect All"
 msgstr "全部取消选择"
 
-#: filterHotSpots/ColorFilterHotSpot.cpp:84
+#: filterHotSpots/ColorFilterHotSpot.cpp:85
+#, fuzzy, kde-format
+#| msgctxt "@label:listbox Column header text for the actual colors"
+#| msgid "Color"
+msgctxt "@action:inmenu"
+msgid "Copy Color"
+msgstr "颜色"
+
+#: filterHotSpots/ColorFilterHotSpot.cpp:148
 #, kde-format
 msgctxt "Caption of hover tooltip"
 msgid "Color Preview"
@@ -752,22 +760,22 @@ msgstr "复制地址"
 msgid "Generating Thumbnail"
 msgstr "正在生成缩略图"
 
-#: filterHotSpots/UrlFilterHotspot.cpp:90
+#: filterHotSpots/UrlFilterHotspot.cpp:92
 #, kde-format
 msgid "Open Link"
 msgstr "打开链接"
 
-#: filterHotSpots/UrlFilterHotspot.cpp:92
+#: filterHotSpots/UrlFilterHotspot.cpp:94
 #, kde-format
 msgid "Copy Link Address"
 msgstr "复制链接地址"
 
-#: filterHotSpots/UrlFilterHotspot.cpp:95
+#: filterHotSpots/UrlFilterHotspot.cpp:97
 #, kde-format
 msgid "Send Email To..."
 msgstr "发送电子邮件到..."
 
-#: filterHotSpots/UrlFilterHotspot.cpp:97
+#: filterHotSpots/UrlFilterHotspot.cpp:99
 #, kde-format
 msgid "Copy Email Address"
 msgstr "复制电子邮件地址"

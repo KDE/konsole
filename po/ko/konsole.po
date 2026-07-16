@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-15 00:49+0000\n"
+"POT-Creation-Date: 2026-07-16 00:48+0000\n"
 "PO-Revision-Date: 2026-06-06 13:33+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -734,7 +734,15 @@ msgstr "모두 선택"
 msgid "Deselect All"
 msgstr "모두 선택 해제"
 
-#: filterHotSpots/ColorFilterHotSpot.cpp:84
+#: filterHotSpots/ColorFilterHotSpot.cpp:85
+#, fuzzy, kde-format
+#| msgctxt "@label:listbox Column header text for the actual colors"
+#| msgid "Color"
+msgctxt "@action:inmenu"
+msgid "Copy Color"
+msgstr "색"
+
+#: filterHotSpots/ColorFilterHotSpot.cpp:148
 #, kde-format
 msgctxt "Caption of hover tooltip"
 msgid "Color Preview"
@@ -759,22 +767,22 @@ msgstr "위치 복사"
 msgid "Generating Thumbnail"
 msgstr "섬네일 생성 중"
 
-#: filterHotSpots/UrlFilterHotspot.cpp:90
+#: filterHotSpots/UrlFilterHotspot.cpp:92
 #, kde-format
 msgid "Open Link"
 msgstr "링크 열기"
 
-#: filterHotSpots/UrlFilterHotspot.cpp:92
+#: filterHotSpots/UrlFilterHotspot.cpp:94
 #, kde-format
 msgid "Copy Link Address"
 msgstr "링크 주소 복사"
 
-#: filterHotSpots/UrlFilterHotspot.cpp:95
+#: filterHotSpots/UrlFilterHotspot.cpp:97
 #, kde-format
 msgid "Send Email To..."
 msgstr "이메일 보내기..."
 
-#: filterHotSpots/UrlFilterHotspot.cpp:97
+#: filterHotSpots/UrlFilterHotspot.cpp:99
 #, kde-format
 msgid "Copy Email Address"
 msgstr "이메일 주소 복사"

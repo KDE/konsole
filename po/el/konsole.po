@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-15 00:49+0000\n"
+"POT-Creation-Date: 2026-07-16 00:48+0000\n"
 "PO-Revision-Date: 2024-09-05 12:59+0300\n"
 "Last-Translator: Αντώνης Γέραλης <capoiosct@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -759,7 +759,15 @@ msgstr "Επιλογή όλων"
 msgid "Deselect All"
 msgstr "Αποεπιλογή όλων"
 
-#: filterHotSpots/ColorFilterHotSpot.cpp:84
+#: filterHotSpots/ColorFilterHotSpot.cpp:85
+#, fuzzy, kde-format
+#| msgctxt "@label:listbox Column header text for the actual colors"
+#| msgid "Color"
+msgctxt "@action:inmenu"
+msgid "Copy Color"
+msgstr "Χρώμα"
+
+#: filterHotSpots/ColorFilterHotSpot.cpp:148
 #, kde-format
 msgctxt "Caption of hover tooltip"
 msgid "Color Preview"
@@ -785,22 +793,22 @@ msgstr "Αντιγραφή τοποθεσίας"
 msgid "Generating Thumbnail"
 msgstr "Παραγωγή εικόνας επισκόπησης"
 
-#: filterHotSpots/UrlFilterHotspot.cpp:90
+#: filterHotSpots/UrlFilterHotspot.cpp:92
 #, kde-format
 msgid "Open Link"
 msgstr "Άνοιγμα συνδέσμου"
 
-#: filterHotSpots/UrlFilterHotspot.cpp:92
+#: filterHotSpots/UrlFilterHotspot.cpp:94
 #, kde-format
 msgid "Copy Link Address"
 msgstr "Αντιγραφή διεύθυνσης συνδέσμου"
 
-#: filterHotSpots/UrlFilterHotspot.cpp:95
+#: filterHotSpots/UrlFilterHotspot.cpp:97
 #, kde-format
 msgid "Send Email To..."
 msgstr "Αποστολή email σε..."
 
-#: filterHotSpots/UrlFilterHotspot.cpp:97
+#: filterHotSpots/UrlFilterHotspot.cpp:99
 #, kde-format
 msgid "Copy Email Address"
 msgstr "Αντιγραφή διεύθυνσης Email"
