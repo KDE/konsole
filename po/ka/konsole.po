@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-16 02:42+0000\n"
-"PO-Revision-Date: 2026-06-20 07:10+0200\n"
+"PO-Revision-Date: 2026-07-17 08:53+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -737,12 +737,10 @@ msgid "Deselect All"
 msgstr "მონიშვნის მოხსნა"
 
 #: filterHotSpots/ColorFilterHotSpot.cpp:85
-#, fuzzy, kde-format
-#| msgctxt "@label:listbox Column header text for the actual colors"
-#| msgid "Color"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Color"
-msgstr "ფერი"
+msgstr "ფერის კოპირება"
 
 #: filterHotSpots/ColorFilterHotSpot.cpp:148
 #, kde-format

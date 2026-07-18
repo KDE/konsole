@@ -728,12 +728,10 @@ msgid "Deselect All"
 msgstr "全部取消选择"
 
 #: filterHotSpots/ColorFilterHotSpot.cpp:85
-#, fuzzy, kde-format
-#| msgctxt "@label:listbox Column header text for the actual colors"
-#| msgid "Color"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Color"
-msgstr "颜色"
+msgstr ""
 
 #: filterHotSpots/ColorFilterHotSpot.cpp:148
 #, kde-format
