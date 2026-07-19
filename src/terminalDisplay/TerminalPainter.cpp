@@ -215,9 +215,8 @@ static void reverseRendition(Character &p)
 void TerminalPainter::drawContents(Character *image,
                                    QPainter &paint,
                                    const QRect &rect,
-                                   bool printerFriendly,
+                                   DrawFlags drawFlags,
                                    int imageSize,
-                                   bool bidiEnabled,
                                    QVector<LineProperty> lineProperties,
                                    CharacterColor const *ulColorTable)
 {
@@ -265,7 +264,7 @@ void TerminalPainter::drawContents(Character *image,
     const QRect textArea(QPoint(leftPadding + fontWidth * rect.x(), topPadding + rect.y() * fontHeight),
                          QSize(rect.width() * fontWidth, rect.height() * fontHeight));
     QRegion sixelRegion = QRegion();
-    if (!printerFriendly) {
+    if (!drawFlags.testFlag(DrawFlag::PrinterFriendly)) {
         drawImagesBelowText(paint, textArea, fontWidth, fontHeight, placementIdx, sixelRegion);
     }
 
@@ -336,15 +335,16 @@ void TerminalPainter::drawContents(Character *image,
         //(instead of textArea.topLeft() * painter-scale)
         QString line;
 #define MAX_LINE_WIDTH 1024
-#define vis2log(x) ((bidiEnabled && (x) <= lastNonSpace) ? line2log[vis2line[x]] : (x))
+#define vis2log(x) ((drawFlags.testFlag(DrawFlag::BidiEnabled) && (x) <= lastNonSpace) ? line2log[vis2line[x]] : (x))
         int log2line[MAX_LINE_WIDTH];
         int line2log[MAX_LINE_WIDTH];
         uint16_t shapemap[MAX_LINE_WIDTH];
         int32_t vis2line[MAX_LINE_WIDTH];
         bool shaped;
+        const bool bidiEnabled = drawFlags.testFlag(DrawFlag::BidiEnabled);
         int lastNonSpace = m_parentDisplay->bidiMap(image + pos, line, log2line, line2log, shapemap, vis2line, shaped, bidiEnabled, bidiEnabled);
         const QRect textArea(textScale.inverted().map(QPoint(textX, textY)), QSize(textWidth, textHeight));
-        if (!printerFriendly) {
+        if (!drawFlags.testFlag(DrawFlag::PrinterFriendly)) {
             QColor background = m_parentDisplay->terminalColor()->backgroundColor();
             if (lineProperty.flags.f.error && errorBackgroundActive) {
                 background = red;
@@ -358,10 +358,10 @@ void TerminalPainter::drawContents(Character *image,
                           rect.width(),
                           fontWidth,
                           colorTable,
+                          drawFlags,
                           invertedRendition,
                           vis2line,
                           line2log,
-                          bidiEnabled,
                           lastNonSpace,
                           background,
                           y,
@@ -385,7 +385,7 @@ void TerminalPainter::drawContents(Character *image,
             const Character char_value = image[pos + log_x];
             const bool doubleWidth = image[qMin(pos + log_x + 1, imageSize - 1)].isRightHalfOfDoubleWide(); // East_Asian_Width wide character
 
-            if (!printerFriendly && lastCharType == 0 && char_value.isSpace() && char_value.rendition.f.cursor == 0) {
+            if (!drawFlags.testFlag(DrawFlag::PrinterFriendly) && lastCharType == 0 && char_value.isSpace() && char_value.rendition.f.cursor == 0) {
                 continue;
             }
 
@@ -402,11 +402,11 @@ void TerminalPainter::drawContents(Character *image,
                 if (doubleWidth && log_next < log_x) {
                     textX -= fontWidth * (doubleWidthLine ? 2 : 1);
                 }
-                if (!printerFriendly && char_value.rendition.f.cursor) {
+                if (drawFlags.testFlag(DrawFlag::DrawCursor) && char_value.rendition.f.cursor) {
                     Character style = char_value;
                     m_parentDisplay->setVisualCursorPosition(x);
 
-                    if (style.rendition.f.selected) {
+                    if (drawFlags.testFlag(DrawFlag::DrawSelection) && style.rendition.f.selected) {
                         if (invertedRendition) {
                             reverseRendition(style);
                         }
@@ -415,7 +415,7 @@ void TerminalPainter::drawContents(Character *image,
                     QColor foregroundColor = style.foregroundColor.color(colorTable);
                     QColor backgroundColor = style.backgroundColor.color(colorTable);
 
-                    if (style.rendition.f.selected) {
+                    if (drawFlags.testFlag(DrawFlag::DrawSelection) && style.rendition.f.selected) {
                         if (!invertedRendition) {
                             backgroundColor = calculateBackgroundColor(style, colorTable).value_or(foregroundColor);
                             if (backgroundColor == foregroundColor) {
@@ -447,9 +447,9 @@ void TerminalPainter::drawContents(Character *image,
                                                word_str,
                                                image[pos + word_log_x],
                                                colorTable,
+                                               drawFlags,
                                                invertedRendition,
                                                lineProperty,
-                                               printerFriendly,
                                                oldRendition,
                                                oldColor,
                                                normalWeight,
@@ -475,9 +475,9 @@ void TerminalPainter::drawContents(Character *image,
                                    unistr,
                                    image[pos + log_x],
                                    colorTable,
+                                   drawFlags,
                                    invertedRendition,
                                    lineProperty,
-                                   printerFriendly,
                                    oldRendition,
                                    oldColor,
                                    normalWeight,
@@ -490,15 +490,15 @@ void TerminalPainter::drawContents(Character *image,
                                word_str,
                                image[pos + word_log_x],
                                colorTable,
+                               drawFlags,
                                invertedRendition,
                                lineProperty,
-                               printerFriendly,
                                oldRendition,
                                oldColor,
                                normalWeight,
                                boldWeight);
         }
-        if (!printerFriendly) {
+        if (!drawFlags.testFlag(DrawFlag::PrinterFriendly)) {
             drawAboveText(paint,
                           textArea,
                           image + pos,
@@ -506,10 +506,10 @@ void TerminalPainter::drawContents(Character *image,
                           rect.width(),
                           fontWidth,
                           colorTable,
+                          drawFlags,
                           invertedRendition,
                           vis2line,
                           line2log,
-                          bidiEnabled,
                           lastNonSpace,
                           ulColorTable);
         }
@@ -551,7 +551,7 @@ void TerminalPainter::drawContents(Character *image,
             y++;
         }
     }
-    if (!printerFriendly) {
+    if (!drawFlags.testFlag(DrawFlag::PrinterFriendly)) {
         drawImagesAboveText(paint, textArea, fontWidth, fontHeight, placementIdx);
     }
 }
@@ -855,10 +855,10 @@ void TerminalPainter::drawBelowText(QPainter &painter,
                                     int width,
                                     int fontWidth,
                                     const QColor *colorTable,
+                                    DrawFlags drawFlags,
                                     const bool invertedRendition,
                                     int *vis2line,
                                     int *line2log,
-                                    bool bidiEnabled,
                                     int lastNonSpace,
                                     QColor background,
                                     int Y,
@@ -892,7 +892,7 @@ void TerminalPainter::drawBelowText(QPainter &painter,
             // - using reverseRendition(), which inverts the foreground/background
             //   colors OR
             // - blending the foreground/background colors
-            if (style[x].rendition.f.selected && invertedRendition) {
+            if (drawFlags.testFlag(DrawFlag::DrawSelection) && invertedRendition && style[x].rendition.f.selected) {
                 backgroundColor = style[x].foregroundColor.color(colorTable);
                 foregroundColor = style[x].backgroundColor.color(colorTable);
             } else {
@@ -900,7 +900,7 @@ void TerminalPainter::drawBelowText(QPainter &painter,
                 backgroundColor = style[x].backgroundColor.color(colorTable);
             }
 
-            if (style[x].rendition.f.selected) {
+            if (drawFlags.testFlag(DrawFlag::DrawSelection) && style[x].rendition.f.selected) {
                 if (!invertedRendition) {
                     backgroundColor = calculateBackgroundColor(style[x], colorTable).value_or(foregroundColor);
                     if (backgroundColor == foregroundColor) {
@@ -932,10 +932,10 @@ void TerminalPainter::drawAboveText(QPainter &painter,
                                     int width,
                                     int fontWidth,
                                     const QColor *colorTable,
+                                    DrawFlags drawFlags,
                                     const bool invertedRendition,
                                     int *vis2line,
                                     int *line2log,
-                                    bool bidiEnabled,
                                     int lastNonSpace,
                                     CharacterColor const *ulColorTable)
 {
@@ -1040,7 +1040,7 @@ void TerminalPainter::drawAboveText(QPainter &painter,
             // - using reverseRendition(), which inverts the foreground/background
             //   colors OR
             // - blending the foreground/background colors
-            if (style[x].rendition.f.selected && invertedRendition) {
+            if (drawFlags.testFlag(DrawFlag::DrawSelection) && invertedRendition && style[x].rendition.f.selected) {
                 backgroundColor = style[x].foregroundColor.color(colorTable);
                 foregroundColor = style[x].backgroundColor.color(colorTable);
             } else {
@@ -1048,7 +1048,7 @@ void TerminalPainter::drawAboveText(QPainter &painter,
                 backgroundColor = style[x].backgroundColor.color(colorTable);
             }
 
-            if (style[x].rendition.f.selected) {
+            if (drawFlags.testFlag(DrawFlag::DrawSelection) && style[x].rendition.f.selected) {
                 if (!invertedRendition) {
                     backgroundColor = calculateBackgroundColor(style[x], colorTable).value_or(foregroundColor);
                     if (backgroundColor == foregroundColor) {
@@ -1140,9 +1140,9 @@ void TerminalPainter::drawTextCharacters(QPainter &painter,
                                          const QString &text,
                                          Character style,
                                          const QColor *colorTable,
+                                         DrawFlags drawFlags,
                                          const bool invertedRendition,
                                          const LineProperty lineProperty,
-                                         bool printerFriendly,
                                          RenditionFlags &oldRendition,
                                          QColor oldColor,
                                          QFont::Weight normalWeight,
@@ -1153,15 +1153,15 @@ void TerminalPainter::drawTextCharacters(QPainter &painter,
         return;
     }
     QColor characterColor;
-    if (!printerFriendly) {
+    if (!drawFlags.testFlag(DrawFlag::PrinterFriendly)) {
         // Sets the text selection colors, either:
         // - invertedRendition, which inverts the foreground/background colors OR
         // - blending the foreground/background colors
-        if (m_parentDisplay->textBlinking() && (style.rendition.f.blink != 0)) {
+        if (drawFlags.testFlag(DrawFlag::DrawBlinking) && m_parentDisplay->textBlinking() && (style.rendition.f.blink != 0)) {
             return;
         }
 
-        if (style.rendition.f.selected) {
+        if (drawFlags.testFlag(DrawFlag::DrawSelection) && style.rendition.f.selected) {
             if (invertedRendition) {
                 reverseRendition(style);
             }
@@ -1170,7 +1170,7 @@ void TerminalPainter::drawTextCharacters(QPainter &painter,
         QColor foregroundColor = style.foregroundColor.color(colorTable);
         QColor backgroundColor = style.backgroundColor.color(colorTable);
 
-        if (style.rendition.f.selected) {
+        if (drawFlags.testFlag(DrawFlag::DrawSelection) && style.rendition.f.selected) {
             if (!invertedRendition) {
                 backgroundColor = calculateBackgroundColor(style, colorTable).value_or(foregroundColor);
                 if (backgroundColor == foregroundColor) {
@@ -1179,7 +1179,7 @@ void TerminalPainter::drawTextCharacters(QPainter &painter,
             }
         }
         characterColor = foregroundColor;
-        if (style.rendition.f.cursor != 0 && !m_parentDisplay->cursorBlinking()) {
+        if (drawFlags.testFlag(DrawFlag::DrawCursor) && style.rendition.f.cursor != 0 && !m_parentDisplay->cursorBlinking()) {
             updateCursorTextColor(backgroundColor, characterColor);
         }
         if (m_parentDisplay->filterChain()->showUrlHint()) {
