@@ -324,7 +324,8 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
         _terminalPainter->drawBackground(painter, rect, backgroundColor, useOpacitySetting);
     };
     auto ldrawContents = [this](QPainter &paint, const QRect &rect, bool friendly) {
-        _terminalPainter->drawContents(_image, paint, rect, friendly, _imageSize, _bidiEnabled, _lineProperties);
+        const TerminalPainter::DrawOptions drawOptions = friendly ? TerminalPainter::DrawOption::PrinterFriendly : TerminalPainter::DrawOption::RenderCursor;
+        _terminalPainter->drawContents(_image, paint, rect, drawOptions, _imageSize, _bidiEnabled, _lineProperties);
     };
     auto lgetBackgroundColor = [this]() {
         return _terminalColor->backgroundColor();
@@ -762,8 +763,10 @@ void TerminalDisplay::paintEvent(QPaintEvent *pe)
     // set https://bugreports.qt.io/browse/QTBUG-66036
     paint.setRenderHint(QPainter::TextAntialiasing, _terminalFont->antialiasText());
 
+    const TerminalPainter::DrawOptions drawOptions =
+        TerminalPainter::DrawOption::RenderCursor | TerminalPainter::DrawOption::RenderBlinking | TerminalPainter::DrawOption::RenderSelection;
     for (const QRect &rect : std::as_const(dirtyImageRegion)) {
-        _terminalPainter->drawContents(_image, paint, rect, false, _imageSize, _bidiEnabled, _lineProperties, _screenWindow->screen()->ulColorTable());
+        _terminalPainter->drawContents(_image, paint, rect, drawOptions, _imageSize, _bidiEnabled, _lineProperties, _screenWindow->screen()->ulColorTable());
     }
 
     if (screenWindow()->currentResultLine() != -1) {
@@ -3403,6 +3406,54 @@ void TerminalDisplay::printScreen()
         _printManager->printContent(painter, friendly, columnLines, lfontget, lfontset);
     };
     _printManager->printRequest(lprintContent, this);
+}
+
+QPixmap TerminalDisplay::createPixmap(int startLine, int startColumn, int endLine, int endColumn, qreal dpr) const
+{
+    const int top = _contentRect.top();
+    const int left = _contentRect.left();
+    const int fontWidth = _terminalFont->fontWidth();
+    const int fontHeight = _terminalFont->fontHeight();
+
+    QRegion region;
+
+    auto lineRect = [top, left, fontWidth, fontHeight](int line, int startColumn, int endColumn) {
+        return QRect(QPoint(startColumn * fontWidth + left, line * fontHeight + top),
+                     QPoint(endColumn * fontWidth + left - 1, (line + 1) * fontHeight + top - 1));
+    };
+    if (startLine == endLine) {
+        region |= lineRect(startLine, startColumn, endColumn);
+    } else {
+        region |= lineRect(startLine, startColumn, _columns);
+        for (int line = startLine + 1; line < endLine; ++line) {
+            region |= lineRect(line, 0, _columns);
+        }
+        region |= lineRect(endLine, 0, endColumn);
+    }
+
+    const QRect boundingRect = region.boundingRect();
+    QPixmap pixmap(boundingRect.size() * dpr);
+    pixmap.setDevicePixelRatio(dpr);
+    pixmap.fill(Qt::transparent);
+
+    QPainter painter(&pixmap);
+    painter.translate(-boundingRect.topLeft());
+
+    painter.setFont(_terminalFont->getVTFont());
+    painter.setRenderHint(QPainter::TextAntialiasing, _terminalFont->antialiasText());
+
+    for (const QRect &rect : std::as_const(region)) {
+        _terminalPainter->drawContents(_image,
+                                       painter,
+                                       widgetToImage(rect),
+                                       TerminalPainter::DrawOption::None,
+                                       _imageSize,
+                                       _bidiEnabled,
+                                       _lineProperties,
+                                       _screenWindow->screen()->ulColorTable());
+    }
+
+    return pixmap;
 }
 
 Character TerminalDisplay::getCursorCharacter(int column, int line)

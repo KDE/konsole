@@ -442,6 +442,13 @@ public:
 
     void setHoverLinkIndicator(QString text);
 
+    /**
+     * Create a pixmap with the given range rendered as on the display,
+     * yet without any selection & the cursor.
+     * Blinking text is rendered as visible.
+     */
+    QPixmap createPixmap(int startLine, int startColumn, int endLine, int endColumn, qreal dpr) const;
+
 public Q_SLOTS:
     /**
      * Causes the terminal display to fetch the latest character image from the associated

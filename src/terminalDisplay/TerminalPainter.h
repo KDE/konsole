@@ -41,6 +41,15 @@ public:
     explicit TerminalPainter(TerminalDisplay *parentDisplay);
     ~TerminalPainter() override = default;
 
+    enum class DrawOption {
+        None = 0x0,
+        RenderCursor = 0x1,
+        RenderBlinking = 0x2,
+        RenderSelection = 0x4,
+        PrinterFriendly = 0x8,
+    };
+    Q_DECLARE_FLAGS(DrawOptions, DrawOption)
+
 public Q_SLOTS:
     // -- Drawing helpers --
 
@@ -51,7 +60,7 @@ public Q_SLOTS:
     void drawContents(Character *image,
                       QPainter &paint,
                       const QRect &rect,
-                      bool PrinterFriendly,
+                      DrawOptions drawOptions,
                       int imageSize,
                       bool bidiEnabled,
                       QVector<LineProperty> lineProperties,
@@ -84,6 +93,16 @@ public Q_SLOTS:
     void drawInputMethodPreeditString(QPainter &painter, const QRect &rect, TerminalDisplay::InputMethodData &inputMethodData, Character *image);
 
 private:
+    enum class TextDrawOption {
+        None = 0x0,
+        RenderCursor = 0x1,
+        RenderBlinking = 0x2,
+        RenderSelection = 0x4,
+        PrinterFriendly = 0x8,
+        RenderInverted = 0x10,
+    };
+    Q_DECLARE_FLAGS(TextDrawOptions, TextDrawOption)
+
     // draws a string of line graphics
     void drawLineCharString(TerminalDisplay *display, QPainter &painter, int x, int y, const QString &str, const Character attributes);
 
@@ -99,7 +118,7 @@ private:
                        int width,
                        int fontWidth,
                        const QColor *colorTable,
-                       const bool invertedRendition,
+                       TextDrawOptions textDrawOptions,
                        int *vis2line,
                        int *line2log,
                        bool bidiEnabled,
@@ -114,7 +133,7 @@ private:
                        int width,
                        int fontWidth,
                        const QColor *colorTable,
-                       const bool invertedRendition,
+                       TextDrawOptions textDrawOptions,
                        int *vis2line,
                        int *line2log,
                        bool bidiEnabled,
@@ -128,9 +147,8 @@ private:
                             const QString &text,
                             Character style,
                             const QColor *colorTable,
-                            const bool invertedRendition,
+                            TextDrawOptions textDrawOptions,
                             const LineProperty lineProperty,
-                            bool printerFriendly,
                             RenditionFlags &oldRendition,
                             QColor oldColor,
                             QFont::Weight normalWeight,
@@ -142,6 +160,7 @@ private:
     QPolygonF m_animatedCursorPolygon;
 };
 
+Q_DECLARE_OPERATORS_FOR_FLAGS(TerminalPainter::DrawOptions)
 }
 
 #endif
