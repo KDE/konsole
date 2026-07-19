@@ -41,6 +41,16 @@ public:
     explicit TerminalPainter(TerminalDisplay *parentDisplay);
     ~TerminalPainter() override = default;
 
+    enum class DrawFlag {
+        None = 0x0,
+        DrawCursor = 0x1,
+        DrawBlinking = 0x2,
+        DrawSelection = 0x4,
+        PrinterFriendly = 0x8,
+        BidiEnabled = 0x10,
+    };
+    Q_DECLARE_FLAGS(DrawFlags, DrawFlag)
+
 public Q_SLOTS:
     // -- Drawing helpers --
 
@@ -51,9 +61,8 @@ public Q_SLOTS:
     void drawContents(Character *image,
                       QPainter &paint,
                       const QRect &rect,
-                      bool PrinterFriendly,
+                      DrawFlags drawFlags,
                       int imageSize,
-                      bool bidiEnabled,
                       QVector<LineProperty> lineProperties,
                       CharacterColor const *ulColorTable = nullptr);
 
@@ -99,10 +108,10 @@ private:
                        int width,
                        int fontWidth,
                        const QColor *colorTable,
+                       DrawFlags drawFlags,
                        const bool invertedRendition,
                        int *vis2line,
                        int *line2log,
-                       bool bidiEnabled,
                        int lastNonSpace,
                        QColor background,
                        int Y,
@@ -114,10 +123,10 @@ private:
                        int width,
                        int fontWidth,
                        const QColor *colorTable,
+                       DrawFlags drawFlags,
                        const bool invertedRendition,
                        int *vis2line,
                        int *line2log,
-                       bool bidiEnabled,
                        int lastNonSpace,
                        CharacterColor const *ulColorTable);
     void drawImagesBelowText(QPainter &painter, const QRect &rect, int fontWidth, int fontHeight, int &placementIdx, QRegion &sixelRegion);
@@ -128,9 +137,9 @@ private:
                             const QString &text,
                             Character style,
                             const QColor *colorTable,
+                            DrawFlags drawFlags,
                             const bool invertedRendition,
                             const LineProperty lineProperty,
-                            bool printerFriendly,
                             RenditionFlags &oldRendition,
                             QColor oldColor,
                             QFont::Weight normalWeight,
@@ -142,6 +151,7 @@ private:
     QPolygonF m_animatedCursorPolygon;
 };
 
+Q_DECLARE_OPERATORS_FOR_FLAGS(TerminalPainter::DrawFlags)
 }
 
 #endif
