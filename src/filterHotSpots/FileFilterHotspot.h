@@ -52,7 +52,7 @@ public:
     void thumbnailRequested();
 
     bool hasDragOperation() const override;
-    void startDrag() override;
+    void startDrag(TerminalDisplay *td) override;
 
     static void stopThumbnailGeneration();
 

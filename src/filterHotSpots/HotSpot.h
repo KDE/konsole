@@ -97,7 +97,7 @@ public:
     virtual QList<QAction *> actions();
 
     virtual bool hasDragOperation() const;
-    virtual void startDrag();
+    virtual void startDrag(TerminalDisplay *td);
 
     /**
      * Sets a menu up with actions for the hotspot.

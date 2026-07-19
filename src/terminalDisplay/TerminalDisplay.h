@@ -619,6 +619,8 @@ private Q_SLOTS:
     void viewScrolledByUser();
 
 private:
+    friend class UrlFilterHotSpot;
+    friend class FileFilterHotSpot;
     Q_DISABLE_COPY(TerminalDisplay)
 
     // the area where the preedit string for input methods will be draw

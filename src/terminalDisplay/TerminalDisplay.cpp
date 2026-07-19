@@ -23,6 +23,7 @@
 #include <QElapsedTimer>
 #include <QEvent>
 #include <QFileInfo>
+#include <QImage>
 #include <QKeyEvent>
 #include <QLabel>
 #include <QMimeData>
@@ -1338,7 +1339,7 @@ void TerminalDisplay::mousePressEvent(QMouseEvent *ev)
     _filterChain->mouseMoveEvent(this, ev, charLine, charColumn);
     auto hotSpotClick = _filterChain->hotSpotAt(charLine, charColumn);
     if (hotSpotClick && hotSpotClick->hasDragOperation() && ev->modifiers() & Qt::Modifier::ALT) {
-        hotSpotClick->startDrag();
+        hotSpotClick->startDrag(this);
         return;
     }
 

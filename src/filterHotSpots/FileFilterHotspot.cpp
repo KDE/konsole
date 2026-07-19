@@ -35,6 +35,8 @@
 #include "profile/Profile.h"
 #include "session/SessionManager.h"
 #include "terminalDisplay/TerminalDisplay.h"
+#include "terminalDisplay/TerminalFonts.h"
+#include "terminalDisplay/TerminalPainter.h"
 
 using namespace Konsole;
 
@@ -325,13 +327,41 @@ bool FileFilterHotSpot::hasDragOperation() const
     return true;
 }
 
-void FileFilterHotSpot::startDrag()
+void FileFilterHotSpot::startDrag(TerminalDisplay *td)
 {
+    auto r = region(td->terminalFont()->fontWidth(), td->terminalFont()->fontHeight(), td->columns(), td->contentRect()).first;
+    qCritical() << "DRÄÄG" << r;
+
+    const qreal dpr = td->devicePixelRatioF();
+    QPixmap pixmap(r.boundingRect().size() * dpr);
+    pixmap.setDevicePixelRatio(dpr);
+    pixmap.fill(Qt::transparent);
+
+    QPainter painter;
+    painter.begin(&pixmap);
+    painter.translate(-r.boundingRect().x(), -r.boundingRect().y());
+
+    painter.setFont(td->_terminalFont->getVTFont());
+    painter.setRenderHint(QPainter::TextAntialiasing, td->_terminalFont->antialiasText());
+    for (const QRect &rect : std::as_const(r)) {
+        td->_terminalPainter->drawContents(td->_image,
+                                           painter,
+                                           td->widgetToImage(rect),
+                                           false,
+                                           td->_imageSize,
+                                           td->_bidiEnabled,
+                                           td->_lineProperties,
+                                           td->_screenWindow->screen()->ulColorTable());
+    }
+
+    painter.end();
+
     auto *drag = new QDrag(this);
     auto *mimeData = new QMimeData();
     mimeData->setUrls({QUrl::fromLocalFile(_filePath)});
 
     drag->setMimeData(mimeData);
+    drag->setPixmap(pixmap);
     drag->exec(Qt::CopyAction);
 }
 

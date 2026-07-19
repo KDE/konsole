@@ -11,6 +11,7 @@
 #include <QApplication>
 #include <QClipboard>
 #include <QDrag>
+#include <QImage>
 #include <QMimeData>
 
 #include <KIO/OpenUrlJob>
@@ -19,6 +20,8 @@
 
 #include "UrlFilter.h"
 #include "terminalDisplay/TerminalDisplay.h"
+#include "terminalDisplay/TerminalFonts.h"
+#include "terminalDisplay/TerminalPainter.h"
 // regexp matches:
 // full url:
 
@@ -121,8 +124,35 @@ bool UrlFilterHotSpot::hasDragOperation() const
     return true;
 }
 
-void UrlFilterHotSpot::startDrag()
+void UrlFilterHotSpot::startDrag(TerminalDisplay *td)
 {
+    auto r = region(td->terminalFont()->fontWidth(), td->terminalFont()->fontHeight(), td->columns(), td->contentRect()).first;
+
+    const qreal dpr = td->devicePixelRatioF();
+    QPixmap pixmap(r.boundingRect().size() * dpr);
+    pixmap.setDevicePixelRatio(dpr);
+    pixmap.fill(Qt::transparent);
+
+    QPainter painter;
+    painter.begin(&pixmap);
+    const QPoint offset(r.boundingRect().x(), r.boundingRect().y());
+    painter.translate(-offset);
+
+    painter.setFont(td->_terminalFont->getVTFont());
+    painter.setRenderHint(QPainter::TextAntialiasing, td->_terminalFont->antialiasText());
+    for (const QRect &rect : std::as_const(r)) {
+        td->_terminalPainter->drawContents(td->_image,
+                                           painter,
+                                           td->widgetToImage(rect),
+                                           false,
+                                           td->_imageSize,
+                                           td->_bidiEnabled,
+                                           td->_lineProperties,
+                                           td->_screenWindow->screen()->ulColorTable());
+    }
+
+    painter.end();
+
     const QString urlString = capturedTexts().at(0);
     auto *drag = new QDrag(this);
     auto *mimeData = new QMimeData();
@@ -131,5 +161,6 @@ void UrlFilterHotSpot::startDrag()
 
     drag->setMimeData(mimeData);
     // TODO add drag pixmap containing the URL.
+    drag->setPixmap(pixmap);
     drag->exec(Qt::CopyAction);
 }

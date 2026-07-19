@@ -182,8 +182,9 @@ bool Konsole::HotSpot::hasDragOperation() const
     return false;
 }
 
-void Konsole::HotSpot::startDrag()
+void Konsole::HotSpot::startDrag(TerminalDisplay *td)
 {
+    Q_UNUSED(td);
 }
 
 #include "moc_HotSpot.cpp"
