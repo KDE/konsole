@@ -8,6 +8,7 @@
 #include "HotSpot.h"
 
 #include <QDebug>
+#include <QDrag>
 #include <QMouseEvent>
 
 #include "FileFilterHotspot.h"
@@ -182,8 +183,20 @@ bool Konsole::HotSpot::hasDragOperation() const
     return false;
 }
 
-void Konsole::HotSpot::startDrag()
+void Konsole::HotSpot::startDrag(TerminalDisplay *, QPoint)
 {
+}
+
+void Konsole::HotSpot::setDragPixmap(QDrag *drag, TerminalDisplay *td, QPoint dragPosition) const
+{
+    // Use app's, not window's, dpr value to prepare drag pixmap
+    // for being displayed on any screens during drag
+    const qreal dpr = qApp->devicePixelRatio();
+    drag->setPixmap(td->createPixmap(_startLine, _startColumn, _endLine, _endColumn, dpr));
+
+    const int column = (_startLine == _endLine) ? _startColumn : 0;
+    const QPoint selectionTopLeft = td->topLeftWidgetPos(column, _startLine);
+    drag->setHotSpot(dragPosition - selectionTopLeft);
 }
 
 #include "moc_HotSpot.cpp"
