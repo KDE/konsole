@@ -600,6 +600,10 @@ protected:
         DragState state;
         QPoint start;
         QDrag *dragObject;
+        int startLine;
+        int startColumn;
+        int endLine;
+        int endColumn;
     } _dragInfo;
 
     // classifies the 'ch' into one of three categories

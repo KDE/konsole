@@ -1378,6 +1378,8 @@ void TerminalDisplay::mousePressEvent(QMouseEvent *ev)
         if ((!_ctrlRequiredForDrag || ((ev->modifiers() & Qt::ControlModifier) != 0u)) && selected) {
             _dragInfo.state = diPending;
             _dragInfo.start = ev->pos();
+            _screenWindow->getSelectionStart(_dragInfo.startColumn, _dragInfo.startLine);
+            _screenWindow->getSelectionEnd(_dragInfo.endColumn, _dragInfo.endLine);
         } else {
             // No reason to ever start a drag event
             _dragInfo.state = diNone;
@@ -3295,6 +3297,15 @@ void TerminalDisplay::doDrag()
     mimeData->setText(clipboardMimeData->text());
     mimeData->setHtml(clipboardMimeData->html());
     _dragInfo.dragObject->setMimeData(mimeData);
+    // Use app's, not window's, dpr value to prepare drag pixmap
+    // for being displayed on any screens during drag
+    const qreal dpr = qApp->devicePixelRatio();
+    const QPixmap pixmap = createPixmap(_dragInfo.startLine, _dragInfo.startColumn, _dragInfo.endLine, _dragInfo.endColumn, dpr);
+    _dragInfo.dragObject->setPixmap(pixmap);
+    const int column = (_dragInfo.startLine == _dragInfo.endLine) ? _dragInfo.startColumn : 0;
+    const QPoint selectionTopLeft = topLeftWidgetPos(column, _dragInfo.startLine);
+    _dragInfo.dragObject->setHotSpot(_dragInfo.start - selectionTopLeft);
+
     _dragInfo.dragObject->exec(Qt::CopyAction);
 }
 
