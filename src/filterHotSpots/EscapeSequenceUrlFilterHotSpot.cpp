@@ -86,13 +86,13 @@ bool EscapeSequenceUrlHotSpot::hasDragOperation() const
     return true;
 }
 
-void EscapeSequenceUrlHotSpot::startDrag()
+void EscapeSequenceUrlHotSpot::startDrag(TerminalDisplay *td, QPoint dragPosition)
 {
     auto *drag = new QDrag(this);
     auto *mimeData = createMimeData();
 
     drag->setMimeData(mimeData);
-    // TODO add drag pixmap containing the URL.
+    setDragPixmap(drag, td, dragPosition);
     drag->exec(Qt::CopyAction);
 }
 

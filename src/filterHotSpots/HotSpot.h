@@ -20,6 +20,7 @@ class QAction;
 class QMenu;
 class QMouseEvent;
 class QKeyEvent;
+class QDrag;
 
 namespace Konsole
 {
@@ -97,7 +98,7 @@ public:
     virtual QList<QAction *> actions();
 
     virtual bool hasDragOperation() const;
-    virtual void startDrag();
+    virtual void startDrag(TerminalDisplay *td, QPoint dragPosition);
 
     /**
      * Sets a menu up with actions for the hotspot.
@@ -164,6 +165,8 @@ public:
 protected:
     /** Sets the type of a hotspot.  This should only be set once */
     void setType(Type type);
+
+    void setDragPixmap(QDrag *drag, TerminalDisplay *td, QPoint dragPosition) const;
 
 private:
     int _startLine;
