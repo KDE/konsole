@@ -35,7 +35,7 @@ public:
 
     bool hasDragOperation() const override;
 
-    void startDrag() override;
+    void startDrag(TerminalDisplay *td, QPoint dragPosition) override;
 
 private:
     enum UrlType {

@@ -325,13 +325,14 @@ bool FileFilterHotSpot::hasDragOperation() const
     return true;
 }
 
-void FileFilterHotSpot::startDrag()
+void FileFilterHotSpot::startDrag(TerminalDisplay *td, QPoint dragPosition)
 {
     auto *drag = new QDrag(this);
     auto *mimeData = new QMimeData();
     mimeData->setUrls({QUrl::fromLocalFile(_filePath)});
 
     drag->setMimeData(mimeData);
+    setDragPixmap(drag, td, dragPosition);
     drag->exec(Qt::CopyAction);
 }
 

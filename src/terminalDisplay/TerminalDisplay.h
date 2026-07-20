@@ -304,6 +304,9 @@ public:
     // a character which left edge is closest to the point.
     QPair<int, int> getCharacterPosition(const QPoint &widgetPoint, bool edge) const;
 
+    // maps an character image position to its top-left widget position
+    QPoint topLeftWidgetPos(int column, int line) const;
+
     // toggle the header bar Minimize/Maximize button.
     void setExpandedMode(bool expand);
 
