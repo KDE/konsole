@@ -982,6 +982,17 @@ QRect TerminalDisplay::widgetToImage(const QRect &widgetArea) const
     return result;
 }
 
+QPoint TerminalDisplay::topLeftWidgetPos(int column, int line) const
+{
+    const int fontWidth = _terminalFont->fontWidth();
+    const int fontHeight = _terminalFont->fontHeight();
+
+    const int left = _contentRect.left() + fontWidth * column;
+    const int top = _contentRect.top() + fontHeight * line;
+
+    return QPoint(left, top);
+}
+
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
 /*                          Blinking Text & Cursor                           */
@@ -1341,7 +1352,7 @@ void TerminalDisplay::mousePressEvent(QMouseEvent *ev)
     _filterChain->mouseMoveEvent(this, ev, charLine, charColumn);
     auto hotSpotClick = _filterChain->hotSpotAt(charLine, charColumn);
     if (hotSpotClick && hotSpotClick->hasDragOperation() && ev->modifiers() & Qt::Modifier::ALT) {
-        hotSpotClick->startDrag();
+        hotSpotClick->startDrag(this, ev->pos());
         return;
     }
 

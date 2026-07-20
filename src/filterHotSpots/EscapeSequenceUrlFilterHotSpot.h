@@ -19,7 +19,7 @@ public:
     void activate(QObject *obj) override;
 
     bool hasDragOperation() const override;
-    void startDrag() override;
+    void startDrag(TerminalDisplay *td, QPoint dragPosition) override;
 
     void mouseEnterEvent(TerminalDisplay *td, QMouseEvent *ev) override;
     void mouseLeaveEvent(TerminalDisplay *td, QMouseEvent *ev) override;

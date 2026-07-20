@@ -96,7 +96,7 @@ bool ColorFilterHotSpot::hasDragOperation() const
     return true;
 }
 
-void ColorFilterHotSpot::startDrag()
+void ColorFilterHotSpot::startDrag(TerminalDisplay *, QPoint)
 {
     auto *drag = new QDrag(this);
 

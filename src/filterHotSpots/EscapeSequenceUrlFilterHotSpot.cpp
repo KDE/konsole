@@ -42,7 +42,7 @@ bool EscapeSequenceUrlHotSpot::hasDragOperation() const
     return true;
 }
 
-void EscapeSequenceUrlHotSpot::startDrag()
+void EscapeSequenceUrlHotSpot::startDrag(TerminalDisplay *td, QPoint dragPosition)
 {
     auto *drag = new QDrag(this);
     auto *mimeData = new QMimeData();
@@ -50,7 +50,7 @@ void EscapeSequenceUrlHotSpot::startDrag()
     mimeData->setUrls({QUrl(_url)});
 
     drag->setMimeData(mimeData);
-    // TODO add drag pixmap containing the URL.
+    setDragPixmap(drag, td, dragPosition);
     drag->exec(Qt::CopyAction);
 }
 

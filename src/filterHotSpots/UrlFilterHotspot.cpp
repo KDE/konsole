@@ -121,7 +121,7 @@ bool UrlFilterHotSpot::hasDragOperation() const
     return true;
 }
 
-void UrlFilterHotSpot::startDrag()
+void UrlFilterHotSpot::startDrag(TerminalDisplay *td, QPoint dragPosition)
 {
     const QString urlString = capturedTexts().at(0);
     auto *drag = new QDrag(this);
@@ -130,6 +130,6 @@ void UrlFilterHotSpot::startDrag()
     mimeData->setUrls({QUrl(urlString)});
 
     drag->setMimeData(mimeData);
-    // TODO add drag pixmap containing the URL.
+    setDragPixmap(drag, td, dragPosition);
     drag->exec(Qt::CopyAction);
 }
