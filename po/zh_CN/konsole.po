@@ -731,7 +731,7 @@ msgstr "全部取消选择"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Color"
-msgstr ""
+msgstr "复制颜色"
 
 #: filterHotSpots/ColorFilterHotSpot.cpp:148
 #, kde-format
