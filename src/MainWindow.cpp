@@ -186,7 +186,7 @@ bool MainWindow::wasWindowGeometrySaved() const
         return false;
     }
 
-    return KWindowConfig::hasSavedWindowSize(cg) || KWindowConfig::hasSavedWindowPosition(cg);
+    return KWindowConfig::hasSavedWindowSize(cg);
 }
 
 void MainWindow::updateUseTransparency()
