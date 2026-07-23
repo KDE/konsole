@@ -546,7 +546,7 @@ private:
         //
         // FIELD FIELD (FIELD WITH SPACES) FIELD FIELD
         //
-        _infoFile = std::make_unique<QFile>(new QFile());
+        _infoFile = std::make_unique<QFile>();
         _infoFile->setFileName(QStringLiteral("/proc/%1/stat").arg(pid));
         if (_infoFile->open(QIODevice::ReadOnly)) {
             QTextStream stream(_infoFile.get());
