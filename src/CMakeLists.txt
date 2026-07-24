@@ -407,6 +407,7 @@ if(APPLE)
 endif()
 
 install(TARGETS konsole ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+install(FILES settings/konsole.kcfg DESTINATION ${KDE_INSTALL_KCFGDIR})
 
 ### Embedded Konsole KPart
 
