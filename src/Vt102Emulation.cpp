@@ -1651,11 +1651,6 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
                 const auto colorStr = item.mid(customCursorColorStr.size());
                 customColor = QColor(colorStr);
                 styleChanged = true;
-
-            } else {
-                if (!newValue.isEmpty())
-                    newValue.append(QChar::fromLatin1(';'));
-                newValue.append(item);
             }
         }
 
