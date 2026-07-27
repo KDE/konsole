@@ -7,8 +7,8 @@
 # SPDX-FileCopyrightText: 2011 Panagiotis Papadopoulos <pano_90@gmx.net>
 # SPDX-FileCopyrightText: 2016, 2023-2026 Frank Steinmetzger <Warp_7@gmx.de>
 # SPDX-FileCopyrightText: 2022, 2025 Alois Spitzbart <spitz234@hotmail.com>
-# SPDX-FileCopyrightText: 2026 Philipp Kiemle <l10n.daphipz@fastmail.de>
 # SPDX-FileCopyrightText: 2026 Jan Tilger <kde@jtilger.de>
+# SPDX-FileCopyrightText: 2026 Philipp Kiemle <l10n.daphipz@fastmail.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
