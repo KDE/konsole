@@ -79,6 +79,7 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
     setTabBar(tabBarWidget);
     setDocumentMode(true);
     setMovable(true);
+    tabBar()->setChangeCurrentOnDrag(true);
     connect(tabBarWidget, &DetachableTabBar::moveTabToWindow, this, &TabbedViewContainer::moveTabToWindow);
     tabBar()->setContextMenuPolicy(Qt::CustomContextMenu);
     _newTabButton->setIcon(QIcon::fromTheme(QStringLiteral("tab-new")));
