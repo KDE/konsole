@@ -9,8 +9,10 @@
 
 #include <KIO/JobUiDelegateFactory>
 #include <KIO/OpenUrlJob>
+#include <KLocalizedString>
 
 #include <QApplication>
+#include <QClipboard>
 #include <QDebug>
 #include <QDrag>
 #include <QMimeData>
@@ -28,13 +30,55 @@ EscapeSequenceUrlHotSpot::EscapeSequenceUrlHotSpot(int startLine, int startColum
     setType(EscapedUrl);
 }
 
-void EscapeSequenceUrlHotSpot::activate(QObject *obj)
+QMimeData *EscapeSequenceUrlHotSpot::createMimeData() const
 {
-    Q_UNUSED(obj)
+    auto *mimeData = new QMimeData();
+    mimeData->setText(_url);
+    mimeData->setUrls({QUrl(_url)});
+    return mimeData;
+}
 
-    auto *job = new KIO::OpenUrlJob(QUrl(_url));
-    job->setUiDelegate(KIO::createDefaultJobUiDelegate(KJobUiDelegate::AutoHandlingEnabled, QApplication::activeWindow()));
-    job->start();
+void EscapeSequenceUrlHotSpot::activate(QObject *object)
+{
+    const QString actionName = object != nullptr ? object->objectName() : QString();
+
+    if (actionName == QLatin1String("copy-action")) {
+        auto *mimeData = createMimeData();
+        QApplication::clipboard()->setMimeData(mimeData);
+        return;
+    }
+
+    if ((object == nullptr) || actionName == QLatin1String("open-action")) {
+        auto *job = new KIO::OpenUrlJob(QUrl(_url));
+        job->setUiDelegate(KIO::createDefaultJobUiDelegate(KJobUiDelegate::AutoHandlingEnabled, QApplication::activeWindow()));
+        job->start();
+    }
+}
+
+QList<QAction *> EscapeSequenceUrlHotSpot::actions()
+{
+    auto openAction = new QAction(this);
+    auto copyAction = new QAction(this);
+
+    openAction->setText(i18n("Open Link"));
+    openAction->setIcon(QIcon::fromTheme(QStringLiteral("internet-services")));
+    copyAction->setText(i18n("Copy Link Address"));
+    copyAction->setIcon(QIcon::fromTheme(QStringLiteral("edit-copy-url")));
+
+    // object names are set here so that the hotspot performs the
+    // correct action when activated() is called with the triggered
+    // action passed as a parameter.
+    openAction->setObjectName(QStringLiteral("open-action"));
+    copyAction->setObjectName(QStringLiteral("copy-action"));
+
+    QObject::connect(openAction, &QAction::triggered, this, [this, openAction] {
+        activate(openAction);
+    });
+    QObject::connect(copyAction, &QAction::triggered, this, [this, copyAction] {
+        activate(copyAction);
+    });
+
+    return {openAction, copyAction};
 }
 
 bool EscapeSequenceUrlHotSpot::hasDragOperation() const
@@ -45,9 +89,7 @@ bool EscapeSequenceUrlHotSpot::hasDragOperation() const
 void EscapeSequenceUrlHotSpot::startDrag()
 {
     auto *drag = new QDrag(this);
-    auto *mimeData = new QMimeData();
-    mimeData->setText(_url);
-    mimeData->setUrls({QUrl(_url)});
+    auto *mimeData = createMimeData();
 
     drag->setMimeData(mimeData);
     // TODO add drag pixmap containing the URL.
