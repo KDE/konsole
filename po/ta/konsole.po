@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-16 02:42+0000\n"
+"POT-Creation-Date: 2026-07-31 03:03+0000\n"
 "PO-Revision-Date: 2026-06-09 21:36+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-l10n-ta@kde.org>\n"
@@ -756,7 +756,7 @@ msgstr ""
 msgid "Copy Location"
 msgstr "இருப்பிடத்தை நகலெடு"
 
-#: filterHotSpots/FileFilterHotspot.cpp:285
+#: filterHotSpots/FileFilterHotspot.cpp:282
 #, kde-format
 msgid "Generating Thumbnail"
 msgstr "சிறுபடம் உருவாக்கப்படுகிறது"

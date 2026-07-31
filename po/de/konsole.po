@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-16 02:42+0000\n"
+"POT-Creation-Date: 2026-07-31 03:03+0000\n"
 "PO-Revision-Date: 2026-07-24 16:04+0200\n"
 "Last-Translator: Jan Tilger <kde@jtilger.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -781,7 +781,7 @@ msgstr ""
 msgid "Copy Location"
 msgstr "Adresse kopieren"
 
-#: filterHotSpots/FileFilterHotspot.cpp:285
+#: filterHotSpots/FileFilterHotspot.cpp:282
 #, kde-format
 msgid "Generating Thumbnail"
 msgstr "Vorschaubilder werden generiert"
