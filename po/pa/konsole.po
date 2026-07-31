@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-16 00:48+0000\n"
+"POT-Creation-Date: 2026-07-31 00:50+0000\n"
 "PO-Revision-Date: 2024-01-19 07:50-0600\n"
 "Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -762,7 +762,7 @@ msgstr ""
 msgid "Copy Location"
 msgstr "ਟਿਕਾਣਾ ਕਾਪੀ ਕਰੋ"
 
-#: filterHotSpots/FileFilterHotspot.cpp:285
+#: filterHotSpots/FileFilterHotspot.cpp:282
 #, kde-format
 msgid "Generating Thumbnail"
 msgstr ""
@@ -6065,13 +6065,13 @@ msgctxt "@info:tooltip"
 msgid "Restore terminal"
 msgstr "ਟਰਮੀਨਲ ਬਹਾਲ ਕਰੋ"
 
-#: widgets/ViewContainer.cpp:86
+#: widgets/ViewContainer.cpp:87
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open a new tab"
 msgstr "ਨਵੀਂ ਟੈਬ ਖੋਲ੍ਹੋ"
 
-#: widgets/ViewContainer.cpp:91
+#: widgets/ViewContainer.cpp:92
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "&Detach Tab"
@@ -6079,38 +6079,38 @@ msgctxt "@info:tooltip"
 msgid "Search Tabs"
 msgstr "ਟੈਬ ਵੱਖ ਕਰੋ(&D)"
 
-#: widgets/ViewContainer.cpp:96
+#: widgets/ViewContainer.cpp:97
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Close this tab"
 msgstr "ਇਹ ਟੈਬ ਬੰਦ ਕਰੋ"
 
-#: widgets/ViewContainer.cpp:132
+#: widgets/ViewContainer.cpp:133
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Detach Tab"
 msgstr "ਟੈਬ ਵੱਖ ਕਰੋ(&D)"
 
-#: widgets/ViewContainer.cpp:138
+#: widgets/ViewContainer.cpp:139
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Configure or Rename Tab..."
 msgstr "ਟੈਬ ਦੀ ਸੰਰਚਨਾ ਕਰੋ ਜਾਂ ਨਾਂ ਬਦਲੋ(&C)..."
 
-#: widgets/ViewContainer.cpp:143
+#: widgets/ViewContainer.cpp:144
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "ਟੈਬ ਬੰਦ ਕਰੋ"
 
-#: widgets/ViewContainer.cpp:968 widgets/ViewContainer.cpp:977
+#: widgets/ViewContainer.cpp:969 widgets/ViewContainer.cpp:978
 #, fuzzy, kde-format
 #| msgid "Maintainer"
 msgctxt "As in Distrobox, Toolbox, Kapsule etc."
 msgid "Container"
 msgstr "ਪਰਬੰਧਕ"
 
-#: widgets/ViewContainer.cpp:987
+#: widgets/ViewContainer.cpp:988
 #, kde-format
 msgctxt ""
 "%1 is the type of container (e.g. Distrobox, Toolbox, Kapsule etc.), %2 its "

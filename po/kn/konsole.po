@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-16 00:48+0000\n"
+"POT-Creation-Date: 2026-07-31 00:50+0000\n"
 "PO-Revision-Date: 2011-07-11 13:50+0530\n"
 "Last-Translator: Shankar Prasad <svenkate@redhat.com>\n"
 "Language-Team: Kannada <en@li.org>\n"
@@ -850,7 +850,7 @@ msgstr ""
 msgid "Copy Location"
 msgstr "ಆದಾನವನ್ನು ಇಲ್ಲಿಗೆ ನಕಲಿಸಿ"
 
-#: filterHotSpots/FileFilterHotspot.cpp:285
+#: filterHotSpots/FileFilterHotspot.cpp:282
 #, kde-format
 msgid "Generating Thumbnail"
 msgstr ""
@@ -6447,7 +6447,7 @@ msgctxt "@info:tooltip"
 msgid "Restore terminal"
 msgstr "ಹಾಳೆ&ಯನ್ನುಮುಚ್ಚು"
 
-#: widgets/ViewContainer.cpp:86
+#: widgets/ViewContainer.cpp:87
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "&Detach Tab"
@@ -6455,7 +6455,7 @@ msgctxt "@info:tooltip"
 msgid "Open a new tab"
 msgstr "ಹಾಳೆಯನ್ನು ಬೇರ್ಪಡಿಸು (&D)"
 
-#: widgets/ViewContainer.cpp:91
+#: widgets/ViewContainer.cpp:92
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "&Detach Tab"
@@ -6463,41 +6463,41 @@ msgctxt "@info:tooltip"
 msgid "Search Tabs"
 msgstr "ಹಾಳೆಯನ್ನು ಬೇರ್ಪಡಿಸು (&D)"
 
-#: widgets/ViewContainer.cpp:96
+#: widgets/ViewContainer.cpp:97
 #, fuzzy, kde-format
 #| msgid "Close the search bar"
 msgctxt "@info:tooltip"
 msgid "Close this tab"
 msgstr "ಹುಡುಕು ಪಟ್ಟಿಯನ್ನು ಮುಚ್ಚು"
 
-#: widgets/ViewContainer.cpp:132
+#: widgets/ViewContainer.cpp:133
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Detach Tab"
 msgstr "ಹಾಳೆಯನ್ನು ಬೇರ್ಪಡಿಸು (&D)"
 
-#: widgets/ViewContainer.cpp:138
+#: widgets/ViewContainer.cpp:139
 #, fuzzy, kde-format
 #| msgid "&Rename Tab..."
 msgctxt "@action:inmenu"
 msgid "&Configure or Rename Tab..."
 msgstr "ಹಾಳೆಯನ್ನು &ಮರುಹೆಸರಿಸು..."
 
-#: widgets/ViewContainer.cpp:143
+#: widgets/ViewContainer.cpp:144
 #, fuzzy, kde-format
 #| msgid "&Close Tab"
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "ಹಾಳೆ&ಯನ್ನುಮುಚ್ಚು"
 
-#: widgets/ViewContainer.cpp:968 widgets/ViewContainer.cpp:977
+#: widgets/ViewContainer.cpp:969 widgets/ViewContainer.cpp:978
 #, fuzzy, kde-format
 #| msgid "Maintainer"
 msgctxt "As in Distrobox, Toolbox, Kapsule etc."
 msgid "Container"
 msgstr "ಪಾಲಕ"
 
-#: widgets/ViewContainer.cpp:987
+#: widgets/ViewContainer.cpp:988
 #, kde-format
 msgctxt ""
 "%1 is the type of container (e.g. Distrobox, Toolbox, Kapsule etc.), %2 its "

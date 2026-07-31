@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-16 00:48+0000\n"
+"POT-Creation-Date: 2026-07-31 00:50+0000\n"
 "PO-Revision-Date: 2023-09-15 16:56+0400\n"
 "Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -770,7 +770,7 @@ msgstr ""
 msgid "Copy Location"
 msgstr "Ünvanı kopyalayın:"
 
-#: filterHotSpots/FileFilterHotspot.cpp:285
+#: filterHotSpots/FileFilterHotspot.cpp:282
 #, kde-format
 msgid "Generating Thumbnail"
 msgstr "Eskiz yaratmaq"
@@ -6194,13 +6194,13 @@ msgctxt "@info:tooltip"
 msgid "Restore terminal"
 msgstr "Terminalı bərpa etmək"
 
-#: widgets/ViewContainer.cpp:86
+#: widgets/ViewContainer.cpp:87
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open a new tab"
 msgstr "Yeni vərəq açmaq"
 
-#: widgets/ViewContainer.cpp:91
+#: widgets/ViewContainer.cpp:92
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "&Detach Tab"
@@ -6208,38 +6208,38 @@ msgctxt "@info:tooltip"
 msgid "Search Tabs"
 msgstr "&Vərəqi ayırmaq"
 
-#: widgets/ViewContainer.cpp:96
+#: widgets/ViewContainer.cpp:97
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Close this tab"
 msgstr "Bu vərəqi bağlamaq"
 
-#: widgets/ViewContainer.cpp:132
+#: widgets/ViewContainer.cpp:133
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Detach Tab"
 msgstr "&Vərəqi ayırmaq"
 
-#: widgets/ViewContainer.cpp:138
+#: widgets/ViewContainer.cpp:139
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Configure or Rename Tab..."
 msgstr "Vərəqin adını və ya ayarlarını &dəyişmək..."
 
-#: widgets/ViewContainer.cpp:143
+#: widgets/ViewContainer.cpp:144
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "Vərəqi bağlamaq"
 
-#: widgets/ViewContainer.cpp:968 widgets/ViewContainer.cpp:977
+#: widgets/ViewContainer.cpp:969 widgets/ViewContainer.cpp:978
 #, fuzzy, kde-format
 #| msgid "&Continue Task"
 msgctxt "As in Distrobox, Toolbox, Kapsule etc."
 msgid "Container"
 msgstr "&Əməliyyata davam (CONT)"
 
-#: widgets/ViewContainer.cpp:987
+#: widgets/ViewContainer.cpp:988
 #, kde-format
 msgctxt ""
 "%1 is the type of container (e.g. Distrobox, Toolbox, Kapsule etc.), %2 its "

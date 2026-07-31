@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-16 00:48+0000\n"
+"POT-Creation-Date: 2026-07-31 00:50+0000\n"
 "PO-Revision-Date: 2020-08-01 09:45+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -776,7 +776,7 @@ msgstr ""
 msgid "Copy Location"
 msgstr "Kopiér placering"
 
-#: filterHotSpots/FileFilterHotspot.cpp:285
+#: filterHotSpots/FileFilterHotspot.cpp:282
 #, kde-format
 msgid "Generating Thumbnail"
 msgstr "Genererer miniature"
@@ -6253,14 +6253,14 @@ msgctxt "@info:tooltip"
 msgid "Restore terminal"
 msgstr "Luk terminal"
 
-#: widgets/ViewContainer.cpp:86
+#: widgets/ViewContainer.cpp:87
 #, fuzzy, kde-format
 #| msgid "&On each tab"
 msgctxt "@info:tooltip"
 msgid "Open a new tab"
 msgstr "&På hvert faneblad"
 
-#: widgets/ViewContainer.cpp:91
+#: widgets/ViewContainer.cpp:92
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "&Detach Tab"
@@ -6268,7 +6268,7 @@ msgctxt "@info:tooltip"
 msgid "Search Tabs"
 msgstr "&Frigør faneblad"
 
-#: widgets/ViewContainer.cpp:96
+#: widgets/ViewContainer.cpp:97
 #, fuzzy, kde-format
 #| msgctxt "@info:whatsthis"
 #| msgid "Close the active tab"
@@ -6276,33 +6276,33 @@ msgctxt "@info:tooltip"
 msgid "Close this tab"
 msgstr "Luk det aktive faneblad"
 
-#: widgets/ViewContainer.cpp:132
+#: widgets/ViewContainer.cpp:133
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Detach Tab"
 msgstr "&Frigør faneblad"
 
-#: widgets/ViewContainer.cpp:138
+#: widgets/ViewContainer.cpp:139
 #, fuzzy, kde-format
 #| msgid "&Rename Tab..."
 msgctxt "@action:inmenu"
 msgid "&Configure or Rename Tab..."
 msgstr "&Omdøb faneblad..."
 
-#: widgets/ViewContainer.cpp:143
+#: widgets/ViewContainer.cpp:144
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "Luk faneblad"
 
-#: widgets/ViewContainer.cpp:968 widgets/ViewContainer.cpp:977
+#: widgets/ViewContainer.cpp:969 widgets/ViewContainer.cpp:978
 #, fuzzy, kde-format
 #| msgid "Maintainer"
 msgctxt "As in Distrobox, Toolbox, Kapsule etc."
 msgid "Container"
 msgstr "Vedligeholder"
 
-#: widgets/ViewContainer.cpp:987
+#: widgets/ViewContainer.cpp:988
 #, kde-format
 msgctxt ""
 "%1 is the type of container (e.g. Distrobox, Toolbox, Kapsule etc.), %2 its "

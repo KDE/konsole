@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-16 00:48+0000\n"
+"POT-Creation-Date: 2026-07-31 00:50+0000\n"
 "PO-Revision-Date: 2013-11-18 03:40+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -821,7 +821,7 @@ msgstr ""
 msgid "Copy Location"
 msgstr "Кірісті мынаған көшірмелеу"
 
-#: filterHotSpots/FileFilterHotspot.cpp:285
+#: filterHotSpots/FileFilterHotspot.cpp:282
 #, kde-format
 msgid "Generating Thumbnail"
 msgstr ""
@@ -6363,7 +6363,7 @@ msgctxt "@info:tooltip"
 msgid "Restore terminal"
 msgstr "Қойындыны жабу"
 
-#: widgets/ViewContainer.cpp:86
+#: widgets/ViewContainer.cpp:87
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "&Detach Tab"
@@ -6371,7 +6371,7 @@ msgctxt "@info:tooltip"
 msgid "Open a new tab"
 msgstr "Койындыны бө&ліп алу"
 
-#: widgets/ViewContainer.cpp:91
+#: widgets/ViewContainer.cpp:92
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "&Detach Tab"
@@ -6379,7 +6379,7 @@ msgctxt "@info:tooltip"
 msgid "Search Tabs"
 msgstr "Койындыны бө&ліп алу"
 
-#: widgets/ViewContainer.cpp:96
+#: widgets/ViewContainer.cpp:97
 #, fuzzy, kde-format
 #| msgctxt "@info:whatsthis"
 #| msgid "Close the active tab"
@@ -6387,34 +6387,34 @@ msgctxt "@info:tooltip"
 msgid "Close this tab"
 msgstr "Белсенді қойындыны жабу"
 
-#: widgets/ViewContainer.cpp:132
+#: widgets/ViewContainer.cpp:133
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Detach Tab"
 msgstr "Койындыны бө&ліп алу"
 
-#: widgets/ViewContainer.cpp:138
+#: widgets/ViewContainer.cpp:139
 #, fuzzy, kde-format
 #| msgid "&Rename Tab..."
 msgctxt "@action:inmenu"
 msgid "&Configure or Rename Tab..."
 msgstr "Қ&ойындыны атау..."
 
-#: widgets/ViewContainer.cpp:143
+#: widgets/ViewContainer.cpp:144
 #, fuzzy, kde-format
 #| msgid "&Close Tab"
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "Қ&ойындыны жабу"
 
-#: widgets/ViewContainer.cpp:968 widgets/ViewContainer.cpp:977
+#: widgets/ViewContainer.cpp:969 widgets/ViewContainer.cpp:978
 #, fuzzy, kde-format
 #| msgid "Maintainer"
 msgctxt "As in Distrobox, Toolbox, Kapsule etc."
 msgid "Container"
 msgstr "Жетілдірушісі"
 
-#: widgets/ViewContainer.cpp:987
+#: widgets/ViewContainer.cpp:988
 #, kde-format
 msgctxt ""
 "%1 is the type of container (e.g. Distrobox, Toolbox, Kapsule etc.), %2 its "

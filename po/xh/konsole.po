@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-16 00:48+0000\n"
+"POT-Creation-Date: 2026-07-31 00:50+0000\n"
 "PO-Revision-Date: 2002-11-04 09:23SAST\n"
 "Last-Translator: Lwandle Mgidlana <lwandle@translate.org.za>\n"
 "Language-Team: Xhosa <xhosa@translate.org.za>\n"
@@ -813,7 +813,7 @@ msgstr ""
 msgid "Copy Location"
 msgstr "&Isaziso Sendlela"
 
-#: filterHotSpots/FileFilterHotspot.cpp:285
+#: filterHotSpots/FileFilterHotspot.cpp:282
 #, kde-format
 msgid "Generating Thumbnail"
 msgstr ""
@@ -6116,54 +6116,54 @@ msgctxt "@info:tooltip"
 msgid "Restore terminal"
 msgstr "&Cwangcisa kwakhona && Isiphelo sendlela Esicacileyo"
 
-#: widgets/ViewContainer.cpp:86
+#: widgets/ViewContainer.cpp:87
 #, fuzzy, kde-format
 #| msgid "&Detach Session"
 msgctxt "@info:tooltip"
 msgid "Open a new tab"
 msgstr "&Vala Intlanganiso"
 
-#: widgets/ViewContainer.cpp:91
+#: widgets/ViewContainer.cpp:92
 #, fuzzy, kde-format
 #| msgid "&Detach Session"
 msgctxt "@info:tooltip"
 msgid "Search Tabs"
 msgstr "&Vala Intlanganiso"
 
-#: widgets/ViewContainer.cpp:96
+#: widgets/ViewContainer.cpp:97
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Close this tab"
 msgstr "&Vala Intlanganiso"
 
-#: widgets/ViewContainer.cpp:132
+#: widgets/ViewContainer.cpp:133
 #, fuzzy, kde-format
 #| msgid "&Detach Session"
 msgctxt "@action:inmenu"
 msgid "&Detach Tab"
 msgstr "&Vala Intlanganiso"
 
-#: widgets/ViewContainer.cpp:138
+#: widgets/ViewContainer.cpp:139
 #, fuzzy, kde-format
 #| msgid "&Terminate Task"
 msgctxt "@action:inmenu"
 msgid "&Configure or Rename Tab..."
 msgstr "&Yenza isiphelo Somsebenzi"
 
-#: widgets/ViewContainer.cpp:143
+#: widgets/ViewContainer.cpp:144
 #, fuzzy, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "&Vala Intlanganiso"
 
-#: widgets/ViewContainer.cpp:968 widgets/ViewContainer.cpp:977
+#: widgets/ViewContainer.cpp:969 widgets/ViewContainer.cpp:978
 #, fuzzy, kde-format
 #| msgid "Maintainer"
 msgctxt "As in Distrobox, Toolbox, Kapsule etc."
 msgid "Container"
 msgstr "Umlondolozi"
 
-#: widgets/ViewContainer.cpp:987
+#: widgets/ViewContainer.cpp:988
 #, kde-format
 msgctxt ""
 "%1 is the type of container (e.g. Distrobox, Toolbox, Kapsule etc.), %2 its "

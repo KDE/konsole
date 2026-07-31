@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-16 00:48+0000\n"
+"POT-Creation-Date: 2026-07-31 00:50+0000\n"
 "PO-Revision-Date: 2026-05-31 19:19-0400\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -765,7 +765,7 @@ msgstr ""
 msgid "Copy Location"
 msgstr "ئورنىنى كۆچۈر"
 
-#: filterHotSpots/FileFilterHotspot.cpp:285
+#: filterHotSpots/FileFilterHotspot.cpp:282
 #, kde-format
 msgid "Generating Thumbnail"
 msgstr "كىچىك سۈرەت ھاسىللاۋاتىدۇ"
@@ -6080,50 +6080,50 @@ msgctxt "@info:tooltip"
 msgid "Restore terminal"
 msgstr "تېرمىنالنى ئەسلىگە كەلتۈرىدۇ"
 
-#: widgets/ViewContainer.cpp:86
+#: widgets/ViewContainer.cpp:87
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open a new tab"
 msgstr "يېڭى بەتكۈچتىن بىرنى ئاچىدۇ"
 
-#: widgets/ViewContainer.cpp:91
+#: widgets/ViewContainer.cpp:92
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Search Tabs"
 msgstr "بەتكۈچ ئىزدەيدۇ"
 
-#: widgets/ViewContainer.cpp:96
+#: widgets/ViewContainer.cpp:97
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Close this tab"
 msgstr "بۇ بەتكۈچنى ياپىدۇ"
 
-#: widgets/ViewContainer.cpp:132
+#: widgets/ViewContainer.cpp:133
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Detach Tab"
 msgstr "بەتكۈچنى ئاجرات(&D)"
 
-#: widgets/ViewContainer.cpp:138
+#: widgets/ViewContainer.cpp:139
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Configure or Rename Tab..."
 msgstr "بەت سەپلە ياكى ئات ئۆزگەرت(&C)…"
 
-#: widgets/ViewContainer.cpp:143
+#: widgets/ViewContainer.cpp:144
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "بەتكۈچ ياپ"
 
-#: widgets/ViewContainer.cpp:968 widgets/ViewContainer.cpp:977
+#: widgets/ViewContainer.cpp:969 widgets/ViewContainer.cpp:978
 #, fuzzy, kde-format
 #| msgid "Container"
 msgctxt "As in Distrobox, Toolbox, Kapsule etc."
 msgid "Container"
 msgstr "قاچا"
 
-#: widgets/ViewContainer.cpp:987
+#: widgets/ViewContainer.cpp:988
 #, fuzzy, kde-format
 #| msgid "%1: %2"
 msgctxt ""
