@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-31 00:50+0000\n"
-"PO-Revision-Date: 2026-06-09 21:36+0530\n"
+"PO-Revision-Date: 2026-08-01 17:40+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-l10n-ta@kde.org>\n"
 "Language: ta\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 26.04.1\n"
+"X-Generator: Lokalize 26.04.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -729,12 +729,10 @@ msgid "Deselect All"
 msgstr "அனைத்து தேர்வுகளை நிராகரி"
 
 #: filterHotSpots/ColorFilterHotSpot.cpp:85
-#, fuzzy, kde-format
-#| msgctxt "@label:listbox Column header text for the actual colors"
-#| msgid "Color"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Color"
-msgstr "நிறம்"
+msgstr "நிறத்தை நகலெடு"
 
 #: filterHotSpots/ColorFilterHotSpot.cpp:148
 #, kde-format
@@ -5274,27 +5272,26 @@ msgstr "தேர்விலுள்ளதை"
 #: widgets/EditProfileMousePage.ui:186
 #, kde-format
 msgid "Right-click:"
-msgstr ""
+msgstr "வலது கிளிக்:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, rightClickPasteDisabledButton)
 #: widgets/EditProfileMousePage.ui:196
 #, kde-format
 msgid "Opens context menu"
-msgstr ""
+msgstr "சூழுல்சார் பட்டியைத் திறக்கும்"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, rightClickPasteDisabledButton)
 #: widgets/EditProfileMousePage.ui:199
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Right-click shows context menu"
-msgstr ""
+msgstr "வலது கிளிக் சூழல்சார் பட்டியைத் திறக்கும்"
 
 #. i18n: ectx: property (text), widget (QRadioButton, rightClickPasteFromClipboardButton)
 #: widgets/EditProfileMousePage.ui:209
-#, fuzzy, kde-format
-#| msgid "From clipboard"
+#, kde-format
 msgid "Pastes from clipboard"
-msgstr "பிடிப்புப்பலகையிலுள்ளதை"
+msgstr "பிடிப்புப்பலகையிலுள்ளதை ஒட்டும்"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, rightClickPasteFromClipboardButton)
 #. i18n: ectx: property (toolTip), widget (QRadioButton, rightClickPasteFromX11SelectionButton)
@@ -5302,14 +5299,13 @@ msgstr "பிடிப்புப்பலகையிலுள்ளதை"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Control+right-click shows context menu"
-msgstr ""
+msgstr "Ctrl+வலது-கிளிக் சூழல்சார் பட்டியைக் காட்டும்"
 
 #. i18n: ectx: property (text), widget (QRadioButton, rightClickPasteFromX11SelectionButton)
 #: widgets/EditProfileMousePage.ui:222
-#, fuzzy, kde-format
-#| msgid "Paste Selection"
+#, kde-format
 msgid "Pastes from selection"
-msgstr "தேர்வை ஒட்டு"
+msgstr "தேர்ந்தெடுத்துள்ளதை ஒட்டும்"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: widgets/EditProfileMousePage.ui:251
@@ -5369,14 +5365,13 @@ msgstr "பின்னுள்ள இடைவெளிகளை நீக்�
 #: widgets/EditProfileMousePage.ui:301
 #, kde-format
 msgid "Clear selection after copying"
-msgstr ""
+msgstr "நகலெடுத்தபின் தேர்வை காலியாக்கு"
 
 #. i18n: ectx: property (text), widget (QCheckBox, clearSelectionButton)
 #: widgets/EditProfileMousePage.ui:304
-#, fuzzy, kde-format
-#| msgid "From selection"
+#, kde-format
 msgid "Clear selection"
-msgstr "தேர்விலுள்ளதை"
+msgstr "தேர்வை காலியாக்கு"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, underlineLinksButton)
 #: widgets/EditProfileMousePage.ui:341
@@ -6089,11 +6084,10 @@ msgid "Close Tab"
 msgstr "கீற்றை மூடு"
 
 #: widgets/ViewContainer.cpp:969 widgets/ViewContainer.cpp:978
-#, fuzzy, kde-format
-#| msgid "Maintainer"
+#, kde-format
 msgctxt "As in Distrobox, Toolbox, Kapsule etc."
 msgid "Container"
-msgstr "பராமரிப்பாளர்"
+msgstr "கொள்கலன்"
 
 #: widgets/ViewContainer.cpp:988
 #, kde-format
@@ -6101,7 +6095,7 @@ msgctxt ""
 "%1 is the type of container (e.g. Distrobox, Toolbox, Kapsule etc.), %2 its "
 "name"
 msgid "%1: %2"
-msgstr ""
+msgstr "%1: %2"
 
 #~ msgctxt "@item:inmenu"
 #~ msgid "Case sensitive"
