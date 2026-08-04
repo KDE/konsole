@@ -1103,7 +1103,7 @@ void SessionController::renameSession()
         dialog->focusTabTitleText();
     }
 
-    connect(dialog, &QDialog::accepted, this, [=]() {
+    connect(dialog, &QDialog::accepted, this, [=, this]() {
         const QString tabTitle = dialog->tabTitleText();
         const QString remoteTabTitle = dialog->remoteTabTitleText();
         const QColor tabColor = dialog->color();
@@ -1427,7 +1427,7 @@ void SessionController::copyInputToSelectedTabs(QList<Session *> *sessions)
         dialog->setMasterSession(session());
         dialog->setChosenSessions(currentGroup);
 
-        connect(dialog, &QDialog::accepted, this, [=]() {
+        connect(dialog, &QDialog::accepted, this, [=, this]() {
             QSet<Session *> newGroup = dialog->chosenSessions();
             newGroup.remove(session());
             update(newGroup, currentGroup);
