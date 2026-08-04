@@ -19,8 +19,6 @@ add_library(konsolecontainers STATIC ${konsolecontainers_SRCS})
 
 set_target_properties(konsolecontainers PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
-target_compile_features(konsolecontainers PUBLIC cxx_std_20)
-
 target_link_libraries(konsolecontainers
     PUBLIC
     Qt::Core
