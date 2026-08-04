@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-31 00:50+0000\n"
+"POT-Creation-Date: 2026-08-04 00:48+0000\n"
 "PO-Revision-Date: 2026-07-22 01:52+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -3844,7 +3844,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "載入分頁佈局"
 
-#: Vt102Emulation.cpp:3336
+#: Vt102Emulation.cpp:3342
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
