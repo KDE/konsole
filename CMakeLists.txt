@@ -14,7 +14,7 @@ set(RELEASE_SERVICE_VERSION "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE_
 cmake_minimum_required(VERSION 3.16)
 
 set(QT_MIN_VERSION "6.5.0")
-set(KF6_DEP_VERSION "6.0.0")
+set(KF6_DEP_VERSION "6.6.0")
 
 # Release script will create bugzilla versions
 project(konsole VERSION ${RELEASE_SERVICE_VERSION})
