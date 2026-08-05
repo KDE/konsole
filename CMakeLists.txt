@@ -129,13 +129,6 @@ check_symbol_exists(getpwuid "pwd.h" HAVE_GETPWUID)
 
 check_function_exists(malloc_trim HAVE_MALLOC_TRIM)
 
-# See above includes for defaults
-add_definitions(
-  -DQT_NO_FOREACH
-  -DQT_STRICT_ITERATORS
-  -DQT_NO_URL_CAST_FROM_STRING
-)
-
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
