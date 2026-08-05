@@ -13,8 +13,8 @@
 #include <QRect>
 
 // Konsole
-#include "../characters/Character.h"
 #include "Screen.h"
+#include "characters/Character.h"
 #include "konsoleprivate_export.h"
 
 namespace Konsole

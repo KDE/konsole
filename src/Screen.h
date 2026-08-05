@@ -20,7 +20,7 @@
 #include <QVector>
 
 // Konsole
-#include "../characters/Character.h"
+#include "characters/Character.h"
 #include "konsoleprivate_export.h"
 
 #define MODE_Origin 0
