@@ -33,6 +33,7 @@
 #include <KLocalizedString>
 #include <KWindowSystem>
 
+#include <KNSCore/Entry>
 #include <KNSWidgets/Button>
 
 // Konsole

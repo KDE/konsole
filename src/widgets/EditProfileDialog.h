@@ -10,7 +10,6 @@
 
 #include <QtGlobal>
 // KDE
-#include <KNSCore/Entry>
 #include <KPageDialog>
 
 // Konsole
@@ -27,6 +26,10 @@
 #include "LabelsAligner.h"
 #include "keyboardtranslator/KeyboardTranslatorManager.h"
 
+namespace KNSCore
+{
+class Entry;
+}
 class KPluralHandlingSpinBox;
 class KLocalizedString;
 class QItemSelectionModel;
