@@ -6,7 +6,7 @@
 
 #include "DistroboxDetector.h"
 #include "DistroboxListParser.h"
-#include "src/konsoledebug.h"
+#include "konsoledebug.h"
 
 #include <KLocalizedString>
 #include <KSandbox>

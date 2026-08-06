@@ -8,8 +8,8 @@
 // Own
 #include "SessionController.h"
 
+#include "SearchHistoryTask.h"
 #include "profile/ProfileManager.h"
-#include "src/SearchHistoryTask.h"
 #include "terminalDisplay/TerminalColor.h"
 #include "terminalDisplay/TerminalFonts.h"
 
