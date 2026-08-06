@@ -1,4 +1,5 @@
 
+if(BUILD_APP)
 
 ########### install files ###############
 
@@ -8,3 +9,5 @@ install(FILES org.kde.konsole.desktop DESTINATION ${KDE_INSTALL_DATADIR}/kglobal
 
 install(FILES konsole.notifyrc DESTINATION ${KDE_INSTALL_KNOTIFYRCDIR})
 install( PROGRAMS konsolerun.desktop  DESTINATION ${KDE_INSTALL_DATADIR}/kio/servicemenus )
+
+endif()

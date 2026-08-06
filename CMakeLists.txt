@@ -36,6 +36,7 @@ include(ECMMarkNonGuiExecutable)
 include(ECMGenerateHeaders)
 include(GenerateExportHeader)
 include(FeatureSummary)
+include(CMakeDependentOption)
 include(ECMQtDeclareLoggingCategory)
 include(KDEClangFormat)
 include(KDEGitCommitHooks)
@@ -44,6 +45,12 @@ include(CheckIncludeFiles)
 
 # Allows passing e.g. -DECM_ENABLE_SANITIZERS='address;undefined' to cmake.
 include(ECMEnableSanitizers)
+
+option(BUILD_APP "Build the application" ON)
+option(BUILD_KPART "Build the KPart" ON)
+cmake_dependent_option(BUILD_DOC "Build the program manual." ON "BUILD_APP" OFF)
+cmake_dependent_option(ENABLE_PLUGIN_SSHMANAGER "Build the SSHManager plugin" ON "BUILD_APP" OFF)
+cmake_dependent_option(ENABLE_PLUGIN_QUICKCOMMANDS "Build the Quick Commands plugin" ON "BUILD_APP" OFF)
 
 find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED
     Core
@@ -79,6 +86,12 @@ if(NOT WIN32)
     )
 endif()
 
+if(BUILD_DOC)
+    find_package(KF6 ${KF6_DEP_VERSION} REQUIRED
+        DocTools
+)
+endif()
+
 # shall we use DBus?
 # enabled per default on Linux & BSD systems
 set(USE_DBUS_DEFAULT OFF)
@@ -96,12 +109,6 @@ if(USE_DBUS)
     )
     set(HAVE_DBUS 1)
 endif()
-
-find_package(KF6DocTools ${KF6_DEP_VERSION})
-set_package_properties(KF6DocTools PROPERTIES DESCRIPTION
-    "Tools to generate documentation"
-    TYPE OPTIONAL
-)
 
 find_package(ICU 61.0 COMPONENTS uc i18n REQUIRED)
 
@@ -137,13 +144,10 @@ include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR})
 
 file(GLOB ICONS_SRCS "data/icons/*.png")
 
-option(ENABLE_PLUGIN_SSHMANAGER "Build the SSHManager plugin" ON)
-option(ENABLE_PLUGIN_QUICKCOMMANDS "Build the Quick Commands plugin" ON)
-
 add_subdirectory( src )
 add_subdirectory( desktop )
 
-if(KF6DocTools_FOUND)
+if(BUILD_DOC)
     add_subdirectory( doc/manual )
 endif()
 
@@ -163,11 +167,13 @@ ecm_qt_install_logging_categories(
 )
 
 ki18n_install( po )
-if(KF6DocTools_FOUND)
+if(BUILD_DOC)
     kdoctools_install( po )
 endif()
 
-install(FILES completions/konsole.zsh RENAME _konsole DESTINATION ${KDE_INSTALL_ZSHAUTOCOMPLETEDIR})
+if(BUILD_APP)
+    install(FILES completions/konsole.zsh RENAME _konsole DESTINATION ${KDE_INSTALL_ZSHAUTOCOMPLETEDIR})
+endif()
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
 

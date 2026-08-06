@@ -267,8 +267,6 @@ set(konsoleprivate_SRCS ${windowadaptors_SRCS}
 
 kconfig_add_kcfg_files(konsoleprivate_SRCS settings/KonsoleSettings.kcfgc)
 
-### Konsole Application
-
 ki18n_wrap_ui(konsoleprivate_SRCS
     CopyInputDialog.ui
     HistorySizeDialog.ui
@@ -336,6 +334,10 @@ set_target_properties(konsoleprivate PROPERTIES
 )
 
 install(TARGETS konsoleprivate ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} LIBRARY NAMELINK_SKIP)
+
+### Konsole Application
+
+if(BUILD_APP)
 
 add_library(konsoleapp SHARED Application.cpp
     MainWindow.cpp
@@ -409,7 +411,11 @@ endif()
 install(TARGETS konsole ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES settings/konsole.kcfg DESTINATION ${KDE_INSTALL_KCFGDIR})
 
+endif()
+
 ### Embedded Konsole KPart
+
+if(BUILD_KPART)
 
 set(konsolepart_PART_SRCS Part.cpp
     settings/PartInfo.cpp
@@ -427,6 +433,8 @@ target_link_libraries(konsolepart
 )
 
 install(TARGETS konsolepart DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf6/parts)
+
+endif()
 
 # Add cmake-options -DBUILD_COVERAGE=ON -DCOVERAGE_GENERATE_HTML=ON
 if(COVERAGE_GENERATE_HTML)
