@@ -14,9 +14,12 @@
 #include <QPoint>
 #include <QString>
 
-#include <KFileItem>
-#include <KFileItemActions>
-#include <KIO/PreviewJob>
+class KFileItem;
+class KFileItemActions;
+namespace KIO
+{
+class PreviewJob;
+}
 
 class QAction;
 class QPixmap;

@@ -21,8 +21,11 @@
 #include <QTimer>
 #include <QToolTip>
 
+#include <KFileItem>
+#include <KFileItemActions>
 #include <KIO/ApplicationLauncherJob>
 #include <KIO/OpenUrlJob>
+#include <KIO/PreviewJob>
 
 #include <KFileItemListProperties>
 #include <KIO/JobUiDelegateFactory>

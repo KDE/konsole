@@ -49,6 +49,7 @@
 #include <KIO/OpenFileManagerWindowJob>
 #include <KIO/OpenUrlJob>
 
+#include <KFileItemActions>
 #include <KFileItemListProperties>
 
 // Konsole
