@@ -13,8 +13,6 @@
 
 #include <terminalDisplay/TerminalDisplay.h>
 
-#include <KPluginFactory>
-
 #include <memory>
 
 #include "konsoleapp_export.h"

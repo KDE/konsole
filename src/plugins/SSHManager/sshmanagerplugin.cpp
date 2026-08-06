@@ -27,6 +27,7 @@
 #include <KCrash>
 #include <KLocalizedString>
 #include <KMessageBox>
+#include <KPluginFactory>
 #include <QSettings>
 #include <kcommandbar.h>
 

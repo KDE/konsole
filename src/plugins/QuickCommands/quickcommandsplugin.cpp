@@ -15,6 +15,7 @@
 #include "MainWindow.h"
 #include <KLocalizedString>
 #include <KMessageBox>
+#include <KPluginFactory>
 
 #include <QDockWidget>
 #include <kcommandbar.h>
