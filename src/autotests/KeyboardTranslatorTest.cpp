@@ -7,7 +7,7 @@
 // Own
 #include "KeyboardTranslatorTest.h"
 
-#include "keyboardtranslator/KeyboardTranslatorReader.h"
+#include "../keyboardtranslator/KeyboardTranslatorReader.h"
 
 // KDE
 #include <QTest>
