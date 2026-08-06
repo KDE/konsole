@@ -7,7 +7,7 @@
 #ifndef SESSIONTEST_H
 #define SESSIONTEST_H
 
-#include <kde_terminal_interface.h>
+#include <QObject>
 
 namespace Konsole
 {

@@ -11,7 +11,6 @@
 #include <QTest>
 
 #include "../characters/Character.h"
-#include "konsoleprivate_export.h"
 
 using namespace Konsole;
 

@@ -7,8 +7,6 @@
 #ifndef HISTORYTEST_H
 #define HISTORYTEST_H
 
-#include <kde_terminal_interface.h>
-
 #include "../characters/Character.h"
 #include "../history/HistoryScrollFile.h"
 #include "../history/HistoryScrollNone.h"

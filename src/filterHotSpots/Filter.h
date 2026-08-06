@@ -13,9 +13,6 @@
 #include <QMultiHash>
 #include <QPoint>
 
-// KDE
-#include <KFileItem>
-
 #include <memory>
 
 // Konsole

@@ -7,8 +7,8 @@
 #ifndef VIEWMANAGERTEST_H
 #define VIEWMANAGERTEST_H
 
+#include <QObject>
 #include <QTemporaryDir>
-#include <kde_terminal_interface.h>
 
 namespace Konsole
 {

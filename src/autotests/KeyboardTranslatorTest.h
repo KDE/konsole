@@ -7,7 +7,6 @@
 #ifndef KEYBOARDTRANSLATORTEST_H
 #define KEYBOARDTRANSLATORTEST_H
 
-#include "keyboardtranslator/KeyboardTranslator.h"
 #include <QObject>
 
 namespace Konsole

@@ -12,12 +12,11 @@
 #include <QKeyEvent>
 #include <QMenu>
 #include <QMenuBar>
-#include <qtestkeyboard.h>
+#include <QTest>
 
 // KDE
 #include <KMainWindow>
 #include <KPluginFactory>
-#include <QTest>
 
 using namespace Konsole;
 

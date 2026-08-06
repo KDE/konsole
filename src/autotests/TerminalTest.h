@@ -7,7 +7,7 @@
 #ifndef TERMINALTEST_H
 #define TERMINALTEST_H
 
-#include <kde_terminal_interface.h>
+#include <QObject>
 
 namespace Konsole
 {

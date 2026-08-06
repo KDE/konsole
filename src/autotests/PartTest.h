@@ -8,7 +8,6 @@
 #define PARTTEST_H
 
 #include <KParts/Part>
-#include <kde_terminal_interface.h>
 
 namespace Konsole
 {

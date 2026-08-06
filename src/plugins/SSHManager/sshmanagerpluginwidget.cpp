@@ -8,7 +8,6 @@
 #include "sshmanagerpluginwidget.h"
 
 #include "ProcessInfo.h"
-#include "konsoledebug.h"
 #include "session/Session.h"
 #include "session/SessionController.h"
 
