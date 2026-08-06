@@ -90,7 +90,7 @@ Consult your operating system documentation to know what the shell is, how to co
 <para>&konsole; uses the notion of scrollback
 to allow users to view previously displayed output.
 By default, scrollback is on
-and set to save 1000 lines of
+and set to save 10,000 lines of
 output in addition to what is currently displayed on the screen.
 </para>
 <para>As lines of text scroll off the top of the screen, they can be reviewed
