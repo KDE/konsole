@@ -1,24 +1,28 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(demo_konsolepart)
-set(PROJECT_VERSION "1.0.0")
+project(demo_konsolepart VERSION "1.0.0")
 
-find_package(ECM 1.0.0 REQUIRED NO_MODULE)
-set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+set(QT_MIN_VERSION "6.5.0")
+set(KF_MIN_VERSION "6.0.0")
+
+find_package(ECM ${KF_MIN_VERSION} REQUIRED NO_MODULE)
+set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
 include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDECompilerSettings NO_POLICY_SCOPE)
-include(ECMInstallIcons)
 include(FeatureSummary)
 
-set(QT_MIN_VERSION "6.5.0")
-find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core Gui Widgets)
+find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
+    Widgets
+)
 
-set(REQUIRED_KF_VERSION "6.0.0")
-find_package(KF6 ${REQUIRED_KF_VERSION} REQUIRED COMPONENTS
+find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS
     CoreAddons
     I18n
+    Parts
+    XmlGui
+    WindowSystem
 )
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
