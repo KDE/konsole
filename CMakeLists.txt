@@ -36,9 +36,6 @@ include(KDEClangFormat)
 include(KDEGitCommitHooks)
 include(CheckFunctionExists)
 
-# Allows passing e.g. -DECM_ENABLE_SANITIZERS='address;undefined' to cmake.
-include(ECMEnableSanitizers)
-
 find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED
     Core
     Multimedia
