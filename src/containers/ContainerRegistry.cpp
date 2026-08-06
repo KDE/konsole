@@ -10,7 +10,7 @@
 #include "ToolboxDetector.h"
 #include "konsoledebug.h"
 
-#include "config-konsole.h"
+#include "../config-konsole.h"
 
 #if HAVE_KAPSULE
 #include "KapsuleDetector.h"
