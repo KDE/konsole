@@ -19,9 +19,8 @@
 // Konsole
 #include "ColorSchemeWallpaper.h"
 
-#include <KLazyLocalizedString>
-
 class KConfig;
+class KLazyLocalizedString;
 class QPixmap;
 class QPainter;
 

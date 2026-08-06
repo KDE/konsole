@@ -18,6 +18,7 @@
 // KDE
 #include <KConfig>
 #include <KConfigGroup>
+#include <KLazyLocalizedString>
 #include <KLocalizedString>
 
 // STL
