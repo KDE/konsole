@@ -96,13 +96,6 @@ if(NOT WIN32)
     )
 endif()
 
-if(HAVE_DBUS)
-    list(APPEND konsole_LIBS
-        KF6::DBusAddons
-        KF6::GlobalAccel
-    )
-endif()
-
 if(${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
     #kinfo_getfile() is in libutil
     list(APPEND konsole_LIBS util)
@@ -366,6 +359,11 @@ target_link_libraries(konsoleapp
   KF6::NotifyConfig
   KF6::Crash
 )
+if(HAVE_DBUS)
+    target_link_libraries(konsoleapp
+        KF6::GlobalAccel
+    )
+endif()
 
 set_target_properties(konsoleapp PROPERTIES
     VERSION ${RELEASE_SERVICE_VERSION}
@@ -393,6 +391,11 @@ target_link_libraries(konsole
   KF6::NotifyConfig
   KF6::Crash
 )
+if(HAVE_DBUS)
+    target_link_libraries(konsole
+        KF6::DBusAddons
+    )
+endif()
 
 if(APPLE)
     set_target_properties(konsole PROPERTIES
