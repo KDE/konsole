@@ -418,7 +418,6 @@ set(konsolepart_PART_SRCS Part.cpp
 )
 
 add_library(konsolepart MODULE ${konsolepart_PART_SRCS})
-generate_export_header(konsolepart BASE_NAME konsole)
 target_link_libraries(konsolepart
     KF6::Parts
     KF6::XmlGui
