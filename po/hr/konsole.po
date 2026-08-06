@@ -1565,9 +1565,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: plugins/QuickCommands/qcwidget.ui:97
-#, fuzzy, kde-format
-#| msgctxt "@item:intable The session title"
-#| msgid "Title"
+#, kde-format
 msgid "Title"
 msgstr "Naslov"
 
@@ -1919,9 +1917,7 @@ msgstr "Uredi odabran(e) profil(e)"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: plugins/SSHManager/sshwidget.ui:19
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile shortcut text"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut"
 msgstr "Prečac"
 
@@ -2124,7 +2120,8 @@ msgstr "Opcije"
 #. i18n: ectx: property (text), widget (QCheckBox, printerFriendly)
 #. i18n: ectx: label, entry (PrinterFriendly), group (PrintOptions)
 #: PrintOptions.ui:39 settings/konsole.kcfg:210
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Printer &friendly mode (black text, no background)"
 msgid "Printer &friendly mode (black text, no background)"
 msgstr "Mod prilagođen pisaču (crni tekst, bez pozadine)"
 
@@ -2564,7 +2561,8 @@ msgid "Stop Auto Save"
 msgstr ""
 
 #: session/SessionController.cpp:773
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "&Print Screen..."
 msgid "&Print Screen..."
 msgstr "&Ispiši zaslon"
 
@@ -2701,22 +2699,26 @@ msgid "Send Signal"
 msgstr "Pošalji &signal"
 
 #: session/SessionController.cpp:963
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "&Suspend Task"
 msgid "&Suspend Task"
 msgstr "&Odgodi zadatak"
 
 #: session/SessionController.cpp:968
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "&Continue Task"
 msgid "&Continue Task"
 msgstr "&Nastavi zadatak"
 
 #: session/SessionController.cpp:973
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "&Hangup"
 msgid "&Hangup"
 msgstr "&Objesi"
 
 #: session/SessionController.cpp:978
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "&Interrupt Task"
 msgid "&Interrupt Task"
 msgstr "&Prekini zadatak"
 
@@ -2727,17 +2729,20 @@ msgid "&Terminate Task"
 msgstr "Mogućnosti terminala"
 
 #: session/SessionController.cpp:988
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "&Kill Task"
 msgid "&Kill Task"
 msgstr "&Ubij zadatak"
 
 #: session/SessionController.cpp:993
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "User Signal &1"
 msgid "User Signal &1"
 msgstr "Korisnikov signal &1"
 
 #: session/SessionController.cpp:998
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "User Signal &2"
 msgid "User Signal &2"
 msgstr "Korisnikov signal &2"
 
@@ -2823,8 +2828,7 @@ msgid "Open Current Folder With"
 msgstr ""
 
 #: session/SessionController.cpp:2226
-#, fuzzy, kde-format
-#| msgid "Save ZModem Download to..."
+#, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Spremi ZModemsko preuzimanje u…"
 
@@ -2955,15 +2959,13 @@ msgstr ""
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchCaseSensitive)
 #. i18n: ectx: tooltip, entry (SearchCaseSensitive), group (SearchSettings)
 #: settings/GeneralSettings.ui:148 settings/konsole.kcfg:85
-#, fuzzy, kde-format
-#| msgid "Sets whether the search is case sensitive"
+#, kde-format
 msgid "Sets whether the search is case sensitive"
 msgstr "Postavlja da li će pretraga paziti na veličinu slova"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchCaseSensitive)
 #: settings/GeneralSettings.ui:151
-#, fuzzy, kde-format
-#| msgid "Case sensitive"
+#, kde-format
 msgid "Case sensitive"
 msgstr "Osjetljivost na veličinu slova"
 
@@ -2975,8 +2977,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchHighlightMatches)
 #: settings/GeneralSettings.ui:174
-#, fuzzy, kde-format
-#| msgid "Highlight all matches"
+#, kde-format
 msgid "Highlight all matches"
 msgstr "Istakni sva podudaranja"
 
@@ -3168,8 +3169,7 @@ msgstr "Istakni sva podudaranja"
 
 #. i18n: ectx: tooltip, entry (SearchHighlightMatches), group (SearchSettings)
 #: settings/konsole.kcfg:94
-#, fuzzy, kde-format
-#| msgid "Sets whether matching text should be highlighted"
+#, kde-format
 msgid "Sets whether matching text should be highlighted"
 msgstr "Postavlja da li će podudarani tekst biti osvijetljen"
 
@@ -5753,10 +5753,7 @@ msgstr "Umetni odabrano"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, underlineLinksButton)
 #: widgets/EditProfileMousePage.ui:341
-#, fuzzy, kde-format
-#| msgid ""
-#| "Text recognized as a link or an email address will be underlined when "
-#| "hovered by the mouse pointer."
+#, kde-format
 msgid ""
 "Text recognized as a link or an email address will be underlined when "
 "hovered by the mouse pointer."
@@ -5766,8 +5763,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, underlineLinksButton)
 #: widgets/EditProfileMousePage.ui:344
-#, fuzzy, kde-format
-#| msgid "Underline links"
+#, kde-format
 msgid "Underline links"
 msgstr "Podvuci linkove"
 
