@@ -49,8 +49,8 @@ include(ECMEnableSanitizers)
 option(BUILD_APP "Build the application" ON)
 option(BUILD_KPART "Build the KPart" ON)
 cmake_dependent_option(BUILD_DOC "Build the program manual." ON "BUILD_APP" OFF)
-cmake_dependent_option(ENABLE_PLUGIN_SSHMANAGER "Build the SSHManager plugin" ON "BUILD_APP" OFF)
-cmake_dependent_option(ENABLE_PLUGIN_QUICKCOMMANDS "Build the Quick Commands plugin" ON "BUILD_APP" OFF)
+cmake_dependent_option(BUILD_PLUGIN_SSHMANAGER "Build the SSHManager plugin" ON "BUILD_APP" OFF)
+cmake_dependent_option(BUILD_PLUGIN_QUICKCOMMANDS "Build the Quick Commands plugin" ON "BUILD_APP" OFF)
 
 find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED
     Core
