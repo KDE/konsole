@@ -167,7 +167,7 @@
 >Geçmiş</title>
 
 <para
->&konsole;, kullanıcıların daha önce görüntülenen çıktıyı görüntülemesine olanak sağlamak için geçmiş kavramını kullanır. Öntanımlı olarak geri sarma açıktır ve ekranda görüntülenene ek olarak 1000 satırlık çıktıyı kaydedecek şekilde ayarlanmıştır. </para>
+>&konsole; uses the notion of scrollback to allow users to view previously displayed output. By default, scrollback is on and set to save 10,000 lines of output in addition to what is currently displayed on the screen. </para>
 <para
 >Metin satırları ekranın yukarısından sarıldıkça; sarma çubuğunu yukarı taşıyarak, fare tekerleği kullanılarak veya <keycombo action="simul"
 >&Shift;<keycap
