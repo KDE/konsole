@@ -8,6 +8,7 @@
 #define ICONTAINERDETECTOR_H
 
 #include "ContainerInfo.h"
+#include "konsoleprivate_export.h"
 
 #include <QList>
 #include <QObject>
@@ -27,8 +28,12 @@ namespace Konsole
  *
  * Container listing is asynchronous: call startListContainers() and connect
  * to the listContainersFinished() signal to receive results.
+ *
+ * @internal
+ * Exported for ViewManagerTest (can't use konsolecontainers,
+ * as the test links already konsoleprivate, which includes that)
  */
-class IContainerDetector : public QObject
+class KONSOLEPRIVATE_EXPORT IContainerDetector : public QObject
 {
     Q_OBJECT
 
