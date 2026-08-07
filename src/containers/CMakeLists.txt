@@ -32,7 +32,6 @@ if(HAVE_KAPSULE)
 endif()
 
 target_include_directories(konsolecontainers
-    PUBLIC
-    ${CMAKE_CURRENT_SOURCE_DIR}
+    PRIVATE
     ${CMAKE_BINARY_DIR}/src  # For config-konsole.h
 )
