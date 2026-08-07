@@ -25,7 +25,6 @@ ecm_add_tests(
     CharacterColorTest.cpp
     CharacterTest.cpp
     CharacterWidthTest.cpp
-    ContainerDetectorParsingTest.cpp
     HotSpotFilterTest.cpp
     ProcessInfoTest.cpp
     ProfileTest.cpp
@@ -33,7 +32,12 @@ ecm_add_tests(
     ShellCommandTest.cpp
     TerminalCharacterDecoderTest.cpp
     Vt102EmulationTest.cpp
-    LINK_LIBRARIES ${KONSOLE_TEST_LIBS} konsolecontainers
+    LINK_LIBRARIES ${KONSOLE_TEST_LIBS}
+)
+
+ecm_add_test(
+    ContainerDetectorParsingTest.cpp
+    LINK_LIBRARIES konsolecontainers Qt::Test
 )
 
 if(NOT WIN32)
