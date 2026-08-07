@@ -253,8 +253,6 @@ set(konsoleprivate_SRCS ${windowadaptors_SRCS}
 
 kconfig_add_kcfg_files(konsoleprivate_SRCS settings/KonsoleSettings.kcfgc)
 
-### Konsole Application
-
 ki18n_wrap_ui(konsoleprivate_SRCS
     CopyInputDialog.ui
     HistorySizeDialog.ui
@@ -322,6 +320,8 @@ set_target_properties(konsoleprivate PROPERTIES
 )
 
 install(TARGETS konsoleprivate ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} LIBRARY NAMELINK_SKIP)
+
+### Konsole Application
 
 add_library(konsoleapp SHARED Application.cpp
     MainWindow.cpp
