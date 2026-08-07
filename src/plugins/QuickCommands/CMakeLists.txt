@@ -16,4 +16,5 @@ configure_file(konsole_quickcommands.in.json konsole_quickcommands.json)
 target_link_libraries(konsole_quickcommandsplugin
     konsoleprivate
     konsoleapp
+    konsolelogging
 )

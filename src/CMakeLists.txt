@@ -112,8 +112,11 @@ set(konsoleprivate_core_SRCS
     ShellCommand.cpp
 )
 
-ecm_qt_declare_logging_category(
-    konsoleprivate_core_SRCS
+add_library(konsolelogging OBJECT)
+set_target_properties(konsolelogging PROPERTIES POSITION_INDEPENDENT_CODE ON)
+target_link_libraries(konsolelogging PUBLIC Qt::Core)
+
+ecm_qt_declare_logging_category(konsolelogging
     HEADER konsoledebug.h
     IDENTIFIER KonsoleDebug
     CATEGORY_NAME org.kde.konsole
@@ -306,6 +309,7 @@ target_link_libraries(konsoleprivate
     konsolecharacters
     konsoledecoders
     konsolecontainers
+    konsolelogging
     KF6::NewStuffCore
     KF6::NewStuffWidgets
     ${konsole_LIBS}
@@ -351,6 +355,7 @@ target_compile_definitions(konsoleapp PRIVATE -DRELEASE_SERVICE_VERSION="${RELEA
 
 target_link_libraries(konsoleapp
   konsoleprivate
+  konsolelogging
   KF6::XmlGui
   KF6::WindowSystem
   KF6::Bookmarks
@@ -425,6 +430,7 @@ target_link_libraries(konsolepart
     KF6::Parts
     KF6::XmlGui
     konsoleprivate
+    konsolelogging
 )
 
 install(TARGETS konsolepart DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf6/parts)

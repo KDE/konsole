@@ -25,6 +25,8 @@ target_link_libraries(konsolecontainers
     Qt::Widgets
     KF6::I18n
     KF6::CoreAddons  # For KSandbox
+    PRIVATE
+        konsolelogging
 )
 
 if(HAVE_KAPSULE)
