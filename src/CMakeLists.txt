@@ -105,12 +105,6 @@ if(HAIKU)
     list(APPEND konsole_LIBS network) # for undefined reference to `inet_aton'
 endif()
 
-# TODO: Move this to an internal folder if it grows too much.
-# This konsoleprivate_core is the "core" library that depends in nothing from konsole itself
-# so we can start to detangle the codebase.
-set(konsoleprivate_core_SRCS
-    ShellCommand.cpp
-)
 
 add_library(konsolelogging OBJECT)
 set_target_properties(konsolelogging PROPERTIES POSITION_INDEPENDENT_CODE ON)
@@ -123,11 +117,6 @@ ecm_qt_declare_logging_category(konsolelogging
     DESCRIPTION "Konsole"
     EXPORT KONSOLE
 )
-
-add_library(konsoleprivate_core STATIC ${konsoleprivate_core_SRCS})
-# Needed to link this static lib to shared libs
-set_target_properties(konsoleprivate_core PROPERTIES POSITION_INDEPENDENT_CODE ON)
-target_link_libraries(konsoleprivate_core KF6::CoreAddons)
 
 set(konsolehelpers_SRCS
     LabelsAligner.cpp
@@ -176,6 +165,7 @@ set(konsoleprivate_SRCS ${windowadaptors_SRCS}
                         ScreenWindow.cpp
                         ScrollState.cpp
                         SearchHistoryTask.cpp
+                        ShellCommand.cpp
                         ShouldApplyProperty.cpp
                         UnixProcessInfo.cpp
                         ViewManager.cpp
@@ -302,7 +292,6 @@ endif()
 
 target_link_libraries(konsoleprivate
     PUBLIC
-    konsoleprivate_core
     konsolecolorscheme
     keyboardtranslator
     konsolehelpers
