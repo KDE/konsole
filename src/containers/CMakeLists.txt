@@ -18,6 +18,14 @@ endif()
 add_library(konsolecontainers STATIC ${konsolecontainers_SRCS})
 
 set_target_properties(konsolecontainers PROPERTIES POSITION_INDEPENDENT_CODE ON)
+# Some of the konsolecontainers API needs to be exported once linked into konsoleprivate,
+# for that the export header of konsoleprivate is reused,
+# which needs here setting the export flag or static build flag manually
+if(BUILD_SHARED_LIBS)
+    target_compile_definitions(konsolecontainers PRIVATE konsoleprivate_EXPORTS)
+else()
+    target_compile_definitions(konsolecontainers PRIVATE KONSOLEPRIVATE_STATIC_DEFINE)
+endif()
 
 target_link_libraries(konsolecontainers
     PUBLIC
