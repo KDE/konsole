@@ -124,8 +124,6 @@ check_symbol_exists(getpwuid "pwd.h" HAVE_GETPWUID)
 
 check_function_exists(malloc_trim HAVE_MALLOC_TRIM)
 
-include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR})
-
 file(GLOB ICONS_SRCS "data/icons/*.png")
 
 option(ENABLE_PLUGIN_SSHMANAGER "Build the SSHManager plugin" ON)
