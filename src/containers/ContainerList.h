@@ -13,6 +13,7 @@
 
 // Konsole
 #include "ContainerInfo.h"
+#include "konsoleprivate_export.h"
 
 class QAction;
 class QActionGroup;
@@ -38,7 +39,7 @@ namespace Konsole
  * When no containers are available, nothing is added and the menu appears
  * unchanged (no section headers, no empty state).
  */
-class ContainerList : public QObject
+class KONSOLEPRIVATE_EXPORT ContainerList : public QObject
 {
     Q_OBJECT
 

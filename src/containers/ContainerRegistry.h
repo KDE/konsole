@@ -9,6 +9,7 @@
 
 #include "ContainerInfo.h"
 #include "IContainerDetector.h"
+#include "konsoleprivate_export.h"
 
 #include <QList>
 #include <QObject>
@@ -136,6 +137,7 @@ public:
      * @param container The container to build a key for
      * @return Key string in "type:name" format, or empty if container is invalid
      */
+    KONSOLEPRIVATE_EXPORT
     static QString keyFromContainerInfo(const ContainerInfo &container);
 
     /**
