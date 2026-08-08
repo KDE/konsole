@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-05 02:47+0000\n"
+"POT-Creation-Date: 2026-08-08 02:43+0000\n"
 "PO-Revision-Date: 2024-11-23 12:11+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -753,6 +753,18 @@ msgctxt "Caption of hover tooltip"
 msgid "Color Preview"
 msgstr "Colour Preview"
 
+#: filterHotSpots/EscapeSequenceUrlFilterHotSpot.cpp:63
+#: filterHotSpots/UrlFilterHotspot.cpp:92
+#, kde-format
+msgid "Open Link"
+msgstr "Open Link"
+
+#: filterHotSpots/EscapeSequenceUrlFilterHotSpot.cpp:65
+#: filterHotSpots/UrlFilterHotspot.cpp:94
+#, kde-format
+msgid "Copy Link Address"
+msgstr "Copy Link Address"
+
 #: filterHotSpots/FileFilterHotspot.cpp:158
 #, kde-format
 msgid ""
@@ -771,16 +783,6 @@ msgstr "Copy Location"
 #, kde-format
 msgid "Generating Thumbnail"
 msgstr "Generating Thumbnail"
-
-#: filterHotSpots/UrlFilterHotspot.cpp:92
-#, kde-format
-msgid "Open Link"
-msgstr "Open Link"
-
-#: filterHotSpots/UrlFilterHotspot.cpp:94
-#, kde-format
-msgid "Copy Link Address"
-msgstr "Copy Link Address"
 
 #: filterHotSpots/UrlFilterHotspot.cpp:97
 #, kde-format

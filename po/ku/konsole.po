@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-05 02:47+0000\n"
+"POT-Creation-Date: 2026-08-08 02:43+0000\n"
 "PO-Revision-Date: 2009-01-06 02:14+0200\n"
 "Last-Translator: Omer Ensari <oensari@gmail.com>\n"
 "Language-Team: Kurdish <ku@li.org>\n"
@@ -823,6 +823,18 @@ msgctxt "Caption of hover tooltip"
 msgid "Color Preview"
 msgstr "Pêşdîtin:"
 
+#: filterHotSpots/EscapeSequenceUrlFilterHotSpot.cpp:63
+#: filterHotSpots/UrlFilterHotspot.cpp:92
+#, kde-format
+msgid "Open Link"
+msgstr "Lînkê Veke"
+
+#: filterHotSpots/EscapeSequenceUrlFilterHotSpot.cpp:65
+#: filterHotSpots/UrlFilterHotspot.cpp:94
+#, kde-format
+msgid "Copy Link Address"
+msgstr "Navnîşana Girêdanê Ji Ber Bigire"
+
 #: filterHotSpots/FileFilterHotspot.cpp:158
 #, kde-format
 msgid ""
@@ -840,16 +852,6 @@ msgstr "Ketanê Ji Ber Bigire Jê..."
 #, kde-format
 msgid "Generating Thumbnail"
 msgstr ""
-
-#: filterHotSpots/UrlFilterHotspot.cpp:92
-#, kde-format
-msgid "Open Link"
-msgstr "Lînkê Veke"
-
-#: filterHotSpots/UrlFilterHotspot.cpp:94
-#, kde-format
-msgid "Copy Link Address"
-msgstr "Navnîşana Girêdanê Ji Ber Bigire"
 
 #: filterHotSpots/UrlFilterHotspot.cpp:97
 #, kde-format

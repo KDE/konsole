@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-05 02:47+0000\n"
+"POT-Creation-Date: 2026-08-08 02:43+0000\n"
 "PO-Revision-Date: 2008-12-29 15:34+0530\n"
 "Last-Translator: Runa Bhattacharjee <runab@redhat.com>\n"
 "Language-Team: Bengali INDIA <fedora-trans-bn_IN@redhat.com>\n"
@@ -827,6 +827,18 @@ msgctxt "Caption of hover tooltip"
 msgid "Color Preview"
 msgstr "পূর্বরূপ:"
 
+#: filterHotSpots/EscapeSequenceUrlFilterHotSpot.cpp:63
+#: filterHotSpots/UrlFilterHotspot.cpp:92
+#, kde-format
+msgid "Open Link"
+msgstr "লিংক প্রদর্শন"
+
+#: filterHotSpots/EscapeSequenceUrlFilterHotSpot.cpp:65
+#: filterHotSpots/UrlFilterHotspot.cpp:94
+#, kde-format
+msgid "Copy Link Address"
+msgstr "লিংক দ্বারা চিহ্নিত অবস্থান কপি করুন"
+
 #: filterHotSpots/FileFilterHotspot.cpp:158
 #, kde-format
 msgid ""
@@ -844,16 +856,6 @@ msgstr "ইনপুট কপি করুন"
 #, kde-format
 msgid "Generating Thumbnail"
 msgstr ""
-
-#: filterHotSpots/UrlFilterHotspot.cpp:92
-#, kde-format
-msgid "Open Link"
-msgstr "লিংক প্রদর্শন"
-
-#: filterHotSpots/UrlFilterHotspot.cpp:94
-#, kde-format
-msgid "Copy Link Address"
-msgstr "লিংক দ্বারা চিহ্নিত অবস্থান কপি করুন"
 
 #: filterHotSpots/UrlFilterHotspot.cpp:97
 #, kde-format

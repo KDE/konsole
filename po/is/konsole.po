@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-05 02:47+0000\n"
+"POT-Creation-Date: 2026-08-08 02:43+0000\n"
 "PO-Revision-Date: 2026-03-13 11:30+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
@@ -761,6 +761,18 @@ msgctxt "Caption of hover tooltip"
 msgid "Color Preview"
 msgstr "Forskoðun á lit"
 
+#: filterHotSpots/EscapeSequenceUrlFilterHotSpot.cpp:63
+#: filterHotSpots/UrlFilterHotspot.cpp:92
+#, kde-format
+msgid "Open Link"
+msgstr "Opna tengil"
+
+#: filterHotSpots/EscapeSequenceUrlFilterHotSpot.cpp:65
+#: filterHotSpots/UrlFilterHotspot.cpp:94
+#, kde-format
+msgid "Copy Link Address"
+msgstr "Afrita tengil"
+
 #: filterHotSpots/FileFilterHotspot.cpp:158
 #, kde-format
 msgid ""
@@ -780,16 +792,6 @@ msgstr "Afrita staðsetningu"
 #, kde-format
 msgid "Generating Thumbnail"
 msgstr "Útbý smámynd"
-
-#: filterHotSpots/UrlFilterHotspot.cpp:92
-#, kde-format
-msgid "Open Link"
-msgstr "Opna tengil"
-
-#: filterHotSpots/UrlFilterHotspot.cpp:94
-#, kde-format
-msgid "Copy Link Address"
-msgstr "Afrita tengil"
 
 #: filterHotSpots/UrlFilterHotspot.cpp:97
 #, kde-format

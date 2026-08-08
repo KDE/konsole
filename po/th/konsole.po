@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-05 02:47+0000\n"
+"POT-Creation-Date: 2026-08-08 02:43+0000\n"
 "PO-Revision-Date: 2025-03-17 21:03+0700\n"
 "Last-Translator: Atirut Wattanamongkol <atirut.wattanamongkol@gmailcom>\n"
 "Language-Team: Thai\n"
@@ -810,6 +810,18 @@ msgctxt "Caption of hover tooltip"
 msgid "Color Preview"
 msgstr "ตัวอย่าง:"
 
+#: filterHotSpots/EscapeSequenceUrlFilterHotSpot.cpp:63
+#: filterHotSpots/UrlFilterHotspot.cpp:92
+#, kde-format
+msgid "Open Link"
+msgstr "เปิดที่อยู่เชื่อมโยง"
+
+#: filterHotSpots/EscapeSequenceUrlFilterHotSpot.cpp:65
+#: filterHotSpots/UrlFilterHotspot.cpp:94
+#, kde-format
+msgid "Copy Link Address"
+msgstr "คัดลอกที่อยู่เชื่อมโยง"
+
 #: filterHotSpots/FileFilterHotspot.cpp:158
 #, kde-format
 msgid ""
@@ -827,16 +839,6 @@ msgstr "คัดลอกข้อมูลเข้า ไปยัง"
 #, kde-format
 msgid "Generating Thumbnail"
 msgstr ""
-
-#: filterHotSpots/UrlFilterHotspot.cpp:92
-#, kde-format
-msgid "Open Link"
-msgstr "เปิดที่อยู่เชื่อมโยง"
-
-#: filterHotSpots/UrlFilterHotspot.cpp:94
-#, kde-format
-msgid "Copy Link Address"
-msgstr "คัดลอกที่อยู่เชื่อมโยง"
 
 #: filterHotSpots/UrlFilterHotspot.cpp:97
 #, kde-format

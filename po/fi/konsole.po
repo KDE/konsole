@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-05 02:47+0000\n"
+"POT-Creation-Date: 2026-08-08 02:43+0000\n"
 "PO-Revision-Date: 2026-01-05 17:20+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -775,6 +775,19 @@ msgctxt "Caption of hover tooltip"
 msgid "Color Preview"
 msgstr "Värien esikatselu"
 
+# & lisätty, jotta valikon kohdan käyttäminen olisi kätevää näppäimistöltä.
+#: filterHotSpots/EscapeSequenceUrlFilterHotSpot.cpp:63
+#: filterHotSpots/UrlFilterHotspot.cpp:92
+#, kde-format
+msgid "Open Link"
+msgstr "&Avaa linkki"
+
+#: filterHotSpots/EscapeSequenceUrlFilterHotSpot.cpp:65
+#: filterHotSpots/UrlFilterHotspot.cpp:94
+#, kde-format
+msgid "Copy Link Address"
+msgstr "Kopioi linkin osoite"
+
 #: filterHotSpots/FileFilterHotspot.cpp:158
 #, kde-format
 msgid ""
@@ -794,17 +807,6 @@ msgstr "Kopioinnin kohde"
 #, kde-format
 msgid "Generating Thumbnail"
 msgstr "Luodaan pienoiskuvaa"
-
-# & lisätty, jotta valikon kohdan käyttäminen olisi kätevää näppäimistöltä.
-#: filterHotSpots/UrlFilterHotspot.cpp:92
-#, kde-format
-msgid "Open Link"
-msgstr "&Avaa linkki"
-
-#: filterHotSpots/UrlFilterHotspot.cpp:94
-#, kde-format
-msgid "Copy Link Address"
-msgstr "Kopioi linkin osoite"
 
 #: filterHotSpots/UrlFilterHotspot.cpp:97
 #, kde-format

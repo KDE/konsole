@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-05 02:47+0000\n"
+"POT-Creation-Date: 2026-08-08 02:43+0000\n"
 "PO-Revision-Date: 2026-08-01 17:40+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-l10n-ta@kde.org>\n"
@@ -740,6 +740,18 @@ msgctxt "Caption of hover tooltip"
 msgid "Color Preview"
 msgstr "நிற முன்னோட்டம்"
 
+#: filterHotSpots/EscapeSequenceUrlFilterHotSpot.cpp:63
+#: filterHotSpots/UrlFilterHotspot.cpp:92
+#, kde-format
+msgid "Open Link"
+msgstr "இணைப்பை திற"
+
+#: filterHotSpots/EscapeSequenceUrlFilterHotSpot.cpp:65
+#: filterHotSpots/UrlFilterHotspot.cpp:94
+#, kde-format
+msgid "Copy Link Address"
+msgstr "இணைப்பின் முகவரியை நகலெடு"
+
 #: filterHotSpots/FileFilterHotspot.cpp:158
 #, kde-format
 msgid ""
@@ -758,16 +770,6 @@ msgstr "இருப்பிடத்தை நகலெடு"
 #, kde-format
 msgid "Generating Thumbnail"
 msgstr "சிறுபடம் உருவாக்கப்படுகிறது"
-
-#: filterHotSpots/UrlFilterHotspot.cpp:92
-#, kde-format
-msgid "Open Link"
-msgstr "இணைப்பை திற"
-
-#: filterHotSpots/UrlFilterHotspot.cpp:94
-#, kde-format
-msgid "Copy Link Address"
-msgstr "இணைப்பின் முகவரியை நகலெடு"
 
 #: filterHotSpots/UrlFilterHotspot.cpp:97
 #, kde-format
