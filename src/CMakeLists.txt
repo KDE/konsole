@@ -97,118 +97,122 @@ if(WIN32)
     set(ptyqt_srcs ptyqt/iptyprocess.cpp ptyqt/conptyprocess.cpp)
 endif()
 
-set(konsoleprivate_SRCS ${windowadaptors_SRCS}
-                        BookmarkHandler.cpp
-                        BookmarkMenu.cpp
-                        CheckableSessionModel.cpp
-                        CopyInputDialog.cpp
-                        Emulation.cpp
-                        EscapeSequenceUrlExtractor.cpp
-                        FontDialog.cpp
-                        HistorySizeDialog.cpp
-                        KeyBindingEditor.cpp
-                        LabelsAligner.cpp
-                        NullProcessInfo.cpp
-                        PrintOptions.cpp
-                        ProcessInfo.cpp
-                        Pty.cpp
-                        RenameTabDialog.cpp
-                        SSHProcessInfo.cpp
-                        SaveHistoryTask.cpp
-                        SaveHistoryAutoTask.cpp
-                        Screen.cpp
-                        ScreenWindow.cpp
-                        ScrollState.cpp
-                        SearchHistoryTask.cpp
-                        ShellCommand.cpp
-                        ShouldApplyProperty.cpp
-                        UnixProcessInfo.cpp
-                        ViewManager.cpp
-                        ViewProperties.cpp
-                        Vt102Emulation.cpp
-                        KittyKeyMap.cpp
-                        WindowSystemInfo.cpp
-                        WinKeys.h
-                        ZModemDialog.cpp
-                        filterHotSpots/EscapeSequenceUrlFilter.cpp
-                        filterHotSpots/EscapeSequenceUrlFilterHotSpot.cpp
-                        filterHotSpots/FileFilter.cpp
-                        filterHotSpots/FileFilterHotspot.cpp
-                        filterHotSpots/Filter.cpp
-                        filterHotSpots/FilterChain.cpp
-                        filterHotSpots/HotSpot.cpp
-                        filterHotSpots/RegExpFilter.cpp
-                        filterHotSpots/RegExpFilterHotspot.cpp
-                        filterHotSpots/TerminalImageFilterChain.cpp
-                        filterHotSpots/UrlFilter.cpp
-                        filterHotSpots/UrlFilterHotspot.cpp
-                        filterHotSpots/ColorFilter.cpp
-                        filterHotSpots/ColorFilterHotSpot.cpp
-                        history/HistoryFile.cpp
-                        history/HistoryScroll.cpp
-                        history/HistoryScrollFile.cpp
-                        history/HistoryScrollNone.cpp
-                        history/HistoryType.cpp
-                        history/HistoryTypeFile.cpp
-                        history/HistoryTypeNone.cpp
-                        history/compact/CompactHistoryScroll.cpp
-                        history/compact/CompactHistoryType.cpp
-                        widgets/DetachableTabBar.cpp
-                        widgets/EditProfileDialog.cpp
-                        widgets/HistorySizeWidget.cpp
-                        widgets/IncrementalSearchBar.cpp
-                        widgets/IncrementalSearchBarSizeGrip.cpp
-                        widgets/RenameTabWidget.cpp
-                        widgets/TabTitleFormatButton.cpp
+add_library(konsoleprivate)
 
-                        searchtabs/SearchTabs.cpp
-                        searchtabs/SearchTabsModel.cpp
+target_sources(konsoleprivate PRIVATE
+    ${windowadaptors_SRCS}
+    BookmarkHandler.cpp
+    BookmarkMenu.cpp
+    CheckableSessionModel.cpp
+    CopyInputDialog.cpp
+    Emulation.cpp
+    EscapeSequenceUrlExtractor.cpp
+    FontDialog.cpp
+    HistorySizeDialog.cpp
+    KeyBindingEditor.cpp
+    LabelsAligner.cpp
+    NullProcessInfo.cpp
+    PrintOptions.cpp
+    ProcessInfo.cpp
+    Pty.cpp
+    RenameTabDialog.cpp
+    SSHProcessInfo.cpp
+    SaveHistoryTask.cpp
+    SaveHistoryAutoTask.cpp
+    Screen.cpp
+    ScreenWindow.cpp
+    ScrollState.cpp
+    SearchHistoryTask.cpp
+    ShellCommand.cpp
+    ShouldApplyProperty.cpp
+    UnixProcessInfo.cpp
+    ViewManager.cpp
+    ViewProperties.cpp
+    Vt102Emulation.cpp
+    KittyKeyMap.cpp
+    WindowSystemInfo.cpp
+    WinKeys.h
+    ZModemDialog.cpp
+    filterHotSpots/EscapeSequenceUrlFilter.cpp
+    filterHotSpots/EscapeSequenceUrlFilterHotSpot.cpp
+    filterHotSpots/FileFilter.cpp
+    filterHotSpots/FileFilterHotspot.cpp
+    filterHotSpots/Filter.cpp
+    filterHotSpots/FilterChain.cpp
+    filterHotSpots/HotSpot.cpp
+    filterHotSpots/RegExpFilter.cpp
+    filterHotSpots/RegExpFilterHotspot.cpp
+    filterHotSpots/TerminalImageFilterChain.cpp
+    filterHotSpots/UrlFilter.cpp
+    filterHotSpots/UrlFilterHotspot.cpp
+    filterHotSpots/ColorFilter.cpp
+    filterHotSpots/ColorFilterHotSpot.cpp
+    history/HistoryFile.cpp
+    history/HistoryScroll.cpp
+    history/HistoryScrollFile.cpp
+    history/HistoryScrollNone.cpp
+    history/HistoryType.cpp
+    history/HistoryTypeFile.cpp
+    history/HistoryTypeNone.cpp
+    history/compact/CompactHistoryScroll.cpp
+    history/compact/CompactHistoryType.cpp
+    widgets/DetachableTabBar.cpp
+    widgets/EditProfileDialog.cpp
+    widgets/HistorySizeWidget.cpp
+    widgets/IncrementalSearchBar.cpp
+    widgets/IncrementalSearchBarSizeGrip.cpp
+    widgets/RenameTabWidget.cpp
+    widgets/TabTitleFormatButton.cpp
 
-                        terminalDisplay/extras/CompositeWidgetFocusWatcher.cpp
-                        terminalDisplay/extras/AutoScrollHandler.cpp
-                        terminalDisplay/extras/HighlightScrolledLines.cpp
+    searchtabs/SearchTabs.cpp
+    searchtabs/SearchTabsModel.cpp
 
-                        terminalDisplay/TerminalDisplay.cpp
-                        terminalDisplay/TerminalPainter.cpp
-                        terminalDisplay/TerminalScrollBar.cpp
-                        terminalDisplay/TerminalColor.cpp
-                        terminalDisplay/TerminalFonts.cpp
-                        terminalDisplay/TerminalBell.cpp
+    terminalDisplay/extras/CompositeWidgetFocusWatcher.cpp
+    terminalDisplay/extras/AutoScrollHandler.cpp
+    terminalDisplay/extras/HighlightScrolledLines.cpp
 
-                        profile/Profile.cpp
-                        profile/ProfileCommandParser.cpp
-                        profile/ProfileGroup.cpp
-                        profile/ProfileList.cpp
-                        profile/ProfileReader.cpp
-                        profile/ProfileWriter.cpp
-                        profile/ProfileManager.cpp
-                        profile/ProfileModel.cpp
+    terminalDisplay/TerminalDisplay.cpp
+    terminalDisplay/TerminalPainter.cpp
+    terminalDisplay/TerminalScrollBar.cpp
+    terminalDisplay/TerminalColor.cpp
+    terminalDisplay/TerminalFonts.cpp
+    terminalDisplay/TerminalBell.cpp
 
-                        ${ptyqt_srcs} # windows conpty backend
+    profile/Profile.cpp
+    profile/ProfileCommandParser.cpp
+    profile/ProfileGroup.cpp
+    profile/ProfileList.cpp
+    profile/ProfileReader.cpp
+    profile/ProfileWriter.cpp
+    profile/ProfileManager.cpp
+    profile/ProfileModel.cpp
 
-                        ${sessionadaptors_SRCS}
-                        session/Session.cpp
-                        session/SessionController.cpp
-                        session/SessionDisplayConnection.cpp
-                        session/SessionGroup.cpp
-                        session/SessionListModel.cpp
-                        session/SessionManager.cpp
-                        session/SessionTask.cpp
+    ${ptyqt_srcs} # windows conpty backend
 
-                        widgets/TerminalDisplayAccessible.cpp
-                        widgets/TerminalHeaderBar.cpp
-                        widgets/ViewContainer.cpp
-                        widgets/ViewSplitter.cpp
-                        widgets/KonsolePrintManager.cpp
+    ${sessionadaptors_SRCS}
+    session/Session.cpp
+    session/SessionController.cpp
+    session/SessionDisplayConnection.cpp
+    session/SessionGroup.cpp
+    session/SessionListModel.cpp
+    session/SessionManager.cpp
+    session/SessionTask.cpp
 
-                        ${dbus_xml_srcs}
+    widgets/TerminalDisplayAccessible.cpp
+    widgets/TerminalHeaderBar.cpp
+    widgets/ViewContainer.cpp
+    widgets/ViewSplitter.cpp
+    widgets/KonsolePrintManager.cpp
 
-                        ../data/data.qrc
-                        ../desktop/konsole.qrc)
+    ${dbus_xml_srcs}
 
-kconfig_add_kcfg_files(konsoleprivate_SRCS settings/KonsoleSettings.kcfgc)
+    ../data/data.qrc
+    ../desktop/konsole.qrc
+)
 
-ki18n_wrap_ui(konsoleprivate_SRCS
+kconfig_add_kcfg_files(konsoleprivate settings/KonsoleSettings.kcfgc)
+
+ki18n_wrap_ui(konsoleprivate
     CopyInputDialog.ui
     HistorySizeDialog.ui
     KeyBindingEditor.ui
@@ -232,7 +236,6 @@ ki18n_wrap_ui(konsoleprivate_SRCS
     widgets/RenameTabWidget.ui
 )
 
-add_library(konsoleprivate ${konsoleprivate_SRCS})
 generate_export_header(konsoleprivate BASE_NAME konsoleprivate)
 
 find_package(ZLIB)
@@ -343,15 +346,14 @@ set_target_properties(konsoleapp PROPERTIES
 
 install(TARGETS konsoleapp ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} LIBRARY NAMELINK_SKIP)
 
-set(konsole_SRCS
-    main.cpp
-)
 
 # Sets the icon on Windows and OSX
 ecm_add_app_icon(ICONS_SOURCES ICONS ${ICONS_SRCS})
 
-set(ICONS_SOURCES)
-add_executable(konsole ${konsole_SRCS} ${ICONS_SOURCES})
+add_executable(konsole
+    main.cpp
+)
+
 target_link_libraries(konsole
     konsoleprivate
     konsoleapp
@@ -384,13 +386,13 @@ install(FILES settings/konsole.kcfg DESTINATION ${KDE_INSTALL_KCFGDIR})
 
 ### Embedded Konsole KPart
 
-set(konsolepart_PART_SRCS Part.cpp
+add_library(konsolepart MODULE
+    Part.cpp
     settings/PartInfo.cpp
     settings/ProfileSettings.cpp
     delegates/ProfileShortcutDelegate.cpp
 )
 
-add_library(konsolepart MODULE ${konsolepart_PART_SRCS})
 target_link_libraries(konsolepart
     konsoleprivate
     konsolelogging

@@ -18,14 +18,13 @@ if(KONSOLE_BUILD_UNI2CHARACTERWIDTH)
         KIO
     )
 
-    set(uni2characterwidth_SRC
+    add_executable(uni2characterwidth
         uni2characterwidth.cpp
         properties.h
         template.cpp
         template.h
     )
 
-    add_executable(uni2characterwidth ${uni2characterwidth_SRC})
     target_link_libraries(uni2characterwidth
         Qt::Core
         KF6::KIOCore
