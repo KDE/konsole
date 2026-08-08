@@ -235,7 +235,7 @@ ki18n_wrap_ui(konsoleprivate
     widgets/RenameTabWidget.ui
 )
 
-generate_export_header(konsoleprivate BASE_NAME konsoleprivate)
+generate_export_header(konsoleprivate)
 
 if(KONSOLE_HAVE_XKBCOMMON)
     target_compile_definitions(konsoleprivate PUBLIC HAVE_XKBCOMMON)
@@ -314,7 +314,7 @@ add_library(konsoleapp
     delegates/ProfileShortcutDelegate.cpp
 )
 
-generate_export_header(konsoleapp BASE_NAME konsoleapp)
+generate_export_header(konsoleapp)
 
 target_compile_definitions(konsoleapp PRIVATE -DRELEASE_SERVICE_VERSION="${RELEASE_SERVICE_VERSION}")
 
