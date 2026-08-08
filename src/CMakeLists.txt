@@ -278,7 +278,6 @@ target_link_libraries(konsoleprivate
 if (HAVE_LIBSSH)
     target_link_libraries(konsoleprivate PRIVATE ssh)
 endif()
-set(konsole_LIBS)
 
 if(NOT WIN32)
     target_link_libraries(konsoleprivate PRIVATE KF6::Pty)
