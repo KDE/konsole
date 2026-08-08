@@ -118,19 +118,6 @@ ecm_qt_declare_logging_category(konsolelogging
     EXPORT KONSOLE
 )
 
-set(konsolehelpers_SRCS
-    LabelsAligner.cpp
-)
-add_library(konsolehelpers
-    STATIC
-    ${konsolehelpers_SRCS}
-)
-set_target_properties(konsolehelpers PROPERTIES POSITION_INDEPENDENT_CODE ON)
-target_link_libraries(konsolehelpers
-    Qt::Core
-    Qt::Widgets
-)
-
 add_subdirectory(colorscheme)
 add_subdirectory(keyboardtranslator)
 add_subdirectory(characters)
@@ -292,7 +279,6 @@ target_link_libraries(konsoleprivate
     PUBLIC
     konsolecolorscheme
     keyboardtranslator
-    konsolehelpers
     konsolecharacters
     konsoledecoders
     konsolecontainers
