@@ -16,7 +16,6 @@
 
 #include <QFile>
 #include <QFileInfo>
-#include <QLoggingCategory>
 #include <QStandardPaths>
 #include <QTextStream>
 

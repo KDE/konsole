@@ -12,7 +12,6 @@
 #include <QEventLoop>
 #include <QFile>
 #include <QFileInfo>
-#include <QLoggingCategory>
 #include <QMap>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>

@@ -13,7 +13,6 @@
 
 // Qt
 #include <QHash>
-#include <QLoggingCategory>
 #include <QProcess>
 #include <QSize>
 #include <QStringList>
