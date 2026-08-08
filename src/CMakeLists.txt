@@ -1,5 +1,3 @@
-# cmake-options : -DCMAKE_DISABLE_FIND_PACKAGE_LibKonq=TRUE or FALSE; default is FALSE
-
 add_definitions(-DTRANSLATION_DOMAIN=\"konsole\")
 
 ### Handle DragonFlyBSD here instead of using __DragonFly__
