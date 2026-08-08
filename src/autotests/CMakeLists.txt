@@ -8,13 +8,10 @@ if (CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
     set(KONSOLE_TEST_LIBS ${KONSOLE_TEST_LIBS} kvm)
 endif()
 
-# Temporary bypass for BKO 432379
-# if(BUILD_SHARED_LIBS)
-    ecm_add_test(
-        KeyboardTranslatorTest.cpp
-        LINK_LIBRARIES keyboardtranslator Qt::Test ${KONSOLE_TEST_LIBS}
-    )
-# endif()
+ecm_add_test(
+    KeyboardTranslatorTest.cpp
+    LINK_LIBRARIES keyboardtranslator Qt::Test ${KONSOLE_TEST_LIBS}
+)
 
 if(NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin" AND NOT WIN32)
     ecm_add_test(
