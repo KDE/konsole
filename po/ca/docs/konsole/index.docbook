@@ -139,7 +139,7 @@
 >Historial</title>
 
 <para
->El &konsole; utilitza la noció de desplaçar enrere per a permetre als usuaris veure la sortida mostrada anteriorment. De manera predeterminada, el desplaçament enrere està activat i establert a desar 1.000 línies de la sortida, a més del que es mostra actualment a la pantalla. </para>
+>El &konsole; utilitza la noció de desplaçar enrere per a permetre als usuaris veure la sortida mostrada anteriorment. De manera predeterminada, el desplaçament enrere està activat i establert a desar 10.000 línies de la sortida, a més del que es mostra actualment a la pantalla. </para>
 <para
 >Segons les línies es van desplaçant fora de la part superior de la pantalla, es poden tornar a veure movent la barra de desplaçament cap amunt, movent la roda del ratolí o usant les tecles <keycombo action="simul"
 >&Maj;<keycap
@@ -293,7 +293,7 @@
 
 <listitem
 ><para
->Introduïu una ordre de la mateixa manera en què ho faríeu si obríssiu un nou terminal i escriviu l'ordre. Per al nostre primer exemple, escriviu <userinput
+>Introduïu una ordre de la mateixa manera en què ho faríeu si obríssiu un terminal nou i escriviu l'ordre. Per al nostre primer exemple, escriviu <userinput
 ><command
 >ssh</command
 > <replaceable
@@ -313,7 +313,7 @@
 ><para
 >Premeu el botó <guibutton
 >D'acord</guibutton
->. Ara restarà disponible la nova sessió en el diàleg <guilabel
+>. Ara restarà disponible la sessió nova en el diàleg <guilabel
 >Gestiona els perfils...</guilabel
 >. </para
 ></listitem>
@@ -484,7 +484,7 @@
 <title
 >Arrossegar i deixar anar</title>
 <para
->Si arrossegueu un fitxer, carpeta o &URL; sobre una finestra del &konsole;, apareixerà un menú contextual amb les següents accions: </para>
+>Si arrossegueu un fitxer, carpeta o &URL; sobre una finestra del &konsole;, apareixerà un menú contextual amb les accions següents: </para>
 <screenshot>
 <screeninfo
 >Menú contextual «Arrossega i deixa anar»</screeninfo>
@@ -1385,7 +1385,7 @@ Various search improvements
 <listitem
 ><para
 ><action
->Mou a la següent instància de la cerca</action
+>Mou a la instància següent de la cerca</action
 >. Si la barra de cerca té el focus, també podreu utilitzar la drecera &Intro;.</para
 ></listitem>
 </varlistentry>
@@ -2742,7 +2742,7 @@ Various search improvements
 > com s'especifica al fitxer de configuració de pestanyes indicat. </para>
 <note
 ><para
->El fitxer té una pestanya per a cada línia en el següent format:</para>
+>El fitxer té una pestanya per a cada línia en el format següent:</para>
 <para
 >Cada línia especifica una pestanya a obrir, utilitzant un màxim de quatre camps per a especificar com serà oberta. Els camps estan delimitats amb <userinput
 >;;</userinput
@@ -2818,7 +2818,7 @@ Various search improvements
 ><para
 ><action
 >Executa</action
-> la nova instància del &konsole; en un procés separat. </para
+> la instància nova del &konsole; en un procés separat. </para
 ></listitem>
 </varlistentry>
 
@@ -3381,7 +3381,7 @@ Space+Ctrl
 </itemizedlist>
 
 <para
->També podeu utilitzar cadenes amb sintaxi de cadena C; podeu utilitzar les següents seqüències d'escapada:</para>
+>També podeu utilitzar cadenes amb sintaxi de cadena C; podeu utilitzar les seqüències d'escapada següents:</para>
 
 <itemizedlist>
 <listitem
