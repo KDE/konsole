@@ -17,4 +17,6 @@ target_link_libraries(konsole_quickcommandsplugin
     konsoleprivate
     konsoleapp
     konsolelogging
+    KF6::CoreAddons
+    KF6::I18n
 )

@@ -29,16 +29,16 @@ endif()
 
 target_link_libraries(konsolecontainers
     PUBLIC
-    Qt::Core
-    Qt::Widgets
-    KF6::I18n
-    KF6::CoreAddons  # For KSandbox
+        Qt::Core
     PRIVATE
         konsolelogging
+        KF6::I18n
+        KF6::CoreAddons  # For KSandbox
+        Qt::Widgets
 )
 
 if(HAVE_KAPSULE)
-    target_link_libraries(konsolecontainers PUBLIC Kapsule::KapsuleQt)
+    target_link_libraries(konsolecontainers PRIVATE Kapsule::KapsuleQt)
 endif()
 
 target_include_directories(konsolecontainers

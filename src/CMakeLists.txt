@@ -74,38 +74,6 @@ if(HAVE_DBUS)
     )
 endif()
 
-set(konsole_LIBS
-    KF6::XmlGui
-    Qt::Multimedia
-    Qt::PrintSupport
-    Qt::Xml
-    KF6::Notifications
-    KF6::WindowSystem
-    KF6::TextWidgets
-    KF6::GuiAddons
-    KF6::IconThemes
-    KF6::Bookmarks
-    KF6::I18n
-    KF6::KIOWidgets
-    KF6::NewStuffCore
-)
-
-if(NOT WIN32)
-    list(APPEND konsole_LIBS
-        KF6::Pty
-    )
-endif()
-
-if(${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
-    #kinfo_getfile() is in libutil
-    list(APPEND konsole_LIBS util)
-endif()
-
-if(HAIKU)
-    list(APPEND konsole_LIBS network) # for undefined reference to `inet_aton'
-endif()
-
-
 add_library(konsolelogging OBJECT)
 set_target_properties(konsolelogging PROPERTIES POSITION_INDEPENDENT_CODE ON)
 target_link_libraries(konsolelogging PUBLIC Qt::Core)
@@ -277,28 +245,50 @@ endif()
 
 target_link_libraries(konsoleprivate
     PUBLIC
-    konsolecolorscheme
-    keyboardtranslator
-    konsolecharacters
-    konsoledecoders
-    konsolecontainers
-    konsolelogging
-    KF6::NewStuffCore
-    KF6::NewStuffWidgets
-    ${konsole_LIBS}
-    ZLIB::ZLIB
-    ICU::uc
-    ICU::i18n
-)
-
-target_link_libraries(konsoleprivate
+        KF6::ConfigCore
+        KF6::XmlGui
     PRIVATE
-    KF6::IconWidgets
-    KF6::BookmarksWidgets
+        konsolecolorscheme
+        keyboardtranslator
+        konsolecharacters
+        konsoledecoders
+        konsolecontainers
+        konsolelogging
+        KF6::Bookmarks
+        KF6::BookmarksWidgets
+        KF6::GuiAddons
+        KF6::I18n
+        KF6::IconWidgets
+        KF6::KIOWidgets
+        KF6::NewStuffCore
+        KF6::NewStuffWidgets
+        KF6::Notifications
+        KF6::TextWidgets
+        KF6::WindowSystem
+        Qt::Multimedia
+        Qt::PrintSupport
+        Qt::Xml
+        ZLIB::ZLIB
+        ICU::uc
+        ICU::i18n
 )
 
 if (HAVE_LIBSSH)
     target_link_libraries(konsoleprivate PRIVATE ssh)
+endif()
+set(konsole_LIBS)
+
+if(NOT WIN32)
+    target_link_libraries(konsoleprivate PRIVATE KF6::Pty)
+endif()
+
+if(${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
+    #kinfo_getfile() is in libutil
+    target_link_libraries(konsoleprivate PRIVATE util)
+endif()
+
+if(HAIKU)
+    target_link_libraries(konsoleprivate PRIVATE network) # for undefined reference to `inet_aton'
 endif()
 
 set_target_properties(konsoleprivate PROPERTIES
@@ -309,7 +299,8 @@ install(TARGETS konsoleprivate ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} LIBRARY NAMEL
 
 ### Konsole Application
 
-add_library(konsoleapp SHARED Application.cpp
+add_library(konsoleapp
+    Application.cpp
     MainWindow.cpp
     settings/ConfigurationDialog.cpp
     settings/ConfigDialogButtonGroupManager.cpp
@@ -329,19 +320,20 @@ generate_export_header(konsoleapp BASE_NAME konsoleapp)
 target_compile_definitions(konsoleapp PRIVATE -DRELEASE_SERVICE_VERSION="${RELEASE_SERVICE_VERSION}")
 
 target_link_libraries(konsoleapp
-  konsoleprivate
-  konsolelogging
-  KF6::XmlGui
-  KF6::WindowSystem
-  KF6::Bookmarks
-  KF6::I18n
-  KF6::KIOWidgets
-  KF6::NotifyConfig
-  KF6::Crash
+    PRIVATE
+        konsoleprivate
+        konsolelogging
+        KF6::Bookmarks
+        KF6::Crash
+        KF6::I18n
+        KF6::KIOWidgets
+        KF6::NotifyConfig
+        KF6::WindowSystem
 )
 if(HAVE_DBUS)
     target_link_libraries(konsoleapp
-        KF6::GlobalAccel
+        PRIVATE
+            KF6::GlobalAccel
     )
 endif()
 
@@ -361,15 +353,13 @@ ecm_add_app_icon(ICONS_SOURCES ICONS ${ICONS_SRCS})
 set(ICONS_SOURCES)
 add_executable(konsole ${konsole_SRCS} ${ICONS_SOURCES})
 target_link_libraries(konsole
-  konsoleprivate
-  konsoleapp
-  KF6::XmlGui
-  KF6::WindowSystem
-  KF6::Bookmarks
-  KF6::I18n
-  KF6::KIOWidgets
-  KF6::NotifyConfig
-  KF6::Crash
+    konsoleprivate
+    konsoleapp
+    KF6::CoreAddons
+    KF6::Crash
+    KF6::I18n
+    KF6::IconThemes
+    KF6::WindowSystem
 )
 if(HAVE_DBUS)
     target_link_libraries(konsole
@@ -402,10 +392,10 @@ set(konsolepart_PART_SRCS Part.cpp
 
 add_library(konsolepart MODULE ${konsolepart_PART_SRCS})
 target_link_libraries(konsolepart
-    KF6::Parts
-    KF6::XmlGui
     konsoleprivate
     konsolelogging
+    KF6::I18n
+    KF6::Parts
 )
 
 install(TARGETS konsolepart DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf6/parts)

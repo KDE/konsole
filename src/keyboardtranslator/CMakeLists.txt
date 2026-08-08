@@ -8,8 +8,11 @@ add_library(keyboardtranslator
 # Needed to link this static lib to shared libs
 set_target_properties(keyboardtranslator PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
-target_link_libraries(
-    keyboardtranslator
-    ${konsole_LIBS}
+target_link_libraries(keyboardtranslator
+    PUBLIC
+        Qt::Core
+    PRIVATE
+        KF6::I18n
+        Qt::Gui
 )
 

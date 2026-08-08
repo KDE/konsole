@@ -26,4 +26,7 @@ configure_file(konsole_sshmanager.in.json konsole_sshmanager.json)
 target_link_libraries(konsole_sshmanagerplugin
     konsoleprivate
     konsoleapp
+    KF6::CoreAddons
+    KF6::Crash
+    KF6::I18n
 )
