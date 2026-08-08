@@ -89,10 +89,6 @@ add_subdirectory(characters)
 add_subdirectory(decoders)
 add_subdirectory(containers)
 add_subdirectory(plugins)
-set(ptyqt_srcs)
-if(WIN32)
-    set(ptyqt_srcs ptyqt/iptyprocess.cpp ptyqt/conptyprocess.cpp)
-endif()
 
 add_library(konsoleprivate)
 
@@ -184,8 +180,6 @@ target_sources(konsoleprivate PRIVATE
     profile/ProfileManager.cpp
     profile/ProfileModel.cpp
 
-    ${ptyqt_srcs} # windows conpty backend
-
     ${sessionadaptors_SRCS}
     session/Session.cpp
     session/SessionController.cpp
@@ -206,6 +200,14 @@ target_sources(konsoleprivate PRIVATE
     ../data/data.qrc
     ../desktop/konsole.qrc
 )
+
+if(WIN32)
+    # windows conpty backend
+    target_sources(konsoleprivate PRIVATE
+        ptyqt/iptyprocess.cpp
+        ptyqt/conptyprocess.cpp
+    )
+endif()
 
 kconfig_add_kcfg_files(konsoleprivate settings/KonsoleSettings.kcfgc)
 
