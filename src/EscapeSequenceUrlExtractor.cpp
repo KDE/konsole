@@ -26,7 +26,7 @@ void EscapeSequenceUrlExtractor::beginUrlInput()
     _reading = true;
 }
 
-void EscapeSequenceUrlExtractor::appendUrlText_impl(uint c)
+void EscapeSequenceUrlExtractor::appendUrlText_impl(char32_t c)
 {
     if (_currentUrl.text.isEmpty()) {
         // We need to  on getCursorX because we want the position of the
