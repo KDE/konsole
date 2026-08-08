@@ -29,8 +29,6 @@ add_library(konsolecolorscheme
 # Needed to link this static lib to shared libs
 set_target_properties(konsolecolorscheme PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
-# generate_export_header(konsolecolorscheme BASE_NAME konsolecolorscheme)
-
 target_link_libraries(konsolecolorscheme
     PUBLIC
         Qt::Widgets
