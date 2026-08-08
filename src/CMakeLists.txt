@@ -9,7 +9,6 @@ else()
   set(HAVE_OS_DRAGONFLYBSD 0)
 endif()
 
-include(CheckIncludeFiles)
 include(ECMAddAppIcon)
 
 configure_file(config-konsole.h.cmake
