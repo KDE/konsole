@@ -10,7 +10,7 @@
 // Qt
 #include <QExplicitlySharedDataPointer>
 
-// KDE
+// KF
 
 // Konsole
 // TODO: Move this file to the profile folder?

@@ -9,7 +9,7 @@
 #define EDITPROFILEDIALOG_H
 
 #include <QtGlobal>
-// KDE
+// KF
 #include <KPageDialog>
 
 // Konsole

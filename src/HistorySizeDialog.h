@@ -8,7 +8,7 @@
 #ifndef HISTORYSIZEDIALOG_H
 #define HISTORYSIZEDIALOG_H
 
-// KDE
+// Qt
 #include <QDialog>
 
 // Konsole

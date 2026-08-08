@@ -16,7 +16,7 @@
 // Qt
 #include <QKeySequence>
 
-// KDE
+// KF
 #include <KLocalizedString>
 
 Q_LOGGING_CATEGORY(KonsoleKeyTrDebug, "org.kde.konsole.keytranslator", QtDebugMsg)

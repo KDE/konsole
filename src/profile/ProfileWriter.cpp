@@ -11,7 +11,7 @@
 
 // Qt
 
-// KDE
+// KF
 #include <KConfig>
 #include <KConfigGroup>
 

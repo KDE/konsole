@@ -23,7 +23,7 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 
-// KDE
+// KF
 #include <KLocalizedString>
 
 // Konsole

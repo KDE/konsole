@@ -8,8 +8,6 @@
 #include "CharacterColorTest.h"
 
 // Qt
-
-// KDE
 #include <QTest>
 
 using namespace Konsole;

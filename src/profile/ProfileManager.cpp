@@ -18,7 +18,7 @@
 #include <QStyleHints>
 #include <QUrl>
 
-// KDE
+// KF
 #include <KConfig>
 #include <KConfigGroup>
 #include <KLocalizedString>

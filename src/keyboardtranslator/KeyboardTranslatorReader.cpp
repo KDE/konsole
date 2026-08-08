@@ -13,7 +13,7 @@
 #include <QKeySequence>
 #include <QRegularExpression>
 
-// KDE
+// KF
 #include <KLocalizedString>
 
 using namespace Konsole;

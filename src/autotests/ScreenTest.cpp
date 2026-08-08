@@ -9,8 +9,6 @@
 
 // Qt
 #include <QString>
-
-// KDE
 #include <QTest>
 
 using namespace Konsole;

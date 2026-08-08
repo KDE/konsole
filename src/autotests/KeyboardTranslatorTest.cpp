@@ -9,7 +9,7 @@
 
 #include "../keyboardtranslator/KeyboardTranslatorReader.h"
 
-// KDE
+// Qt
 #include <QTest>
 
 using namespace Konsole;

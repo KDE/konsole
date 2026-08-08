@@ -21,7 +21,7 @@
 #include <QTimer>
 #include <QtEndian>
 
-// KDE
+// KF
 #include <KLocalizedString>
 #include <KNotification>
 

@@ -15,7 +15,7 @@
 // Qt
 #include <QObject>
 
-// KDE
+// KF
 #include <KCoreConfigSkeleton>
 
 class QString;

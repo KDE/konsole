@@ -7,8 +7,10 @@
 #ifndef RENAMETABDIALOG_H
 #define RENAMETABDIALOG_H
 
-// KDE
+// Own
 #include "konsoleprivate_export.h"
+
+// Qt
 #include <QDialog>
 
 namespace Ui

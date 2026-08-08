@@ -7,8 +7,10 @@
 // Own
 #include "ZModemDialog.h"
 
-// KDE
+// KF
 #include <KTextEdit>
+
+// Qt
 #include <QDialogButtonBox>
 #include <QPushButton>
 #include <QVBoxLayout>

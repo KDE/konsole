@@ -16,7 +16,7 @@
 #include "konsoleprivate_export.h"
 
 #ifndef Q_OS_WIN
-// KDE
+// KF
 #include <KPtyProcess>
 #else
 #include <QObject>

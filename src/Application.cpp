@@ -16,7 +16,7 @@
 #include <QStandardPaths>
 #include <QTimer>
 
-// KDE
+// KF
 #include <KActionCollection>
 #if HAVE_DBUS
 #include <KGlobalAccel>

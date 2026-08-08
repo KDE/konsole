@@ -26,7 +26,7 @@
 #include <QTimer>
 #include <QUrl>
 
-// KDE
+// KF
 #include <KCodecAction>
 #include <KColorButton>
 #include <KIconDialog>

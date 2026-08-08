@@ -30,7 +30,7 @@
 #include <QRegularExpression>
 #include <QThread>
 
-// KDE
+// KF
 #include <KActionCollection>
 #include <KConfigGroup>
 #include <KIO/DesktopExecParser>

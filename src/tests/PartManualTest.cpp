@@ -14,7 +14,7 @@
 #include <QMenuBar>
 #include <QTest>
 
-// KDE
+// KF
 #include <KMainWindow>
 #include <KPluginFactory>
 

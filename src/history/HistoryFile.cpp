@@ -22,7 +22,7 @@
 #include <QDir>
 #include <QUrl>
 
-// KDE
+// KF
 #include <KConfigGroup>
 #include <KSharedConfig>
 

@@ -19,7 +19,7 @@
 #include <QDialogButtonBox>
 #include <QPushButton>
 
-// KDE
+// KF
 #include <KConfigDialogManager>
 #include <KLocalizedString>
 

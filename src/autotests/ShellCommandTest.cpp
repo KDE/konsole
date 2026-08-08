@@ -10,8 +10,6 @@
 
 // Qt
 #include <QStringList>
-
-// KDE
 #include <QTest>
 
 using namespace Konsole;

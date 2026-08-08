@@ -21,7 +21,7 @@
 #include <sys/ioctl.h> //ioctl() and TIOCSWINSZ
 #include <termios.h>
 
-// KDE
+// KF
 #include <KPtyDevice>
 #include <KSandbox>
 

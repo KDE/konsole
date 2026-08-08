@@ -14,7 +14,7 @@
 
 // Qt
 
-// KDE
+// KF
 #include <KCoreConfigSkeleton>
 #include <KPageDialog>
 

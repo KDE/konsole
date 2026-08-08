@@ -7,7 +7,7 @@
 #ifndef PART_H
 #define PART_H
 
-// KDE
+// KF
 #include <KParts/ReadOnlyPart>
 #include <kde_terminal_interface.h>
 

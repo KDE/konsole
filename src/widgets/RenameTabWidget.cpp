@@ -10,7 +10,7 @@
 // Konsole
 #include "ui_RenameTabWidget.h"
 
-// KDE
+// KF
 #include <KColorCombo>
 
 // Qt

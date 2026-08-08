@@ -11,7 +11,7 @@
 #include <QIcon>
 #include <QKeyEvent>
 
-// KDE
+// KF
 #include <KLocalizedString>
 #include <KMessageBox>
 

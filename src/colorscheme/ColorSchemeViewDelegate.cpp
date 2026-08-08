@@ -12,7 +12,7 @@
 #include "../config-konsole.h"
 #include "ColorScheme.h"
 
-// KDE
+// KF
 #include <KLocalizedString>
 
 // Qt

@@ -15,7 +15,7 @@
 #include "TerminalFonts.h"
 #include "session/SessionController.h"
 
-// KDE
+// KF
 
 // Qt
 #include <QGuiApplication>

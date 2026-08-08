@@ -11,7 +11,7 @@
 #include <QActionGroup>
 #include <QWidget>
 
-// KDE
+// KF
 #include <KLocalizedString>
 
 // Konsole

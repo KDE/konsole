@@ -11,13 +11,13 @@
 #include <QDialog>
 #include <QFileInfo>
 #include <QLabel>
+#include <QTest>
 #include <QTimer>
 #include <QVBoxLayout>
-// KDE
+// KF
 #include <KPluginFactory>
 #include <KPtyDevice>
 #include <KPtyProcess>
-#include <QTest>
 
 // Konsole
 #include "../Pty.h"

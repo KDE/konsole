@@ -23,7 +23,7 @@
 #include <QDBusMessage>
 #endif
 
-// KDE
+// KF
 #include <KAcceleratorManager>
 #include <KActionCollection>
 #include <KActionMenu>

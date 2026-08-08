@@ -11,7 +11,7 @@
 #ifndef BOOKMARKHANDLER_H
 #define BOOKMARKHANDLER_H
 
-// KDE
+// KF
 #include <KBookmarkManager>
 #include <KBookmarkOwner>
 

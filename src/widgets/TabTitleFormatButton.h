@@ -11,7 +11,7 @@
 #include <QAction>
 #include <QPushButton>
 
-// KDE
+// KF
 #include <KLazyLocalizedString>
 
 // Konsole

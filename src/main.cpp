@@ -24,7 +24,7 @@
 #include <QStandardPaths>
 #include <qplatformdefs.h>
 
-// KDE
+// KF
 #include <KAboutData>
 #include <KCrash>
 #include <KIconTheme>

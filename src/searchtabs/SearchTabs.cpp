@@ -14,7 +14,7 @@
 #include <QSortFilterProxyModel>
 #include <QVBoxLayout>
 
-// KDE
+// KF
 #include <KFuzzyMatcher>
 #include <KLocalizedString>
 

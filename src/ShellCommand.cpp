@@ -7,7 +7,7 @@
 // Own
 #include "ShellCommand.h"
 
-// KDE
+// KF
 #include <KShell>
 
 using Konsole::ShellCommand;

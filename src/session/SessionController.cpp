@@ -25,7 +25,7 @@
 #include <QStandardPaths>
 #include <QUrl>
 
-// KDE
+// KF
 #include <KActionCollection>
 #include <KActionMenu>
 #include <KCodecAction>

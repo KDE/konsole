@@ -14,7 +14,7 @@
 #include <QSet>
 #include <QString>
 
-// KDE
+// KF
 #include <KXMLGUIClient>
 
 #include <memory>

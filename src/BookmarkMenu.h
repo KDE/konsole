@@ -9,7 +9,7 @@
 #ifndef BOOKMARKMENU_H
 #define BOOKMARKMENU_H
 
-// KDE
+// KF
 #include <KBookmarkMenu>
 
 // Konsole

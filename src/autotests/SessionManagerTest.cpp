@@ -7,7 +7,7 @@
 // Own
 #include "session/SessionManagerTest.h"
 
-// KDE
+// Qt
 #include <QTest>
 
 using namespace Konsole;

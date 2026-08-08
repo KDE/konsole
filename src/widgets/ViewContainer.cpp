@@ -17,7 +17,7 @@
 #include <QMenu>
 #include <QTabBar>
 
-// KDE
+// KF
 #include <KActionCollection>
 #include <KColorScheme>
 #include <KColorUtils>

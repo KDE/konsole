@@ -14,10 +14,8 @@
 #include "../decoders/PlainTextDecoder.h"
 
 // Qt
-#include <QTextStream>
-
-// KDE
 #include <QTest>
+#include <QTextStream>
 
 using namespace Konsole;
 

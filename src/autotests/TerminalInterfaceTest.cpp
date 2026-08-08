@@ -14,7 +14,7 @@
 #include <QDir>
 #include <QSignalSpy>
 
-// KDE
+// KF
 #include <KPluginFactory>
 
 // Others

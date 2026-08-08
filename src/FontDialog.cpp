@@ -11,7 +11,7 @@
 #include <QBoxLayout>
 #include <QWhatsThis>
 
-// KDE
+// KF
 #include <KLocalizedString>
 
 using namespace Konsole;

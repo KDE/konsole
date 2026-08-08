@@ -11,7 +11,7 @@
 #include <QList>
 #include <QMenu>
 
-// KDE
+// KF
 #include <KLocalizedString>
 
 using namespace Konsole;

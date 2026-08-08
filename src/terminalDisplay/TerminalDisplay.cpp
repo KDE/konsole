@@ -34,7 +34,7 @@
 #include <QTimer>
 #include <QVBoxLayout>
 
-// KDE
+// KF
 #include <KColorScheme>
 #include <KCursor>
 #include <KIO/DropJob>

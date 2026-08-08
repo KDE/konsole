@@ -9,7 +9,7 @@
 // Own
 #include "SessionListModel.h"
 
-// KDE
+// KF
 #include <KLocalizedString>
 
 #include <QIcon>

@@ -13,7 +13,7 @@
 #include <QDir>
 #include <QFile>
 
-// KDE
+// KF
 #include <KConfig>
 #include <KConfigGroup>
 

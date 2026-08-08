@@ -7,7 +7,7 @@
 // Own
 #include "PrintOptions.h"
 
-// KDE
+// KF
 #include <KConfigGroup>
 #include <KSharedConfig>
 

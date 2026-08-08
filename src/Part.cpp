@@ -15,7 +15,7 @@
 #include <QStringList>
 #include <QUrl>
 
-// KDE
+// KF
 #include <KActionCollection>
 #include <KConfigDialog>
 #include <KLocalizedString>

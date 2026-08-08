@@ -24,7 +24,7 @@
 #include <QDBusMetaType>
 #endif
 
-// KDE
+// KF
 #include <KActionCollection>
 #include <KActionMenu>
 #include <KConfigGroup>

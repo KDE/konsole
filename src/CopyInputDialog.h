@@ -8,11 +8,9 @@
 #define COPYINPUTDIALOG_H
 
 // Qt
+#include <QDialog>
 #include <QPointer>
 #include <QSet>
-
-// KDE
-#include <QDialog>
 
 // Konsole
 #include "konsoleprivate_export.h"

@@ -12,7 +12,7 @@
 // Qt
 #include <QStringList>
 
-// KDE
+// KF
 #include <KConfig>
 #include <KConfigGroup>
 

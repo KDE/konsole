@@ -33,7 +33,7 @@
 #include <QTextStream>
 #include <QtGlobal>
 
-// KDE
+// KF
 #include <KConfigGroup>
 #include <KSandbox>
 #include <KSharedConfig>

@@ -22,7 +22,7 @@
 #include <QRect>
 #include <QWidget>
 
-// KDE
+// KF
 #include <KConfigGroup>
 #include <KSharedConfig>
 

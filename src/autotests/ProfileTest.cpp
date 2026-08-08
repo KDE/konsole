@@ -15,7 +15,7 @@
 #include <QTest>
 #include <QTextStream>
 
-// KDE
+// KF
 
 // Konsole
 #include "../profile/Profile.h"

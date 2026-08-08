@@ -6,6 +6,7 @@
 
 // Own
 #include "widgets/IncrementalSearchBar.h"
+#include "widgets/IncrementalSearchBarSizeGrip.h"
 
 // Qt
 #include <QApplication>
@@ -15,10 +16,10 @@
 #include <QTimer>
 #include <QToolButton>
 
-// KDE
+// Konsole
 #include "KonsoleSettings.h"
-#include "widgets/IncrementalSearchBarSizeGrip.h"
 
+// KF
 #include <KLocalizedString>
 #include <KStatefulBrush>
 #include <QLineEdit>

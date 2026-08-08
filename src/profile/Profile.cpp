@@ -13,11 +13,11 @@
 // Qt
 #include <QDir>
 #include <QFileInfo>
+#include <QFontDatabase>
 #include <QStringConverter>
 
-// KDE
+// KF
 #include <KLocalizedString>
-#include <QFontDatabase>
 
 // Konsole
 #include "ProfileGroup.h"

@@ -10,7 +10,7 @@
 // Qt
 #include <QTest>
 
-// KDE
+// KF
 #include <KBookmarkManager>
 
 using namespace Konsole;

@@ -9,7 +9,7 @@
 // Own
 #include "BookmarkMenu.h"
 
-// KDE
+// KF
 #include <KActionCollection>
 #include <KBookmark>
 #include <KBookmarkManager>

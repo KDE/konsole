@@ -8,9 +8,6 @@
 #define COLORSCHEMEEDITOR_H
 
 // Qt
-#include <QWidget>
-
-// KDE
 #include <QDialog>
 
 class QTableWidgetItem;

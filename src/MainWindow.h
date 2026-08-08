@@ -16,7 +16,7 @@
 // STL
 #include <optional>
 
-// KDE
+// KF
 #include <KXmlGuiWindow>
 
 // Konsole
