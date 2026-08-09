@@ -93,11 +93,7 @@ QSharedPointer<HotSpot> FileFilter::newHotSpot(int startLine, int startColumn, i
 
     // '.' and '..' could be valid hotspots, but '..................' most likely isn't
     static const QRegularExpression allDotRe{QRegularExpression::anchoredPattern(QStringLiteral("\\.{3}"))};
-#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
     if (allDotRe.matchView(filename).hasMatch()) {
-#else
-    if (allDotRe.match(filename).hasMatch()) {
-#endif
         return nullptr;
     }
 

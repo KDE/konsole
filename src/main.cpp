@@ -29,17 +29,13 @@
 #include <KCrash>
 #include <KIconTheme>
 #include <KLocalizedString>
+#include <KStyleManager>
 #include <KWindowSystem>
 
 #if HAVE_DBUS
 #include <KDBusService>
 #include <QDBusConnection>
 #include <QDBusMessage>
-#endif
-
-#define HAVE_STYLE_MANAGER __has_include(<KStyleManager>)
-#if HAVE_STYLE_MANAGER
-#include <KStyleManager>
 #endif
 
 using Konsole::Application;
@@ -145,9 +141,7 @@ int main(int argc, char *argv[])
     /**
      * trigger initialisation of proper icon theme
      */
-#if KICONTHEMES_VERSION >= QT_VERSION_CHECK(6, 3, 0)
     KIconTheme::initTheme();
-#endif
 
 #if HAVE_DBUS
     // Check if any of the arguments makes it impossible to reuse an existing process.
@@ -161,20 +155,10 @@ int main(int argc, char *argv[])
 
     auto app = new QApplication(argc, argv);
 
-#if HAVE_STYLE_MANAGER
     /**
      * trigger initialisation of proper application style
      */
     KStyleManager::initStyle();
-#else
-    /**
-     * For Windows and macOS: use Breeze if available
-     * Of all tested styles that works the best for us
-     */
-#if defined(Q_OS_MACOS) || defined(Q_OS_WIN)
-    QApplication::setStyle(QStringLiteral("breeze"));
-#endif
-#endif
 
     // fix the alt key, ensure we keep the current selected style as base
     app->setStyle(new MenuStyle(app->style()->name()));
