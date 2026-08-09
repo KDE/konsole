@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-08 00:48+0000\n"
+"POT-Creation-Date: 2026-08-09 00:49+0000\n"
 "PO-Revision-Date: 2026-07-16 18:02+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -1579,34 +1579,34 @@ msgstr "Verwijderen"
 msgid "Warnings (*)"
 msgstr "Waarschuwingen (*)"
 
-#: plugins/SSHManager/sshmanagermodel.cpp:46
+#: plugins/SSHManager/sshmanagermodel.cpp:45
 #, kde-format
 msgctxt "@item:inlistbox Hosts from ssh/config file"
 msgid "SSH Config"
 msgstr "SSH-configuratie"
 
-#: plugins/SSHManager/sshmanagermodel.cpp:49
+#: plugins/SSHManager/sshmanagermodel.cpp:48
 #, kde-format
 msgctxt "@item:inlistbox The default list of ssh hosts"
 msgid "Default"
 msgstr "Standaard"
 
-#: plugins/SSHManager/sshmanagermodel.cpp:75
+#: plugins/SSHManager/sshmanagermodel.cpp:74
 #, kde-format
 msgid "%1 is a folder for SSH entries"
 msgstr "%1 is een map voor SSH-items"
 
-#: plugins/SSHManager/sshmanagermodel.cpp:79
-#: plugins/SSHManager/sshmanagermodel.cpp:322
-#: plugins/SSHManager/sshmanagermodel.cpp:391
-#: plugins/SSHManager/sshmanagermodel.cpp:424
+#: plugins/SSHManager/sshmanagermodel.cpp:78
+#: plugins/SSHManager/sshmanagermodel.cpp:321
+#: plugins/SSHManager/sshmanagermodel.cpp:390
+#: plugins/SSHManager/sshmanagermodel.cpp:423
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:93
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:428
 #, kde-format
 msgid "SSH Config"
 msgstr "SSH-configuratie"
 
-#: plugins/SSHManager/sshmanagermodel.cpp:103
+#: plugins/SSHManager/sshmanagermodel.cpp:102
 #, kde-format
 msgid "Host: %1"
 msgstr "Host: %1"
@@ -5868,49 +5868,49 @@ msgctxt "Do not save any lines to the scrollback history"
 msgid "&None"
 msgstr "Gee&n"
 
-#: widgets/IncrementalSearchBar.cpp:50
+#: widgets/IncrementalSearchBar.cpp:51
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Find..."
 msgstr "Zoeken..."
 
-#: widgets/IncrementalSearchBar.cpp:52
+#: widgets/IncrementalSearchBar.cpp:53
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the text to search for here"
 msgstr "Voer hier de tekst in waarnaar u wilt zoeken"
 
-#: widgets/IncrementalSearchBar.cpp:74
+#: widgets/IncrementalSearchBar.cpp:75
 #, kde-format
 msgctxt "@action:button Go to the next phrase"
 msgid "Next"
 msgstr "Volgende"
 
-#: widgets/IncrementalSearchBar.cpp:77
+#: widgets/IncrementalSearchBar.cpp:78
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Find the next match for the current search phrase"
 msgstr "Ga naar de volgende overeenkomst op de huidige zoekterm"
 
-#: widgets/IncrementalSearchBar.cpp:84
+#: widgets/IncrementalSearchBar.cpp:85
 #, kde-format
 msgctxt "@action:button Go to the previous phrase"
 msgid "Previous"
 msgstr "Vorige"
 
-#: widgets/IncrementalSearchBar.cpp:86
+#: widgets/IncrementalSearchBar.cpp:87
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Find the previous match for the current search phrase"
 msgstr "Ga naar de vorige overeenkomst op de huidige zoekterm"
 
-#: widgets/IncrementalSearchBar.cpp:102
+#: widgets/IncrementalSearchBar.cpp:103
 #, kde-format
 msgctxt "@action:button"
 msgid "Case sensitive"
 msgstr "Hoofdlettergevoelig"
 
-#: widgets/IncrementalSearchBar.cpp:103
+#: widgets/IncrementalSearchBar.cpp:104
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether the search is case sensitive"
@@ -5918,68 +5918,68 @@ msgstr ""
 "Geeft aan of er bij het zoeken onderscheid gemaakt wordt tussen hoofd- en "
 "kleine letters"
 
-#: widgets/IncrementalSearchBar.cpp:114
+#: widgets/IncrementalSearchBar.cpp:115
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Display the options menu"
 msgstr "Het menu-opties tonen"
 
-#: widgets/IncrementalSearchBar.cpp:121
+#: widgets/IncrementalSearchBar.cpp:122
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Close the search bar"
 msgstr "De zoekbalk sluiten"
 
-#: widgets/IncrementalSearchBar.cpp:131
+#: widgets/IncrementalSearchBar.cpp:132
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Match regular expression"
 msgstr "Met reguliere expressie laten overeenkomen"
 
-#: widgets/IncrementalSearchBar.cpp:135
+#: widgets/IncrementalSearchBar.cpp:136
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Highlight all matches"
 msgstr "Alle overeenkomsten markeren"
 
-#: widgets/IncrementalSearchBar.cpp:137
+#: widgets/IncrementalSearchBar.cpp:138
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether matching text should be highlighted"
 msgstr "Bepaalt of overeenkomende tekst moet worden geaccentueerd"
 
-#: widgets/IncrementalSearchBar.cpp:140
+#: widgets/IncrementalSearchBar.cpp:141
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Search backwards"
 msgstr "Achterwaarts zoeken"
 
-#: widgets/IncrementalSearchBar.cpp:142
+#: widgets/IncrementalSearchBar.cpp:143
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should start from the bottom"
 msgstr "Stelt in of zoeken moet beginnen vanaf beneden"
 
-#: widgets/IncrementalSearchBar.cpp:147
+#: widgets/IncrementalSearchBar.cpp:148
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "No wrap"
 msgstr "Niet van voren af verder gaan"
 
-#: widgets/IncrementalSearchBar.cpp:149
+#: widgets/IncrementalSearchBar.cpp:150
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should stop instead of wrapping"
 msgstr ""
 "Stelt in of zoeken moet stoppen in plaats van van voren af weer verder gaan"
 
-#: widgets/IncrementalSearchBar.cpp:184
+#: widgets/IncrementalSearchBar.cpp:185
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the bottom"
 msgstr "Zoek naar de huidige zoektekst vanaf beneden"
 
-#: widgets/IncrementalSearchBar.cpp:189
+#: widgets/IncrementalSearchBar.cpp:190
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the top"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-08 00:48+0000\n"
+"POT-Creation-Date: 2026-08-09 00:49+0000\n"
 "PO-Revision-Date: 2025-12-19 17:46+0000\n"
 "Last-Translator: Charlotte <altronic25@protonmail.com>\n"
 "Language-Team: Irish <kde-i18n-doc@kde.org>\n"
@@ -1563,34 +1563,34 @@ msgstr "Scrios"
 msgid "Warnings (*)"
 msgstr "Rabhaidh (*)"
 
-#: plugins/SSHManager/sshmanagermodel.cpp:46
+#: plugins/SSHManager/sshmanagermodel.cpp:45
 #, kde-format
 msgctxt "@item:inlistbox Hosts from ssh/config file"
 msgid "SSH Config"
 msgstr "Cumraíocht SSH"
 
-#: plugins/SSHManager/sshmanagermodel.cpp:49
+#: plugins/SSHManager/sshmanagermodel.cpp:48
 #, kde-format
 msgctxt "@item:inlistbox The default list of ssh hosts"
 msgid "Default"
 msgstr "Réamhshocrú"
 
-#: plugins/SSHManager/sshmanagermodel.cpp:75
+#: plugins/SSHManager/sshmanagermodel.cpp:74
 #, kde-format
 msgid "%1 is a folder for SSH entries"
 msgstr "Is fillteán é %1 le haghaidh iontrálacha SSH"
 
-#: plugins/SSHManager/sshmanagermodel.cpp:79
-#: plugins/SSHManager/sshmanagermodel.cpp:322
-#: plugins/SSHManager/sshmanagermodel.cpp:391
-#: plugins/SSHManager/sshmanagermodel.cpp:424
+#: plugins/SSHManager/sshmanagermodel.cpp:78
+#: plugins/SSHManager/sshmanagermodel.cpp:321
+#: plugins/SSHManager/sshmanagermodel.cpp:390
+#: plugins/SSHManager/sshmanagermodel.cpp:423
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:93
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:428
 #, kde-format
 msgid "SSH Config"
 msgstr "Cumraíocht SSH"
 
-#: plugins/SSHManager/sshmanagermodel.cpp:103
+#: plugins/SSHManager/sshmanagermodel.cpp:102
 #, kde-format
 msgid "Host: %1"
 msgstr "Óstach: %1"
@@ -5870,115 +5870,115 @@ msgctxt "Do not save any lines to the scrollback history"
 msgid "&None"
 msgstr "&Dada"
 
-#: widgets/IncrementalSearchBar.cpp:50
+#: widgets/IncrementalSearchBar.cpp:51
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Find..."
 msgstr "Aimsigh..."
 
-#: widgets/IncrementalSearchBar.cpp:52
+#: widgets/IncrementalSearchBar.cpp:53
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the text to search for here"
 msgstr "Cuir isteach an téacs atá le cuardach anseo"
 
-#: widgets/IncrementalSearchBar.cpp:74
+#: widgets/IncrementalSearchBar.cpp:75
 #, kde-format
 msgctxt "@action:button Go to the next phrase"
 msgid "Next"
 msgstr "Ar Aghaidh"
 
-#: widgets/IncrementalSearchBar.cpp:77
+#: widgets/IncrementalSearchBar.cpp:78
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Find the next match for the current search phrase"
 msgstr "Aimsigh an chéad sampla eile den fhrása cuardaigh"
 
-#: widgets/IncrementalSearchBar.cpp:84
+#: widgets/IncrementalSearchBar.cpp:85
 #, kde-format
 msgctxt "@action:button Go to the previous phrase"
 msgid "Previous"
 msgstr "Roimhe Seo"
 
-#: widgets/IncrementalSearchBar.cpp:86
+#: widgets/IncrementalSearchBar.cpp:87
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Find the previous match for the current search phrase"
 msgstr "Aimsigh an sampla roimhe seo den fhrása cuardaigh"
 
-#: widgets/IncrementalSearchBar.cpp:102
+#: widgets/IncrementalSearchBar.cpp:103
 #, kde-format
 msgctxt "@action:button"
 msgid "Case sensitive"
 msgstr "Cás-íogair"
 
-#: widgets/IncrementalSearchBar.cpp:103
+#: widgets/IncrementalSearchBar.cpp:104
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether the search is case sensitive"
 msgstr "Socraigh cé acu an bhfuil an cuardach cásíogair nó nach bhfuil"
 
-#: widgets/IncrementalSearchBar.cpp:114
+#: widgets/IncrementalSearchBar.cpp:115
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Display the options menu"
 msgstr "Taispeáin an roghchlár roghanna"
 
-#: widgets/IncrementalSearchBar.cpp:121
+#: widgets/IncrementalSearchBar.cpp:122
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Close the search bar"
 msgstr "Dún an barra cuardaigh"
 
-#: widgets/IncrementalSearchBar.cpp:131
+#: widgets/IncrementalSearchBar.cpp:132
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Match regular expression"
 msgstr "Comhoiriúnaigh do shlonn ionadaíochta"
 
-#: widgets/IncrementalSearchBar.cpp:135
+#: widgets/IncrementalSearchBar.cpp:136
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Highlight all matches"
 msgstr "Aibhsigh uile"
 
-#: widgets/IncrementalSearchBar.cpp:137
+#: widgets/IncrementalSearchBar.cpp:138
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether matching text should be highlighted"
 msgstr "Socraíonn sé an bhfuil téacs comhoiriúnach le haibhsiú nó nach bhfuil"
 
-#: widgets/IncrementalSearchBar.cpp:140
+#: widgets/IncrementalSearchBar.cpp:141
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Search backwards"
 msgstr "Cuardaigh ar gcúl"
 
-#: widgets/IncrementalSearchBar.cpp:142
+#: widgets/IncrementalSearchBar.cpp:143
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should start from the bottom"
 msgstr "Socraíonn sé an dtosóidh an cuardach ón mbun"
 
-#: widgets/IncrementalSearchBar.cpp:147
+#: widgets/IncrementalSearchBar.cpp:148
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "No wrap"
 msgstr "Gan fillteán"
 
-#: widgets/IncrementalSearchBar.cpp:149
+#: widgets/IncrementalSearchBar.cpp:150
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should stop instead of wrapping"
 msgstr "Socraíonn sé an gcuardach a stopadh in ionad é a fhilleadh"
 
-#: widgets/IncrementalSearchBar.cpp:184
+#: widgets/IncrementalSearchBar.cpp:185
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the bottom"
 msgstr "Cuardaigh an frása cuardaigh reatha ón mbun"
 
-#: widgets/IncrementalSearchBar.cpp:189
+#: widgets/IncrementalSearchBar.cpp:190
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the top"

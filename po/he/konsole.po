@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-08 00:48+0000\n"
+"POT-Creation-Date: 2026-08-09 00:49+0000\n"
 "PO-Revision-Date: 2026-07-17 12:13+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -1561,34 +1561,34 @@ msgstr "מחיקה"
 msgid "Warnings (*)"
 msgstr "אזהרות (*)"
 
-#: plugins/SSHManager/sshmanagermodel.cpp:46
+#: plugins/SSHManager/sshmanagermodel.cpp:45
 #, kde-format
 msgctxt "@item:inlistbox Hosts from ssh/config file"
 msgid "SSH Config"
 msgstr "הגדרות SSH"
 
-#: plugins/SSHManager/sshmanagermodel.cpp:49
+#: plugins/SSHManager/sshmanagermodel.cpp:48
 #, kde-format
 msgctxt "@item:inlistbox The default list of ssh hosts"
 msgid "Default"
 msgstr "ברירת מחדל"
 
-#: plugins/SSHManager/sshmanagermodel.cpp:75
+#: plugins/SSHManager/sshmanagermodel.cpp:74
 #, kde-format
 msgid "%1 is a folder for SSH entries"
 msgstr "%1 היא תיקייה לרשומות SSH"
 
-#: plugins/SSHManager/sshmanagermodel.cpp:79
-#: plugins/SSHManager/sshmanagermodel.cpp:322
-#: plugins/SSHManager/sshmanagermodel.cpp:391
-#: plugins/SSHManager/sshmanagermodel.cpp:424
+#: plugins/SSHManager/sshmanagermodel.cpp:78
+#: plugins/SSHManager/sshmanagermodel.cpp:321
+#: plugins/SSHManager/sshmanagermodel.cpp:390
+#: plugins/SSHManager/sshmanagermodel.cpp:423
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:93
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:428
 #, kde-format
 msgid "SSH Config"
 msgstr "הגדרות SSH"
 
-#: plugins/SSHManager/sshmanagermodel.cpp:103
+#: plugins/SSHManager/sshmanagermodel.cpp:102
 #, kde-format
 msgid "Host: %1"
 msgstr "מארח: ‎‎%1"
@@ -5765,115 +5765,115 @@ msgctxt "Do not save any lines to the scrollback history"
 msgid "&None"
 msgstr "&כלום"
 
-#: widgets/IncrementalSearchBar.cpp:50
+#: widgets/IncrementalSearchBar.cpp:51
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Find..."
 msgstr "איתור…"
 
-#: widgets/IncrementalSearchBar.cpp:52
+#: widgets/IncrementalSearchBar.cpp:53
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the text to search for here"
 msgstr "הכנס כאן את הטקסט לחיפוש"
 
-#: widgets/IncrementalSearchBar.cpp:74
+#: widgets/IncrementalSearchBar.cpp:75
 #, kde-format
 msgctxt "@action:button Go to the next phrase"
 msgid "Next"
 msgstr "הבא"
 
-#: widgets/IncrementalSearchBar.cpp:77
+#: widgets/IncrementalSearchBar.cpp:78
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Find the next match for the current search phrase"
 msgstr "מצא את המופע הבא של מחרוזת החיפוש הנוכחית"
 
-#: widgets/IncrementalSearchBar.cpp:84
+#: widgets/IncrementalSearchBar.cpp:85
 #, kde-format
 msgctxt "@action:button Go to the previous phrase"
 msgid "Previous"
 msgstr "הקודם"
 
-#: widgets/IncrementalSearchBar.cpp:86
+#: widgets/IncrementalSearchBar.cpp:87
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Find the previous match for the current search phrase"
 msgstr "מצא את המופע הקודם של מחרוזת החיפוש הנוכחית"
 
-#: widgets/IncrementalSearchBar.cpp:102
+#: widgets/IncrementalSearchBar.cpp:103
 #, kde-format
 msgctxt "@action:button"
 msgid "Case sensitive"
 msgstr "תלוי רישיות"
 
-#: widgets/IncrementalSearchBar.cpp:103
+#: widgets/IncrementalSearchBar.cpp:104
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether the search is case sensitive"
 msgstr "הגדרה האם החיפוש הוא תלוי רישיות"
 
-#: widgets/IncrementalSearchBar.cpp:114
+#: widgets/IncrementalSearchBar.cpp:115
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Display the options menu"
 msgstr "הצגת תפריט האפשרויות"
 
-#: widgets/IncrementalSearchBar.cpp:121
+#: widgets/IncrementalSearchBar.cpp:122
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Close the search bar"
 msgstr "סגור את סרגל החיפוש"
 
-#: widgets/IncrementalSearchBar.cpp:131
+#: widgets/IncrementalSearchBar.cpp:132
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Match regular expression"
 msgstr "התאם ביטוי רגולרי"
 
-#: widgets/IncrementalSearchBar.cpp:135
+#: widgets/IncrementalSearchBar.cpp:136
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Highlight all matches"
 msgstr "הדגש את כל ההתאמות"
 
-#: widgets/IncrementalSearchBar.cpp:137
+#: widgets/IncrementalSearchBar.cpp:138
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether matching text should be highlighted"
 msgstr "הגדרה האם להדגיש את הטקסט שאותר"
 
-#: widgets/IncrementalSearchBar.cpp:140
+#: widgets/IncrementalSearchBar.cpp:141
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Search backwards"
 msgstr "חיפוש לאחור"
 
-#: widgets/IncrementalSearchBar.cpp:142
+#: widgets/IncrementalSearchBar.cpp:143
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should start from the bottom"
 msgstr "הגדרה האם החיפוש יתחיל מהסוף"
 
-#: widgets/IncrementalSearchBar.cpp:147
+#: widgets/IncrementalSearchBar.cpp:148
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "No wrap"
 msgstr "ללא גלישה"
 
-#: widgets/IncrementalSearchBar.cpp:149
+#: widgets/IncrementalSearchBar.cpp:150
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should stop instead of wrapping"
 msgstr "מגדיר האם החיפוש ייעצר במקום לגלוש"
 
-#: widgets/IncrementalSearchBar.cpp:184
+#: widgets/IncrementalSearchBar.cpp:185
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the bottom"
 msgstr "חיפוש אחר ביטוי החיפוש הנוכחי מהסוף"
 
-#: widgets/IncrementalSearchBar.cpp:189
+#: widgets/IncrementalSearchBar.cpp:190
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the top"

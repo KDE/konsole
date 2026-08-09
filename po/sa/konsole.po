@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-08 00:48+0000\n"
+"POT-Creation-Date: 2026-08-09 00:49+0000\n"
 "PO-Revision-Date: 2024-12-25 19:40+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -1556,34 +1556,34 @@ msgstr "लुप्"
 msgid "Warnings (*)"
 msgstr "चेतावनी (*)"
 
-#: plugins/SSHManager/sshmanagermodel.cpp:46
+#: plugins/SSHManager/sshmanagermodel.cpp:45
 #, kde-format
 msgctxt "@item:inlistbox Hosts from ssh/config file"
 msgid "SSH Config"
 msgstr "SSH Config"
 
-#: plugins/SSHManager/sshmanagermodel.cpp:49
+#: plugins/SSHManager/sshmanagermodel.cpp:48
 #, kde-format
 msgctxt "@item:inlistbox The default list of ssh hosts"
 msgid "Default"
 msgstr "मूलभूतम्‌"
 
-#: plugins/SSHManager/sshmanagermodel.cpp:75
+#: plugins/SSHManager/sshmanagermodel.cpp:74
 #, kde-format
 msgid "%1 is a folder for SSH entries"
 msgstr "%1 SSH प्रविष्टीनां कृते एकं पुटम् अस्ति"
 
-#: plugins/SSHManager/sshmanagermodel.cpp:79
-#: plugins/SSHManager/sshmanagermodel.cpp:322
-#: plugins/SSHManager/sshmanagermodel.cpp:391
-#: plugins/SSHManager/sshmanagermodel.cpp:424
+#: plugins/SSHManager/sshmanagermodel.cpp:78
+#: plugins/SSHManager/sshmanagermodel.cpp:321
+#: plugins/SSHManager/sshmanagermodel.cpp:390
+#: plugins/SSHManager/sshmanagermodel.cpp:423
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:93
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:428
 #, kde-format
 msgid "SSH Config"
 msgstr "SSH Config"
 
-#: plugins/SSHManager/sshmanagermodel.cpp:103
+#: plugins/SSHManager/sshmanagermodel.cpp:102
 #, kde-format
 msgid "Host: %1"
 msgstr "यजमानः %1"
@@ -5797,116 +5797,116 @@ msgctxt "Do not save any lines to the scrollback history"
 msgid "&None"
 msgstr "&न कश्चित्"
 
-#: widgets/IncrementalSearchBar.cpp:50
+#: widgets/IncrementalSearchBar.cpp:51
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Find..."
 msgstr "अन्वेषय..."
 
-#: widgets/IncrementalSearchBar.cpp:52
+#: widgets/IncrementalSearchBar.cpp:53
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the text to search for here"
 msgstr "अत्र अन्वेष्टुं पाठं प्रविशतु"
 
-#: widgets/IncrementalSearchBar.cpp:74
+#: widgets/IncrementalSearchBar.cpp:75
 #, kde-format
 msgctxt "@action:button Go to the next phrase"
 msgid "Next"
 msgstr "अग्रिम"
 
-#: widgets/IncrementalSearchBar.cpp:77
+#: widgets/IncrementalSearchBar.cpp:78
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Find the next match for the current search phrase"
 msgstr "वर्तमान अन्वेषणवाक्यस्य अग्रिममेलनं ज्ञातव्यम्"
 
-#: widgets/IncrementalSearchBar.cpp:84
+#: widgets/IncrementalSearchBar.cpp:85
 #, kde-format
 msgctxt "@action:button Go to the previous phrase"
 msgid "Previous"
 msgstr "पूर्वतनम्‌"
 
-#: widgets/IncrementalSearchBar.cpp:86
+#: widgets/IncrementalSearchBar.cpp:87
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Find the previous match for the current search phrase"
 msgstr "वर्तमान अन्वेषणवाक्यस्य पूर्वमेलनं ज्ञातव्यम्"
 
-#: widgets/IncrementalSearchBar.cpp:102
+#: widgets/IncrementalSearchBar.cpp:103
 #, fuzzy, kde-format
 #| msgid "Case sensitive"
 msgctxt "@action:button"
 msgid "Case sensitive"
 msgstr "प्रकरणसंवेदनशीलः"
 
-#: widgets/IncrementalSearchBar.cpp:103
+#: widgets/IncrementalSearchBar.cpp:104
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether the search is case sensitive"
 msgstr "अन्वेषणं लघुसंवेदनशीलं वा इति सेट् करोति"
 
-#: widgets/IncrementalSearchBar.cpp:114
+#: widgets/IncrementalSearchBar.cpp:115
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Display the options menu"
 msgstr "विकल्पमेनू प्रदर्शयन्तु"
 
-#: widgets/IncrementalSearchBar.cpp:121
+#: widgets/IncrementalSearchBar.cpp:122
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Close the search bar"
 msgstr "अन्वेषणपट्टिकां पिधाय"
 
-#: widgets/IncrementalSearchBar.cpp:131
+#: widgets/IncrementalSearchBar.cpp:132
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Match regular expression"
 msgstr "नियमितव्यञ्जनस्य मेलनं कुर्वन्तु"
 
-#: widgets/IncrementalSearchBar.cpp:135
+#: widgets/IncrementalSearchBar.cpp:136
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Highlight all matches"
 msgstr "सर्वाणि मेलनानि प्रकाशयन्तु"
 
-#: widgets/IncrementalSearchBar.cpp:137
+#: widgets/IncrementalSearchBar.cpp:138
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether matching text should be highlighted"
 msgstr "मेलपाठः प्रकाशितः भवेत् वा इति सेट् करोति"
 
-#: widgets/IncrementalSearchBar.cpp:140
+#: widgets/IncrementalSearchBar.cpp:141
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Search backwards"
 msgstr "पश्चात् अन्वेषणं कुर्वन्तु"
 
-#: widgets/IncrementalSearchBar.cpp:142
+#: widgets/IncrementalSearchBar.cpp:143
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should start from the bottom"
 msgstr "अन्वेषणं अधः आरभ्यत इति सेट् करोति"
 
-#: widgets/IncrementalSearchBar.cpp:147
+#: widgets/IncrementalSearchBar.cpp:148
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "No wrap"
 msgstr "न वेष्टनम्"
 
-#: widgets/IncrementalSearchBar.cpp:149
+#: widgets/IncrementalSearchBar.cpp:150
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should stop instead of wrapping"
 msgstr "अन्वेषणं वेष्टनस्य स्थाने स्थगितव्यं वा इति सेट् करोति"
 
-#: widgets/IncrementalSearchBar.cpp:184
+#: widgets/IncrementalSearchBar.cpp:185
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the bottom"
 msgstr "वर्तमान अन्वेषणवाक्यं अधः अन्वेष्टुम्"
 
-#: widgets/IncrementalSearchBar.cpp:189
+#: widgets/IncrementalSearchBar.cpp:190
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the top"

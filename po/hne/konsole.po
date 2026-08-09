@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-08 00:48+0000\n"
+"POT-Creation-Date: 2026-08-09 00:49+0000\n"
 "PO-Revision-Date: 2009-01-29 20:59+0530\n"
 "Last-Translator: Ravishankar Shrivastava <raviratlami@aol.in>\n"
 "Language-Team: Hindi <kde-i18n-doc@lists.kde.org>\n"
@@ -1710,29 +1710,29 @@ msgstr ""
 msgid "Warnings (*)"
 msgstr "चेतावनी:"
 
-#: plugins/SSHManager/sshmanagermodel.cpp:46
+#: plugins/SSHManager/sshmanagermodel.cpp:45
 #, fuzzy, kde-format
 #| msgid "Confirm Close"
 msgctxt "@item:inlistbox Hosts from ssh/config file"
 msgid "SSH Config"
 msgstr "बंद करे के पुस्टि करव"
 
-#: plugins/SSHManager/sshmanagermodel.cpp:49
+#: plugins/SSHManager/sshmanagermodel.cpp:48
 #, fuzzy, kde-format
 #| msgid "Set as Default"
 msgctxt "@item:inlistbox The default list of ssh hosts"
 msgid "Default"
 msgstr "डिफाल्ट रूप मं सेट करव"
 
-#: plugins/SSHManager/sshmanagermodel.cpp:75
+#: plugins/SSHManager/sshmanagermodel.cpp:74
 #, kde-format
 msgid "%1 is a folder for SSH entries"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagermodel.cpp:79
-#: plugins/SSHManager/sshmanagermodel.cpp:322
-#: plugins/SSHManager/sshmanagermodel.cpp:391
-#: plugins/SSHManager/sshmanagermodel.cpp:424
+#: plugins/SSHManager/sshmanagermodel.cpp:78
+#: plugins/SSHManager/sshmanagermodel.cpp:321
+#: plugins/SSHManager/sshmanagermodel.cpp:390
+#: plugins/SSHManager/sshmanagermodel.cpp:423
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:93
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:428
 #, fuzzy, kde-format
@@ -1740,7 +1740,7 @@ msgstr ""
 msgid "SSH Config"
 msgstr "बंद करे के पुस्टि करव"
 
-#: plugins/SSHManager/sshmanagermodel.cpp:103
+#: plugins/SSHManager/sshmanagermodel.cpp:102
 #, fuzzy, kde-format
 #| msgid "Host:"
 msgid "Host: %1"
@@ -6065,49 +6065,49 @@ msgctxt "Do not save any lines to the scrollback history"
 msgid "&None"
 msgstr ""
 
-#: widgets/IncrementalSearchBar.cpp:50
+#: widgets/IncrementalSearchBar.cpp:51
 #, fuzzy, kde-format
 #| msgid "Find:"
 msgctxt "@label:textbox"
 msgid "Find..."
 msgstr "खोजव:"
 
-#: widgets/IncrementalSearchBar.cpp:52
+#: widgets/IncrementalSearchBar.cpp:53
 #, fuzzy, kde-format
 #| msgid "Enter the text to search for here"
 msgctxt "@info:tooltip"
 msgid "Enter the text to search for here"
 msgstr "खोजइया पाठ इहां भरव"
 
-#: widgets/IncrementalSearchBar.cpp:74
+#: widgets/IncrementalSearchBar.cpp:75
 #, fuzzy, kde-format
 #| msgid "Next"
 msgctxt "@action:button Go to the next phrase"
 msgid "Next"
 msgstr "अगला"
 
-#: widgets/IncrementalSearchBar.cpp:77
+#: widgets/IncrementalSearchBar.cpp:78
 #, fuzzy, kde-format
 #| msgid "Find the next match for the current search phrase"
 msgctxt "@info:tooltip"
 msgid "Find the next match for the current search phrase"
 msgstr "अभी हाल के मं ढूंढे जा रहे वाक्यांस के अगले मैच ल खोजव"
 
-#: widgets/IncrementalSearchBar.cpp:84
+#: widgets/IncrementalSearchBar.cpp:85
 #, fuzzy, kde-format
 #| msgid "Previous"
 msgctxt "@action:button Go to the previous phrase"
 msgid "Previous"
 msgstr "पिछला"
 
-#: widgets/IncrementalSearchBar.cpp:86
+#: widgets/IncrementalSearchBar.cpp:87
 #, fuzzy, kde-format
 #| msgid "Find the previous match for the current search phrase"
 msgctxt "@info:tooltip"
 msgid "Find the previous match for the current search phrase"
 msgstr "अभी हाल के मं ढूंढे जा रहे वाक्यांस के पिछले मैच ल खोजव"
 
-#: widgets/IncrementalSearchBar.cpp:102
+#: widgets/IncrementalSearchBar.cpp:103
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu Close Active View"
 #| msgid "Close Active"
@@ -6115,81 +6115,81 @@ msgctxt "@action:button"
 msgid "Case sensitive"
 msgstr "सक्रिय ल बन्द करव"
 
-#: widgets/IncrementalSearchBar.cpp:103
+#: widgets/IncrementalSearchBar.cpp:104
 #, fuzzy, kde-format
 #| msgid "Sets whether the search is case sensitive"
 msgctxt "@info:tooltip"
 msgid "Sets whether the search is case sensitive"
 msgstr "सेट करथे  कि का खोजना केस-सेंसिटिव होही"
 
-#: widgets/IncrementalSearchBar.cpp:114
+#: widgets/IncrementalSearchBar.cpp:115
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Display the options menu"
 msgstr ""
 
-#: widgets/IncrementalSearchBar.cpp:121
+#: widgets/IncrementalSearchBar.cpp:122
 #, fuzzy, kde-format
 #| msgid "Close the search bar"
 msgctxt "@info:tooltip"
 msgid "Close the search bar"
 msgstr "खोज पट्टी बन्द करव"
 
-#: widgets/IncrementalSearchBar.cpp:131
+#: widgets/IncrementalSearchBar.cpp:132
 #, fuzzy, kde-format
 #| msgid "Match regular expression"
 msgctxt "@item:inmenu"
 msgid "Match regular expression"
 msgstr "रेगुलर एक्सप्रेसन मिलान करव"
 
-#: widgets/IncrementalSearchBar.cpp:135
+#: widgets/IncrementalSearchBar.cpp:136
 #, fuzzy, kde-format
 #| msgid "Highlight all"
 msgctxt "@item:inmenu"
 msgid "Highlight all matches"
 msgstr "सब्बो ल चमकाव"
 
-#: widgets/IncrementalSearchBar.cpp:137
+#: widgets/IncrementalSearchBar.cpp:138
 #, fuzzy, kde-format
 #| msgid "Sets whether matching text should be highlighted"
 msgctxt "@info:tooltip"
 msgid "Sets whether matching text should be highlighted"
 msgstr "सेट करथे  कि का मैच करत पाठ मन ल उभारे जाना हे"
 
-#: widgets/IncrementalSearchBar.cpp:140
+#: widgets/IncrementalSearchBar.cpp:141
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Search backwards"
 msgstr ""
 
-#: widgets/IncrementalSearchBar.cpp:142
+#: widgets/IncrementalSearchBar.cpp:143
 #, fuzzy, kde-format
 #| msgid "Find the next match for the current search phrase"
 msgctxt "@info:tooltip"
 msgid "Sets whether search should start from the bottom"
 msgstr "अभी हाल के मं ढूंढे जा रहे वाक्यांस के अगले मैच ल खोजव"
 
-#: widgets/IncrementalSearchBar.cpp:147
+#: widgets/IncrementalSearchBar.cpp:148
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "No wrap"
 msgstr ""
 
-#: widgets/IncrementalSearchBar.cpp:149
+#: widgets/IncrementalSearchBar.cpp:150
 #, fuzzy, kde-format
 #| msgid "Find the next match for the current search phrase"
 msgctxt "@info:tooltip"
 msgid "Sets whether search should stop instead of wrapping"
 msgstr "अभी हाल के मं ढूंढे जा रहे वाक्यांस के अगले मैच ल खोजव"
 
-#: widgets/IncrementalSearchBar.cpp:184
+#: widgets/IncrementalSearchBar.cpp:185
 #, fuzzy, kde-format
 #| msgid "Find the next match for the current search phrase"
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the bottom"
 msgstr "अभी हाल के मं ढूंढे जा रहे वाक्यांस के अगले मैच ल खोजव"
 
-#: widgets/IncrementalSearchBar.cpp:189
+#: widgets/IncrementalSearchBar.cpp:190
 #, fuzzy, kde-format
 #| msgid "Find the next match for the current search phrase"
 msgctxt "@info:tooltip"
