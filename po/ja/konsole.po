@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-09 00:49+0000\n"
+"POT-Creation-Date: 2026-08-10 00:49+0000\n"
 "PO-Revision-Date: 2023-12-03 23:07-0800\n"
 "Last-Translator: Fumiaki Okushi <fumiaki.okushi@gmail.com>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -1972,7 +1972,7 @@ msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr "ビルトイン"
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:580
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:581
 #, kde-format
 msgid "Default profile"
 msgstr "標準プロファイル"
@@ -4801,55 +4801,55 @@ msgstr ""
 msgid "180"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:72
+#: widgets/EditProfileDialog.cpp:73
 #, kde-format
 msgid "Edit Profile"
 msgstr "プロファイルを編集"
 
-#: widgets/EditProfileDialog.cpp:99
+#: widgets/EditProfileDialog.cpp:100
 #, kde-format
 msgctxt "@title:tab Generic, common options"
 msgid "General"
 msgstr "全般"
 
-#: widgets/EditProfileDialog.cpp:112
+#: widgets/EditProfileDialog.cpp:113
 #, kde-format
 msgid "Tabs"
 msgstr "タブ"
 
-#: widgets/EditProfileDialog.cpp:129
+#: widgets/EditProfileDialog.cpp:130
 #, kde-format
 msgid "Appearance"
 msgstr "外観"
 
-#: widgets/EditProfileDialog.cpp:147
+#: widgets/EditProfileDialog.cpp:148
 #, kde-format
 msgid "Scrolling"
 msgstr "スクロール"
 
-#: widgets/EditProfileDialog.cpp:161
+#: widgets/EditProfileDialog.cpp:162
 #, kde-format
 msgid "Keyboard"
 msgstr "キーボード"
 
-#: widgets/EditProfileDialog.cpp:162
+#: widgets/EditProfileDialog.cpp:163
 #, fuzzy, kde-format
 #| msgid "Key Bindings"
 msgid "Key bindings"
 msgstr "キーバインド"
 
-#: widgets/EditProfileDialog.cpp:173
+#: widgets/EditProfileDialog.cpp:174
 #, kde-format
 msgid "Mouse"
 msgstr "マウス"
 
-#: widgets/EditProfileDialog.cpp:191
+#: widgets/EditProfileDialog.cpp:192
 #, kde-format
 msgctxt "@title:tab Complex options"
 msgid "Advanced"
 msgstr "詳細"
 
-#: widgets/EditProfileDialog.cpp:299
+#: widgets/EditProfileDialog.cpp:300
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -4858,47 +4858,47 @@ msgid ""
 "the settings to a new profile."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:316
+#: widgets/EditProfileDialog.cpp:317
 #, kde-format
 msgctxt "@info"
 msgid "Profile Name was empty; please set a name to be able to save settings."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:324
+#: widgets/EditProfileDialog.cpp:325
 #, kde-format
 msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:354
+#: widgets/EditProfileDialog.cpp:355
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:392
+#: widgets/EditProfileDialog.cpp:393
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:428
+#: widgets/EditProfileDialog.cpp:429
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
 msgstr[0] "%1 個のプロファイルを編集: %2"
 
-#: widgets/EditProfileDialog.cpp:432
+#: widgets/EditProfileDialog.cpp:433
 #, kde-format
 msgid "Create New Profile"
 msgstr "新しいプロファイルを作成"
 
-#: widgets/EditProfileDialog.cpp:435
+#: widgets/EditProfileDialog.cpp:436
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "プロファイル \"%1\" を編集"
 
-#: widgets/EditProfileDialog.cpp:537
+#: widgets/EditProfileDialog.cpp:538
 #, fuzzy, kde-format
 #| msgctxt "Do not show a close button"
 #| msgid "None"
@@ -4908,88 +4908,87 @@ msgstr "なし"
 #: widgets/EditProfileDialog.cpp:557
 #, fuzzy, kde-format
 #| msgid "Columns"
-msgctxt ""
-"Suffix of the number of columns (N columns). The leading space is needed to "
-"separate it from the number value."
-msgid " column"
-msgid_plural " columns"
+msgctxt "@item number of columns"
+msgid "%v column"
+msgid_plural "%v columns"
 msgstr[0] "文字数"
 
-#: widgets/EditProfileDialog.cpp:559
+#: widgets/EditProfileDialog.cpp:558
 #, kde-format
-msgctxt ""
-"Suffix of the number of rows (N rows). The leading space is needed to "
-"separate it from the number value."
-msgid " row"
-msgid_plural " rows"
+msgctxt "@item number of rows"
+msgid "%v row"
+msgid_plural "%v rows"
 msgstr[0] ""
 
-#: widgets/EditProfileDialog.cpp:569
+#: widgets/EditProfileDialog.cpp:570
 #, kde-format
 msgid "System Bell"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:569
+#: widgets/EditProfileDialog.cpp:570
 #, fuzzy, kde-format
 #| msgid "Notifications:"
 msgid "System Notifications"
 msgstr "通知:"
 
-#: widgets/EditProfileDialog.cpp:569
+#: widgets/EditProfileDialog.cpp:570
 #, fuzzy, kde-format
 #| msgctxt "@info:credit"
 #| msgid "Visual effects"
 msgid "Visual Bell"
 msgstr "視覚効果"
 
-#: widgets/EditProfileDialog.cpp:569
+#: widgets/EditProfileDialog.cpp:570
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:578
+#: widgets/EditProfileDialog.cpp:579
 #, fuzzy, kde-format
 #| msgid "Set the selected profile as the default for new terminal sessions"
 msgid "Default profile for new terminal sessions in %1"
 msgstr ""
 "選択したプロファイルを新しいターミナルセッションのデフォルトとして設定します"
 
-#: widgets/EditProfileDialog.cpp:685
+#: widgets/EditProfileDialog.cpp:686
 #, kde-format
 msgid "Edit Environment"
 msgstr "環境を編集"
 
-#: widgets/EditProfileDialog.cpp:686
+#: widgets/EditProfileDialog.cpp:687
 #, kde-format
 msgid "One environment variable per line"
 msgstr "1行に1つの環境変数を記述します"
 
-#: widgets/EditProfileDialog.cpp:719
-#, kde-format
-msgctxt "Unit of time"
-msgid " second"
-msgid_plural " seconds"
+#: widgets/EditProfileDialog.cpp:720
+#, fuzzy, kde-format
+#| msgctxt "Unit of time"
+#| msgid " second"
+#| msgid_plural " seconds"
+msgctxt "@item number of seconds"
+msgid "%v second"
+msgid_plural "%v seconds"
 msgstr[0] " 秒"
 
-#: widgets/EditProfileDialog.cpp:849
+#: widgets/EditProfileDialog.cpp:850
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "開始ディレクトリを選択"
 
-#: widgets/EditProfileDialog.cpp:1011
+#: widgets/EditProfileDialog.cpp:1012
 #, fuzzy, kde-format
 #| msgctxt "@action:button Create an alternate color scheme"
 #| msgid "New..."
 msgid "Get New..."
 msgstr "新規..."
 
-#: widgets/EditProfileDialog.cpp:1460
+#: widgets/EditProfileDialog.cpp:1461
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1642
+#: widgets/EditProfileDialog.cpp:1643
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4998,7 +4997,7 @@ msgstr ""
 "この色スキームには、あなたのデスクトップがサポートしていないと思われる透明の"
 "背景が含まれています"
 
-#: widgets/EditProfileDialog.cpp:1648
+#: widgets/EditProfileDialog.cpp:1649
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -5007,13 +5006,13 @@ msgstr ""
 "デスクトップエフェクトが有効になる前に Konsole が起動されました。透明化を有効"
 "にする場合は Konsole を再起動してください。"
 
-#: widgets/EditProfileDialog.cpp:2060
+#: widgets/EditProfileDialog.cpp:2061
 #, fuzzy, kde-format
 #| msgid "Default profile"
 msgid "Default for file type"
 msgstr "標準プロファイル"
 
-#: widgets/EditProfileDialog.cpp:2086
+#: widgets/EditProfileDialog.cpp:2087
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -5030,7 +5029,7 @@ msgid ""
 "editor."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:2099
+#: widgets/EditProfileDialog.cpp:2100
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr ""
@@ -5849,23 +5848,23 @@ msgstr "タブの監視"
 msgid "Threshold for continuous silence:"
 msgstr "静観している時間:"
 
-#. i18n: ectx: property (toolTip), widget (KPluralHandlingSpinBox, silenceSecondsSpinner)
+#. i18n: ectx: property (toolTip), widget (QSpinBox, silenceSecondsSpinner)
 #: widgets/EditProfileTabsPage.ui:93
 #, kde-format
 msgid "The threshold for continuous silence to be detected by Konsole"
 msgstr "静観している時間のしきい値は Konsole で検出"
 
-#: widgets/HistorySizeWidget.cpp:40
+#: widgets/HistorySizeWidget.cpp:41
 #, fuzzy, kde-format
 #| msgctxt "Unit of scrollback"
 #| msgid " line"
 #| msgid_plural " lines"
-msgctxt "@label:textbox Unit of scrollback"
-msgid " line"
-msgid_plural " lines"
+msgctxt "@item number of lines"
+msgid "%v line"
+msgid_plural "%v lines"
 msgstr[0] "行"
 
-#: widgets/HistorySizeWidget.cpp:57
+#: widgets/HistorySizeWidget.cpp:56
 #, fuzzy, kde-format
 #| msgctxt "@info:status"
 #| msgid ""
@@ -5882,7 +5881,7 @@ msgstr ""
 "巨大な値を指定した場合は、システムの空き RAM が無くなり、システムの深刻な問題"
 "を引き起こす可能性があります。"
 
-#: widgets/HistorySizeWidget.cpp:69
+#: widgets/HistorySizeWidget.cpp:68
 #, fuzzy, kde-kuit-format
 #| msgctxt "@info:status"
 #| msgid ""
@@ -5916,7 +5915,7 @@ msgstr "記憶する出力を一定の行数に制限する"
 msgid "Fi&xed size:"
 msgstr "固定行数のスクロールバック:"
 
-#. i18n: ectx: property (toolTip), widget (KPluralHandlingSpinBox, historyLineSpinner)
+#. i18n: ectx: property (toolTip), widget (QSpinBox, historyLineSpinner)
 #: widgets/HistorySizeWidget.ui:73
 #, kde-format
 msgid "Number of lines of output to remember"

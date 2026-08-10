@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-09 00:49+0000\n"
+"POT-Creation-Date: 2026-08-10 00:49+0000\n"
 "PO-Revision-Date: 2026-06-06 13:33+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -1929,7 +1929,7 @@ msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr "내장"
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:580
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:581
 #, kde-format
 msgid "Default profile"
 msgstr "기본 프로필"
@@ -4666,54 +4666,54 @@ msgstr "배지 투명도 설정(0: 완전 투명, 255: 불투명)"
 msgid "180"
 msgstr "180"
 
-#: widgets/EditProfileDialog.cpp:72
+#: widgets/EditProfileDialog.cpp:73
 #, kde-format
 msgid "Edit Profile"
 msgstr "프로필 편집"
 
-#: widgets/EditProfileDialog.cpp:99
+#: widgets/EditProfileDialog.cpp:100
 #, kde-format
 msgctxt "@title:tab Generic, common options"
 msgid "General"
 msgstr "일반"
 
-#: widgets/EditProfileDialog.cpp:112
+#: widgets/EditProfileDialog.cpp:113
 #, kde-format
 msgid "Tabs"
 msgstr "탭"
 
-#: widgets/EditProfileDialog.cpp:129
+#: widgets/EditProfileDialog.cpp:130
 #, kde-format
 msgid "Appearance"
 msgstr "모양"
 
-#: widgets/EditProfileDialog.cpp:147
+#: widgets/EditProfileDialog.cpp:148
 #, kde-format
 msgid "Scrolling"
 msgstr "스크롤"
 
-#: widgets/EditProfileDialog.cpp:161
+#: widgets/EditProfileDialog.cpp:162
 #, kde-format
 msgid "Keyboard"
 msgstr "키보드"
 
-#: widgets/EditProfileDialog.cpp:162
+#: widgets/EditProfileDialog.cpp:163
 #, kde-format
 msgid "Key bindings"
 msgstr "키 바인딩"
 
-#: widgets/EditProfileDialog.cpp:173
+#: widgets/EditProfileDialog.cpp:174
 #, kde-format
 msgid "Mouse"
 msgstr "마우스"
 
-#: widgets/EditProfileDialog.cpp:191
+#: widgets/EditProfileDialog.cpp:192
 #, kde-format
 msgctxt "@title:tab Complex options"
 msgid "Advanced"
 msgstr "고급"
 
-#: widgets/EditProfileDialog.cpp:299
+#: widgets/EditProfileDialog.cpp:300
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -4725,128 +4725,137 @@ msgstr ""
 "파일의 권한을 바꾸거나, 프로필 이름을 변경해 새로운 프로필 설정 파일에 저장하"
 "십시오."
 
-#: widgets/EditProfileDialog.cpp:316
+#: widgets/EditProfileDialog.cpp:317
 #, kde-format
 msgctxt "@info"
 msgid "Profile Name was empty; please set a name to be able to save settings."
 msgstr "프로필 이름이 비어 있습니다. 설정을 저장할 이름을 설정하십시오."
 
-#: widgets/EditProfileDialog.cpp:324
+#: widgets/EditProfileDialog.cpp:325
 #, kde-format
 msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
 msgstr "이름이 \"%1\"인 프로필이 이미 존재합니다."
 
-#: widgets/EditProfileDialog.cpp:354
+#: widgets/EditProfileDialog.cpp:355
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
 msgstr "프로필 이름이 최대 허용된 길이를 초과합니다(%1)."
 
-#: widgets/EditProfileDialog.cpp:392
+#: widgets/EditProfileDialog.cpp:393
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
 msgstr "프로필 이름에 강조된 글자를 사용할 수 없습니다: %1"
 
-#: widgets/EditProfileDialog.cpp:428
+#: widgets/EditProfileDialog.cpp:429
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
 msgstr[0] "프로필 %1개 편집: %2"
 
-#: widgets/EditProfileDialog.cpp:432
+#: widgets/EditProfileDialog.cpp:433
 #, kde-format
 msgid "Create New Profile"
 msgstr "새 프로필 만들기"
 
-#: widgets/EditProfileDialog.cpp:435
+#: widgets/EditProfileDialog.cpp:436
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "\"%1\" 프로필 편집"
 
-#: widgets/EditProfileDialog.cpp:537
+#: widgets/EditProfileDialog.cpp:538
 #, kde-format
 msgid "None"
 msgstr "없음"
 
 #: widgets/EditProfileDialog.cpp:557
-#, kde-format
-msgctxt ""
-"Suffix of the number of columns (N columns). The leading space is needed to "
-"separate it from the number value."
-msgid " column"
-msgid_plural " columns"
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "Suffix of the number of columns (N columns). The leading space is needed "
+#| "to separate it from the number value."
+#| msgid " column"
+#| msgid_plural " columns"
+msgctxt "@item number of columns"
+msgid "%v column"
+msgid_plural "%v columns"
 msgstr[0] "열"
 
-#: widgets/EditProfileDialog.cpp:559
-#, kde-format
-msgctxt ""
-"Suffix of the number of rows (N rows). The leading space is needed to "
-"separate it from the number value."
-msgid " row"
-msgid_plural " rows"
+#: widgets/EditProfileDialog.cpp:558
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "Suffix of the number of rows (N rows). The leading space is needed to "
+#| "separate it from the number value."
+#| msgid " row"
+#| msgid_plural " rows"
+msgctxt "@item number of rows"
+msgid "%v row"
+msgid_plural "%v rows"
 msgstr[0] "행"
 
-#: widgets/EditProfileDialog.cpp:569
+#: widgets/EditProfileDialog.cpp:570
 #, kde-format
 msgid "System Bell"
 msgstr "시스템 벨"
 
-#: widgets/EditProfileDialog.cpp:569
+#: widgets/EditProfileDialog.cpp:570
 #, kde-format
 msgid "System Notifications"
 msgstr "시스템 알림:"
 
-#: widgets/EditProfileDialog.cpp:569
+#: widgets/EditProfileDialog.cpp:570
 #, kde-format
 msgid "Visual Bell"
 msgstr "벨 시각화"
 
-#: widgets/EditProfileDialog.cpp:569
+#: widgets/EditProfileDialog.cpp:570
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "벨 이벤트 무시"
 
-#: widgets/EditProfileDialog.cpp:578
+#: widgets/EditProfileDialog.cpp:579
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "%1의 새 터미널 세션의 기본 프로필"
 
-#: widgets/EditProfileDialog.cpp:685
+#: widgets/EditProfileDialog.cpp:686
 #, kde-format
 msgid "Edit Environment"
 msgstr "환경 편집"
 
-#: widgets/EditProfileDialog.cpp:686
+#: widgets/EditProfileDialog.cpp:687
 #, kde-format
 msgid "One environment variable per line"
 msgstr "한 줄에 환경 변수 하나씩"
 
-#: widgets/EditProfileDialog.cpp:719
-#, kde-format
-msgctxt "Unit of time"
-msgid " second"
-msgid_plural " seconds"
+#: widgets/EditProfileDialog.cpp:720
+#, fuzzy, kde-format
+#| msgctxt "Unit of time"
+#| msgid " second"
+#| msgid_plural " seconds"
+msgctxt "@item number of seconds"
+msgid "%v second"
+msgid_plural "%v seconds"
 msgstr[0] "초"
 
-#: widgets/EditProfileDialog.cpp:849
+#: widgets/EditProfileDialog.cpp:850
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "초기 디렉터리 선택"
 
-#: widgets/EditProfileDialog.cpp:1011
+#: widgets/EditProfileDialog.cpp:1012
 #, kde-format
 msgid "Get New..."
 msgstr "새 항목 가져오기..."
 
-#: widgets/EditProfileDialog.cpp:1460
+#: widgets/EditProfileDialog.cpp:1461
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "배열 <resource>%1</resource>을(를) 불러올 수 없습니다."
 
-#: widgets/EditProfileDialog.cpp:1642
+#: widgets/EditProfileDialog.cpp:1643
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4855,7 +4864,7 @@ msgstr ""
 "이 색 구성표는 현재 데스크톱 환경에서 지원하지 않는 투명 배경을 사용하고 있습"
 "니다"
 
-#: widgets/EditProfileDialog.cpp:1648
+#: widgets/EditProfileDialog.cpp:1649
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4864,12 +4873,12 @@ msgstr ""
 "데스크톱 효과를 활성화하기 전에 Konsole을 시작했습니다. 투명한 배경을 보려면 "
 "Konsole을 다시 시작해야 합니다."
 
-#: widgets/EditProfileDialog.cpp:2060
+#: widgets/EditProfileDialog.cpp:2061
 #, kde-format
 msgid "Default for file type"
 msgstr "파일 형식 기본값"
 
-#: widgets/EditProfileDialog.cpp:2086
+#: widgets/EditProfileDialog.cpp:2087
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4897,7 +4906,7 @@ msgstr ""
 "PATH 또는 LINE이 명령에 없으면, 이 설정을 무시하고 \n"
 "기본 텍스트 편집기로 파일을 엽니다."
 
-#: widgets/EditProfileDialog.cpp:2099
+#: widgets/EditProfileDialog.cpp:2100
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "텍스트 편집기 사용자 정의 명령"
@@ -5667,20 +5676,23 @@ msgstr "탭 모니터링"
 msgid "Threshold for continuous silence:"
 msgstr "응답 없음 대기 시간:"
 
-#. i18n: ectx: property (toolTip), widget (KPluralHandlingSpinBox, silenceSecondsSpinner)
+#. i18n: ectx: property (toolTip), widget (QSpinBox, silenceSecondsSpinner)
 #: widgets/EditProfileTabsPage.ui:93
 #, kde-format
 msgid "The threshold for continuous silence to be detected by Konsole"
 msgstr "응답 없음을 기다릴 초 단위 시간입니다"
 
-#: widgets/HistorySizeWidget.cpp:40
-#, kde-format
-msgctxt "@label:textbox Unit of scrollback"
-msgid " line"
-msgid_plural " lines"
+#: widgets/HistorySizeWidget.cpp:41
+#, fuzzy, kde-format
+#| msgctxt "@label:textbox Unit of scrollback"
+#| msgid " line"
+#| msgid_plural " lines"
+msgctxt "@item number of lines"
+msgid "%v line"
+msgid_plural "%v lines"
 msgstr[0] "줄"
 
-#: widgets/HistorySizeWidget.cpp:57
+#: widgets/HistorySizeWidget.cpp:56
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -5691,7 +5703,7 @@ msgstr ""
 "이 옵션을 사용하면 스크롤백 데이터를 RAM에 저장합니다. 저장 크기를 너무 크게 "
 "설정하면 RAM 용량이 부족해질 수도 있습니다."
 
-#: widgets/HistorySizeWidget.cpp:69
+#: widgets/HistorySizeWidget.cpp:68
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -5718,7 +5730,7 @@ msgstr "기억하는 출력을 다음 줄 수로 제한"
 msgid "Fi&xed size:"
 msgstr "고정 크기(&X):"
 
-#. i18n: ectx: property (toolTip), widget (KPluralHandlingSpinBox, historyLineSpinner)
+#. i18n: ectx: property (toolTip), widget (QSpinBox, historyLineSpinner)
 #: widgets/HistorySizeWidget.ui:73
 #, kde-format
 msgid "Number of lines of output to remember"

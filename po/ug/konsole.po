@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-09 00:49+0000\n"
+"POT-Creation-Date: 2026-08-10 00:49+0000\n"
 "PO-Revision-Date: 2026-05-31 19:19-0400\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -1943,7 +1943,7 @@ msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr "ئىچكى"
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:580
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:581
 #, kde-format
 msgid "Default profile"
 msgstr "كۆڭۈلدىكى سەپلىمە ھۆججەت"
@@ -4710,54 +4710,54 @@ msgstr "تارتۇق سۈزۈكلۈكىنى تەڭشەيدۇ (0 = تولۇق س�
 msgid "180"
 msgstr "180"
 
-#: widgets/EditProfileDialog.cpp:72
+#: widgets/EditProfileDialog.cpp:73
 #, kde-format
 msgid "Edit Profile"
 msgstr "سەپلىمە ھۆججەت تەھرىر"
 
-#: widgets/EditProfileDialog.cpp:99
+#: widgets/EditProfileDialog.cpp:100
 #, kde-format
 msgctxt "@title:tab Generic, common options"
 msgid "General"
 msgstr "ئادەتتىكى"
 
-#: widgets/EditProfileDialog.cpp:112
+#: widgets/EditProfileDialog.cpp:113
 #, kde-format
 msgid "Tabs"
 msgstr "بەتكۈچ"
 
-#: widgets/EditProfileDialog.cpp:129
+#: widgets/EditProfileDialog.cpp:130
 #, kde-format
 msgid "Appearance"
 msgstr "قىياپەت"
 
-#: widgets/EditProfileDialog.cpp:147
+#: widgets/EditProfileDialog.cpp:148
 #, kde-format
 msgid "Scrolling"
 msgstr "سىيرىش"
 
-#: widgets/EditProfileDialog.cpp:161
+#: widgets/EditProfileDialog.cpp:162
 #, kde-format
 msgid "Keyboard"
 msgstr "ھەرپتاختا"
 
-#: widgets/EditProfileDialog.cpp:162
+#: widgets/EditProfileDialog.cpp:163
 #, kde-format
 msgid "Key bindings"
 msgstr "كۇنۇپكا باغلىنىشى"
 
-#: widgets/EditProfileDialog.cpp:173
+#: widgets/EditProfileDialog.cpp:174
 #, kde-format
 msgid "Mouse"
 msgstr "چاشقىنەك"
 
-#: widgets/EditProfileDialog.cpp:191
+#: widgets/EditProfileDialog.cpp:192
 #, kde-format
 msgctxt "@title:tab Complex options"
 msgid "Advanced"
 msgstr "ئالىي"
 
-#: widgets/EditProfileDialog.cpp:299
+#: widgets/EditProfileDialog.cpp:300
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -4769,128 +4769,137 @@ msgstr ""
 ">ھۆججەتنىڭ ئىجازىتىنى ئۆزگەرتىڭ ياكى سەپلىمە ھۆججەتنىڭ ئاتىنى ئۆزگەرتىپ يېڭى "
 "سەپلىمە ھۆججەتكە ساقلاڭ."
 
-#: widgets/EditProfileDialog.cpp:316
+#: widgets/EditProfileDialog.cpp:317
 #, kde-format
 msgctxt "@info"
 msgid "Profile Name was empty; please set a name to be able to save settings."
 msgstr "سەپلىمە ھۆججەت ئاتى بوش؛ تەڭشەكنى ساقلىغىلى بولۇشى ئۈچۈن ئات  قويۇڭ."
 
-#: widgets/EditProfileDialog.cpp:324
+#: widgets/EditProfileDialog.cpp:325
 #, kde-format
 msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
 msgstr "«%1» ئاتتىكى سەپلىمە ھۆججەت مەۋجۇت."
 
-#: widgets/EditProfileDialog.cpp:354
+#: widgets/EditProfileDialog.cpp:355
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
 msgstr "سەپلىمە ھۆججەت ئاتى يول قويىدىغان ئۇزۇنلۇق چېكى (%1) دىن ئېشىپ كەتتى."
 
-#: widgets/EditProfileDialog.cpp:392
+#: widgets/EditProfileDialog.cpp:393
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
 msgstr "سەپلىمە ھۆججەت ئاتىدىكى يوشۇرۇش ھەرپى ئىناۋەتسىز: %1."
 
-#: widgets/EditProfileDialog.cpp:428
+#: widgets/EditProfileDialog.cpp:429
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
 msgstr[0] "%1 سەپلىمە ھۆججەتنى تەھرىرلەۋاتىدۇ: %2"
 
-#: widgets/EditProfileDialog.cpp:432
+#: widgets/EditProfileDialog.cpp:433
 #, kde-format
 msgid "Create New Profile"
 msgstr "يېڭى سەپلىمە ھۆججەت قۇر"
 
-#: widgets/EditProfileDialog.cpp:435
+#: widgets/EditProfileDialog.cpp:436
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "«%1» سەپلىمە ھۆججەتنى تەھرىرلە"
 
-#: widgets/EditProfileDialog.cpp:537
+#: widgets/EditProfileDialog.cpp:538
 #, kde-format
 msgid "None"
 msgstr "يوق"
 
 #: widgets/EditProfileDialog.cpp:557
-#, kde-format
-msgctxt ""
-"Suffix of the number of columns (N columns). The leading space is needed to "
-"separate it from the number value."
-msgid " column"
-msgid_plural " columns"
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "Suffix of the number of columns (N columns). The leading space is needed "
+#| "to separate it from the number value."
+#| msgid " column"
+#| msgid_plural " columns"
+msgctxt "@item number of columns"
+msgid "%v column"
+msgid_plural "%v columns"
 msgstr[0] " رەت"
 
-#: widgets/EditProfileDialog.cpp:559
-#, kde-format
-msgctxt ""
-"Suffix of the number of rows (N rows). The leading space is needed to "
-"separate it from the number value."
-msgid " row"
-msgid_plural " rows"
+#: widgets/EditProfileDialog.cpp:558
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "Suffix of the number of rows (N rows). The leading space is needed to "
+#| "separate it from the number value."
+#| msgid " row"
+#| msgid_plural " rows"
+msgctxt "@item number of rows"
+msgid "%v row"
+msgid_plural "%v rows"
 msgstr[0] " قۇر"
 
-#: widgets/EditProfileDialog.cpp:569
+#: widgets/EditProfileDialog.cpp:570
 #, kde-format
 msgid "System Bell"
 msgstr "سىستېما قوڭغۇراق"
 
-#: widgets/EditProfileDialog.cpp:569
+#: widgets/EditProfileDialog.cpp:570
 #, kde-format
 msgid "System Notifications"
 msgstr "سىستېما ئۇقتۇرۇشى"
 
-#: widgets/EditProfileDialog.cpp:569
+#: widgets/EditProfileDialog.cpp:570
 #, kde-format
 msgid "Visual Bell"
 msgstr "كۆرۈنۈشچان قوڭغۇراق"
 
-#: widgets/EditProfileDialog.cpp:569
+#: widgets/EditProfileDialog.cpp:570
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "قوڭغۇراق ھادىسىسىگە پەرۋا قىلما"
 
-#: widgets/EditProfileDialog.cpp:578
+#: widgets/EditProfileDialog.cpp:579
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "%1 دىكى يېڭى تېرمىنالنىڭ كۆڭۈلدىكى سەپلىمە ھۆججىتى"
 
-#: widgets/EditProfileDialog.cpp:685
+#: widgets/EditProfileDialog.cpp:686
 #, kde-format
 msgid "Edit Environment"
 msgstr "مۇھىت ئۆزگەرگۈچىنى تەھرىرلە"
 
-#: widgets/EditProfileDialog.cpp:686
+#: widgets/EditProfileDialog.cpp:687
 #, kde-format
 msgid "One environment variable per line"
 msgstr "ھەر قۇردا بىردىن مۇھىت ئۆزگەرگۈچى"
 
-#: widgets/EditProfileDialog.cpp:719
-#, kde-format
-msgctxt "Unit of time"
-msgid " second"
-msgid_plural " seconds"
+#: widgets/EditProfileDialog.cpp:720
+#, fuzzy, kde-format
+#| msgctxt "Unit of time"
+#| msgid " second"
+#| msgid_plural " seconds"
+msgctxt "@item number of seconds"
+msgid "%v second"
+msgid_plural "%v seconds"
 msgstr[0] " سېكۇنت"
 
-#: widgets/EditProfileDialog.cpp:849
+#: widgets/EditProfileDialog.cpp:850
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "دەسلەپكى مۇندەرىجە تاللىنىدۇ"
 
-#: widgets/EditProfileDialog.cpp:1011
+#: widgets/EditProfileDialog.cpp:1012
 #, kde-format
 msgid "Get New..."
 msgstr "يېڭىسىغا ئېرىش…"
 
-#: widgets/EditProfileDialog.cpp:1460
+#: widgets/EditProfileDialog.cpp:1461
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "<resource>%1</resource> لايىھەنى يۈكلىيەلمىدى."
 
-#: widgets/EditProfileDialog.cpp:1642
+#: widgets/EditProfileDialog.cpp:1643
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4899,7 +4908,7 @@ msgstr ""
 "بۇ رەڭ لايىھەسىدە سىزنىڭ ئۈستەلئۈستىڭىز قوللىمايدىغان سۈزۈك تەگلىك "
 "ئىشلىتىلگەن"
 
-#: widgets/EditProfileDialog.cpp:1648
+#: widgets/EditProfileDialog.cpp:1649
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4908,12 +4917,12 @@ msgstr ""
 "Konsole ئۈستەلئۈستى ئۈنۈمى قوزغىلىشتىن ئىلگىرى قوزغالغان. سۈزۈك تەگلىكنى "
 "كۆرۈش ئۈچۈن Konsole نى قايتا قوزغىتىشىڭىز كېرەك."
 
-#: widgets/EditProfileDialog.cpp:2060
+#: widgets/EditProfileDialog.cpp:2061
 #, kde-format
 msgid "Default for file type"
 msgstr "ھۆججەت تۈرىنىڭ كۆڭۈلدىكى قىممىتى"
 
-#: widgets/EditProfileDialog.cpp:2086
+#: widgets/EditProfileDialog.cpp:2087
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4941,7 +4950,7 @@ msgstr ""
 "ئەگەر PATH ياكى LINE بۇيرۇق قۇرىدا كۆرۈنمىگەن بولسا، ئۇنداقتا بۇ تەڭشەككە "
 "پەرۋا قىلماي، كۆڭۈلدىكى تېكىست تەھرىرلىگۈچتە ئاچىدۇ."
 
-#: widgets/EditProfileDialog.cpp:2099
+#: widgets/EditProfileDialog.cpp:2100
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "تېكىست تەھرىرلىگۈچنىڭ ئىختىيارى بۇيرۇقى"
@@ -5740,20 +5749,23 @@ msgstr "بەتكۈچ كۆزىتىش"
 msgid "Threshold for continuous silence:"
 msgstr "ئۇدا جىمجىت تۇرغان ۋاقىتنىڭ بوسۇغا قىممىتى:"
 
-#. i18n: ectx: property (toolTip), widget (KPluralHandlingSpinBox, silenceSecondsSpinner)
+#. i18n: ectx: property (toolTip), widget (QSpinBox, silenceSecondsSpinner)
 #: widgets/EditProfileTabsPage.ui:93
 #, kde-format
 msgid "The threshold for continuous silence to be detected by Konsole"
 msgstr "Konsole ئۇدا جىمجىت تۇرغان ۋاقىتنىڭ بوسۇغا قىممىتىنى بايقىدى"
 
-#: widgets/HistorySizeWidget.cpp:40
-#, kde-format
-msgctxt "@label:textbox Unit of scrollback"
-msgid " line"
-msgid_plural " lines"
+#: widgets/HistorySizeWidget.cpp:41
+#, fuzzy, kde-format
+#| msgctxt "@label:textbox Unit of scrollback"
+#| msgid " line"
+#| msgid_plural " lines"
+msgctxt "@item number of lines"
+msgid "%v line"
+msgid_plural "%v lines"
 msgstr[0] " قۇر"
 
-#: widgets/HistorySizeWidget.cpp:57
+#: widgets/HistorySizeWidget.cpp:56
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -5765,7 +5777,7 @@ msgstr ""
 "ساقلىنىدۇ. ئەگەر تارىخ خاتىرىسى سانلىق مەلۇماتى قىممىتى بەك يۇقىرى تەڭشەلسە، "
 "سىستېما ئەسلەكنىڭ ھەممىسىنى ئىشلىتىۋېتىپ ئېغىر مەسىلە كېلىپ چىقىشى مۇمكىن."
 
-#: widgets/HistorySizeWidget.cpp:69
+#: widgets/HistorySizeWidget.cpp:68
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -5792,7 +5804,7 @@ msgstr "ئەستە ساقلايدىغان قۇر سانىنى مۇقىم قىل�
 msgid "Fi&xed size:"
 msgstr "مۇقىم چوڭلۇقى(&X):"
 
-#. i18n: ectx: property (toolTip), widget (KPluralHandlingSpinBox, historyLineSpinner)
+#. i18n: ectx: property (toolTip), widget (QSpinBox, historyLineSpinner)
 #: widgets/HistorySizeWidget.ui:73
 #, kde-format
 msgid "Number of lines of output to remember"
