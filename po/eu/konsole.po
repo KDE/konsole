@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-10 00:49+0000\n"
+"POT-Creation-Date: 2026-08-11 00:49+0000\n"
 "PO-Revision-Date: 2026-07-16 11:55+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -3871,19 +3871,19 @@ msgstr "Aholku semantikoak"
 msgid "Line numbers "
 msgstr "Lerro-zenbakiak"
 
-#: ViewManager.cpp:1279
+#: ViewManager.cpp:1289
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Gorde fitxen antolaera"
 
-#: ViewManager.cpp:1281 ViewManager.cpp:1402
+#: ViewManager.cpp:1291 ViewManager.cpp:1412
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Konsoleren ikuspegi antolaera (*.json)"
 
-#: ViewManager.cpp:1297
+#: ViewManager.cpp:1307
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3893,7 +3893,7 @@ msgstr ""
 "Arazo bat gertatu da antolaera gordetzean.\n"
 "%1"
 
-#: ViewManager.cpp:1389
+#: ViewManager.cpp:1399
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3903,7 +3903,7 @@ msgstr ""
 "Arazo bat gertatu da antolaera zamatzean.\n"
 "%1"
 
-#: ViewManager.cpp:1400
+#: ViewManager.cpp:1410
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"

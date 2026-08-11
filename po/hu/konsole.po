@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-10 00:49+0000\n"
+"POT-Creation-Date: 2026-08-11 00:49+0000\n"
 "PO-Revision-Date: 2026-06-18 21:50+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -3873,19 +3873,19 @@ msgstr "Szemantikai tippek "
 msgid "Line numbers "
 msgstr "Sorszámok"
 
-#: ViewManager.cpp:1279
+#: ViewManager.cpp:1289
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Lapelrendezés mentése"
 
-#: ViewManager.cpp:1281 ViewManager.cpp:1402
+#: ViewManager.cpp:1291 ViewManager.cpp:1412
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Konsole nézetelrendezés (*.json)"
 
-#: ViewManager.cpp:1297
+#: ViewManager.cpp:1307
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3895,7 +3895,7 @@ msgstr ""
 "Hiba történt az elrendezés mentésekor.\n"
 "%1"
 
-#: ViewManager.cpp:1389
+#: ViewManager.cpp:1399
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3905,7 +3905,7 @@ msgstr ""
 "Hiba történt az elrendezés betöltésekor.\n"
 "%1"
 
-#: ViewManager.cpp:1400
+#: ViewManager.cpp:1410
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"

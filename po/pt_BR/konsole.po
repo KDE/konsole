@@ -21,9 +21,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-10 00:49+0000\n"
-"PO-Revision-Date: 2026-07-15 23:39-0300\n"
-"Last-Translator: Geraldo Simiao <geraldosimiao@fedoraproject.org>\n"
+"POT-Creation-Date: 2026-08-11 00:49+0000\n"
+"PO-Revision-Date: 2026-08-10 06:18-0300\n"
+"Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -3879,19 +3879,19 @@ msgstr "Indicações semânticas"
 msgid "Line numbers "
 msgstr "Números de linha "
 
-#: ViewManager.cpp:1279
+#: ViewManager.cpp:1289
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Salvar layout de abas"
 
-#: ViewManager.cpp:1281 ViewManager.cpp:1402
+#: ViewManager.cpp:1291 ViewManager.cpp:1412
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Layout de visualização do Konsole (*.json)"
 
-#: ViewManager.cpp:1297
+#: ViewManager.cpp:1307
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3901,7 +3901,7 @@ msgstr ""
 "Ocorreu um problema ao salvar o layout.\n"
 "%1"
 
-#: ViewManager.cpp:1389
+#: ViewManager.cpp:1399
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3911,7 +3911,7 @@ msgstr ""
 "Ocorreu um problema ao carregar o layout.\n"
 "%1"
 
-#: ViewManager.cpp:1400
+#: ViewManager.cpp:1410
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
@@ -4847,30 +4847,20 @@ msgid "None"
 msgstr "Nenhum"
 
 #: widgets/EditProfileDialog.cpp:557
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Suffix of the number of columns (N columns). The leading space is needed "
-#| "to separate it from the number value."
-#| msgid " column"
-#| msgid_plural " columns"
+#, kde-format
 msgctxt "@item number of columns"
 msgid "%v column"
 msgid_plural "%v columns"
-msgstr[0] " coluna"
-msgstr[1] " colunas"
+msgstr[0] "%v coluna"
+msgstr[1] "%v colunas"
 
 #: widgets/EditProfileDialog.cpp:558
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Suffix of the number of rows (N rows). The leading space is needed to "
-#| "separate it from the number value."
-#| msgid " row"
-#| msgid_plural " rows"
+#, kde-format
 msgctxt "@item number of rows"
 msgid "%v row"
 msgid_plural "%v rows"
-msgstr[0] " linha"
-msgstr[1] " linhas"
+msgstr[0] "%v linha"
+msgstr[1] "%v linhas"
 
 #: widgets/EditProfileDialog.cpp:570
 #, kde-format
@@ -4908,15 +4898,12 @@ msgid "One environment variable per line"
 msgstr "Uma variável de ambiente por linha"
 
 #: widgets/EditProfileDialog.cpp:720
-#, fuzzy, kde-format
-#| msgctxt "Unit of time"
-#| msgid " second"
-#| msgid_plural " seconds"
+#, kde-format
 msgctxt "@item number of seconds"
 msgid "%v second"
 msgid_plural "%v seconds"
-msgstr[0] " segundo"
-msgstr[1] " segundos"
+msgstr[0] "%v segundo"
+msgstr[1] "%v segundos"
 
 #: widgets/EditProfileDialog.cpp:850
 #, kde-format
@@ -5785,15 +5772,12 @@ msgid "The threshold for continuous silence to be detected by Konsole"
 msgstr "O limite de silêncio contínuo a ser detectado pelo Konsole"
 
 #: widgets/HistorySizeWidget.cpp:41
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox Unit of scrollback"
-#| msgid " line"
-#| msgid_plural " lines"
+#, kde-format
 msgctxt "@item number of lines"
 msgid "%v line"
 msgid_plural "%v lines"
-msgstr[0] " linha"
-msgstr[1] " linhas"
+msgstr[0] "%v linha"
+msgstr[1] "%v linhas"
 
 #: widgets/HistorySizeWidget.cpp:56
 #, kde-format

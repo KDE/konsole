@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-10 00:49+0000\n"
-"PO-Revision-Date: 2026-07-17 11:20+0400\n"
+"POT-Creation-Date: 2026-08-11 00:49+0000\n"
+"PO-Revision-Date: 2026-08-10 18:37+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -1751,7 +1751,7 @@ msgstr "الاختصار"
 #: plugins/SSHManager/sshwidget.ui:43
 #, kde-format
 msgid "Show entries that don't match the filter"
-msgstr "أعرض المدخلات التي لا تطابق المرشح"
+msgstr "اعرض المدخلات التي لا تطابق المرشح"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, btnManageProfile)
 #: plugins/SSHManager/sshwidget.ui:57
@@ -3836,19 +3836,19 @@ msgstr "التلميحات الدلالية "
 msgid "Line numbers "
 msgstr "أرقام الأسطر "
 
-#: ViewManager.cpp:1279
+#: ViewManager.cpp:1289
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "احفظ تخطيط الألسنة"
 
-#: ViewManager.cpp:1281 ViewManager.cpp:1402
+#: ViewManager.cpp:1291 ViewManager.cpp:1412
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "تخطيط عرض كونسول (*.json)"
 
-#: ViewManager.cpp:1297
+#: ViewManager.cpp:1307
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3858,7 +3858,7 @@ msgstr ""
 "حصلت مشكلة أثناء حفظ التخطيط.\n"
 "%1"
 
-#: ViewManager.cpp:1389
+#: ViewManager.cpp:1399
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3868,7 +3868,7 @@ msgstr ""
 "حصلت مشكلة أثناء تحميل التخطيط.\n"
 "%1"
 
-#: ViewManager.cpp:1400
+#: ViewManager.cpp:1410
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
@@ -4736,9 +4736,8 @@ msgid ""
 ">Either change the permissions of that file or set a different name to save "
 "the settings to a new profile."
 msgstr ""
-"أذونات غير كافية لحفظ الإعدادات إلى: <filename>%1</filename>. <nl/> إما أن "
-"تقوم بتغيير أذونات هذا الملف أو تعيين اسم مختلف لحفظ الإعدادات في تشكيلة "
-"جديدة."
+"أذون غير كافية لحفظ الإعدادات إلى: <filename>%1</filename>. <nl/> إما أن "
+"تقوم بتغيير أذون هذا الملف أو تعيين اسم مختلف لحفظ الإعدادات في تشكيلة جديدة."
 
 #: widgets/EditProfileDialog.cpp:317
 #, kde-format

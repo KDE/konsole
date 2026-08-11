@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-10 00:49+0000\n"
-"PO-Revision-Date: 2026-07-16 06:23+0200\n"
+"POT-Creation-Date: 2026-08-11 00:49+0000\n"
+"PO-Revision-Date: 2026-08-10 06:40+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -3850,19 +3850,19 @@ msgstr "Semantični namigi "
 msgid "Line numbers "
 msgstr "Številke vrstic "
 
-#: ViewManager.cpp:1279
+#: ViewManager.cpp:1289
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Shrani razporeditev zavihka"
 
-#: ViewManager.cpp:1281 ViewManager.cpp:1402
+#: ViewManager.cpp:1291 ViewManager.cpp:1412
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Konsole View Layout (*.json)"
 
-#: ViewManager.cpp:1297
+#: ViewManager.cpp:1307
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3872,7 +3872,7 @@ msgstr ""
 "Med shranjevanjem postavitve je prišlo do težave.\n"
 "%1"
 
-#: ViewManager.cpp:1389
+#: ViewManager.cpp:1399
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3882,7 +3882,7 @@ msgstr ""
 "Med nalaganjem postavitve je prišlo do težave.\n"
 "%1"
 
-#: ViewManager.cpp:1400
+#: ViewManager.cpp:1410
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
@@ -4809,34 +4809,24 @@ msgid "None"
 msgstr "Noben"
 
 #: widgets/EditProfileDialog.cpp:557
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Suffix of the number of columns (N columns). The leading space is needed "
-#| "to separate it from the number value."
-#| msgid " column"
-#| msgid_plural " columns"
+#, kde-format
 msgctxt "@item number of columns"
 msgid "%v column"
 msgid_plural "%v columns"
-msgstr[0] " stolpcev"
-msgstr[1] " stolpec"
-msgstr[2] " stolpca"
-msgstr[3] " stolpci"
+msgstr[0] "%v stolpcev"
+msgstr[1] "%v stolpec"
+msgstr[2] "%v stolpca"
+msgstr[3] "%v stolpci"
 
 #: widgets/EditProfileDialog.cpp:558
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Suffix of the number of rows (N rows). The leading space is needed to "
-#| "separate it from the number value."
-#| msgid " row"
-#| msgid_plural " rows"
+#, kde-format
 msgctxt "@item number of rows"
 msgid "%v row"
 msgid_plural "%v rows"
-msgstr[0] " vrstic"
-msgstr[1] " vrstica"
-msgstr[2] " vrstici"
-msgstr[3] " vrstice"
+msgstr[0] "%v vrstic"
+msgstr[1] "%v vrstica"
+msgstr[2] "%v vrstici"
+msgstr[3] "%v vrstice"
 
 #: widgets/EditProfileDialog.cpp:570
 #, kde-format
@@ -4874,17 +4864,14 @@ msgid "One environment variable per line"
 msgstr "Ena okoljska spremenljivka na vrstico"
 
 #: widgets/EditProfileDialog.cpp:720
-#, fuzzy, kde-format
-#| msgctxt "Unit of time"
-#| msgid " second"
-#| msgid_plural " seconds"
+#, kde-format
 msgctxt "@item number of seconds"
 msgid "%v second"
 msgid_plural "%v seconds"
-msgstr[0] " sekund"
-msgstr[1] " sekunda"
-msgstr[2] " sekundi"
-msgstr[3] " sekunde"
+msgstr[0] "%v sekund"
+msgstr[1] "%v sekunda"
+msgstr[2] "%v sekundi"
+msgstr[3] "%v sekunde"
 
 #: widgets/EditProfileDialog.cpp:850
 #, kde-format
@@ -5748,17 +5735,14 @@ msgid "The threshold for continuous silence to be detected by Konsole"
 msgstr "Prag za neprekinjeno nedejavnost, ki jo zazna Konsole"
 
 #: widgets/HistorySizeWidget.cpp:41
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox Unit of scrollback"
-#| msgid " line"
-#| msgid_plural " lines"
+#, kde-format
 msgctxt "@item number of lines"
 msgid "%v line"
 msgid_plural "%v lines"
-msgstr[0] " vrstic"
-msgstr[1] " vrstica"
-msgstr[2] " vrstici"
-msgstr[3] " vrstice"
+msgstr[0] "%v vrstic"
+msgstr[1] "%v vrstica"
+msgstr[2] "%v vrstici"
+msgstr[3] "%v vrstice"
 
 #: widgets/HistorySizeWidget.cpp:56
 #, kde-format

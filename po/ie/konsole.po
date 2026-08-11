@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-10 00:49+0000\n"
+"POT-Creation-Date: 2026-08-11 00:49+0000\n"
 "PO-Revision-Date: 2024-08-04 17:18+0700\n"
 "Last-Translator: OIS <mistresssilvara@hotmail.com>\n"
 "Language-Team: Interlingue <>\n"
@@ -3794,19 +3794,19 @@ msgstr "Configurar integration de  semantica (bash)"
 msgid "Line numbers "
 msgstr "Numerós de lineas"
 
-#: ViewManager.cpp:1279
+#: ViewManager.cpp:1289
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "&Configurar o renominar li carte..."
 
-#: ViewManager.cpp:1281 ViewManager.cpp:1402
+#: ViewManager.cpp:1291 ViewManager.cpp:1412
 #, fuzzy, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Fender li vise"
 
-#: ViewManager.cpp:1297
+#: ViewManager.cpp:1307
 #, fuzzy, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3814,7 +3814,7 @@ msgid ""
 "%1"
 msgstr "<html><head/><body><p>Arangeament del complex textu</p></body></html>"
 
-#: ViewManager.cpp:1389
+#: ViewManager.cpp:1399
 #, fuzzy, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3822,7 +3822,7 @@ msgid ""
 "%1"
 msgstr "<html><head/><body><p>Arangeament del complex textu</p></body></html>"
 
-#: ViewManager.cpp:1400
+#: ViewManager.cpp:1410
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"

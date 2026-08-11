@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-10 00:49+0000\n"
+"POT-Creation-Date: 2026-08-11 00:49+0000\n"
 "PO-Revision-Date: 2020-10-23 12:16+0200\n"
 "Last-Translator: Mihkel Tõnnov <mihhkel@gmail.com>\n"
 "Language-Team: Estonian <>\n"
@@ -3984,7 +3984,7 @@ msgstr "Teksti käitlemine"
 msgid "Line numbers "
 msgstr "Ridade arv: "
 
-#: ViewManager.cpp:1279
+#: ViewManager.cpp:1289
 #, fuzzy, kde-format
 #| msgctxt "@action Shortcut entry"
 #| msgid "Move tab to the left"
@@ -3992,13 +3992,13 @@ msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Kaardi liigutamine vasakule"
 
-#: ViewManager.cpp:1281 ViewManager.cpp:1402
+#: ViewManager.cpp:1291 ViewManager.cpp:1412
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr ""
 
-#: ViewManager.cpp:1297
+#: ViewManager.cpp:1307
 #, fuzzy, kde-format
 #| msgid ""
 #| "A problem occurred when saving the output.\n"
@@ -4011,7 +4011,7 @@ msgstr ""
 "Väljundi salvestamisel tekkis probleem.\n"
 "%1"
 
-#: ViewManager.cpp:1389
+#: ViewManager.cpp:1399
 #, fuzzy, kde-format
 #| msgid ""
 #| "A problem occurred when saving the output.\n"
@@ -4024,7 +4024,7 @@ msgstr ""
 "Väljundi salvestamisel tekkis probleem.\n"
 "%1"
 
-#: ViewManager.cpp:1400
+#: ViewManager.cpp:1410
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
