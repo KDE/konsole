@@ -117,7 +117,7 @@ bool UnixProcessInfo::readArguments(int pid)
     return true;
 }
 
-#if defined(Q_OS_FREEBSD) || defined(Q_OS_OPEN_BSD) || defined(Q_OS_MACOS)
+#if defined(Q_OS_FREEBSD) || defined(Q_OS_OPENBSD) || defined(Q_OS_MACOS)
 QSharedPointer<struct kinfo_proc> UnixProcessInfo::getProcInfoStruct(int *managementInfoBase, int mibCount)
 {
     size_t structLength;

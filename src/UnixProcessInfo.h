@@ -12,7 +12,7 @@
 #if defined(Q_OS_MACOS) || defined(Q_OS_FREEBSD) || defined(Q_OS_OPENBSD)
 #include <QSharedPointer>
 #include <sys/sysctl.h>
-#if defined(Q_OS_FREEBSD) || defined(Q_OS_OPEN_BSD)
+#if defined(Q_OS_FREEBSD)
 #include <sys/user.h>
 #endif
 #endif
