@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 86ff119b1606fcaa910d6b44fc14b611\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-08 02:43+0000\n"
+"POT-Creation-Date: 2026-08-11 02:56+0000\n"
 "PO-Revision-Date: 2022-09-04 10:59+0300\n"
 "Last-Translator: Zmicier <zmicerturok@gmail.com>\n"
 "Language-Team: Belarusian <kde-i18n-doc@kde.org>\n"
@@ -3973,7 +3973,7 @@ msgstr "Siemantyčnyja padkazki:"
 msgid "Line numbers "
 msgstr "Stalaja koĺkasć radkoŭ: "
 
-#: ViewManager.cpp:1279
+#: ViewManager.cpp:1289
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Save tab layout to file"
@@ -3981,13 +3981,13 @@ msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Zachavać makiet ukladak u fajl"
 
-#: ViewManager.cpp:1281 ViewManager.cpp:1402
+#: ViewManager.cpp:1291 ViewManager.cpp:1412
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Makiet kampanavannia terminalaŭ Konsole (*.json)"
 
-#: ViewManager.cpp:1297
+#: ViewManager.cpp:1307
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3997,7 +3997,7 @@ msgstr ""
 "Padčas zachavannia makieta ŭznikla prabliema.\n"
 "%1"
 
-#: ViewManager.cpp:1389
+#: ViewManager.cpp:1399
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -4007,7 +4007,7 @@ msgstr ""
 "Padčas zahruzki makieta ŭznikla prabliema.\n"
 "%1"
 
-#: ViewManager.cpp:1400
+#: ViewManager.cpp:1410
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Load tab layout from file"

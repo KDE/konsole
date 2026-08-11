@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-08 02:43+0000\n"
+"POT-Creation-Date: 2026-08-11 02:56+0000\n"
 "PO-Revision-Date: 2026-03-31 15:08+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -3861,7 +3861,7 @@ msgstr "Interacțiune cu textul"
 msgid "Line numbers "
 msgstr "Număr constant de linii: "
 
-#: ViewManager.cpp:1279
+#: ViewManager.cpp:1289
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Save tab layout to file"
@@ -3869,14 +3869,14 @@ msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Salvează aranjamentul filelor în fișier"
 
-#: ViewManager.cpp:1281 ViewManager.cpp:1402
+#: ViewManager.cpp:1291 ViewManager.cpp:1412
 #, fuzzy, kde-format
 #| msgid "Konsole View Layout (*.json)"
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Aranjament de vizualizări Konsolă (*.json)"
 
-#: ViewManager.cpp:1297
+#: ViewManager.cpp:1307
 #, fuzzy, kde-format
 #| msgid ""
 #| "A problem occurred when saving the Layout.\n"
@@ -3889,7 +3889,7 @@ msgstr ""
 "A intervenit o problemă la salvarea aranjamentului.\n"
 "%1"
 
-#: ViewManager.cpp:1389
+#: ViewManager.cpp:1399
 #, fuzzy, kde-format
 #| msgid ""
 #| "A problem occurred when loading the Layout.\n"
@@ -3902,7 +3902,7 @@ msgstr ""
 "A intervenit o problemă la încărcarea aranjamentului.\n"
 "%1"
 
-#: ViewManager.cpp:1400
+#: ViewManager.cpp:1410
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Load tab layout from file"
