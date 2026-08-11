@@ -1404,7 +1404,10 @@ ProcessInfo *ProcessInfo::newInstance(int pid, int sessionPid, QByteArrayView tt
     } else {
         info = new LinuxProcessInfo(pid, sessionPid);
     }
-#elif defined(Q_OS_SOLARIS)
+#else
+    Q_UNUSED(sessionPid)
+    Q_UNUSED(tty)
+#if defined(Q_OS_SOLARIS)
     info = new SolarisProcessInfo(pid);
 #elif defined(Q_OS_MACOS)
     info = new MacProcessInfo(pid);
@@ -1414,6 +1417,7 @@ ProcessInfo *ProcessInfo::newInstance(int pid, int sessionPid, QByteArrayView tt
     info = new OpenBSDProcessInfo(pid);
 #else
     info = new NullProcessInfo(pid);
+#endif
 #endif
     info->readProcessInfo(pid);
     return info;
