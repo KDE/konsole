@@ -96,8 +96,6 @@ set_package_properties(KF6DocTools PROPERTIES DESCRIPTION
 
 find_package(ICU 61.0 COMPONENTS uc i18n REQUIRED)
 
-find_package(ZLIB REQUIRED)
-
 option(WITH_KAPSULE "Build with Kapsule container support" OFF)
 if(WITH_KAPSULE)
     find_package(QCoro6 REQUIRED COMPONENTS Core)
