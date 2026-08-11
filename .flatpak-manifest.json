@@ -5,7 +5,9 @@
     "runtime-version": "6.11",
     "sdk": "org.kde.Sdk",
     "command": "konsole",
-    "tags": ["nightly"],
+    "tags": [
+        "nightly"
+    ],
     "desktop-file-name-suffix": " (Nightly)",
     "finish-args": [
         "--device=all",
@@ -25,7 +27,10 @@
                 "-DWITH_LIBSSH=OFF"
             ],
             "sources": [
-                { "type": "dir", "path": "." }
+                {
+                    "type": "dir",
+                    "path": "."
+                }
             ]
         }
     ]
