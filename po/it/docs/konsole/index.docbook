@@ -167,7 +167,7 @@
 >Scorrimento</title>
 
 <para
->&konsole; usa il concetto di scorrimento per permettere di visualizzare l'output precedentemente prodotto. Lo scorrimento è predefinito a salvare 1000 righe di output oltre a ciò che è attualmente visualizzato sullo schermo. </para>
+>&konsole; usa il concetto di scorrimento per permettere di visualizzare l'output precedentemente prodotto. In modo predefinito, la funzione di scorrimento all'indietro è attiva ed è impostata per salvare 10.000 righe di output in aggiunta a quanto attualmente visualizzato sullo schermo. </para>
 <para
 >Quando le righe scorrono oltre la cima dello schermo, possono essere riviste spostando in alto la barra di scorrimento, usando la rotellina del mouse o i tasti <keycombo action="simul"
 >&Shift;<keycap
@@ -761,6 +761,15 @@
 ><guilabel
 >Caratteri dell'alfabeto brahmi</guilabel
 > - Raggruppa i caratteri brahmi come descritto sopra. Senza questa opzione (a seconda del carattere) alcune parole potrebbero non essere collegate come dovrebbero. Con questa opzione abilitato i caratteri brahmi possono apparire fuori posizione. Per esempio. il terzo carattere nella seconda riga potrebbe non apparire direttamente sotto il terzo carattere nella prima riga. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>Hinting dei caratteri:</guilabel
+> - Consente di applicare <ulink url="https://en.wikipedia.org/wiki/Font_hinting"
+>hinting</ulink
+> ai glifi durante il rendering. Può migliorare la leggibilità generale dei caratteri quando si utilizzano determinati caratteri e alcune visualizzazioni. Può anche aiutare a risolvere alcune situazioni in cui i caratteri non vengono visualizzati con la larghezza o l'altezza attuali, soprattutto quando è abilitata la modalità parola. Se impostato, viene utilizzato l'hinting completo. Se non impostato, viene utilizzato il livello di hinting predefinito. </para
 ></listitem>
 
 <listitem
