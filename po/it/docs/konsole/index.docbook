@@ -766,6 +766,15 @@
 <listitem
 ><para
 ><guilabel
+>Hinting dei caratteri:</guilabel
+> - Consente di applicare <ulink url="https://en.wikipedia.org/wiki/Font_hinting"
+>hinting</ulink
+> ai glifi durante il rendering. Può migliorare la leggibilità generale dei caratteri quando si utilizzano determinati caratteri e alcune visualizzazioni. Può anche aiutare a risolvere alcune situazioni in cui i caratteri non vengono visualizzati con la larghezza o l'altezza attuali, soprattutto quando è abilitata la modalità parola. Se impostato, viene utilizzato l'hinting completo. Se non impostato, viene utilizzato il livello di hinting predefinito. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
 >Carattere Emoji:</guilabel
 > - Ciò consente di specificare il carattere da utilizzare per i caratteri Emoji Unicode. Se non viene impostato, sarà utilizzato il carattere del profilo predefinito oppure il sistema potrebbe utilizzare alcuni caratteri di riserva se i glifi non sono presenti in questo carattere. </para
 ></listitem>
