@@ -699,11 +699,9 @@ msgid "Kapsule"
 msgstr "Kapsule"
 
 #: containers/KapsuleDetector.cpp:61 containers/KapsuleDetector.cpp:64
-#, fuzzy, kde-format
-#| msgctxt "As in Distrobox, Toolbox, Kapsule etc."
-#| msgid "Container"
+#, kde-format
 msgid "Kapsule Container"
-msgstr "Kontajner"
+msgstr "Kontajner Kapsule"
 
 #: containers/KapsuleDetector.cpp:99
 #, kde-format
@@ -740,12 +738,10 @@ msgid "Deselect All"
 msgstr "Zrušiť výber"
 
 #: filterHotSpots/ColorFilterHotSpot.cpp:85
-#, fuzzy, kde-format
-#| msgctxt "@label:listbox Column header text for the actual colors"
-#| msgid "Color"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Color"
-msgstr "Farba"
+msgstr "Kopírovať farbu"
 
 #: filterHotSpots/ColorFilterHotSpot.cpp:148
 #, kde-format
@@ -4799,32 +4795,22 @@ msgid "None"
 msgstr "Žiadne"
 
 #: widgets/EditProfileDialog.cpp:557
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Suffix of the number of columns (N columns). The leading space is needed "
-#| "to separate it from the number value."
-#| msgid " column"
-#| msgid_plural " columns"
+#, kde-format
 msgctxt "@item number of columns"
 msgid "%v column"
 msgid_plural "%v columns"
-msgstr[0] "stĺpec"
-msgstr[1] "stĺpce"
-msgstr[2] "stĺpcov"
+msgstr[0] "%v stĺpec"
+msgstr[1] "%v stĺpce"
+msgstr[2] "%v stĺpcov"
 
 #: widgets/EditProfileDialog.cpp:558
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Suffix of the number of rows (N rows). The leading space is needed to "
-#| "separate it from the number value."
-#| msgid " row"
-#| msgid_plural " rows"
+#, kde-format
 msgctxt "@item number of rows"
 msgid "%v row"
 msgid_plural "%v rows"
-msgstr[0] "riadok"
-msgstr[1] "riadky"
-msgstr[2] "riadkov"
+msgstr[0] "%v riadok"
+msgstr[1] "%v riadky"
+msgstr[2] "%v riadkov"
 
 #: widgets/EditProfileDialog.cpp:570
 #, kde-format
@@ -4863,16 +4849,13 @@ msgid "One environment variable per line"
 msgstr "Jedna premenná prostredia na riadok"
 
 #: widgets/EditProfileDialog.cpp:720
-#, fuzzy, kde-format
-#| msgctxt "Unit of time"
-#| msgid " second"
-#| msgid_plural " seconds"
+#, kde-format
 msgctxt "@item number of seconds"
 msgid "%v second"
 msgid_plural "%v seconds"
-msgstr[0] " sekunda"
-msgstr[1] " sekundy"
-msgstr[2] " sekúnd"
+msgstr[0] "%v sekunda"
+msgstr[1] "%v sekundy"
+msgstr[2] "%v sekúnd"
 
 #: widgets/EditProfileDialog.cpp:850
 #, kde-format
@@ -5734,16 +5717,13 @@ msgid "The threshold for continuous silence to be detected by Konsole"
 msgstr "Prah súvislého ticha detekovaného v Konsole"
 
 #: widgets/HistorySizeWidget.cpp:41
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox Unit of scrollback"
-#| msgid " line"
-#| msgid_plural " lines"
+#, kde-format
 msgctxt "@item number of lines"
 msgid "%v line"
 msgid_plural "%v lines"
-msgstr[0] " riadok"
-msgstr[1] " riadky"
-msgstr[2] " riadkov"
+msgstr[0] "%v riadok"
+msgstr[1] "%v riadky"
+msgstr[2] "%v riadkov"
 
 #: widgets/HistorySizeWidget.cpp:56
 #, kde-format
