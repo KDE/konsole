@@ -699,11 +699,9 @@ msgid "Kapsule"
 msgstr "Kapsule"
 
 #: containers/KapsuleDetector.cpp:61 containers/KapsuleDetector.cpp:64
-#, fuzzy, kde-format
-#| msgctxt "As in Distrobox, Toolbox, Kapsule etc."
-#| msgid "Container"
+#, kde-format
 msgid "Kapsule Container"
-msgstr "Kontajner"
+msgstr "Kontajner Kapsule"
 
 #: containers/KapsuleDetector.cpp:99
 #, kde-format
@@ -740,12 +738,10 @@ msgid "Deselect All"
 msgstr "Zrušiť výber"
 
 #: filterHotSpots/ColorFilterHotSpot.cpp:85
-#, fuzzy, kde-format
-#| msgctxt "@label:listbox Column header text for the actual colors"
-#| msgid "Color"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Color"
-msgstr "Farba"
+msgstr "Kopírovať farbu"
 
 #: filterHotSpots/ColorFilterHotSpot.cpp:148
 #, kde-format
