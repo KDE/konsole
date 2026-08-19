@@ -4735,28 +4735,18 @@ msgid "None"
 msgstr "无"
 
 #: widgets/EditProfileDialog.cpp:557
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Suffix of the number of columns (N columns). The leading space is needed "
-#| "to separate it from the number value."
-#| msgid " column"
-#| msgid_plural " columns"
+#, kde-format
 msgctxt "@item number of columns"
 msgid "%v column"
 msgid_plural "%v columns"
-msgstr[0] " 列"
+msgstr[0] "%v 列"
 
 #: widgets/EditProfileDialog.cpp:558
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Suffix of the number of rows (N rows). The leading space is needed to "
-#| "separate it from the number value."
-#| msgid " row"
-#| msgid_plural " rows"
+#, kde-format
 msgctxt "@item number of rows"
 msgid "%v row"
 msgid_plural "%v rows"
-msgstr[0] " 行"
+msgstr[0] "%v 行"
 
 #: widgets/EditProfileDialog.cpp:570
 #, kde-format
@@ -4794,14 +4784,11 @@ msgid "One environment variable per line"
 msgstr "每个环境变量一行"
 
 #: widgets/EditProfileDialog.cpp:720
-#, fuzzy, kde-format
-#| msgctxt "Unit of time"
-#| msgid " second"
-#| msgid_plural " seconds"
+#, kde-format
 msgctxt "@item number of seconds"
 msgid "%v second"
 msgid_plural "%v seconds"
-msgstr[0] " 秒"
+msgstr[0] "%v 秒"
 
 #: widgets/EditProfileDialog.cpp:850
 #, kde-format
@@ -5634,14 +5621,11 @@ msgid "The threshold for continuous silence to be detected by Konsole"
 msgstr "Konsole 检测到连续静止的时间阈值"
 
 #: widgets/HistorySizeWidget.cpp:41
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox Unit of scrollback"
-#| msgid " line"
-#| msgid_plural " lines"
+#, kde-format
 msgctxt "@item number of lines"
 msgid "%v line"
 msgid_plural "%v lines"
-msgstr[0] " 行"
+msgstr[0] "%v 行"
 
 #: widgets/HistorySizeWidget.cpp:56
 #, kde-format
