@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-11 00:49+0000\n"
+"POT-Creation-Date: 2026-08-19 00:50+0000\n"
 "PO-Revision-Date: 2010-01-22 15:02+0100\n"
 "Last-Translator: Jean Cayron <jean.cayron@gmail.com>\n"
 "Language-Team: Walloon <linux-wa@walon.org>\n"
@@ -987,249 +987,249 @@ msgstr "Intrêye :"
 msgid "Output:"
 msgstr "Rexhowe :"
 
-#: main.cpp:189
+#: main.cpp:173
 #, fuzzy, kde-format
 #| msgid "Konsole"
 msgctxt "@title"
 msgid "Konsole"
 msgstr "Konsole"
 
-#: main.cpp:191
+#: main.cpp:175
 #, fuzzy, kde-format
 #| msgid "Terminal emulator"
 msgctxt "@title"
 msgid "Terminal emulator"
 msgstr "Emulateu d' terminå"
 
-#: main.cpp:193
+#: main.cpp:177
 #, kde-format
 msgctxt "@info:credit"
 msgid "(c) 1997-2022, The Konsole Developers"
 msgstr ""
 
-#: main.cpp:369
+#: main.cpp:353
 #, fuzzy, kde-format
 #| msgid "Kurt V. Hindenburg"
 msgctxt "@info:credit"
 msgid "Kurt Hindenburg"
 msgstr "Kurt V. Hindenburg"
 
-#: main.cpp:371
+#: main.cpp:355
 #, fuzzy, kde-format
 #| msgid "Bug fixes and general improvements"
 msgctxt "@info:credit"
 msgid "General maintainer, bug fixes and general improvements"
 msgstr "coridjaedje di bugs ey amidraedjes di totes sôres"
 
-#: main.cpp:374
+#: main.cpp:358
 #, fuzzy, kde-format
 #| msgid "Robert Knight"
 msgctxt "@info:credit"
 msgid "Robert Knight"
 msgstr "Robert Knight"
 
-#: main.cpp:375
+#: main.cpp:359
 #, kde-format
 msgctxt "@info:credit"
 msgid "Previous maintainer, ported to KDE4"
 msgstr ""
 
-#: main.cpp:377
+#: main.cpp:361
 #, fuzzy, kde-format
 #| msgid "Lars Doelle"
 msgctxt "@info:credit"
 msgid "Lars Doelle"
 msgstr "Lars Doelle"
 
-#: main.cpp:377
+#: main.cpp:361
 #, fuzzy, kde-format
 #| msgid "Terminal emulator"
 msgctxt "@info:credit"
 msgid "Original author"
 msgstr "Emulateu d' terminå"
 
-#: main.cpp:378
+#: main.cpp:362
 #, kde-format
 msgctxt "@info:credit"
 msgid "Ahmad Samir"
 msgstr ""
 
-#: main.cpp:379 main.cpp:382 main.cpp:385 main.cpp:388
+#: main.cpp:363 main.cpp:366 main.cpp:369 main.cpp:372
 #, fuzzy, kde-format
 #| msgid "Bug fixes and general improvements"
 msgctxt "@info:credit"
 msgid "Major refactoring, bug fixes and major improvements"
 msgstr "coridjaedje di bugs ey amidraedjes di totes sôres"
 
-#: main.cpp:381
+#: main.cpp:365
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carlos Alves"
 msgstr ""
 
-#: main.cpp:384
+#: main.cpp:368
 #, kde-format
 msgctxt "@info:credit"
 msgid "Tomaz Canabrava"
 msgstr ""
 
-#: main.cpp:387
+#: main.cpp:371
 #, kde-format
 msgctxt "@info:credit"
 msgid "Gustavo Carneiro"
 msgstr ""
 
-#: main.cpp:390
+#: main.cpp:374
 #, kde-format
 msgctxt "@info:credit"
 msgid "Edwin Pujols"
 msgstr ""
 
-#: main.cpp:391 main.cpp:394 main.cpp:396 main.cpp:401 main.cpp:403
-#: main.cpp:404 main.cpp:405
+#: main.cpp:375 main.cpp:378 main.cpp:380 main.cpp:385 main.cpp:387
+#: main.cpp:388 main.cpp:389
 #, fuzzy, kde-format
 #| msgid "Bug fixes and general improvements"
 msgctxt "@info:credit"
 msgid "Bug fixes and general improvements"
 msgstr "coridjaedje di bugs ey amidraedjes di totes sôres"
 
-#: main.cpp:393
+#: main.cpp:377
 #, kde-format
 msgctxt "@info:credit"
 msgid "Martin T. H. Sandsmark"
 msgstr ""
 
-#: main.cpp:396
+#: main.cpp:380
 #, kde-format
 msgctxt "@info:credit"
 msgid "Nate Graham"
 msgstr ""
 
-#: main.cpp:397
+#: main.cpp:381
 #, kde-format
 msgctxt "@info:credit"
 msgid "Mariusz Glebocki"
 msgstr ""
 
-#: main.cpp:398
+#: main.cpp:382
 #, fuzzy, kde-format
 #| msgid "Bug fixes and general improvements"
 msgctxt "@info:credit"
 msgid "Bug fixes and major improvements"
 msgstr "coridjaedje di bugs ey amidraedjes di totes sôres"
 
-#: main.cpp:400
+#: main.cpp:384
 #, fuzzy, kde-format
 #| msgid "Thomas Dreibholz"
 msgctxt "@info:credit"
 msgid "Thomas Surrel"
 msgstr "Thomas Dreibholz"
 
-#: main.cpp:403
+#: main.cpp:387
 #, kde-format
 msgctxt "@info:credit"
 msgid "Jekyll Wu"
 msgstr ""
 
-#: main.cpp:404
+#: main.cpp:388
 #, fuzzy, kde-format
 #| msgid "Waldo Bastian"
 msgctxt "@info:credit"
 msgid "Waldo Bastian"
 msgstr "Waldo Bastian"
 
-#: main.cpp:405
+#: main.cpp:389
 #, fuzzy, kde-format
 #| msgid "Stephan Binner"
 msgctxt "@info:credit"
 msgid "Stephan Binner"
 msgstr "Stephan Binner"
 
-#: main.cpp:406
+#: main.cpp:390
 #, fuzzy, kde-format
 #| msgid "Thomas Dreibholz"
 msgctxt "@info:credit"
 msgid "Thomas Dreibholz"
 msgstr "Thomas Dreibholz"
 
-#: main.cpp:406
+#: main.cpp:390
 #, fuzzy, kde-format
 #| msgid "General improvements"
 msgctxt "@info:credit"
 msgid "General improvements"
 msgstr "Amidraedjes di totes sôres"
 
-#: main.cpp:407
+#: main.cpp:391
 #, fuzzy, kde-format
 #| msgid "Chris Machemer"
 msgctxt "@info:credit"
 msgid "Chris Machemer"
 msgstr "Chris Machemer"
 
-#: main.cpp:407 main.cpp:408 main.cpp:435 main.cpp:436 main.cpp:437
-#: main.cpp:438
+#: main.cpp:391 main.cpp:392 main.cpp:419 main.cpp:420 main.cpp:421
+#: main.cpp:422
 #, fuzzy, kde-format
 #| msgid "Bug fixes"
 msgctxt "@info:credit"
 msgid "Bug fixes"
 msgstr "Coridjaedje di bugs"
 
-#: main.cpp:408
+#: main.cpp:392
 #, kde-format
 msgctxt "@info:credit"
 msgid "Francesco Cecconi"
 msgstr ""
 
-#: main.cpp:409
+#: main.cpp:393
 #, fuzzy, kde-format
 #| msgid "Stephan Kulow"
 msgctxt "@info:credit"
 msgid "Stephan Kulow"
 msgstr "Stephan Kulow"
 
-#: main.cpp:409
+#: main.cpp:393
 #, fuzzy, kde-format
 #| msgid "Solaris support and history"
 msgctxt "@info:credit"
 msgid "Solaris support and history"
 msgstr "Sopoirt po Solaris ey ovraedjes so l' istwere"
 
-#: main.cpp:410
+#: main.cpp:394
 #, fuzzy, kde-format
 #| msgid "Alexander Neundorf"
 msgctxt "@info:credit"
 msgid "Alexander Neundorf"
 msgstr "Alexander Neundorf"
 
-#: main.cpp:411
+#: main.cpp:395
 #, fuzzy, kde-format
 #| msgid "Bug fixes and improved startup performance"
 msgctxt "@info:credit"
 msgid "Bug fixes and improved startup performance"
 msgstr "Coridjaedje di bugs eyet amidraedje del performance d' enondaedje"
 
-#: main.cpp:413
+#: main.cpp:397
 #, fuzzy, kde-format
 #| msgid "Peter Silva"
 msgctxt "@info:credit"
 msgid "Peter Silva"
 msgstr "Peter Silva"
 
-#: main.cpp:413
+#: main.cpp:397
 #, fuzzy, kde-format
 #| msgid "Marking improvements"
 msgctxt "@info:credit"
 msgid "Marking improvements"
 msgstr "Ramidraedjes"
 
-#: main.cpp:414
+#: main.cpp:398
 #, fuzzy, kde-format
 #| msgid "Lotzi Boloni"
 msgctxt "@info:credit"
 msgid "Lotzi Boloni"
 msgstr "Lotzi Boloni"
 
-#: main.cpp:416
+#: main.cpp:400
 #, fuzzy, kde-format
 #| msgid ""
 #| "Embedded Konsole\n"
@@ -1242,14 +1242,14 @@ msgstr ""
 "Ravalêye Konsole\n"
 "Bår ås usteyes et nos d' sessions"
 
-#: main.cpp:419
+#: main.cpp:403
 #, fuzzy, kde-format
 #| msgid "David Faure"
 msgctxt "@info:credit"
 msgid "David Faure"
 msgstr "David Faure"
 
-#: main.cpp:421
+#: main.cpp:405
 #, fuzzy, kde-format
 #| msgid ""
 #| "Embedded Konsole\n"
@@ -1262,28 +1262,28 @@ msgstr ""
 "Embedded Konsole\n"
 "Amidraedjes di totes sôres"
 
-#: main.cpp:424
+#: main.cpp:408
 #, fuzzy, kde-format
 #| msgid "Antonio Larrosa"
 msgctxt "@info:credit"
 msgid "Antonio Larrosa"
 msgstr "Antonio Larrosa"
 
-#: main.cpp:424
+#: main.cpp:408
 #, fuzzy, kde-format
 #| msgid "Visual effects"
 msgctxt "@info:credit"
 msgid "Visual effects"
 msgstr "Efets vizuwels"
 
-#: main.cpp:425
+#: main.cpp:409
 #, fuzzy, kde-format
 #| msgid "Matthias Ettrich"
 msgctxt "@info:credit"
 msgid "Matthias Ettrich"
 msgstr "Matthias Ettrich"
 
-#: main.cpp:427
+#: main.cpp:411
 #, fuzzy, kde-format
 #| msgid ""
 #| "Code from the kvt project\n"
@@ -1296,77 +1296,77 @@ msgstr ""
 "Côde do pordjet kvt\n"
 "Amidraedjes di totes sôres"
 
-#: main.cpp:430
+#: main.cpp:414
 #, fuzzy, kde-format
 #| msgid "Warwick Allison"
 msgctxt "@info:credit"
 msgid "Warwick Allison"
 msgstr "Warwick Allison"
 
-#: main.cpp:431
+#: main.cpp:415
 #, fuzzy, kde-format
 #| msgid "Schema and text selection improvements"
 msgctxt "@info:credit"
 msgid "Schema and text selection improvements"
 msgstr "Schema eyet amidraedje pol tchuze di tecse"
 
-#: main.cpp:433
+#: main.cpp:417
 #, fuzzy, kde-format
 #| msgid "Dan Pilone"
 msgctxt "@info:credit"
 msgid "Dan Pilone"
 msgstr "Dan Pilone"
 
-#: main.cpp:433
+#: main.cpp:417
 #, fuzzy, kde-format
 #| msgid "SGI port"
 msgctxt "@info:credit"
 msgid "SGI port"
 msgstr "Poirtaedje so SGI"
 
-#: main.cpp:434
+#: main.cpp:418
 #, fuzzy, kde-format
 #| msgid "Kevin Street"
 msgctxt "@info:credit"
 msgid "Kevin Street"
 msgstr "Kevin Street"
 
-#: main.cpp:434
+#: main.cpp:418
 #, fuzzy, kde-format
 #| msgid "FreeBSD port"
 msgctxt "@info:credit"
 msgid "FreeBSD port"
 msgstr "Poirtaedje so FreeBSD"
 
-#: main.cpp:435
+#: main.cpp:419
 #, fuzzy, kde-format
 #| msgid "Sven Fischer"
 msgctxt "@info:credit"
 msgid "Sven Fischer"
 msgstr "Sven Fischer"
 
-#: main.cpp:436
+#: main.cpp:420
 #, fuzzy, kde-format
 #| msgid "Dale M. Flaven"
 msgctxt "@info:credit"
 msgid "Dale M. Flaven"
 msgstr "Dale M. Flaven"
 
-#: main.cpp:437
+#: main.cpp:421
 #, fuzzy, kde-format
 #| msgid "Martin Jones"
 msgctxt "@info:credit"
 msgid "Martin Jones"
 msgstr "Martin Jones"
 
-#: main.cpp:438
+#: main.cpp:422
 #, fuzzy, kde-format
 #| msgid "Lars Knoll"
 msgctxt "@info:credit"
 msgid "Lars Knoll"
 msgstr "Lars Knoll"
 
-#: main.cpp:439
+#: main.cpp:423
 #, fuzzy, kde-format
 #| msgid "Thanks to many others.\n"
 msgctxt "@info:credit"
@@ -1408,39 +1408,39 @@ msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "&Rimåkes"
 
-#: MainWindow.cpp:489
+#: MainWindow.cpp:485
 #, fuzzy, kde-format
 #| msgid "New Color Scheme"
 msgid "&Window Color Scheme"
 msgstr "Novea djeu d' coleurs"
 
-#: MainWindow.cpp:501
+#: MainWindow.cpp:497
 #, fuzzy, kde-format
 #| msgid "Manage Profiles"
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Manaedjî les profils"
 
-#: MainWindow.cpp:507
+#: MainWindow.cpp:503
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr ""
 
-#: MainWindow.cpp:513
+#: MainWindow.cpp:509
 #, fuzzy, kde-format
 #| msgid "Move View Left"
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Potchî al vuwe di hintche"
 
-#: MainWindow.cpp:522
+#: MainWindow.cpp:518
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr ""
 
-#: MainWindow.cpp:874 MainWindow.cpp:891
+#: MainWindow.cpp:870 MainWindow.cpp:887
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have multiple tabs in this window, are you sure you want to quit?"
@@ -1451,28 +1451,28 @@ msgid_plural ""
 msgstr[0] "Vos avoz sacwantès linwetes e ç' purnea ci, voloz cwiter podbon?"
 msgstr[1] "Vos avoz sacwantès linwetes e ç' purnea ci, voloz cwiter podbon?"
 
-#: MainWindow.cpp:880 MainWindow.cpp:897 MainWindow.cpp:911
+#: MainWindow.cpp:876 MainWindow.cpp:893 MainWindow.cpp:907
 #, fuzzy, kde-format
 #| msgid "Confirm Close"
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Racertiner cloyaedje"
 
-#: MainWindow.cpp:881 MainWindow.cpp:898 MainWindow.cpp:912
+#: MainWindow.cpp:877 MainWindow.cpp:894 MainWindow.cpp:908
 #, fuzzy, kde-format
 #| msgid "Konsole"
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Konsole"
 
-#: MainWindow.cpp:899 MainWindow.cpp:913
+#: MainWindow.cpp:895 MainWindow.cpp:909
 #, fuzzy, kde-format
 #| msgid "Close Current Tab"
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Clôre li linwete do moumint"
 
-#: MainWindow.cpp:908
+#: MainWindow.cpp:904
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have multiple tabs in this window, are you sure you want to quit?"
@@ -1480,39 +1480,39 @@ msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "Vos avoz sacwantès linwetes e ç' purnea ci, voloz cwiter podbon?"
 
-#: MainWindow.cpp:1062 Part.cpp:317
+#: MainWindow.cpp:1058 Part.cpp:317
 #, fuzzy, kde-format
 #| msgid "New Profile"
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Novea profil"
 
-#: MainWindow.cpp:1080
+#: MainWindow.cpp:1076
 #, fuzzy, kde-format
 #| msgid "General"
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Djenerå"
 
-#: MainWindow.cpp:1092
+#: MainWindow.cpp:1088
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr ""
 
-#: MainWindow.cpp:1098
+#: MainWindow.cpp:1094
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr ""
 
-#: MainWindow.cpp:1103
+#: MainWindow.cpp:1099
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr ""
 
-#: MainWindow.cpp:1108
+#: MainWindow.cpp:1104
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"

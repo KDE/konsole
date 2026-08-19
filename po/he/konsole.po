@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-11 00:49+0000\n"
+"POT-Creation-Date: 2026-08-19 00:50+0000\n"
 "PO-Revision-Date: 2026-08-11 08:39+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -900,225 +900,225 @@ msgstr "קלט:"
 msgid "Output:"
 msgstr "פלט:"
 
-#: main.cpp:189
+#: main.cpp:173
 #, kde-format
 msgctxt "@title"
 msgid "Konsole"
 msgstr "Konsole"
 
-#: main.cpp:191
+#: main.cpp:175
 #, kde-format
 msgctxt "@title"
 msgid "Terminal emulator"
 msgstr "מדמה מסוף"
 
-#: main.cpp:193
+#: main.cpp:177
 #, kde-format
 msgctxt "@info:credit"
 msgid "(c) 1997-2022, The Konsole Developers"
 msgstr "(c) 1997‏-2022, מפתחי Konsole"
 
-#: main.cpp:369
+#: main.cpp:353
 #, kde-format
 msgctxt "@info:credit"
 msgid "Kurt Hindenburg"
 msgstr "קרט הינדנבורג"
 
-#: main.cpp:371
+#: main.cpp:355
 #, kde-format
 msgctxt "@info:credit"
 msgid "General maintainer, bug fixes and general improvements"
 msgstr "מתחזק ראשי, תיקוני תקלות ושיפורים כללים"
 
-#: main.cpp:374
+#: main.cpp:358
 #, kde-format
 msgctxt "@info:credit"
 msgid "Robert Knight"
 msgstr "רוברט נייט"
 
-#: main.cpp:375
+#: main.cpp:359
 #, kde-format
 msgctxt "@info:credit"
 msgid "Previous maintainer, ported to KDE4"
 msgstr "מתחזק קודם, הסבה אל KDE4"
 
-#: main.cpp:377
+#: main.cpp:361
 #, kde-format
 msgctxt "@info:credit"
 msgid "Lars Doelle"
 msgstr "לארס דואל"
 
-#: main.cpp:377
+#: main.cpp:361
 #, kde-format
 msgctxt "@info:credit"
 msgid "Original author"
 msgstr "יוצר מקורי"
 
-#: main.cpp:378
+#: main.cpp:362
 #, kde-format
 msgctxt "@info:credit"
 msgid "Ahmad Samir"
 msgstr "אחמד סמיר"
 
-#: main.cpp:379 main.cpp:382 main.cpp:385 main.cpp:388
+#: main.cpp:363 main.cpp:366 main.cpp:369 main.cpp:372
 #, kde-format
 msgctxt "@info:credit"
 msgid "Major refactoring, bug fixes and major improvements"
 msgstr "כתיבה מחדש משמעותית, תיקוני תקלות ושיפורים משמעותיים"
 
-#: main.cpp:381
+#: main.cpp:365
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carlos Alves"
 msgstr "קרלוס אלביס"
 
-#: main.cpp:384
+#: main.cpp:368
 #, kde-format
 msgctxt "@info:credit"
 msgid "Tomaz Canabrava"
 msgstr "טומאש קנאבראווה"
 
-#: main.cpp:387
+#: main.cpp:371
 #, kde-format
 msgctxt "@info:credit"
 msgid "Gustavo Carneiro"
 msgstr "גוסטבו קרניירו"
 
-#: main.cpp:390
+#: main.cpp:374
 #, kde-format
 msgctxt "@info:credit"
 msgid "Edwin Pujols"
 msgstr "אדווין פוחוס"
 
-#: main.cpp:391 main.cpp:394 main.cpp:396 main.cpp:401 main.cpp:403
-#: main.cpp:404 main.cpp:405
+#: main.cpp:375 main.cpp:378 main.cpp:380 main.cpp:385 main.cpp:387
+#: main.cpp:388 main.cpp:389
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes and general improvements"
 msgstr "תיקוני תקלות ושיפורים כלליים"
 
-#: main.cpp:393
+#: main.cpp:377
 #, kde-format
 msgctxt "@info:credit"
 msgid "Martin T. H. Sandsmark"
 msgstr "מרטין ט. ה. זנדסמרק"
 
-#: main.cpp:396
+#: main.cpp:380
 #, kde-format
 msgctxt "@info:credit"
 msgid "Nate Graham"
 msgstr "נייט גרהם"
 
-#: main.cpp:397
+#: main.cpp:381
 #, kde-format
 msgctxt "@info:credit"
 msgid "Mariusz Glebocki"
 msgstr "מריוש גלבוצ׳קי"
 
-#: main.cpp:398
+#: main.cpp:382
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes and major improvements"
 msgstr "תיקוני תקלות ושיפורים משמעותיים"
 
-#: main.cpp:400
+#: main.cpp:384
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thomas Surrel"
 msgstr "תומס סורל"
 
-#: main.cpp:403
+#: main.cpp:387
 #, kde-format
 msgctxt "@info:credit"
 msgid "Jekyll Wu"
 msgstr "ג׳קיל וו"
 
-#: main.cpp:404
+#: main.cpp:388
 #, kde-format
 msgctxt "@info:credit"
 msgid "Waldo Bastian"
 msgstr "ולדו בסטיאן"
 
-#: main.cpp:405
+#: main.cpp:389
 #, kde-format
 msgctxt "@info:credit"
 msgid "Stephan Binner"
 msgstr "סטפן בינר"
 
-#: main.cpp:406
+#: main.cpp:390
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thomas Dreibholz"
 msgstr "תומס דרייבהולץ"
 
-#: main.cpp:406
+#: main.cpp:390
 #, kde-format
 msgctxt "@info:credit"
 msgid "General improvements"
 msgstr "שיפורים כלליים"
 
-#: main.cpp:407
+#: main.cpp:391
 #, kde-format
 msgctxt "@info:credit"
 msgid "Chris Machemer"
 msgstr "Chris Machemer"
 
-#: main.cpp:407 main.cpp:408 main.cpp:435 main.cpp:436 main.cpp:437
-#: main.cpp:438
+#: main.cpp:391 main.cpp:392 main.cpp:419 main.cpp:420 main.cpp:421
+#: main.cpp:422
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes"
 msgstr "תיקוני תקלות"
 
-#: main.cpp:408
+#: main.cpp:392
 #, kde-format
 msgctxt "@info:credit"
 msgid "Francesco Cecconi"
 msgstr "Francesco Cecconi"
 
-#: main.cpp:409
+#: main.cpp:393
 #, kde-format
 msgctxt "@info:credit"
 msgid "Stephan Kulow"
 msgstr "Stephan Kulow"
 
-#: main.cpp:409
+#: main.cpp:393
 #, kde-format
 msgctxt "@info:credit"
 msgid "Solaris support and history"
 msgstr "תמיכה בסולאריס והיסטוריה"
 
-#: main.cpp:410
+#: main.cpp:394
 #, kde-format
 msgctxt "@info:credit"
 msgid "Alexander Neundorf"
 msgstr "אלכסנדר נוינדורף"
 
-#: main.cpp:411
+#: main.cpp:395
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes and improved startup performance"
 msgstr "תיקוני תקלות ושיפור בביצועי ההפעלה"
 
-#: main.cpp:413
+#: main.cpp:397
 #, kde-format
 msgctxt "@info:credit"
 msgid "Peter Silva"
 msgstr "פיטר סילבה"
 
-#: main.cpp:413
+#: main.cpp:397
 #, kde-format
 msgctxt "@info:credit"
 msgid "Marking improvements"
 msgstr "שיפורים בסימניות"
 
-#: main.cpp:414
+#: main.cpp:398
 #, kde-format
 msgctxt "@info:credit"
 msgid "Lotzi Boloni"
 msgstr "לוצי בולוני"
 
-#: main.cpp:416
+#: main.cpp:400
 #, kde-format
 msgctxt "@info:credit"
 msgid ""
@@ -1128,13 +1128,13 @@ msgstr ""
 "מסוף מוטמע\n"
 "סרגלי כלים ושמות הפעלות"
 
-#: main.cpp:419
+#: main.cpp:403
 #, kde-format
 msgctxt "@info:credit"
 msgid "David Faure"
 msgstr "דיויד פור"
 
-#: main.cpp:421
+#: main.cpp:405
 #, kde-format
 msgctxt "@info:credit"
 msgid ""
@@ -1144,25 +1144,25 @@ msgstr ""
 "מסוף מוטמע\n"
 "שיפורים כלליים"
 
-#: main.cpp:424
+#: main.cpp:408
 #, kde-format
 msgctxt "@info:credit"
 msgid "Antonio Larrosa"
 msgstr "אנטוניו לרוסה"
 
-#: main.cpp:424
+#: main.cpp:408
 #, kde-format
 msgctxt "@info:credit"
 msgid "Visual effects"
 msgstr "אפקטים חזותיים"
 
-#: main.cpp:425
+#: main.cpp:409
 #, kde-format
 msgctxt "@info:credit"
 msgid "Matthias Ettrich"
 msgstr "מתיאס אטריק"
 
-#: main.cpp:427
+#: main.cpp:411
 #, kde-format
 msgctxt "@info:credit"
 msgid ""
@@ -1172,67 +1172,67 @@ msgstr ""
 "לקח קוד ממיזם kvt\n"
 "שיפורים כלליים"
 
-#: main.cpp:430
+#: main.cpp:414
 #, kde-format
 msgctxt "@info:credit"
 msgid "Warwick Allison"
 msgstr "וורוויק אליסון"
 
-#: main.cpp:431
+#: main.cpp:415
 #, kde-format
 msgctxt "@info:credit"
 msgid "Schema and text selection improvements"
 msgstr "שיפורי ערכות צבע ובחירת טקסט"
 
-#: main.cpp:433
+#: main.cpp:417
 #, kde-format
 msgctxt "@info:credit"
 msgid "Dan Pilone"
 msgstr "דן פיילון"
 
-#: main.cpp:433
+#: main.cpp:417
 #, kde-format
 msgctxt "@info:credit"
 msgid "SGI port"
 msgstr "הסבה ל־SGI"
 
-#: main.cpp:434
+#: main.cpp:418
 #, kde-format
 msgctxt "@info:credit"
 msgid "Kevin Street"
 msgstr "קווין סטריט"
 
-#: main.cpp:434
+#: main.cpp:418
 #, kde-format
 msgctxt "@info:credit"
 msgid "FreeBSD port"
 msgstr "הסבה ל־FreeBSD"
 
-#: main.cpp:435
+#: main.cpp:419
 #, kde-format
 msgctxt "@info:credit"
 msgid "Sven Fischer"
 msgstr "סוון פישר"
 
-#: main.cpp:436
+#: main.cpp:420
 #, kde-format
 msgctxt "@info:credit"
 msgid "Dale M. Flaven"
 msgstr "Dale M. Flaven"
 
-#: main.cpp:437
+#: main.cpp:421
 #, kde-format
 msgctxt "@info:credit"
 msgid "Martin Jones"
 msgstr "מרטין ג׳ונס"
 
-#: main.cpp:438
+#: main.cpp:422
 #, kde-format
 msgctxt "@info:credit"
 msgid "Lars Knoll"
 msgstr "Lars Knoll"
 
-#: main.cpp:439
+#: main.cpp:423
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
@@ -1268,36 +1268,36 @@ msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "&סימניות"
 
-#: MainWindow.cpp:489
+#: MainWindow.cpp:485
 #, kde-format
 msgid "&Window Color Scheme"
 msgstr "&סכמת צבע חלון"
 
-#: MainWindow.cpp:501
+#: MainWindow.cpp:497
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "ניהול פרופילים…"
 
-#: MainWindow.cpp:507
+#: MainWindow.cpp:503
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "הפעלת תפריט"
 
-#: MainWindow.cpp:513
+#: MainWindow.cpp:509
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "שמירת פריסת הלשוניות…"
 
-#: MainWindow.cpp:522
+#: MainWindow.cpp:518
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "טעינת פריסת לשוניות…"
 
-#: MainWindow.cpp:874 MainWindow.cpp:891
+#: MainWindow.cpp:870 MainWindow.cpp:887
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1308,61 +1308,61 @@ msgstr[1] "יש שני תהליכים רצים בחלון זה. לצאת בכל 
 msgstr[2] "יש %1 תהליכים רצים בחלון זה. לצאת בכל זאת?"
 msgstr[3] "יש %1 תהליכים רצים בחלון זה. לצאת בכל זאת?"
 
-#: MainWindow.cpp:880 MainWindow.cpp:897 MainWindow.cpp:911
+#: MainWindow.cpp:876 MainWindow.cpp:893 MainWindow.cpp:907
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "אישור יציאה"
 
-#: MainWindow.cpp:881 MainWindow.cpp:898 MainWindow.cpp:912
+#: MainWindow.cpp:877 MainWindow.cpp:894 MainWindow.cpp:908
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "סגירת החלון"
 
-#: MainWindow.cpp:899 MainWindow.cpp:913
+#: MainWindow.cpp:895 MainWindow.cpp:909
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "סגירת ה&לשונית הנוכחית"
 
-#: MainWindow.cpp:908
+#: MainWindow.cpp:904
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "יש עוד %1 מסופים פתוחים בחלון הזה. לצאת בכל זאת?"
 
-#: MainWindow.cpp:1062 Part.cpp:317
+#: MainWindow.cpp:1058 Part.cpp:317
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "פרופילים"
 
-#: MainWindow.cpp:1080
+#: MainWindow.cpp:1076
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "כללי"
 
-#: MainWindow.cpp:1092
+#: MainWindow.cpp:1088
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr "זיכרון"
 
-#: MainWindow.cpp:1098
+#: MainWindow.cpp:1094
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "סרגל לשוניות / מפצלים"
 
-#: MainWindow.cpp:1103
+#: MainWindow.cpp:1099
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "קבצים זמניים"
 
-#: MainWindow.cpp:1108
+#: MainWindow.cpp:1104
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"

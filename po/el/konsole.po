@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-11 00:49+0000\n"
+"POT-Creation-Date: 2026-08-19 00:50+0000\n"
 "PO-Revision-Date: 2024-09-05 12:59+0300\n"
 "Last-Translator: Αντώνης Γέραλης <capoiosct@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -919,225 +919,225 @@ msgstr "Είσοδος:"
 msgid "Output:"
 msgstr "Έξοδος:"
 
-#: main.cpp:189
+#: main.cpp:173
 #, kde-format
 msgctxt "@title"
 msgid "Konsole"
 msgstr "Konsole"
 
-#: main.cpp:191
+#: main.cpp:175
 #, kde-format
 msgctxt "@title"
 msgid "Terminal emulator"
 msgstr "Εξομοιωτής τερματικού"
 
-#: main.cpp:193
+#: main.cpp:177
 #, kde-format
 msgctxt "@info:credit"
 msgid "(c) 1997-2022, The Konsole Developers"
 msgstr "(c) 1997-2022, Οι προγραμματιστές του Konsole"
 
-#: main.cpp:369
+#: main.cpp:353
 #, kde-format
 msgctxt "@info:credit"
 msgid "Kurt Hindenburg"
 msgstr "Kurt Hindenburg"
 
-#: main.cpp:371
+#: main.cpp:355
 #, kde-format
 msgctxt "@info:credit"
 msgid "General maintainer, bug fixes and general improvements"
 msgstr "Συντηρητής, διόρθωση σφαλμάτων και γενικές βελτιώσεις"
 
-#: main.cpp:374
+#: main.cpp:358
 #, kde-format
 msgctxt "@info:credit"
 msgid "Robert Knight"
 msgstr "Robert Knight"
 
-#: main.cpp:375
+#: main.cpp:359
 #, kde-format
 msgctxt "@info:credit"
 msgid "Previous maintainer, ported to KDE4"
 msgstr "Πρώην συντηρητής, μεταφορά στο KDE4"
 
-#: main.cpp:377
+#: main.cpp:361
 #, kde-format
 msgctxt "@info:credit"
 msgid "Lars Doelle"
 msgstr "Lars Doelle"
 
-#: main.cpp:377
+#: main.cpp:361
 #, kde-format
 msgctxt "@info:credit"
 msgid "Original author"
 msgstr "Αρχικός συγγραφέας"
 
-#: main.cpp:378
+#: main.cpp:362
 #, kde-format
 msgctxt "@info:credit"
 msgid "Ahmad Samir"
 msgstr "Ahmad Samir"
 
-#: main.cpp:379 main.cpp:382 main.cpp:385 main.cpp:388
+#: main.cpp:363 main.cpp:366 main.cpp:369 main.cpp:372
 #, kde-format
 msgctxt "@info:credit"
 msgid "Major refactoring, bug fixes and major improvements"
 msgstr "Σημαντική ανασχεδίαση, διόρθωση σφαλμάτων και σημαντικές βελτιώσεις"
 
-#: main.cpp:381
+#: main.cpp:365
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carlos Alves"
 msgstr "Carlos Alves"
 
-#: main.cpp:384
+#: main.cpp:368
 #, kde-format
 msgctxt "@info:credit"
 msgid "Tomaz Canabrava"
 msgstr "Tomaz Canabrava"
 
-#: main.cpp:387
+#: main.cpp:371
 #, kde-format
 msgctxt "@info:credit"
 msgid "Gustavo Carneiro"
 msgstr "Gustavo Carneiro"
 
-#: main.cpp:390
+#: main.cpp:374
 #, kde-format
 msgctxt "@info:credit"
 msgid "Edwin Pujols"
 msgstr "Edwin Pujols"
 
-#: main.cpp:391 main.cpp:394 main.cpp:396 main.cpp:401 main.cpp:403
-#: main.cpp:404 main.cpp:405
+#: main.cpp:375 main.cpp:378 main.cpp:380 main.cpp:385 main.cpp:387
+#: main.cpp:388 main.cpp:389
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes and general improvements"
 msgstr "Διόρθωση σφαλμάτων και γενικές βελτιώσεις"
 
-#: main.cpp:393
+#: main.cpp:377
 #, kde-format
 msgctxt "@info:credit"
 msgid "Martin T. H. Sandsmark"
 msgstr "Martin T. H. Sandsmark"
 
-#: main.cpp:396
+#: main.cpp:380
 #, kde-format
 msgctxt "@info:credit"
 msgid "Nate Graham"
 msgstr "Nate Graham"
 
-#: main.cpp:397
+#: main.cpp:381
 #, kde-format
 msgctxt "@info:credit"
 msgid "Mariusz Glebocki"
 msgstr "Mariusz Glebocki"
 
-#: main.cpp:398
+#: main.cpp:382
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes and major improvements"
 msgstr "Διόρθωση σφαλμάτων και σημαντικές βελτιώσεις"
 
-#: main.cpp:400
+#: main.cpp:384
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thomas Surrel"
 msgstr "Thomas Surrel"
 
-#: main.cpp:403
+#: main.cpp:387
 #, kde-format
 msgctxt "@info:credit"
 msgid "Jekyll Wu"
 msgstr "Jekyll Wu"
 
-#: main.cpp:404
+#: main.cpp:388
 #, kde-format
 msgctxt "@info:credit"
 msgid "Waldo Bastian"
 msgstr "Waldo Bastian"
 
-#: main.cpp:405
+#: main.cpp:389
 #, kde-format
 msgctxt "@info:credit"
 msgid "Stephan Binner"
 msgstr "Stephan Binner"
 
-#: main.cpp:406
+#: main.cpp:390
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thomas Dreibholz"
 msgstr "Thomas Dreibholz"
 
-#: main.cpp:406
+#: main.cpp:390
 #, kde-format
 msgctxt "@info:credit"
 msgid "General improvements"
 msgstr "Γενικές βελτιώσεις"
 
-#: main.cpp:407
+#: main.cpp:391
 #, kde-format
 msgctxt "@info:credit"
 msgid "Chris Machemer"
 msgstr "Chris Machemer"
 
-#: main.cpp:407 main.cpp:408 main.cpp:435 main.cpp:436 main.cpp:437
-#: main.cpp:438
+#: main.cpp:391 main.cpp:392 main.cpp:419 main.cpp:420 main.cpp:421
+#: main.cpp:422
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes"
 msgstr "Διόρθωση σφαλμάτων"
 
-#: main.cpp:408
+#: main.cpp:392
 #, kde-format
 msgctxt "@info:credit"
 msgid "Francesco Cecconi"
 msgstr "Francesco Cecconi"
 
-#: main.cpp:409
+#: main.cpp:393
 #, kde-format
 msgctxt "@info:credit"
 msgid "Stephan Kulow"
 msgstr "Stephan Kulow"
 
-#: main.cpp:409
+#: main.cpp:393
 #, kde-format
 msgctxt "@info:credit"
 msgid "Solaris support and history"
 msgstr "Υποστήριξη Solaris και ιστορικό"
 
-#: main.cpp:410
+#: main.cpp:394
 #, kde-format
 msgctxt "@info:credit"
 msgid "Alexander Neundorf"
 msgstr "Alexander Neundorf"
 
-#: main.cpp:411
+#: main.cpp:395
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes and improved startup performance"
 msgstr "Διόρθωση σφαλμάτων και βελτίωση απόδοσης κατά την εκκίνηση"
 
-#: main.cpp:413
+#: main.cpp:397
 #, kde-format
 msgctxt "@info:credit"
 msgid "Peter Silva"
 msgstr "Peter Silva"
 
-#: main.cpp:413
+#: main.cpp:397
 #, kde-format
 msgctxt "@info:credit"
 msgid "Marking improvements"
 msgstr "Βελτιώσεις σήμανσης"
 
-#: main.cpp:414
+#: main.cpp:398
 #, kde-format
 msgctxt "@info:credit"
 msgid "Lotzi Boloni"
 msgstr "Lotzi Boloni"
 
-#: main.cpp:416
+#: main.cpp:400
 #, kde-format
 msgctxt "@info:credit"
 msgid ""
@@ -1147,13 +1147,13 @@ msgstr ""
 "Ενσωματωμένο Konsole\n"
 "Γραμμή εργαλείων και ονόματα συνεδριών"
 
-#: main.cpp:419
+#: main.cpp:403
 #, kde-format
 msgctxt "@info:credit"
 msgid "David Faure"
 msgstr "David Faure"
 
-#: main.cpp:421
+#: main.cpp:405
 #, kde-format
 msgctxt "@info:credit"
 msgid ""
@@ -1163,25 +1163,25 @@ msgstr ""
 "Ενσωματωμένο Konsole\n"
 "Γενικές βελτιώσεις"
 
-#: main.cpp:424
+#: main.cpp:408
 #, kde-format
 msgctxt "@info:credit"
 msgid "Antonio Larrosa"
 msgstr "Antonio Larrosa"
 
-#: main.cpp:424
+#: main.cpp:408
 #, kde-format
 msgctxt "@info:credit"
 msgid "Visual effects"
 msgstr "Οπτικά εφέ"
 
-#: main.cpp:425
+#: main.cpp:409
 #, kde-format
 msgctxt "@info:credit"
 msgid "Matthias Ettrich"
 msgstr "Matthias Ettrich"
 
-#: main.cpp:427
+#: main.cpp:411
 #, kde-format
 msgctxt "@info:credit"
 msgid ""
@@ -1191,67 +1191,67 @@ msgstr ""
 "Κώδικας από το έργο kvt\n"
 "Γενικές βελτιώσεις"
 
-#: main.cpp:430
+#: main.cpp:414
 #, kde-format
 msgctxt "@info:credit"
 msgid "Warwick Allison"
 msgstr "Warwick Allison"
 
-#: main.cpp:431
+#: main.cpp:415
 #, kde-format
 msgctxt "@info:credit"
 msgid "Schema and text selection improvements"
 msgstr "Βελτιώσεις σχημάτων και επιλογής κειμένου"
 
-#: main.cpp:433
+#: main.cpp:417
 #, kde-format
 msgctxt "@info:credit"
 msgid "Dan Pilone"
 msgstr "Dan Pilone"
 
-#: main.cpp:433
+#: main.cpp:417
 #, kde-format
 msgctxt "@info:credit"
 msgid "SGI port"
 msgstr "Προσαρμογή στο SGI"
 
-#: main.cpp:434
+#: main.cpp:418
 #, kde-format
 msgctxt "@info:credit"
 msgid "Kevin Street"
 msgstr "Kevin Street"
 
-#: main.cpp:434
+#: main.cpp:418
 #, kde-format
 msgctxt "@info:credit"
 msgid "FreeBSD port"
 msgstr "Προσαρμογή στο FreeBSD"
 
-#: main.cpp:435
+#: main.cpp:419
 #, kde-format
 msgctxt "@info:credit"
 msgid "Sven Fischer"
 msgstr "Sven Fischer"
 
-#: main.cpp:436
+#: main.cpp:420
 #, kde-format
 msgctxt "@info:credit"
 msgid "Dale M. Flaven"
 msgstr "Dale M. Flaven"
 
-#: main.cpp:437
+#: main.cpp:421
 #, kde-format
 msgctxt "@info:credit"
 msgid "Martin Jones"
 msgstr "Martin Jones"
 
-#: main.cpp:438
+#: main.cpp:422
 #, kde-format
 msgctxt "@info:credit"
 msgid "Lars Knoll"
 msgstr "Lars Knoll"
 
-#: main.cpp:439
+#: main.cpp:423
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
@@ -1287,36 +1287,36 @@ msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "&Σελιδοδείκτες"
 
-#: MainWindow.cpp:489
+#: MainWindow.cpp:485
 #, kde-format
 msgid "&Window Color Scheme"
 msgstr "&Θέμα χρωμάτων παραθύρου"
 
-#: MainWindow.cpp:501
+#: MainWindow.cpp:497
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Διαχείριση προφίλ..."
 
-#: MainWindow.cpp:507
+#: MainWindow.cpp:503
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Ενεργοποίηση του μενού"
 
-#: MainWindow.cpp:513
+#: MainWindow.cpp:509
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Αποθήκευση διάταξης καρτελών..."
 
-#: MainWindow.cpp:522
+#: MainWindow.cpp:518
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Φόρτωση διάταξης καρτελών..."
 
-#: MainWindow.cpp:874 MainWindow.cpp:891
+#: MainWindow.cpp:870 MainWindow.cpp:887
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1325,25 +1325,25 @@ msgid_plural ""
 msgstr[0] "Εκτελείται μια διεργασία σε αυτό το παράθυρο. Θα το κλείσετε;"
 msgstr[1] "Εκτελούνται %1 διεργασίες σε αυτό το παράθυρο. Θα το κλείσετε;"
 
-#: MainWindow.cpp:880 MainWindow.cpp:897 MainWindow.cpp:911
+#: MainWindow.cpp:876 MainWindow.cpp:893 MainWindow.cpp:907
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Επιβεβαίωση κλεισίματος"
 
-#: MainWindow.cpp:881 MainWindow.cpp:898 MainWindow.cpp:912
+#: MainWindow.cpp:877 MainWindow.cpp:894 MainWindow.cpp:908
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Κλείσιμο &παραθύρου"
 
-#: MainWindow.cpp:899 MainWindow.cpp:913
+#: MainWindow.cpp:895 MainWindow.cpp:909
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Κλείσιμο τρέχουσας καρ&τέλας"
 
-#: MainWindow.cpp:908
+#: MainWindow.cpp:904
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
@@ -1351,37 +1351,37 @@ msgstr ""
 "Υπάρχουν %1 ανοιχτά τερματικά σε αυτό το παράθυρο. Σίγουρα θέλετε να "
 "κλείσετε;"
 
-#: MainWindow.cpp:1062 Part.cpp:317
+#: MainWindow.cpp:1058 Part.cpp:317
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Προφίλ"
 
-#: MainWindow.cpp:1080
+#: MainWindow.cpp:1076
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Γενικά"
 
-#: MainWindow.cpp:1092
+#: MainWindow.cpp:1088
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr "Μνήμη"
 
-#: MainWindow.cpp:1098
+#: MainWindow.cpp:1094
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Γραμμή καρτελών / Διαχωριστές"
 
-#: MainWindow.cpp:1103
+#: MainWindow.cpp:1099
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Προσωρινά αρχεία"
 
-#: MainWindow.cpp:1108
+#: MainWindow.cpp:1104
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
