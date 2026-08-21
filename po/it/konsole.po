@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-19 00:50+0000\n"
-"PO-Revision-Date: 2026-07-16 15:42+0200\n"
+"PO-Revision-Date: 2026-08-18 14:37+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -4856,29 +4856,19 @@ msgid "None"
 msgstr "Nessuno"
 
 #: widgets/EditProfileDialog.cpp:557
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Suffix of the number of columns (N columns). The leading space is needed "
-#| "to separate it from the number value."
-#| msgid " column"
-#| msgid_plural " columns"
+#, kde-format
 msgctxt "@item number of columns"
 msgid "%v column"
 msgid_plural "%v columns"
 msgstr[0] " colonna"
-msgstr[1] " colonne"
+msgstr[1] "%v colonne"
 
 #: widgets/EditProfileDialog.cpp:558
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Suffix of the number of rows (N rows). The leading space is needed to "
-#| "separate it from the number value."
-#| msgid " row"
-#| msgid_plural " rows"
+#, kde-format
 msgctxt "@item number of rows"
 msgid "%v row"
 msgid_plural "%v rows"
-msgstr[0] " riga"
+msgstr[0] "%v riga"
 msgstr[1] " righe"
 
 #: widgets/EditProfileDialog.cpp:570
@@ -4917,14 +4907,11 @@ msgid "One environment variable per line"
 msgstr "Una variabile d'ambiente per riga"
 
 #: widgets/EditProfileDialog.cpp:720
-#, fuzzy, kde-format
-#| msgctxt "Unit of time"
-#| msgid " second"
-#| msgid_plural " seconds"
+#, kde-format
 msgctxt "@item number of seconds"
 msgid "%v second"
 msgid_plural "%v seconds"
-msgstr[0] " secondo"
+msgstr[0] "%v secondo"
 msgstr[1] " secondi"
 
 #: widgets/EditProfileDialog.cpp:850
@@ -5802,14 +5789,11 @@ msgid "The threshold for continuous silence to be detected by Konsole"
 msgstr "La soglia per far rilevare a Konsole il silenzio continuo"
 
 #: widgets/HistorySizeWidget.cpp:41
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox Unit of scrollback"
-#| msgid " line"
-#| msgid_plural " lines"
+#, kde-format
 msgctxt "@item number of lines"
 msgid "%v line"
 msgid_plural "%v lines"
-msgstr[0] " riga"
+msgstr[0] "%v riga"
 msgstr[1] " righe"
 
 #: widgets/HistorySizeWidget.cpp:56
