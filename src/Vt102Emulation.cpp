@@ -24,6 +24,7 @@
 // KF
 #include <KLocalizedString>
 #include <KNotification>
+#include <qassert.h>
 
 // Konsole
 #include "EscapeSequenceUrlExtractor.h"
@@ -4168,9 +4169,7 @@ void Vt102Emulation::handleKittyKeyboardSet(int flags, int mode)
 bool Vt102Emulation::handleKittyKeyEvent(QKeyEvent *event)
 {
     const int flags = currentKittyKeyboardFlags();
-    if (flags == 0) {
-        return false;
-    }
+    Q_ASSERT(flags != 0);
 
     // Synthetic events from sendText() have key()==0 — fall through to legacy
     if (event->key() == 0) {
