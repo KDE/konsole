@@ -3214,19 +3214,19 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent *event)
     }
 #endif
 
-    // Kitty keyboard protocol — must be checked before the KeyPress-only gate
-    // because flag 2 (report event types) needs release/repeat events too.
-    if (_kittyKeyboardEnabled && currentKittyKeyboardFlags() != 0 && !isReadOnly) {
-        if (handleKittyKeyEvent(event)) {
-            return;
-        }
-    }
+    const bool preferKittyKeyboard = _kittyKeyboardEnabled && currentKittyKeyboardFlags() != 0;
 
-    if (event->type() != QEvent::KeyPress) return;
+    auto tryHandleKittyKeyEvent = [&]() -> bool {
+        return preferKittyKeyboard && !isReadOnly && handleKittyKeyEvent(event);
+    };
+
+    if (event->type() != QEvent::KeyPress) {
+        tryHandleKittyKeyEvent();
+        return;
+    }
 
     const Qt::KeyboardModifiers modifiers = event->modifiers();
     KeyboardTranslator::States states = KeyboardTranslator::NoState;
-
     // get current states
     if (getMode(MODE_NewLine)) {
         states |= KeyboardTranslator::NewLineState;
@@ -3244,7 +3244,7 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent *event)
         states |= KeyboardTranslator::ApplicationKeypadState;
     }
 
-    if (!isReadOnly) {
+    if (!preferKittyKeyboard && !isReadOnly) {
         // check flow control state
         if ((modifiers & Qt::ControlModifier) != 0U) {
             switch (event->key()) {
@@ -3268,6 +3268,8 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent *event)
     }
     // look up key binding
     if (_keyTranslator == nullptr) {
+        if (tryHandleKittyKeyEvent())
+            return;
         if (!isReadOnly) {
             // print an error message to the terminal if no key translator has been
             // set
@@ -3281,7 +3283,13 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent *event)
         }
         return;
     }
+
     KeyboardTranslator::Entry entry = _keyTranslator->findEntry(event->key(), modifiers, states);
+
+    if (entry.command() == KeyboardTranslator::NoCommand && tryHandleKittyKeyEvent()) {
+        return;
+    }
+
     // send result to terminal
     QByteArray textToSend;
 
