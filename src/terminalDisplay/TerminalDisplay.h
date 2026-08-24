@@ -674,7 +674,7 @@ private:
     bool isInTerminalRegion(const QPoint &pnt) const;
 
     // Uses the current settings for trimming whitespace and preserving linebreaks to create a proper flag value for Screen
-    Screen::DecodingOptions currentDecodingOptions();
+    Screen::DecodingOptions currentDecodingOptions() const;
 
     // Boilerplate setup for MessageWidget
     KMessageWidget *createMessageWidget(const QString &text);

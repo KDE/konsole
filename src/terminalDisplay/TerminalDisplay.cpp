@@ -2194,7 +2194,7 @@ bool TerminalDisplay::isInTerminalRegion(const QPoint &point) const
     return !(!visibleRegion().contains(point) || _scrollBar->frameGeometry().contains(point) || inMessageSuspendedWidget);
 }
 
-Screen::DecodingOptions TerminalDisplay::currentDecodingOptions()
+Screen::DecodingOptions TerminalDisplay::currentDecodingOptions() const
 {
     Screen::DecodingOptions decodingOptions;
     if (_preserveLineBreaks) {
