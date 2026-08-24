@@ -700,6 +700,7 @@ private:
 
     void sendMouseSignal(int button, QPoint pos, int eventType, bool sendInexact);
 
+private: // data members
     // the window onto the terminal screen which this display
     // is currently showing.
     QPointer<ScreenWindow> _screenWindow;
