@@ -1723,9 +1723,9 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent *ev)
                 if (_possibleTripleClick) {
                     const QString text = _screenWindow->selectedText(currentDecodingOptions());
                     if (!text.isEmpty()) {
-                        _doubleClickSelectedText = text;
+                        _doubleClickCopyData.text = text;
                         if (_copyTextAsHTML) {
-                            _doubleClickSelectedHtml = _screenWindow->selectedText(currentDecodingOptions() | Screen::ConvertToHtml);
+                            _doubleClickCopyData.html = _screenWindow->selectedText(currentDecodingOptions() | Screen::ConvertToHtml);
                         }
                     }
                 }
@@ -2591,8 +2591,8 @@ void TerminalDisplay::copyToX11Selection(bool useSavedText)
     QString text;
     QString html;
     if (useSavedText) {
-        text = _doubleClickSelectedText;
-        html = _doubleClickSelectedHtml;
+        text = _doubleClickCopyData.text;
+        html = _doubleClickCopyData.html;
     } else {
         text = _screenWindow->selectedText(currentDecodingOptions());
         if (!text.isEmpty() && _copyTextAsHTML) {
@@ -2607,8 +2607,7 @@ void TerminalDisplay::copyToX11Selection(bool useSavedText)
     // Copying the double-click selection *does* double click select + copy.
     // Copying another selection *cancels* double-click select + copy.
     // In both cases, no double-click copy is pending anymore.
-    _doubleClickSelectedText.clear();
-    _doubleClickSelectedHtml.clear();
+    _doubleClickCopyData.clear();
 
     auto createMimeData = [&text, &html]() {
         QMimeData *data = new QMimeData;
@@ -3646,8 +3645,7 @@ int TerminalDisplay::bidiMap(Character *screenline,
 void TerminalDisplay::clearSelection()
 {
     _screenWindow->clearSelection();
-    _doubleClickSelectedText.clear();
-    _doubleClickSelectedHtml.clear();
+    _doubleClickCopyData.clear();
 }
 
 #include "moc_TerminalDisplay.cpp"
