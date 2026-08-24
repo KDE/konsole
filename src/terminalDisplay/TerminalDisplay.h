@@ -700,6 +700,16 @@ private:
 
     void sendMouseSignal(int button, QPoint pos, int eventType, bool sendInexact);
 
+    struct SelectionCopyData {
+        QString text;
+        QString html;
+        void clear()
+        {
+            text.clear();
+            html.clear();
+        }
+    };
+
 private: // data members
     // the window onto the terminal screen which this display
     // is currently showing.
@@ -782,9 +792,7 @@ private: // data members
     bool _possibleTripleClick = false; // is set in mouseDoubleClickEvent and cleared
                                        // after QApplication::doubleClickInterval() delay
     QPoint _tripleClickPos = QPoint(0, 0); // The position where a potential triple click was started
-    QString _doubleClickSelectedText = QString(); // selected text whose copying may be cancelled by further events; copying
-    QString _doubleClickSelectedHtml = QString(); // is delayed to prevent a triple-click from generating > 1 entries in the
-                                      // clipboard history (a triple click is a double click at first ;)
+    SelectionCopyData _doubleClickCopyData;
 
     QLabel *_resizeWidget = nullptr;
     QTimer *_resizeTimer = nullptr;
