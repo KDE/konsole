@@ -589,7 +589,7 @@ protected:
     // drag and drop
     void dragEnterEvent(QDragEnterEvent *event) override;
     void dropEvent(QDropEvent *event) override;
-    void doDrag();
+    void doDrag(QMimeData *mimeData);
     enum DragState {
         diNone,
         diPending,

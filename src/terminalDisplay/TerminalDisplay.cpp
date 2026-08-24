@@ -1499,7 +1499,15 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent *ev)
             // we've left the drag square, we can start a real drag operation now
 
             clearSelection();
-            doDrag();
+            const QMimeData *clipboardMimeData = QApplication::clipboard()->mimeData(QClipboard::Selection);
+            if (clipboardMimeData == nullptr) {
+                return;
+            }
+            auto mimeData = new QMimeData();
+            mimeData->setText(clipboardMimeData->text());
+            mimeData->setHtml(clipboardMimeData->html());
+
+            doDrag(mimeData);
         }
         return;
     } else if (_dragInfo.state == diDragging) {
@@ -3286,17 +3294,10 @@ void TerminalDisplay::dropEvent(QDropEvent *event)
     setFocus(Qt::MouseFocusReason);
 }
 
-void TerminalDisplay::doDrag()
+void TerminalDisplay::doDrag(QMimeData *mimeData)
 {
-    const QMimeData *clipboardMimeData = QApplication::clipboard()->mimeData(QClipboard::Selection);
-    if (clipboardMimeData == nullptr) {
-        return;
-    }
-    auto mimeData = new QMimeData();
     _dragInfo.state = diDragging;
     _dragInfo.dragObject = new QDrag(this);
-    mimeData->setText(clipboardMimeData->text());
-    mimeData->setHtml(clipboardMimeData->html());
     _dragInfo.dragObject->setMimeData(mimeData);
     // Use app's, not window's, dpr value to prepare drag pixmap
     // for being displayed on any screens during drag
