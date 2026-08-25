@@ -460,7 +460,7 @@ public Q_SLOTS:
     void updateImage();
 
     /** Copies the selected text to the X11 Selection. */
-    void copyToX11Selection(bool useSavedText = false);
+    void copyToX11Selection();
 
     /** Copies the selected text to the system clipboard. */
     void copyToClipboard(Screen::DecodingOptions options = Screen::PlainText);
@@ -799,7 +799,6 @@ private: // data members
     bool _possibleTripleClick = false; // is set in mouseDoubleClickEvent and cleared
                                        // after QApplication::doubleClickInterval() delay
     QPoint _tripleClickPos = QPoint(0, 0); // The position where a potential triple click was started
-    SelectionCopyData _doubleClickCopyData;
 
     QLabel *_resizeWidget = nullptr;
     QTimer *_resizeTimer = nullptr;
