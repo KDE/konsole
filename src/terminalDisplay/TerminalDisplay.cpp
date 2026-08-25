@@ -1721,13 +1721,7 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent *ev)
             if (_actSel > 1) {
                 copyToX11Selection();
                 if (_possibleTripleClick) {
-                    const QString text = _screenWindow->selectedText(currentDecodingOptions());
-                    if (!text.isEmpty()) {
-                        _doubleClickCopyData.text = text;
-                        if (_copyTextAsHTML) {
-                            _doubleClickCopyData.html = _screenWindow->selectedText(currentDecodingOptions() | Screen::ConvertToHtml);
-                        }
-                    }
+                    _doubleClickCopyData = selectionCopyData();
                 }
             }
 
@@ -2582,38 +2576,43 @@ void TerminalDisplay::setCopyTextAsHTML(bool enabled)
     _copyTextAsHTML = enabled;
 }
 
+TerminalDisplay::SelectionCopyData TerminalDisplay::selectionCopyData(Screen::DecodingOptions options) const
+{
+    SelectionCopyData data;
+    data.text = _screenWindow->selectedText(currentDecodingOptions() | options);
+    if (!data.text.isEmpty() && _copyTextAsHTML) {
+        // TODO: should possibly also get OR'ed with options
+        data.html = _screenWindow->selectedText(currentDecodingOptions() | Screen::ConvertToHtml);
+    }
+    return data;
+}
+
 void TerminalDisplay::copyToX11Selection(bool useSavedText)
 {
     if (_screenWindow.isNull()) {
         return;
     }
 
-    QString text;
-    QString html;
+    SelectionCopyData data;
+
+    SelectionCopyData *usedData;
+
     if (useSavedText) {
-        text = _doubleClickCopyData.text;
-        html = _doubleClickCopyData.html;
+        usedData = &_doubleClickCopyData;
     } else {
-        text = _screenWindow->selectedText(currentDecodingOptions());
-        if (!text.isEmpty() && _copyTextAsHTML) {
-            html = _screenWindow->selectedText(currentDecodingOptions() | Screen::ConvertToHtml);
-        }
+        data = selectionCopyData();
+        usedData = &data;
     }
 
-    if (text.isEmpty()) {
+    if (usedData->isEmpty()) {
         return;
     }
 
-    // Copying the double-click selection *does* double click select + copy.
-    // Copying another selection *cancels* double-click select + copy.
-    // In both cases, no double-click copy is pending anymore.
-    _doubleClickCopyData.clear();
-
-    auto createMimeData = [&text, &html]() {
+    auto createMimeData = [usedData]() {
         QMimeData *data = new QMimeData;
-        data->setText(text);
-        if (!html.isEmpty()) {
-            data->setHtml(html);
+        data->setText(usedData->text);
+        if (!usedData->html.isEmpty()) {
+            data->setHtml(usedData->html);
         }
         return data;
     };
@@ -2625,6 +2624,11 @@ void TerminalDisplay::copyToX11Selection(bool useSavedText)
     if (_autoCopySelectedText) {
         QApplication::clipboard()->setMimeData(createMimeData(), QClipboard::Clipboard);
     }
+
+    // Copying the double-click selection *does* double click select + copy.
+    // Copying another selection *cancels* double-click select + copy.
+    // In both cases, no double-click copy is pending anymore.
+    _doubleClickCopyData.clear();
 }
 
 void TerminalDisplay::copyToClipboard(Screen::DecodingOptions options)
@@ -2633,16 +2637,16 @@ void TerminalDisplay::copyToClipboard(Screen::DecodingOptions options)
         return;
     }
 
-    const QString &text = _screenWindow->selectedText(currentDecodingOptions() | options);
-    if (text.isEmpty()) {
+    const SelectionCopyData copyData = selectionCopyData(options);
+    if (copyData.isEmpty()) {
         return;
     }
 
     auto mimeData = new QMimeData;
-    mimeData->setText(text);
+    mimeData->setText(copyData.text);
 
-    if (_copyTextAsHTML) {
-        mimeData->setHtml(_screenWindow->selectedText(currentDecodingOptions() | Screen::ConvertToHtml));
+    if (!copyData.html.isEmpty()) {
+        mimeData->setHtml(copyData.html);
     }
 
     QApplication::clipboard()->setMimeData(mimeData, QClipboard::Clipboard);
