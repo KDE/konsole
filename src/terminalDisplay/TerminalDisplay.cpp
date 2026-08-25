@@ -1498,14 +1498,20 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent *ev)
             || ev->position().y() > _dragInfo.start.y() + distance || ev->position().y() < _dragInfo.start.y() - distance) {
             // we've left the drag square, we can start a real drag operation now
 
-            clearSelection();
-            const QMimeData *clipboardMimeData = QApplication::clipboard()->mimeData(QClipboard::Selection);
-            if (clipboardMimeData == nullptr) {
-                return;
+            // prepare data, reuse the one from the selection clipboard if present
+            QMimeData *mimeData;
+            const QMimeData *const clipboardMimeData =
+                (QApplication::clipboard()->supportsSelection()) ? QApplication::clipboard()->mimeData(QClipboard::Selection) : nullptr;
+            if (clipboardMimeData) {
+                mimeData = new QMimeData();
+                mimeData->setText(clipboardMimeData->text());
+                mimeData->setHtml(clipboardMimeData->html());
+            } else {
+                const SelectionCopyData data = selectionCopyData();
+                mimeData = createSelectionMimeData(data);
             }
-            auto mimeData = new QMimeData();
-            mimeData->setText(clipboardMimeData->text());
-            mimeData->setHtml(clipboardMimeData->html());
+
+            clearSelection();
 
             doDrag(mimeData);
         }
