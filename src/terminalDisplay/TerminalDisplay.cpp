@@ -1060,9 +1060,6 @@ void TerminalDisplay::focusOutEvent(QFocusEvent *)
     // suppress further text blinking
     _blinkTextTimer->stop();
     Q_ASSERT(!_textBlinking);
-
-    // If waiting for a triple click - losing focus cancels that (do the pending copy)
-    copyToX11Selection(true);
 }
 
 void TerminalDisplay::focusInEvent(QFocusEvent *)
@@ -1448,7 +1445,6 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent *ev)
 
     if (_possibleTripleClick && (ev->pos() - _tripleClickPos).manhattanLength() > 20) {
         _possibleTripleClick = false;
-        copyToX11Selection(true);
     }
     auto [charLine, charColumn] = getCharacterPosition(ev->pos(), !usesMouseTracking());
 
@@ -1726,9 +1722,6 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent *ev)
         } else {
             if (_actSel > 1) {
                 copyToX11Selection();
-                if (_possibleTripleClick) {
-                    _doubleClickCopyData = selectionCopyData();
-                }
             }
 
             _actSel = 0;
@@ -1792,9 +1785,6 @@ void TerminalDisplay::processMidButtonClick(QMouseEvent *ev)
 {
     if (!usesMouseTracking() || ((ev->modifiers() & Qt::ShiftModifier) != 0u)) {
         const bool appendEnter = (ev->modifiers() & Qt::ControlModifier) != 0u;
-
-        // If currently waiting for a triple click, a middle click cancels that - copy now
-        copyToX11Selection(true);
 
         if (_middleClickPasteMode == Enum::PasteFromX11Selection) {
             pasteFromX11Selection(appendEnter);
@@ -1867,7 +1857,6 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent *ev)
 
     QTimer::singleShot(QApplication::doubleClickInterval(), this, [this]() {
         _possibleTripleClick = false;
-        copyToX11Selection(true); // this will do nothing if another copy happened in the meantime
     });
 }
 
@@ -2603,39 +2592,25 @@ QMimeData *TerminalDisplay::createSelectionMimeData(const SelectionCopyData &dat
     return mimeData;
 };
 
-void TerminalDisplay::copyToX11Selection(bool useSavedText)
+void TerminalDisplay::copyToX11Selection()
 {
     if (_screenWindow.isNull()) {
         return;
     }
 
-    SelectionCopyData data;
+    const SelectionCopyData data = selectionCopyData();
 
-    SelectionCopyData *usedData;
-
-    if (useSavedText) {
-        usedData = &_doubleClickCopyData;
-    } else {
-        data = selectionCopyData();
-        usedData = &data;
-    }
-
-    if (usedData->isEmpty()) {
+    if (data.isEmpty()) {
         return;
     }
 
     if (QApplication::clipboard()->supportsSelection()) {
-        QApplication::clipboard()->setMimeData(createSelectionMimeData(*usedData), QClipboard::Selection);
+        QApplication::clipboard()->setMimeData(createSelectionMimeData(data), QClipboard::Selection);
     }
 
     if (_autoCopySelectedText) {
-        QApplication::clipboard()->setMimeData(createSelectionMimeData(*usedData), QClipboard::Clipboard);
+        QApplication::clipboard()->setMimeData(createSelectionMimeData(data), QClipboard::Clipboard);
     }
-
-    // Copying the double-click selection *does* double click select + copy.
-    // Copying another selection *cancels* double-click select + copy.
-    // In both cases, no double-click copy is pending anymore.
-    _doubleClickCopyData.clear();
 }
 
 void TerminalDisplay::copyToClipboard(Screen::DecodingOptions options)
@@ -3651,7 +3626,6 @@ int TerminalDisplay::bidiMap(Character *screenline,
 void TerminalDisplay::clearSelection()
 {
     _screenWindow->clearSelection();
-    _doubleClickCopyData.clear();
 }
 
 #include "moc_TerminalDisplay.cpp"
