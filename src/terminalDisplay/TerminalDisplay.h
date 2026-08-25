@@ -708,7 +708,13 @@ private:
             text.clear();
             html.clear();
         }
+        bool isEmpty() const
+        {
+            return text.isEmpty();
+        }
     };
+
+    SelectionCopyData selectionCopyData(Screen::DecodingOptions options = Screen::PlainText) const;
 
 private: // data members
     // the window onto the terminal screen which this display
