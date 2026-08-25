@@ -715,6 +715,7 @@ private:
     };
 
     SelectionCopyData selectionCopyData(Screen::DecodingOptions options = Screen::PlainText) const;
+    QMimeData *createSelectionMimeData(const SelectionCopyData &data) const;
 
 private: // data members
     // the window onto the terminal screen which this display

@@ -2587,6 +2587,16 @@ TerminalDisplay::SelectionCopyData TerminalDisplay::selectionCopyData(Screen::De
     return data;
 }
 
+QMimeData *TerminalDisplay::createSelectionMimeData(const SelectionCopyData &data) const
+{
+    auto mimeData = new QMimeData;
+    mimeData->setText(data.text);
+    if (!data.html.isEmpty()) {
+        mimeData->setHtml(data.html);
+    }
+    return mimeData;
+};
+
 void TerminalDisplay::copyToX11Selection(bool useSavedText)
 {
     if (_screenWindow.isNull()) {
@@ -2608,21 +2618,12 @@ void TerminalDisplay::copyToX11Selection(bool useSavedText)
         return;
     }
 
-    auto createMimeData = [usedData]() {
-        QMimeData *data = new QMimeData;
-        data->setText(usedData->text);
-        if (!usedData->html.isEmpty()) {
-            data->setHtml(usedData->html);
-        }
-        return data;
-    };
-
     if (QApplication::clipboard()->supportsSelection()) {
-        QApplication::clipboard()->setMimeData(createMimeData(), QClipboard::Selection);
+        QApplication::clipboard()->setMimeData(createSelectionMimeData(*usedData), QClipboard::Selection);
     }
 
     if (_autoCopySelectedText) {
-        QApplication::clipboard()->setMimeData(createMimeData(), QClipboard::Clipboard);
+        QApplication::clipboard()->setMimeData(createSelectionMimeData(*usedData), QClipboard::Clipboard);
     }
 
     // Copying the double-click selection *does* double click select + copy.
@@ -2642,12 +2643,7 @@ void TerminalDisplay::copyToClipboard(Screen::DecodingOptions options)
         return;
     }
 
-    auto mimeData = new QMimeData;
-    mimeData->setText(copyData.text);
-
-    if (!copyData.html.isEmpty()) {
-        mimeData->setHtml(copyData.html);
-    }
+    auto mimeData = createSelectionMimeData(copyData);
 
     QApplication::clipboard()->setMimeData(mimeData, QClipboard::Clipboard);
 
