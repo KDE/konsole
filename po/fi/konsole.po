@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-19 00:50+0000\n"
-"PO-Revision-Date: 2026-01-05 17:20+0200\n"
+"PO-Revision-Date: 2026-02-25 16:06+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -185,20 +185,16 @@ msgid "Hide the menubar, overriding the default setting"
 msgstr "Piilota valikkorivi oletusasetuksesta riippumatta"
 
 #: Application.cpp:68
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "Show the tabbar, overriding the default setting"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Show all the toolbars, overriding the default setting"
-msgstr "Näytä välilehtipalkki oletusasetuksesta riippumatta"
+msgstr "Sivuuta oletusasetus ja näytä kaikki työkalurivit"
 
 #: Application.cpp:69
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "Hide the tabbar, overriding the default setting"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Hide all the toolbars, overriding the default setting"
-msgstr "Piilota välilehtipalkki oletusasetuksesta riippumatta"
+msgstr "Sivuuta oletusasetus ja piilota kaikki työkalurivit"
 
 #: Application.cpp:70
 #, kde-format
@@ -707,12 +703,12 @@ msgstr "Palvelin: %1"
 #, kde-format
 msgid ""
 "Container support is not available when Konsole is running inside Flatpak."
-msgstr ""
+msgstr "Säilötuki ei ole käytettävissä, kun Konsolea suoritetaan Flatpakissä."
 
 #: containers/DistroboxDetector.cpp:124
 #, kde-format
 msgid "Distrobox"
-msgstr ""
+msgstr "Distrobox"
 
 #: containers/KapsuleDetector.cpp:36
 #, kde-format
@@ -735,7 +731,7 @@ msgstr " [Oletus]"
 #: containers/ToolboxDetector.cpp:89
 #, kde-format
 msgid "Toolbox"
-msgstr ""
+msgstr "Toolbox"
 
 #: CopyInputDialog.cpp:30
 #, kde-format
@@ -2691,10 +2687,9 @@ msgstr "Muista ikkunan koko"
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ForceNewTabs)
 #. i18n: ectx: label, entry (ForceNewTabs), group (KonsoleWindow)
 #: settings/GeneralSettings.ui:91 settings/konsole.kcfg:37
-#, fuzzy, kde-format
-#| msgid "Put new tabs:"
+#, kde-format
 msgid "Force new tabs"
-msgstr "Sijoita uudet välilehdet:"
+msgstr "Pakota uudet välilehdet"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ListenForZModemTerminalCodes)
 #: settings/GeneralSettings.ui:98
@@ -2706,7 +2701,7 @@ msgstr "Kuuntele ZModem-päätekoodeja"
 #: settings/GeneralSettings.ui:105
 #, kde-format
 msgid "Show progress in taskbar"
-msgstr ""
+msgstr "Näytä eteneminen tehtäväpalkissa"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SyncProfileWithSystemTheme)
 #: settings/GeneralSettings.ui:112
@@ -2860,26 +2855,25 @@ msgstr "Ikkunan koko tallennetaan, kun Konsole lopetetaan"
 
 #. i18n: ectx: tooltip, entry (ForceNewTabs), group (KonsoleWindow)
 #: settings/konsole.kcfg:38
-#, fuzzy, kde-format
-#| msgid "When launching Konsole re-use existing process if possible"
+#, kde-format
 msgid ""
 "When launching Konsole create a new tab instead of creating new windows if "
 "possible"
 msgstr ""
-"Konsolea käynnistettäessä käytä mahdollisuuksien mukaan uudelleen olemassa "
-"olevaa prosessia"
+"Konsolea käynnistettäessä luo uusi välilehti uusien ikkunoiden sijaan, jos "
+"mahdollista"
 
 #. i18n: ectx: label, entry (ShowProgressInTaskBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:42
 #, kde-format
 msgid "Show progress in task bar"
-msgstr ""
+msgstr "Näytä eteneminen tehtäväpalkissa"
 
 #. i18n: ectx: tooltip, entry (ShowProgressInTaskBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:43
 #, kde-format
 msgid "When a script reports its progress, it will be shown in the task bar"
-msgstr ""
+msgstr "Kun skripti ilmoittaa etenemisestään, se näytetään tehtäväpalkissa"
 
 #. i18n: ectx: tooltip, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
 #: settings/konsole.kcfg:48
@@ -4294,17 +4288,15 @@ msgstr "Käytössä"
 
 #. i18n: ectx: property (text), widget (QLabel, label_12)
 #: widgets/EditProfileAppearancePage.ui:457
-#, fuzzy, kde-format
-#| msgid "Activation:"
+#, kde-format
 msgid "Animation:"
-msgstr "Aktivointi:"
+msgstr "Animointi:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableAnimatingCursorButton)
 #: widgets/EditProfileAppearancePage.ui:473
-#, fuzzy, kde-format
-#| msgid "Make the cursor blink regularly"
+#, kde-format
 msgid "Make the cursor animate smoothly"
-msgstr "Panee kohdistimen vilkkumaan tasaisesti"
+msgstr "Animoi kohdistinta pehmeästi"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #. i18n: ectx: attribute (title), widget (QWidget, miscTab)
@@ -4830,11 +4822,9 @@ msgid "Edit Profile \"%1\""
 msgstr "Muokkaa profiilia ”%1”"
 
 #: widgets/EditProfileDialog.cpp:538
-#, fuzzy, kde-format
-#| msgctxt "Do not show a close button"
-#| msgid "None"
+#, kde-format
 msgid "None"
-msgstr "Ei milloinkaan"
+msgstr "Ei mitään"
 
 #: widgets/EditProfileDialog.cpp:557
 #, fuzzy, kde-format
@@ -5068,26 +5058,27 @@ msgid ""
 "When opening a new tab or split, automatically enter the same container "
 "(Toolbox, Distrobox) as the current session"
 msgstr ""
+"Avattaessa uutta välilehteä tai jakoa, siirry automaattisesti samaan säilöön "
+"(Toolbox, Distrobox) kuin nykyinen istunto"
 
 #. i18n: ectx: property (text), widget (QCheckBox, inheritContainerButton)
 #: widgets/EditProfileGeneralPage.ui:203
-#, fuzzy, kde-format
-#| msgid "Start in same directory as current session"
+#, kde-format
 msgid "Enter same container as current session"
-msgstr "Aloita nykyisen istunnon kansiossa"
+msgstr "Siirry samaan säilöön kuin nykyinen istunto"
 
 #. i18n: ectx: property (text), widget (QLabel, containerLabel)
 #: widgets/EditProfileGeneralPage.ui:229
 #, kde-format
 msgid "Always start in container:"
-msgstr ""
+msgstr "Käynnistä aina säilöön:"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, containerCombo)
 #: widgets/EditProfileGeneralPage.ui:242
 #, kde-format
 msgid ""
 "Always start new sessions using this profile inside the selected container"
-msgstr ""
+msgstr "Käynnistä uudet istunnot aina tällä profiililla valittuun säilöön"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/EditProfileGeneralPage.ui:255
@@ -6012,10 +6003,9 @@ msgstr "&Välilehden väri:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/RenameTabWidget.ui:128
-#, fuzzy, kde-format
-#| msgid "Select &Tab Color"
+#, kde-format
 msgid "&Activity Tab Color:"
-msgstr "Valitse &välilehden väri"
+msgstr "&Aktiivisen välilehden väri:"
 
 #: widgets/TabTitleFormatButton.cpp:21
 #, c-format
