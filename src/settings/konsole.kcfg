@@ -204,6 +204,16 @@
       <label>Expand the tab widths</label>
       <default>false</default>
     </entry>
+    <entry name="ShowContainerTabColor" type="Bool">
+      <label>Color-code tab when running inside a container</label>
+      <tooltip>When running inside a container (e.g. Distrobox or Toolbox), color-code the tab with a container-specific color</tooltip>
+      <default>true</default>
+    </entry>
+    <entry name="ShowContainerStatusBar" type="Bool">
+      <label>Show container label in terminal footer</label>
+      <tooltip>When running inside a container (e.g. Distrobox or Toolbox), show a label with the container name at the bottom of the terminal</tooltip>
+      <default>true</default>
+    </entry>
   </group>
   <group name="PrintOptions">
     <entry name="PrinterFriendly" type="Bool">

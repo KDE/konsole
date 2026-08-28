@@ -15,6 +15,8 @@
 #include "../session/Session.h"
 #include "../session/SessionController.h"
 #include "../widgets/ViewContainer.h"
+#include "../KonsoleSettings.h"
+#include <QSignalSpy>
 #include <QStandardPaths>
 
 using namespace Konsole;
@@ -132,6 +134,68 @@ void ViewManagerTest::testContainerMenuLaunchKeepsPendingColor()
     session->setContainerContext(container);
     QCOMPARE(session->property(ContainerSessionState::PendingContainerKeyProperty).toString(), QString());
     QCOMPARE(session->color(), ContainerSessionState::colorForContainerKey(key));
+}
+
+void ViewManagerTest::testContainerTabColorSettingHidesAutoColor()
+{
+    auto mw = MainWindow();
+
+    TestContainerDetector detector;
+    ContainerInfo container;
+    container.detector = &detector;
+    container.name = QStringLiteral("fedora-41");
+    container.displayName = QStringLiteral("fedora-41");
+    container.iconName = QStringLiteral("distrobox");
+
+    const bool invoked = QMetaObject::invokeMethod(&mw, "newInContainer", Qt::DirectConnection, Q_ARG(Konsole::ContainerInfo, container));
+    QVERIFY(invoked);
+
+    Session *session = mw.viewManager()->activeViewController()->session();
+    auto *viewContainer = mw.viewManager()->activeContainer();
+
+    QVERIFY(!session->isTabColorSetByUser());
+    QVERIFY(session->color().isValid());
+
+    QSignalSpy colorSpy(viewContainer, &TabbedViewContainer::setColor);
+
+    // Setting ON: config refresh must emit the container color
+    KonsoleSettings::setShowContainerTabColor(true);
+    Q_EMIT KonsoleSettings::self()->configChanged();
+    QVERIFY(!colorSpy.isEmpty());
+    QVERIFY(colorSpy.last().at(1).value<QColor>().isValid());
+
+    colorSpy.clear();
+
+    // Setting OFF: config refresh must suppress the auto color
+    KonsoleSettings::setShowContainerTabColor(false);
+    Q_EMIT KonsoleSettings::self()->configChanged();
+    QVERIFY(!colorSpy.isEmpty());
+    QVERIFY(!colorSpy.last().at(1).value<QColor>().isValid());
+
+    KonsoleSettings::setShowContainerTabColor(true);
+}
+
+void ViewManagerTest::testContainerTabColorSettingPreservesUserColor()
+{
+    auto mw = MainWindow();
+    mw.viewManager()->newSession(mw.viewManager()->defaultProfile(), m_testDir->path());
+
+    Session *session = mw.viewManager()->activeViewController()->session();
+    auto *viewContainer = mw.viewManager()->activeContainer();
+
+    session->setColor(QColor(Qt::red));
+    session->tabColorSetByUser(true);
+
+    QSignalSpy colorSpy(viewContainer, &TabbedViewContainer::setColor);
+
+    // Setting OFF must NOT suppress a user-explicitly-set color
+    KonsoleSettings::setShowContainerTabColor(false);
+    Q_EMIT KonsoleSettings::self()->configChanged();
+    QVERIFY(!colorSpy.isEmpty());
+    QCOMPARE(colorSpy.last().at(1).value<QColor>(), QColor(Qt::red));
+
+    KonsoleSettings::setShowContainerTabColor(true);
+    session->tabColorSetByUser(false);
 }
 
 QTEST_MAIN(ViewManagerTest)

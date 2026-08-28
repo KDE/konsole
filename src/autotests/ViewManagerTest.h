@@ -21,6 +21,8 @@ private Q_SLOTS:
     void testSaveLayout();
     void testLoadLayout();
     void testContainerMenuLaunchKeepsPendingColor();
+    void testContainerTabColorSettingHidesAutoColor();
+    void testContainerTabColorSettingPreservesUserColor();
 
 private:
     QTemporaryDir *m_testDir;

@@ -520,6 +520,84 @@ Cycling between the three displayed modes can also be done by a keyboard shortcu
 </itemizedlist>
 </sect1>
 
+<sect1 id="container-awareness">
+<title>Container Awareness</title>
+
+<para>
+&konsole; can detect when the foreground process is running inside a Linux container such as
+<application>Distrobox</application>, <application>Toolbox</application>, or
+<application>Kapsule</application>, and provides visual feedback to help you keep track of
+which terminal is running inside which container.
+</para>
+
+<sect2 id="container-indicators">
+<title>Visual Indicators</title>
+
+<para>When a container is detected, &konsole; shows two indicators:</para>
+
+<itemizedlist>
+<listitem><para>
+<emphasis>Colored tab</emphasis> — the tab receives a unique color derived from the container
+identity. Each container consistently gets the same color across sessions, so you can tell at a
+glance which tab belongs to which container.
+</para></listitem>
+
+<listitem><para>
+<emphasis>Container label</emphasis> — a small bar appears at the bottom of the terminal area
+showing the container type and name (for example, <guilabel>Distrobox: fedora-41</guilabel>).
+The label disappears automatically when the foreground process returns to the host.
+</para></listitem>
+</itemizedlist>
+
+<para>
+Both indicators can be enabled or disabled independently in
+<menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure &konsole;…</guimenuitem>
+<guimenuitem>Tab Bar / Splitters</guimenuitem></menuchoice>:
+</para>
+
+<itemizedlist>
+<listitem><para>
+<guilabel>Color-code tab when inside a container</guilabel> — toggles the colored tab. On by default.
+</para></listitem>
+<listitem><para>
+<guilabel>Show container label in terminal footer</guilabel> — toggles the footer label. On by default.
+</para></listitem>
+</itemizedlist>
+</sect2>
+
+<sect2 id="container-new-tab">
+<title>Opening a Tab Inside a Container</title>
+
+<para>
+The <guimenu>File</guimenu> menu and the <guibutton>New Tab</guibutton> button offer a
+submenu listing all available containers. Selecting a container opens a new tab that
+enters that container immediately. A <guilabel>Host</guilabel> entry is also provided
+to explicitly open a tab on the host system regardless of any profile default.
+</para>
+</sect2>
+
+<sect2 id="container-profile">
+<title>Profile Settings</title>
+
+<para>
+Two container-related options are available per profile in the
+<guilabel>General</guilabel> tab of <guilabel>Edit Profile</guilabel>:
+</para>
+
+<itemizedlist>
+<listitem><para>
+<guilabel>Always start in container</guilabel> — choose a specific container that new sessions
+using this profile will always enter automatically.
+</para></listitem>
+<listitem><para>
+<guilabel>Enter same container as current session</guilabel> — new tabs opened from an existing
+container session will enter the same container instead of starting on the host.
+</para></listitem>
+</itemizedlist>
+</sect2>
+
+</sect1>
+
 </chapter>
 
 <chapter id="commandreference">

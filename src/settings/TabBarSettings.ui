@@ -296,13 +296,33 @@
           </widget>
          </item>
          <item row="18" column="1" colspan="2">
+          <widget class="QCheckBox" name="kcfg_ShowContainerTabColor">
+           <property name="toolTip">
+            <string>When running inside a container (e.g. Distrobox or Toolbox), color-code the tab with a container-specific color</string>
+           </property>
+           <property name="text">
+            <string>Color-code tab when inside a container</string>
+           </property>
+          </widget>
+         </item>
+         <item row="19" column="1" colspan="2">
+          <widget class="QCheckBox" name="kcfg_ShowContainerStatusBar">
+           <property name="toolTip">
+            <string>When running inside a container (e.g. Distrobox or Toolbox), show a label with the container name at the bottom of the terminal</string>
+           </property>
+           <property name="text">
+            <string>Show container label in terminal footer</string>
+           </property>
+          </widget>
+         </item>
+         <item row="20" column="1" colspan="2">
           <widget class="QCheckBox" name="kcfg_TabBarUseUserStyleSheet">
            <property name="text">
             <string>Use user-defined stylesheet:</string>
            </property>
           </widget>
          </item>
-         <item row="19" column="1">
+         <item row="21" column="1">
           <spacer>
            <property name="orientation">
             <enum>Qt::Orientation::Horizontal</enum>
@@ -318,7 +338,7 @@
            </property>
           </spacer>
          </item>
-         <item row="19" column="2">
+         <item row="21" column="2">
           <widget class="KUrlRequester" name="kcfg_TabBarUserStyleSheetFile">
            <property name="enabled">
             <bool>false</bool>
@@ -579,6 +599,8 @@
   <tabstop>HideSearchTabsButton</tabstop>
   <tabstop>kcfg_NewTabButton</tabstop>
   <tabstop>kcfg_ExpandTabWidth</tabstop>
+  <tabstop>kcfg_ShowContainerTabColor</tabstop>
+  <tabstop>kcfg_ShowContainerStatusBar</tabstop>
   <tabstop>kcfg_TabBarUseUserStyleSheet</tabstop>
   <tabstop>kcfg_TabBarUserStyleSheetFile</tabstop>
   <tabstop>kcfg_CloseTabOnMiddleMouseButton</tabstop>
@@ -597,6 +619,38 @@
    <sender>AlwaysHideTabBar</sender>
    <signal>toggled(bool)</signal>
    <receiver>Bottom</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>AlwaysHideTabBar</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>kcfg_ShowContainerTabColor</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>AlwaysHideTabBar</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>kcfg_ShowContainerStatusBar</receiver>
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">

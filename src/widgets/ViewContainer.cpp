@@ -300,6 +300,13 @@ void TabbedViewContainer::konsoleConfigChanged()
     tabBar()->setExpanding(KonsoleSettings::expandTabWidth());
     tabBar()->update();
 
+    for (int i = 0; i < count(); ++i) {
+        if (auto *splitter = viewSplitterAt(i)) {
+            Q_EMIT setColor(i, effectiveTabColor(splitter));
+        }
+    }
+    updateActiveContainerBadge();
+
     if (KonsoleSettings::tabBarUseUserStyleSheet()) {
         setCssFromFile(KonsoleSettings::tabBarUserStyleSheetFile());
         _stylesheetSet = true;
@@ -688,10 +695,17 @@ QColor TabbedViewContainer::effectiveTabColor(ViewSplitter *splitter) const
     bool hasChosen = false;
     bool mixed = false;
 
+    const bool indicatorEnabled = KonsoleSettings::showContainerTabColor();
     for (TerminalDisplay *display : displays) {
         auto *controller = display != nullptr ? display->sessionController() : nullptr;
         auto session = controller != nullptr ? controller->session() : QPointer<Session>{};
-        const QColor color = session != nullptr ? session->color() : QColor();
+        QColor color = session != nullptr ? session->color() : QColor();
+
+        // When the container tab-color indicator is disabled, skip auto-assigned
+        // container colors so a sibling pane's user-set color is preserved.
+        if (color.isValid() && session != nullptr && !session->isTabColorSetByUser() && !indicatorEnabled) {
+            continue;
+        }
 
         if (!hasChosen) {
             chosen = color;
@@ -941,6 +955,13 @@ void TabbedViewContainer::removeContainerBadge(TerminalDisplay *display)
 void TabbedViewContainer::updateContainerBadgeForDisplay(TerminalDisplay *display)
 {
     if (display == nullptr) {
+        return;
+    }
+
+    if (!KonsoleSettings::showContainerStatusBar()) {
+        if (_containerBadgeWidgets.contains(display)) {
+            _containerBadgeWidgets.value(display)->setVisible(false);
+        }
         return;
     }
 
