@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-19 00:50+0000\n"
+"POT-Creation-Date: 2026-08-29 00:49+0000\n"
 "PO-Revision-Date: 2026-08-10 06:40+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -1928,14 +1928,14 @@ msgstr "Možnosti izpisa"
 
 #. i18n: ectx: property (text), widget (QCheckBox, printerFriendly)
 #. i18n: ectx: label, entry (PrinterFriendly), group (PrintOptions)
-#: PrintOptions.ui:39 settings/konsole.kcfg:210
+#: PrintOptions.ui:39 settings/konsole.kcfg:220
 #, kde-format
 msgid "Printer &friendly mode (black text, no background)"
 msgstr "Prijazen način do tiskalnika (črno besedilo, brez ozadja)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, scaleOutput)
 #. i18n: ectx: label, entry (ScaleOutput), group (PrintOptions)
-#: PrintOptions.ui:46 settings/konsole.kcfg:214
+#: PrintOptions.ui:46 settings/konsole.kcfg:224
 #, kde-format
 msgid "&Scale output"
 msgstr "Umeri izpis"
@@ -3015,44 +3015,75 @@ msgstr "Nadziraj kam bo postavljen nov zavihek"
 msgid "Expand the tab widths"
 msgstr "Razširi širine zavihkov"
 
+#. i18n: ectx: label, entry (ShowContainerTabColor), group (TabBar)
+#: settings/konsole.kcfg:208
+#, kde-format
+msgid "Color-code tab when running inside a container"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ShowContainerTabColor)
+#. i18n: ectx: tooltip, entry (ShowContainerTabColor), group (TabBar)
+#: settings/konsole.kcfg:209 settings/TabBarSettings.ui:301
+#, kde-format
+msgid ""
+"When running inside a container (e.g. Distrobox or Toolbox), color-code the "
+"tab with a container-specific color"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowContainerStatusBar)
+#. i18n: ectx: label, entry (ShowContainerStatusBar), group (TabBar)
+#: settings/konsole.kcfg:213 settings/TabBarSettings.ui:314
+#, kde-format
+msgid "Show container label in terminal footer"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ShowContainerStatusBar)
+#. i18n: ectx: tooltip, entry (ShowContainerStatusBar), group (TabBar)
+#: settings/konsole.kcfg:214 settings/TabBarSettings.ui:311
+#, kde-format
+msgid ""
+"When running inside a container (e.g. Distrobox or Toolbox), show a label "
+"with the container name at the bottom of the terminal"
+msgstr ""
+
 #. i18n: ectx: label, entry (scrollbackUseSystemLocation), group (FileLocation)
-#: settings/konsole.kcfg:220
+#: settings/konsole.kcfg:230
 #, kde-format
 msgid "For scrollback files, use system-wide folder location"
 msgstr "Uporabi sistemsko mapo za datoteke s pomnilnikom vrstic"
 
 #. i18n: ectx: label, entry (scrollbackUseCacheLocation), group (FileLocation)
-#: settings/konsole.kcfg:224
+#: settings/konsole.kcfg:234
 #, kde-format
 msgid "For scrollback files, use user's specific folder location"
 msgstr "Uporabi uporabniško določeno mapo za datoteke s pomnilnikom vrstic"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocation), group (FileLocation)
-#: settings/konsole.kcfg:228
+#: settings/konsole.kcfg:238
 #, kde-format
 msgid "For scrollback files, use specified folder location"
 msgstr "Uporabi navedeno mapo za datoteke s pomnilnikom vrstic"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocationDirectory), group (FileLocation)
-#: settings/konsole.kcfg:232
+#: settings/konsole.kcfg:242
 #, kde-format
 msgid "For scrollback files, use this folder"
 msgstr "Uporabi to mapo za datoteke s pomnilnikom vrstic"
 
 #. i18n: ectx: label, entry (SyncProfileWithSystemTheme), group (LightDarkTheme)
-#: settings/konsole.kcfg:238
+#: settings/konsole.kcfg:248
 #, kde-format
 msgid "Sync profile with system theme"
 msgstr "Sinhroniziraj profil s sistemsko temo"
 
 #. i18n: ectx: label, entry (LightThemeProfile), group (LightDarkTheme)
-#: settings/konsole.kcfg:242
+#: settings/konsole.kcfg:252
 #, kde-format
 msgid "Profile to use for light system theme"
 msgstr "Profil za uporabo za svetlo sistemsko temo"
 
 #. i18n: ectx: label, entry (DarkThemeProfile), group (LightDarkTheme)
-#: settings/konsole.kcfg:246
+#: settings/konsole.kcfg:256
 #, kde-format
 msgid "Profile to use for dark system theme"
 msgstr "Profil za uporabo za temno sistemsko temo"
@@ -3289,7 +3320,7 @@ msgstr "Nikoli"
 
 #. i18n: ectx: property (text), widget (QLabel, miscellaneousAppearanceLabel)
 #. i18n: ectx: property (text), widget (QLabel, miscellaneousBehaviorLabel)
-#: settings/TabBarSettings.ui:277 settings/TabBarSettings.ui:410
+#: settings/TabBarSettings.ui:277 settings/TabBarSettings.ui:430
 #, kde-format
 msgctxt "@item:intext Miscellaneous Options"
 msgid "Miscellaneous:"
@@ -3307,105 +3338,111 @@ msgstr "Pokaži gumb »Nov zavihek«"
 msgid "Expand individual tab widths to full window"
 msgstr "Razširi posamezne širine zavihkov do polnega okna"
 
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowContainerTabColor)
+#: settings/TabBarSettings.ui:304
+#, kde-format
+msgid "Color-code tab when inside a container"
+msgstr ""
+
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabBarUseUserStyleSheet)
-#: settings/TabBarSettings.ui:301
+#: settings/TabBarSettings.ui:321
 #, kde-format
 msgid "Use user-defined stylesheet:"
 msgstr "Uporabniško določena slogovna predloga:"
 
 #. i18n: ectx: property (placeholderText), widget (KUrlRequester, kcfg_TabBarUserStyleSheetFile)
-#: settings/TabBarSettings.ui:327
+#: settings/TabBarSettings.ui:347
 #, kde-format
 msgctxt "@item:intext Optional file path is empty"
 msgid "(none)"
 msgstr "(noben)"
 
 #. i18n: ectx: attribute (title), widget (QWidget, behaviorTab)
-#: settings/TabBarSettings.ui:350
+#: settings/TabBarSettings.ui:370
 #, kde-format
 msgctxt "@title:tab Tab bar settings"
 msgid "Behavior"
 msgstr "Obnašanje"
 
 #. i18n: ectx: property (text), widget (QLabel, putNewTabsLabel)
-#: settings/TabBarSettings.ui:364
+#: settings/TabBarSettings.ui:384
 #, kde-format
 msgid "Put new tabs:"
 msgstr "Postavi nove zavihke:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAtTheEnd)
-#: settings/TabBarSettings.ui:374
+#: settings/TabBarSettings.ui:394
 #, kde-format
 msgid "At &the end"
 msgstr "Na konec"
 
 #. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAfterCurrentTab)
-#: settings/TabBarSettings.ui:384
+#: settings/TabBarSettings.ui:404
 #, kde-format
 msgid "After current &tab"
 msgstr "Za trenutnim zavihkom"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_CloseTabOnMiddleMouseButton)
-#: settings/TabBarSettings.ui:420
+#: settings/TabBarSettings.ui:440
 #, kde-format
 msgid "Close tab on middle-click"
 msgstr "Zavihek zapremo s srednjo tipko"
 
 #. i18n: ectx: attribute (title), widget (QWidget, splitTab)
-#: settings/TabBarSettings.ui:443
+#: settings/TabBarSettings.ui:463
 #, kde-format
 msgid "Splits"
 msgstr "Razdeli"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: settings/TabBarSettings.ui:449
+#: settings/TabBarSettings.ui:469
 #, kde-format
 msgid "Show Header:"
 msgstr "Pokaži glavo:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSplitHeaderWhenNeeded)
-#: settings/TabBarSettings.ui:456
+#: settings/TabBarSettings.ui:476
 #, kde-format
 msgctxt "@option:radio When needed show the split header"
 msgid "When needed"
 msgstr "Kadar je potrebno"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysHideSplitHeader)
-#: settings/TabBarSettings.ui:466
+#: settings/TabBarSettings.ui:486
 #, kde-format
 msgctxt "@option:radio Never show the split header"
 msgid "Never"
 msgstr "Nikoli"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: settings/TabBarSettings.ui:492
+#: settings/TabBarSettings.ui:512
 #, kde-format
 msgid "Drag Handle Size:"
 msgstr "Vleci velikost ročaja:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleSmall)
-#: settings/TabBarSettings.ui:502
+#: settings/TabBarSettings.ui:522
 #, kde-format
 msgctxt "@option:radio Small height/width of splitter widget"
 msgid "Small"
 msgstr "Majhno"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleMedium)
-#: settings/TabBarSettings.ui:512
+#: settings/TabBarSettings.ui:532
 #, kde-format
 msgctxt "@option:radio Medium height/width of splitter widget"
 msgid "Medium"
 msgstr "Srednje"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleLarge)
-#: settings/TabBarSettings.ui:522
+#: settings/TabBarSettings.ui:542
 #, kde-format
 msgctxt "@option:radio Large height/width of splitter widget"
 msgid "Large"
 msgstr "Veliko"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysShowSplitHeader)
-#: settings/TabBarSettings.ui:545
+#: settings/TabBarSettings.ui:565
 #, kde-format
 msgctxt "@option:radio Always show the split header"
 msgid "Always"
@@ -3500,12 +3537,12 @@ msgstr "Ctrl"
 msgid "Enable thumbnails generation"
 msgstr "Omogoči tvorbo predoglednih sličic"
 
-#: terminalDisplay/TerminalDisplay.cpp:704
+#: terminalDisplay/TerminalDisplay.cpp:706
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr "Velikost: %1 × %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2432
+#: terminalDisplay/TerminalDisplay.cpp:2449
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
@@ -3514,52 +3551,52 @@ msgstr[1] "Ali res želite prilepiti %1 znak?"
 msgstr[2] "Ali res želite prilepiti %1 znaka?"
 msgstr[3] "Ali res želite prilepiti %1 znake?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2433
+#: terminalDisplay/TerminalDisplay.cpp:2450
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Potrditev lepljenja"
 
-#: terminalDisplay/TerminalDisplay.cpp:2466
+#: terminalDisplay/TerminalDisplay.cpp:2483
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "End Of Text/Interrupt: lahko konča trenutni proces"
 
-#: terminalDisplay/TerminalDisplay.cpp:2467
+#: terminalDisplay/TerminalDisplay.cpp:2484
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "End Of Transmission:  lahko konča trenutni proces"
 
-#: terminalDisplay/TerminalDisplay.cpp:2468
+#: terminalDisplay/TerminalDisplay.cpp:2485
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Bell: bo poskusil oddati zvočno opozorilo"
 
-#: terminalDisplay/TerminalDisplay.cpp:2469
+#: terminalDisplay/TerminalDisplay.cpp:2486
 #, kde-format
 msgid "Backspace"
 msgstr "Backspace"
 
-#: terminalDisplay/TerminalDisplay.cpp:2470
+#: terminalDisplay/TerminalDisplay.cpp:2487
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "Device Control Three/XOFF: začasno prekini izhod"
 
-#: terminalDisplay/TerminalDisplay.cpp:2471
+#: terminalDisplay/TerminalDisplay.cpp:2488
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "Substitute/Suspend: lahko začasno ustavi trenutni proces"
 
-#: terminalDisplay/TerminalDisplay.cpp:2472
+#: terminalDisplay/TerminalDisplay.cpp:2489
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Escape: se uporablja za spremembo stanja terminala"
 
-#: terminalDisplay/TerminalDisplay.cpp:2473
+#: terminalDisplay/TerminalDisplay.cpp:2490
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "File Separator/Quit:  lahko konča trenutni proces"
 
-#: terminalDisplay/TerminalDisplay.cpp:2496
+#: terminalDisplay/TerminalDisplay.cpp:2513
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3568,31 +3605,31 @@ msgstr ""
 "Besedilo, ki ga želite prilepiti vsebuje nekatere skrite kontrolne znake. "
 "Ali želite te znake odfiltrirati?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2499
+#: terminalDisplay/TerminalDisplay.cpp:2516
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Potrdi lepljenje"
 
-#: terminalDisplay/TerminalDisplay.cpp:2500
+#: terminalDisplay/TerminalDisplay.cpp:2517
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Prilepi brez kontrolnih znakov"
 
-#: terminalDisplay/TerminalDisplay.cpp:2501
+#: terminalDisplay/TerminalDisplay.cpp:2518
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "&Prilepi vse"
 
-#: terminalDisplay/TerminalDisplay.cpp:2502
+#: terminalDisplay/TerminalDisplay.cpp:2519
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "Prekliči"
 
-#: terminalDisplay/TerminalDisplay.cpp:2745
+#: terminalDisplay/TerminalDisplay.cpp:2762
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3603,17 +3640,17 @@ msgstr ""
 "Software_flow_control\">zaustavljen</a> s pritiskom Ctrl+S.  Pritisnite "
 "<b>Ctrl+Q</b>za nadaljevanje.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2800
+#: terminalDisplay/TerminalDisplay.cpp:2817
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Ta terminal je samo za branje."
 
-#: terminalDisplay/TerminalDisplay.cpp:3206
+#: terminalDisplay/TerminalDisplay.cpp:3223
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Spremeni mapo v"
 
-#: terminalDisplay/TerminalDisplay.cpp:3241
+#: terminalDisplay/TerminalDisplay.cpp:3258
 #, kde-format
 msgid "&Paste Location"
 msgstr "&Prilepi naslov"
@@ -6110,13 +6147,13 @@ msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "Zapri zavihek"
 
-#: widgets/ViewContainer.cpp:969 widgets/ViewContainer.cpp:978
+#: widgets/ViewContainer.cpp:990 widgets/ViewContainer.cpp:999
 #, kde-format
 msgctxt "As in Distrobox, Toolbox, Kapsule etc."
 msgid "Container"
 msgstr "Vsebnik"
 
-#: widgets/ViewContainer.cpp:988
+#: widgets/ViewContainer.cpp:1009
 #, kde-format
 msgctxt ""
 "%1 is the type of container (e.g. Distrobox, Toolbox, Kapsule etc.), %2 its "
