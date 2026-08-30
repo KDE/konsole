@@ -468,11 +468,17 @@ void MainWindow::setupActions()
     // Settings Menu
     _toggleMenuBarAction = KStandardAction::showMenubar(menuBar(), &QMenuBar::setVisible, collection);
     collection->setDefaultShortcut(_toggleMenuBarAction, static_cast<Qt::Modifiers>(Konsole::ACCEL) | Qt::Key_M);
-    connect(_toggleMenuBarAction, &QAction::triggered, [this, collection] {
+    connect(_toggleMenuBarAction, &QAction::triggered, [this, collection](bool checked) {
         // Remove menubar icons set for the hamburger menu, so they don't override
         // the text when they appear in the in-window menubar
         collection->action(QStringLiteral("bookmark"))->setIcon(QIcon());
         static_cast<QMenu *>(factory()->container(QStringLiteral("plugins"), this))->setIcon(QIcon());
+        // Update config settings since the menubar visibility is taken from config at the new view activation
+        KSharedConfigPtr appConfig = KSharedConfig::openConfig();
+        KConfigGroup mw = appConfig->group(QStringLiteral("MainWindow"));
+        if (mw.exists() && !mw.readEntry("MenuBar", "").isEmpty()) {
+            mw.writeEntry("MenuBar", checked ? "Enabled" : "Disabled");
+        }
     });
 
     // Set up themes
