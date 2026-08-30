@@ -89,22 +89,13 @@ private:
 };
 
 struct RegistryFixture {
-    RegistryFixture(QStringList types)
-    {
-        std::vector<std::unique_ptr<IContainerDetector>> ownedDetectors;
-        for (const QString &type : types) {
-            auto detector = std::make_unique<TestContainerDetector>(type);
-            detectors.append(detector.get());
-            ownedDetectors.push_back(std::move(detector));
-        }
-        registry = std::make_unique<ContainerRegistry>(std::move(ownedDetectors));
-    }
-
     QList<TestContainerDetector *> detectors;
     std::unique_ptr<ContainerRegistry> registry;
 };
 }
 
+namespace Konsole
+{
 class ContainerRegistryTest : public QObject
 {
     Q_OBJECT
@@ -121,7 +112,23 @@ private Q_SLOTS:
     void refreshAcceptsEmptyResults();
     void overlappingRefreshIsIgnored();
     void detectorChangeStartsRefresh();
+
+private:
+    static RegistryFixture makeFixture(const QStringList &types);
 };
+
+RegistryFixture ContainerRegistryTest::makeFixture(const QStringList &types)
+{
+    RegistryFixture fixture;
+    std::vector<std::unique_ptr<IContainerDetector>> ownedDetectors;
+    for (const QString &type : types) {
+        auto detector = std::make_unique<TestContainerDetector>(type);
+        fixture.detectors.append(detector.get());
+        ownedDetectors.push_back(std::move(detector));
+    }
+    fixture.registry = std::unique_ptr<ContainerRegistry>(new ContainerRegistry(std::move(ownedDetectors)));
+    return fixture;
+}
 
 void ContainerRegistryTest::keyRoundTrip_data()
 {
@@ -138,7 +145,7 @@ void ContainerRegistryTest::keyRoundTrip()
     QFETCH(QString, type);
     QFETCH(QString, name);
 
-    RegistryFixture fixture({type});
+    RegistryFixture fixture = makeFixture({type});
     const ContainerInfo original = fixture.detectors.constFirst()->info(name);
     const QString key = ContainerRegistry::keyFromContainerInfo(original);
     const ContainerInfo restored = fixture.registry->containerInfoFromKey(key);
@@ -162,13 +169,13 @@ void ContainerRegistryTest::invalidKey_data()
 void ContainerRegistryTest::invalidKey()
 {
     QFETCH(QString, key);
-    RegistryFixture fixture({QStringLiteral("kapsule")});
+    RegistryFixture fixture = makeFixture({QStringLiteral("kapsule")});
     QVERIFY(!fixture.registry->containerInfoFromKey(key).isValid());
 }
 
 void ContainerRegistryTest::osc777Parsing()
 {
-    RegistryFixture fixture({QStringLiteral("toolbox"), QStringLiteral("kapsule")});
+    RegistryFixture fixture = makeFixture({QStringLiteral("toolbox"), QStringLiteral("kapsule")});
 
     const auto push =
         fixture.registry->containerInfoFromOsc777({QStringLiteral("container"), QStringLiteral("push"), QStringLiteral("dev"), QStringLiteral("kapsule")});
@@ -189,7 +196,7 @@ void ContainerRegistryTest::osc777Parsing()
 
 void ContainerRegistryTest::detectionUsesRegistrationOrder()
 {
-    RegistryFixture fixture({QStringLiteral("first"), QStringLiteral("second")});
+    RegistryFixture fixture = makeFixture({QStringLiteral("first"), QStringLiteral("second")});
     fixture.detectors.at(0)->setDetection(42, QStringLiteral("one"));
     fixture.detectors.at(1)->setDetection(42, QStringLiteral("two"));
 
@@ -201,7 +208,7 @@ void ContainerRegistryTest::detectionUsesRegistrationOrder()
 
 void ContainerRegistryTest::delegatesEntryCommand()
 {
-    RegistryFixture fixture({QStringLiteral("kapsule")});
+    RegistryFixture fixture = makeFixture({QStringLiteral("kapsule")});
     const ContainerInfo container = fixture.detectors.constFirst()->info(QString());
     QCOMPARE(fixture.registry->entryCommand(container), QStringList({QStringLiteral("kapsule"), QStringLiteral("enter"), QString()}));
     QVERIFY(fixture.registry->entryCommand({}).isEmpty());
@@ -209,7 +216,7 @@ void ContainerRegistryTest::delegatesEntryCommand()
 
 void ContainerRegistryTest::refreshWaitsForAllDetectors()
 {
-    RegistryFixture fixture({QStringLiteral("first"), QStringLiteral("second")});
+    RegistryFixture fixture = makeFixture({QStringLiteral("first"), QStringLiteral("second")});
     QSignalSpy updatedSpy(fixture.registry.get(), &ContainerRegistry::containersUpdated);
 
     fixture.registry->refreshContainers();
@@ -229,7 +236,7 @@ void ContainerRegistryTest::refreshWaitsForAllDetectors()
 
 void ContainerRegistryTest::refreshAcceptsEmptyResults()
 {
-    RegistryFixture fixture({QStringLiteral("first"), QStringLiteral("second")});
+    RegistryFixture fixture = makeFixture({QStringLiteral("first"), QStringLiteral("second")});
     QSignalSpy updatedSpy(fixture.registry.get(), &ContainerRegistry::containersUpdated);
 
     fixture.registry->refreshContainers();
@@ -243,7 +250,7 @@ void ContainerRegistryTest::refreshAcceptsEmptyResults()
 
 void ContainerRegistryTest::overlappingRefreshIsIgnored()
 {
-    RegistryFixture fixture({QStringLiteral("kapsule")});
+    RegistryFixture fixture = makeFixture({QStringLiteral("kapsule")});
 
     fixture.registry->refreshContainers();
     fixture.registry->refreshContainers();
@@ -256,12 +263,14 @@ void ContainerRegistryTest::overlappingRefreshIsIgnored()
 
 void ContainerRegistryTest::detectorChangeStartsRefresh()
 {
-    RegistryFixture fixture({QStringLiteral("kapsule")});
+    RegistryFixture fixture = makeFixture({QStringLiteral("kapsule")});
 
     fixture.detectors.constFirst()->notifyContainersChanged();
     QCOMPARE(fixture.detectors.constFirst()->startCount, 1);
 }
 
-QTEST_GUILESS_MAIN(ContainerRegistryTest)
+}
+
+QTEST_GUILESS_MAIN(Konsole::ContainerRegistryTest)
 
 #include "ContainerRegistryTest.moc"
