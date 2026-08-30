@@ -10,6 +10,8 @@
 #include <QObject>
 #include <QTemporaryDir>
 
+#include <memory>
+
 namespace Konsole
 {
 class ViewManagerTest : public QObject
@@ -18,14 +20,19 @@ class ViewManagerTest : public QObject
 
 private Q_SLOTS:
     void initTestCase();
+    void cleanup();
     void testSaveLayout();
     void testLoadLayout();
+    void testContainerContextSelection_data();
+    void testContainerContextSelection();
+    void testExplicitContainerOverridesAutomaticContext();
+    void testExplicitHostOverridesAutomaticContext();
     void testContainerMenuLaunchKeepsPendingColor();
     void testContainerTabColorSettingHidesAutoColor();
     void testContainerTabColorSettingPreservesUserColor();
 
 private:
-    QTemporaryDir *m_testDir;
+    std::unique_ptr<QTemporaryDir> m_testDir;
 };
 
 }
