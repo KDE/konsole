@@ -209,7 +209,7 @@
 >Historial</title>
 
 <para
->&konsole; utiliza el concepto de historial para permitir a los usuarios ver la salida mostrada previamente. De manera predeterminada, el historial está activado y preparado para guardar 1.000 líneas de salida además de lo que se muestre actualmente en la pantalla. </para>
+>&konsole; utiliza el concepto de historial para permitir a los usuarios ver la salida mostrada previamente. De manera predeterminada, el historial está activado y preparado para guardar 10.000 líneas de salida además de lo que se muestre actualmente en la pantalla. </para>
 <para
 >A medida que las líneas de texto quedan fuera de la parte superior de la pantalla, se pueden ver moviendo la barra de desplazamiento hacia arriba, desplazándose con la rueda del ratón o utilizando las teclas <keycombo action="simul"
 >&Shift;<keycap
@@ -894,6 +894,114 @@
 >). </para
 ></listitem>
 </itemizedlist>
+</sect1>
+
+<sect1 id="container-awareness">
+<title
+>Identificación de contenedores</title>
+
+<para
+>&konsole; puede detectar si el proceso en primer plano se está ejecutando dentro de un contenedor Linux (como <application
+>Distrobox</application
+>, <application
+>Toolbox</application
+> o <application
+>Kapsule</application
+>) y proporciona información visual para ayudar a seguir la pista de los terminales que se ejecutan dentro de contenedores. </para>
+
+<sect2 id="container-indicators">
+<title
+>Indicadores visuales</title>
+
+<para
+>Cuando se detecta un contenedor, &konsole; muestra dos indicadores:</para>
+
+<itemizedlist>
+<listitem
+><para
+><emphasis
+>Pestaña coloreada</emphasis
+>: la pestaña recibe un color único que deriva de la identidad del contenedor. Cada contenedor usa de forma consistente el mismo color para todas las sesiones, por lo que se puede identificar a simple vista la pestaña que pertenece a un determinado contenedor. </para
+></listitem>
+
+<listitem
+><para
+><emphasis
+>Etiqueta en pestaña</emphasis
+>: una pequeña barra aparece en la parte inferior del área del terminal mostrando el tipo y el nombre del contenedor (por ejemplo, <guilabel
+>Distrobox: fedora-41</guilabel
+>). Esta etiqueta desaparece automáticamente cuando el proceso en primer plano vuelve al anfitrión. </para
+></listitem>
+</itemizedlist>
+
+<para
+>Ambos indicadores se pueden activar o desactivar independientemente en <menuchoice
+><guimenu
+>Preferencias</guimenu
+><guimenuitem
+>Configurar &konsole;…</guimenuitem
+> <guimenuitem
+>Barra de pestaña / separadores</guimenuitem
+></menuchoice
+>: </para>
+
+<itemizedlist>
+<listitem
+><para
+><guilabel
+>Pestaña coloreada cuando esté dentro de un contenedor</guilabel
+>: conmuta la pestaña coloreada. Está activado de forma predeterminada. </para
+></listitem>
+<listitem
+><para
+><guilabel
+>Mostrar etiqueta de contenedor en el pie del terminal</guilabel
+>: conmuta la etiqueta al pie. Está activado de forma predeterminada. </para
+></listitem>
+</itemizedlist>
+</sect2>
+
+<sect2 id="container-new-tab">
+<title
+>Apertura de una pestaña dentro de un contenedor</title>
+
+<para
+>El menú <guimenu
+>Archivo</guimenu
+> y el botón <guibutton
+>Nueva pestaña</guibutton
+> ofrecen un submenú que enumera todos los contenedores disponibles. Al seleccionar un contenedor se abre una nueva pestaña que entra en dicho contenedor de forma inmediata. También se proporciona una entrada <guilabel
+>Anfitrión</guilabel
+> para abrir explícitamente una pestaña en el sistema anfitrión sin tener en cuenta ningún perfil predeterminado. </para>
+</sect2>
+
+<sect2 id="container-profile">
+<title
+>Preferencias del perfil</title>
+
+<para
+>Existen dos opciones relacionadas con contenedores en cada perfil dentro de la pestaña <guilabel
+>General</guilabel
+> de <guilabel
+>Editar perfil</guilabel
+>: </para>
+
+<itemizedlist>
+<listitem
+><para
+><guilabel
+>Iniciar siempre en contenedor</guilabel
+>: permite escoger un determinado contenedor en el que entrarán automáticamente las nuevas sesiones que usen dicho perfil. </para
+></listitem>
+<listitem
+><para
+><guilabel
+>Entrar en el mismo contenedor que la sesión actual</guilabel
+>: las nuevas pestañas que se abran desde una sesión de contenedor existente entrarán en el mismo contenedor en lugar de iniciarse en el anfitrión. </para
+></listitem>
+</itemizedlist>
+</sect2>
+
 </sect1>
 
 </chapter>

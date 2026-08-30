@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-29 00:49+0000\n"
-"PO-Revision-Date: 2026-08-10 05:14+0200\n"
+"PO-Revision-Date: 2026-08-29 04:26+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -3013,7 +3013,7 @@ msgstr "ჩანართის სიგანის გაფართოე�
 #: settings/konsole.kcfg:208
 #, kde-format
 msgid "Color-code tab when running inside a container"
-msgstr ""
+msgstr "ფერის კოდი როცა გაშვებულია კონტეინერის შიგნით"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ShowContainerTabColor)
 #. i18n: ectx: tooltip, entry (ShowContainerTabColor), group (TabBar)
@@ -3023,13 +3023,15 @@ msgid ""
 "When running inside a container (e.g. Distrobox or Toolbox), color-code the "
 "tab with a container-specific color"
 msgstr ""
+"კონტეინერის შიგნიდან გაშვებისას (მაგ: Distrobox, ან Toolbox), ის ჩანართი "
+"კონტეინერისთვის სპეფიციკური ფერით იქნება დანიშნული"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowContainerStatusBar)
 #. i18n: ectx: label, entry (ShowContainerStatusBar), group (TabBar)
 #: settings/konsole.kcfg:213 settings/TabBarSettings.ui:314
 #, kde-format
 msgid "Show container label in terminal footer"
-msgstr ""
+msgstr "კონტეინერის ჭდის ჩვენება ტერმინალის ქვედა კოლონტიტულში"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ShowContainerStatusBar)
 #. i18n: ectx: tooltip, entry (ShowContainerStatusBar), group (TabBar)
@@ -3039,6 +3041,8 @@ msgid ""
 "When running inside a container (e.g. Distrobox or Toolbox), show a label "
 "with the container name at the bottom of the terminal"
 msgstr ""
+"კონტეინერის შიგნიდან გაშვებისას (მაგ: Distrobox, ან Toolbox), ტერმინალის "
+"ქვედა კოლონტიტულში კონტეინერის სახელის შემცველი ჭდის ჩვენება"
 
 #. i18n: ectx: label, entry (scrollbackUseSystemLocation), group (FileLocation)
 #: settings/konsole.kcfg:230
@@ -3339,7 +3343,7 @@ msgstr "ინდივიდუალური ჩანართის სი�
 #: settings/TabBarSettings.ui:304
 #, kde-format
 msgid "Color-code tab when inside a container"
-msgstr ""
+msgstr "ჩანართის ფერის კოდი კონტეინერის შიგნით ყოფნისას"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabBarUseUserStyleSheet)
 #: settings/TabBarSettings.ui:321

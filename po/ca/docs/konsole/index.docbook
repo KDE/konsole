@@ -818,6 +818,114 @@
 </itemizedlist>
 </sect1>
 
+<sect1 id="container-awareness">
+<title
+>Coneixement de contenidor</title>
+
+<para
+>El &konsole; pot detectar quan el procés en primer pla està executant-se en un contenidor Linux com <application
+>Distrobox</application
+>, <application
+>Toolbox</application
+> o <application
+>Kapsule</application
+>, i proporciona retroalimentació visual per ajudar-vos a fer un seguiment de quin contenidor s'està executant dins del terminal. </para>
+
+<sect2 id="container-indicators">
+<title
+>Indicadors visuals</title>
+
+<para
+>Quan es detecta un contenidor, el &konsole; mostra dos indicadors:</para>
+
+<itemizedlist>
+<listitem
+><para
+><emphasis
+>Pestanya acolorida</emphasis
+>: la pestanya rep un color únic derivat de la identitat del contenidor. Cada contenidor té el mateix color a través de les sessions, de manera que es pot dir d'un cop d'ull a quin contenidor pertany una pestanya. </para
+></listitem>
+
+<listitem
+><para
+><emphasis
+>Etiqueta de contenidor</emphasis
+>: apareix una petita barra a la part inferior de l'àrea del terminal que mostra el tipus i el nom del contenidor (per exemple, <guilabel
+>Distrobox: fedora-41</guilabel
+>). L'etiqueta desapareix automàticament quan el procés de primer pla torna a l'amfitrió. </para
+></listitem>
+</itemizedlist>
+
+<para
+>Els dos indicadors es poden activar o desactivar independentment a <menuchoice
+><guimenu
+>Arranjament</guimenu
+><guimenuitem
+>Configura el &konsole;…</guimenuitem
+><guimenuitem
+>Barra de pestanyes / Divisors</guimenuitem
+></menuchoice
+>: </para>
+
+<itemizedlist>
+<listitem
+><para
+><guilabel
+>Pestanya amb codi de color en executar-se en un contenidor</guilabel
+>: commuta la pestanya acolorida. Actiu de manera predeterminada. </para
+></listitem>
+<listitem
+><para
+><guilabel
+>Mostra l'etiqueta del contenidor al peu del terminal</guilabel
+>: commuta l'etiqueta del peu. Actiu de manera predeterminada. </para
+></listitem>
+</itemizedlist>
+</sect2>
+
+<sect2 id="container-new-tab">
+<title
+>Obertura d'una pestanya en un contenidor</title>
+
+<para
+>El menú <guimenu
+>Fitxer</guimenu
+> i el botó <guibutton
+>Pestanya nova</guibutton
+> ofereixen un submenú que llista tots els contenidors disponibles. En seleccionar un contenidor s'obre una pestanya nova que entra immediatament en aquest contenidor. També es proporciona una entrada <guilabel
+>Servidor</guilabel
+> per obrir explícitament una pestanya al sistema amfitrió independentment de qualsevol perfil predeterminat. </para>
+</sect2>
+
+<sect2 id="container-profile">
+<title
+>Configuració del perfil</title>
+
+<para
+>Hi ha dues opcions relacionades amb contenidors disponibles per perfil a la pestanya <guilabel
+>General</guilabel
+> d'<guilabel
+>Edita un perfil</guilabel
+>: </para>
+
+<itemizedlist>
+<listitem
+><para
+><guilabel
+>Inicia sempre en el contenidor</guilabel
+>: trieu un contenidor específic que les sessions noves que facin servir aquest perfil sempre hi entraran automàticament. </para
+></listitem>
+<listitem
+><para
+><guilabel
+>Entra en el mateix contenidor que la sessió actual</guilabel
+>: les pestanyes noves obertes des d'una sessió de contenidor existent entraran al mateix contenidor en lloc de començar a l'amfitrió. </para
+></listitem>
+</itemizedlist>
+</sect2>
+
+</sect1>
+
 </chapter>
 
 <chapter id="commandreference">
