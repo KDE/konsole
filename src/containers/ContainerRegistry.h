@@ -155,6 +155,7 @@ public:
     ContainerInfo containerInfoFromKey(const QString &key) const;
 
     ContainerRegistry();
+    explicit ContainerRegistry(std::vector<std::unique_ptr<IContainerDetector>> detectors, bool refreshOnConstruction = false);
     ~ContainerRegistry() override = default;
 
 Q_SIGNALS:
