@@ -57,14 +57,10 @@ ContainerRegistry::ContainerRegistry()
     refreshContainers();
 }
 
-ContainerRegistry::ContainerRegistry(std::vector<std::unique_ptr<IContainerDetector>> detectors, bool refreshOnConstruction)
+ContainerRegistry::ContainerRegistry(std::vector<std::unique_ptr<IContainerDetector>> detectors)
 {
     for (auto &detector : detectors) {
         registerDetector(std::move(detector));
-    }
-
-    if (refreshOnConstruction) {
-        refreshContainers();
     }
 }
 
