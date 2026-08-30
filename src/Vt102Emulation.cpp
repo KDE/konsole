@@ -1802,8 +1802,8 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
             {QLatin1String("grabbing"), Qt::ClosedHandCursor},
 
             {QLatin1String("all-scroll"), Qt::ArrowCursor}, // no exact match
-            {QLatin1String("col-resize"), Qt::ArrowCursor}, // no exact match
-            {QLatin1String("row-resize"), Qt::ArrowCursor}, // no exact match
+            {QLatin1String("col-resize"), Qt::SplitHCursor},
+            {QLatin1String("row-resize"), Qt::SplitVCursor},
 
             {QLatin1String("n-resize"), Qt::SizeVerCursor}, // no exact match
             {QLatin1String("e-resize"), Qt::SizeHorCursor}, // no exact match
