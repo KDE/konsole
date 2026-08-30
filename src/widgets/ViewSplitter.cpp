@@ -312,7 +312,7 @@ void ViewSplitter::handleFocusDirection(Qt::Orientation orientation, int directi
     // See https://bugs.kde.org/show_bug.cgi?id=411387 for more info
     const auto handleWidth = parentSplitter->handleWidth() + 3;
 
-    const auto start = QPoint(terminalDisplay->x(), terminalDisplay->y());
+    const auto start = ViewSplitter::containerWidgetForDisplay(terminalDisplay)->pos();
     const auto startMapped = parentSplitter->mapTo(topSplitter, start);
 
     const int newX = orientation != Qt::Horizontal ? startMapped.x() + handleWidth
