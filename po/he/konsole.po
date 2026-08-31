@@ -23,7 +23,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-29 00:49+0000\n"
-"PO-Revision-Date: 2026-08-11 08:39+0300\n"
+"PO-Revision-Date: 2026-08-30 21:50+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -2995,7 +2995,7 @@ msgstr "הרחבת הלשוניות"
 #: settings/konsole.kcfg:208
 #, kde-format
 msgid "Color-code tab when running inside a container"
-msgstr ""
+msgstr "לשונית בצבע מוסכם בעת ריצה בתוך מכולה"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ShowContainerTabColor)
 #. i18n: ectx: tooltip, entry (ShowContainerTabColor), group (TabBar)
@@ -3005,13 +3005,14 @@ msgid ""
 "When running inside a container (e.g. Distrobox or Toolbox), color-code the "
 "tab with a container-specific color"
 msgstr ""
+"בעת ריצה בתוך מכולה (למשל: Distrobox או Toolbox), לסמן את הלשונית בצבע מסוים"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowContainerStatusBar)
 #. i18n: ectx: label, entry (ShowContainerStatusBar), group (TabBar)
 #: settings/konsole.kcfg:213 settings/TabBarSettings.ui:314
 #, kde-format
 msgid "Show container label in terminal footer"
-msgstr ""
+msgstr "הצגת תווית מכולה בכותרת התחתונה של המכולה"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ShowContainerStatusBar)
 #. i18n: ectx: tooltip, entry (ShowContainerStatusBar), group (TabBar)
@@ -3021,6 +3022,8 @@ msgid ""
 "When running inside a container (e.g. Distrobox or Toolbox), show a label "
 "with the container name at the bottom of the terminal"
 msgstr ""
+"בעת ריצה בתוך מכולה (למשל: Distrobox או Toolbox), להציג תווית עם שם המכולה "
+"בתחתית המסוף"
 
 #. i18n: ectx: label, entry (scrollbackUseSystemLocation), group (FileLocation)
 #: settings/konsole.kcfg:230
@@ -3317,7 +3320,7 @@ msgstr "הרחבת רוחבי לשוניות בודדות לחלון מלא"
 #: settings/TabBarSettings.ui:304
 #, kde-format
 msgid "Color-code tab when inside a container"
-msgstr ""
+msgstr "לשונית בצבע מוסכם בתוך מכולה"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabBarUseUserStyleSheet)
 #: settings/TabBarSettings.ui:321

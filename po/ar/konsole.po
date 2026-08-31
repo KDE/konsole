@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-29 00:49+0000\n"
-"PO-Revision-Date: 2026-08-11 09:20+0400\n"
+"PO-Revision-Date: 2026-08-30 18:00+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -3006,7 +3006,7 @@ msgstr "وسع عرض اللسان"
 #: settings/konsole.kcfg:208
 #, kde-format
 msgid "Color-code tab when running inside a container"
-msgstr ""
+msgstr "لوّن اللسان عند التشغيل داخل حاوية"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ShowContainerTabColor)
 #. i18n: ectx: tooltip, entry (ShowContainerTabColor), group (TabBar)
@@ -3016,13 +3016,15 @@ msgid ""
 "When running inside a container (e.g. Distrobox or Toolbox), color-code the "
 "tab with a container-specific color"
 msgstr ""
+"عند التشغيل داخل حاوية (مثل Distrobox أو Toolbox)، لوّن اللسان باللون الخاص "
+"بالحاوية."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowContainerStatusBar)
 #. i18n: ectx: label, entry (ShowContainerStatusBar), group (TabBar)
 #: settings/konsole.kcfg:213 settings/TabBarSettings.ui:314
 #, kde-format
 msgid "Show container label in terminal footer"
-msgstr ""
+msgstr "اعرض لصيقة الحاوية في تذييل الطرفية"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ShowContainerStatusBar)
 #. i18n: ectx: tooltip, entry (ShowContainerStatusBar), group (TabBar)
@@ -3032,6 +3034,8 @@ msgid ""
 "When running inside a container (e.g. Distrobox or Toolbox), show a label "
 "with the container name at the bottom of the terminal"
 msgstr ""
+"عند التشغيل داخل حاوية (مثل Distrobox أو Toolbox)، اعرض لصيقة باسم الحاوية "
+"في أسفل نافذة الطرفية."
 
 #. i18n: ectx: label, entry (scrollbackUseSystemLocation), group (FileLocation)
 #: settings/konsole.kcfg:230
@@ -3329,7 +3333,7 @@ msgstr "وسّع عرض اللسان المفرد إلى ملء النافذة"
 #: settings/TabBarSettings.ui:304
 #, kde-format
 msgid "Color-code tab when inside a container"
-msgstr ""
+msgstr "لوّن اللسان عندما يكون داخل حاوية"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabBarUseUserStyleSheet)
 #: settings/TabBarSettings.ui:321
