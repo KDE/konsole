@@ -37,7 +37,7 @@ void HTMLDecoder::begin(QTextStream *output)
     *_output << "<head>\n";
     *_output << "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n";
     *_output << "</head>\n";
-    *_output << "<body>\n";
+    *_output << "<body style=\"background-color:" << _colorTable[DEFAULT_BACK_COLOR].name() << "\">\n";
 
     QString text;
     openSpan(text, QStringLiteral("font-family:monospace"));
