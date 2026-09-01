@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-29 00:49+0000\n"
-"PO-Revision-Date: 2026-08-11 09:13+0200\n"
+"PO-Revision-Date: 2026-08-30 09:21+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -32,7 +32,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Accelerator-Marker: &\n"
 "X-Environment: kde\n"
-"X-Generator: Lokalize 26.04.3\n"
+"X-Generator: Lokalize 26.08.0\n"
 "X-Text-Markup: kde4\n"
 
 #, kde-format
@@ -3091,6 +3091,7 @@ msgstr "Agrandir la largeur des onglets"
 #, kde-format
 msgid "Color-code tab when running inside a container"
 msgstr ""
+"Onglet en code couleur lors de l'exécution à l'intérieur d'un conteneur"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ShowContainerTabColor)
 #. i18n: ectx: tooltip, entry (ShowContainerTabColor), group (TabBar)
@@ -3100,13 +3101,15 @@ msgid ""
 "When running inside a container (e.g. Distrobox or Toolbox), color-code the "
 "tab with a container-specific color"
 msgstr ""
+"Lors de l'exécution dans un conteneur (Par exemple dans Distrobox ou "
+"Toolbox), affichez l'onglet avec un code de couleur spécifique au conteneur."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowContainerStatusBar)
 #. i18n: ectx: label, entry (ShowContainerStatusBar), group (TabBar)
 #: settings/konsole.kcfg:213 settings/TabBarSettings.ui:314
 #, kde-format
 msgid "Show container label in terminal footer"
-msgstr ""
+msgstr "Afficher l'étiquette du conteneur dans le pied de page du terminal"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ShowContainerStatusBar)
 #. i18n: ectx: tooltip, entry (ShowContainerStatusBar), group (TabBar)
@@ -3116,6 +3119,8 @@ msgid ""
 "When running inside a container (e.g. Distrobox or Toolbox), show a label "
 "with the container name at the bottom of the terminal"
 msgstr ""
+"Lors de l'exécution dans un conteneur (Par exemple dans Distrobox ou "
+"Toolbox), affichez une étiquette avec le nom du conteneur en bas du terminal."
 
 #. i18n: ectx: label, entry (scrollbackUseSystemLocation), group (FileLocation)
 #: settings/konsole.kcfg:230
@@ -3422,7 +3427,7 @@ msgstr "Augmenter la largeur de chaque tabulation à la largeur de la fenêtre"
 #: settings/TabBarSettings.ui:304
 #, kde-format
 msgid "Color-code tab when inside a container"
-msgstr ""
+msgstr "Onglet avec un code couleur lorsqu'à l'intérieur d'un conteneur"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabBarUseUserStyleSheet)
 #: settings/TabBarSettings.ui:321

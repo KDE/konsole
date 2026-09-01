@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-29 00:49+0000\n"
-"PO-Revision-Date: 2026-07-16 17:09+0200\n"
+"PO-Revision-Date: 2026-08-31 17:31+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -4870,30 +4870,20 @@ msgid "None"
 msgstr "Necun"
 
 #: widgets/EditProfileDialog.cpp:557
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Suffix of the number of columns (N columns). The leading space is needed "
-#| "to separate it from the number value."
-#| msgid " column"
-#| msgid_plural " columns"
+#, kde-format
 msgctxt "@item number of columns"
 msgid "%v column"
 msgid_plural "%v columns"
-msgstr[0] "columna"
-msgstr[1] "columnas"
+msgstr[0] "%v columna"
+msgstr[1] "%v columnas"
 
 #: widgets/EditProfileDialog.cpp:558
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Suffix of the number of rows (N rows). The leading space is needed to "
-#| "separate it from the number value."
-#| msgid " row"
-#| msgid_plural " rows"
+#, kde-format
 msgctxt "@item number of rows"
 msgid "%v row"
 msgid_plural "%v rows"
-msgstr[0] "Linea"
-msgstr[1] " Lineas"
+msgstr[0] "%v rango"
+msgstr[1] "%v rangos"
 
 #: widgets/EditProfileDialog.cpp:570
 #, kde-format
@@ -4931,15 +4921,12 @@ msgid "One environment variable per line"
 msgstr "Un variabile de ambiente per linea"
 
 #: widgets/EditProfileDialog.cpp:720
-#, fuzzy, kde-format
-#| msgctxt "Unit of time"
-#| msgid " second"
-#| msgid_plural " seconds"
+#, kde-format
 msgctxt "@item number of seconds"
 msgid "%v second"
 msgid_plural "%v seconds"
-msgstr[0] " secunda"
-msgstr[1] " secundas"
+msgstr[0] "%v secunda"
+msgstr[1] "%v secundas"
 
 #: widgets/EditProfileDialog.cpp:850
 #, kde-format
@@ -5809,14 +5796,11 @@ msgid "The threshold for continuous silence to be detected by Konsole"
 msgstr "Le limine per le silentio continue que debe esser relevate per Konsole"
 
 #: widgets/HistorySizeWidget.cpp:41
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox Unit of scrollback"
-#| msgid " line"
-#| msgid_plural " lines"
+#, kde-format
 msgctxt "@item number of lines"
 msgid "%v line"
 msgid_plural "%v lines"
-msgstr[0] "linea"
+msgstr[0] "%v linea"
 msgstr[1] " lineas"
 
 #: widgets/HistorySizeWidget.cpp:56
