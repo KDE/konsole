@@ -134,7 +134,7 @@ void TerminalCharacterDecoderTest::testHTMLDecoder()
     QVERIFY(outputString.contains(QStringLiteral("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />")));
 
     // strip HTML document
-    outputString.replace(QRegularExpression(QStringLiteral("^.*<body>\\n"), QRegularExpression::DotMatchesEverythingOption), QString());
+    outputString.replace(QRegularExpression(QStringLiteral("^.*<body[^>]*>\\n"), QRegularExpression::DotMatchesEverythingOption), QString());
     outputString.replace(QRegularExpression(QStringLiteral("</body>.*$"), QRegularExpression::DotMatchesEverythingOption), QString());
 
     QCOMPARE(outputString, result);
