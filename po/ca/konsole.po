@@ -1,9 +1,9 @@
 # Translation of konsole.po to Catalan
 # Copyright (C) 1998-2026 This_file_is_part_of_KDE
 #
-# SPDX-FileCopyrightText: 1998, 1999, 2000, 2001, 2002, 2004, 2005, 2006 Sebastià Pla i Sanz <sps@sastia.com>
-# SPDX-FileCopyrightText: 2003, 2011, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023 Antoni Bella Pérez <antonibella5@yahoo.com>
-# SPDX-FileCopyrightText: 2003, 2004, 2005 Albert Astals Cid <aacid@kde.org>
+# SPDX-FileCopyrightText: 1998-2002, 2004-2006 Sebastià Pla i Sanz <sps@sastia.com>
+# SPDX-FileCopyrightText: 2003, 2011, 2015-2023 Antoni Bella Pérez <antonibella5@yahoo.com>
+# SPDX-FileCopyrightText: 2003-2005 Albert Astals Cid <aacid@kde.org>
 # SPDX-FileCopyrightText: 2007 Miquel Oliete i Baliarda <ktalanet@yahoo.es>
 # SPDX-FileCopyrightText: 2007-2026 Josep M. Ferrer <txemaq@gmail.com>
 msgid ""
