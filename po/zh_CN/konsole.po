@@ -2975,7 +2975,7 @@ msgstr "扩展标签页宽度"
 #: settings/konsole.kcfg:208
 #, kde-format
 msgid "Color-code tab when running inside a container"
-msgstr ""
+msgstr "在容器内运行时对标签页进行颜色编码"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ShowContainerTabColor)
 #. i18n: ectx: tooltip, entry (ShowContainerTabColor), group (TabBar)
@@ -2985,13 +2985,15 @@ msgid ""
 "When running inside a container (e.g. Distrobox or Toolbox), color-code the "
 "tab with a container-specific color"
 msgstr ""
+"在容器内运行时 (例如 Distrobox 或 Toolbox)，使用容器专属颜色对标签页进行颜色"
+"编码"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowContainerStatusBar)
 #. i18n: ectx: label, entry (ShowContainerStatusBar), group (TabBar)
 #: settings/konsole.kcfg:213 settings/TabBarSettings.ui:314
 #, kde-format
 msgid "Show container label in terminal footer"
-msgstr ""
+msgstr "在终端页脚显示容器标签"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ShowContainerStatusBar)
 #. i18n: ectx: tooltip, entry (ShowContainerStatusBar), group (TabBar)
@@ -3001,6 +3003,7 @@ msgid ""
 "When running inside a container (e.g. Distrobox or Toolbox), show a label "
 "with the container name at the bottom of the terminal"
 msgstr ""
+"在容器内运行时 (例如 Distrobox 或 Toolbox)，在终端底部显示带有容器名称的标签"
 
 #. i18n: ectx: label, entry (scrollbackUseSystemLocation), group (FileLocation)
 #: settings/konsole.kcfg:230
@@ -3295,7 +3298,7 @@ msgstr "单个标签页拉伸到窗口宽度"
 #: settings/TabBarSettings.ui:304
 #, kde-format
 msgid "Color-code tab when inside a container"
-msgstr ""
+msgstr "在容器内时对标签页进行颜色编码"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabBarUseUserStyleSheet)
 #: settings/TabBarSettings.ui:321
