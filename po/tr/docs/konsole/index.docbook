@@ -846,6 +846,114 @@
 </itemizedlist>
 </sect1>
 
+<sect1 id="container-awareness">
+<title
+>Kapsayıcı Duyarlılığı</title>
+
+<para
+>&konsole;, ön plandaki sürecin <application
+>Distrobox</application
+>, <application
+>Toolbox</application
+> veya <application
+>Kapsule</application
+> gibi bir kapsayıcıda çalıştığını algılayabilir ve hangi uçbirimin hangi kapsayıcıda çalıştığını takip etmenize yardımcı olmak adına görsel geri bildirimler sağlar. </para>
+
+<sect2 id="container-indicators">
+<title
+>Görsel Göstergeler</title>
+
+<para
+>Bir kapsayıcı algılandığında &konsole;, iki gösterge gösterir:</para>
+
+<itemizedlist>
+<listitem
+><para
+><emphasis
+>Renkli sekme</emphasis
+> — Sekme, kapsayıcının kimliğinden alınan benzersiz bir renk görüntüler. Her bir kapsayıcı oturumlar arasında aynı renge sahip olur ve böylece hangi sekmenin hangi kapsayıcıya ait olduğunu kolaylıkla görebilirsiniz. </para
+></listitem>
+
+<listitem
+><para
+><emphasis
+>Kapsayıcı etiketi</emphasis
+> — Uçbirim alanının altında küçük bir çubuk görünür ve burada kapsayıcının adı ve türü görüntülenir (örneğin, <guilabel
+>Distrobox: fedora-41</guilabel
+>). Ön plan süreci ana makineye döndüğünde etiket kendiliğinden kaybolur. </para
+></listitem>
+</itemizedlist>
+
+<para
+>Her iki gösterge de <menuchoice
+><guimenu
+>Ayarlar</guimenu
+><guimenuitem
+>&konsole; Uygulamasını Yapılandır…</guimenuitem
+> <guimenuitem
+>Sekme Çubuğu / Ayırıcılar</guimenuitem
+></menuchoice
+> bölümünden birbirlerinden bağımsız olarak etkinleştirilebilir veya devre dışı bırakılabilir: </para>
+
+<itemizedlist>
+<listitem
+><para
+><guilabel
+>Kapsayıcı içindeyken sekmeyi renklerle kodla</guilabel
+> — Sekme renklendirmesini açar/kapatır. Öntanımlı olarak açık gelir. </para
+></listitem>
+<listitem
+><para
+><guilabel
+>Kapsayıcı etiketini uçbirim alt bilgisinde göster</guilabel
+> — Alt bilgi etiketini açar/kapatır. Öntanımlı olarak açık gelir. </para
+></listitem>
+</itemizedlist>
+</sect2>
+
+<sect2 id="container-new-tab">
+<title
+>Kapsayıcı içinde Sekme Açmak</title>
+
+<para
+><guimenu
+>Dosya</guimenu
+> menüsü ve <guibutton
+>Yeni Sekme</guibutton
+> düğmesi, kullanılabilir tüm kapsayıcıları gösteren bir alt menü sunar. Bir kapsayıcı seçmek, o kapsayıcıyı yeni bir sekmede açar ve ona geçiş yapar. Herhangi bir profil öntanımlı değerinden bağımsız olarak ana makinede bir sekme açmak için bir <guilabel
+>Makine</guilabel
+> girdisi de ayrı olarak bulunur. </para>
+</sect2>
+
+<sect2 id="container-profile">
+<title
+>Profil Ayarları</title>
+
+<para
+><guilabel
+>Genel</guilabel
+> sekmesinin <guilabel
+>Profili Düzenle</guilabel
+> bölümünde, iki adet kapsayıcılarla ilgili seçenek bulunur: </para>
+
+<itemizedlist>
+<listitem
+><para
+><guilabel
+>Her zaman şu kapsayıcıda başlat</guilabel
+> — Bu profilin kullandığı oturumlar için belirli bir kapsayıcı seçin. Otomatik olarak geçiş yapılır. </para
+></listitem>
+<listitem
+><para
+><guilabel
+>Geçerli oturumla aynı kapsayıcıya gir</guilabel
+> — Var olan kapsayıcı oturumundan başlatılan sekmeler her zaman makinede başlamak yerine bu kapsayıcı üzerinden sürdürülür. </para
+></listitem>
+</itemizedlist>
+</sect2>
+
+</sect1>
+
 </chapter>
 
 <chapter id="commandreference">
