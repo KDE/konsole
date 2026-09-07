@@ -741,7 +741,7 @@
 >Correcció de lletres</guilabel
 >: Això activa l'aplicació de la <ulink url="https://en.wikipedia.org/wiki/Font_hinting"
 >correcció</ulink
-> als glifs en renderitzar-los. Pot millorar la llegibilitat general dels caràcters quan s'utilitzen fonts determinades i algunes pantalles. També pot ajudar a resoldre algunes situacions en què els caràcters no es renderitzen amb l'amplada o l'alçada correctes, especialment quan està activat el mode paraula. Si s'estableix, s'utilitza la <ulink url="https://doc.qt.io/qt-6/qfont.html#HintingPreference-enum"
+> als glifs en renderitzar-los. Pot millorar la llegibilitat general dels caràcters quan s'utilitzen fonts determinades i algunes pantalles. També pot ajudar a resoldre algunes situacions en què els caràcters no es renderitzen amb l'amplada o l'altura correctes, especialment quan està activat el mode paraula. Si s'estableix, s'utilitza la <ulink url="https://doc.qt.io/qt-6/qfont.html#HintingPreference-enum"
 >correcció completa</ulink
 >. Si no s'estableix, s'utilitza el nivell predeterminat de correcció. </para
 ></listitem>
