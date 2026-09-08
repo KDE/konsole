@@ -744,7 +744,7 @@ msgstr "[Par défaut]"
 #: containers/ToolboxDetector.cpp:89
 #, kde-format
 msgid "Toolbox"
-msgstr "Boîte à outils"
+msgstr "Boite à outils"
 
 #: CopyInputDialog.cpp:30
 #, kde-format
