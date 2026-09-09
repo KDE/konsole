@@ -732,7 +732,7 @@ private:
     // the parameters are specified as offsets from the start of the screen image.
     // the loc(x,y) macro can be used to generate these values from a column,line pair.
     // if resetLineRendition is true, all completely cleared lines will be set to single-width.
-    void clearImage(int loca, int loce, char c, bool resetLineRendition = true);
+    void clearImage(int loca, int loce, char c, bool resetLineRendition = true, bool eraseGraphics = true);
 
     // erases a rectangular section of the screen.
     void eraseBlock(int y, int x, int height, int width);
