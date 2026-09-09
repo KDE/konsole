@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-29 00:49+0000\n"
+"POT-Creation-Date: 2026-09-09 00:53+0000\n"
 "PO-Revision-Date: 2026-03-13 11:30+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
@@ -3555,59 +3555,59 @@ msgstr "Virkja myndun smámynda"
 msgid "Size: %1 x %2"
 msgstr "Stærð: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2449
+#: terminalDisplay/TerminalDisplay.cpp:2446
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "Ertu viss um að þú viljir líma %1 staf?"
 msgstr[1] "Ertu viss um að þú viljir líma %1 stafi?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2450
+#: terminalDisplay/TerminalDisplay.cpp:2447
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Staðfesta límingu"
 
-#: terminalDisplay/TerminalDisplay.cpp:2483
+#: terminalDisplay/TerminalDisplay.cpp:2480
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "End Of Text/Interrupt (lok texta/rof): gæti hætt í núverandi ferli"
 
-#: terminalDisplay/TerminalDisplay.cpp:2484
+#: terminalDisplay/TerminalDisplay.cpp:2481
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "End Of Transmission (lok miðlunar): getur hætt í núverandi ferli"
 
-#: terminalDisplay/TerminalDisplay.cpp:2485
+#: terminalDisplay/TerminalDisplay.cpp:2482
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Bell (bjalla): reynir að gefa frá sér hljóðviðvörun"
 
-#: terminalDisplay/TerminalDisplay.cpp:2486
+#: terminalDisplay/TerminalDisplay.cpp:2483
 #, kde-format
 msgid "Backspace"
 msgstr "Backspace (baklykill)"
 
-#: terminalDisplay/TerminalDisplay.cpp:2487
+#: terminalDisplay/TerminalDisplay.cpp:2484
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "Device Control Three/XOFF (tækisstýring þrjú/XOFF): stöðvar úttak"
 
-#: terminalDisplay/TerminalDisplay.cpp:2488
+#: terminalDisplay/TerminalDisplay.cpp:2485
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "Substitute/Suspend (skipta út/í bið): getur sett núverandi ferli í bið"
 
-#: terminalDisplay/TerminalDisplay.cpp:2489
+#: terminalDisplay/TerminalDisplay.cpp:2486
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Escape (Esc): notaður til að stjórna stöðu skjáhermis"
 
-#: terminalDisplay/TerminalDisplay.cpp:2490
+#: terminalDisplay/TerminalDisplay.cpp:2487
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "Skráaskiltákn/Hætta: gæti stöðvað núverandi ferli alveg"
 
-#: terminalDisplay/TerminalDisplay.cpp:2513
+#: terminalDisplay/TerminalDisplay.cpp:2510
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3616,31 +3616,31 @@ msgstr ""
 "Textinn sem þú ert að reyna að líma inniheldur falin stýringartákn, viltu "
 "sía þau út?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2516
+#: terminalDisplay/TerminalDisplay.cpp:2513
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Staðfesta límingu"
 
-#: terminalDisplay/TerminalDisplay.cpp:2517
+#: terminalDisplay/TerminalDisplay.cpp:2514
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Lí&ma án stýristafa"
 
-#: terminalDisplay/TerminalDisplay.cpp:2518
+#: terminalDisplay/TerminalDisplay.cpp:2515
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "&Líma allt"
 
-#: terminalDisplay/TerminalDisplay.cpp:2519
+#: terminalDisplay/TerminalDisplay.cpp:2516
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "&Hætta við"
 
-#: terminalDisplay/TerminalDisplay.cpp:2762
+#: terminalDisplay/TerminalDisplay.cpp:2750
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3651,17 +3651,17 @@ msgstr ""
 "\">sett í bið</a> með því að ýta á Ctrl+S. Ýttu á <b>Ctrl+Q</b> til að halda "
 "áfram.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2817
+#: terminalDisplay/TerminalDisplay.cpp:2805
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Þessi skjáhermir er skrifvarinn."
 
-#: terminalDisplay/TerminalDisplay.cpp:3223
+#: terminalDisplay/TerminalDisplay.cpp:3211
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Breyta &möppu í"
 
-#: terminalDisplay/TerminalDisplay.cpp:3258
+#: terminalDisplay/TerminalDisplay.cpp:3246
 #, kde-format
 msgid "&Paste Location"
 msgstr "&Límingarstaður"

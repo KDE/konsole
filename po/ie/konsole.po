@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-29 00:49+0000\n"
+"POT-Creation-Date: 2026-09-09 00:53+0000\n"
 "PO-Revision-Date: 2024-08-04 17:18+0700\n"
 "Last-Translator: OIS <mistresssilvara@hotmail.com>\n"
 "Language-Team: Interlingue <>\n"
@@ -3487,90 +3487,90 @@ msgstr "Miniaturas"
 msgid "Size: %1 x %2"
 msgstr "Dimension: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2449
+#: terminalDisplay/TerminalDisplay.cpp:2446
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "Esque vu vole collar %1 caracter?"
 msgstr[1] "Esque vu vole collar %1 caracteres?:"
 
-#: terminalDisplay/TerminalDisplay.cpp:2450
+#: terminalDisplay/TerminalDisplay.cpp:2447
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Confirmar li collation"
 
-#: terminalDisplay/TerminalDisplay.cpp:2483
+#: terminalDisplay/TerminalDisplay.cpp:2480
 #, fuzzy, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "Actual fólder (long): %D"
 
-#: terminalDisplay/TerminalDisplay.cpp:2484
+#: terminalDisplay/TerminalDisplay.cpp:2481
 #, fuzzy, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "Lansat in un separat processu"
 
-#: terminalDisplay/TerminalDisplay.cpp:2485
+#: terminalDisplay/TerminalDisplay.cpp:2482
 #, fuzzy, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Avise: "
 
-#: terminalDisplay/TerminalDisplay.cpp:2486
+#: terminalDisplay/TerminalDisplay.cpp:2483
 #, kde-format
 msgid "Backspace"
 msgstr "Retroclave"
 
-#: terminalDisplay/TerminalDisplay.cpp:2487
+#: terminalDisplay/TerminalDisplay.cpp:2484
 #, fuzzy, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "Collar &sin caracteres de control"
 
-#: terminalDisplay/TerminalDisplay.cpp:2488
+#: terminalDisplay/TerminalDisplay.cpp:2485
 #, fuzzy, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "Lansat in un separat processu"
 
-#: terminalDisplay/TerminalDisplay.cpp:2489
+#: terminalDisplay/TerminalDisplay.cpp:2486
 #, fuzzy, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Restituer li terminal"
 
-#: terminalDisplay/TerminalDisplay.cpp:2490
+#: terminalDisplay/TerminalDisplay.cpp:2487
 #, fuzzy, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "File"
 
-#: terminalDisplay/TerminalDisplay.cpp:2513
+#: terminalDisplay/TerminalDisplay.cpp:2510
 #, fuzzy, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
 "want to filter them out?"
 msgstr "Celat"
 
-#: terminalDisplay/TerminalDisplay.cpp:2516
+#: terminalDisplay/TerminalDisplay.cpp:2513
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Confirmar li collation"
 
-#: terminalDisplay/TerminalDisplay.cpp:2517
+#: terminalDisplay/TerminalDisplay.cpp:2514
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Collar &sin caracteres de control"
 
-#: terminalDisplay/TerminalDisplay.cpp:2518
+#: terminalDisplay/TerminalDisplay.cpp:2515
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "&Collar omnicos"
 
-#: terminalDisplay/TerminalDisplay.cpp:2519
+#: terminalDisplay/TerminalDisplay.cpp:2516
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "A&nullar"
 
-#: terminalDisplay/TerminalDisplay.cpp:2762
+#: terminalDisplay/TerminalDisplay.cpp:2750
 #, fuzzy, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3578,17 +3578,17 @@ msgid ""
 "b> to resume.</qt>"
 msgstr "Ctrl"
 
-#: terminalDisplay/TerminalDisplay.cpp:2817
+#: terminalDisplay/TerminalDisplay.cpp:2805
 #, fuzzy, kde-format
 msgid "This terminal is read-only."
 msgstr "Restituer li terminal"
 
-#: terminalDisplay/TerminalDisplay.cpp:3223
+#: terminalDisplay/TerminalDisplay.cpp:3211
 #, fuzzy, kde-format
 msgid "Change &Directory To"
 msgstr "Actual fólder (long): %D"
 
-#: terminalDisplay/TerminalDisplay.cpp:3258
+#: terminalDisplay/TerminalDisplay.cpp:3246
 #, kde-format
 msgid "&Paste Location"
 msgstr "Coll&ar li localisation"
