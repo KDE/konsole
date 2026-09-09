@@ -718,8 +718,8 @@ msgstr "Hôte"
 msgid ""
 "Container support is not available when Konsole is running inside Flatpak."
 msgstr ""
-"La prise en charge des conteneurs n’est pas disponible lorsque Konsole "
-"fonctionne à l’intérieur de Flatpak."
+"La prise en charge des conteneurs n'est pas disponible lorsque Konsole "
+"fonctionne à l'intérieur de Flatpak."
 
 #: containers/DistroboxDetector.cpp:124
 #, kde-format
