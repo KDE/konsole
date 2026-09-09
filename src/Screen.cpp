@@ -1418,7 +1418,7 @@ void Screen::scrollUp(int from, int n)
 
     // FIXME: make sure `topMargin', `bottomMargin', `from', `n' is in bounds.
     moveImage(loc(0, from), loc(0, from + n), loc(_columns, _bottomMargin));
-    clearImage(loc(0, _bottomMargin - n + 1), loc(_columns - 1, _bottomMargin), ' ');
+    clearImage(loc(0, _bottomMargin - n + 1), loc(_columns - 1, _bottomMargin), ' ', true, false);
     if (_hasGraphics) {
         scrollPlacements(n);
     }
@@ -1503,7 +1503,7 @@ int Screen::getCursorY() const
     return _cuY;
 }
 
-void Screen::clearImage(int loca, int loce, char c, bool resetLineRendition)
+void Screen::clearImage(int loca, int loce, char c, bool resetLineRendition, bool eraseGraphics)
 {
     const int scr_TL = loc(0, _history->getLines());
     // FIXME: check positions
@@ -1570,7 +1570,7 @@ void Screen::clearImage(int loca, int loce, char c, bool resetLineRendition)
 
     // Clear non-kitty graphics placements in the cleared area.
     // kitty has its own delete logic.
-    if (_hasGraphics) {
+    if (eraseGraphics && _hasGraphics) {
         auto i = _graphicsPlacements.begin();
         while (i != _graphicsPlacements.end()) {
             TerminalGraphicsPlacement_t *p = i->get();
