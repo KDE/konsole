@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-09 00:53+0000\n"
-"PO-Revision-Date: 2026-08-31 17:31+0200\n"
+"PO-Revision-Date: 2026-09-14 15:52+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -3036,6 +3036,7 @@ msgstr "Expande le largessa de scheda"
 #, kde-format
 msgid "Color-code tab when running inside a container"
 msgstr ""
+"Codificar per colores le scheda durante le execution intra un container."
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ShowContainerTabColor)
 #. i18n: ectx: tooltip, entry (ShowContainerTabColor), group (TabBar)
@@ -3045,13 +3046,15 @@ msgid ""
 "When running inside a container (e.g. Distrobox or Toolbox), color-code the "
 "tab with a container-specific color"
 msgstr ""
+"Quando se executa intra un container (p.ex. Distrobox o Toolbox), codifica "
+"per color le scheda con un color specific al container."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowContainerStatusBar)
 #. i18n: ectx: label, entry (ShowContainerStatusBar), group (TabBar)
 #: settings/konsole.kcfg:213 settings/TabBarSettings.ui:314
 #, kde-format
 msgid "Show container label in terminal footer"
-msgstr ""
+msgstr "Monstrar le etiquetta del container in le pede del terminal"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ShowContainerStatusBar)
 #. i18n: ectx: tooltip, entry (ShowContainerStatusBar), group (TabBar)
@@ -3061,6 +3064,8 @@ msgid ""
 "When running inside a container (e.g. Distrobox or Toolbox), show a label "
 "with the container name at the bottom of the terminal"
 msgstr ""
+"Quando se executa intra un container (p.ex. Distrobox o Toolbox),  monstra "
+"un etiquetta con le nomine del container al fundo del terminal."
 
 #. i18n: ectx: label, entry (scrollbackUseSystemLocation), group (FileLocation)
 #: settings/konsole.kcfg:230
@@ -3362,7 +3367,7 @@ msgstr "Expande Largessas de scheda individual a fenestra plen"
 #: settings/TabBarSettings.ui:304
 #, kde-format
 msgid "Color-code tab when inside a container"
-msgstr ""
+msgstr "Codificar per colores le scheda quando intra un container."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabBarUseUserStyleSheet)
 #: settings/TabBarSettings.ui:321
@@ -4817,9 +4822,9 @@ msgid ""
 ">Either change the permissions of that file or set a different name to save "
 "the settings to a new profile."
 msgstr ""
-"Permissiones insufficientes per slveguardar preferentias a:<filename>%1</"
+"Permissiones insufficientes per salveguardar preferentias a:<filename>%1</"
 "filename>, <nl/>O cambia le permissiones de ille file o fixa un nomine "
-"differente per salveguardar le preferentias a unnove profilo."
+"differente per salveguardar le preferentias a un nove profilo."
 
 #: widgets/EditProfileDialog.cpp:317
 #, kde-format
