@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-11 02:56+0000\n"
-"PO-Revision-Date: 2026-08-11 09:20+0400\n"
+"PO-Revision-Date: 2026-09-14 20:50+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -90,7 +90,7 @@ msgstr "مساعدة"
 #: ../desktop/konsoleui.rc:61
 #, kde-format
 msgid "Main Toolbar"
-msgstr "شريط الأدوات الرّئيسيّ"
+msgstr "شريط الأدوات الرئيس"
 
 #. i18n: ectx: Menu (history)
 #: ../desktop/partui.rc:20
@@ -933,7 +933,7 @@ msgstr "المشرف العام، إصلاح علل وتحسينات عامة"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Robert Knight"
-msgstr "Robert Knight"
+msgstr "روبرت ونايت"
 
 #: main.cpp:375
 #, kde-format
@@ -969,19 +969,19 @@ msgstr "إعادة هيكلة كبرى وإصلاحات أخطاء وتحسين�
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carlos Alves"
-msgstr "Carlos Alves"
+msgstr "كارلوس ألفيس"
 
 #: main.cpp:384
 #, kde-format
 msgctxt "@info:credit"
 msgid "Tomaz Canabrava"
-msgstr "Tomaz Canabrava"
+msgstr "توماز كانابرافا"
 
 #: main.cpp:387
 #, kde-format
 msgctxt "@info:credit"
 msgid "Gustavo Carneiro"
-msgstr "Gustavo Carneiro"
+msgstr "غوستافو كارنيرو"
 
 #: main.cpp:390
 #, kde-format
@@ -1006,7 +1006,7 @@ msgstr "Martin T. H. Sandsmark"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Nate Graham"
-msgstr "Nate Graham"
+msgstr "نيت جراهام"
 
 #: main.cpp:397
 #, kde-format
@@ -1036,13 +1036,13 @@ msgstr "Jekyll Wu"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Waldo Bastian"
-msgstr "Waldo Bastian"
+msgstr "والدو باستيان"
 
 #: main.cpp:405
 #, kde-format
 msgctxt "@info:credit"
 msgid "Stephan Binner"
-msgstr "Stephan Binner"
+msgstr "ستيفان بينر"
 
 #: main.cpp:406
 #, kde-format
