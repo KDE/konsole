@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-09 00:53+0000\n"
-"PO-Revision-Date: 2026-07-22 01:52+0900\n"
+"PO-Revision-Date: 2026-09-15 16:33+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -2979,7 +2979,7 @@ msgstr "展開分頁寬度"
 #: settings/konsole.kcfg:208
 #, kde-format
 msgid "Color-code tab when running inside a container"
-msgstr ""
+msgstr "在容器內執行時以容器色彩顯示分頁"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ShowContainerTabColor)
 #. i18n: ectx: tooltip, entry (ShowContainerTabColor), group (TabBar)
@@ -2989,13 +2989,14 @@ msgid ""
 "When running inside a container (e.g. Distrobox or Toolbox), color-code the "
 "tab with a container-specific color"
 msgstr ""
+"在容器內執行時（如 Distrobox 或 Toolbox），用容器特定的色彩來為分頁上色"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowContainerStatusBar)
 #. i18n: ectx: label, entry (ShowContainerStatusBar), group (TabBar)
 #: settings/konsole.kcfg:213 settings/TabBarSettings.ui:314
 #, kde-format
 msgid "Show container label in terminal footer"
-msgstr ""
+msgstr "在終端機頁尾顯示容器名稱"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ShowContainerStatusBar)
 #. i18n: ectx: tooltip, entry (ShowContainerStatusBar), group (TabBar)
@@ -3004,7 +3005,7 @@ msgstr ""
 msgid ""
 "When running inside a container (e.g. Distrobox or Toolbox), show a label "
 "with the container name at the bottom of the terminal"
-msgstr ""
+msgstr "在容器內執行時（如 Distrobox 或 Toolbox）在終端機底部顯示容器名稱"
 
 #. i18n: ectx: label, entry (scrollbackUseSystemLocation), group (FileLocation)
 #: settings/konsole.kcfg:230
@@ -3300,7 +3301,7 @@ msgstr "將個別分頁寬度擴展到整個視窗"
 #: settings/TabBarSettings.ui:304
 #, kde-format
 msgid "Color-code tab when inside a container"
-msgstr ""
+msgstr "在容器內時以容器色彩顯示分頁"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabBarUseUserStyleSheet)
 #: settings/TabBarSettings.ui:321
@@ -4782,28 +4783,20 @@ msgid "None"
 msgstr "無"
 
 #: widgets/EditProfileDialog.cpp:557
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Suffix of the number of columns (N columns). The leading space is needed "
-#| "to separate it from the number value."
-#| msgid " column"
-#| msgid_plural " columns"
+#, kde-format
 msgctxt "@item number of columns"
 msgid "%v column"
 msgid_plural "%v columns"
-msgstr[0] " 欄"
+msgstr[0] "%v 欄"
 
+# 預設視窗大小。這個 row 是文字行沒錯。
+# --Kisaragi
 #: widgets/EditProfileDialog.cpp:558
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Suffix of the number of rows (N rows). The leading space is needed to "
-#| "separate it from the number value."
-#| msgid " row"
-#| msgid_plural " rows"
+#, kde-format
 msgctxt "@item number of rows"
 msgid "%v row"
 msgid_plural "%v rows"
-msgstr[0] " 行"
+msgstr[0] "%v 行"
 
 #: widgets/EditProfileDialog.cpp:570
 #, kde-format
@@ -4841,14 +4834,11 @@ msgid "One environment variable per line"
 msgstr "每一個環境變數佔一行"
 
 #: widgets/EditProfileDialog.cpp:720
-#, fuzzy, kde-format
-#| msgctxt "Unit of time"
-#| msgid " second"
-#| msgid_plural " seconds"
+#, kde-format
 msgctxt "@item number of seconds"
 msgid "%v second"
 msgid_plural "%v seconds"
-msgstr[0] " 秒"
+msgstr[0] "%v 秒"
 
 #: widgets/EditProfileDialog.cpp:850
 #, kde-format
@@ -5058,10 +5048,7 @@ msgid ""
 "for these entries to work.</p></body></html>"
 msgstr ""
 "<html><head/><body><p>必須停用 <span style=\" font-style:italic;\">設定 → 設"
-"定 Konsole → 一般 → 下次啟動時使用目前的視窗大小</span> 才能讓這些項目運作。"
-"</p></body></html><html><head/><body><p>必須停用 <span style=\" font-style:"
-"italic;\">設定 → 設定 Konsole → 一般 → 記住視窗大小</span> 這些項目才能運作。"
-"</p></body></html>"
+"定 Konsole → 一般 → 記住視窗大小</span> 這些項目才能運作。</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, terminalBellLabel)
 #: widgets/EditProfileGeneralPage.ui:411
@@ -5684,14 +5671,11 @@ msgid "The threshold for continuous silence to be detected by Konsole"
 msgstr "定義終端機經過多少時間依然未更新畫面，並將之視為靜默"
 
 #: widgets/HistorySizeWidget.cpp:41
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox Unit of scrollback"
-#| msgid " line"
-#| msgid_plural " lines"
+#, kde-format
 msgctxt "@item number of lines"
 msgid "%v line"
 msgid_plural "%v lines"
-msgstr[0] " 行"
+msgstr[0] "%v 行"
 
 #: widgets/HistorySizeWidget.cpp:56
 #, kde-format
