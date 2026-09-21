@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-09 00:53+0000\n"
+"POT-Creation-Date: 2026-09-21 00:48+0000\n"
 "PO-Revision-Date: 2025-02-23 13:36+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -924,9 +924,11 @@ msgid "Terminal emulator"
 msgstr "Terminalimitilo"
 
 #: main.cpp:177
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@info:credit"
+#| msgid "(c) 1997-2022, The Konsole Developers"
 msgctxt "@info:credit"
-msgid "(c) 1997-2022, The Konsole Developers"
+msgid "© 1997–%1, The Konsole Developers"
 msgstr "(c) 1997-2022, La Konzol-Programistoj"
 
 #: main.cpp:353

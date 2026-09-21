@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-09 00:53+0000\n"
+"POT-Creation-Date: 2026-09-21 00:48+0000\n"
 "PO-Revision-Date: 2026-03-31 15:08+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -913,9 +913,11 @@ msgid "Terminal emulator"
 msgstr "Emulator de terminal"
 
 #: main.cpp:177
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@info:credit"
+#| msgid "(c) 1997-2022, The Konsole Developers"
 msgctxt "@info:credit"
-msgid "(c) 1997-2022, The Konsole Developers"
+msgid "© 1997–%1, The Konsole Developers"
 msgstr "(c) 1997-2022, Dezvoltatorii Konsolă"
 
 #: main.cpp:353

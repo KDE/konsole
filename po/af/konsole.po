@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole stable\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-09 00:53+0000\n"
+"POT-Creation-Date: 2026-09-21 00:48+0000\n"
 "PO-Revision-Date: 2005-11-29 11:30+0200\n"
 "Last-Translator: Frikkie Thirion <frikkie.thirion@deneloptronics.co.za>\n"
 "Language-Team: AFRIKAANS <translate-discuss-af@lists.sourceforge.net>\n"
@@ -960,7 +960,7 @@ msgstr "Maak toe Terminaal Emulasie"
 #: main.cpp:177
 #, kde-format
 msgctxt "@info:credit"
-msgid "(c) 1997-2022, The Konsole Developers"
+msgid "© 1997–%1, The Konsole Developers"
 msgstr ""
 
 #: main.cpp:353

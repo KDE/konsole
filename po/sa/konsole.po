@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-09 00:53+0000\n"
+"POT-Creation-Date: 2026-09-21 00:48+0000\n"
 "PO-Revision-Date: 2024-12-25 19:40+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -909,9 +909,11 @@ msgid "Terminal emulator"
 msgstr "टर्मिनल एमुलेटर"
 
 #: main.cpp:177
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@info:credit"
+#| msgid "(c) 1997-2022, The Konsole Developers"
 msgctxt "@info:credit"
-msgid "(c) 1997-2022, The Konsole Developers"
+msgid "© 1997–%1, The Konsole Developers"
 msgstr "(ग) 1997-2022, द कन्सोल डेवलपर्स"
 
 #: main.cpp:353
