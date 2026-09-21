@@ -57,6 +57,13 @@ ContainerRegistry::ContainerRegistry()
     refreshContainers();
 }
 
+ContainerRegistry::ContainerRegistry(std::vector<std::unique_ptr<IContainerDetector>> detectors)
+{
+    for (auto &detector : detectors) {
+        registerDetector(std::move(detector));
+    }
+}
+
 void ContainerRegistry::registerDetector(std::unique_ptr<IContainerDetector> detector)
 {
     if (detector) {

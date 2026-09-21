@@ -65,6 +65,12 @@ ecm_add_test(
     LINK_LIBRARIES konsolecontainers Qt::Test ${KONSOLE_TEST_LIBS}
 )
 
+ecm_add_test(
+    ContainerRegistryTest.cpp
+    LINK_LIBRARIES konsolecontainers Qt::Test ${KONSOLE_TEST_LIBS}
+)
+target_include_directories(ContainerRegistryTest PRIVATE ${CMAKE_BINARY_DIR}/src)
+
 if(NOT WIN32)
     ecm_add_test(
         PtyTest.cpp

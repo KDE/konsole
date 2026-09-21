@@ -8,14 +8,16 @@
 #include <QFile>
 #include <QTest>
 
+#include "../KonsoleSettings.h"
 #include "../MainWindow.h"
 #include "../ViewManager.h"
 #include "../containers/ContainerSessionState.h"
 #include "../containers/IContainerDetector.h"
+#include "../profile/Profile.h"
+#include "../profile/ProfileManager.h"
 #include "../session/Session.h"
 #include "../session/SessionController.h"
 #include "../widgets/ViewContainer.h"
-#include "../KonsoleSettings.h"
 #include <QSignalSpy>
 #include <QStandardPaths>
 
@@ -23,14 +25,39 @@ using namespace Konsole;
 
 namespace
 {
+class ProfilePropertyGuard
+{
+public:
+    ProfilePropertyGuard(Profile::Ptr profile, Profile::Property property)
+        : m_profile(std::move(profile))
+        , m_property(property)
+        , m_value(m_profile->property<QVariant>(property))
+    {
+    }
+
+    ~ProfilePropertyGuard()
+    {
+        m_profile->setProperty(m_property, m_value);
+    }
+
+private:
+    Profile::Ptr m_profile;
+    Profile::Property m_property;
+    QVariant m_value;
+};
+
 class TestContainerDetector : public IContainerDetector
 {
 public:
-    using IContainerDetector::IContainerDetector;
+    explicit TestContainerDetector(QString type = QStringLiteral("distrobox"), QObject *parent = nullptr)
+        : IContainerDetector(parent)
+        , m_type(std::move(type))
+    {
+    }
 
     QString typeId() const override
     {
-        return QStringLiteral("distrobox");
+        return m_type;
     }
 
     QString displayName() const override
@@ -57,12 +84,33 @@ public:
     {
         Q_EMIT listContainersFinished({});
     }
+
+private:
+    QString m_type;
 };
+
+ContainerInfo containerInfo(const IContainerDetector *detector, const QString &name)
+{
+    return ContainerInfo{.detector = detector, .name = name, .displayName = name, .iconName = detector->iconName(), .hostPid = std::nullopt};
+}
+
+QString containerKey(const ContainerInfo &container)
+{
+    return container.isValid() ? container.detector->typeId() + QLatin1Char(':') + container.name : QString();
+}
 }
 
 void ViewManagerTest::initTestCase()
 {
-    m_testDir = new QTemporaryDir(QDir::tempPath() + QDir::separator() + QStringLiteral("konsoleviewmanagertest-XXXXXX"));
+    QStandardPaths::setTestModeEnabled(true);
+    m_testDir = std::make_unique<QTemporaryDir>(QDir::tempPath() + QDir::separator() + QStringLiteral("konsoleviewmanagertest-XXXXXX"));
+    QVERIFY(m_testDir->isValid());
+}
+
+void ViewManagerTest::cleanup()
+{
+    KonsoleSettings::setShowContainerTabColor(true);
+    KonsoleSettings::setShowContainerStatusBar(true);
 }
 
 void ViewManagerTest::testSaveLayout()
@@ -100,6 +148,100 @@ void ViewManagerTest::testLoadLayout()
 
     mw.viewManager()->loadLayout(m_testDir->filePath(QStringLiteral("test.json")));
     QCOMPARE(mw.viewManager()->viewHierarchy(), expectedHierarchy);
+}
+
+void ViewManagerTest::testContainerContextSelection_data()
+{
+    QTest::addColumn<bool>("inheritContext");
+    QTest::addColumn<QString>("activeContainerKey");
+    QTest::addColumn<QString>("profileContainerKey");
+    QTest::addColumn<QString>("expectedContainerKey");
+
+    QTest::newRow("host-default") << false << QString() << QString() << QString();
+    QTest::newRow("profile-container") << false << QStringLiteral("toolbox:active") << QStringLiteral("distrobox:profile")
+                                       << QStringLiteral("distrobox:profile");
+    QTest::newRow("inherit-host-falls-back-to-profile") << true << QString() << QStringLiteral("distrobox:profile") << QStringLiteral("distrobox:profile");
+    QTest::newRow("inherit-active") << true << QStringLiteral("toolbox:active") << QString() << QStringLiteral("toolbox:active");
+    QTest::newRow("inherit-wins-over-profile") << true << QStringLiteral("toolbox:active") << QStringLiteral("distrobox:profile")
+                                               << QStringLiteral("toolbox:active");
+}
+
+void ViewManagerTest::testContainerContextSelection()
+{
+    QFETCH(bool, inheritContext);
+    QFETCH(QString, activeContainerKey);
+    QFETCH(QString, profileContainerKey);
+    QFETCH(QString, expectedContainerKey);
+
+    TestContainerDetector toolboxDetector(QStringLiteral("toolbox"));
+    MainWindow mw;
+    auto *manager = mw.viewManager();
+
+    if (!activeContainerKey.isEmpty()) {
+        Profile::Ptr activeProfile(new Profile);
+        Session *activeSession = manager->createSession(activeProfile);
+        activeSession->setContainerContext(containerInfo(&toolboxDetector, activeContainerKey.section(QLatin1Char(':'), 1)));
+        manager->activeContainer()->addView(manager->createView(activeSession));
+    }
+
+    Profile::Ptr profile(new Profile);
+    profile->setProperty(Profile::InheritContainerContext, inheritContext);
+    profile->setProperty(Profile::ContainerName, profileContainerKey);
+
+    Session *session = manager->createSession(profile);
+    QCOMPARE(containerKey(session->containerContext()), expectedContainerKey);
+}
+
+void ViewManagerTest::testExplicitContainerOverridesAutomaticContext()
+{
+    TestContainerDetector toolboxDetector(QStringLiteral("toolbox"));
+    TestContainerDetector distroboxDetector(QStringLiteral("distrobox"));
+    MainWindow mw;
+    auto *manager = mw.viewManager();
+    const Profile::Ptr defaultProfile = ProfileManager::instance()->defaultProfile();
+    const ProfilePropertyGuard inheritGuard(defaultProfile, Profile::InheritContainerContext);
+    const ProfilePropertyGuard containerGuard(defaultProfile, Profile::ContainerName);
+
+    defaultProfile->setProperty(Profile::InheritContainerContext, true);
+    defaultProfile->setProperty(Profile::ContainerName, QStringLiteral("distrobox:profile"));
+    Session *activeSession = manager->createSession(defaultProfile);
+    activeSession->setContainerContext(containerInfo(&toolboxDetector, QStringLiteral("active")));
+    manager->activeContainer()->addView(manager->createView(activeSession));
+
+    const ContainerInfo explicitContainer = containerInfo(&distroboxDetector, QStringLiteral("explicit"));
+    const QList<Session *> previousSessionList = manager->sessions();
+    const QSet<Session *> previousSessions(previousSessionList.cbegin(), previousSessionList.cend());
+    QVERIFY(QMetaObject::invokeMethod(&mw, "newInContainer", Qt::DirectConnection, Q_ARG(Konsole::ContainerInfo, explicitContainer)));
+    const QList<Session *> newSessionList = manager->sessions();
+    const QSet<Session *> newSessions(newSessionList.cbegin(), newSessionList.cend());
+    const QSet<Session *> addedSessions = newSessions - previousSessions;
+    QCOMPARE(addedSessions.size(), 1);
+    QCOMPARE(containerKey((*addedSessions.cbegin())->containerContext()), QStringLiteral("distrobox:explicit"));
+}
+
+void ViewManagerTest::testExplicitHostOverridesAutomaticContext()
+{
+    TestContainerDetector toolboxDetector(QStringLiteral("toolbox"));
+    MainWindow mw;
+    auto *manager = mw.viewManager();
+    const Profile::Ptr defaultProfile = ProfileManager::instance()->defaultProfile();
+    const ProfilePropertyGuard inheritGuard(defaultProfile, Profile::InheritContainerContext);
+    const ProfilePropertyGuard containerGuard(defaultProfile, Profile::ContainerName);
+
+    defaultProfile->setProperty(Profile::InheritContainerContext, true);
+    defaultProfile->setProperty(Profile::ContainerName, QStringLiteral("distrobox:profile"));
+    Session *activeSession = manager->createSession(defaultProfile);
+    activeSession->setContainerContext(containerInfo(&toolboxDetector, QStringLiteral("active")));
+    manager->activeContainer()->addView(manager->createView(activeSession));
+
+    const QList<Session *> previousSessionList = manager->sessions();
+    const QSet<Session *> previousSessions(previousSessionList.cbegin(), previousSessionList.cend());
+    QVERIFY(QMetaObject::invokeMethod(&mw, "newInContainer", Qt::DirectConnection, Q_ARG(Konsole::ContainerInfo, ContainerInfo{})));
+    const QList<Session *> newSessionList = manager->sessions();
+    const QSet<Session *> newSessions(newSessionList.cbegin(), newSessionList.cend());
+    const QSet<Session *> addedSessions = newSessions - previousSessions;
+    QCOMPARE(addedSessions.size(), 1);
+    QVERIFY(!(*addedSessions.cbegin())->containerContext().isValid());
 }
 
 void ViewManagerTest::testContainerMenuLaunchKeepsPendingColor()

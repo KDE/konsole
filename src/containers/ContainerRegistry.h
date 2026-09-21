@@ -22,6 +22,8 @@
 namespace Konsole
 {
 
+class ContainerRegistryTest;
+
 /**
  * Singleton registry for container detection and management.
  *
@@ -165,6 +167,7 @@ Q_SIGNALS:
     void containersUpdated();
 
 private:
+    explicit ContainerRegistry(std::vector<std::unique_ptr<IContainerDetector>> detectors);
     void onDetectorFinished(const QList<ContainerInfo> &containers);
 
     bool _enabled = true;
@@ -175,6 +178,7 @@ private:
     QList<ContainerInfo> _pendingResults;
 
     Q_DISABLE_COPY(ContainerRegistry)
+    friend class ContainerRegistryTest;
 };
 
 } // namespace Konsole
