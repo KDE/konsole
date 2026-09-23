@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-21 00:48+0000\n"
-"PO-Revision-Date: 2026-09-06 19:57+0200\n"
+"PO-Revision-Date: 2026-09-22 21:30+0200\n"
 "Last-Translator: Alexander Yavorskiy <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -929,12 +929,10 @@ msgid "Terminal emulator"
 msgstr "Эмулятор терминала"
 
 #: main.cpp:177
-#, fuzzy, kde-format
-#| msgctxt "@info:credit"
-#| msgid "(c) 1997-2022, The Konsole Developers"
+#, kde-format
 msgctxt "@info:credit"
 msgid "© 1997–%1, The Konsole Developers"
-msgstr "© Разработчики Konsole, 1997–2022"
+msgstr "© Разработчики Konsole, 1997–%1"
 
 #: main.cpp:353
 #, kde-format
