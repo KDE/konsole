@@ -209,7 +209,7 @@
 >Буфер вывода</title>
 
 <para
->&konsole; использует понятие буфера вывода, чтобы позволить пользователям просматривать введённые ранее команды. По умолчанию буфер вывода сохраняет до 1000 строк вдобавок к тому, что уже показано на экране. </para>
+>&konsole; использует понятие буфера вывода, что позволяет просматривать выводившиеся ранее данные. По умолчанию буфер вывода включён и сохраняет 10 000 строк вывода вдобавок к тому, что уже показано на экране. </para>
 <para
 >При выходе строк за верхнюю границу окна &konsole; позволяет вернуться к нужному тексту передвижением вверх ползунка полосы прокрутки справа, вращением колеса мыши или с помощью комбинаций клавиш: <keycombo action="simul"
 >&Shift;<keycap
@@ -229,17 +229,19 @@
 ></keycombo
 > (вниз). </para>
 <para
->Степень сдвига прокрутки с помощью комбинации клавиш <keycombo action="simul"
+>Шаг прокрутки при нажатии <keycombo action="simul"
 >&Shift;<keycap
 >Page Up/Down</keycap
 ></keycombo
-> возможно изменить в меню настройки журнала (<menuchoice
+> (половина или целая страница) задаётся на вкладке <guilabel
+>Журнал</guilabel
+> окна настройки профиля (чтобы открыть это окно, выберите <menuchoice
 ><guimenu
 >Настройка</guimenu
 ><guimenuitem
->Настроить профиль...</guimenuitem
+>Настроить профиль…</guimenuitem
 ></menuchoice
->). Доступны два параметра: половина высоты окна и целое окно. </para>
+>). </para>
 
 </sect1>
 
@@ -380,9 +382,9 @@
 <listitem
 ><para
 >Нажмите <guibutton
->OK</guibutton
+>ОК</guibutton
 >. Новый сеанс появится в списке сеансов диалога <guilabel
->Управление профилями...</guilabel
+>Управление профилями…</guilabel
 >. </para
 ></listitem>
 
@@ -609,7 +611,7 @@
 ><shortcut
 >&Ctrl;</shortcut
 ><guimenuitem
->Скопировать сюда</guimenuitem
+>Копировать сюда</guimenuitem
 > </menuchoice>
 </term
 > <listitem>
@@ -667,7 +669,7 @@
 ><shortcut
 >&Esc;</shortcut
 ><guimenuitem
->Отменить</guimenuitem
+>Отмена</guimenuitem
 > </menuchoice>
 </term
 > <listitem>
@@ -683,7 +685,7 @@
 
 <para
 >Чтобы настроить клавишу &Ctrl; для перетаскивания или отключить контекстное меню для вставки &URL; как текста по умолчанию, установите флажок на соответствующих параметрах в меню настройки профиля во вкладке <guilabel
->Mouse</guilabel
+>Мышь</guilabel
 >. </para>
 
 </sect1>
@@ -826,6 +828,17 @@
 <listitem
 ><para
 ><guilabel
+>Хинтинг шрифта</guilabel
+> — применять <ulink url="https://en.wikipedia.org/wiki/Font_hinting"
+>хинтинг</ulink
+> к глифам при их отрисовке. Для некоторых шрифтов и дисплеев это улучшает разборчивость символов, а также помогает, когда символы отрисовываются с неправильной шириной или высотой, особенно при включённом словесном режиме. Если параметр включён, используется <ulink url="https://doc.qt.io/qt-6/qfont.html#HintingPreference-enum"
+>полный хинтинг</ulink
+>, если отключён — уровень хинтинга по умолчанию. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
 >Шрифт эмодзи</guilabel
 > — этот параметр позволяет указать шрифт для символов эмодзи в Unicode. Если шрифт не выбран, будет использоваться стандартный установленный в профиле шрифт (если нужных глифов в нём не окажется, система задействует резервный шрифт). </para
 ></listitem>
@@ -893,6 +906,114 @@
 > </para
 ></listitem>
 </itemizedlist>
+</sect1>
+
+<sect1 id="container-awareness">
+<title
+>Распознавание контейнеров</title>
+
+<para
+>&konsole; распознаёт, что процесс переднего плана выполняется внутри контейнера Linux (например, <application
+>Distrobox</application
+>, <application
+>Toolbox</application
+> или <application
+>Kapsule</application
+>), и наглядно показывает, какой терминал работает в каком контейнере. </para>
+
+<sect2 id="container-indicators">
+<title
+>Визуальные индикаторы</title>
+
+<para
+>При обнаружении контейнера &konsole; показывает два индикатора:</para>
+
+<itemizedlist>
+<listitem
+><para
+><emphasis
+>Цветная вкладка</emphasis
+> — вкладка получает уникальный цвет, определяемый идентификатором контейнера. Каждый контейнер неизменно получает один и тот же цвет во всех сеансах, поэтому с первого взгляда видно, какая вкладка какому контейнеру принадлежит. </para
+></listitem>
+
+<listitem
+><para
+><emphasis
+>Метка контейнера</emphasis
+> — в нижней части области терминала появляется небольшая панель, показывающая тип и название контейнера (например, <guilabel
+>Distrobox: fedora-41</guilabel
+>). Метка автоматически исчезает, когда процесс переднего плана возвращается на хост-систему. </para
+></listitem>
+</itemizedlist>
+
+<para
+>Оба индикатора включаются и отключаются независимо друг от друга в диалоге <menuchoice
+><guimenu
+>Настройка</guimenu
+><guimenuitem
+>Настроить &konsole;…</guimenuitem
+> <guimenuitem
+>Панель вкладок / Разделение окна</guimenuitem
+></menuchoice
+>: </para>
+
+<itemizedlist>
+<listitem
+><para
+><guilabel
+>Помечать вкладку цветом при выполнении в контейнере</guilabel
+> — включает и отключает цветовую пометку вкладки. По умолчанию включено. </para
+></listitem>
+<listitem
+><para
+><guilabel
+>Показывать метку контейнера в нижней панели терминала</guilabel
+> — включает и отключает метку в нижней панели. По умолчанию включено. </para
+></listitem>
+</itemizedlist>
+</sect2>
+
+<sect2 id="container-new-tab">
+<title
+>Открытие вкладки внутри контейнера</title>
+
+<para
+>Меню <guimenu
+>Файл</guimenu
+> и кнопка <guibutton
+>Новая вкладка</guibutton
+> содержат подменю со списком всех доступных контейнеров. При выборе контейнера открывается новая вкладка, которая сразу входит в этот контейнер. Пункт <guilabel
+>Хост</guilabel
+> открывает вкладку в хост-системе, что бы ни было задано в профиле по умолчанию. </para>
+</sect2>
+
+<sect2 id="container-profile">
+<title
+>Параметры профиля</title>
+
+<para
+>Для каждого профиля на вкладке <guilabel
+>Главное</guilabel
+> диалога <guilabel
+>Редактирование профиля</guilabel
+> доступны два параметра, связанных с контейнерами: </para>
+
+<itemizedlist>
+<listitem
+><para
+><guilabel
+>Всегда запускать в контейнере</guilabel
+> — контейнер, в который автоматически входят все новые сеансы с этим профилем. </para
+></listitem>
+<listitem
+><para
+><guilabel
+>Входить в контейнер, использующийся в текущем сеансе</guilabel
+> — новые вкладки, открытые из сеанса в контейнере, входят в тот же контейнер, а не запускаются в хост-системе. </para
+></listitem>
+</itemizedlist>
+</sect2>
+
 </sect1>
 
 </chapter>
@@ -2101,7 +2222,7 @@ Various search improvements
 ><guimenu
 >Закладки</guimenu
 ><guimenuitem
->Редактировать закладки</guimenuitem
+>Изменить закладки…</guimenuitem
 ></menuchoice
 ></term>
 <listitem
@@ -2278,7 +2399,7 @@ Various search improvements
 ><guimenu
 >Настройка</guimenu
 ><guimenuitem
->Настроить язык... </guimenuitem
+>Сменить язык интерфейса приложения…</guimenuitem
 ></menuchoice
 ></term>
 <listitem
@@ -2295,7 +2416,7 @@ Various search improvements
 ><guimenu
 >Настройка</guimenu
 ><guimenuitem
->Комбинации клавиш...</guimenuitem
+>Настроить комбинации клавиш…</guimenuitem
 ></menuchoice
 ></term>
 <listitem
@@ -2381,7 +2502,7 @@ Various search improvements
 ><guimenu
 >Настройка</guimenu
 ><guimenuitem
->Панели инструментов...</guimenuitem
+>Настроить панели инструментов…</guimenuitem
 ></menuchoice
 ></term>
 <listitem
