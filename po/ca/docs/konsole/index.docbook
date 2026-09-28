@@ -732,7 +732,7 @@
 ><para
 ><guilabel
 >Caràcters dels alfabets bràmics</guilabel
->: agrupa els caràcters bràmics com s'ha descrit anteriorment. Sense aquesta opció (depenent de la lletra) algunes paraules poden no estar connectades com haurien. Amb aquesta opció activada, els caràcters bràmics poden aparèixer fora de posició. P. ex. el tercer caràcter de la segona línia podria no aparèixer directament sota el tercer caràcter de la primera línia. </para
+>: agrupa els caràcters bràmics com s'ha descrit anteriorment. Sense aquesta opció (depenent de la lletra) algunes paraules poden no estar connectades com caldria. Amb aquesta opció activada, els caràcters bràmics poden aparèixer fora de posició. P. ex. el tercer caràcter de la segona línia podria no aparèixer directament sota el tercer caràcter de la primera línia. </para
 ></listitem>
 
 <listitem
@@ -2854,7 +2854,7 @@ Various search improvements
 <para
 >Cada línia especifica una pestanya a obrir, utilitzant un màxim de quatre camps per a especificar com serà oberta. Els camps estan delimitats amb <userinput
 >;;</userinput
-> i un nom de camp haurà de tenir un <userinput
+> i un nom de camp cal que tingui un <userinput
 >:</userinput
 > afegit. Les línies en blanc o amb <userinput
 >#</userinput
