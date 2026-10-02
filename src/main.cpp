@@ -12,6 +12,7 @@
 #include "Application.h"
 #include "KonsoleSettings.h"
 #include "MainWindow.h"
+#include "Terminal1IntentHandler.h"
 #include "ViewManager.h"
 #include "config-konsole.h"
 #include "widgets/ViewContainer.h"
@@ -232,7 +233,7 @@ int main(int argc, char *argv[])
     atexit(deleteQApplication);
     // Ensure that we only launch a new instance if we need to
     // If there is already an instance running, we will quit here
-    KDBusService dbusService(startupOption | KDBusService::NoExitOnFailure);
+    KDBusService dbusService(startupOption | KDBusService::NoExitOnFailure, ExtraAdaptor<Terminal1IntentHandler>);
 
     needToDeleteQApplication = false;
 #endif

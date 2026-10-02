@@ -118,6 +118,7 @@ target_sources(konsoleprivate PRIVATE
     SearchHistoryTask.cpp
     ShellCommand.cpp
     ShouldApplyProperty.cpp
+    Terminal1IntentHandler.cpp
     UnixProcessInfo.cpp
     ViewManager.cpp
     ViewProperties.cpp
