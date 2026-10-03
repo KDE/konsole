@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-30 00:50+0000\n"
+"POT-Creation-Date: 2026-10-03 00:49+0000\n"
 "PO-Revision-Date: 2026-09-21 15:09+0200\n"
 "Last-Translator: Libor Filipek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -3547,12 +3547,12 @@ msgstr "Ctrl"
 msgid "Enable thumbnails generation"
 msgstr "Povolit vytváření náhledů"
 
-#: terminalDisplay/TerminalDisplay.cpp:706
+#: terminalDisplay/TerminalDisplay.cpp:708
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr "Velikost: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2446
+#: terminalDisplay/TerminalDisplay.cpp:2448
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
@@ -3560,52 +3560,52 @@ msgstr[0] "Opravdu chcete vložit znak?"
 msgstr[1] "Opravdu chcete vložit %1 znaky?"
 msgstr[2] "Opravdu chcete vložit %1 znaků?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2447
+#: terminalDisplay/TerminalDisplay.cpp:2449
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Potvrdit vložení"
 
-#: terminalDisplay/TerminalDisplay.cpp:2480
+#: terminalDisplay/TerminalDisplay.cpp:2482
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "Konec textu/přerušení: může ukončit aktuální proces"
 
-#: terminalDisplay/TerminalDisplay.cpp:2481
+#: terminalDisplay/TerminalDisplay.cpp:2483
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "Konec přenosu: může ukončit současný proces"
 
-#: terminalDisplay/TerminalDisplay.cpp:2482
+#: terminalDisplay/TerminalDisplay.cpp:2484
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Zvonek: pokusí se vydat zvukové varování"
 
-#: terminalDisplay/TerminalDisplay.cpp:2483
+#: terminalDisplay/TerminalDisplay.cpp:2485
 #, kde-format
 msgid "Backspace"
 msgstr "Backspace"
 
-#: terminalDisplay/TerminalDisplay.cpp:2484
+#: terminalDisplay/TerminalDisplay.cpp:2486
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "Ovládání zařízení 3/XOFF: pozastaví výstup"
 
-#: terminalDisplay/TerminalDisplay.cpp:2485
+#: terminalDisplay/TerminalDisplay.cpp:2487
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "Nahradit/pozastavit: lze pozastavit aktuální proces"
 
-#: terminalDisplay/TerminalDisplay.cpp:2486
+#: terminalDisplay/TerminalDisplay.cpp:2488
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Escape: slouží k manipulaci s konečným stavem"
 
-#: terminalDisplay/TerminalDisplay.cpp:2487
+#: terminalDisplay/TerminalDisplay.cpp:2489
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "Oddělovač souborů/ukončit: může přerušit aktuální proces"
 
-#: terminalDisplay/TerminalDisplay.cpp:2510
+#: terminalDisplay/TerminalDisplay.cpp:2512
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3614,31 +3614,31 @@ msgstr ""
 "Text, který se pokoušíte vložit obsahuje skryté ovládací znaky. Chcete je "
 "odfiltrovat?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2513
+#: terminalDisplay/TerminalDisplay.cpp:2515
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Potvrdit vložení"
 
-#: terminalDisplay/TerminalDisplay.cpp:2514
+#: terminalDisplay/TerminalDisplay.cpp:2516
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Vložit bez &kontrolních znaků"
 
-#: terminalDisplay/TerminalDisplay.cpp:2515
+#: terminalDisplay/TerminalDisplay.cpp:2517
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "&Vložit vše"
 
-#: terminalDisplay/TerminalDisplay.cpp:2516
+#: terminalDisplay/TerminalDisplay.cpp:2518
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "Z&rušit"
 
-#: terminalDisplay/TerminalDisplay.cpp:2750
+#: terminalDisplay/TerminalDisplay.cpp:2752
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3649,17 +3649,17 @@ msgstr ""
 "\">potlačen</a> stisknutím Ctrl+S.  Stiskněte <b>Ctrl+Q</b> pro pokračování."
 "</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2805
+#: terminalDisplay/TerminalDisplay.cpp:2807
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Tento terminál je pouze pro čtení."
 
-#: terminalDisplay/TerminalDisplay.cpp:3211
+#: terminalDisplay/TerminalDisplay.cpp:3213
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Změnit a&dresář na"
 
-#: terminalDisplay/TerminalDisplay.cpp:3246
+#: terminalDisplay/TerminalDisplay.cpp:3248
 #, kde-format
 msgid "&Paste Location"
 msgstr "Vložit &místo"
