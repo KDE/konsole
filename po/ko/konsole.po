@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-11 02:56+0000\n"
-"PO-Revision-Date: 2026-06-06 13:33+0200\n"
+"PO-Revision-Date: 2026-10-02 01:04+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -694,11 +694,9 @@ msgid "Kapsule"
 msgstr "Kapsule"
 
 #: containers/KapsuleDetector.cpp:61 containers/KapsuleDetector.cpp:64
-#, fuzzy, kde-format
-#| msgctxt "As in Distrobox, Toolbox, Kapsule etc."
-#| msgid "Container"
+#, kde-format
 msgid "Kapsule Container"
-msgstr "컨테이너"
+msgstr "Kapsule 컨테이너"
 
 #: containers/KapsuleDetector.cpp:99
 #, kde-format
@@ -735,12 +733,10 @@ msgid "Deselect All"
 msgstr "모두 선택 해제"
 
 #: filterHotSpots/ColorFilterHotSpot.cpp:85
-#, fuzzy, kde-format
-#| msgctxt "@label:listbox Column header text for the actual colors"
-#| msgid "Color"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Color"
-msgstr "색"
+msgstr "색 복사"
 
 #: filterHotSpots/ColorFilterHotSpot.cpp:148
 #, kde-format
