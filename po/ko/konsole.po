@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-03 00:49+0000\n"
-"PO-Revision-Date: 2026-06-06 13:33+0200\n"
+"PO-Revision-Date: 2026-10-02 01:04+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -694,11 +694,9 @@ msgid "Kapsule"
 msgstr "Kapsule"
 
 #: containers/KapsuleDetector.cpp:61 containers/KapsuleDetector.cpp:64
-#, fuzzy, kde-format
-#| msgctxt "As in Distrobox, Toolbox, Kapsule etc."
-#| msgid "Container"
+#, kde-format
 msgid "Kapsule Container"
-msgstr "컨테이너"
+msgstr "Kapsule 컨테이너"
 
 #: containers/KapsuleDetector.cpp:99
 #, kde-format
@@ -735,12 +733,10 @@ msgid "Deselect All"
 msgstr "모두 선택 해제"
 
 #: filterHotSpots/ColorFilterHotSpot.cpp:85
-#, fuzzy, kde-format
-#| msgctxt "@label:listbox Column header text for the actual colors"
-#| msgid "Color"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Color"
-msgstr "색"
+msgstr "색 복사"
 
 #: filterHotSpots/ColorFilterHotSpot.cpp:148
 #, kde-format
@@ -906,12 +902,10 @@ msgid "Terminal emulator"
 msgstr "터미널 에뮬레이터"
 
 #: main.cpp:177
-#, fuzzy, kde-format
-#| msgctxt "@info:credit"
-#| msgid "(c) 1997-2022, The Konsole Developers"
+#, kde-format
 msgctxt "@info:credit"
 msgid "© 1997–%1, The Konsole Developers"
-msgstr "(c) 1997-2022, The Konsole Developers"
+msgstr "© 1997–%1, The Konsole Developers"
 
 #: main.cpp:353
 #, kde-format
@@ -2998,7 +2992,7 @@ msgstr "탭 너비 확장"
 #: settings/konsole.kcfg:208
 #, kde-format
 msgid "Color-code tab when running inside a container"
-msgstr ""
+msgstr "컨테이너에서 실행 중인 탭을 별도 색상으로 표시"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ShowContainerTabColor)
 #. i18n: ectx: tooltip, entry (ShowContainerTabColor), group (TabBar)
@@ -3008,13 +3002,15 @@ msgid ""
 "When running inside a container (e.g. Distrobox or Toolbox), color-code the "
 "tab with a container-specific color"
 msgstr ""
+"컨테이너 내부(예: Distrobox, Toolbox)에서 실행 중일 때 탭을 컨테이너별 별도 "
+"색상으로 표시합니다"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowContainerStatusBar)
 #. i18n: ectx: label, entry (ShowContainerStatusBar), group (TabBar)
 #: settings/konsole.kcfg:213 settings/TabBarSettings.ui:314
 #, kde-format
 msgid "Show container label in terminal footer"
-msgstr ""
+msgstr "터미널 바닥글에 컨테이너 레이블 표시"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ShowContainerStatusBar)
 #. i18n: ectx: tooltip, entry (ShowContainerStatusBar), group (TabBar)
@@ -3024,6 +3020,8 @@ msgid ""
 "When running inside a container (e.g. Distrobox or Toolbox), show a label "
 "with the container name at the bottom of the terminal"
 msgstr ""
+"컨테이너 내부(예: Distrobox, Toolbox)에서 실행 중일 때 터미널 바닥글에 컨테이"
+"너 이름이 포함된 레이블을 표시합니다"
 
 #. i18n: ectx: label, entry (scrollbackUseSystemLocation), group (FileLocation)
 #: settings/konsole.kcfg:230
@@ -3320,7 +3318,7 @@ msgstr "개별 탭 너비를 전체 창으로 확장"
 #: settings/TabBarSettings.ui:304
 #, kde-format
 msgid "Color-code tab when inside a container"
-msgstr ""
+msgstr "컨테이너에 있을 때 탭을 별도 색상으로 표시"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabBarUseUserStyleSheet)
 #: settings/TabBarSettings.ui:321
@@ -4810,28 +4808,18 @@ msgid "None"
 msgstr "없음"
 
 #: widgets/EditProfileDialog.cpp:557
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Suffix of the number of columns (N columns). The leading space is needed "
-#| "to separate it from the number value."
-#| msgid " column"
-#| msgid_plural " columns"
+#, kde-format
 msgctxt "@item number of columns"
 msgid "%v column"
 msgid_plural "%v columns"
-msgstr[0] "열"
+msgstr[0] "열 %v개"
 
 #: widgets/EditProfileDialog.cpp:558
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Suffix of the number of rows (N rows). The leading space is needed to "
-#| "separate it from the number value."
-#| msgid " row"
-#| msgid_plural " rows"
+#, kde-format
 msgctxt "@item number of rows"
 msgid "%v row"
 msgid_plural "%v rows"
-msgstr[0] "행"
+msgstr[0] "행 %v개"
 
 #: widgets/EditProfileDialog.cpp:570
 #, kde-format
@@ -4869,14 +4857,11 @@ msgid "One environment variable per line"
 msgstr "한 줄에 환경 변수 하나씩"
 
 #: widgets/EditProfileDialog.cpp:720
-#, fuzzy, kde-format
-#| msgctxt "Unit of time"
-#| msgid " second"
-#| msgid_plural " seconds"
+#, kde-format
 msgctxt "@item number of seconds"
 msgid "%v second"
 msgid_plural "%v seconds"
-msgstr[0] "초"
+msgstr[0] "%v초"
 
 #: widgets/EditProfileDialog.cpp:850
 #, kde-format
@@ -5722,14 +5707,11 @@ msgid "The threshold for continuous silence to be detected by Konsole"
 msgstr "응답 없음을 기다릴 초 단위 시간입니다"
 
 #: widgets/HistorySizeWidget.cpp:41
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox Unit of scrollback"
-#| msgid " line"
-#| msgid_plural " lines"
+#, kde-format
 msgctxt "@item number of lines"
 msgid "%v line"
 msgid_plural "%v lines"
-msgstr[0] "줄"
+msgstr[0] "줄 %v개"
 
 #: widgets/HistorySizeWidget.cpp:56
 #, kde-format
