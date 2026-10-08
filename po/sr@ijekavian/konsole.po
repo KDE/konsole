@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-03 00:49+0000\n"
-"PO-Revision-Date: 2026-09-30 23:00+0200\n"
+"PO-Revision-Date: 2026-10-07 11:45+0200\n"
 "Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr@ijekavian\n"
@@ -4420,7 +4420,7 @@ msgstr ""
 #: widgets/EditProfileAppearancePage.ui:520
 #, kde-format
 msgid "Show hint for terminal size after resizing"
-msgstr "Наговештај о величини терминала по промјени величине"
+msgstr "Наговјештај о величини терминала по промјени величине"
 
 #. i18n: ectx: property (text), widget (QCheckBox, invertSelectionColorsCheckbox)
 #: widgets/EditProfileAppearancePage.ui:527
