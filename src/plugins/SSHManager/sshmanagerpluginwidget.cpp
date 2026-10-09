@@ -278,7 +278,7 @@ void SSHManagerTreeWidget::editSshInfo()
 
 void SSHManagerTreeWidget::handleImportedData(bool isImported)
 {
-    QList<QWidget *> elements = {ui->hostname, ui->port, ui->username, ui->sshkey, ui->useSshConfig};
+    QList<QWidget *> elements = {ui->hostname, ui->port, ui->username, ui->sshkey, ui->useSshConfig, ui->btnFindSshKey};
     if (isImported) {
         ui->errorPanel->setText(i18n("Imported SSH Profile <br/> Some settings are read only."));
         ui->errorPanel->show();
@@ -295,6 +295,7 @@ void SSHManagerTreeWidget::setEditComponentsEnabled(bool enabled)
     ui->name->setEnabled(enabled);
     ui->port->setEnabled(enabled);
     ui->sshkey->setEnabled(enabled);
+    ui->btnFindSshKey->setEnabled(enabled);
     ui->profile->setEnabled(enabled);
     ui->username->setEnabled(enabled);
     ui->useSshConfig->setEnabled(enabled);
