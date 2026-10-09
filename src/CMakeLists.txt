@@ -118,7 +118,6 @@ target_sources(konsoleprivate PRIVATE
     SearchHistoryTask.cpp
     ShellCommand.cpp
     ShouldApplyProperty.cpp
-    Terminal1IntentHandler.cpp
     UnixProcessInfo.cpp
     ViewManager.cpp
     ViewProperties.cpp
@@ -301,6 +300,7 @@ install(TARGETS konsoleprivate ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} LIBRARY NAMEL
 add_library(konsoleapp
     Application.cpp
     MainWindow.cpp
+    Terminal1IntentHandler.cpp
     settings/ConfigurationDialog.cpp
     settings/ConfigDialogButtonGroupManager.cpp
     settings/TemporaryFilesSettings.cpp

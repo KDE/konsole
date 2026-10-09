@@ -99,6 +99,10 @@ void Application::populateCommandLineParser(QCommandLineParser *parser)
         QCommandLineOption({QStringLiteral("T"), QStringLiteral("title")}, QStringLiteral("Debian policy compatibility, not used"), QStringLiteral("value"));
     titleOption.setFlags(QCommandLineOption::HiddenFromHelp);
     parser->addOption(titleOption);
+
+    auto activatedOption = QCommandLineOption(QStringLiteral("activated"));
+    activatedOption.setFlags(QCommandLineOption::HiddenFromHelp);
+    parser->addOption(activatedOption);
 }
 
 QStringList Application::getCustomCommand(QStringList &args)
@@ -186,6 +190,11 @@ int Application::newInstance()
     // terminal, quit if such an argument was found
     if (processHelpArgs()) {
         return 0;
+    }
+
+    if (m_parser->isSet(QStringLiteral("activated"))) {
+        // Started by DBus activation, a method will be invoked that tells us what to do
+        return 1;
     }
 
     // create a new window or use an existing one
@@ -582,5 +591,36 @@ void Application::slotActivateRequested(QStringList args, const QString & /*work
 
     newInstance();
 }
+
+#if HAVE_DBUS
+void Konsole::Application::slotLaunchCommandRequested(const QList<Terminal1IntentHandler::Command> &commands,
+                                                      const QString &desktopEntry,
+                                                      const QVariantMap &options,
+                                                      const QVariantMap &platformData)
+{
+    auto window = newMainWindow();
+    const auto baseProfile = ProfileManager::instance()->defaultProfile();
+    const bool keepOpen = options.value(QLatin1String("keep-terminal-open"), false).toBool();
+    const QString defaultShell = ProfileManager::instance()->builtinProfile()->command();
+
+    for (const auto &command : commands) {
+        Profile::Ptr newProfile = Profile::Ptr(new Profile(baseProfile));
+        if (!command.exec.isEmpty()) {
+            newProfile->setProperty(Profile::Command, command.exec.at(0));
+            newProfile->setProperty(Profile::Arguments, command.exec);
+        } else {
+            newProfile->setProperty(Profile::Command, defaultShell);
+            newProfile->setProperty(Profile::Command, defaultShell);
+        }
+        auto session = window->createSession(newProfile, command.workingDir);
+        session->setAutoClose(!keepOpen);
+        session->setEnvironment(command.env);
+    }
+    if (const auto token = platformData.value(QLatin1String("activation-token")).toByteArray(); !token.isEmpty()) {
+        qputenv("XDG_ACTIVATION_TOKEN", token);
+    }
+    window->show();
+}
+#endif
 
 #include "moc_Application.cpp"
