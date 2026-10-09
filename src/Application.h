@@ -11,13 +11,13 @@
 #include <QCommandLineParser>
 
 // Konsole
+#include "Terminal1IntentHandler.h"
 #include "containers/ContainerInfo.h"
 #include "konsoleapp_export.h"
 #include "pluginsystem/PluginManager.h"
 #include "profile/Profile.h"
 #include "terminalDisplay/TerminalDisplay.h"
 #include "widgets/ViewSplitter.h"
-
 namespace Konsole
 {
 class MainWindow;
@@ -67,6 +67,12 @@ private Q_SLOTS:
 
 public Q_SLOTS:
     void slotActivateRequested(QStringList args, const QString &workingDir);
+#if HAVE_DBUS
+    void slotLaunchCommandRequested(const QList<Terminal1IntentHandler::Command> &commands,
+                                    const QString &desktopEntry,
+                                    const QVariantMap &options,
+                                    const QVariantMap &platformData);
+#endif
 
 private:
     Q_DISABLE_COPY(Application)

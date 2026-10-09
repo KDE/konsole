@@ -35,6 +35,7 @@ include(ECMQtDeclareLoggingCategory)
 include(KDEClangFormat)
 include(KDEGitCommitHooks)
 include(CheckFunctionExists)
+include (ECMGenerateDBusServiceFile)
 
 find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED
     Core
@@ -84,6 +85,11 @@ if(USE_DBUS)
     find_package(KF6 ${KF6_DEP_VERSION} REQUIRED
         DBusAddons
         GlobalAccel
+    )
+    ecm_generate_dbus_service_file(
+        NAME org.kde.konsole
+        EXECUTABLE "${KDE_INSTALL_FULL_BINDIR}/konsole --activated"
+        DESTINATION ${KDE_INSTALL_DBUSSERVICEDIR}
     )
     set(HAVE_DBUS 1)
 endif()
