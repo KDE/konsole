@@ -233,7 +233,7 @@ int main(int argc, char *argv[])
     atexit(deleteQApplication);
     // Ensure that we only launch a new instance if we need to
     // If there is already an instance running, we will quit here
-    KDBusService dbusService(startupOption | KDBusService::NoExitOnFailure, ExtraAdaptor<Terminal1IntentHandler>);
+    auto dbusService = KDBusService::withExtraAdaptors<Terminal1IntentHandler>(startupOption | KDBusService::NoExitOnFailure);
 
     needToDeleteQApplication = false;
 #endif
@@ -246,6 +246,10 @@ int main(int argc, char *argv[])
     // The activateRequested() signal is emitted when a second instance
     // of Konsole is started.
     QObject::connect(&dbusService, &KDBusService::activateRequested, &konsoleApp, &Application::slotActivateRequested);
+    QObject::connect(dbusService.findChild<Terminal1IntentHandler *>(),
+                     &Terminal1IntentHandler::LaunchCommandRequested,
+                     &konsoleApp,
+                     &Application::slotLaunchCommandRequested);
 #endif
 
     if (app->isSessionRestored()) {

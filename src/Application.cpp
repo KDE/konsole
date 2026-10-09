@@ -583,4 +583,33 @@ void Application::slotActivateRequested(QStringList args, const QString & /*work
     newInstance();
 }
 
+#if HAVE_DBUS
+void Konsole::Application::slotLaunchCommandRequested(const QList<Terminal1IntentHandler::Command> &commands,
+                                                      const QString &desktopEntry,
+                                                      const QVariantMap &options,
+                                                      const QVariantMap &platformData)
+{
+    auto window = newMainWindow();
+    const auto baseProfile = ProfileManager::instance()->defaultProfile();
+    const bool keepOpen = options.value(QLatin1String("keep-terminal-open"), false).toBool();
+    const QString defaultShell = ProfileManager::instance()->builtinProfile()->command();
+
+    for (const auto &command : commands) {
+        Profile::Ptr newProfile = Profile::Ptr(new Profile(baseProfile));
+        if (!command.exec.isEmpty()) {
+            newProfile->setProperty(Profile::Command, command.exec.at(0));
+            newProfile->setProperty(Profile::Arguments, command.exec);
+        } else {
+            newProfile->setProperty(Profile::Command, defaultShell);
+            newProfile->setProperty(Profile::Command, defaultShell);
+        }
+        auto session = window->createSession(newProfile, command.workingDir);
+        session->setAutoClose(!keepOpen);
+        // TODO env
+    }
+    // TODO activation token
+    window->show();
+}
+#endif
+
 #include "moc_Application.cpp"
