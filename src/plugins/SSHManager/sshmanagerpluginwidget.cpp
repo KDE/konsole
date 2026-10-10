@@ -120,6 +120,7 @@ SSHManagerTreeWidget::SSHManagerTreeWidget(QWidget *parent)
     connect(ui->treeView, &SshTreeView::mouseButtonClicked, this, &SSHManagerTreeWidget::handleTreeClick);
 
     ui->treeView->setModel(d->filterModel);
+    connect(ui->treeView->selectionModel(), &QItemSelectionModel::currentChanged, this, &SSHManagerTreeWidget::selectionChanged);
 
     // We have nothing selected, so there's nothing to edit.
     ui->btnEdit->setEnabled(false);
@@ -411,6 +412,40 @@ std::pair<bool, QString> SSHManagerTreeWidget::checkFields() const
     return {error, errorString};
 }
 
+void SSHManagerTreeWidget::selectionChanged(const QModelIndex current)
+{
+    ui->treeView->setCurrentIndex(current);
+    ui->treeView->selectionModel()->setCurrentIndex(current, QItemSelectionModel::SelectionFlag::Rows);
+
+    auto sourceIdx = d->filterModel->mapToSource(current);
+    const bool isParent = sourceIdx.parent() == d->model->invisibleRootItem()->index();
+
+    if (isParent) {
+        setEditComponentsEnabled(false);
+        if (sourceIdx.data(Qt::DisplayRole).toString() == i18n("SSH Config")) {
+            ui->btnDelete->setEnabled(false);
+            ui->btnDelete->setToolTip(i18n("Cannot delete this folder"));
+        } else {
+            ui->btnDelete->setEnabled(true);
+            ui->btnDelete->setToolTip(i18n("Delete folder and all of its contents"));
+        }
+        ui->btnEdit->setEnabled(false);
+        if (ui->sshInfoPane->isVisible()) {
+            ui->errorPanel->setText(i18n("Double click to change the folder name."));
+        }
+    } else {
+        const auto item = d->model->itemFromIndex(sourceIdx);
+        const auto data = item->data(SSHManagerModel::SSHRole).value<SSHConfigurationData>();
+        ui->btnEdit->setEnabled(true);
+        ui->btnDelete->setEnabled(!data.importedFromSshConfig);
+        ui->btnDelete->setToolTip(data.importedFromSshConfig ? i18n("You can't delete an automatically added entry.") : i18n("Delete selected entry"));
+        if (ui->sshInfoPane->isVisible()) {
+            handleImportedData(data.importedFromSshConfig);
+            editSshInfo();
+        }
+    }
+}
+
 void SSHManagerTreeWidget::handleTreeClick(Qt::MouseButton btn, const QModelIndex idx)
 {
     if (!d->controller) {
@@ -418,39 +453,9 @@ void SSHManagerTreeWidget::handleTreeClick(Qt::MouseButton btn, const QModelInde
     }
     auto sourceIdx = d->filterModel->mapToSource(idx);
 
-    ui->treeView->setCurrentIndex(idx);
-    ui->treeView->selectionModel()->setCurrentIndex(idx, QItemSelectionModel::SelectionFlag::Rows);
-
-    if (btn == Qt::LeftButton || btn == Qt::RightButton) {
-        const bool isParent = sourceIdx.parent() == d->model->invisibleRootItem()->index();
-
-        if (isParent) {
-            setEditComponentsEnabled(false);
-            if (sourceIdx.data(Qt::DisplayRole).toString() == i18n("SSH Config")) {
-                ui->btnDelete->setEnabled(false);
-                ui->btnDelete->setToolTip(i18n("Cannot delete this folder"));
-            } else {
-                ui->btnDelete->setEnabled(true);
-                ui->btnDelete->setToolTip(i18n("Delete folder and all of its contents"));
-            }
-            ui->btnEdit->setEnabled(false);
-            if (ui->sshInfoPane->isVisible()) {
-                ui->errorPanel->setText(i18n("Double click to change the folder name."));
-            }
-        } else {
-            const auto item = d->model->itemFromIndex(sourceIdx);
-            const auto data = item->data(SSHManagerModel::SSHRole).value<SSHConfigurationData>();
-            ui->btnEdit->setEnabled(true);
-            ui->btnDelete->setEnabled(!data.importedFromSshConfig);
-            ui->btnDelete->setToolTip(data.importedFromSshConfig ? i18n("You can't delete an automatically added entry.") : i18n("Delete selected entry"));
-            if (ui->sshInfoPane->isVisible()) {
-                handleImportedData(data.importedFromSshConfig);
-                editSshInfo();
-            }
-        }
-        return;
+    if (btn == Qt::RightButton) {
+        selectionChanged(idx);
     }
-
     if (btn == Qt::MiddleButton) {
         if (sourceIdx.parent() == d->model->invisibleRootItem()->index()) {
             return;
