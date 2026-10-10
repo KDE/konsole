@@ -454,7 +454,7 @@ void SSHManagerTreeWidget::handleTreeClick(Qt::MouseButton btn, const QModelInde
     }
     auto sourceIdx = d->filterModel->mapToSource(idx);
 
-    if (btn == Qt::RightButton) {
+    if (btn == Qt::LeftButton || btn == Qt::RightButton) {
         selectionChanged(idx);
     }
     if (btn == Qt::MiddleButton) {
