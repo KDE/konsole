@@ -305,10 +305,11 @@ void SSHManagerTreeWidget::setEditComponentsEnabled(bool enabled)
 void SSHManagerTreeWidget::clearSshInfo()
 {
     hideInfoPane();
-    ui->name->setText({});
-    ui->hostname->setText({});
+    ui->name->clear();
+    ui->hostname->clear();
     ui->port->setText(QStringLiteral("22"));
-    ui->sshkey->setText({});
+    ui->sshkey->clear();
+    ui->username->clear();
     ui->treeView->setEnabled(true);
 }
 
