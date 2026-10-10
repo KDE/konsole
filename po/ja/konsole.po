@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-03 00:49+0000\n"
+"POT-Creation-Date: 2026-10-10 00:50+0000\n"
 "PO-Revision-Date: 2023-12-03 23:07-0800\n"
 "Last-Translator: Fumiaki Okushi <fumiaki.okushi@gmail.com>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -2232,8 +2232,8 @@ msgstr "セッション '%1' が休止"
 
 #: session/Session.cpp:819 session/Session.cpp:2355
 #: session/SessionController.cpp:382 session/SessionController.cpp:1928
-#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1280
-#: Vt102Emulation.cpp:1535
+#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1281
+#: Vt102Emulation.cpp:1536
 #, kde-format
 msgid "Show session"
 msgstr "セッションを表示"
@@ -4006,7 +4006,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "タブのレイアウトを読み込む"
 
-#: Vt102Emulation.cpp:3342
+#: Vt102Emulation.cpp:3277
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
