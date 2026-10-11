@@ -22,6 +22,7 @@ void SshTreeView::mouseReleaseEvent(QMouseEvent *ev)
     if (idxAt.isValid()) {
         Q_EMIT mouseButtonClicked(ev->button(), idxAt);
     }
+    QTreeView::mouseReleaseEvent(ev);
 }
 
 #include "moc_sshtreeview.cpp"
