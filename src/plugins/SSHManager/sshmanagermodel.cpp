@@ -76,6 +76,7 @@ QStandardItem *SSHManagerModel::addTopLevelItem(const QString &name)
     invisibleRootItem()->sortChildren(0);
 
     if (name == i18n("SSH Config")) {
+        newItem->setEditable(false);
         m_sshConfigTopLevelItem = newItem;
     }
 
