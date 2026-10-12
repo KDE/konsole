@@ -11,14 +11,14 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-10 00:50+0000\n"
-"PO-Revision-Date: 2026-09-25 18:24+0200\n"
+"PO-Revision-Date: 2026-10-11 22:02+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
 "Language: nn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 26.08.1\n"
+"X-Generator: Lokalize 26.11.70\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
@@ -2155,7 +2155,7 @@ msgstr "Skriv inn fanenamn å søkja etter"
 #: session/Session.cpp:133
 #, kde-format
 msgid "Bell in '%1' (Session '%2')"
-msgstr "Varsel i «%1» (økt «%2»)"
+msgstr "Varsel i «%1» (økta «%2»)"
 
 #: session/Session.cpp:436
 #, kde-format
@@ -2190,7 +2190,7 @@ msgstr "Klarte ikkje starta programmet «%1» med argumenta «%2»."
 #: session/Session.cpp:818
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
-msgstr "Stilt i «%1» (økt «%2»)"
+msgstr "Stilt i «%1» (økta «%2»)"
 
 #: session/Session.cpp:819 session/Session.cpp:2355
 #: session/SessionController.cpp:382 session/SessionController.cpp:1928
@@ -2224,7 +2224,7 @@ msgstr "ZModem-framdrift"
 #: session/Session.cpp:2354
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
-msgstr "Aktivitet i «%1» (økt «%2»)"
+msgstr "Aktivitet i «%1» (økta «%2»)"
 
 #: session/Session.cpp:2637
 #, kde-format
