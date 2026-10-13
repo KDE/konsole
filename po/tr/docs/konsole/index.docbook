@@ -3298,7 +3298,7 @@ Boşluk+Kontrol
 </para>
 
 <para
->Düğme adları, qnamespace.h üstbilgi dosyasında <quote
+>Düğme adları, qnamespace.h üst bilgi dosyasında <quote
 >Qt::Key_</quote
 > öneki kaldırılmış olarak tanımlıdır; düğme adlarının bir listesi için <ulink url="https://doc.qt.io/qt-5/qt.html#Key-enum"
 >Qt::Key enumeration in the &Qt;</ulink

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-10 00:50+0000\n"
+"POT-Creation-Date: 2026-10-13 00:49+0000\n"
 "PO-Revision-Date: 2026-03-13 11:30+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
@@ -3938,7 +3938,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Hlaða inn flipaframsetningu"
 
-#: Vt102Emulation.cpp:3277
+#: Vt102Emulation.cpp:3272
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
