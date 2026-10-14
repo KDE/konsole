@@ -2152,7 +2152,7 @@ QList<int> Screen::getCharacterCounts() const
     for (int line = 0; line < totalLines; ++line) {
         int count = getLineLength(line);
         bool lineIsWrapped = false;
-        Character *characterBuffer = getCharacterBuffer(count - 1);
+        Character *characterBuffer = getCharacterBuffer(count);
         const Character *lineData = characterBuffer;
 
         Q_ASSERT(count >= 0);
