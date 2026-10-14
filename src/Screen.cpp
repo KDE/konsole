@@ -2153,10 +2153,12 @@ QList<int> Screen::getCharacterCounts() const
         int count = getLineLength(line);
         bool lineIsWrapped = false;
         Character *characterBuffer = getCharacterBuffer(count - 1);
+        const Character *lineData = characterBuffer;
 
         Q_ASSERT(count >= 0);
 
-        if (line < _history->getLines()) {
+        const bool isInHistoryBuffer = line < _history->getLines();
+        if (isInHistoryBuffer) {
             // safety checks
             Q_ASSERT(count <= _history->getLineLen(line));
 
@@ -2179,6 +2181,7 @@ QList<int> Screen::getCharacterCounts() const
             screenLine = qMin(screenLine, _screenLinesSize);
 
             auto *data = _screenLines[screenLine].data();
+            lineData = data;
             int length = _screenLines.at(screenLine).count();
 
             // Exclude trailing empty cells from count and don't bother processing them further.
@@ -2200,7 +2203,7 @@ QList<int> Screen::getCharacterCounts() const
         }
 
         // If the last character is wide, account for it
-        if (count > 0 && Character::width(characterBuffer[count - 1].character, _ignoreWcWidth) == 2)
+        if (count > 0 && Character::width(lineData[count - 1].character, _ignoreWcWidth) == 2)
             count++;
 
         // When users ask not to preserve the linebreaks, they usually mean:
