@@ -2200,7 +2200,7 @@ QList<int> Screen::getCharacterCounts() const
         }
 
         // If the last character is wide, account for it
-        if (Character::width(characterBuffer[count - 1].character, _ignoreWcWidth) == 2)
+        if (count > 0 && Character::width(characterBuffer[count - 1].character, _ignoreWcWidth) == 2)
             count++;
 
         // When users ask not to preserve the linebreaks, they usually mean:
@@ -2315,7 +2315,7 @@ int Screen::copyLineToStream(int line,
     }
 
     // If the last character is wide, account for it
-    if (Character::width(characterBuffer[count - 1].character, _ignoreWcWidth) == 2) {
+    if (count > 0 && Character::width(characterBuffer[count - 1].character, _ignoreWcWidth) == 2) {
         characterBuffer[count].setRightHalfOfDoubleWide();
         count++;
     }
