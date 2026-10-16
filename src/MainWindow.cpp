@@ -588,7 +588,10 @@ void MainWindow::updateHamburgerMenu()
 
     if (auto settingsMenu = static_cast<QMenu *>(factory()->container(QStringLiteral("settings"), nullptr))) {
         auto configureMenu = menu->addMenu(QIcon::fromTheme(QStringLiteral("configure")), settingsMenu->title());
-        configureMenu->addAction(toolBarMenuAction());
+        QAction *tbAction = toolBarMenuAction();
+        if (tbAction) {
+            configureMenu->addAction(tbAction);
+        }
         configureMenu->addSeparator();
         configureMenu->addAction(collection->action(KStandardAction::name(KStandardAction::SwitchApplicationLanguage)));
         configureMenu->addAction(collection->action(KStandardAction::name(KStandardAction::KeyBindings)));
