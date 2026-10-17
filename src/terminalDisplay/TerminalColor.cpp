@@ -122,12 +122,14 @@ void TerminalColor::onColorsChanged()
 
     QColor buttonColor = backgroundColor.toHsv();
     if (buttonColor.valueF() < 0.5) {
-        buttonColor = buttonColor.lighter();
+        // lighter() *multiplies* the existing lightness value, which doesn't do much for very small values.
+        // So add to the HSV lightness value instead.
+        buttonColor.setHsvF(buttonColor.hsvHueF(), buttonColor.hsvSaturationF(), buttonColor.valueF() + 0.25f, buttonColor.alphaF());
     } else {
         buttonColor = buttonColor.darker();
     }
     palette.setColor(QPalette::Button, buttonColor);
-    palette.setColor(QPalette::Window, backgroundColor);
+    palette.setColor(QPalette::Window, buttonColor); // used for scrollbar handle in certain styles, needs contrast to background
     palette.setColor(QPalette::Base, backgroundColor);
     palette.setColor(QPalette::WindowText, buttonTextColor);
     palette.setColor(QPalette::ButtonText, buttonTextColor);
