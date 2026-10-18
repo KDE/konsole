@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-13 00:49+0000\n"
+"POT-Creation-Date: 2026-10-18 00:53+0000\n"
 "PO-Revision-Date: 2026-09-21 06:44-0300\n"
 "Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -1314,7 +1314,7 @@ msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Carregar layout de abas..."
 
-#: MainWindow.cpp:876 MainWindow.cpp:893
+#: MainWindow.cpp:879 MainWindow.cpp:896
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1325,61 +1325,61 @@ msgstr[0] ""
 msgstr[1] ""
 "Existem %1 processos em execução nesta janela. Deseja realmente sair?"
 
-#: MainWindow.cpp:882 MainWindow.cpp:899 MainWindow.cpp:913
+#: MainWindow.cpp:885 MainWindow.cpp:902 MainWindow.cpp:916
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Confirmar fechamento"
 
-#: MainWindow.cpp:883 MainWindow.cpp:900 MainWindow.cpp:914
+#: MainWindow.cpp:886 MainWindow.cpp:903 MainWindow.cpp:917
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "&Fechar janela"
 
-#: MainWindow.cpp:901 MainWindow.cpp:915
+#: MainWindow.cpp:904 MainWindow.cpp:918
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Fechar a aba a&tual"
 
-#: MainWindow.cpp:910
+#: MainWindow.cpp:913
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "Há %1 terminais abertos nesta janela. Deseja realmente sair?"
 
-#: MainWindow.cpp:1064 Part.cpp:317
+#: MainWindow.cpp:1067 Part.cpp:317
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Perfis"
 
-#: MainWindow.cpp:1082
+#: MainWindow.cpp:1085
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Geral"
 
-#: MainWindow.cpp:1094
+#: MainWindow.cpp:1097
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr "Memória"
 
-#: MainWindow.cpp:1100
+#: MainWindow.cpp:1103
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Barra de abas / divisores"
 
-#: MainWindow.cpp:1105
+#: MainWindow.cpp:1108
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Arquivos temporários"
 
-#: MainWindow.cpp:1110
+#: MainWindow.cpp:1113
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
