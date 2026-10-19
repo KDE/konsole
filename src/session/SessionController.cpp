@@ -1888,6 +1888,10 @@ void SessionController::clearHistory()
     session()->clearHistory();
     view()->updateImage(); // To reset view scrollbar
     view()->repaint();
+
+    if (_isSearchBarEnabled) {
+        beginSearch(_searchBar->searchText(), reverseSearchChecked() ? Enum::BackwardsSearch : Enum::ForwardsSearch, noWrapChecked());
+    }
 }
 
 void SessionController::clearHistoryAndReset()
