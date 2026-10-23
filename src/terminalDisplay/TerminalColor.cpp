@@ -129,7 +129,10 @@ void TerminalColor::onColorsChanged()
         buttonColor = buttonColor.darker();
     }
     palette.setColor(QPalette::Button, buttonColor);
-    palette.setColor(QPalette::Window, buttonColor); // used for scrollbar handle in certain styles, needs contrast to background
+    // Window is known to affect:
+    // - scrollbar handles in some styles, notably Breeze
+    // - background of the search overlay widget (the thing with default shortcut Ctrl-Shift-F)
+    palette.setColor(QPalette::Window, buttonColor);
     palette.setColor(QPalette::Base, backgroundColor);
     palette.setColor(QPalette::WindowText, buttonTextColor);
     palette.setColor(QPalette::ButtonText, buttonTextColor);
