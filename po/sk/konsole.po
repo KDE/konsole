@@ -908,12 +908,10 @@ msgid "Terminal emulator"
 msgstr "Emulátor terminálu"
 
 #: main.cpp:177
-#, fuzzy, kde-format
-#| msgctxt "@info:credit"
-#| msgid "(c) 1997-2022, The Konsole Developers"
+#, kde-format
 msgctxt "@info:credit"
 msgid "© 1997–%1, The Konsole Developers"
-msgstr "(c) 1997-2022, Vývojári Konsole"
+msgstr "© 1997–%1, Vývojári Konsole"
 
 #: main.cpp:353
 #, kde-format
