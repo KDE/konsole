@@ -21,11 +21,6 @@
 #include <QDebug>
 #include <QtGlobal>
 
-#if defined(Q_OS_FREEBSD) || defined(Q_OS_OPENBSD) || defined(Q_OS_MACOS)
-#include <QSharedPointer>
-#include <sys/sysctl.h>
-#endif
-
 using namespace Konsole;
 
 UnixProcessInfo::UnixProcessInfo(int pid)
