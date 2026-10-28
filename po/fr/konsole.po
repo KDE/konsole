@@ -1320,7 +1320,7 @@ msgstr "Activer le menu"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
-msgstr "Enregistrer une disposition d'onglets..."
+msgstr "Enregistrer la disposition des onglets..."
 
 #: MainWindow.cpp:524
 #, kde-format
@@ -2597,7 +2597,7 @@ msgstr "Confirmer la fermeture"
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
-msgstr "Fermer un programme"
+msgstr "Fermer le programme"
 
 #: session/SessionController.cpp:1194
 #, kde-format
