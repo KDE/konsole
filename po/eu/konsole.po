@@ -1,7 +1,7 @@
 # Translation for konsole.po to Euskara/Basque (eu).
 # Copyright (C) 2002-2026 This file is copyright:
 # This file is distributed under the same license as the konsole package.
-# SPDX-FileCopyrightText: 2023-2026 KDE euskaratzeko proiektuaren arduraduna <xalba@ni.eus>
+# SPDX-FileCopyrightText: 2023-2026 KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>
 #
 # Translators:
 # Marcos  <marcos@euskalgnu.org>, 2002, 2003, 2005, 2006.

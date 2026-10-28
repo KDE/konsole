@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-13 03:23+0000\n"
-"PO-Revision-Date: 2026-09-21 10:49+0200\n"
+"PO-Revision-Date: 2026-10-27 12:42+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -32,7 +32,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Accelerator-Marker: &\n"
 "X-Environment: kde\n"
-"X-Generator: Lokalize 26.08.0\n"
+"X-Generator: Lokalize 26.08.1\n"
 "X-Text-Markup: kde4\n"
 
 #, kde-format
@@ -944,12 +944,10 @@ msgid "Terminal emulator"
 msgstr "Émulateur de terminal"
 
 #: main.cpp:193
-#, fuzzy, kde-format
-#| msgctxt "@info:credit"
-#| msgid "(c) 1997-2022, The Konsole Developers"
+#, kde-format
 msgctxt "@info:credit"
 msgid "(c) 1997-2022, The Konsole Developers"
-msgstr "(c) 1997 - 2022, Les développeurs de Konsole"
+msgstr "(c) 1997 - 2022, l'équipe de développement de Konsole"
 
 #: main.cpp:369
 #, kde-format
@@ -4908,34 +4906,24 @@ msgid "None"
 msgstr "Aucun"
 
 #: widgets/EditProfileDialog.cpp:556
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Suffix of the number of columns (N columns). The leading space is needed "
-#| "to separate it from the number value."
-#| msgid " column"
-#| msgid_plural " columns"
+#, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
 "separate it from the number value."
 msgid " column"
 msgid_plural " columns"
-msgstr[0] " colonne"
+msgstr[0] " colonne"
 msgstr[1] " colonnes"
 
 #: widgets/EditProfileDialog.cpp:558
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Suffix of the number of rows (N rows). The leading space is needed to "
-#| "separate it from the number value."
-#| msgid " row"
-#| msgid_plural " rows"
+#, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
 "separate it from the number value."
 msgid " row"
 msgid_plural " rows"
-msgstr[0] " ligne"
-msgstr[1] " lignes"
+msgstr[0] " ligne"
+msgstr[1] " lignes"
 
 #: widgets/EditProfileDialog.cpp:568
 #, kde-format
@@ -4973,15 +4961,12 @@ msgid "One environment variable per line"
 msgstr "Une variable d'environnement par ligne"
 
 #: widgets/EditProfileDialog.cpp:718
-#, fuzzy, kde-format
-#| msgctxt "Unit of time"
-#| msgid " second"
-#| msgid_plural " seconds"
+#, kde-format
 msgctxt "Unit of time"
 msgid " second"
 msgid_plural " seconds"
-msgstr[0] " seconde"
-msgstr[1] " secondes"
+msgstr[0] " seconde"
+msgstr[1] " secondes"
 
 #: widgets/EditProfileDialog.cpp:848
 #, kde-format
@@ -5876,15 +5861,12 @@ msgstr ""
 "Le seuil exprimé en secondes pour la détection par Konsole d'un silence"
 
 #: widgets/HistorySizeWidget.cpp:40
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox Unit of scrollback"
-#| msgid " line"
-#| msgid_plural " lines"
+#, kde-format
 msgctxt "@label:textbox Unit of scrollback"
 msgid " line"
 msgid_plural " lines"
-msgstr[0] " ligne"
-msgstr[1] " lignes"
+msgstr[0] " ligne"
+msgstr[1] " lignes"
 
 #: widgets/HistorySizeWidget.cpp:57
 #, kde-format
