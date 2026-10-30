@@ -139,7 +139,7 @@
 >Terugschuiven</title>
 
 <para
->&konsole; gebruikt de terugschuiven-mogelijkheid om eerder getoonde uitvoer te bekijken. Standaard is terugschuiven actief en worden 1000 regels bewaard naast de inhoud van het huidige scherm.  </para>
+>&konsole; gebruikt de terugschuiven-mogelijkheid om eerder getoonde uitvoer te bekijken. Standaard is terugschuiven actief en worden 10.000 regels bewaard naast de inhoud van het huidige scherm.  </para>
 <para
 >De regels die bovenaan het scherm uitrollen, kunt u toch bekijken door de schuifbalk naar boven te bewegen, met het muiswiel of met de toetsen <keycombo action="simul"
 >&Shift;<keycap
@@ -816,6 +816,114 @@
 > </para
 ></listitem>
 </itemizedlist>
+</sect1>
+
+<sect1 id="container-awareness">
+<title
+>Bewustzijn van containers</title>
+
+<para
+>&konsole; kan detecteren wanneer het voorgrondproces in een Linux-container draait, zoals <application
+>Distrobox</application
+>, <application
+>Toolbox</application
+> of <application
+>Kapsule</application
+>, en geeft visuele feedback zodat u kunt bijhouden welke terminal in welke container draait. </para>
+
+<sect2 id="container-indicators">
+<title
+>Visuele indicatoren</title>
+
+<para
+>Wanneer een container wordt gedetecteerd, toont &konsole; twee indicatoren:</para>
+
+<itemizedlist>
+<listitem
+><para
+><emphasis
+>Gekleurd tabblad</emphasis
+> — het tabblad krijgt een unieke kleur die is afgeleid van de identiteit van de container. Elke container behoudt steeds dezelfde kleur tussen sessies door, zodat u in één oogopslag kunt zien welk tabblad bij welke container hoort. </para
+></listitem>
+
+<listitem
+><para
+><emphasis
+>Containerlabel</emphasis
+> — onderaan het terminalgebied verschijnt een kleine balk die het containertype en de containernaam weergeeft (bijvoorbeeld <guilabel
+>Distrobox: fedora-41</guilabel
+>). Het label verdwijnt automatisch zodra het voorgrondproces terugkeert naar de host. </para
+></listitem>
+</itemizedlist>
+
+<para
+>Beide indicatoren kunnen onafhankelijk van elkaar worden in- of uitgeschakeld via <menuchoice
+><guimenu
+>Instellingen</guimenu
+><guimenuitem
+>&konsole; configureren…</guimenuitem
+> <guimenuitem
+>Tabbladbalk / Splitsers</guimenuitem
+></menuchoice
+>: </para>
+
+<itemizedlist>
+<listitem
+><para
+><guilabel
+>Tabblad van kleurcode voorzien in een container</guilabel
+> — schakelt het gekleurde tabblad in of uit. Standaard ingeschakeld. </para
+></listitem>
+<listitem
+><para
+><guilabel
+>Containerlabel in terminalvoettekst weergeven</guilabel
+> — schakelt het label in de voettekst in of uit. Standaard ingeschakeld. </para
+></listitem>
+</itemizedlist>
+</sect2>
+
+<sect2 id="container-new-tab">
+<title
+>Een tabblad openen in een container</title>
+
+<para
+>Het menu <guimenu
+>Bestand</guimenu
+> en de knop <guibutton
+>Nieuw tabblad</guibutton
+> bieden een submenu met alle beschikbare containers. Door een container te selecteren, wordt een nieuw tabblad geopend waarin direct naar die container wordt overgeschakeld. Er is ook een optie <guilabel
+>Host</guilabel
+> beschikbaar om expliciet een tabblad op het hostsysteem te openen, ongeacht de standaardinstellingen van het profiel. </para>
+</sect2>
+
+<sect2 id="container-profile">
+<title
+>Profielinstellingen</title>
+
+<para
+>Per profiel zijn twee containergerelateerde opties beschikbaar in het tabblad <guilabel
+>Algemeen</guilabel
+> van <guilabel
+>Profiel bewerken</guilabel
+>: </para>
+
+<itemizedlist>
+<listitem
+><para
+><guilabel
+>Altijd in container starten</guilabel
+> — kies een specifieke container die nieuwe sessies met dit profiel altijd automatisch zullen openen. </para
+></listitem>
+<listitem
+><para
+><guilabel
+>Dezelfde container als de huidige sessie gebruiken</guilabel
+> — nieuwe tabbladen die vanuit een bestaande containersessie worden geopend, worden in dezelfde container geopend in plaats van op de host te starten. </para
+></listitem>
+</itemizedlist>
+</sect2>
+
 </sect1>
 
 </chapter>
