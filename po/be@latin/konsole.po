@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 86ff119b1606fcaa910d6b44fc14b611\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-18 00:53+0000\n"
+"POT-Creation-Date: 2026-10-31 00:55+0000\n"
 "PO-Revision-Date: 2022-09-04 10:59+0300\n"
 "Last-Translator: Zmicier <zmicerturok@gmail.com>\n"
 "Language-Team: Belarusian <kde-i18n-doc@kde.org>\n"
@@ -2250,7 +2250,7 @@ msgid "Silence in '%1' (Session '%2')"
 msgstr "Biazdziejnasć u \"%1\" (sieans \"%2\")"
 
 #: session/Session.cpp:819 session/Session.cpp:2355
-#: session/SessionController.cpp:382 session/SessionController.cpp:1928
+#: session/SessionController.cpp:382 session/SessionController.cpp:1932
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1281
 #: Vt102Emulation.cpp:1536
 #, kde-format
@@ -2645,22 +2645,22 @@ msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "Zniščyć praces prahramy"
 
-#: session/SessionController.cpp:1927
+#: session/SessionController.cpp:1931
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr ""
 
-#: session/SessionController.cpp:2157
+#: session/SessionController.cpp:2161
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "Adkryć &biahučy kataloh z dapamohaj"
 
-#: session/SessionController.cpp:2227
+#: session/SessionController.cpp:2231
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Zachavać spampavanyja z dapamohaj pratakola ZModem fajly u..."
 
-#: session/SessionController.cpp:2237
+#: session/SessionController.cpp:2241
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>A ZModem file transfer attempt has been detected, but no suitable "
@@ -2675,7 +2675,7 @@ msgstr ""
 "hetaj sistemie nie znojdziena adpaviednaha prahramnaha zabiespiačennia "
 "ZModem.</p><p>Vy možacie ŭstaliavać pakunak \"rzsz\" abo \"lrzsz\".</p>"
 
-#: session/SessionController.cpp:2247
+#: session/SessionController.cpp:2251
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
@@ -2683,7 +2683,7 @@ msgstr ""
 "<p>U biahučym sieansie ŭžo vykonvajecca praces pieradačy fajlaŭ pa "
 "pratakolie ZModem.</p>"
 
-#: session/SessionController.cpp:2260
+#: session/SessionController.cpp:2264
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>No suitable ZModem software was found on this system.</p><p>You may "
@@ -2696,7 +2696,7 @@ msgstr ""
 "ZModem.</p><p>Mahčyma, vy zachočacie ŭstaliavać pakunak \"rzsz\" abo \"lrzsz"
 "\".</p>"
 
-#: session/SessionController.cpp:2265
+#: session/SessionController.cpp:2269
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Abiarycie fajly dlia zapampoŭvannia z dapamohaj pratakola ZModem"

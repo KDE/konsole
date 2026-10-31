@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fc57ad16a28d02dea100ceb1c60de14e\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-18 00:53+0000\n"
+"POT-Creation-Date: 2026-10-31 00:55+0000\n"
 "PO-Revision-Date: 2024-10-28 19:13\n"
 "Last-Translator: Zmicier <zmicerturok@gmail.com>\n"
 "Language-Team: Belarusian\n"
@@ -2209,7 +2209,7 @@ msgid "Silence in '%1' (Session '%2')"
 msgstr "Бяздзейнасць у \"%1\" (сеанс \"%2\")"
 
 #: session/Session.cpp:819 session/Session.cpp:2355
-#: session/SessionController.cpp:382 session/SessionController.cpp:1928
+#: session/SessionController.cpp:382 session/SessionController.cpp:1932
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1281
 #: Vt102Emulation.cpp:1536
 #, kde-format
@@ -2582,22 +2582,22 @@ msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "Знішчыць працэс праграмы"
 
-#: session/SessionController.cpp:1927
+#: session/SessionController.cpp:1931
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "Падказка абалонкі паказваецца ў сеансе \"%1\""
 
-#: session/SessionController.cpp:2157
+#: session/SessionController.cpp:2161
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "Адкрыць &бягучы каталог з дапамогай"
 
-#: session/SessionController.cpp:2227
+#: session/SessionController.cpp:2231
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Захаваць спампаваныя з дапамогай пратаколу ZModem файлы у..."
 
-#: session/SessionController.cpp:2237
+#: session/SessionController.cpp:2241
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2608,7 +2608,7 @@ msgstr ""
 "сістэме не знойдзена адпаведнага праграмнага забеспячэння ZModem.</p><p>Вы "
 "можаце ўсталяваць пакет \"rzsz\" або \"lrzsz\".</p>"
 
-#: session/SessionController.cpp:2247
+#: session/SessionController.cpp:2251
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
@@ -2616,7 +2616,7 @@ msgstr ""
 "<p>У бягучым сеансе ўжо выконваецца працэс перадачы файлаў па пратаколе "
 "ZModem.</p>"
 
-#: session/SessionController.cpp:2260
+#: session/SessionController.cpp:2264
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2625,7 +2625,7 @@ msgstr ""
 "<p>У гэтай сістэме не знойдзена адпаведнага праграмнага забеспячэння ZModem."
 "</p><p>Магчыма, вы захочаце ўсталяваць пакет \"rzsz\" або \"lrzsz\".</p>"
 
-#: session/SessionController.cpp:2265
+#: session/SessionController.cpp:2269
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Абярыце файлы для запампоўвання з дапамогай пратаколу ZModem"

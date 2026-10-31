@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-18 00:53+0000\n"
+"POT-Creation-Date: 2026-10-31 00:55+0000\n"
 "PO-Revision-Date: 2017-10-02 10:32+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -2300,7 +2300,7 @@ msgid "Silence in '%1' (Session '%2')"
 msgstr "Jokios veiklos sesijoje „%1“"
 
 #: session/Session.cpp:819 session/Session.cpp:2355
-#: session/SessionController.cpp:382 session/SessionController.cpp:1928
+#: session/SessionController.cpp:382 session/SessionController.cpp:1932
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1281
 #: Vt102Emulation.cpp:1536
 #, fuzzy, kde-format
@@ -2693,23 +2693,23 @@ msgctxt "@action:button"
 msgid "Kill Program"
 msgstr ""
 
-#: session/SessionController.cpp:1927
+#: session/SessionController.cpp:1931
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr ""
 
-#: session/SessionController.cpp:2157
+#: session/SessionController.cpp:2161
 #, kde-format
 msgid "Open Current Folder With"
 msgstr ""
 
-#: session/SessionController.cpp:2227
+#: session/SessionController.cpp:2231
 #, fuzzy, kde-format
 #| msgid "Save ZModem Download to..."
 msgid "Save ZModem Download to..."
 msgstr "Įrašyti ZModem atsisiuntimą į..."
 
-#: session/SessionController.cpp:2237
+#: session/SessionController.cpp:2241
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2720,13 +2720,13 @@ msgstr ""
 "ZModem programinės įrangos šioje sistemoje.</p><p>Galite įdiegti paketą "
 "„rzsz“ arba „lrzsz“.</p>"
 
-#: session/SessionController.cpp:2247
+#: session/SessionController.cpp:2251
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>Šioje sesijoje jau vykdomas ZModem failo perkėlimas.</p>"
 
-#: session/SessionController.cpp:2260
+#: session/SessionController.cpp:2264
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2735,7 +2735,7 @@ msgstr ""
 "<p>Šioje sistemoje nepavyko rasti tinkamos ZModem programos.</p><p>Tokią "
 "programą galite įgyti įdiegdami paketą „rzsz“ arba „lrzsz“.</p>"
 
-#: session/SessionController.cpp:2265
+#: session/SessionController.cpp:2269
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Pažymėkite failus išsiuntimui su ZModem"

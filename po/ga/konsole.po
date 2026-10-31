@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-18 00:53+0000\n"
+"POT-Creation-Date: 2026-10-31 00:55+0000\n"
 "PO-Revision-Date: 2025-12-19 17:46+0000\n"
 "Last-Translator: Charlotte <altronic25@protonmail.com>\n"
 "Language-Team: Irish <kde-i18n-doc@kde.org>\n"
@@ -2205,7 +2205,7 @@ msgid "Silence in '%1' (Session '%2')"
 msgstr "Ciúnas i '%1' (Seisiún '%2')"
 
 #: session/Session.cpp:819 session/Session.cpp:2355
-#: session/SessionController.cpp:382 session/SessionController.cpp:1928
+#: session/SessionController.cpp:382 session/SessionController.cpp:1932
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1281
 #: Vt102Emulation.cpp:1536
 #, kde-format
@@ -2580,22 +2580,22 @@ msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "Clár Maraithe"
 
-#: session/SessionController.cpp:1927
+#: session/SessionController.cpp:1931
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "Taispeántar an leid bhlaosc i seisiún '%1'"
 
-#: session/SessionController.cpp:2157
+#: session/SessionController.cpp:2161
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "Oscail an Fillteán Reatha Le"
 
-#: session/SessionController.cpp:2227
+#: session/SessionController.cpp:2231
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Sábháil Íoslódáil ZModem chuig..."
 
-#: session/SessionController.cpp:2237
+#: session/SessionController.cpp:2241
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2606,14 +2606,14 @@ msgstr ""
 "bhogearraí ZModem oiriúnacha ar an gcóras seo.</p><p>B’fhéidir gur mhaith "
 "leat an pacáiste ‘rzsz’ nó ‘lrzsz’ a shuiteáil.</p>"
 
-#: session/SessionController.cpp:2247
+#: session/SessionController.cpp:2251
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr ""
 "<p>Tá aistriú comhaid ZModem ar siúl cheana féin sa seisiún reatha.</p>"
 
-#: session/SessionController.cpp:2260
+#: session/SessionController.cpp:2264
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2622,7 +2622,7 @@ msgstr ""
 "<p>Níor aimsíodh aon bhogearraí ZModem oiriúnacha ar an gcóras seo.</"
 "p><p>B’fhéidir gur mhaith leat an pacáiste ‘rzsz’ nó ‘lrzsz’ a shuiteáil.</p>"
 
-#: session/SessionController.cpp:2265
+#: session/SessionController.cpp:2269
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Roghnaigh Comhaid le haghaidh Uaslódáil ZModem"
