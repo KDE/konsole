@@ -6192,10 +6192,3 @@ msgctxt ""
 "name"
 msgid "%1: %2"
 msgstr "%1: %2"
-
-#~ msgid "Distrobox: %1"
-#~ msgstr "Distrobox: %1"
-
-# skip-rule: kct-toolbox
-#~ msgid "Toolbox: %1"
-#~ msgstr "Toolbox: %1"
