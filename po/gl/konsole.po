@@ -4255,16 +4255,12 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:191
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Characters for drawing lines for a frame or box in TUI programs. Not a "
-#| "row of characters."
-#| msgid ">Use line characters contained in font"
+#, kde-format
 msgctxt ""
 "Characters for drawing lines for a frame or box in TUI programs. Not a row "
 "of characters."
 msgid "Use line characters contained in font"
-msgstr ">Usar os caracteres de liña do tipo de letra."
+msgstr "Usar os caracteres de liña do tipo de letra."
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:198
