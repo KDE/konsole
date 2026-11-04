@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-31 00:55+0000\n"
-"PO-Revision-Date: 2026-09-23 06:56+0900\n"
+"PO-Revision-Date: 2026-11-02 10:21-0500\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
 "Language: ug\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.9\n"
+"X-Generator: Poedit 3.10\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -146,7 +146,7 @@ msgid ""
 "(by default) is pressed"
 msgstr ""
 "Konsole نى ئارقا سۇپىدا باشلايدۇ ۋە Ctrl+Shift+F12 (كۆڭۈلدىكى قىممىتى) "
-"كۇنۇپكىسى بېسىلسا ئالدى سۇپىغا ئېلىپ كېلىدۇ"
+"كۇنۇپكىسى بېسىلسا ئالدى سۇپىغا ئېلىپ كېلىدۇ."
 
 #: Application.cpp:65
 #, kde-format
@@ -229,6 +229,8 @@ msgid ""
 "Command to execute. This option will catch all following arguments, so use "
 "it as the last option."
 msgstr ""
+"ئىجرا قىلىدىغان بۇيرۇق. بۇ تاللانما تۆۋەندىكى بارلىق ئەركىن ئۆزگەرگۈچىگە "
+"ئېرىشىدۇ، شۇڭا ئەڭ ئاخىرقى تاللانما سۈپىتىدە ئىشلىتىلىدۇ."
 
 #: Application.cpp:81
 #, kde-format
@@ -237,6 +239,8 @@ msgid ""
 "Force re-using the existing instance even if it breaks functionality, e. g. "
 "--new-tab. Mostly for debugging."
 msgstr ""
+"بەزى ئىقتىدارنى بۇزغان تەقدىردىمۇ مەۋجۇت مىسالنى مەجبۇرىي قايتا ئىشلىتىدۇ. "
+"مەسىلەن، «--new-tab». ئاساسلىقى سازلاشقا ئىشلىتىلىدۇ."
 
 #: Application.cpp:88
 #, kde-format
@@ -260,7 +264,7 @@ msgstr "%2 دىكى %1"
 #, kde-format
 msgctxt "@item:inmenu The host the user is connected to via ssh"
 msgid "%1"
-msgstr ""
+msgstr "%1"
 
 #: colorscheme/ColorScheme.cpp:125
 msgctxt "@item:intable palette"
@@ -510,6 +514,10 @@ msgid ""
 "settings.\n"
 "To see any effect, set colors with saturation value greater than 0."
 msgstr ""
+"كۆڭۈلدىكى ئەھۋالدا ئالدى كۆرۈنۈش ۋە تەگلىكنىڭ رەڭ تۈسى ۋە تويۇنۇشچانلىق "
+"قىممىتى ئىختىيارىيلاشتۇرۇلىدۇ. بەزى رەڭ لايىھەسى پەرقلىق ئىختىيارىيلەشتۇرۇش "
+"تەڭشىكىنى ئىشلىتىشى مۇمكىن.\n"
+"ئۈنۈمىنى كۆرۈشتە، رەڭنىڭ تويۇنۇشچانلىقىنى 0 دىن چوڭ قىممەتكە تەڭشەڭ."
 
 #. i18n: ectx: property (text), widget (QCheckBox, randomizedBackgroundCheck)
 #: colorscheme/ColorSchemeEditor.ui:53
@@ -662,7 +670,7 @@ msgstr "ئۈستى"
 #: colorscheme/ColorSchemeViewDelegate.cpp:52
 #, kde-format
 msgid "AaZz09..."
-msgstr ""
+msgstr "AaZz09..."
 
 #: containers/ContainerList.cpp:78
 #, kde-format
@@ -691,7 +699,7 @@ msgstr "كاپسۇل"
 #: containers/KapsuleDetector.cpp:61 containers/KapsuleDetector.cpp:64
 #, kde-format
 msgid "Kapsule Container"
-msgstr ""
+msgstr "Kapsule يۈكدان"
 
 #: containers/KapsuleDetector.cpp:99
 #, kde-format
@@ -731,7 +739,7 @@ msgstr "ھەممىنى تاللىما"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Color"
-msgstr ""
+msgstr "رەڭ كۆچۈر"
 
 #: filterHotSpots/ColorFilterHotSpot.cpp:148
 #, kde-format
@@ -801,6 +809,10 @@ msgid ""
 "equal width (monospace). Any non monospaced font may cause display issues. "
 "This should not be necessary except in rare cases."
 msgstr ""
+"ماھىيىتىدىن ئېيتقاندا، تېرمىنال پىروگراممىسىغا لازىملىق خەت نۇسخىسى تەڭ "
+"كەڭلىكتە بولىدۇ. تەڭ كەڭلىكتە بولمىغان  ھەر قانداق خەت نۇسخىسى كۆرسىتىش "
+"مەسىلىسى پەيدا قىلىشى مۇمكىن. ئىنتايىن ئاز ئۇچرايدىغان ئەھۋالنى ھېسابقا "
+"ئالمىغاندا بۇنىڭ زۆرۈرىيىتى يوق."
 
 #: HistorySizeDialog.cpp:25
 #, kde-format
@@ -886,7 +898,7 @@ msgstr "چىقىرىش:"
 #, kde-format
 msgctxt "@title"
 msgid "Konsole"
-msgstr ""
+msgstr "Konsole"
 
 #: main.cpp:175
 #, kde-format
@@ -898,13 +910,13 @@ msgstr "تېرمىنال تەقلىدلىگۈچ"
 #, kde-format
 msgctxt "@info:credit"
 msgid "© 1997–%1, The Konsole Developers"
-msgstr ""
+msgstr "© 1997–%1, Konsole ئىجادكارلىرى"
 
 #: main.cpp:353
 #, kde-format
 msgctxt "@info:credit"
 msgid "Kurt Hindenburg"
-msgstr ""
+msgstr "Kurt Hindenburg"
 
 #: main.cpp:355
 #, kde-format
@@ -916,7 +928,7 @@ msgstr "ئادەتتىكى ئاسرىغۇچى، كەمتۈك تۈزىتىش ۋە
 #, kde-format
 msgctxt "@info:credit"
 msgid "Robert Knight"
-msgstr ""
+msgstr "Robert Knight"
 
 #: main.cpp:359
 #, kde-format
@@ -928,7 +940,7 @@ msgstr "ئالدىنقى ئاسرىغۇچى، KDE4 كە يۆتكىگۈچى"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Lars Doelle"
-msgstr ""
+msgstr "Lars Doelle"
 
 #: main.cpp:361
 #, kde-format
@@ -940,7 +952,7 @@ msgstr "ئەسلى يازغۇچى"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Ahmad Samir"
-msgstr ""
+msgstr "Ahmad Samir"
 
 #: main.cpp:363 main.cpp:366 main.cpp:369 main.cpp:372
 #, kde-format
@@ -952,25 +964,25 @@ msgstr "مۇھىم قايتا قۇرۇش، كەمتۈك تۈزىتىش ۋە مۇ
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carlos Alves"
-msgstr ""
+msgstr "Carlos Alves"
 
 #: main.cpp:368
 #, kde-format
 msgctxt "@info:credit"
 msgid "Tomaz Canabrava"
-msgstr ""
+msgstr "Tomaz Canabrava"
 
 #: main.cpp:371
 #, kde-format
 msgctxt "@info:credit"
 msgid "Gustavo Carneiro"
-msgstr ""
+msgstr "Gustavo Carneiro"
 
 #: main.cpp:374
 #, kde-format
 msgctxt "@info:credit"
 msgid "Edwin Pujols"
-msgstr ""
+msgstr "Edwin Pujols"
 
 #: main.cpp:375 main.cpp:378 main.cpp:380 main.cpp:385 main.cpp:387
 #: main.cpp:388 main.cpp:389
@@ -983,19 +995,19 @@ msgstr "كەمتۈك تۈزىتىش ۋە ئادەتتىكى ياخشىلاش"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Martin T. H. Sandsmark"
-msgstr ""
+msgstr "Martin T. H. Sandsmark"
 
 #: main.cpp:380
 #, kde-format
 msgctxt "@info:credit"
 msgid "Nate Graham"
-msgstr ""
+msgstr "Nate Graham"
 
 #: main.cpp:381
 #, kde-format
 msgctxt "@info:credit"
 msgid "Mariusz Glebocki"
-msgstr ""
+msgstr "Mariusz Glebocki"
 
 #: main.cpp:382
 #, kde-format
@@ -1007,31 +1019,31 @@ msgstr "كەمتۈك تۈزىتىش ۋە مۇھىم ياخشىلاش"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thomas Surrel"
-msgstr ""
+msgstr "Thomas Surrel"
 
 #: main.cpp:387
 #, kde-format
 msgctxt "@info:credit"
 msgid "Jekyll Wu"
-msgstr ""
+msgstr "Jekyll Wu"
 
 #: main.cpp:388
 #, kde-format
 msgctxt "@info:credit"
 msgid "Waldo Bastian"
-msgstr ""
+msgstr "Waldo Bastian"
 
 #: main.cpp:389
 #, kde-format
 msgctxt "@info:credit"
 msgid "Stephan Binner"
-msgstr ""
+msgstr "Stephan Binner"
 
 #: main.cpp:390
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thomas Dreibholz"
-msgstr ""
+msgstr "Thomas Dreibholz"
 
 #: main.cpp:390
 #, kde-format
@@ -1043,7 +1055,7 @@ msgstr "ئادەتتىكى ياخشىلاش"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Chris Machemer"
-msgstr ""
+msgstr "Chris Machemer"
 
 #: main.cpp:391 main.cpp:392 main.cpp:419 main.cpp:420 main.cpp:421
 #: main.cpp:422
@@ -1056,13 +1068,13 @@ msgstr "كەمتۈك تۈزىتىش"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Francesco Cecconi"
-msgstr ""
+msgstr "Francesco Cecconi"
 
 #: main.cpp:393
 #, kde-format
 msgctxt "@info:credit"
 msgid "Stephan Kulow"
-msgstr ""
+msgstr "Stephan Kulow"
 
 #: main.cpp:393
 #, kde-format
@@ -1074,7 +1086,7 @@ msgstr "Solaris قوللاش ۋە تارىخ"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Alexander Neundorf"
-msgstr ""
+msgstr "Alexander Neundorf"
 
 #: main.cpp:395
 #, kde-format
@@ -1086,7 +1098,7 @@ msgstr "كەمتۈك تۈزىتىش ۋە باشلىنىش تېزلىكىنى ي�
 #, kde-format
 msgctxt "@info:credit"
 msgid "Peter Silva"
-msgstr ""
+msgstr "Peter Silva"
 
 #: main.cpp:397
 #, kde-format
@@ -1098,7 +1110,7 @@ msgstr "ياخشىلىنىشلارنى خاتىرىلەش"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Lotzi Boloni"
-msgstr ""
+msgstr "Lotzi Boloni"
 
 #: main.cpp:400
 #, kde-format
@@ -1114,7 +1126,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:credit"
 msgid "David Faure"
-msgstr ""
+msgstr "David Faure"
 
 #: main.cpp:405
 #, kde-format
@@ -1130,7 +1142,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:credit"
 msgid "Antonio Larrosa"
-msgstr ""
+msgstr "Antonio Larrosa"
 
 #: main.cpp:408
 #, kde-format
@@ -1142,7 +1154,7 @@ msgstr "كۆرۈنۈش ئۈنۈمى"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Matthias Ettrich"
-msgstr ""
+msgstr "Matthias Ettrich"
 
 #: main.cpp:411
 #, kde-format
@@ -1158,7 +1170,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:credit"
 msgid "Warwick Allison"
-msgstr ""
+msgstr "Warwick Allison"
 
 #: main.cpp:415
 #, kde-format
@@ -1170,7 +1182,7 @@ msgstr "لايىھە ۋە تېكىست تاللاشنى ياخشىلاش"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Dan Pilone"
-msgstr ""
+msgstr "Dan Pilone"
 
 #: main.cpp:417
 #, kde-format
@@ -1182,7 +1194,7 @@ msgstr "SGI غا يۆتكەش"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Kevin Street"
-msgstr ""
+msgstr "Kevin Street"
 
 #: main.cpp:418
 #, kde-format
@@ -1194,25 +1206,25 @@ msgstr "FreeBSD غا يۆتكەش"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Sven Fischer"
-msgstr ""
+msgstr "Sven Fischer"
 
 #: main.cpp:420
 #, kde-format
 msgctxt "@info:credit"
 msgid "Dale M. Flaven"
-msgstr ""
+msgstr "Dale M. Flaven"
 
 #: main.cpp:421
 #, kde-format
 msgctxt "@info:credit"
 msgid "Martin Jones"
-msgstr ""
+msgstr "Martin Jones"
 
 #: main.cpp:422
 #, kde-format
 msgctxt "@info:credit"
 msgid "Lars Knoll"
-msgstr ""
+msgstr "Lars Knoll"
 
 #: main.cpp:423
 #, kde-format
@@ -1285,7 +1297,7 @@ msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
 msgid_plural ""
 "There are %1 processes running in this window. Do you still want to quit?"
-msgstr[0] ""
+msgstr[0] "بۇ كۆزنەكتە ئىجرا قىلىنىۋاتقان %1 جەريان بار. يەنىلا چېكىنەمسىز؟"
 
 #: MainWindow.cpp:885 MainWindow.cpp:902 MainWindow.cpp:916
 #, kde-format
@@ -1309,7 +1321,7 @@ msgstr "نۆۋەتتىكى بەتكۈچنى ياپ(&T)"
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
-msgstr ""
+msgstr "بۇ كۆزنەكتە %1 ئوچۇق تېرمىنال بار. يەنىلا چېكىنەمسىز؟"
 
 #: MainWindow.cpp:1067 Part.cpp:317
 #, kde-format
@@ -1457,6 +1469,8 @@ msgstr "تېز زىيارەتنى كۆرسەت"
 #, kde-format
 msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
 msgstr ""
+"ھېچقانداق تېز بۇيرۇق تېپىلمىدى. قىستۇرما -› تېز بۇيرۇق ئارقىلىق بىرنى "
+"قوشالايسىز"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
@@ -1501,6 +1515,8 @@ msgid ""
 "You are about to delete the group %1,\n"
 " with multiple configurations, are you sure?"
 msgstr ""
+"%1 گۇرۇپپىنى ئۆچۈرمەكچى بولۇۋاتىسىز،\n"
+"كۆپ سەپلىمىسى بار، راست ئۆچۈرەمسىز؟"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:243
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:222
@@ -1589,6 +1605,7 @@ msgstr "SSH مەشغۇلاتىنىڭ تېز زىيارىتىنى كۆرسەت"
 #, kde-format
 msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
 msgstr ""
+"`ساقلانغان SSH سەپلىمىسى تېپىلمىدى. قىستۇرما -› SSH باشقۇرغۇچتىن قوشالايسىز"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:146
 #, kde-format
@@ -1645,6 +1662,8 @@ msgid ""
 "You are about to delete the folder %1,\n"
 " with multiple SSH Configurations, are you sure?"
 msgstr ""
+"%1 قىسقۇچنى ئۆچۈرمەكچى بولۇۋاتىسىز،\n"
+"كۆپ SSH سەپلىمىسى بار، راست ئۆچۈرەمسىز؟"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:229
 #, kde-format
@@ -1786,7 +1805,7 @@ msgstr "مۇلازىمېتىر ئېغىزى، ssh باغلىنىشىنىڭ كۆ�
 #: plugins/SSHManager/sshwidget.ui:126
 #, kde-format
 msgid "22"
-msgstr ""
+msgstr "22"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, sshkey)
 #: plugins/SSHManager/sshwidget.ui:142
@@ -1967,13 +1986,13 @@ msgstr " [كۆڭۈلدىكى]"
 #, kde-format
 msgctxt "@label:textbox added to profile name when used for light system theme"
 msgid " [Light]"
-msgstr ""
+msgstr " [يورۇق]"
 
 #: profile/ProfileModel.cpp:94
 #, kde-format
 msgctxt "@label:textbox added to profile name when used for dark system theme"
 msgid " [Dark]"
-msgstr ""
+msgstr " [قاراڭغۇ]"
 
 #: profile/ProfileModel.cpp:110
 #, kde-format
@@ -2031,6 +2050,8 @@ msgid ""
 "A problem occurred when saving the output.\n"
 "%1"
 msgstr ""
+"چىقىرىشنى ساقلاۋاتقاندا مەسىلە كۆرۈلدى.\n"
+"%1"
 
 #: schemas.cpp:1
 #, kde-format
@@ -2060,7 +2081,7 @@ msgstr "مەيىن شامال"
 #: schemas.cpp:6
 #, kde-format
 msgid "Campbell"
-msgstr ""
+msgstr "Campbell"
 
 #: schemas.cpp:7
 #, kde-format
@@ -2110,7 +2131,7 @@ msgstr "Linux تىزگىن سۇپىسى"
 #: schemas.cpp:16
 #, kde-format
 msgid "macOS"
-msgstr ""
+msgstr "macOS"
 
 #: schemas.cpp:17
 #, kde-format
@@ -2156,6 +2177,7 @@ msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
 "settings."
 msgstr ""
+"«%1» تېپىلمىدى، شۇڭا «%2» نى باشلاڭ. سەپلىمە ھۆججەت تەڭشىكىنى تەكشۈرۈڭ."
 
 #: session/Session.cpp:642
 #, kde-format
@@ -2209,7 +2231,7 @@ msgstr "بىخەتەرلىكى سەزگۈر DBus API تەڭشەكتە چەكلە
 #: session/SessionController.cpp:144
 #, kde-format
 msgid "Konsole"
-msgstr ""
+msgstr "Konsole"
 
 #: session/SessionController.cpp:381
 #, kde-format
@@ -2437,7 +2459,7 @@ msgstr "خەت نۇسخا چوڭلۇقى تەڭشەك"
 #: session/SessionController.cpp:960
 #, kde-format
 msgid "Send Signal"
-msgstr "سىگنال ئەۋەت"
+msgstr "سىگنال يوللا"
 
 #: session/SessionController.cpp:964
 #, kde-format
@@ -2495,6 +2517,8 @@ msgid ""
 "A program is currently running in this session.  Are you sure you want to "
 "close it?"
 msgstr ""
+"نۆۋەتتىكى جەريانچاق ئىچىدە بىر پىروگرامما ئىجرا بولۇۋاتىدۇ. ئۇنى راستتىنلا "
+"ياپامسىز؟"
 
 #: session/SessionController.cpp:1163
 #, kde-format
@@ -2502,6 +2526,8 @@ msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
 "want to close it?"
 msgstr ""
+"نۆۋەتتىكى جەريانچاق ئىچىدە «%1» پىروگرامما ئىجرا بولۇۋاتىدۇ. ئۇنى راستتىنلا "
+"ياپامسىز؟"
 
 #: session/SessionController.cpp:1170 session/SessionController.cpp:1205
 #, kde-format
@@ -2520,6 +2546,8 @@ msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
 "by force?"
 msgstr ""
+"بۇ جەريانچاقتىكى بىر پىروگرامما تېخىچە ئىجرا قىلىنىۋاتىدۇ. ئۇنى راستتىنلا "
+"مەجبۇرىي ئاخىرلاشتۇرامسىز؟"
 
 #: session/SessionController.cpp:1198
 #, kde-format
@@ -2527,6 +2555,8 @@ msgid ""
 "The program '%1' in this session would not die.  Are you sure you want to "
 "kill it by force?"
 msgstr ""
+"بۇ جەريانچاقتىكى «%1» پىروگرامما تېخىچە ئىجرا قىلىنىۋاتىدۇ. ئۇنى راستتىنلا "
+"مەجبۇرىي ئاخىرلاشتۇرامسىز؟"
 
 #: session/SessionController.cpp:1206
 #, kde-format
@@ -2649,7 +2679,7 @@ msgstr "ئىلگىرىلەشنى ۋەزىپە بالداقتا كۆرسىتىد�
 #: settings/GeneralSettings.ui:112
 #, kde-format
 msgid "Automatically switch profile based on system theme"
-msgstr ""
+msgstr "سىستېما ئۆرنىكىگە ئاساسەن سەپلىمە ھۆججەتنى ئۆزلۈكىدىن ئالماشتۇرىدۇ"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/GeneralSettings.ui:119
@@ -2986,7 +3016,7 @@ msgstr "بەتكۈچ كەڭلىكىنى يايىدۇ"
 #: settings/konsole.kcfg:208
 #, kde-format
 msgid "Color-code tab when running inside a container"
-msgstr ""
+msgstr "يۈكداندا ئىجرا قىلغاندا بەتكۈچكە رەڭ كودى بېرىدۇ"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ShowContainerTabColor)
 #. i18n: ectx: tooltip, entry (ShowContainerTabColor), group (TabBar)
@@ -2996,13 +3026,15 @@ msgid ""
 "When running inside a container (e.g. Distrobox or Toolbox), color-code the "
 "tab with a container-specific color"
 msgstr ""
+"يۈكداندا ئىجرا قىلغاندا (مەسىلەن، Distrobox ياكى Toolbox)، يۈكدانغا خاس رەڭ "
+"بىلەن بەتكۈچكە رەڭ كودى بېرىدۇ"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowContainerStatusBar)
 #. i18n: ectx: label, entry (ShowContainerStatusBar), group (TabBar)
 #: settings/konsole.kcfg:213 settings/TabBarSettings.ui:314
 #, kde-format
 msgid "Show container label in terminal footer"
-msgstr ""
+msgstr "تېرمىنالنىڭ بەت ئاستىدا يۈكدان بەلگىسىنى كۆرسىتىدۇ"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ShowContainerStatusBar)
 #. i18n: ectx: tooltip, entry (ShowContainerStatusBar), group (TabBar)
@@ -3012,6 +3044,8 @@ msgid ""
 "When running inside a container (e.g. Distrobox or Toolbox), show a label "
 "with the container name at the bottom of the terminal"
 msgstr ""
+"يۈكداندا ئىجرا قىلغاندا (مەسىلەن، Distrobox ياكى Toolbox)، تېرمىنالنىڭ بەت "
+"ئاستىدا يۈكدان ئىسمى بار بەلگىنى كۆرسىتىدۇ"
 
 #. i18n: ectx: label, entry (scrollbackUseSystemLocation), group (FileLocation)
 #: settings/konsole.kcfg:230
@@ -3047,19 +3081,19 @@ msgstr "تارىخ خاتىرىسىنى كەينىگە ياندۇرۇش ھۆجج
 #: settings/konsole.kcfg:248
 #, kde-format
 msgid "Sync profile with system theme"
-msgstr ""
+msgstr "سەپلىمە ھۆججەت بىلەن سىستېما ئۆرنىكىنى قەدەمداشلايدۇ"
 
 #. i18n: ectx: label, entry (LightThemeProfile), group (LightDarkTheme)
 #: settings/konsole.kcfg:252
 #, kde-format
 msgid "Profile to use for light system theme"
-msgstr ""
+msgstr "يورۇق سىستېما ئۆرنىكىگە ئىشلىتىدىغان سەپلىمە ھۆججەت"
 
 #. i18n: ectx: label, entry (DarkThemeProfile), group (LightDarkTheme)
 #: settings/konsole.kcfg:256
 #, kde-format
 msgid "Profile to use for dark system theme"
-msgstr ""
+msgstr "قاراڭغۇ سىستېما ئۆرنىكىگە ئىشلىتىدىغان سەپلىمە ھۆججەت"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableMemoryMonitoring)
 #: settings/MemorySettings.ui:17
@@ -3077,6 +3111,12 @@ msgid ""
 "enabling might cause greater slowdowns during high memory consumption and "
 "specifying excessively low values might still cause Konsole to be killed."
 msgstr ""
+"ئۆزگىرىش قايتا قوزغالغاندا كۈچكە ئىگە بولىدۇ. ئەگەر قوزغىتىلسا، Konsole سەرپ "
+"قىلغان ئەسلەك بەلگىلەنگەن چەكتىن ئېشىپ كەتسە، systemd-oomd ئەسلەكنى كۆپ سەرپ "
+"قىلغان جەريان بار بەتكۈچنى تازىلايدۇ. ئەسكەرتىش: بۇ تاللانما قوزغىتىلسا، "
+"ئەسلەكنى كۆپ سەرپ قىلسا سىستېما ئىنتايىن ئاستىلاپ كېتىشى مۇمكىن. ئەگەر "
+"يۇقىرى چېكى بەك تۆۋەن بولسا، سىستېما Konsole نىڭ ئۆزىنى ئاخىرلاشتۇرۇۋېتىشى "
+"مۇمكىن."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:37
@@ -3088,7 +3128,7 @@ msgstr "ئەسلەك چېكى:"
 #: settings/MemorySettings.ui:44
 #, kde-format
 msgid " MB"
-msgstr ""
+msgstr " MB"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/PartInfo.ui:17
@@ -3167,25 +3207,25 @@ msgstr "كۆڭۈلدىكى قىلىپ بەلگىلە(&S)"
 #: settings/ProfileSettings.ui:103
 #, kde-format
 msgid "Set the selected profile as the light theme profile"
-msgstr ""
+msgstr "تاللىغان ئۆرنەكنى يورۇق ئۆرنەك سەپلىمە ھۆججىتىگە تەڭشەيدۇ"
 
 #. i18n: ectx: property (text), widget (QPushButton, setLightProfileButton)
 #: settings/ProfileSettings.ui:106
 #, kde-format
 msgid "&Set as Light"
-msgstr ""
+msgstr "يورۇق ئۆرنەككە تەڭشە(&S)"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, setDarkProfileButton)
 #: settings/ProfileSettings.ui:116
 #, kde-format
 msgid "Set the selected profile as the dark theme profile"
-msgstr ""
+msgstr "تاللىغان ئۆرنەكنى قاراڭغۇ ئۆرنەك سەپلىمە ھۆججىتىگە تەڭشەيدۇ"
 
 #. i18n: ectx: property (text), widget (QPushButton, setDarkProfileButton)
 #: settings/ProfileSettings.ui:119
 #, kde-format
 msgid "&Set as Dark"
-msgstr ""
+msgstr "قاراڭغۇ ئۆرنەككە تەڭشە(&S)"
 
 #. i18n: ectx: attribute (title), widget (QWidget, appearanceTab)
 #: settings/TabBarSettings.ui:39
@@ -3315,7 +3355,7 @@ msgstr "ئايرىم بەتكۈچ كەڭلىكىنى پۈتۈن كۆزنەككە
 #: settings/TabBarSettings.ui:304
 #, kde-format
 msgid "Color-code tab when inside a container"
-msgstr ""
+msgstr "يۈكدان ئىچىدە بولغاندا بەتكۈچكە رەڭ كودى بېرىدۇ"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabBarUseUserStyleSheet)
 #: settings/TabBarSettings.ui:321
@@ -3405,7 +3445,7 @@ msgstr "كىچىك"
 #, kde-format
 msgctxt "@option:radio Medium height/width of splitter widget"
 msgid "Medium"
-msgstr "ئوتتۇراھال"
+msgstr "ئوتتۇرا ھال"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleLarge)
 #: settings/TabBarSettings.ui:542
@@ -3460,7 +3500,7 @@ msgstr "چوڭلۇقى:"
 #: settings/ThumbnailsSettings.ui:24
 #, kde-format
 msgid "px"
-msgstr ""
+msgstr "px"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/ThumbnailsSettings.ui:37
@@ -3490,19 +3530,19 @@ msgstr "چاشقىنەكتە نىشانلاپ+"
 #: settings/ThumbnailsSettings.ui:70
 #, kde-format
 msgid "Shift"
-msgstr ""
+msgstr "Shift"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ThumbnailAlt)
 #: settings/ThumbnailsSettings.ui:77
 #, kde-format
 msgid "Alt"
-msgstr ""
+msgstr "Alt"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ThumbnailCtrl)
 #: settings/ThumbnailsSettings.ui:84
 #, kde-format
 msgid "Ctrl"
-msgstr ""
+msgstr "Ctrl"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableThumbnails)
 #: settings/ThumbnailsSettings.ui:93
@@ -3544,7 +3584,7 @@ msgstr "قوڭغۇراق: ئاۋازلىق ئاگاھلاندۇرۇش چىقىر
 #: terminalDisplay/TerminalDisplay.cpp:2485
 #, kde-format
 msgid "Backspace"
-msgstr ""
+msgstr "Backspace"
 
 #: terminalDisplay/TerminalDisplay.cpp:2486
 #, kde-format
@@ -3605,6 +3645,9 @@ msgid ""
 "Software_flow_control\">suspended</a> by pressing Ctrl+S. Press <b>Ctrl+Q</"
 "b> to resume.</qt>"
 msgstr ""
+"<qt>چىقىرىشنى Ctrl+S <a href=\"https://en.wikipedia.org/wiki/"
+"Software_flow_control\">كېچىكتۈر</a> دى. <b>Ctrl+Q</b> بېسىلسا "
+"داۋاملاشتۇرىدۇ.</qt>"
 
 #: terminalDisplay/TerminalDisplay.cpp:2807
 #, kde-format
@@ -3872,6 +3915,8 @@ msgid ""
 "A problem occurred when saving the Layout.\n"
 "%1"
 msgstr ""
+"جايلاشتۇرۇشنى ساقلاۋاتقاندا مەسىلە كۆرۈلدى.\n"
+"%1"
 
 #: ViewManager.cpp:1399
 #, kde-format
@@ -3880,6 +3925,8 @@ msgid ""
 "A problem occurred when loading the Layout.\n"
 "%1"
 msgstr ""
+"جايلاشتۇرۇشنى يۈكلەۋاتقاندا مەسىلە كۆرۈلدى.\n"
+"%1"
 
 #: ViewManager.cpp:1410
 #, kde-format
@@ -3893,6 +3940,8 @@ msgid ""
 "No keyboard translator available.  The information needed to convert key "
 "presses into characters to send to the terminal is missing."
 msgstr ""
+"ھەرپتاختا تەرجىمانى تېپىلمىدى. بېسىلغان كۇنۇپكىنى ھەرپكە ئايلاندۇرۇپ "
+"تېرمىنالغا يوللاپ بېرىدىغان چاغدىكى ئۇچۇر يوق."
 
 #. i18n: ectx: property (text), widget (QLabel, urlHintsLabel)
 #: widgets/EditProfileAdvancedPage.ui:19
@@ -3905,28 +3954,28 @@ msgstr "تور ئادرېس ئەسكەرتىشىنى كۆرسىتىدىغان ب
 #, kde-format
 msgctxt "key on keyboard"
 msgid "Shift"
-msgstr ""
+msgstr "Shift"
 
 #. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierCtrl)
 #: widgets/EditProfileAdvancedPage.ui:70
 #, kde-format
 msgctxt "key on keyboard"
 msgid "Ctrl"
-msgstr ""
+msgstr "Ctrl"
 
 #. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierAlt)
 #: widgets/EditProfileAdvancedPage.ui:89
 #, kde-format
 msgctxt "key on keyboard"
 msgid "Alt"
-msgstr ""
+msgstr "Alt"
 
 #. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierMeta)
 #: widgets/EditProfileAdvancedPage.ui:108
 #, kde-format
 msgctxt "key on keyboard"
 msgid "Meta"
-msgstr ""
+msgstr "Meta"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: widgets/EditProfileAdvancedPage.ui:154
@@ -3979,12 +4028,14 @@ msgid ""
 "Allow terminal programs to use the Kitty keyboard protocol for enhanced "
 "keyboard input"
 msgstr ""
+"تېرمىنال پىروگراممىسىنىڭ Kitty ھەرپتاختا كېلىشىمىنى ئىشلىتىپ ھەرپتاختا "
+"كىرگۈزۈش ئىقتىدارىنى كۈچەيتىشىگە يول قويىدۇ"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableKittyKeyboardButton)
 #: widgets/EditProfileAdvancedPage.ui:215
 #, kde-format
 msgid "Kitty keyboard protocol"
-msgstr ""
+msgstr "Kitty ھەرپتاختا كېلىشىمى"
 
 #. i18n: ectx: property (text), widget (QLabel, label_14)
 #: widgets/EditProfileAdvancedPage.ui:238
@@ -4008,7 +4059,7 @@ msgstr "ئۆزلۈكىدىن ساقلاش ئارىلىقىنىڭ تەڭشىكى:
 #: widgets/EditProfileAdvancedPage.ui:278
 #, kde-format
 msgid " ms"
-msgstr ""
+msgstr " ms"
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
 #: widgets/EditProfileAdvancedPage.ui:291
@@ -4177,7 +4228,7 @@ msgstr "بۆلەك"
 #, kde-format
 msgctxt "A vertical line on the left edge"
 msgid "I-Beam"
-msgstr ""
+msgstr "I-Beam"
 
 #. i18n: ectx: property (text), widget (QRadioButton, cursorShapeUnderline)
 #: widgets/EditProfileAppearancePage.ui:259
@@ -4372,7 +4423,7 @@ msgstr "ئىككى قۇر ئارىسىدىكى پىكسېل سانى"
 #, kde-format
 msgctxt "(pixels) visual size unit"
 msgid " px"
-msgstr ""
+msgstr " px"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/EditProfileAppearancePage.ui:694
@@ -4477,12 +4528,14 @@ msgid ""
 "Render words made of characters that usually appear in coding ligatures "
 "together."
 msgstr ""
+"ئادەتتە پىروگرامما تۈزۈشتە كۆرۈلىدىغان ھەرپ بىرىكمىسىنى سۆز سۈپىتىدە "
+"ھاسىللايدۇ."
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeCoding)
 #: widgets/EditProfileAppearancePage.ui:938
 #, kde-format
 msgid "Coding ligatures characters"
-msgstr ""
+msgstr "بىرىكمە ھەرپنى كودلاش"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:951
@@ -4503,12 +4556,14 @@ msgid ""
 "Apply hinting to glyphs when rendering, which may improve the legibility of "
 "certain fonts with some displays"
 msgstr ""
+"خەت نۇسخىسىنى ھاسىللىغاندا زىل تەڭشەشنى قوللىنىدۇ، بۇ بەزى خەت نۇسخىسىنىڭ "
+"بەزى ئېكراندىكى ئوقۇشچانلىقىنى ياخشىلايدۇ"
 
 #. i18n: ectx: property (text), widget (QCheckBox, fontHinting)
 #: widgets/EditProfileAppearancePage.ui:970
 #, kde-format
 msgid "Font hinting"
-msgstr ""
+msgstr "خەت نۇسخا زىل تەڭشەش"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:983
@@ -4697,7 +4752,7 @@ msgstr "تارتۇق سۈزۈكلۈكىنى تەڭشەيدۇ (0 = تولۇق س�
 #: widgets/EditProfileAppearancePage.ui:1334
 #, kde-format
 msgid "180"
-msgstr ""
+msgstr "180"
 
 #: widgets/EditProfileDialog.cpp:73
 #, kde-format
@@ -4808,14 +4863,14 @@ msgstr "يوق"
 msgctxt "@item number of columns"
 msgid "%v column"
 msgid_plural "%v columns"
-msgstr[0] ""
+msgstr[0] "%v رەت"
 
 #: widgets/EditProfileDialog.cpp:558
 #, kde-format
 msgctxt "@item number of rows"
 msgid "%v row"
 msgid_plural "%v rows"
-msgstr[0] ""
+msgstr[0] "%v قۇر"
 
 #: widgets/EditProfileDialog.cpp:570
 #, kde-format
@@ -4890,6 +4945,8 @@ msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
 "Konsole to see transparent background."
 msgstr ""
+"Konsole ئۈستەلئۈستى ئۈنۈمى قوزغىلىشتىن ئىلگىرى قوزغالغان. سۈزۈك تەگلىكنى "
+"كۆرۈش ئۈچۈن Konsole نى قايتا قوزغىتىشىڭىز كېرەك."
 
 #: widgets/EditProfileDialog.cpp:2061
 #, kde-format
@@ -4980,7 +5037,7 @@ msgstr ""
 #: widgets/EditProfileGeneralPage.ui:144
 #, kde-format
 msgid "/bin/sh"
-msgstr ""
+msgstr "/bin/sh"
 
 #. i18n: ectx: property (text), widget (QLabel, label_9)
 #: widgets/EditProfileGeneralPage.ui:157
@@ -5000,7 +5057,7 @@ msgstr ""
 #: widgets/EditProfileGeneralPage.ui:176
 #, kde-format
 msgid "/home/username"
-msgstr ""
+msgstr "/home/username"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, dirSelectButton)
 #: widgets/EditProfileGeneralPage.ui:183
@@ -5179,6 +5236,10 @@ msgid ""
 "terminal program. For more information on how to customize the key bindings "
 "check the Konsole Handbook."
 msgstr ""
+"كۇنۇپكا باغلىنىشى — تېرمىنال كۆزنىكىدە بېسىلغان بىرىكمە كۇنۇپكىلارنى قانداق "
+"شەكىلدىكى ھەرپ ئېقىمىغا ئايلاندۇرىدۇ ۋە ئۇلارنى نۆۋەتتىكى تېرمىنال "
+"پىروگراممىسىغا قانداق يوللاپ بېرىدۇ دېگەننى تىزگىنلەيدۇ. كۇنۇپكا باغلىنىشىنى "
+"قانداق خاسلاشتۇرۇش ھەققىدىكى تەپسىلاتنى Konsole قوللانمىسىدىن كۆرۈڭ."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newKeyBindingsButton)
 #: widgets/EditProfileKeyboardPage.ui:60
@@ -5276,26 +5337,26 @@ msgstr "تاللانغاندىن"
 #: widgets/EditProfileMousePage.ui:186
 #, kde-format
 msgid "Right-click:"
-msgstr ""
+msgstr "ئوڭ چېكىش:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, rightClickPasteDisabledButton)
 #: widgets/EditProfileMousePage.ui:196
 #, kde-format
 msgid "Opens context menu"
-msgstr ""
+msgstr "مەزمۇن تىزىملىكىنى ئاچىدۇ"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, rightClickPasteDisabledButton)
 #: widgets/EditProfileMousePage.ui:199
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Right-click shows context menu"
-msgstr ""
+msgstr "ئوڭ چېكىلسە مەزمۇن تىزىملىكىنى كۆرسىتىدۇ"
 
 #. i18n: ectx: property (text), widget (QRadioButton, rightClickPasteFromClipboardButton)
 #: widgets/EditProfileMousePage.ui:209
 #, kde-format
 msgid "Pastes from clipboard"
-msgstr ""
+msgstr "چاپلاش تاختىسىدىن چاپلايدۇ"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, rightClickPasteFromClipboardButton)
 #. i18n: ectx: property (toolTip), widget (QRadioButton, rightClickPasteFromX11SelectionButton)
@@ -5303,13 +5364,13 @@ msgstr ""
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Control+right-click shows context menu"
-msgstr ""
+msgstr "Ctrl +ئوڭ چېكىلسە مەزمۇن تىزىملىكىنى كۆرسىتىدۇ"
 
 #. i18n: ectx: property (text), widget (QRadioButton, rightClickPasteFromX11SelectionButton)
 #: widgets/EditProfileMousePage.ui:222
 #, kde-format
 msgid "Pastes from selection"
-msgstr ""
+msgstr "تاللىغاندىن چاپلايدۇ"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: widgets/EditProfileMousePage.ui:251
@@ -5371,13 +5432,13 @@ msgstr "ئاخىرىدىكى بوشلۇقنى چىقىرىۋەت"
 #: widgets/EditProfileMousePage.ui:301
 #, kde-format
 msgid "Clear selection after copying"
-msgstr ""
+msgstr "كۆچۈرگەندىن كېيىن تاللىغاننى تازىلا"
 
 #. i18n: ectx: property (text), widget (QCheckBox, clearSelectionButton)
 #: widgets/EditProfileMousePage.ui:304
 #, kde-format
 msgid "Clear selection"
-msgstr ""
+msgstr "تاللىغاننى تازىلا"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, underlineLinksButton)
 #: widgets/EditProfileMousePage.ui:341
@@ -5441,7 +5502,7 @@ msgstr ""
 #: widgets/EditProfileMousePage.ui:413
 #, kde-format
 msgid "Open underlined files/links by direct click"
-msgstr ""
+msgstr "بىۋاسىتە چېكىلسە ئاستى سىزىق ھۆججەت/ئۇلانمىنى ئاچىدۇ"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowLinkEscapeSequenceButton)
 #: widgets/EditProfileMousePage.ui:424
@@ -5557,6 +5618,9 @@ msgid ""
 "Some terminal applications have mouse support, this allows them to get it by "
 "default. It can be toggled on/off while running as well."
 msgstr ""
+"بەزى تېرمىنال پىروگراممىسى چاشقىنەكنى قوللايدۇ، بۇ تاللانما كۆڭۈلدى ئەھۋالدا "
+"ئۇلارنىڭ چاشقىنەك ئۇچۇرىغا ئېرىشىشىگە يول قويىدۇ. ئىجرا قىلىنىۋاتقاندا ئۇنىڭ "
+"ئوچۇق/تاقاق ھالىتىنى ئالماشتۇرالايسىز."
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowMouseTrackingButton)
 #: widgets/EditProfileMousePage.ui:536
@@ -5588,7 +5652,7 @@ msgstr "كۆرۈنۈشكە كىرگەن قۇرنى يورۇتىدۇ"
 #: widgets/EditProfileScrollingPage.ui:58
 #, no-c-format, kde-format
 msgid " %"
-msgstr ""
+msgstr " %"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarHiddenButton)
 #: widgets/EditProfileScrollingPage.ui:74
@@ -5724,7 +5788,7 @@ msgstr "Konsole ئۇدا جىمجىت تۇرغان ۋاقىتنىڭ بوسۇغا
 msgctxt "@item number of lines"
 msgid "%v line"
 msgid_plural "%v lines"
-msgstr[0] ""
+msgstr[0] "%v قۇر"
 
 #: widgets/HistorySizeWidget.cpp:56
 #, kde-format
@@ -5748,6 +5812,10 @@ msgid ""
 "Konsole → Temporary Files</emphasis> to select the location of the temporary "
 "files."
 msgstr ""
+"بۇ تاللانمىنى ئىشلەتكەندە، تارىخ خاتىرىسى سانلىق مەلۇماتى شىفىرلانمىغان "
+"ۋاقىتلىق ھۆججەتكە يېزىلىدۇ. بۇ ۋاقىتلىق ھۆججەت Konsole ئادەتتىكىدەك "
+"يېپىلغاندا ئۆزلۈكىدىن ئۆچۈرۈلىدۇ.<nl/><emphasis>تەڭشەك ← Konsole سەپلىمە ← "
+"ۋاقىتلىق ھۆججەت</emphasis> ئارقىلىق ۋاقىتلىق ھۆججەتنىڭ ئورنى تاللىنىدۇ."
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, fixedSizeHistoryButton)
 #: widgets/HistorySizeWidget.ui:60
@@ -6099,7 +6167,7 @@ msgctxt ""
 "%1 is the type of container (e.g. Distrobox, Toolbox, Kapsule etc.), %2 its "
 "name"
 msgid "%1: %2"
-msgstr ""
+msgstr "%1: %2"
 
 #~ msgctxt "@item:inmenu"
 #~ msgid "Case sensitive"
