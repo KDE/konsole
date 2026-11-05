@@ -56,6 +56,7 @@
   <name xml:lang="sv">Terminal</name>
   <name xml:lang="ta">கான்சோல்</name>
   <name xml:lang="tr">Konsole</name>
+  <name xml:lang="ug">Konsole</name>
   <name xml:lang="uk">Konsole</name>
   <name xml:lang="zh-CN">Konsole 命令行终端</name>
   <name xml:lang="zh-TW">Konsole</name>
@@ -101,6 +102,7 @@
   <summary xml:lang="sv">Använd kommandoradsgränssnitt</summary>
   <summary xml:lang="ta">முனைய இடைமுகப்பைப் பயன்படுத்துங்கள்</summary>
   <summary xml:lang="tr">Komut satırı arayüzünü kullanın</summary>
+  <summary xml:lang="ug">بۇيرۇق قۇرى ئارايۈزىنى ئىشلىتىدۇ</summary>
   <summary xml:lang="uk">Використання інтерфейсу командного рядка</summary>
   <summary xml:lang="zh-CN">使用命令行界面</summary>
   <summary xml:lang="zh-TW">使用指令列介面</summary>
@@ -156,6 +158,7 @@
     <p xml:lang="sv">Terminal är en terminal för att köra ett kommandoskal. Det tillhandahåller ett kommandoradsgränssnitt för att direkt styra datorn.</p>
     <p xml:lang="ta">கான்சோல், முனைய இடைமுகப்பை இயக்கும் செயலி ஆகும். உங்கள் கணினி நீங்கள் நேரடியாக கட்டுப்படுத்த இது உதவும்.</p>
     <p xml:lang="tr">Konsole, komut kabukları çalıştırmak için kullanılan bir uçbirimdir. Bilgisayarınızı doğrudan denetlemek için bir komut satırı arabirimi sağlar.</p>
+    <p xml:lang="ug">Konsole بۇيرۇق قۇرىنى ئىجرا قىلىدىغان shell تېرمىنال پىروگراممىسى. ئۇ كومپيۇتېرنى بىۋاسىتە باشقۇرىدىغان بۇيرۇق قۇرى ئېغىزى بىلەن تەمىنلەيدۇ.</p>
     <p xml:lang="uk">Konsole — це термінал для роботи з командною оболонкою. За її допомогою можна отримати доступ до інтерфейсу командного рядка для керування вашим комп'ютером.</p>
     <p xml:lang="zh-CN">Konsole 是一款用于运行命令 Shell 的终端程序。它提供了直接控制计算机的命令行接口。</p>
     <p xml:lang="zh-TW">Konsole 是個用於執行指令 shell 的終端機。其提供能直接操作電腦的指令行介面。</p>
@@ -323,6 +326,7 @@
       <li xml:lang="sv">Flera profiler</li>
       <li xml:lang="ta">பல பயன்முறைகள்</li>
       <li xml:lang="tr">Çoklu profiller</li>
+      <li xml:lang="ug">كۆپ سەپلىمە ھۆججەت</li>
       <li xml:lang="uk">Підтримка роботи з декількома профілями.</li>
       <li xml:lang="zh-CN">多个配置文件</li>
       <li xml:lang="zh-TW">多重設定檔</li>
@@ -376,6 +380,7 @@
       <li xml:lang="sv">Övervakning av tystnad och aktivitet</li>
       <li xml:lang="ta">செயல்பாடு மற்றும் அமைதிக்காக கண்காணித்தல்</li>
       <li xml:lang="tr">Sessizlik ve Etkinlik izleme</li>
+      <li xml:lang="ug">تىنچ ۋە ئاكتىپ نازارەت</li>
       <li xml:lang="uk">Спостереження за бездіяльністю та діями.</li>
       <li xml:lang="zh-CN">静止和活动监视</li>
       <li xml:lang="zh-TW">靜音與活動監控</li>
@@ -429,6 +434,7 @@
       <li xml:lang="sv">Stöd för bokmärken</li>
       <li xml:lang="ta">நினைவுக்குறிக்கான ஆதரவு</li>
       <li xml:lang="tr">Yer imi desteği</li>
+      <li xml:lang="ug">خەتكۈش قوللاش</li>
       <li xml:lang="uk">Підтримка закладок.</li>
       <li xml:lang="zh-CN">书签支持</li>
       <li xml:lang="zh-TW">書籤支援</li>
@@ -538,6 +544,7 @@
       <li xml:lang="sv">Spara utmatning</li>
       <li xml:lang="ta">வெளியீட்டை சேமிப்பது</li>
       <li xml:lang="tr">Çıktıyı kaydetme</li>
+      <li xml:lang="ug">چىقىرىشنى ساقلاش</li>
       <li xml:lang="uk">Збереження виведених даних.</li>
       <li xml:lang="zh-CN">保存输出</li>
       <li xml:lang="zh-TW">儲存輸出</li>
@@ -615,6 +622,7 @@
       <caption xml:lang="sv">Terminal används som en terminalemulator.</caption>
       <caption xml:lang="ta">முனையக் கருவியாக கான்சோல் பயன்படுத்தப்படுவது</caption>
       <caption xml:lang="tr">Konsole uçbirim öykünücüsü olarak kullanılırken</caption>
+      <caption xml:lang="ug">Konsole تېرمىنال تەقلىدلىگۈچ سۈپىتىدە ئىشلىتىلىدۇ</caption>
       <caption xml:lang="uk">Konsole використовується як емулятор термінала</caption>
       <caption xml:lang="zh-CN">Konsole 作为终端仿真器使用</caption>
       <caption xml:lang="zh-TW">Konsole 是一款使用中的終端模擬器</caption>
