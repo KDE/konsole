@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-31 00:55+0000\n"
+"POT-Creation-Date: 2026-11-07 01:01+0000\n"
 "PO-Revision-Date: 2026-09-30 23:00+0200\n"
 "Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -889,7 +889,7 @@ msgstr "Šema sveza tastera ne može da se sačuva sa praznim opisom."
 #. i18n: ectx: property (text), widget (QPushButton, addEntryButton)
 #. i18n: ectx: property (text), widget (QPushButton, btnAdd)
 #: KeyBindingEditor.ui:65 plugins/QuickCommands/qcwidget.ui:246
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:341
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:344
 #: plugins/SSHManager/sshwidget.ui:310
 #, kde-format
 msgid "Add"
@@ -1481,7 +1481,7 @@ msgstr "Sačuvaj"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnUpdate)
 #: plugins/QuickCommands/qcwidget.ui:266
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:272
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:273
 #, kde-format
 msgid "Update"
 msgstr "Ažuriraj"
@@ -1558,7 +1558,7 @@ msgstr ""
 " koja sadrži više postava. Da li ste sigurni?"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:243
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:222
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:223
 #, kde-format
 msgid "You are about to delete %1, are you sure?"
 msgstr "Upravo ćete obrisati %1. Da li ste sigurni?"
@@ -1614,17 +1614,17 @@ msgstr "%1 je fascikla za stavke SSH‑a"
 
 # >> @title:window
 #: plugins/SSHManager/sshmanagermodel.cpp:78
-#: plugins/SSHManager/sshmanagermodel.cpp:321
-#: plugins/SSHManager/sshmanagermodel.cpp:390
-#: plugins/SSHManager/sshmanagermodel.cpp:423
+#: plugins/SSHManager/sshmanagermodel.cpp:322
+#: plugins/SSHManager/sshmanagermodel.cpp:391
+#: plugins/SSHManager/sshmanagermodel.cpp:424
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:93
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:428
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:426
 #, kde-format
 msgid "SSH Config"
 msgstr "postave SSH‑a"
 
 # >> @item:inlistbox
-#: plugins/SSHManager/sshmanagermodel.cpp:102
+#: plugins/SSHManager/sshmanagermodel.cpp:103
 #, kde-format
 msgid "Host: %1"
 msgstr "Domaćin: %1"
@@ -1694,12 +1694,12 @@ msgctxt "@action:inmenu"
 msgid "Delete"
 msgstr "Obriši"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:150
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:151
 #, kde-format
 msgid "Don't Change"
 msgstr "ne menjaj"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:221
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:222
 #, kde-format
 msgid ""
 "You are about to delete the folder %1,\n"
@@ -1708,71 +1708,71 @@ msgstr ""
 "Upravo ćete obrisati fasciklu %1,\n"
 " koja sadrži više postava SSH‑a. Da li ste sigurni?"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:229
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:230
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
 msgstr "Brisanje postava SSH‑a"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:283
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:284
 #, kde-format
 msgid "Imported SSH Profile <br/> Some settings are read only."
 msgstr ""
 "<html>Uvezen profil SSH‑a <br/> Neke postavke su samo za čitanje.</html>"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:378
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:381
 #, kde-format
 msgid "Missing Hostname"
 msgstr "Nedostaje ime domaćina"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:383
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:386
 #, kde-format
 msgid "Missing Name"
 msgstr "Nedostaje ime"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:390
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:393
 #, kde-format
 msgid "If Use Ssh Config is set, do not specify sshkey or username."
 msgstr ""
 "Ako je uključeno korišćenje postavnog fajla ~/.ssh/config, ne zadajte SSH "
 "ključ ni korisničko ime."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:395
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:398
 #, kde-format
 msgid "At least Username or SSHKey must be set"
 msgstr "Potrebno je bar korisničko ime ili SSH ključ"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:401
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:404
 #, kde-format
 msgid "Missing Folder"
 msgstr "Nedostaje fascikla"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:406
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:409
 #, kde-format
 msgid "An SSH session must have a profile"
 msgstr "SSH sesija mora imati profil"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:430
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:428
 #, kde-format
 msgid "Cannot delete this folder"
 msgstr "Ne mogu da obrišem ovu fasciklu"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:433
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:431
 #, kde-format
 msgid "Delete folder and all of its contents"
 msgstr "Obriši fasciklu sa svim sadržajem"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:437
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:435
 #, kde-format
 msgid "Double click to change the folder name."
 msgstr "Dvokliknite da promenite ime fascikle."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:444
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:442
 #, kde-format
 msgid "You can't delete an automatically added entry."
 msgstr "Ne možete obrisati automatski dodatu stavku."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:444
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:442
 #, kde-format
 msgid "Delete selected entry"
 msgstr "Obriši izabranu stavku"

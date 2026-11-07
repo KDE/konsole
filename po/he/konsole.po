@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-31 00:55+0000\n"
+"POT-Creation-Date: 2026-11-07 01:01+0000\n"
 "PO-Revision-Date: 2026-09-21 23:02+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -866,7 +866,7 @@ msgstr "אי אפשר לשמור סכמת צירופי מקשים עם תיאו�
 #. i18n: ectx: property (text), widget (QPushButton, addEntryButton)
 #. i18n: ectx: property (text), widget (QPushButton, btnAdd)
 #: KeyBindingEditor.ui:65 plugins/QuickCommands/qcwidget.ui:246
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:341
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:344
 #: plugins/SSHManager/sshwidget.ui:310
 #, kde-format
 msgid "Add"
@@ -1452,7 +1452,7 @@ msgstr "שמירה"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnUpdate)
 #: plugins/QuickCommands/qcwidget.ui:266
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:272
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:273
 #, kde-format
 msgid "Update"
 msgstr "עדכון"
@@ -1526,7 +1526,7 @@ msgstr ""
 " על מגוון ההגדרות שלה, להמשיך?"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:243
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:222
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:223
 #, kde-format
 msgid "You are about to delete %1, are you sure?"
 msgstr "פעולה זו תמחק את %1, להמשיך?"
@@ -1579,16 +1579,16 @@ msgid "%1 is a folder for SSH entries"
 msgstr "%1 היא תיקייה לרשומות SSH"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:78
-#: plugins/SSHManager/sshmanagermodel.cpp:321
-#: plugins/SSHManager/sshmanagermodel.cpp:390
-#: plugins/SSHManager/sshmanagermodel.cpp:423
+#: plugins/SSHManager/sshmanagermodel.cpp:322
+#: plugins/SSHManager/sshmanagermodel.cpp:391
+#: plugins/SSHManager/sshmanagermodel.cpp:424
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:93
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:428
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:426
 #, kde-format
 msgid "SSH Config"
 msgstr "הגדרות SSH"
 
-#: plugins/SSHManager/sshmanagermodel.cpp:102
+#: plugins/SSHManager/sshmanagermodel.cpp:103
 #, kde-format
 msgid "Host: %1"
 msgstr "מארח: ‎‎%1"
@@ -1654,12 +1654,12 @@ msgctxt "@action:inmenu"
 msgid "Delete"
 msgstr "מחיקה"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:150
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:151
 #, kde-format
 msgid "Don't Change"
 msgstr "לא לשנות"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:221
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:222
 #, kde-format
 msgid ""
 "You are about to delete the folder %1,\n"
@@ -1668,68 +1668,68 @@ msgstr ""
 "פעולה זו תמחק את התיקייה %1,\n"
 " על מגוון הגדרות ה־SSH שבה, להמשיך?"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:229
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:230
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
 msgstr "מחיקת הגדרות SSH"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:283
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:284
 #, kde-format
 msgid "Imported SSH Profile <br/> Some settings are read only."
 msgstr "יובא פרופיל SSH <br/> חלק מההגדרות הן לקריאה בלבד."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:378
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:381
 #, kde-format
 msgid "Missing Hostname"
 msgstr "שם מארח חסר"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:383
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:386
 #, kde-format
 msgid "Missing Name"
 msgstr "שם חסר"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:390
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:393
 #, kde-format
 msgid "If Use Ssh Config is set, do not specify sshkey or username."
 msgstr "אם הוגדר שימוש בהגדרות Ssh, לא לציין מפתח ssh או שם משתמש."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:395
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:398
 #, kde-format
 msgid "At least Username or SSHKey must be set"
 msgstr "יש להגדיר לפחות שם משתמש או מפתח SSH"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:401
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:404
 #, kde-format
 msgid "Missing Folder"
 msgstr "תיקייה חסרה"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:406
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:409
 #, kde-format
 msgid "An SSH session must have a profile"
 msgstr "להפעלת SSH חייב להיות פרופיל"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:430
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:428
 #, kde-format
 msgid "Cannot delete this folder"
 msgstr "אי אפשר למחוק את התיקייה הזאת"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:433
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:431
 #, kde-format
 msgid "Delete folder and all of its contents"
 msgstr "מחיקת התיקייה על תוכנה"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:437
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:435
 #, kde-format
 msgid "Double click to change the folder name."
 msgstr "לחיצה כפולה תשנה את שם התיקייה."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:444
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:442
 #, kde-format
 msgid "You can't delete an automatically added entry."
 msgstr "אי אפשר למחוק רשומה שנוספה אוטומטית."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:444
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:442
 #, kde-format
 msgid "Delete selected entry"
 msgstr "מחיקת הרשומה הנבחרת"

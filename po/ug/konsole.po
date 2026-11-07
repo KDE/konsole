@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-31 00:55+0000\n"
+"POT-Creation-Date: 2026-11-07 01:01+0000\n"
 "PO-Revision-Date: 2026-11-02 10:21-0500\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
@@ -860,7 +860,7 @@ msgstr "بوش چۈشەندۈرۈش بىلەن كۇنۇپكا باغلىنىش �
 #. i18n: ectx: property (text), widget (QPushButton, addEntryButton)
 #. i18n: ectx: property (text), widget (QPushButton, btnAdd)
 #: KeyBindingEditor.ui:65 plugins/QuickCommands/qcwidget.ui:246
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:341
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:344
 #: plugins/SSHManager/sshwidget.ui:310
 #, kde-format
 msgid "Add"
@@ -1443,7 +1443,7 @@ msgstr "ساقلا"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnUpdate)
 #: plugins/QuickCommands/qcwidget.ui:266
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:272
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:273
 #, kde-format
 msgid "Update"
 msgstr "يېڭىلا"
@@ -1519,7 +1519,7 @@ msgstr ""
 "كۆپ سەپلىمىسى بار، راست ئۆچۈرەمسىز؟"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:243
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:222
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:223
 #, kde-format
 msgid "You are about to delete %1, are you sure?"
 msgstr "%1 نى ئۆچۈرمەكچى بولۇۋاتىسىز، راست ئۆچۈرەمسىز؟"
@@ -1572,16 +1572,16 @@ msgid "%1 is a folder for SSH entries"
 msgstr "%1 غا SSH سەپلىمە تۈرلىرى ساقلىنىدىغان قىسقۇچ"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:78
-#: plugins/SSHManager/sshmanagermodel.cpp:321
-#: plugins/SSHManager/sshmanagermodel.cpp:390
-#: plugins/SSHManager/sshmanagermodel.cpp:423
+#: plugins/SSHManager/sshmanagermodel.cpp:322
+#: plugins/SSHManager/sshmanagermodel.cpp:391
+#: plugins/SSHManager/sshmanagermodel.cpp:424
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:93
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:428
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:426
 #, kde-format
 msgid "SSH Config"
 msgstr "SSH سەپلىمە"
 
-#: plugins/SSHManager/sshmanagermodel.cpp:102
+#: plugins/SSHManager/sshmanagermodel.cpp:103
 #, kde-format
 msgid "Host: %1"
 msgstr "مۇلازىمېتىر: %1"
@@ -1651,12 +1651,12 @@ msgctxt "@action:inmenu"
 msgid "Delete"
 msgstr "ئۆچۈر"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:150
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:151
 #, kde-format
 msgid "Don't Change"
 msgstr "ئۆزگەرتمە"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:221
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:222
 #, kde-format
 msgid ""
 "You are about to delete the folder %1,\n"
@@ -1665,71 +1665,71 @@ msgstr ""
 "%1 قىسقۇچنى ئۆچۈرمەكچى بولۇۋاتىسىز،\n"
 "كۆپ SSH سەپلىمىسى بار، راست ئۆچۈرەمسىز؟"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:229
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:230
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
 msgstr "SSH سەپلىمىسىنى ئۆچۈر"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:283
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:284
 #, kde-format
 msgid "Imported SSH Profile <br/> Some settings are read only."
 msgstr "SSH سەپلىمىسىنى ئەكىردى<br/>بەزى تەڭشەك ئوقۇشقىلا بولىدۇ."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:378
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:381
 #, kde-format
 msgid "Missing Hostname"
 msgstr "مۇلازىمېتىر ئاتى كەم"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:383
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:386
 #, kde-format
 msgid "Missing Name"
 msgstr "ئاتى كەم"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:390
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:393
 #, kde-format
 msgid "If Use Ssh Config is set, do not specify sshkey or username."
 msgstr ""
 "ئەگەر تەڭشەلگەن SSH سەپلىمىسىنى ئىشلىتىشنى تاللىغان بولسىڭىز، SSH ئاچقۇچى "
 "ياكى ئىشلەتكۈچى ئاتىنى بەلگىلىمەڭ."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:395
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:398
 #, kde-format
 msgid "At least Username or SSHKey must be set"
 msgstr ""
 "ھېچ بولمىغاندا ئىشلەتكۈچى ئاتى ياكى SSH ئاچقۇچىدىن بىرى تەڭشىلىشى كېرەك"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:401
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:404
 #, kde-format
 msgid "Missing Folder"
 msgstr "قىسقۇچ كەم"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:406
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:409
 #, kde-format
 msgid "An SSH session must have a profile"
 msgstr "SSH جەريانچاقنىڭ چوقۇم سەپلىمە ھۆججىتى بولۇشى كېرەك"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:430
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:428
 #, kde-format
 msgid "Cannot delete this folder"
 msgstr "بۇ قىسقۇچنى ئۆچۈرەلمەيدۇ"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:433
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:431
 #, kde-format
 msgid "Delete folder and all of its contents"
 msgstr "قىسقۇچ ۋە ئۇنىڭ مەزمۇنىنىڭ ھەممىسىنى ئۆچۈرىدۇ"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:437
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:435
 #, kde-format
 msgid "Double click to change the folder name."
 msgstr "قىسقۇچ ئاتىنى ئۆزگەرتىشتە قوش چېكىلىدۇ."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:444
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:442
 #, kde-format
 msgid "You can't delete an automatically added entry."
 msgstr "ئۆزلۈكىدىن قوشۇلغان تۈرنى ئۆچۈرەلمەيسىز."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:444
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:442
 #, kde-format
 msgid "Delete selected entry"
 msgstr "تاللانغان تۈرنى ئۆچۈر"

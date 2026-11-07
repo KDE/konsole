@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-31 00:55+0000\n"
+"POT-Creation-Date: 2026-11-07 01:01+0000\n"
 "PO-Revision-Date: 2023-05-15 10:35+0100\n"
 "Last-Translator: Pedro Morais <morais@kde.org>\n"
 "Language-Team: pt <kde-i18n-pt@kde.org>\n"
@@ -893,7 +893,7 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QPushButton, addEntryButton)
 #. i18n: ectx: property (text), widget (QPushButton, btnAdd)
 #: KeyBindingEditor.ui:65 plugins/QuickCommands/qcwidget.ui:246
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:341
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:344
 #: plugins/SSHManager/sshwidget.ui:310
 #, kde-format
 msgid "Add"
@@ -1482,7 +1482,7 @@ msgstr "Gravar"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnUpdate)
 #: plugins/QuickCommands/qcwidget.ui:266
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:272
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:273
 #, kde-format
 msgid "Update"
 msgstr "Actualizar"
@@ -1559,7 +1559,7 @@ msgstr ""
 "que tem várias configurações; tem a certeza?"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:243
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:222
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:223
 #, kde-format
 msgid "You are about to delete %1, are you sure?"
 msgstr "Está prestes a remover o %1; tem a certeza?"
@@ -1612,16 +1612,16 @@ msgid "%1 is a folder for SSH entries"
 msgstr "A %1 é uma pasta de itens do SSH"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:78
-#: plugins/SSHManager/sshmanagermodel.cpp:321
-#: plugins/SSHManager/sshmanagermodel.cpp:390
-#: plugins/SSHManager/sshmanagermodel.cpp:423
+#: plugins/SSHManager/sshmanagermodel.cpp:322
+#: plugins/SSHManager/sshmanagermodel.cpp:391
+#: plugins/SSHManager/sshmanagermodel.cpp:424
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:93
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:428
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:426
 #, kde-format
 msgid "SSH Config"
 msgstr "Configuração do SSH"
 
-#: plugins/SSHManager/sshmanagermodel.cpp:102
+#: plugins/SSHManager/sshmanagermodel.cpp:103
 #, kde-format
 msgid "Host: %1"
 msgstr "Máquina: %1"
@@ -1693,12 +1693,12 @@ msgctxt "@action:inmenu"
 msgid "Delete"
 msgstr "Apagar"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:150
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:151
 #, kde-format
 msgid "Don't Change"
 msgstr "Não Modificar"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:221
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:222
 #, kde-format
 msgid ""
 "You are about to delete the folder %1,\n"
@@ -1707,70 +1707,70 @@ msgstr ""
 "Está prestes a remover a pasta %1, que tem\n"
 "várias configurações de SSH; tem a certeza?"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:229
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:230
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
 msgstr "Remover as Configurações de SSH"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:283
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:284
 #, kde-format
 msgid "Imported SSH Profile <br/> Some settings are read only."
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:378
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:381
 #, kde-format
 msgid "Missing Hostname"
 msgstr "Falta o Nome da Máquina"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:383
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:386
 #, kde-format
 msgid "Missing Name"
 msgstr "Falta o Nome"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:390
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:393
 #, kde-format
 msgid "If Use Ssh Config is set, do not specify sshkey or username."
 msgstr ""
 "Se a opção Usar a Configuração do SSH estiver activa, não indicar a chave de "
 "SSH ou o utilizador."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:395
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:398
 #, kde-format
 msgid "At least Username or SSHKey must be set"
 msgstr "Deve indicar pelo menos o Utilizador ou a Chave de SSH"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:401
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:404
 #, kde-format
 msgid "Missing Folder"
 msgstr "Falta a Pasta"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:406
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:409
 #, kde-format
 msgid "An SSH session must have a profile"
 msgstr "Uma sessão de SSH deverá ter um perfil"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:430
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:428
 #, kde-format
 msgid "Cannot delete this folder"
 msgstr "Não é possível remover esta pasta"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:433
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:431
 #, kde-format
 msgid "Delete folder and all of its contents"
 msgstr "Remover a pasta e todo o seu conteúdo"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:437
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:435
 #, kde-format
 msgid "Double click to change the folder name."
 msgstr "Faça duplo-click para mudar o nome da pasta."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:444
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:442
 #, kde-format
 msgid "You can't delete an automatically added entry."
 msgstr "Não pode remover um item adicionado automaticamente."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:444
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:442
 #, kde-format
 msgid "Delete selected entry"
 msgstr "Remover o item seleccionado"
