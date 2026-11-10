@@ -11,6 +11,7 @@
 #include <QDialog>
 #include <QFileInfo>
 #include <QLabel>
+#include <QStandardPaths>
 #include <QTest>
 #include <QTimer>
 #include <QVBoxLayout>
@@ -60,16 +61,7 @@ void PartTest::testFdStandalone()
 void PartTest::testFd(bool runShell)
 {
     // find ping
-    QStringList pingList;
-    QFileInfo info;
-    QString pingExe;
-    pingList << QStringLiteral("/bin/ping") << QStringLiteral("/sbin/ping");
-    for (int i = 0; i < pingList.size(); ++i) {
-        info.setFile(pingList.at(i));
-        if (info.exists() && info.isExecutable()) {
-            pingExe = pingList.at(i);
-        }
-    }
+    QString pingExe = QStandardPaths::findExecutable(QStringLiteral("ping"));
 
     if (pingExe.isEmpty()) {
         QSKIP("ping command not found.");
