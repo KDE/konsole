@@ -16,6 +16,8 @@
 #include <QRegion>
 #include <QSharedPointer>
 
+#include <utility>
+
 class QAction;
 class QMenu;
 class QMouseEvent;
@@ -111,7 +113,7 @@ public:
      */
     virtual QList<QAction *> setupMenu(QMenu *menu);
 
-    QPair<QRegion, QRect> region(int fontWidth, int fontHeight, int columns, QRect terminalDisplayRect) const;
+    std::pair<QRegion, QRect> region(int fontWidth, int fontHeight, int columns, QRect terminalDisplayRect) const;
 
     /**
      * Returns true if the type of the HotSpot is Link, EMailAddress, or EscapedUrl, (see

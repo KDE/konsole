@@ -12,10 +12,10 @@
 #include <QHash>
 #include <QMap>
 #include <QMediaPlayer>
-#include <QPair>
 #include <QVector>
 #include <QList>
 
+#include <utility>
 
 // Konsole
 #include "Emulation.h"
@@ -360,7 +360,7 @@ private:
     int m_verticalPosition = 0;
     uint8_t m_currentColor = 0;
     bool m_preserveBackground = true;
-    QPair<int, int> m_aspect = qMakePair(1, 1);
+    std::pair<int, int> m_aspect = std::make_pair(1, 1);
     bool m_SixelScrolling = true;
     QSize m_actualSize; // For efficiency reasons, we keep the image in memory larger than what the end result is
 

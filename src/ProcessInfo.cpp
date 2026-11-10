@@ -347,11 +347,13 @@ void ProcessInfo::setFileError(QFile::FileError error)
 #include <QThread>
 #include <QVariant>
 
+#include <utility>
+
 #include "KonsoleSettings.h"
 
-typedef QPair<QString, QDBusVariant> VariantPair;
+typedef std::pair<QString, QDBusVariant> VariantPair;
 typedef QList<VariantPair> VariantList;
-typedef QList<QPair<QString, VariantList>> EmptyArray;
+typedef QList<std::pair<QString, VariantList>> EmptyArray;
 
 Q_DECLARE_METATYPE(VariantPair);
 Q_DECLARE_METATYPE(VariantList);
@@ -381,7 +383,7 @@ const QDBusArgument &operator>>(const QDBusArgument &argument, VariantPair &pair
     return argument;
 }
 
-QDBusArgument &operator<<(QDBusArgument &argument, const QPair<QString, VariantList> pair)
+QDBusArgument &operator<<(QDBusArgument &argument, const std::pair<QString, VariantList> pair)
 {
     argument.beginStructure();
     argument << pair.first;
@@ -391,7 +393,7 @@ QDBusArgument &operator<<(QDBusArgument &argument, const QPair<QString, VariantL
     return argument;
 }
 
-const QDBusArgument &operator>>(const QDBusArgument &argument, QPair<QString, VariantList> &pair)
+const QDBusArgument &operator>>(const QDBusArgument &argument, std::pair<QString, VariantList> &pair)
 {
     argument.beginStructure();
     argument >> pair.first;
@@ -632,7 +634,7 @@ private:
     {
         qDBusRegisterMetaType<VariantPair>();
         qDBusRegisterMetaType<VariantList>();
-        qDBusRegisterMetaType<QPair<QString, VariantList>>();
+        qDBusRegisterMetaType<std::pair<QString, VariantList>>();
         qDBusRegisterMetaType<EmptyArray>();
         const pid_t selfPid = getpid();
 

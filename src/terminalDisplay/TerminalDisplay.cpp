@@ -1748,7 +1748,7 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent *ev)
     }
 }
 
-QPair<int, int> TerminalDisplay::getCharacterPosition(const QPoint &widgetPoint, bool edge) const
+std::pair<int, int> TerminalDisplay::getCharacterPosition(const QPoint &widgetPoint, bool edge) const
 {
     // the column value returned can be equal to _usedColumns (when edge == true),
     // which is the position just after the last character displayed in a line.
@@ -1775,7 +1775,7 @@ QPair<int, int> TerminalDisplay::getCharacterPosition(const QPoint &widgetPoint,
         column = line2log[vis2line[column]];
     }
 
-    return qMakePair(line, column);
+    return std::make_pair(line, column);
 }
 
 void TerminalDisplay::setExpandedMode(bool expand)

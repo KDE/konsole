@@ -12,6 +12,8 @@
 #include <QStringList>
 #include <QTimer>
 
+#include <utility>
+
 #define CONPTY_MINIMAL_WINDOWS_VERSION 18309
 
 class IPtyProcess : public QObject
@@ -47,7 +49,7 @@ public:
     {
         return m_pid;
     }
-    QPair<qint16, qint16> size()
+    std::pair<qint16, qint16> size()
     {
         return m_size;
     }
@@ -72,7 +74,7 @@ protected:
     QString m_shellPath;
     QString m_lastError;
     qint64 m_pid;
-    QPair<qint16, qint16> m_size; // cols / rows
+    std::pair<qint16, qint16> m_size; // cols / rows
     bool m_trace;
     int m_exitCode = -1;
 };

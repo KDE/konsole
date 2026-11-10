@@ -3991,7 +3991,7 @@ bool Vt102Emulation::processSixel(uint cc)
     const int p = tokenBufferPos;
 
     if (!m_SixelStarted && (sixel() || s[0] == '!' || s[0] == '#')) {
-        m_aspect = qMakePair(1, 1);
+        m_aspect = std::make_pair(1, 1);
         SixelModeEnable(30, 6);
     }
     if (sixel()) {
@@ -4021,9 +4021,9 @@ bool Vt102Emulation::processSixel(uint cc)
 
             if (!m_SixelStarted) {
                 if (params.value[1] == 0 || params.value[0] == 0) {
-                    m_aspect = qMakePair(1, 1);
+                    m_aspect = std::make_pair(1, 1);
                 } else {
-                    m_aspect = qMakePair(params.value[0], params.value[1]);
+                    m_aspect = std::make_pair(params.value[0], params.value[1]);
                 }
                 int width;
                 int height;

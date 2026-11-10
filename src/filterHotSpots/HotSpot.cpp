@@ -68,7 +68,7 @@ void HotSpot::setType(Type type)
     _type = type;
 }
 
-QPair<QRegion, QRect> HotSpot::region(int fontWidth, int fontHeight, int columns, QRect terminalDisplayRect) const
+std::pair<QRegion, QRect> HotSpot::region(int fontWidth, int fontHeight, int columns, QRect terminalDisplayRect) const
 {
     QRegion region;
     QRect r;

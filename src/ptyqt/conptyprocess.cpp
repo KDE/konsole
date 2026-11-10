@@ -109,7 +109,7 @@ bool ConPtyProcess::startProcess(const QString &shellPath,
     }
 
     m_shellPath = shellPath;
-    m_size = QPair<qint16, qint16>(cols, rows);
+    m_size = std::pair<qint16, qint16>(cols, rows);
 
     // env
     std::wstringstream envBlock;
@@ -219,7 +219,7 @@ bool ConPtyProcess::resize(qint16 cols, qint16 rows)
     bool res = SUCCEEDED(m_winContext.resizePseudoConsole(m_ptyHandler, {cols, rows}));
 
     if (res) {
-        m_size = QPair<qint16, qint16>(cols, rows);
+        m_size = std::pair<qint16, qint16>(cols, rows);
     }
 
     return res;

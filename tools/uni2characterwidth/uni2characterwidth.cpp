@@ -558,7 +558,7 @@ struct WidthsRange {
     CharacterWidth width;
 };
 
-QVector<WidthsRange> rangesFromWidths(const QVector<CharacterWidth> &widths, QPair<uint, uint> ucsRange = {0, CODE_POINTS_NUM})
+QVector<WidthsRange> rangesFromWidths(const QVector<CharacterWidth> &widths, std::pair<uint, uint> ucsRange = {0, CODE_POINTS_NUM})
 {
     QVector<WidthsRange> ranges;
 
@@ -597,13 +597,14 @@ QVector<WidthsRange> rangesFromWidths(const QVector<CharacterWidth> &widths, QPa
 // First range is always without change. Last range (A) can be dropped
 // (it always contains everything). Search should be done in order: D, C, B (A).
 // For simplicity the function returns all ranges, including first and last.
-QMap<CharacterWidth, QVector<QPair<uint, uint>>>
-mergedRangesFromWidths(const QVector<CharacterWidth> &widths, const QVector<CharacterWidth> widthsSortOrder, QPair<uint, uint> ucsRange = {0, CODE_POINTS_NUM})
+QMap<CharacterWidth, QVector<std::pair<uint, uint>>> mergedRangesFromWidths(const QVector<CharacterWidth> &widths,
+                                                                            const QVector<CharacterWidth> widthsSortOrder,
+                                                                            std::pair<uint, uint> ucsRange = {0, CODE_POINTS_NUM})
 {
     if (ucsRange.second >= CODE_POINTS_NUM)
         ucsRange.second = widths.size() - 1;
     QVector<WidthsRange> ranges = rangesFromWidths(widths, ucsRange);
-    QMap<CharacterWidth, QVector<QPair<uint, uint>>> mergedRanges;
+    QMap<CharacterWidth, QVector<std::pair<uint, uint>>> mergedRanges;
 
     int cmwi; // Currently Merged Width Index
     int sri = -1; // Start Range Index (for current width)
@@ -687,7 +688,8 @@ bool code(QTextStream &out, const QVector<CharacterProperties> &props, const QVe
     }
 
     static const QVector<CharacterWidth> widthsSortOrder = {CharacterWidth::NonPrintable, 2, CharacterWidth::Ambiguous, 0, 1};
-    const QMap<CharacterWidth, QVector<QPair<uint, uint>>> mergedRanges = mergedRangesFromWidths(widths, widthsSortOrder, {DIRECT_LUT_SIZE, CODE_POINTS_NUM});
+    const QMap<CharacterWidth, QVector<std::pair<uint, uint>>> mergedRanges =
+        mergedRangesFromWidths(widths, widthsSortOrder, {DIRECT_LUT_SIZE, CODE_POINTS_NUM});
 
     // Find last non-empty ranges lut
     int lastWidthId = 0;

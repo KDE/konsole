@@ -254,7 +254,7 @@ void FilterChain::paint(TerminalDisplay *td, QPainter &painter)
     for (const auto &spot : spots) {
         QRegion region;
         if (spot->type() == HotSpot::Link || spot->type() == HotSpot::EMailAddress || spot->type() == HotSpot::EscapedUrl || spot->type() == HotSpot::File) {
-            QPair<QRegion, QRect> spotRegion =
+            const std::pair<QRegion, QRect> spotRegion =
                 spot->region(td->terminalFont()->fontWidth(), td->terminalFont()->fontHeight(), td->columns(), td->contentRect());
             region = spotRegion.first;
             QRect r = spotRegion.second;

@@ -14,6 +14,7 @@
 #include <QWidget>
 
 #include <memory>
+#include <utility>
 
 // Konsole
 #include "../characters/Character.h"
@@ -302,7 +303,7 @@ public:
     // maps a point on the widget to the position ( ie. line and column )
     // of the character at that point. When the edge is true, it maps to
     // a character which left edge is closest to the point.
-    QPair<int, int> getCharacterPosition(const QPoint &widgetPoint, bool edge) const;
+    std::pair<int, int> getCharacterPosition(const QPoint &widgetPoint, bool edge) const;
 
     // maps an character image position to its top-left widget position
     QPoint topLeftWidgetPos(int column, int line) const;
