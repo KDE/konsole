@@ -167,7 +167,7 @@
 >Histórico</title>
 
 <para
->O &konsole; usa um conceito de histórico para permitir que os usuários consultem os resultados apresentados anteriormente. Por padrão, o histórico está ativo e armazena 1.000 linhas de resultado, além do que já está sendo mostrado na tela. </para>
+>O &konsole; usa um conceito de histórico para permitir que os usuários consultem os resultados apresentados anteriormente. Por padrão, o histórico está ativo e armazena 10.000 linhas de resultado, além do que já está sendo mostrado na tela. </para>
 <para
 >Conforme as linhas se deslocam para a parte superior da tela, elas podem ser revistas ao mover a barra de rolagem para cima, com uso da roda do mouse ou através das teclas <keycombo action="simul"
 >&Shift;<keycap
@@ -844,6 +844,114 @@
 > </para
 ></listitem>
 </itemizedlist>
+</sect1>
+
+<sect1 id="container-awareness">
+<title
+>Consciência sobre contêineres</title>
+
+<para
+>O &konsole; consegue detectar quando o processo em primeiro plano está sendo executado dentro de um contêiner Linux, como o <application
+>Distrobox</application
+>, o <application
+>Toolbox</application
+> ou o <application
+>Kapsule</application
+>, e fornece um feedback visual para ajudar você a identificar qual terminal está em execução em qual contêiner. </para>
+
+<sect2 id="container-indicators">
+<title
+>Indicadores visuais</title>
+
+<para
+>Quando um contêiner é detectado, o &konsole; exibe dois indicadores:</para>
+
+<itemizedlist>
+<listitem
+><para
+><emphasis
+>Aba colorida</emphasis
+> — a aba recebe uma cor exclusiva derivada da identidade do contêiner. Cada contêiner mantém sempre a mesma cor entre as sessões, permitindo identificar rapidamente qual aba pertence a qual contêiner. </para
+></listitem>
+
+<listitem
+><para
+><emphasis
+>Rótulo do contêiner</emphasis
+> — uma pequena barra aparece na parte inferior da área do terminal, exibindo o tipo e o nome do contêiner (por exemplo, <guilabel
+>Distrobox: fedora-41</guilabel
+>). O rótulo desaparece automaticamente quando o processo em primeiro plano retorna ao host. </para
+></listitem>
+</itemizedlist>
+
+<para
+>Ambos os indicadores podem ser ativados ou desativados de forma independente em <menuchoice
+><guimenu
+>Configurações</guimenu
+><guimenuitem
+>Configurar o &konsole;…</guimenuitem
+> <guimenuitem
+>Barra de abas / Divisores</guimenuitem
+></menuchoice
+>: </para>
+
+<itemizedlist>
+<listitem
+><para
+><guilabel
+>Codificar a aba por cor ao executar dentro de um contêiner</guilabel
+> — alterna a exibição da aba colorida. Ativado por padrão. </para
+></listitem>
+<listitem
+><para
+><guilabel
+>Mostrar rótulo do contêiner no rodapé do terminal</guilabel
+> — alterna a exibição do rótulo no rodapé. Ativado por padrão. </para
+></listitem>
+</itemizedlist>
+</sect2>
+
+<sect2 id="container-new-tab">
+<title
+>Abrir uma aba dentro de um contêiner</title>
+
+<para
+>O menu <guimenu
+>Arquivo</guimenu
+> e o botão <guibutton
+>Nova aba</guibutton
+> oferecem um submenu que lista todos os contêineres disponíveis. Selecionar um contêiner abre uma nova aba que entra imediatamente nesse contêiner. Também é disponibilizada uma opção <guilabel
+>Host</guilabel
+> para abrir explicitamente uma aba no sistema hospedeiro, independentemente de qualquer padrão de perfil. </para>
+</sect2>
+
+<sect2 id="container-profile">
+<title
+>Configurações de perfil</title>
+
+<para
+>Duas opções relacionadas a contêineres estão disponíveis por perfil na aba <guilabel
+>Geral</guilabel
+> de <guilabel
+>Editar perfil</guilabel
+>: </para>
+
+<itemizedlist>
+<listitem
+><para
+><guilabel
+>Sempre iniciar no contêiner</guilabel
+> — escolha um contêiner específico no qual novas sessões que utilizam este perfil entrarão sempre de forma automática. </para
+></listitem>
+<listitem
+><para
+><guilabel
+>Entrar no mesmo contêiner da sessão atual</guilabel
+> — novas abas abertas a partir de uma sessão de contêiner existente entrarão no mesmo contêiner, em vez de iniciarem no host. </para
+></listitem>
+</itemizedlist>
+</sect2>
+
 </sect1>
 
 </chapter>
