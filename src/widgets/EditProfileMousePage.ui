@@ -26,7 +26,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <property name="documentMode">
       <bool>true</bool>
@@ -40,8 +40,11 @@
         <number>0</number>
        </property>
        <item>
-        <layout class="QGridLayout">
-         <property name="spacing">
+        <layout class="QFormLayout" name="formLayout">
+         <property name="horizontalSpacing">
+          <number>6</number>
+         </property>
+         <property name="verticalSpacing">
           <number>6</number>
          </property>
          <item row="0" column="0">
@@ -99,26 +102,30 @@
           </widget>
          </item>
          <item row="2" column="1">
-          <widget class="QRadioButton" name="tripleClickSelectsTheWholeLine">
-           <property name="text">
-            <string>&amp;The whole line</string>
-           </property>
-           <attribute name="buttonGroup">
-            <string notr="true">tripleClickMode</string>
-           </attribute>
-          </widget>
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <item>
+            <widget class="QRadioButton" name="tripleClickSelectsTheWholeLine">
+             <property name="text">
+              <string>&amp;The whole line</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">tripleClickMode</string>
+             </attribute>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="tripleClickSelectsFromMousePosition">
+             <property name="text">
+              <string>From mouse position to the end of &amp;line</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">tripleClickMode</string>
+             </attribute>
+            </widget>
+           </item>
+          </layout>
          </item>
          <item row="3" column="1">
-          <widget class="QRadioButton" name="tripleClickSelectsFromMousePosition">
-           <property name="text">
-            <string>From mouse position to the end of &amp;line</string>
-           </property>
-           <attribute name="buttonGroup">
-            <string notr="true">tripleClickMode</string>
-           </attribute>
-          </widget>
-         </item>
-         <item row="4" column="1">
           <spacer>
            <property name="orientation">
             <enum>Qt::Orientation::Vertical</enum>
@@ -134,7 +141,7 @@
            </property>
           </spacer>
          </item>
-         <item row="5" column="0">
+         <item row="4" column="0">
           <widget class="QLabel" name="label_13">
            <property name="text">
             <string>Middle-click pastes:</string>
@@ -144,25 +151,98 @@
            </property>
           </widget>
          </item>
+         <item row="4" column="1">
+          <layout class="QVBoxLayout" name="verticalLayout_4">
+           <item>
+            <widget class="QRadioButton" name="pasteFromClipboardButton">
+             <property name="text">
+              <string>From clipboard</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">pasteFrom</string>
+             </attribute>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="pasteFromX11SelectionButton">
+             <property name="text">
+              <string>From selection</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">pasteFrom</string>
+             </attribute>
+            </widget>
+           </item>
+          </layout>
+         </item>
          <item row="5" column="1">
-          <widget class="QRadioButton" name="pasteFromClipboardButton">
-           <property name="text">
-            <string>From clipboard</string>
+          <spacer>
+           <property name="orientation">
+            <enum>Qt::Orientation::Vertical</enum>
            </property>
-           <attribute name="buttonGroup">
-            <string notr="true">pasteFrom</string>
-           </attribute>
+           <property name="sizeType">
+            <enum>QSizePolicy::Policy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>16</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="6" column="0">
+          <widget class="QLabel" name="rightClickPasteLabel">
+           <property name="text">
+            <string>Right-click:</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+           </property>
           </widget>
          </item>
          <item row="6" column="1">
-          <widget class="QRadioButton" name="pasteFromX11SelectionButton">
-           <property name="text">
-            <string>From selection</string>
-           </property>
-           <attribute name="buttonGroup">
-            <string notr="true">pasteFrom</string>
-           </attribute>
-          </widget>
+          <layout class="QVBoxLayout" name="verticalLayout_5">
+           <item>
+            <widget class="QRadioButton" name="rightClickPasteDisabledButton">
+             <property name="toolTip">
+              <string comment="@info:tooltip">Right-click shows context menu</string>
+             </property>
+             <property name="text">
+              <string>Opens context menu</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">rightClickPasteFrom</string>
+             </attribute>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="rightClickPasteFromClipboardButton">
+             <property name="toolTip">
+              <string comment="@info:tooltip">Control+right-click shows context menu</string>
+             </property>
+             <property name="text">
+              <string>Pastes from clipboard</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">rightClickPasteFrom</string>
+             </attribute>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="rightClickPasteFromX11SelectionButton">
+             <property name="toolTip">
+              <string comment="@info:tooltip">Control+right-click shows context menu</string>
+             </property>
+             <property name="text">
+              <string>Pastes from selection</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">rightClickPasteFrom</string>
+             </attribute>
+            </widget>
+           </item>
+          </layout>
          </item>
          <item row="7" column="1">
           <spacer>
@@ -181,71 +261,6 @@
           </spacer>
          </item>
          <item row="8" column="0">
-          <widget class="QLabel" name="rightClickPasteLabel">
-           <property name="text">
-            <string>Right-click:</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="8" column="1">
-          <widget class="QRadioButton" name="rightClickPasteDisabledButton">
-           <property name="text">
-            <string>Opens context menu</string>
-           </property>
-           <property name="toolTip">
-            <string comment="@info:tooltip">Right-click shows context menu</string>
-           </property>
-           <attribute name="buttonGroup">
-            <string notr="true">rightClickPasteFrom</string>
-           </attribute>
-          </widget>
-         </item>
-         <item row="9" column="1">
-          <widget class="QRadioButton" name="rightClickPasteFromClipboardButton">
-           <property name="text">
-            <string>Pastes from clipboard</string>
-           </property>
-           <property name="toolTip">
-            <string comment="@info:tooltip">Control+right-click shows context menu</string>
-           </property>
-           <attribute name="buttonGroup">
-            <string notr="true">rightClickPasteFrom</string>
-           </attribute>
-          </widget>
-         </item>
-         <item row="10" column="1">
-          <widget class="QRadioButton" name="rightClickPasteFromX11SelectionButton">
-           <property name="text">
-            <string>Pastes from selection</string>
-           </property>
-           <property name="toolTip">
-            <string comment="@info:tooltip">Control+right-click shows context menu</string>
-           </property>
-           <attribute name="buttonGroup">
-            <string notr="true">rightClickPasteFrom</string>
-           </attribute>
-          </widget>
-         </item>
-         <item row="11" column="1">
-          <spacer>
-           <property name="orientation">
-            <enum>Qt::Orientation::Vertical</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Policy::Fixed</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>20</width>
-             <height>16</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item row="12" column="0">
           <widget class="QLabel" name="label">
            <property name="text">
             <string>Copy options:</string>
@@ -255,55 +270,59 @@
            </property>
           </widget>
          </item>
-         <item row="12" column="1">
-          <widget class="QCheckBox" name="copyTextToClipboardButton">
-           <property name="toolTip">
-            <string>Automatically copy selected text into clipboard</string>
-           </property>
-           <property name="text">
-            <string>Copy on select</string>
-           </property>
-          </widget>
-         </item>
-         <item row="13" column="1">
-          <widget class="QCheckBox" name="copyTextAsHTMLButton">
-           <property name="toolTip">
-            <string>Copy text as HTML (including formatting, font faces, colors... etc)</string>
-           </property>
-           <property name="text">
-            <string>Copy text as HTML</string>
-           </property>
-          </widget>
-         </item>
-         <item row="14" column="1">
-          <widget class="QCheckBox" name="trimLeadingSpacesButton">
-           <property name="toolTip">
-            <string>Trim leading spaces in selected text, useful in some instances</string>
-           </property>
-           <property name="text">
-            <string>Trim leading spaces</string>
-           </property>
-          </widget>
-         </item>
-         <item row="15" column="1">
-          <widget class="QCheckBox" name="trimTrailingSpacesButton">
-           <property name="toolTip">
-            <string>Trim trailing spaces in selected text, useful in some instances</string>
-           </property>
-           <property name="text">
-            <string>Trim trailing spaces</string>
-           </property>
-          </widget>
-         </item>
-         <item row="16" column="1">
-          <widget class="QCheckBox" name="clearSelectionButton">
-           <property name="toolTip">
-            <string>Clear selection after copying</string>
-           </property>
-           <property name="text">
-            <string>Clear selection</string>
-           </property>
-          </widget>
+         <item row="8" column="1">
+          <layout class="QVBoxLayout" name="verticalLayout_6">
+           <item>
+            <widget class="QCheckBox" name="copyTextToClipboardButton">
+             <property name="toolTip">
+              <string>Automatically copy selected text into clipboard</string>
+             </property>
+             <property name="text">
+              <string>Copy on select</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="copyTextAsHTMLButton">
+             <property name="toolTip">
+              <string>Copy text as HTML (including formatting, font faces, colors... etc)</string>
+             </property>
+             <property name="text">
+              <string>Copy text as HTML</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="trimLeadingSpacesButton">
+             <property name="toolTip">
+              <string>Trim leading spaces in selected text, useful in some instances</string>
+             </property>
+             <property name="text">
+              <string>Trim leading spaces</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="trimTrailingSpacesButton">
+             <property name="toolTip">
+              <string>Trim trailing spaces in selected text, useful in some instances</string>
+             </property>
+             <property name="text">
+              <string>Trim trailing spaces</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="clearSelectionButton">
+             <property name="toolTip">
+              <string>Clear selection after copying</string>
+             </property>
+             <property name="text">
+              <string>Clear selection</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
         </layout>
        </item>
@@ -356,6 +375,22 @@
           </widget>
          </item>
          <item>
+          <widget class="QCheckBox" name="openLinksByDirectClickButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="toolTip">
+            <string>Text recognized as a file, link or an email address can be opened by direct mouse click.</string>
+           </property>
+           <property name="text">
+            <string>Open underlined files/links by direct click</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <layout class="QHBoxLayout">
            <item>
             <widget class="QLabel" name="textEditorCommandLabel">
@@ -364,6 +399,9 @@
              </property>
              <property name="text">
               <string>Text Editor Command: </string>
+             </property>
+             <property name="indent">
+              <number>30</number>
              </property>
              <property name="buddy">
               <cstring>textEditorCombo</cstring>
@@ -397,22 +435,6 @@
             </widget>
            </item>
           </layout>
-         </item>
-         <item>
-          <widget class="QCheckBox" name="openLinksByDirectClickButton">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="toolTip">
-            <string>Text recognized as a file, link or an email address can be opened by direct mouse click.</string>
-           </property>
-           <property name="text">
-            <string>Open underlined files/links by direct click</string>
-           </property>
-          </widget>
          </item>
         </layout>
        </item>
@@ -465,22 +487,22 @@
         </layout>
        </item>
        <item>
+        <widget class="QCheckBox" name="allowMouseTrackingButton">
+         <property name="toolTip">
+          <string>Some terminal applications have mouse support, this allows them to get it by default. It can be toggled on/off while running as well.</string>
+         </property>
+         <property name="text">
+          <string>Allow terminal applications to handle clicks and drags</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QCheckBox" name="ctrlRequiredForDragButton">
          <property name="toolTip">
           <string>Selected text will require control key plus click to drag.</string>
          </property>
          <property name="text">
           <string>Require Ctrl key for drag &amp;&amp; drop</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="enableAlternateScrollingButton">
-         <property name="toolTip">
-          <string>Mouse scroll wheel will emulate up/down key presses in programs that use the Alternate Screen buffer (e.g. less)</string>
-         </property>
-         <property name="text">
-          <string>Enable Alternate Screen buffer scrolling</string>
          </property>
         </widget>
        </item>
@@ -515,6 +537,16 @@
         </widget>
        </item>
        <item>
+        <widget class="QCheckBox" name="enableAlternateScrollingButton">
+         <property name="toolTip">
+          <string>Mouse scroll wheel will emulate up/down key presses in programs that use the Alternate Screen buffer (e.g. less)</string>
+         </property>
+         <property name="text">
+          <string>Enable Alternate Screen buffer scrolling</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <spacer>
          <property name="orientation">
           <enum>Qt::Orientation::Vertical</enum>
@@ -526,16 +558,6 @@
           </size>
          </property>
         </spacer>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="allowMouseTrackingButton">
-         <property name="toolTip">
-          <string>Some terminal applications have mouse support, this allows them to get it by default. It can be toggled on/off while running as well.</string>
-         </property>
-         <property name="text">
-          <string>Allow terminal applications to handle clicks and drags</string>
-         </property>
-        </widget>
        </item>
       </layout>
      </widget>
