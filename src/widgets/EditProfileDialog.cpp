@@ -154,9 +154,6 @@ EditProfileDialog::EditProfileDialog(QWidget *parent)
     scrollingPageItem->setIcon(QIcon::fromTheme(QStringLiteral("preferences-scroll"), defaultIcon));
     _pages[scrollingPageItem] = Page(&EditProfileDialog::setupScrollingPage);
 
-    // adjust "history size" label height to match history size widget's first radio button
-    _scrollingUi->historySizeLabel->setFixedHeight(_scrollingUi->historySizeWidget->preferredLabelHeight());
-
     // Keyboard page
 
     const QString keyboardPageName = i18n("Keyboard");
