@@ -903,16 +903,8 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr &profile)
 
     // setup font preview
     const bool antialias = profile->antiAliasFonts();
-
-    QFont profileFont = profile->font();
-    profileFont.setStyleStrategy(antialias ? QFont::PreferAntialias : QFont::NoAntialias);
-
-    _appearanceUi->fontPreview->setFont(profileFont);
-    _appearanceUi->fontPreview->setText(QStringLiteral("%1 %2pt").arg(profileFont.family()).arg(profileFont.pointSize()));
-
-    QFont emojiFont = profile->emojiFont();
-    _appearanceUi->emojiFontPreview->setFont(profileFont);
-    _appearanceUi->emojiFontPreview->setText(QStringLiteral("%1 %2pt").arg(emojiFont.family()).arg(emojiFont.pointSize()));
+    updateFontPreview(profile->font());
+    updateEmojiFontPreview(profile->emojiFont());
 
     // setup font smoothing
     _appearanceUi->antialiasTextButton->setChecked(antialias);
@@ -1424,7 +1416,12 @@ void EditProfileDialog::updateEmojiFontPreview(QFont font)
     font.setStyleStrategy(aa ? QFont::PreferAntialias : QFont::NoAntialias);
     QFont emojiFont = _profile->emojiFont();
     _appearanceUi->emojiFontPreview->setFont(_profile->font());
-    _appearanceUi->emojiFontPreview->setText(QStringLiteral("%1 %2pt").arg(emojiFont.family()).arg(emojiFont.pointSize()));
+    if (!emojiFont.family().isEmpty()) {
+        _appearanceUi->emojiFontPreview->setText(QStringLiteral("%1 %2pt").arg(emojiFont.family()).arg(emojiFont.pointSize()));
+    } else {
+        const auto defaultText = i18nc("Default emoji font placeholder", "System Default");
+        _appearanceUi->emojiFontPreview->setText(defaultText);
+    }
 }
 
 void EditProfileDialog::removeColorScheme()
