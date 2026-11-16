@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-08 00:17+0000\n"
-"PO-Revision-Date: 2026-10-12 11:52+0300\n"
+"PO-Revision-Date: 2026-11-15 19:37+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -27,7 +27,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 26.08.0\n"
+"X-Generator: Lokalize 26.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -809,7 +809,7 @@ msgstr "Yazıtipi Seç"
 #, kde-format
 msgctxt "@action:button"
 msgid "Show all fonts"
-msgstr "Tüm yazıtiplerini göster"
+msgstr "Tüm yazı tiplerini göster"
 
 #: FontDialog.cpp:66
 #, kde-format
@@ -4082,7 +4082,7 @@ msgstr "&Her zaman"
 #: widgets/EditProfileAppearancePage.ui:36
 #, kde-format
 msgid "Color scheme && font"
-msgstr "Renk Şeması ve Yazıtipi"
+msgstr "Renk Şeması ve Yazı Tipi"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newColorSchemeButton)
 #: widgets/EditProfileAppearancePage.ui:69
@@ -4138,7 +4138,7 @@ msgstr "Öntanımlılar"
 #: widgets/EditProfileAppearancePage.ui:135
 #, kde-format
 msgid "Font:"
-msgstr "Yazıtipi:"
+msgstr "Yazı tipi:"
 
 #. i18n: ectx: property (text), widget (QPushButton, chooseFontButton)
 #: widgets/EditProfileAppearancePage.ui:167
@@ -4151,7 +4151,7 @@ msgstr "Seç…"
 #: widgets/EditProfileAppearancePage.ui:174
 #, kde-format
 msgid "Smooth fonts"
-msgstr "Düz yazıtipleri"
+msgstr "Düz yazıt ipleri"
 
 #. i18n: ectx: property (text), widget (QCheckBox, boldIntenseButton)
 #: widgets/EditProfileAppearancePage.ui:181
@@ -4175,7 +4175,7 @@ msgctxt ""
 "Characters for drawing lines for a frame or box in TUI programs. Not a row "
 "of characters."
 msgid "Use line characters contained in font"
-msgstr "Yazıtipindeki çizgi karakterlerini kullan"
+msgstr "Yazı tipindeki çizgi karakterlerini kullan"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:198
@@ -4191,7 +4191,7 @@ msgstr ""
 #: widgets/EditProfileAppearancePage.ui:201
 #, kde-format
 msgid "Use unicode Braille characters contained in font"
-msgstr "Yazıtipindeki Unicode Braille karakterlerini kullan"
+msgstr "Yazı tipindeki Unicode Braille karakterlerini kullan"
 
 #. i18n: ectx: attribute (title), widget (QWidget, cursorTab)
 #: widgets/EditProfileAppearancePage.ui:209
@@ -4542,14 +4542,14 @@ msgid ""
 "Apply hinting to glyphs when rendering, which may improve the legibility of "
 "certain fonts with some displays"
 msgstr ""
-"Sunma sırasında glif piksellerini hizalamak, bazı ekranlarda belirli "
-"yazıtiplerinin okunabilirliğini artırabilir."
+"Sunma sırasında glif piksellerini hizalamak, bazı ekranlarda belirli yazı "
+"tiplerinin okunabilirliğini artırabilir."
 
 #. i18n: ectx: property (text), widget (QCheckBox, fontHinting)
 #: widgets/EditProfileAppearancePage.ui:970
 #, kde-format
 msgid "Font hinting"
-msgstr "Yazıtipi piksel hizalaması"
+msgstr "Yazı tipi piksel hizalaması"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:983
@@ -5388,7 +5388,7 @@ msgstr "Seçince kopyala"
 #, kde-format
 msgid "Copy text as HTML (including formatting, font faces, colors... etc)"
 msgstr ""
-"Metni HTML olarak kopyala (biçimlendirme, yazıtipleri, renkler vb. dahil)"
+"Metni HTML olarak kopyala (biçimlendirme, yazı tipleri, renkler vb. dahil)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, copyTextAsHTMLButton)
 #: widgets/EditProfileMousePage.ui:274
