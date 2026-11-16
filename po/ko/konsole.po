@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-08 03:01+0000\n"
+"POT-Creation-Date: 2026-11-16 01:11+0000\n"
 "PO-Revision-Date: 2026-10-02 01:04+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -570,7 +570,7 @@ msgstr "배경 그림 선택"
 #. i18n: ectx: property (text), widget (QToolButton, dirSelectButton)
 #. i18n: ectx: property (text), widget (QToolButton, btnFindSshKey)
 #: colorscheme/ColorSchemeEditor.ui:154 plugins/SSHManager/sshwidget.ui:155
-#: widgets/EditProfileGeneralPage.ui:186
+#: widgets/EditProfileGeneralPage.ui:150
 #, kde-format
 msgid "..."
 msgstr "..."
@@ -878,7 +878,8 @@ msgid "Test Area"
 msgstr "테스트 영역"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: KeyBindingEditor.ui:115
+#. i18n: ectx: property (text), widget (QLabel, inputLabel)
+#: KeyBindingEditor.ui:115 widgets/EditProfileGeneralPage.ui:482
 #, kde-format
 msgid "Input:"
 msgstr "입력:"
@@ -1925,7 +1926,7 @@ msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr "내장"
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:581
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:578
 #, kde-format
 msgid "Default profile"
 msgstr "기본 프로필"
@@ -2613,175 +2614,175 @@ msgctxt "@title:window"
 msgid "Configure"
 msgstr "설정"
 
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: settings/GeneralSettings.ui:46
+#, kde-format
+msgid "Process and window:"
+msgstr "프로세스와 창:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_RememberWindowSize)
+#: settings/GeneralSettings.ui:64
+#, kde-format
+msgid "If enabled, profile settings will be ignored"
+msgstr "선택하면 프로필 설정을 무시합니다"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RememberWindowSize)
+#: settings/GeneralSettings.ui:67
+#, kde-format
+msgid "Remember window size"
+msgstr "창 크기 기억"
+
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_UseSingleInstance)
 #. i18n: ectx: tooltip, entry (UseSingleInstance), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:49 settings/konsole.kcfg:33
+#: settings/GeneralSettings.ui:80 settings/konsole.kcfg:33
 #, kde-format
 msgid "When launching Konsole re-use existing process if possible"
 msgstr "사용 가능한 경우 Konsole을 실행할 때 프로세스 재사용"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSingleInstance)
 #. i18n: ectx: label, entry (UseSingleInstance), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:52 settings/konsole.kcfg:32
+#: settings/GeneralSettings.ui:83 settings/konsole.kcfg:32
 #, kde-format
 msgid "Run all Konsole windows in a single process"
 msgstr "모든 Konsole 창을 단일 프로세스로 실행"
 
-#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_RememberWindowSize)
-#: settings/GeneralSettings.ui:81
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_AllowMenuAccelerators)
+#. i18n: ectx: label, entry (AllowMenuAccelerators), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:96 settings/konsole.kcfg:22
 #, kde-format
-msgid "If enabled, profile settings will be ignored"
-msgstr "선택하면 프로필 설정을 무시합니다"
+msgid "Enable menu accelerators"
+msgstr "메뉴 가속기 키 사용하기"
 
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RememberWindowSize)
-#: settings/GeneralSettings.ui:84
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowWindowTitleOnTitleBar)
+#. i18n: ectx: label, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:109 settings/konsole.kcfg:17
 #, kde-format
-msgid "Remember window size"
-msgstr "창 크기 기억"
+msgid "Show window title on the titlebar"
+msgstr "제목 표시줄에 창 제목 표시"
 
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ForceNewTabs)
-#. i18n: ectx: label, entry (ForceNewTabs), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:91 settings/konsole.kcfg:37
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RemoveWindowTitleBarAndFrame)
+#. i18n: ectx: label, entry (RemoveWindowTitleBarAndFrame), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:116 settings/konsole.kcfg:9
 #, kde-format
-msgid "Force new tabs"
-msgstr "새 탭 강제"
+msgid "Remove window titlebar and frame"
+msgstr "창 제목 표시줄과 프레임 숨기기"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_FocusFollowsMouse)
+#. i18n: ectx: label, entry (FocusFollowsMouse), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:123 settings/konsole.kcfg:13
+#, kde-format
+msgid "Focus terminals when the mouse pointer is moved over them"
+msgstr "마우스 포인터가 위에 있을 때 터미널에 포커스 맞추기"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableSecuritySensitiveDBusAPI)
+#. i18n: ectx: label, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:130 settings/konsole.kcfg:47
+#, kde-format
+msgid "Enable the security sensitive parts of the DBus API"
+msgstr "보안에 민감한 DBus API 활성화"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ListenForZModemTerminalCodes)
-#: settings/GeneralSettings.ui:98
+#: settings/GeneralSettings.ui:137
 #, kde-format
 msgid "Listen for ZModem terminal codes"
 msgstr "ZModem 터미널 코드 듣기"
 
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ForceNewTabs)
+#. i18n: ectx: label, entry (ForceNewTabs), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:144 settings/konsole.kcfg:37
+#, kde-format
+msgid "Force new tabs"
+msgstr "새 탭 강제"
+
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowProgressInTaskBar)
-#: settings/GeneralSettings.ui:105
+#: settings/GeneralSettings.ui:151
 #, kde-format
 msgid "Show progress in taskbar"
 msgstr "작업 표시줄에 진행 상황 표시"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SyncProfileWithSystemTheme)
-#: settings/GeneralSettings.ui:112
+#: settings/GeneralSettings.ui:158
 #, kde-format
 msgid "Automatically switch profile based on system theme"
 msgstr "시스템 테마를 기반으로 자동으로 프로필 전환"
 
-#. i18n: ectx: property (text), widget (QLabel, label_3)
-#: settings/GeneralSettings.ui:119
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: settings/GeneralSettings.ui:183
 #, kde-format
-msgid "Notifications:"
-msgstr "알림:"
+msgctxt "@item:intext Search options"
+msgid "Search:"
+msgstr "검색:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchCaseSensitive)
+#. i18n: ectx: tooltip, entry (SearchCaseSensitive), group (SearchSettings)
+#: settings/GeneralSettings.ui:198 settings/konsole.kcfg:85
+#, kde-format
+msgid "Sets whether the search is case sensitive"
+msgstr "검색할 텍스트의 대소문자를 구분할지 선택합니다"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchCaseSensitive)
+#: settings/GeneralSettings.ui:201
+#, kde-format
+msgid "Case sensitive"
+msgstr "대소문자 구분"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchRegExpression)
+#. i18n: ectx: label, entry (SearchRegExpression), group (SearchSettings)
+#: settings/GeneralSettings.ui:214 settings/konsole.kcfg:89
+#, kde-format
+msgid "Match using regular expressions"
+msgstr "정규 표현식 일치"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchHighlightMatches)
+#: settings/GeneralSettings.ui:227
+#, kde-format
+msgid "Highlight all matches"
+msgstr "모두 강조"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchReverseSearch)
 #. i18n: ectx: tooltip, entry (SearchReverseSearch), group (SearchSettings)
-#: settings/GeneralSettings.ui:132 settings/konsole.kcfg:99
+#: settings/GeneralSettings.ui:240 settings/konsole.kcfg:99
 #, kde-format
 msgid "Sets whether search should start from the bottom"
 msgstr "검색을 맨 밑에서부터 시작할지 여부"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchReverseSearch)
 #. i18n: ectx: label, entry (SearchReverseSearch), group (SearchSettings)
-#: settings/GeneralSettings.ui:135 settings/konsole.kcfg:98
+#: settings/GeneralSettings.ui:243 settings/konsole.kcfg:98
 #, kde-format
 msgid "Search backwards"
 msgstr "뒤로 검색"
 
-#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchCaseSensitive)
-#. i18n: ectx: tooltip, entry (SearchCaseSensitive), group (SearchSettings)
-#: settings/GeneralSettings.ui:148 settings/konsole.kcfg:85
-#, kde-format
-msgid "Sets whether the search is case sensitive"
-msgstr "검색할 텍스트의 대소문자를 구분할지 선택합니다"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchCaseSensitive)
-#: settings/GeneralSettings.ui:151
-#, kde-format
-msgid "Case sensitive"
-msgstr "대소문자 구분"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: settings/GeneralSettings.ui:158
-#, kde-format
-msgid "Process and window:"
-msgstr "프로세스와 창:"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchHighlightMatches)
-#: settings/GeneralSettings.ui:174
-#, kde-format
-msgid "Highlight all matches"
-msgstr "모두 강조"
-
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: settings/GeneralSettings.ui:181
-#, kde-format
-msgctxt "@item:intext Search options"
-msgid "Search:"
-msgstr "검색:"
-
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchNoWrap)
 #. i18n: ectx: tooltip, entry (SearchNoWrap), group (SearchSettings)
-#: settings/GeneralSettings.ui:210 settings/konsole.kcfg:104
+#: settings/GeneralSettings.ui:256 settings/konsole.kcfg:104
 #, kde-format
 msgid "Sets whether search should stop instead of wrapping"
 msgstr "검색을 원점에서 다시 시작하는 대신 중지할지 여부"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchNoWrap)
-#: settings/GeneralSettings.ui:213
+#: settings/GeneralSettings.ui:259
 #, kde-format
 msgid "No wrap"
 msgstr "다시 시작하지 않음"
 
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_AllowMenuAccelerators)
-#. i18n: ectx: label, entry (AllowMenuAccelerators), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:226 settings/konsole.kcfg:22
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: settings/GeneralSettings.ui:284
 #, kde-format
-msgid "Enable menu accelerators"
-msgstr "메뉴 가속기 키 사용하기"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_FocusFollowsMouse)
-#. i18n: ectx: label, entry (FocusFollowsMouse), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:233 settings/konsole.kcfg:13
-#, kde-format
-msgid "Focus terminals when the mouse pointer is moved over them"
-msgstr "마우스 포인터가 위에 있을 때 터미널에 포커스 맞추기"
+msgid "Notifications:"
+msgstr "알림:"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, enableAllMessagesButton)
-#: settings/GeneralSettings.ui:251
+#: settings/GeneralSettings.ui:297
 #, kde-format
 msgid "All dialogs will be shown again"
 msgstr "모든 대화 상자를 다시 표시합니다"
 
 #. i18n: ectx: property (text), widget (QPushButton, enableAllMessagesButton)
-#: settings/GeneralSettings.ui:254
+#: settings/GeneralSettings.ui:300
 #, kde-format
 msgid "Enable all \"Don't Ask Again\" messages"
 msgstr "모든 \"다시 묻지 않음\" 메시지 활성화"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowWindowTitleOnTitleBar)
-#. i18n: ectx: label, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:282 settings/konsole.kcfg:17
-#, kde-format
-msgid "Show window title on the titlebar"
-msgstr "제목 표시줄에 창 제목 표시"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableSecuritySensitiveDBusAPI)
-#. i18n: ectx: label, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:289 settings/konsole.kcfg:47
-#, kde-format
-msgid "Enable the security sensitive parts of the DBus API"
-msgstr "보안에 민감한 DBus API 활성화"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RemoveWindowTitleBarAndFrame)
-#. i18n: ectx: label, entry (RemoveWindowTitleBarAndFrame), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:296 settings/konsole.kcfg:9
-#, kde-format
-msgid "Remove window titlebar and frame"
-msgstr "창 제목 표시줄과 프레임 숨기기"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchRegExpression)
-#. i18n: ectx: label, entry (SearchRegExpression), group (SearchSettings)
-#: settings/GeneralSettings.ui:309 settings/konsole.kcfg:89
-#, kde-format
-msgid "Match using regular expressions"
-msgstr "정규 표현식 일치"
 
 #. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:18
@@ -2996,7 +2997,7 @@ msgstr "컨테이너에서 실행 중인 탭을 별도 색상으로 표시"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ShowContainerTabColor)
 #. i18n: ectx: tooltip, entry (ShowContainerTabColor), group (TabBar)
-#: settings/konsole.kcfg:209 settings/TabBarSettings.ui:301
+#: settings/konsole.kcfg:209 settings/TabBarSettings.ui:322
 #, kde-format
 msgid ""
 "When running inside a container (e.g. Distrobox or Toolbox), color-code the "
@@ -3007,14 +3008,14 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowContainerStatusBar)
 #. i18n: ectx: label, entry (ShowContainerStatusBar), group (TabBar)
-#: settings/konsole.kcfg:213 settings/TabBarSettings.ui:314
+#: settings/konsole.kcfg:213 settings/TabBarSettings.ui:335
 #, kde-format
 msgid "Show container label in terminal footer"
 msgstr "터미널 바닥글에 컨테이너 레이블 표시"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ShowContainerStatusBar)
 #. i18n: ectx: tooltip, entry (ShowContainerStatusBar), group (TabBar)
-#: settings/konsole.kcfg:214 settings/TabBarSettings.ui:311
+#: settings/konsole.kcfg:214 settings/TabBarSettings.ui:332
 #, kde-format
 msgid ""
 "When running inside a container (e.g. Distrobox or Toolbox), show a label "
@@ -3088,13 +3089,13 @@ msgstr ""
 "지 못하게 종료될 수도 있습니다."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: settings/MemorySettings.ui:37
+#: settings/MemorySettings.ui:59
 #, kde-format
 msgid "Memory limit:"
 msgstr "메모리 제한:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_MemoryLimitValue)
-#: settings/MemorySettings.ui:44
+#: settings/MemorySettings.ui:66
 #, kde-format
 msgid " MB"
 msgstr " MB"
@@ -3198,231 +3199,231 @@ msgid "Appearance"
 msgstr "모양"
 
 #. i18n: ectx: property (text), widget (QLabel, showTabBarLabel)
-#: settings/TabBarSettings.ui:53
+#: settings/TabBarSettings.ui:56
 #, kde-format
 msgid "Show:"
 msgstr "표시:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowTabBarWhenNeeded)
-#: settings/TabBarSettings.ui:63
+#: settings/TabBarSettings.ui:68
 #, kde-format
 msgid "When needed"
 msgstr "필요할 때"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysShowTabBar)
-#: settings/TabBarSettings.ui:73
+#: settings/TabBarSettings.ui:78
 #, kde-format
 msgid "Alwa&ys"
 msgstr "항상(&Y)"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysHideTabBar)
-#: settings/TabBarSettings.ui:83
+#: settings/TabBarSettings.ui:88
 #, kde-format
 msgid "&Never"
 msgstr "사용 안 함(&N)"
 
 #. i18n: ectx: property (text), widget (QLabel, positionLabel)
-#: settings/TabBarSettings.ui:109
+#: settings/TabBarSettings.ui:116
 #, kde-format
 msgid "Position:"
 msgstr "위치:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Top)
-#: settings/TabBarSettings.ui:119
+#: settings/TabBarSettings.ui:128
 #, kde-format
 msgid "Above terminal area"
 msgstr "터미널 영역 위"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Bottom)
-#: settings/TabBarSettings.ui:129
+#: settings/TabBarSettings.ui:138
 #, kde-format
 msgid "Be&low terminal area"
 msgstr "터미널 영역 아래(&L)"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Left)
-#: settings/TabBarSettings.ui:139
+#: settings/TabBarSettings.ui:148
 #, kde-format
 msgid "To the left of terminal area"
 msgstr "터미널 영역 왼쪽"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Right)
-#: settings/TabBarSettings.ui:149
+#: settings/TabBarSettings.ui:158
 #, kde-format
 msgid "To the &right of terminal area"
 msgstr "터미널 영역 오른쪽(&R)"
 
 #. i18n: ectx: property (text), widget (QLabel, showCloseTabButtonLabel)
-#: settings/TabBarSettings.ui:175
+#: settings/TabBarSettings.ui:186
 #, kde-format
 msgid "Show Close Tab button:"
 msgstr "탭 닫기 단추 표시:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnEachTab)
-#: settings/TabBarSettings.ui:185
+#: settings/TabBarSettings.ui:198
 #, kde-format
 msgid "On ea&ch tab"
 msgstr "각각 탭마다(&C)"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnTabBar)
-#: settings/TabBarSettings.ui:195
+#: settings/TabBarSettings.ui:208
 #, kde-format
 msgid "On &the tab bar"
 msgstr "탭 표시줄에(&T)"
 
 #. i18n: ectx: property (text), widget (QRadioButton, None)
-#: settings/TabBarSettings.ui:205
+#: settings/TabBarSettings.ui:218
 #, kde-format
 msgctxt "Do not show a close button"
 msgid "None"
 msgstr "없음"
 
 #. i18n: ectx: property (text), widget (QLabel, showSearchTabsButtonLabel)
-#: settings/TabBarSettings.ui:231
+#: settings/TabBarSettings.ui:246
 #, kde-format
 msgid "Show Search Tabs button:"
 msgstr "탭 검색 단추 표시:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSearchTabsButton)
-#: settings/TabBarSettings.ui:241
+#: settings/TabBarSettings.ui:258
 #, kde-format
 msgid "Always"
 msgstr "항상"
 
 #. i18n: ectx: property (text), widget (QRadioButton, HideSearchTabsButton)
-#: settings/TabBarSettings.ui:251
+#: settings/TabBarSettings.ui:268
 #, kde-format
 msgid "Never"
 msgstr "하지 않음"
 
 #. i18n: ectx: property (text), widget (QLabel, miscellaneousAppearanceLabel)
 #. i18n: ectx: property (text), widget (QLabel, miscellaneousBehaviorLabel)
-#: settings/TabBarSettings.ui:277 settings/TabBarSettings.ui:430
+#: settings/TabBarSettings.ui:296 settings/TabBarSettings.ui:464
 #, kde-format
 msgctxt "@item:intext Miscellaneous Options"
 msgid "Miscellaneous:"
 msgstr "기타:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_NewTabButton)
-#: settings/TabBarSettings.ui:287
+#: settings/TabBarSettings.ui:308
 #, kde-format
 msgid "Show 'New Tab' button"
 msgstr "'새 탭' 단추 표시"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ExpandTabWidth)
-#: settings/TabBarSettings.ui:294
+#: settings/TabBarSettings.ui:315
 #, kde-format
 msgid "Expand individual tab widths to full window"
 msgstr "개별 탭 너비를 전체 창으로 확장"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowContainerTabColor)
-#: settings/TabBarSettings.ui:304
+#: settings/TabBarSettings.ui:325
 #, kde-format
 msgid "Color-code tab when inside a container"
 msgstr "컨테이너에 있을 때 탭을 별도 색상으로 표시"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabBarUseUserStyleSheet)
-#: settings/TabBarSettings.ui:321
+#: settings/TabBarSettings.ui:342
 #, kde-format
 msgid "Use user-defined stylesheet:"
 msgstr "사용자 정의 스타일시트 사용:"
 
 #. i18n: ectx: property (placeholderText), widget (KUrlRequester, kcfg_TabBarUserStyleSheetFile)
-#: settings/TabBarSettings.ui:347
+#: settings/TabBarSettings.ui:370
 #, kde-format
 msgctxt "@item:intext Optional file path is empty"
 msgid "(none)"
 msgstr "(없음)"
 
 #. i18n: ectx: attribute (title), widget (QWidget, behaviorTab)
-#: settings/TabBarSettings.ui:370
+#: settings/TabBarSettings.ui:397
 #, kde-format
 msgctxt "@title:tab Tab bar settings"
 msgid "Behavior"
 msgstr "행동"
 
 #. i18n: ectx: property (text), widget (QLabel, putNewTabsLabel)
-#: settings/TabBarSettings.ui:384
+#: settings/TabBarSettings.ui:414
 #, kde-format
 msgid "Put new tabs:"
 msgstr "새 탭 위치:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAtTheEnd)
-#: settings/TabBarSettings.ui:394
+#: settings/TabBarSettings.ui:426
 #, kde-format
 msgid "At &the end"
 msgstr "맨 끝에(&T)"
 
 #. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAfterCurrentTab)
-#: settings/TabBarSettings.ui:404
+#: settings/TabBarSettings.ui:436
 #, kde-format
 msgid "After current &tab"
 msgstr "현재 탭 뒤에(&T)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_CloseTabOnMiddleMouseButton)
-#: settings/TabBarSettings.ui:440
+#: settings/TabBarSettings.ui:474
 #, kde-format
 msgid "Close tab on middle-click"
 msgstr "가운데 단추를 클릭했을 때 탭 닫기"
 
 #. i18n: ectx: attribute (title), widget (QWidget, splitTab)
-#: settings/TabBarSettings.ui:463
+#: settings/TabBarSettings.ui:497
 #, kde-format
 msgid "Splits"
 msgstr "분할"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: settings/TabBarSettings.ui:469
+#: settings/TabBarSettings.ui:505
 #, kde-format
 msgid "Show Header:"
 msgstr "머리글 표시:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSplitHeaderWhenNeeded)
-#: settings/TabBarSettings.ui:476
+#: settings/TabBarSettings.ui:514
 #, kde-format
 msgctxt "@option:radio When needed show the split header"
 msgid "When needed"
 msgstr "필요할 때"
 
+#. i18n: ectx: property (text), widget (QRadioButton, AlwaysShowSplitHeader)
+#: settings/TabBarSettings.ui:524
+#, kde-format
+msgctxt "@option:radio Always show the split header"
+msgid "Always"
+msgstr "항상"
+
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysHideSplitHeader)
-#: settings/TabBarSettings.ui:486
+#: settings/TabBarSettings.ui:534
 #, kde-format
 msgctxt "@option:radio Never show the split header"
 msgid "Never"
 msgstr "하지 않음"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: settings/TabBarSettings.ui:512
+#: settings/TabBarSettings.ui:562
 #, kde-format
 msgid "Drag Handle Size:"
 msgstr "드래그 핸들 크기:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleSmall)
-#: settings/TabBarSettings.ui:522
+#: settings/TabBarSettings.ui:574
 #, kde-format
 msgctxt "@option:radio Small height/width of splitter widget"
 msgid "Small"
 msgstr "작게"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleMedium)
-#: settings/TabBarSettings.ui:532
+#: settings/TabBarSettings.ui:584
 #, kde-format
 msgctxt "@option:radio Medium height/width of splitter widget"
 msgid "Medium"
 msgstr "중간"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleLarge)
-#: settings/TabBarSettings.ui:542
+#: settings/TabBarSettings.ui:594
 #, kde-format
 msgctxt "@option:radio Large height/width of splitter widget"
 msgid "Large"
 msgstr "크게"
-
-#. i18n: ectx: property (text), widget (QRadioButton, AlwaysShowSplitHeader)
-#: settings/TabBarSettings.ui:565
-#, kde-format
-msgctxt "@option:radio Always show the split header"
-msgid "Always"
-msgstr "항상"
 
 #: settings/TemporaryFilesSettings.cpp:31
 #, kde-format
@@ -3441,32 +3442,26 @@ msgid "User cache directory (%1)"
 msgstr "사용자 캐시 디렉터리(%1)"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
-#: settings/TemporaryFilesSettings.ui:25
+#: settings/TemporaryFilesSettings.ui:28
 #, kde-format
 msgid "Scrollback file location:"
 msgstr "스크롤백 파일 위치:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, kcfg_scrollbackUseSpecifiedLocation)
-#: settings/TemporaryFilesSettings.ui:64
+#: settings/TemporaryFilesSettings.ui:72
 #, kde-format
 msgctxt "@option:radio Custom (file location); followed by text entry field"
 msgid "Custom:"
 msgstr "사용자 정의:"
 
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: settings/ThumbnailsSettings.ui:17
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableThumbnails)
+#: settings/ThumbnailsSettings.ui:19
 #, kde-format
-msgid "Size:"
-msgstr "크기:"
-
-#. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_ThumbnailSize)
-#: settings/ThumbnailsSettings.ui:24
-#, kde-format
-msgid "px"
-msgstr "픽셀"
+msgid "Enable thumbnails generation"
+msgstr "섬네일 생성 활성화"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
-#: settings/ThumbnailsSettings.ui:37
+#: settings/ThumbnailsSettings.ui:28
 #, kde-format
 msgid ""
 "<html><head/><body><p>To use this feature, enable <span style=\" font-"
@@ -3477,41 +3472,47 @@ msgstr ""
 "font-weight:600;\">마우스-&gt;기타-&gt;파일에 밑줄 긋기</span>를 활성화해야 "
 "합니다.</p></body></html>"
 
-#. i18n: ectx: property (text), widget (QLabel, label_2)
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: settings/ThumbnailsSettings.ui:46
+#, kde-format
+msgid "Size:"
+msgstr "크기:"
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_ThumbnailSize)
 #: settings/ThumbnailsSettings.ui:53
+#, kde-format
+msgid "px"
+msgstr "픽셀"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: settings/ThumbnailsSettings.ui:66
 #, kde-format
 msgid "Activation:"
 msgstr "활성화:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
-#: settings/ThumbnailsSettings.ui:63
+#: settings/ThumbnailsSettings.ui:78
 #, kde-format
 msgid "Mouse hover plus"
 msgstr "마우스가 지나다닐 때 다음 키 누름"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ThumbnailShift)
-#: settings/ThumbnailsSettings.ui:70
+#: settings/ThumbnailsSettings.ui:85
 #, kde-format
 msgid "Shift"
 msgstr "Shift"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ThumbnailAlt)
-#: settings/ThumbnailsSettings.ui:77
+#: settings/ThumbnailsSettings.ui:92
 #, kde-format
 msgid "Alt"
 msgstr "Alt"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ThumbnailCtrl)
-#: settings/ThumbnailsSettings.ui:84
+#: settings/ThumbnailsSettings.ui:99
 #, kde-format
 msgid "Ctrl"
 msgstr "Ctrl"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableThumbnails)
-#: settings/ThumbnailsSettings.ui:93
-#, kde-format
-msgid "Enable thumbnails generation"
-msgstr "섬네일 생성 활성화"
 
 #: terminalDisplay/TerminalDisplay.cpp:708
 #, kde-format
@@ -3949,43 +3950,43 @@ msgid "Miscellaneous:"
 msgstr "기타:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableReverseUrlHints)
-#: widgets/EditProfileAdvancedPage.ui:164
+#: widgets/EditProfileAdvancedPage.ui:166
 #, kde-format
 msgid "Number URL hints in reverse, starting from the bottom"
 msgstr "맨 밑에서부터 URL 힌트 번호 부여"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableReverseUrlHints)
-#: widgets/EditProfileAdvancedPage.ui:167
+#: widgets/EditProfileAdvancedPage.ui:169
 #, kde-format
 msgid "Reverse URL hint numbering"
 msgstr "역순으로 URL 힌트 번호 부여"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBlinkingTextButton)
-#: widgets/EditProfileAdvancedPage.ui:180
+#: widgets/EditProfileAdvancedPage.ui:182
 #, kde-format
 msgid "Allow terminal programs to create blinking sections of text"
 msgstr "터미널 프로그램이 깜빡이는 텍스트를 만들도록 허용"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBlinkingTextButton)
-#: widgets/EditProfileAdvancedPage.ui:183
+#: widgets/EditProfileAdvancedPage.ui:185
 #, kde-format
 msgid "Allow blinking text"
 msgstr "깜빡이는 텍스트 허용"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableFlowControlButton)
-#: widgets/EditProfileAdvancedPage.ui:196
+#: widgets/EditProfileAdvancedPage.ui:198
 #, kde-format
 msgid "Allow the output to be suspended by pressing Ctrl+S"
 msgstr "Ctrl+S 키를 눌렀을 때 출력 일시 중단 허용"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableFlowControlButton)
-#: widgets/EditProfileAdvancedPage.ui:199
+#: widgets/EditProfileAdvancedPage.ui:201
 #, kde-format
 msgid "Flow control"
 msgstr "흐름 제어"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableKittyKeyboardButton)
-#: widgets/EditProfileAdvancedPage.ui:212
+#: widgets/EditProfileAdvancedPage.ui:214
 #, kde-format
 msgid ""
 "Allow terminal programs to use the Kitty keyboard protocol for enhanced "
@@ -3994,57 +3995,57 @@ msgstr ""
 "향상된 키보드 입력을 위하여 터미널 앱에서 Kitty 키보드 프로토콜 사용 허용"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableKittyKeyboardButton)
-#: widgets/EditProfileAdvancedPage.ui:215
+#: widgets/EditProfileAdvancedPage.ui:217
 #, kde-format
 msgid "Kitty keyboard protocol"
 msgstr "Kitty 키보드 프로토콜"
 
 #. i18n: ectx: property (text), widget (QLabel, label_14)
-#: widgets/EditProfileAdvancedPage.ui:238
+#: widgets/EditProfileAdvancedPage.ui:242
 #, kde-format
 msgid "&Default character encoding:"
 msgstr "기본 문자 인코딩(&D):"
 
 #. i18n: ectx: property (text), widget (QLabel, peekPrimaryLabel)
-#: widgets/EditProfileAdvancedPage.ui:258
+#: widgets/EditProfileAdvancedPage.ui:262
 #, kde-format
 msgid "Shortcut for peeking the primary screen:"
 msgstr "주 화면을 엿보는 단축키:"
 
 #. i18n: ectx: property (text), widget (QLabel, autoSaveIntervalLabel)
-#: widgets/EditProfileAdvancedPage.ui:271
+#: widgets/EditProfileAdvancedPage.ui:282
 #, kde-format
 msgid "Set interval between autosaves:"
 msgstr "자동 저장 간격:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, autoSaveIntervalWidget)
-#: widgets/EditProfileAdvancedPage.ui:278
+#: widgets/EditProfileAdvancedPage.ui:289
 #, kde-format
 msgid " ms"
 msgstr "밀리초"
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
-#: widgets/EditProfileAdvancedPage.ui:291
+#: widgets/EditProfileAdvancedPage.ui:302
 #, kde-format
 msgid "Line Numbers:"
 msgstr "줄 번호:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsNever)
-#: widgets/EditProfileAdvancedPage.ui:301
+#: widgets/EditProfileAdvancedPage.ui:314
 #, kde-format
 msgctxt "Never"
 msgid "&Never"
 msgstr "사용 안 함(&N)"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsURL)
-#: widgets/EditProfileAdvancedPage.ui:311
+#: widgets/EditProfileAdvancedPage.ui:324
 #, kde-format
 msgctxt "When showing URL hints"
 msgid "When &URL hints show"
 msgstr "URL 힌트 표시(&U)"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsAlways)
-#: widgets/EditProfileAdvancedPage.ui:321
+#: widgets/EditProfileAdvancedPage.ui:334
 #, kde-format
 msgctxt "Always"
 msgid "A&lways"
@@ -4080,8 +4081,8 @@ msgstr "선택한 색 구성표를 편집합니다"
 #. i18n: ectx: property (text), widget (QPushButton, textEditorCustomBtn)
 #. i18n: ectx: property (text), widget (QPushButton, editColorSchemeButton)
 #: widgets/EditProfileAppearancePage.ui:82
-#: widgets/EditProfileGeneralPage.ui:276 widgets/EditProfileKeyboardPage.ui:73
-#: widgets/EditProfileMousePage.ui:395
+#: widgets/EditProfileGeneralPage.ui:231 widgets/EditProfileKeyboardPage.ui:73
+#: widgets/EditProfileMousePage.ui:433
 #, kde-format
 msgid "Edit..."
 msgstr "편집..."
@@ -4170,95 +4171,95 @@ msgid "Cursor"
 msgstr "커서"
 
 #. i18n: ectx: property (text), widget (QLabel, label_8)
-#: widgets/EditProfileAppearancePage.ui:229
+#: widgets/EditProfileAppearancePage.ui:245
 #, kde-format
 msgid "Shape:"
 msgstr "형태:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, cursorShapeBlock)
-#: widgets/EditProfileAppearancePage.ui:239
+#: widgets/EditProfileAppearancePage.ui:257
 #, kde-format
 msgctxt "A solid rectangular"
 msgid "Block"
 msgstr "블록"
 
 #. i18n: ectx: property (text), widget (QRadioButton, cursorShapeIBeam)
-#: widgets/EditProfileAppearancePage.ui:249
+#: widgets/EditProfileAppearancePage.ui:267
 #, kde-format
 msgctxt "A vertical line on the left edge"
 msgid "I-Beam"
 msgstr "I 빔"
 
 #. i18n: ectx: property (text), widget (QRadioButton, cursorShapeUnderline)
-#: widgets/EditProfileAppearancePage.ui:259
+#: widgets/EditProfileAppearancePage.ui:277
 #, kde-format
 msgctxt "A hortizonal line on the bottom edge"
 msgid "Underline"
 msgstr "밑줄"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
-#: widgets/EditProfileAppearancePage.ui:291
+#: widgets/EditProfileAppearancePage.ui:295
 #, kde-format
 msgctxt "Cursor color options"
 msgid "Color:"
 msgstr "색상:"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, autoCursorColorButton)
-#: widgets/EditProfileAppearancePage.ui:307
+#: widgets/EditProfileAppearancePage.ui:313
 #, kde-format
 msgid "Set the cursor to match the color of the character underneath it."
 msgstr "커서가 위치한 곳에 있는 글자색과 커서의 색을 일치시킵니다."
 
 #. i18n: ectx: property (text), widget (QRadioButton, autoCursorColorButton)
-#: widgets/EditProfileAppearancePage.ui:310
+#: widgets/EditProfileAppearancePage.ui:316
 #, kde-format
 msgid "Match current character"
 msgstr "현재 글자와 맞추기"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, customCursorColorButton)
-#: widgets/EditProfileAppearancePage.ui:326
+#: widgets/EditProfileAppearancePage.ui:332
 #, kde-format
 msgid "Use a custom, fixed color for the cursor"
 msgstr "커서에 사용자 정의 고정 색상을 사용합니다"
 
 #. i18n: ectx: property (text), widget (QRadioButton, customCursorColorButton)
-#: widgets/EditProfileAppearancePage.ui:329
+#: widgets/EditProfileAppearancePage.ui:335
 #, kde-format
 msgid "Custom cursor color"
 msgstr "사용자 정의 커서 색상"
 
 #. i18n: ectx: property (text), widget (QLabel, customCursorColorLabel)
-#: widgets/EditProfileAppearancePage.ui:360
+#: widgets/EditProfileAppearancePage.ui:366
 #, kde-format
 msgid "Cursor:"
 msgstr "커서:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, customColorSelectButton)
-#: widgets/EditProfileAppearancePage.ui:373
+#: widgets/EditProfileAppearancePage.ui:379
 #, kde-format
 msgid "Select the color used to draw the cursor"
 msgstr "커서를 그릴 색상을 선택하십시오"
 
 #. i18n: ectx: property (text), widget (QLabel, customCursorTextColorLabel)
-#: widgets/EditProfileAppearancePage.ui:393
+#: widgets/EditProfileAppearancePage.ui:399
 #, kde-format
 msgid "Text:"
 msgstr "텍스트:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, customTextColorSelectButton)
-#: widgets/EditProfileAppearancePage.ui:406
+#: widgets/EditProfileAppearancePage.ui:412
 #, kde-format
 msgid "Select the color used to draw the character underneath the cursor"
 msgstr "글자 아래 커서를 그릴 색상을 선택하십시오"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: widgets/EditProfileAppearancePage.ui:431
+#: widgets/EditProfileAppearancePage.ui:423
 #, kde-format
 msgid "Blinking:"
 msgstr "깜빡임:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBlinkingCursorButton)
-#: widgets/EditProfileAppearancePage.ui:447
+#: widgets/EditProfileAppearancePage.ui:439
 #, kde-format
 msgid "Make the cursor blink regularly"
 msgstr "주기적으로 커서를 깜빡이게 합니다"
@@ -4266,41 +4267,83 @@ msgstr "주기적으로 커서를 깜빡이게 합니다"
 #. i18n: ectx: property (text), widget (QCheckBox, enableBlinkingCursorButton)
 #. i18n: ectx: property (text), widget (QCheckBox, enableAnimatingCursorButton)
 #. i18n: ectx: property (text), widget (QCheckBox, alignToCenterButton)
-#: widgets/EditProfileAppearancePage.ui:450
-#: widgets/EditProfileAppearancePage.ui:476
-#: widgets/EditProfileAppearancePage.ui:759
+#: widgets/EditProfileAppearancePage.ui:442
+#: widgets/EditProfileAppearancePage.ui:468
+#: widgets/EditProfileAppearancePage.ui:546
 #, kde-format
 msgid "Enabled"
 msgstr "사용함"
 
 #. i18n: ectx: property (text), widget (QLabel, label_12)
-#: widgets/EditProfileAppearancePage.ui:457
+#: widgets/EditProfileAppearancePage.ui:449
 #, kde-format
 msgid "Animation:"
 msgstr "애니메이션:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableAnimatingCursorButton)
-#: widgets/EditProfileAppearancePage.ui:473
+#: widgets/EditProfileAppearancePage.ui:465
 #, kde-format
 msgid "Make the cursor animate smoothly"
 msgstr "커서 깜빡임을 부드럽게 만들기"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #. i18n: ectx: attribute (title), widget (QWidget, miscTab)
-#: widgets/EditProfileAppearancePage.ui:499 widgets/EditProfileMousePage.ui:327
+#: widgets/EditProfileAppearancePage.ui:510 widgets/EditProfileMousePage.ui:346
 #, kde-format
 msgctxt "Items that do not fit in other categories"
 msgid "Miscellaneous"
 msgstr "기타"
 
+#. i18n: ectx: property (title), widget (QGroupBox, contentsGroup)
+#: widgets/EditProfileAppearancePage.ui:521
+#, kde-format
+msgctxt "@title:group"
+msgid "Terminal contents"
+msgstr "터미널 내용"
+
+#. i18n: ectx: property (text), widget (QLabel, lineSpacingLabel)
+#: widgets/EditProfileAppearancePage.ui:533
+#, kde-format
+msgid "Line spacing:"
+msgstr "줄 간격:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+#: widgets/EditProfileAppearancePage.ui:559
+#, kde-format
+msgid "Margins:"
+msgstr "여백:"
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, marginsSpinner)
+#. i18n: ectx: property (suffix), widget (QSpinBox, lineSpacingSpinner)
+#. i18n: ectx: property (suffix), widget (QSpinBox, badgeFontSizeSpinner)
+#: widgets/EditProfileAppearancePage.ui:577
+#: widgets/EditProfileAppearancePage.ui:613
+#: widgets/EditProfileAppearancePage.ui:1302
+#, kde-format
+msgctxt "(pixels) visual size unit"
+msgid " px"
+msgstr "픽셀"
+
+#. i18n: ectx: property (toolTip), widget (QSpinBox, lineSpacingSpinner)
+#: widgets/EditProfileAppearancePage.ui:610
+#, kde-format
+msgid "The number of pixels between two lines"
+msgstr "두 줄 사이의 픽셀 단위 간격"
+
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+#: widgets/EditProfileAppearancePage.ui:647
+#, kde-format
+msgid "Align to center:"
+msgstr "가운데 정렬:"
+
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: widgets/EditProfileAppearancePage.ui:510
+#: widgets/EditProfileAppearancePage.ui:681
 #, kde-format
 msgid "Window:"
 msgstr "창:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, showTerminalSizeHintButton)
-#: widgets/EditProfileAppearancePage.ui:517
+#: widgets/EditProfileAppearancePage.ui:690
 #, kde-format
 msgid ""
 "Show terminal size in columns and lines in the center of window after "
@@ -4308,146 +4351,111 @@ msgid ""
 msgstr "창 크기를 조정한 후 터미널 크기를 가로 및 세로 글자 수로 표시"
 
 #. i18n: ectx: property (text), widget (QCheckBox, showTerminalSizeHintButton)
-#: widgets/EditProfileAppearancePage.ui:520
+#: widgets/EditProfileAppearancePage.ui:693
 #, kde-format
 msgid "Show hint for terminal size after resizing"
 msgstr "창 크기를 조정한 후 터미널 크기 힌트 표시"
 
-#. i18n: ectx: property (text), widget (QCheckBox, invertSelectionColorsCheckbox)
-#: widgets/EditProfileAppearancePage.ui:527
+#. i18n: ectx: property (text), widget (QCheckBox, displayVerticalLine)
+#: widgets/EditProfileAppearancePage.ui:702
 #, kde-format
-msgid "Always invert the colors of selected text"
-msgstr "항상 선택한 텍스트의 색상 반전"
+msgid "Display Vertical line at column:"
+msgstr "다음 열에 수직선 표시:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_10)
+#: widgets/EditProfileAppearancePage.ui:733
+#, kde-format
+msgid "Inactive Terminals:"
+msgstr "비활성 터미널:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, dimWhenInactiveCheckbox)
+#: widgets/EditProfileAppearancePage.ui:745
+#, kde-format
+msgid "Indicate whether the window is active by dimming the colors"
+msgstr "창 활성화 여부를 색을 어둡게 하여 나타내기"
+
+#. i18n: ectx: property (text), widget (QCheckBox, dimWhenInactiveCheckbox)
+#: widgets/EditProfileAppearancePage.ui:748
+#, kde-format
+msgid "Darken"
+msgstr "어둡게"
 
 #. i18n: ectx: property (text), widget (QLabel, dimLabel)
-#: widgets/EditProfileAppearancePage.ui:536
+#: widgets/EditProfileAppearancePage.ui:757
 #, kde-format
 msgid "Darkening strength:"
 msgstr "어둡게 하기 강도:"
 
+#. i18n: ectx: property (text), widget (QLabel, label_11)
+#: widgets/EditProfileAppearancePage.ui:784
+#, kde-format
+msgid "Active Terminals:"
+msgstr "활성 터미널:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, borderWhenActiveCheckbox)
+#: widgets/EditProfileAppearancePage.ui:796
+#, kde-format
+msgid "Indicate whether the window is active by drawing a border"
+msgstr "창 활성화 여부를 색을 경계선을 그려서 나타내기"
+
+#. i18n: ectx: property (text), widget (QCheckBox, borderWhenActiveCheckbox)
+#: widgets/EditProfileAppearancePage.ui:799
+#, kde-format
+msgid "Border"
+msgstr "경계선"
+
 #. i18n: ectx: property (text), widget (QLabel, borderLabel)
-#: widgets/EditProfileAppearancePage.ui:569
+#: widgets/EditProfileAppearancePage.ui:814
 #, kde-format
 msgctxt "Border color options"
 msgid "Color:"
 msgstr "색상:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, focusBorderColor)
-#: widgets/EditProfileAppearancePage.ui:585
+#: widgets/EditProfileAppearancePage.ui:830
 #, kde-format
 msgid "Select the color used to draw the border"
 msgstr "경계선을 그릴 색상을 선택하십시오"
 
-#. i18n: ectx: property (text), widget (QLabel, label_10)
-#: widgets/EditProfileAppearancePage.ui:607
+#. i18n: ectx: property (text), widget (QCheckBox, invertSelectionColorsCheckbox)
+#: widgets/EditProfileAppearancePage.ui:854
 #, kde-format
-msgid "Inactive Terminals:"
-msgstr "비활성 터미널:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_11)
-#: widgets/EditProfileAppearancePage.ui:617
-#, kde-format
-msgid "Active Terminals:"
-msgstr "활성 터미널:"
-
-#. i18n: ectx: property (title), widget (QGroupBox, contentsGroup)
-#: widgets/EditProfileAppearancePage.ui:627
-#, kde-format
-msgctxt "@title:group"
-msgid "Terminal contents"
-msgstr "터미널 내용"
-
-#. i18n: ectx: property (text), widget (QLabel, lineSpacingLabel)
-#: widgets/EditProfileAppearancePage.ui:639
-#, kde-format
-msgid "Line spacing:"
-msgstr "줄 간격:"
-
-#. i18n: ectx: property (toolTip), widget (QSpinBox, lineSpacingSpinner)
-#: widgets/EditProfileAppearancePage.ui:657
-#, kde-format
-msgid "The number of pixels between two lines"
-msgstr "두 줄 사이의 픽셀 단위 간격"
-
-#. i18n: ectx: property (suffix), widget (QSpinBox, lineSpacingSpinner)
-#. i18n: ectx: property (suffix), widget (QSpinBox, marginsSpinner)
-#. i18n: ectx: property (suffix), widget (QSpinBox, badgeFontSizeSpinner)
-#: widgets/EditProfileAppearancePage.ui:660
-#: widgets/EditProfileAppearancePage.ui:712
-#: widgets/EditProfileAppearancePage.ui:1239
-#, kde-format
-msgctxt "(pixels) visual size unit"
-msgid " px"
-msgstr "픽셀"
-
-#. i18n: ectx: property (text), widget (QLabel, label_4)
-#: widgets/EditProfileAppearancePage.ui:694
-#, kde-format
-msgid "Margins:"
-msgstr "여백:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_5)
-#: widgets/EditProfileAppearancePage.ui:746
-#, kde-format
-msgid "Align to center:"
-msgstr "가운데 정렬:"
-
-#. i18n: ectx: property (toolTip), widget (QCheckBox, dimWhenInactiveCheckbox)
-#: widgets/EditProfileAppearancePage.ui:769
-#, kde-format
-msgid "Indicate whether the window is active by dimming the colors"
-msgstr "창 활성화 여부를 색을 어둡게 하여 나타내기"
-
-#. i18n: ectx: property (text), widget (QCheckBox, dimWhenInactiveCheckbox)
-#: widgets/EditProfileAppearancePage.ui:772
-#, kde-format
-msgid "Darken"
-msgstr "어둡게"
-
-#. i18n: ectx: property (toolTip), widget (QCheckBox, borderWhenActiveCheckbox)
-#: widgets/EditProfileAppearancePage.ui:779
-#, kde-format
-msgid "Indicate whether the window is active by drawing a border"
-msgstr "창 활성화 여부를 색을 경계선을 그려서 나타내기"
-
-#. i18n: ectx: property (text), widget (QCheckBox, borderWhenActiveCheckbox)
-#: widgets/EditProfileAppearancePage.ui:782
-#, kde-format
-msgid "Border"
-msgstr "경계선"
-
-#. i18n: ectx: property (text), widget (QCheckBox, displayVerticalLine)
-#: widgets/EditProfileAppearancePage.ui:824
-#, kde-format
-msgid "Display Vertical line at column:"
-msgstr "다음 열에 수직선 표시:"
+msgid "Always invert the colors of selected text"
+msgstr "항상 선택한 텍스트의 색상 반전"
 
 #. i18n: ectx: property (toolTip), widget (QWidget, CTLtab)
-#: widgets/EditProfileAppearancePage.ui:869
+#: widgets/EditProfileAppearancePage.ui:882
 #, kde-format
 msgid "<html><head/><body><p>Complex Text Layout</p></body></html>"
 msgstr "<html><head/><body><p>복합 텍스트 레이아웃</p></body></html>"
 
 #. i18n: ectx: attribute (title), widget (QWidget, CTLtab)
-#: widgets/EditProfileAppearancePage.ui:872
+#: widgets/EditProfileAppearancePage.ui:885
 #, kde-format
 msgid "Complex Text Layout"
 msgstr "복합 텍스트 레이아웃"
 
+#. i18n: ectx: property (text), widget (QLabel, charactersLabel)
+#: widgets/EditProfileAppearancePage.ui:909
+#, fuzzy, kde-format
+#| msgid "Word characters:"
+msgid "Characters:"
+msgstr "단어 글자:"
+
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
-#: widgets/EditProfileAppearancePage.ui:887
+#: widgets/EditProfileAppearancePage.ui:924
 #, kde-format
 msgid "Enable word mode text rendering"
 msgstr "단어 모드 텍스트 렌더링 활성화"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
-#: widgets/EditProfileAppearancePage.ui:890
+#: widgets/EditProfileAppearancePage.ui:927
 #, kde-format
 msgid "Word mode"
 msgstr "단어 모드"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAttr)
-#: widgets/EditProfileAppearancePage.ui:903
+#: widgets/EditProfileAppearancePage.ui:940
 #, kde-format
 msgid ""
 "Ignore attribute changes mid-word (otherwise, attribute changes break word "
@@ -4457,25 +4465,25 @@ msgstr ""
 "를 자름)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
-#: widgets/EditProfileAppearancePage.ui:906
+#: widgets/EditProfileAppearancePage.ui:943
 #, kde-format
 msgid "Use the same attributes for whole word"
 msgstr "전체 단어에 같은 속성 사용"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
-#: widgets/EditProfileAppearancePage.ui:919
+#: widgets/EditProfileAppearancePage.ui:956
 #, kde-format
 msgid "Render words of ASCII characters together"
 msgstr "ASCII 글자 단어를 같이 렌더"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
-#: widgets/EditProfileAppearancePage.ui:922
+#: widgets/EditProfileAppearancePage.ui:959
 #, kde-format
 msgid "ASCII characters "
 msgstr "ASCII 글자"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeCoding)
-#: widgets/EditProfileAppearancePage.ui:935
+#: widgets/EditProfileAppearancePage.ui:972
 #, kde-format
 msgid ""
 "Render words made of characters that usually appear in coding ligatures "
@@ -4483,25 +4491,25 @@ msgid ""
 msgstr "코딩 합자에 자주 나타나는 문자가 포함된 단어를 같이 렌더합니다."
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeCoding)
-#: widgets/EditProfileAppearancePage.ui:938
+#: widgets/EditProfileAppearancePage.ui:975
 #, kde-format
 msgid "Coding ligatures characters"
 msgstr "코딩 합자 문자"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
-#: widgets/EditProfileAppearancePage.ui:951
+#: widgets/EditProfileAppearancePage.ui:988
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
 msgstr "브라흐미 문자 글자 단어를 같이 렌더"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
-#: widgets/EditProfileAppearancePage.ui:954
+#: widgets/EditProfileAppearancePage.ui:991
 #, kde-format
 msgid "Brahmic scripts characters"
 msgstr "브라흐미 문자 글자"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, fontHinting)
-#: widgets/EditProfileAppearancePage.ui:967
+#: widgets/EditProfileAppearancePage.ui:1004
 #, kde-format
 msgid ""
 "Apply hinting to glyphs when rendering, which may improve the legibility of "
@@ -4511,19 +4519,27 @@ msgstr ""
 "시킬 수 있습니다"
 
 #. i18n: ectx: property (text), widget (QCheckBox, fontHinting)
-#: widgets/EditProfileAppearancePage.ui:970
+#: widgets/EditProfileAppearancePage.ui:1007
 #, kde-format
 msgid "Font hinting"
 msgstr "글꼴 힌팅"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
-#: widgets/EditProfileAppearancePage.ui:983
+#: widgets/EditProfileAppearancePage.ui:1022
 #, kde-format
 msgid "Emoji Font:"
 msgstr "이모지 글꼴:"
 
+#. i18n: ectx: property (text), widget (QLabel, renderingLabel)
+#: widgets/EditProfileAppearancePage.ui:1048
+#, fuzzy, kde-format
+#| msgctxt "A hortizonal line on the bottom edge"
+#| msgid "Underline"
+msgid "Rendering:"
+msgstr "밑줄"
+
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
-#: widgets/EditProfileAppearancePage.ui:1009
+#: widgets/EditProfileAppearancePage.ui:1063
 #, kde-format
 msgid ""
 "Enable Bi-Directional display on terminals (valid for Arabic, Farsi or "
@@ -4532,90 +4548,78 @@ msgstr ""
 "아랍어, 페르시아어, 히브리어 등에 필요한 양방향 디스플레이를 활성화합니다."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiRenderingButton)
-#: widgets/EditProfileAppearancePage.ui:1012
+#: widgets/EditProfileAppearancePage.ui:1066
 #, kde-format
 msgid "Bi-Directional text rendering"
 msgstr "양방향 텍스트 렌더링"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
-#: widgets/EditProfileAppearancePage.ui:1025
+#: widgets/EditProfileAppearancePage.ui:1079
 #, kde-format
 msgid "Lines are always LTR, rather than determined by first strong character"
 msgstr "첫 강조 문자로 결정하지 않고 줄은 항상 LTR임"
 
 #. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
-#: widgets/EditProfileAppearancePage.ui:1028
+#: widgets/EditProfileAppearancePage.ui:1082
 #, kde-format
 msgid "force LTR line direction"
 msgstr "강제 LTR 줄 방향 사용"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
-#: widgets/EditProfileAppearancePage.ui:1041
+#: widgets/EditProfileAppearancePage.ui:1095
 #, kde-format
 msgid "Treat table drawing characters as strong LTR."
 msgstr "표 그리기 문자를 강한 LTR로 간주합니다."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
-#: widgets/EditProfileAppearancePage.ui:1044
+#: widgets/EditProfileAppearancePage.ui:1098
 #, kde-format
 msgid "Table characters BiDi mode override"
 msgstr "표 문자 BiDi 모드 재정의"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
-#: widgets/EditProfileAppearancePage.ui:1057
+#: widgets/EditProfileAppearancePage.ui:1111
 #, kde-format
 msgid "Ignore wcwidth of problematic characters"
 msgstr "문제가 되는 글자의 wcwidth 무시"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ignoreWcWidth)
-#: widgets/EditProfileAppearancePage.ui:1060
+#: widgets/EditProfileAppearancePage.ui:1114
 #, kde-format
 msgid "Override wcwidth"
 msgstr "wcwidth 재정의"
 
 #. i18n: ectx: property (toolTip), widget (QWidget, badgeTab)
-#: widgets/EditProfileAppearancePage.ui:1081
+#: widgets/EditProfileAppearancePage.ui:1158
 #, kde-format
 msgid "<html><head/><body><p>Badge overlay options</p></body></html>"
 msgstr "<html><head/><body><p>배지 오버레이 옵션</p></body></html>"
 
 #. i18n: ectx: attribute (title), widget (QWidget, badgeTab)
 #. i18n: ectx: property (text), widget (QCheckBox, badgeEnabled)
-#: widgets/EditProfileAppearancePage.ui:1084
-#: widgets/EditProfileAppearancePage.ui:1114
+#: widgets/EditProfileAppearancePage.ui:1161
+#: widgets/EditProfileAppearancePage.ui:1425
 #, kde-format
 msgid "Badge Overlay"
 msgstr "배지 오버레이"
 
-#. i18n: ectx: property (text), widget (QLabel, badgeOverlayLabel)
-#: widgets/EditProfileAppearancePage.ui:1094
-#, kde-format
-msgid "Badge Overlay Options"
-msgstr "배지 오버레이 옵션"
-
-#. i18n: ectx: property (toolTip), widget (QCheckBox, badgeEnabled)
-#: widgets/EditProfileAppearancePage.ui:1111
-#, kde-format
-msgid "Enable badge overlay rendering"
-msgstr "배지 오버레이 렌더링 활성화"
-
 #. i18n: ectx: property (toolTip), widget (QLabel, badge_label_1)
 #. i18n: ectx: property (toolTip), widget (QLineEdit, badgeTextEdit)
-#: widgets/EditProfileAppearancePage.ui:1121
-#: widgets/EditProfileAppearancePage.ui:1142
+#: widgets/EditProfileAppearancePage.ui:1185
+#: widgets/EditProfileAppearancePage.ui:1208
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Default text of badge."
 msgstr "배지의 기본 텍스트입니다."
 
 #. i18n: ectx: property (text), widget (QLabel, badge_label_1)
-#: widgets/EditProfileAppearancePage.ui:1124
+#: widgets/EditProfileAppearancePage.ui:1188
 #, kde-format
 msgid "Badge text:"
 msgstr "배지 텍스트:"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeVariablesHelpLabel)
-#: widgets/EditProfileAppearancePage.ui:1150
+#: widgets/EditProfileAppearancePage.ui:1215
 #, kde-format
 msgid ""
 "<html><head/><body><p><small><b>Available variables:</b> \\(session.title), "
@@ -4629,7 +4633,7 @@ msgstr ""
 "html>"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeEscapeSequenceHelpLabel)
-#: widgets/EditProfileAppearancePage.ui:1170
+#: widgets/EditProfileAppearancePage.ui:1234
 #, kde-format
 msgid ""
 "<html><head/><body><p><small><b>Badge configuration:</b><br/>Use profile "
@@ -4642,66 +4646,72 @@ msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QLabel, badge_label_2)
 #. i18n: ectx: property (toolTip), widget (QLineEdit, badgeFontEdit)
-#: widgets/EditProfileAppearancePage.ui:1190
-#: widgets/EditProfileAppearancePage.ui:1211
+#: widgets/EditProfileAppearancePage.ui:1255
+#: widgets/EditProfileAppearancePage.ui:1276
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Badge font family."
 msgstr "배지 글꼴 종류입니다."
 
 #. i18n: ectx: property (text), widget (QLabel, badge_label_2)
-#: widgets/EditProfileAppearancePage.ui:1193
+#: widgets/EditProfileAppearancePage.ui:1258
 #, kde-format
 msgid "Badge font family:"
 msgstr "배지 글꼴 종류:"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeFontSizeLabel)
-#: widgets/EditProfileAppearancePage.ui:1226
+#: widgets/EditProfileAppearancePage.ui:1289
 #, kde-format
 msgid "Badge font size:"
 msgstr "배지 글꼴 크기:"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeColorLabel)
-#: widgets/EditProfileAppearancePage.ui:1256
+#: widgets/EditProfileAppearancePage.ui:1318
 #, kde-format
 msgid "Badge color:"
 msgstr "배지 색상:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, badgeColorSelectButton)
-#: widgets/EditProfileAppearancePage.ui:1269
+#: widgets/EditProfileAppearancePage.ui:1333
 #, kde-format
 msgid "Select the color used to draw the badge"
 msgstr "배지를 그릴 색상을 선택하십시오"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, badgeTextOnlyCheckBox)
-#: widgets/EditProfileAppearancePage.ui:1283
+#: widgets/EditProfileAppearancePage.ui:1346
 #, kde-format
 msgid "Display badge as text only without background rectangle"
 msgstr "배지를 배경 사각형 없이 텍스트로만 표시"
 
 #. i18n: ectx: property (text), widget (QCheckBox, badgeTextOnlyCheckBox)
-#: widgets/EditProfileAppearancePage.ui:1286
+#: widgets/EditProfileAppearancePage.ui:1349
 #, kde-format
 msgid "Text only (no background)"
 msgstr "텍스트만(배경 없음)"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeTransparencyLabel)
-#: widgets/EditProfileAppearancePage.ui:1300
+#: widgets/EditProfileAppearancePage.ui:1364
 #, kde-format
 msgid "Transparency:"
 msgstr "투명도:"
 
 #. i18n: ectx: property (toolTip), widget (QSlider, badgeTransparencySlider)
-#: widgets/EditProfileAppearancePage.ui:1327
+#: widgets/EditProfileAppearancePage.ui:1379
 #, kde-format
 msgid "Set badge transparency (0 = fully transparent, 255 = opaque)"
 msgstr "배지 투명도 설정(0: 완전 투명, 255: 불투명)"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeTransparencyValueLabel)
-#: widgets/EditProfileAppearancePage.ui:1334
+#: widgets/EditProfileAppearancePage.ui:1404
 #, kde-format
 msgid "180"
 msgstr "180"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, badgeEnabled)
+#: widgets/EditProfileAppearancePage.ui:1422
+#, kde-format
+msgid "Enable badge overlay rendering"
+msgstr "배지 오버레이 렌더링 활성화"
 
 #: widgets/EditProfileDialog.cpp:73
 #, kde-format
@@ -4729,28 +4739,28 @@ msgstr "모양"
 msgid "Scrolling"
 msgstr "스크롤"
 
-#: widgets/EditProfileDialog.cpp:162
+#: widgets/EditProfileDialog.cpp:159
 #, kde-format
 msgid "Keyboard"
 msgstr "키보드"
 
-#: widgets/EditProfileDialog.cpp:163
+#: widgets/EditProfileDialog.cpp:160
 #, kde-format
 msgid "Key bindings"
 msgstr "키 바인딩"
 
-#: widgets/EditProfileDialog.cpp:174
+#: widgets/EditProfileDialog.cpp:171
 #, kde-format
 msgid "Mouse"
 msgstr "마우스"
 
-#: widgets/EditProfileDialog.cpp:192
+#: widgets/EditProfileDialog.cpp:189
 #, kde-format
 msgctxt "@title:tab Complex options"
 msgid "Advanced"
 msgstr "고급"
 
-#: widgets/EditProfileDialog.cpp:300
+#: widgets/EditProfileDialog.cpp:297
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -4762,124 +4772,131 @@ msgstr ""
 "파일의 권한을 바꾸거나, 프로필 이름을 변경해 새로운 프로필 설정 파일에 저장하"
 "십시오."
 
-#: widgets/EditProfileDialog.cpp:317
+#: widgets/EditProfileDialog.cpp:314
 #, kde-format
 msgctxt "@info"
 msgid "Profile Name was empty; please set a name to be able to save settings."
 msgstr "프로필 이름이 비어 있습니다. 설정을 저장할 이름을 설정하십시오."
 
-#: widgets/EditProfileDialog.cpp:325
+#: widgets/EditProfileDialog.cpp:322
 #, kde-format
 msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
 msgstr "이름이 \"%1\"인 프로필이 이미 존재합니다."
 
-#: widgets/EditProfileDialog.cpp:355
+#: widgets/EditProfileDialog.cpp:352
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
 msgstr "프로필 이름이 최대 허용된 길이를 초과합니다(%1)."
 
-#: widgets/EditProfileDialog.cpp:393
+#: widgets/EditProfileDialog.cpp:390
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
 msgstr "프로필 이름에 강조된 글자를 사용할 수 없습니다: %1"
 
-#: widgets/EditProfileDialog.cpp:429
+#: widgets/EditProfileDialog.cpp:426
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
 msgstr[0] "프로필 %1개 편집: %2"
 
-#: widgets/EditProfileDialog.cpp:433
+#: widgets/EditProfileDialog.cpp:430
 #, kde-format
 msgid "Create New Profile"
 msgstr "새 프로필 만들기"
 
-#: widgets/EditProfileDialog.cpp:436
+#: widgets/EditProfileDialog.cpp:433
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "\"%1\" 프로필 편집"
 
-#: widgets/EditProfileDialog.cpp:538
+#: widgets/EditProfileDialog.cpp:535
 #, kde-format
 msgid "None"
 msgstr "없음"
 
-#: widgets/EditProfileDialog.cpp:557
+#: widgets/EditProfileDialog.cpp:554
 #, kde-format
 msgctxt "@item number of columns"
 msgid "%v column"
 msgid_plural "%v columns"
 msgstr[0] "열 %v개"
 
-#: widgets/EditProfileDialog.cpp:558
+#: widgets/EditProfileDialog.cpp:555
 #, kde-format
 msgctxt "@item number of rows"
 msgid "%v row"
 msgid_plural "%v rows"
 msgstr[0] "행 %v개"
 
-#: widgets/EditProfileDialog.cpp:570
+#: widgets/EditProfileDialog.cpp:567
 #, kde-format
 msgid "System Bell"
 msgstr "시스템 벨"
 
-#: widgets/EditProfileDialog.cpp:570
+#: widgets/EditProfileDialog.cpp:567
 #, kde-format
 msgid "System Notifications"
 msgstr "시스템 알림:"
 
-#: widgets/EditProfileDialog.cpp:570
+#: widgets/EditProfileDialog.cpp:567
 #, kde-format
 msgid "Visual Bell"
 msgstr "벨 시각화"
 
-#: widgets/EditProfileDialog.cpp:570
+#: widgets/EditProfileDialog.cpp:567
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "벨 이벤트 무시"
 
-#: widgets/EditProfileDialog.cpp:579
+#: widgets/EditProfileDialog.cpp:576
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "%1의 새 터미널 세션의 기본 프로필"
 
-#: widgets/EditProfileDialog.cpp:686
+#: widgets/EditProfileDialog.cpp:683
 #, kde-format
 msgid "Edit Environment"
 msgstr "환경 편집"
 
-#: widgets/EditProfileDialog.cpp:687
+#: widgets/EditProfileDialog.cpp:684
 #, kde-format
 msgid "One environment variable per line"
 msgstr "한 줄에 환경 변수 하나씩"
 
-#: widgets/EditProfileDialog.cpp:720
+#: widgets/EditProfileDialog.cpp:717
 #, kde-format
 msgctxt "@item number of seconds"
 msgid "%v second"
 msgid_plural "%v seconds"
 msgstr[0] "%v초"
 
-#: widgets/EditProfileDialog.cpp:850
+#: widgets/EditProfileDialog.cpp:847
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "초기 디렉터리 선택"
 
-#: widgets/EditProfileDialog.cpp:1012
+#: widgets/EditProfileDialog.cpp:1001
 #, kde-format
 msgid "Get New..."
 msgstr "새 항목 가져오기..."
 
-#: widgets/EditProfileDialog.cpp:1461
+#: widgets/EditProfileDialog.cpp:1422
+#, fuzzy, kde-format
+#| msgid "System Bell"
+msgctxt "Default emoji font placeholder"
+msgid "System Default"
+msgstr "시스템 벨"
+
+#: widgets/EditProfileDialog.cpp:1455
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "배열 <resource>%1</resource>을(를) 불러올 수 없습니다."
 
-#: widgets/EditProfileDialog.cpp:1643
+#: widgets/EditProfileDialog.cpp:1637
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4888,7 +4905,7 @@ msgstr ""
 "이 색 구성표는 현재 데스크톱 환경에서 지원하지 않는 투명 배경을 사용하고 있습"
 "니다"
 
-#: widgets/EditProfileDialog.cpp:1649
+#: widgets/EditProfileDialog.cpp:1643
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4897,12 +4914,12 @@ msgstr ""
 "데스크톱 효과를 활성화하기 전에 Konsole을 시작했습니다. 투명한 배경을 보려면 "
 "Konsole을 다시 시작해야 합니다."
 
-#: widgets/EditProfileDialog.cpp:2061
+#: widgets/EditProfileDialog.cpp:2055
 #, kde-format
 msgid "Default for file type"
 msgstr "파일 형식 기본값"
 
-#: widgets/EditProfileDialog.cpp:2087
+#: widgets/EditProfileDialog.cpp:2081
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4930,7 +4947,7 @@ msgstr ""
 "PATH 또는 LINE이 명령에 없으면, 이 설정을 무시하고 \n"
 "기본 텍스트 편집기로 파일을 엽니다."
 
-#: widgets/EditProfileDialog.cpp:2100
+#: widgets/EditProfileDialog.cpp:2094
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "텍스트 편집기 사용자 정의 명령"
@@ -4941,39 +4958,14 @@ msgstr "텍스트 편집기 사용자 정의 명령"
 msgid "General Settings"
 msgstr "일반 설정"
 
-#. i18n: ectx: property (toolTip), widget (QPushButton, iconSelectButton)
-#: widgets/EditProfileGeneralPage.ui:66
-#, kde-format
-msgid "Select the icon displayed on tabs using this profile"
-msgstr "이 프로필을 사용했을 때 탭에 표시할 아이콘"
-
-#. i18n: ectx: property (toolTip), widget (QLineEdit, profileNameEdit)
-#: widgets/EditProfileGeneralPage.ui:84
-#, kde-format
-msgid "A descriptive name for the profile"
-msgstr "프로필을 설명할 수 있는 이름"
-
-#. i18n: ectx: property (placeholderText), widget (QLineEdit, profileNameEdit)
-#: widgets/EditProfileGeneralPage.ui:87
-#, kde-format
-msgctxt "@label:textbox"
-msgid "Profile name"
-msgstr "프로필 이름"
-
-#. i18n: ectx: property (text), widget (QCheckBox, setAsDefaultButton)
-#: widgets/EditProfileGeneralPage.ui:94
-#, kde-format
-msgid "Default Profile"
-msgstr "기본 프로필"
-
 #. i18n: ectx: property (text), widget (QLabel, label_3)
-#: widgets/EditProfileGeneralPage.ui:125
+#: widgets/EditProfileGeneralPage.ui:85
 #, kde-format
 msgid "Command:"
 msgstr "명령:"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, commandEdit)
-#: widgets/EditProfileGeneralPage.ui:138
+#: widgets/EditProfileGeneralPage.ui:98
 #, kde-format
 msgid ""
 "The command to execute when new terminal sessions are created using this "
@@ -4981,44 +4973,44 @@ msgid ""
 msgstr "이 프로필을 사용해서 새 터미널 세션을 만들었을 때 실행시킬 명령"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, commandEdit)
-#: widgets/EditProfileGeneralPage.ui:144
+#: widgets/EditProfileGeneralPage.ui:104
 #, kde-format
 msgid "/bin/sh"
 msgstr "/bin/sh"
 
 #. i18n: ectx: property (text), widget (QLabel, label_9)
-#: widgets/EditProfileGeneralPage.ui:157
+#: widgets/EditProfileGeneralPage.ui:117
 #, kde-format
 msgid "I&nitial directory:"
 msgstr "초기 디렉터리(&N):"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, initialDirEdit)
-#: widgets/EditProfileGeneralPage.ui:170
+#: widgets/EditProfileGeneralPage.ui:134
 #, kde-format
 msgid ""
 "The initial working directory for new terminal sessions using this profile"
 msgstr "이 프로필을 사용해서 새 터미널 세션을 만들었을 때 초기 디렉터리"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, initialDirEdit)
-#: widgets/EditProfileGeneralPage.ui:176
+#: widgets/EditProfileGeneralPage.ui:140
 #, kde-format
 msgid "/home/username"
 msgstr "/home/username"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, dirSelectButton)
-#: widgets/EditProfileGeneralPage.ui:183
+#: widgets/EditProfileGeneralPage.ui:147
 #, kde-format
 msgid "Choose the initial directory"
 msgstr "초기 디렉터리 선택"
 
 #. i18n: ectx: property (text), widget (QCheckBox, startInSameDirButton)
-#: widgets/EditProfileGeneralPage.ui:193
+#: widgets/EditProfileGeneralPage.ui:159
 #, kde-format
 msgid "Start in same directory as current session"
 msgstr "현재 세션과 같은 디렉터리에서 시작하기"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, inheritContainerButton)
-#: widgets/EditProfileGeneralPage.ui:200
+#: widgets/EditProfileGeneralPage.ui:166
 #, kde-format
 msgid ""
 "When opening a new tab or split, automatically enter the same container "
@@ -5028,44 +5020,44 @@ msgstr ""
 "로 자동으로 진입"
 
 #. i18n: ectx: property (text), widget (QCheckBox, inheritContainerButton)
-#: widgets/EditProfileGeneralPage.ui:203
+#: widgets/EditProfileGeneralPage.ui:169
 #, kde-format
 msgid "Enter same container as current session"
 msgstr "현재 세션과 같은 컨테이너로 들어가기"
 
 #. i18n: ectx: property (text), widget (QLabel, containerLabel)
-#: widgets/EditProfileGeneralPage.ui:229
+#: widgets/EditProfileGeneralPage.ui:184
 #, kde-format
 msgid "Always start in container:"
 msgstr "항상 컨테이너에서 시작:"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, containerCombo)
-#: widgets/EditProfileGeneralPage.ui:242
+#: widgets/EditProfileGeneralPage.ui:197
 #, kde-format
 msgid ""
 "Always start new sessions using this profile inside the selected container"
 msgstr "이 프로필을 사용하는 새 세션을 항상 선택한 컨테이너 내에서 시작"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
-#: widgets/EditProfileGeneralPage.ui:255
+#: widgets/EditProfileGeneralPage.ui:210
 #, kde-format
 msgid "Environment:"
 msgstr "환경:"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, environmentEditButton)
-#: widgets/EditProfileGeneralPage.ui:273
+#: widgets/EditProfileGeneralPage.ui:228
 #, kde-format
 msgid "Edit the list of environment variables and associated values"
 msgstr "환경 변수와 값 목록 편집"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
-#: widgets/EditProfileGeneralPage.ui:320
+#: widgets/EditProfileGeneralPage.ui:259
 #, kde-format
 msgid "Initial terminal si&ze:"
 msgstr "초기 터미널 크기(&Z):"
 
 #. i18n: ectx: property (text), widget (QLabel, useCurrentWindowSizeNote)
-#: widgets/EditProfileGeneralPage.ui:395
+#: widgets/EditProfileGeneralPage.ui:336
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -5078,31 +5070,56 @@ msgstr ""
 "body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, terminalBellLabel)
-#: widgets/EditProfileGeneralPage.ui:411
+#: widgets/EditProfileGeneralPage.ui:354
 #, kde-format
 msgid "&Terminal bell mode:"
 msgstr "터미널 벨 모드(&T):"
 
+#. i18n: ectx: property (toolTip), widget (QPushButton, iconSelectButton)
+#: widgets/EditProfileGeneralPage.ui:389
+#, kde-format
+msgid "Select the icon displayed on tabs using this profile"
+msgstr "이 프로필을 사용했을 때 탭에 표시할 아이콘"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, profileNameEdit)
+#: widgets/EditProfileGeneralPage.ui:407
+#, kde-format
+msgid "A descriptive name for the profile"
+msgstr "프로필을 설명할 수 있는 이름"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, profileNameEdit)
+#: widgets/EditProfileGeneralPage.ui:410
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Profile name"
+msgstr "프로필 이름"
+
+#. i18n: ectx: property (text), widget (QCheckBox, setAsDefaultButton)
+#: widgets/EditProfileGeneralPage.ui:417
+#, kde-format
+msgid "Default Profile"
+msgstr "기본 프로필"
+
 #. i18n: ectx: attribute (title), widget (QWidget, semantic)
-#: widgets/EditProfileGeneralPage.ui:429
+#: widgets/EditProfileGeneralPage.ui:461
 #, kde-format
 msgid "Semantic Integration"
 msgstr "시맨틱 통합"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticUpDown)
-#: widgets/EditProfileGeneralPage.ui:435
+#: widgets/EditProfileGeneralPage.ui:491
 #, kde-format
 msgid "Up/Down Arrows emulation"
 msgstr "위/아래 화살표 에뮬레이션"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticInputClick)
-#: widgets/EditProfileGeneralPage.ui:442
+#: widgets/EditProfileGeneralPage.ui:498
 #, kde-format
 msgid "Mouse click in input line moves cursor"
 msgstr "입력 줄에 마우스 클릭 시 커서 이동"
 
 #. i18n: ectx: property (text), widget (QLabel, label_8)
-#: widgets/EditProfileGeneralPage.ui:455
+#: widgets/EditProfileGeneralPage.ui:513
 #, kde-format
 msgid "Semantic hints:"
 msgstr "시맨틱 힌트:"
@@ -5112,9 +5129,9 @@ msgstr "시맨틱 힌트:"
 #. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundNever)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsNever)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundNever)
-#: widgets/EditProfileGeneralPage.ui:465 widgets/EditProfileGeneralPage.ui:511
-#: widgets/EditProfileGeneralPage.ui:557 widgets/EditProfileGeneralPage.ui:603
-#: widgets/EditProfileGeneralPage.ui:649
+#: widgets/EditProfileGeneralPage.ui:525 widgets/EditProfileGeneralPage.ui:575
+#: widgets/EditProfileGeneralPage.ui:625 widgets/EditProfileGeneralPage.ui:675
+#: widgets/EditProfileGeneralPage.ui:725
 #, kde-format
 msgctxt "Never"
 msgid "Never"
@@ -5125,9 +5142,9 @@ msgstr "하지 않음"
 #. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundURL)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsURL)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundURL)
-#: widgets/EditProfileGeneralPage.ui:475 widgets/EditProfileGeneralPage.ui:521
-#: widgets/EditProfileGeneralPage.ui:567 widgets/EditProfileGeneralPage.ui:613
-#: widgets/EditProfileGeneralPage.ui:659
+#: widgets/EditProfileGeneralPage.ui:535 widgets/EditProfileGeneralPage.ui:585
+#: widgets/EditProfileGeneralPage.ui:635 widgets/EditProfileGeneralPage.ui:685
+#: widgets/EditProfileGeneralPage.ui:735
 #, kde-format
 msgctxt "When showing URL hints"
 msgid "When URL hints show"
@@ -5138,34 +5155,34 @@ msgstr "URL 힌트 표시"
 #. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundAlways)
-#: widgets/EditProfileGeneralPage.ui:485 widgets/EditProfileGeneralPage.ui:531
-#: widgets/EditProfileGeneralPage.ui:577 widgets/EditProfileGeneralPage.ui:623
-#: widgets/EditProfileGeneralPage.ui:669
+#: widgets/EditProfileGeneralPage.ui:545 widgets/EditProfileGeneralPage.ui:595
+#: widgets/EditProfileGeneralPage.ui:645 widgets/EditProfileGeneralPage.ui:695
+#: widgets/EditProfileGeneralPage.ui:745
 #, kde-format
 msgctxt "Always"
 msgid "Always"
 msgstr "항상"
 
 #. i18n: ectx: property (text), widget (QLabel, label_20)
-#: widgets/EditProfileGeneralPage.ui:501
+#: widgets/EditProfileGeneralPage.ui:563
 #, kde-format
 msgid "Red error bars:"
 msgstr "빨간 오류 표시줄:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_30)
-#: widgets/EditProfileGeneralPage.ui:547
+#: widgets/EditProfileGeneralPage.ui:613
 #, kde-format
 msgid "Red error background:"
 msgstr "빨간 오류 배경:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_40)
-#: widgets/EditProfileGeneralPage.ui:593
+#: widgets/EditProfileGeneralPage.ui:663
 #, kde-format
 msgid "Alternating bars:"
 msgstr "전환되는 표시줄:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
-#: widgets/EditProfileGeneralPage.ui:639
+#: widgets/EditProfileGeneralPage.ui:713
 #, kde-format
 msgid "Alternating background:"
 msgstr "전환되는 배경:"
@@ -5223,7 +5240,7 @@ msgstr "텍스트 활동"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, label_11)
 #. i18n: ectx: property (toolTip), widget (QLineEdit, wordCharacterEdit)
-#: widgets/EditProfileMousePage.ui:50 widgets/EditProfileMousePage.ui:71
+#: widgets/EditProfileMousePage.ui:53 widgets/EditProfileMousePage.ui:74
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -5233,154 +5250,154 @@ msgstr ""
 "두 번 클릭하여 터미널에서 단어를 선택할 때 단어의 일부로 간주할 문자입니다."
 
 #. i18n: ectx: property (text), widget (QLabel, label_11)
-#: widgets/EditProfileMousePage.ui:53
+#: widgets/EditProfileMousePage.ui:56
 #, kde-format
 msgid "Word characters:"
 msgstr "단어 글자:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
-#: widgets/EditProfileMousePage.ui:94
+#: widgets/EditProfileMousePage.ui:97
 #, kde-format
 msgid "Triple-click selects:"
 msgstr "세 번 클릭해서 선택:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, tripleClickSelectsTheWholeLine)
-#: widgets/EditProfileMousePage.ui:104
+#: widgets/EditProfileMousePage.ui:109
 #, kde-format
 msgid "&The whole line"
 msgstr "전체 줄(&T)"
 
 #. i18n: ectx: property (text), widget (QRadioButton, tripleClickSelectsFromMousePosition)
-#: widgets/EditProfileMousePage.ui:114
+#: widgets/EditProfileMousePage.ui:119
 #, kde-format
 msgid "From mouse position to the end of &line"
 msgstr "마우스 위치부터 줄 끝까지(&L)"
 
 #. i18n: ectx: property (text), widget (QLabel, label_13)
-#: widgets/EditProfileMousePage.ui:140
+#: widgets/EditProfileMousePage.ui:147
 #, kde-format
 msgid "Middle-click pastes:"
 msgstr "가운데 단추 클릭으로 붙여넣기:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, pasteFromClipboardButton)
-#: widgets/EditProfileMousePage.ui:150
+#: widgets/EditProfileMousePage.ui:159
 #, kde-format
 msgid "From clipboard"
 msgstr "클립보드에서"
 
 #. i18n: ectx: property (text), widget (QRadioButton, pasteFromX11SelectionButton)
-#: widgets/EditProfileMousePage.ui:160
+#: widgets/EditProfileMousePage.ui:169
 #, kde-format
 msgid "From selection"
 msgstr "선택에서"
 
 #. i18n: ectx: property (text), widget (QLabel, rightClickPasteLabel)
-#: widgets/EditProfileMousePage.ui:186
+#: widgets/EditProfileMousePage.ui:197
 #, kde-format
 msgid "Right-click:"
 msgstr "오른쪽 단추 클릭:"
 
-#. i18n: ectx: property (text), widget (QRadioButton, rightClickPasteDisabledButton)
-#: widgets/EditProfileMousePage.ui:196
-#, kde-format
-msgid "Opens context menu"
-msgstr "상황에 맞는 메뉴 열기"
-
 #. i18n: ectx: property (toolTip), widget (QRadioButton, rightClickPasteDisabledButton)
-#: widgets/EditProfileMousePage.ui:199
+#: widgets/EditProfileMousePage.ui:209
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Right-click shows context menu"
 msgstr "오른쪽 클릭으로 상황에 맞는 메뉴 표시"
 
-#. i18n: ectx: property (text), widget (QRadioButton, rightClickPasteFromClipboardButton)
-#: widgets/EditProfileMousePage.ui:209
+#. i18n: ectx: property (text), widget (QRadioButton, rightClickPasteDisabledButton)
+#: widgets/EditProfileMousePage.ui:212
 #, kde-format
-msgid "Pastes from clipboard"
-msgstr "클립보드에서 붙여넣기"
+msgid "Opens context menu"
+msgstr "상황에 맞는 메뉴 열기"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, rightClickPasteFromClipboardButton)
 #. i18n: ectx: property (toolTip), widget (QRadioButton, rightClickPasteFromX11SelectionButton)
-#: widgets/EditProfileMousePage.ui:212 widgets/EditProfileMousePage.ui:225
+#: widgets/EditProfileMousePage.ui:222 widgets/EditProfileMousePage.ui:235
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Control+right-click shows context menu"
 msgstr "Ctrl+오른쪽 단추 클릭 시 상황에 맞는 메뉴 표시"
 
+#. i18n: ectx: property (text), widget (QRadioButton, rightClickPasteFromClipboardButton)
+#: widgets/EditProfileMousePage.ui:225
+#, kde-format
+msgid "Pastes from clipboard"
+msgstr "클립보드에서 붙여넣기"
+
 #. i18n: ectx: property (text), widget (QRadioButton, rightClickPasteFromX11SelectionButton)
-#: widgets/EditProfileMousePage.ui:222
+#: widgets/EditProfileMousePage.ui:238
 #, kde-format
 msgid "Pastes from selection"
 msgstr "선택 영역에서 붙여넣기"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: widgets/EditProfileMousePage.ui:251
+#: widgets/EditProfileMousePage.ui:266
 #, kde-format
 msgid "Copy options:"
 msgstr "복사 설정:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, copyTextToClipboardButton)
-#: widgets/EditProfileMousePage.ui:261
+#: widgets/EditProfileMousePage.ui:278
 #, kde-format
 msgid "Automatically copy selected text into clipboard"
 msgstr "클립보드에 선택한 텍스트 자동으로 복사"
 
 #. i18n: ectx: property (text), widget (QCheckBox, copyTextToClipboardButton)
-#: widgets/EditProfileMousePage.ui:264
+#: widgets/EditProfileMousePage.ui:281
 #, kde-format
 msgid "Copy on select"
 msgstr "선택할 때 복사"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, copyTextAsHTMLButton)
-#: widgets/EditProfileMousePage.ui:271
+#: widgets/EditProfileMousePage.ui:288
 #, kde-format
 msgid "Copy text as HTML (including formatting, font faces, colors... etc)"
 msgstr "텍스트를 HTML로 복사(양식, 글꼴, 색상 등 포함)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, copyTextAsHTMLButton)
-#: widgets/EditProfileMousePage.ui:274
+#: widgets/EditProfileMousePage.ui:291
 #, kde-format
 msgid "Copy text as HTML"
 msgstr "텍스트를 HTML로 복사"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, trimLeadingSpacesButton)
-#: widgets/EditProfileMousePage.ui:281
+#: widgets/EditProfileMousePage.ui:298
 #, kde-format
 msgid "Trim leading spaces in selected text, useful in some instances"
 msgstr "선택한 텍스트 앞에 있는 공백을 제거합니다"
 
 #. i18n: ectx: property (text), widget (QCheckBox, trimLeadingSpacesButton)
-#: widgets/EditProfileMousePage.ui:284
+#: widgets/EditProfileMousePage.ui:301
 #, kde-format
 msgid "Trim leading spaces"
 msgstr "앞선 공백 제거"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, trimTrailingSpacesButton)
-#: widgets/EditProfileMousePage.ui:291
+#: widgets/EditProfileMousePage.ui:308
 #, kde-format
 msgid "Trim trailing spaces in selected text, useful in some instances"
 msgstr "선택한 텍스트 뒤에 있는 공백을 제거합니다"
 
 #. i18n: ectx: property (text), widget (QCheckBox, trimTrailingSpacesButton)
-#: widgets/EditProfileMousePage.ui:294
+#: widgets/EditProfileMousePage.ui:311
 #, kde-format
 msgid "Trim trailing spaces"
 msgstr "뒤따르는 공백 제거"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, clearSelectionButton)
-#: widgets/EditProfileMousePage.ui:301
+#: widgets/EditProfileMousePage.ui:318
 #, kde-format
 msgid "Clear selection after copying"
 msgstr "복사 후 선택 해제"
 
 #. i18n: ectx: property (text), widget (QCheckBox, clearSelectionButton)
-#: widgets/EditProfileMousePage.ui:304
+#: widgets/EditProfileMousePage.ui:321
 #, kde-format
 msgid "Clear selection"
 msgstr "선택 해제"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, underlineLinksButton)
-#: widgets/EditProfileMousePage.ui:341
+#: widgets/EditProfileMousePage.ui:360
 #, kde-format
 msgid ""
 "Text recognized as a link or an email address will be underlined when "
@@ -5390,13 +5407,13 @@ msgstr ""
 "표시됩니다."
 
 #. i18n: ectx: property (text), widget (QCheckBox, underlineLinksButton)
-#: widgets/EditProfileMousePage.ui:344
+#: widgets/EditProfileMousePage.ui:363
 #, kde-format
 msgid "Underline links"
 msgstr "링크에 밑줄 긋기"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, underlineFilesButton)
-#: widgets/EditProfileMousePage.ui:351
+#: widgets/EditProfileMousePage.ui:370
 #, kde-format
 msgid ""
 "Text recognized as a file will be underlined when hovered by the mouse "
@@ -5405,27 +5422,13 @@ msgstr ""
 "파일로 감지되는 텍스트는 마우스 포인터를 올려 두었을 때 밑줄이 표시됩니다."
 
 #. i18n: ectx: property (text), widget (QCheckBox, underlineFilesButton)
-#: widgets/EditProfileMousePage.ui:354
+#: widgets/EditProfileMousePage.ui:373
 #, kde-format
 msgid "Underline files"
 msgstr "파일에 밑줄 긋기"
 
-#. i18n: ectx: property (toolTip), widget (QLabel, textEditorCommandLabel)
-#. i18n: ectx: property (toolTip), widget (QComboBox, textEditorCombo)
-#: widgets/EditProfileMousePage.ui:363 widgets/EditProfileMousePage.ui:382
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Text editor to use when opening text file URLs at a given line/column."
-msgstr "텍스트 파일 URL의 지정한 행/열을 열 때 사용할 텍스트 편집기입니다."
-
-#. i18n: ectx: property (text), widget (QLabel, textEditorCommandLabel)
-#: widgets/EditProfileMousePage.ui:366
-#, kde-format
-msgid "Text Editor Command: "
-msgstr "텍스트 편집기 명령:"
-
 #. i18n: ectx: property (toolTip), widget (QCheckBox, openLinksByDirectClickButton)
-#: widgets/EditProfileMousePage.ui:410
+#: widgets/EditProfileMousePage.ui:386
 #, kde-format
 msgid ""
 "Text recognized as a file, link or an email address can be opened by direct "
@@ -5434,19 +5437,33 @@ msgstr ""
 "파일, 링크나 이메일 주소로 감지되는 텍스트를 마우스로 클릭했을 때 엽니다."
 
 #. i18n: ectx: property (text), widget (QCheckBox, openLinksByDirectClickButton)
-#: widgets/EditProfileMousePage.ui:413
+#: widgets/EditProfileMousePage.ui:389
 #, kde-format
 msgid "Open underlined files/links by direct click"
 msgstr "직접 클릭으로 밑줄이 그어진 파일/링크 열기"
 
+#. i18n: ectx: property (toolTip), widget (QLabel, textEditorCommandLabel)
+#. i18n: ectx: property (toolTip), widget (QComboBox, textEditorCombo)
+#: widgets/EditProfileMousePage.ui:398 widgets/EditProfileMousePage.ui:420
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Text editor to use when opening text file URLs at a given line/column."
+msgstr "텍스트 파일 URL의 지정한 행/열을 열 때 사용할 텍스트 편집기입니다."
+
+#. i18n: ectx: property (text), widget (QLabel, textEditorCommandLabel)
+#: widgets/EditProfileMousePage.ui:401
+#, kde-format
+msgid "Text Editor Command: "
+msgstr "텍스트 편집기 명령:"
+
 #. i18n: ectx: property (text), widget (QCheckBox, allowLinkEscapeSequenceButton)
-#: widgets/EditProfileMousePage.ui:424
+#: widgets/EditProfileMousePage.ui:446
 #, kde-format
 msgid "Allow escape sequences for links"
 msgstr "링크에 탈출 시퀀스 허용"
 
 #. i18n: ectx: property (text), widget (QLabel, allowLinkEscapeSequenceButtonWarning)
-#: widgets/EditProfileMousePage.ui:431
+#: widgets/EditProfileMousePage.ui:453
 #, kde-format
 msgid ""
 "<b>WARNING</b>: This has security implications as it allows malicious URLs "
@@ -5458,87 +5475,19 @@ msgstr ""
 "이해해야 합니다."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: widgets/EditProfileMousePage.ui:449
+#: widgets/EditProfileMousePage.ui:471
 #, kde-format
 msgid "Allowed link formats: "
 msgstr "허용된 링크 형식: "
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, linkEscapeSequenceTexts)
-#: widgets/EditProfileMousePage.ui:459
+#: widgets/EditProfileMousePage.ui:481
 #, kde-format
 msgid "The formats of possible links, like http://, https:// and file://"
 msgstr "가능한 링크 형식(예: http://, https://, file://)"
 
-#. i18n: ectx: property (toolTip), widget (QCheckBox, ctrlRequiredForDragButton)
-#: widgets/EditProfileMousePage.ui:470
-#, kde-format
-msgid "Selected text will require control key plus click to drag."
-msgstr "선택한 텍스트를 드래그하려면 Ctrl 키를 눌러야 합니다."
-
-#. i18n: ectx: property (text), widget (QCheckBox, ctrlRequiredForDragButton)
-#: widgets/EditProfileMousePage.ui:473
-#, kde-format
-msgid "Require Ctrl key for drag && drop"
-msgstr "Ctrl 키를 누를 때에만 드래그 앤 드롭에 반응"
-
-#. i18n: ectx: property (toolTip), widget (QCheckBox, enableAlternateScrollingButton)
-#: widgets/EditProfileMousePage.ui:480
-#, kde-format
-msgid ""
-"Mouse scroll wheel will emulate up/down key presses in programs that use the "
-"Alternate Screen buffer (e.g. less)"
-msgstr ""
-"less와 같은 대체 화면 버퍼를 사용하는 프로그램에서 마우스 휠을 굴렸을 때 위/"
-"아래 화살표 키를 흉내냅니다."
-
-#. i18n: ectx: property (text), widget (QCheckBox, enableAlternateScrollingButton)
-#: widgets/EditProfileMousePage.ui:483
-#, kde-format
-msgid "Enable Alternate Screen buffer scrolling"
-msgstr "대체 화면 버퍼 스크롤링 사용"
-
-#. i18n: ectx: property (toolTip), widget (QCheckBox, dropUrlsAsText)
-#: widgets/EditProfileMousePage.ui:490
-#, kde-format
-msgid ""
-"Always paste dropped files and URLs as text without offering move, copy and "
-"link actions."
-msgstr "URL을 끌어다 놓았을 때 이동, 복사, 링크 동작 없이 항상 붙여 넣습니다."
-
-#. i18n: ectx: property (text), widget (QCheckBox, dropUrlsAsText)
-#: widgets/EditProfileMousePage.ui:493
-#, kde-format
-msgid "Disable drag && drop menu for files && URLs"
-msgstr "파일과 URL의 드래그 앤 드롭 메뉴 비활성화"
-
-#. i18n: ectx: property (toolTip), widget (QCheckBox, enableMouseWheelZoomButton)
-#: widgets/EditProfileMousePage.ui:500
-#, kde-format
-msgid "Pressing Ctrl+scrollwheel will increase/decrease the text size."
-msgstr "Ctrl+휠을 굴리면 텍스트 크기를 확대 및 축소할 수 있습니다."
-
-#. i18n: ectx: property (text), widget (QCheckBox, enableMouseWheelZoomButton)
-#: widgets/EditProfileMousePage.ui:503
-#, kde-format
-msgid "Allow Ctrl+scrollwheel to zoom text size"
-msgstr "Ctrl+휠로 텍스트 크기 조절 허용"
-
-#. i18n: ectx: property (toolTip), widget (QCheckBox, allowColorFilters)
-#: widgets/EditProfileMousePage.ui:510
-#, kde-format
-msgid ""
-"When positioning the mouse over a hexadecimal color it will be displayed in "
-"a frame next to the mouse pointer"
-msgstr "마우스를 16진수 색 위에 놓으면 마우스 포인터 옆의 프레임에 표시됩니다."
-
-#. i18n: ectx: property (text), widget (QCheckBox, allowColorFilters)
-#: widgets/EditProfileMousePage.ui:513
-#, kde-format
-msgid "Preview Colors on hover"
-msgstr "마우스가 위에 있을 때 색상 미리 보기"
-
 #. i18n: ectx: property (toolTip), widget (QCheckBox, allowMouseTrackingButton)
-#: widgets/EditProfileMousePage.ui:533
+#: widgets/EditProfileMousePage.ui:492
 #, kde-format
 msgid ""
 "Some terminal applications have mouse support, this allows them to get it by "
@@ -5548,139 +5497,214 @@ msgstr ""
 "에 이 옵션을 변경할 수도 있습니다."
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowMouseTrackingButton)
-#: widgets/EditProfileMousePage.ui:536
+#: widgets/EditProfileMousePage.ui:495
 #, kde-format
 msgid "Allow terminal applications to handle clicks and drags"
 msgstr "터미널 앱에서 클릭과 드래그 처리 활성화"
 
+#. i18n: ectx: property (toolTip), widget (QCheckBox, ctrlRequiredForDragButton)
+#: widgets/EditProfileMousePage.ui:502
+#, kde-format
+msgid "Selected text will require control key plus click to drag."
+msgstr "선택한 텍스트를 드래그하려면 Ctrl 키를 눌러야 합니다."
+
+#. i18n: ectx: property (text), widget (QCheckBox, ctrlRequiredForDragButton)
+#: widgets/EditProfileMousePage.ui:505
+#, kde-format
+msgid "Require Ctrl key for drag && drop"
+msgstr "Ctrl 키를 누를 때에만 드래그 앤 드롭에 반응"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, dropUrlsAsText)
+#: widgets/EditProfileMousePage.ui:512
+#, kde-format
+msgid ""
+"Always paste dropped files and URLs as text without offering move, copy and "
+"link actions."
+msgstr "URL을 끌어다 놓았을 때 이동, 복사, 링크 동작 없이 항상 붙여 넣습니다."
+
+#. i18n: ectx: property (text), widget (QCheckBox, dropUrlsAsText)
+#: widgets/EditProfileMousePage.ui:515
+#, kde-format
+msgid "Disable drag && drop menu for files && URLs"
+msgstr "파일과 URL의 드래그 앤 드롭 메뉴 비활성화"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, enableMouseWheelZoomButton)
+#: widgets/EditProfileMousePage.ui:522
+#, kde-format
+msgid "Pressing Ctrl+scrollwheel will increase/decrease the text size."
+msgstr "Ctrl+휠을 굴리면 텍스트 크기를 확대 및 축소할 수 있습니다."
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableMouseWheelZoomButton)
+#: widgets/EditProfileMousePage.ui:525
+#, kde-format
+msgid "Allow Ctrl+scrollwheel to zoom text size"
+msgstr "Ctrl+휠로 텍스트 크기 조절 허용"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, allowColorFilters)
+#: widgets/EditProfileMousePage.ui:532
+#, kde-format
+msgid ""
+"When positioning the mouse over a hexadecimal color it will be displayed in "
+"a frame next to the mouse pointer"
+msgstr "마우스를 16진수 색 위에 놓으면 마우스 포인터 옆의 프레임에 표시됩니다."
+
+#. i18n: ectx: property (text), widget (QCheckBox, allowColorFilters)
+#: widgets/EditProfileMousePage.ui:535
+#, kde-format
+msgid "Preview Colors on hover"
+msgstr "마우스가 위에 있을 때 색상 미리 보기"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, enableAlternateScrollingButton)
+#: widgets/EditProfileMousePage.ui:542
+#, kde-format
+msgid ""
+"Mouse scroll wheel will emulate up/down key presses in programs that use the "
+"Alternate Screen buffer (e.g. less)"
+msgstr ""
+"less와 같은 대체 화면 버퍼를 사용하는 프로그램에서 마우스 휠을 굴렸을 때 위/"
+"아래 화살표 키를 흉내냅니다."
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableAlternateScrollingButton)
+#: widgets/EditProfileMousePage.ui:545
+#, kde-format
+msgid "Enable Alternate Screen buffer scrolling"
+msgstr "대체 화면 버퍼 스크롤링 사용"
+
 #. i18n: ectx: property (text), widget (QLabel, historySizeLabel)
-#: widgets/EditProfileScrollingPage.ui:25
+#: widgets/EditProfileScrollingPage.ui:19
 #, kde-format
 msgid "Scrollback:"
 msgstr "스크롤백:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: widgets/EditProfileScrollingPage.ui:41
+#: widgets/EditProfileScrollingPage.ui:58
 #, kde-format
 msgid "Scroll Page Up/Down:"
 msgstr "한 쪽 위/아래 스크롤:"
 
-#. i18n: ectx: property (text), widget (QCheckBox, highlightScrolledLinesButton)
-#: widgets/EditProfileScrollingPage.ui:51
-#, kde-format
-msgid "Highlight the lines coming into view"
-msgstr "보기에 새로 출력되는 줄 구문 강조"
-
-#. i18n: ectx: property (suffix), widget (QDoubleSpinBox, markerSizeWidget)
-#: widgets/EditProfileScrollingPage.ui:58
-#, no-c-format, kde-format
-msgid " %"
-msgstr "%"
-
-#. i18n: ectx: property (text), widget (QRadioButton, scrollBarHiddenButton)
-#: widgets/EditProfileScrollingPage.ui:74
-#, kde-format
-msgctxt "@option:radio Hide the scroll bar"
-msgid "Hidden"
-msgstr "숨겨짐"
-
-#. i18n: ectx: property (text), widget (QLabel, labelMarkerSize)
-#: widgets/EditProfileScrollingPage.ui:84
-#, kde-format
-msgid "Size of each marker (as a percentage of scrollbar length):"
-msgstr "각각 마커의 크기(스크롤바 크기의 백분율):"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: widgets/EditProfileScrollingPage.ui:97
-#, kde-format
-msgid "Highlighting:"
-msgstr "구문 강조:"
-
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollHalfPage)
-#: widgets/EditProfileScrollingPage.ui:129
+#: widgets/EditProfileScrollingPage.ui:76
 #, kde-format
 msgid "Scroll the page the half height of window"
 msgstr "창의 절반만큼 쪽 스크롤"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollHalfPage)
-#: widgets/EditProfileScrollingPage.ui:132
+#: widgets/EditProfileScrollingPage.ui:79
 #, kde-format
 msgid "Half screen heigh&t"
 msgstr "화면 높이의 절반(&T)"
 
-#. i18n: ectx: property (text), widget (QLabel, labelMarkerColor)
-#: widgets/EditProfileScrollingPage.ui:142
-#, kde-format
-msgid "Color of scrollbar markers:"
-msgstr "스크롤바 마커 색상:"
-
-#. i18n: ectx: property (text), widget (QLabel, labelSearhcHighlighterColor)
-#: widgets/EditProfileScrollingPage.ui:168
-#, kde-format
-msgid "Color of scrollbar search highlighting lines:"
-msgstr "스크롤바 검색 강조 줄 색상:"
-
-#. i18n: ectx: property (text), widget (QLabel, labelReflowLines)
-#: widgets/EditProfileScrollingPage.ui:181
-#, kde-format
-msgid "Reflow Lines:"
-msgstr "줄 리플로:"
-
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollFullPage)
-#: widgets/EditProfileScrollingPage.ui:191
+#: widgets/EditProfileScrollingPage.ui:89
 #, kde-format
 msgid "Scroll the page the full height of window"
 msgstr "전체 창 높이만큼 쪽 스크롤"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollFullPage)
-#: widgets/EditProfileScrollingPage.ui:194
+#: widgets/EditProfileScrollingPage.ui:92
 #, kde-format
 msgid "F&ull screen height"
 msgstr "전체 화면 높이(&U)"
 
+#. i18n: ectx: property (text), widget (QLabel, labelSize)
+#: widgets/EditProfileScrollingPage.ui:126
+#, kde-format
+msgid "Scrollbar position:"
+msgstr "스크롤바 위치:"
+
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollBarRightButton)
-#: widgets/EditProfileScrollingPage.ui:215
+#: widgets/EditProfileScrollingPage.ui:138
 #, kde-format
 msgid "Show the scroll bar on the right side of the terminal window"
 msgstr "터미널 창 오른쪽에 스크롤 바 표시"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarRightButton)
-#: widgets/EditProfileScrollingPage.ui:218
+#: widgets/EditProfileScrollingPage.ui:141
 #, kde-format
 msgctxt "@option:radio Show scrollbar on the right side"
 msgid "Ri&ght side"
 msgstr "오른쪽(&G)"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollBarLeftButton)
-#: widgets/EditProfileScrollingPage.ui:238
+#: widgets/EditProfileScrollingPage.ui:151
 #, kde-format
 msgid "Show the scroll bar on the left side of the terminal window"
 msgstr "터미널 창 왼쪽에 스크롤 바 표시"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarLeftButton)
-#: widgets/EditProfileScrollingPage.ui:241
+#: widgets/EditProfileScrollingPage.ui:154
 #, kde-format
 msgctxt "@option:radio Show scrollbar on the left side"
 msgid "&Left side"
 msgstr "왼쪽(&L)"
 
+#. i18n: ectx: property (text), widget (QRadioButton, scrollBarHiddenButton)
+#: widgets/EditProfileScrollingPage.ui:164
+#, kde-format
+msgctxt "@option:radio Hide the scroll bar"
+msgid "Hidden"
+msgstr "숨겨짐"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: widgets/EditProfileScrollingPage.ui:198
+#, kde-format
+msgid "Highlighting:"
+msgstr "구문 강조:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, highlightScrolledLinesButton)
+#: widgets/EditProfileScrollingPage.ui:208
+#, kde-format
+msgid "Highlight the lines coming into view"
+msgstr "보기에 새로 출력되는 줄 구문 강조"
+
+#. i18n: ectx: property (text), widget (QLabel, labelReflowLines)
+#: widgets/EditProfileScrollingPage.ui:221
+#, kde-format
+msgid "Reflow Lines:"
+msgstr "줄 리플로:"
+
 #. i18n: ectx: property (text), widget (QCheckBox, reflowLinesButton)
-#: widgets/EditProfileScrollingPage.ui:251
+#: widgets/EditProfileScrollingPage.ui:231
 #, kde-format
 msgid "Reflow lines when terminal resizes"
 msgstr "터미널 크기 조정 시 줄 리플로"
 
-#. i18n: ectx: property (text), widget (QLabel, labelSize)
-#: widgets/EditProfileScrollingPage.ui:280
+#. i18n: ectx: property (text), widget (QLabel, labelMarkerColor)
+#: widgets/EditProfileScrollingPage.ui:254
 #, kde-format
-msgid "Scrollbar position:"
-msgstr "스크롤바 위치:"
+msgid "Color of scrollbar markers:"
+msgstr "스크롤바 마커 색상:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelSearhcHighlighterColor)
+#: widgets/EditProfileScrollingPage.ui:264
+#, kde-format
+msgid "Color of scrollbar search highlighting lines:"
+msgstr "스크롤바 검색 강조 줄 색상:"
 
 #. i18n: ectx: property (text), widget (QLabel, lableSearchHighlighterOpacity)
-#: widgets/EditProfileScrollingPage.ui:290
+#: widgets/EditProfileScrollingPage.ui:282
 #, kde-format
 msgid "Search highlighting line opacity:"
 msgstr "검색 강조 줄 불투명도:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelMarkerSize)
+#: widgets/EditProfileScrollingPage.ui:305
+#, kde-format
+msgid "Size of each marker:"
+msgstr ""
+
+#. i18n: ectx: property (suffix), widget (QDoubleSpinBox, markerSizeWidget)
+#: widgets/EditProfileScrollingPage.ui:314
+#, no-c-format, kde-format
+msgid " %"
+msgstr "%"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: widgets/EditProfileScrollingPage.ui:330
+#, fuzzy, kde-format
+#| msgid "Size of each marker (as a percentage of scrollbar length):"
+msgid "<i>Percentage of scrollbar length.</i>"
+msgstr "각각 마커의 크기(스크롤바 크기의 백분율):"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43
@@ -6089,6 +6113,9 @@ msgctxt ""
 "name"
 msgid "%1: %2"
 msgstr "%1: %2"
+
+#~ msgid "Badge Overlay Options"
+#~ msgstr "배지 오버레이 옵션"
 
 #~ msgid "Distrobox: %1"
 #~ msgstr "Distrobox: %1"
