@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-08 00:17+0000\n"
-"PO-Revision-Date: 2026-11-15 19:37+0300\n"
+"PO-Revision-Date: 2026-11-16 18:49+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -756,7 +756,7 @@ msgstr "Rengi Kopyala"
 #, kde-format
 msgctxt "Caption of hover tooltip"
 msgid "Color Preview"
-msgstr "Renk Önizlemesi"
+msgstr "Renk Ön İzlemesi"
 
 #: filterHotSpots/EscapeSequenceUrlFilterHotSpot.cpp:63
 #: filterHotSpots/UrlFilterHotspot.cpp:92
@@ -803,7 +803,7 @@ msgstr "E-posta Adresini Kopyala"
 #, kde-format
 msgctxt "@title:window"
 msgid "Select font"
-msgstr "Yazıtipi Seç"
+msgstr "Yazı Tipi Seç"
 
 #: FontDialog.cpp:37
 #, kde-format
@@ -819,8 +819,8 @@ msgid ""
 "equal width (monospace). Any non monospaced font may cause display issues. "
 "This should not be necessary except in rare cases."
 msgstr ""
-"Doğası gereği, bir uçbirim programı eş aralıklı yazıtipi karakterleri "
-"gerektirir. Tek aralıklı olmayan herhangi bir yazıtipi, görüntüleme "
+"Doğası gereği, bir uçbirim programı eş aralıklı yazı tipi karakterleri "
+"gerektirir. Tek aralıklı olmayan herhangi bir yazı tipi, görüntüleme "
 "sorunlarına neden olabilir. Nadir durumlar dışında bu gerekli olmamalıdır."
 
 #: HistorySizeDialog.cpp:25
@@ -2452,17 +2452,17 @@ msgstr "Süreç Sonlanmasını İzle"
 #: session/SessionController.cpp:941
 #, kde-format
 msgid "Enlarge Font"
-msgstr "Yazıtipi Puntosunu Büyüt"
+msgstr "Yazı Tipi Puntosunu Büyüt"
 
 #: session/SessionController.cpp:949
 #, kde-format
 msgid "Shrink Font"
-msgstr "Yazıtipi Puntosunu Küçült"
+msgstr "Yazı Tipi Puntosunu Küçült"
 
 #: session/SessionController.cpp:954
 #, kde-format
 msgid "Reset Font Size"
-msgstr "Yazıtipi Puntosunu Sıfırla"
+msgstr "Yazı Tipi Puntosunu Sıfırla"
 
 #: session/SessionController.cpp:960
 #, kde-format
@@ -2961,7 +2961,7 @@ msgstr "Sekme çubuğunun konumunu denetle"
 #: settings/konsole.kcfg:159
 #, kde-format
 msgid "Control the visual style of the tab bar"
-msgstr "Sekme çubuğunun görsel biçemini denetle"
+msgstr "Sekme çubuğunun görsel stilini denetle"
 
 #. i18n: ectx: label, entry (TabBarUseUserStyleSheet), group (TabBar)
 #: settings/konsole.kcfg:163
@@ -2973,7 +2973,7 @@ msgstr "Sekme çubuğu için kullanıcı tanımlı bir .css dosyası kullan"
 #: settings/konsole.kcfg:167
 #, kde-format
 msgid "The .css file to use for the tab bar style"
-msgstr "Sekme çubuk biçeminde kullanılmak üzere .css dosyası"
+msgstr "Sekme çubuk stilinde kullanılmak üzere .css dosyası"
 
 #. i18n: ectx: label, entry (CloseTabOnMiddleMouseButton), group (TabBar)
 #: settings/konsole.kcfg:171
@@ -3350,7 +3350,7 @@ msgstr "Kapsayıcı içindeyken sekmeyi renklerle kodla"
 #: settings/TabBarSettings.ui:321
 #, kde-format
 msgid "Use user-defined stylesheet:"
-msgstr "Kullanıcı tanımlı biçem sayfası kullan:"
+msgstr "Kullanıcı tanımlı stil sayfası kullan:"
 
 #. i18n: ectx: property (placeholderText), widget (KUrlRequester, kcfg_TabBarUserStyleSheetFile)
 #: settings/TabBarSettings.ui:347
@@ -4157,7 +4157,7 @@ msgstr "Düz yazıt ipleri"
 #: widgets/EditProfileAppearancePage.ui:181
 #, kde-format
 msgid "Draw intense colors in bold font"
-msgstr "Yoğun renkleri koyu yazıtipiyle çiz"
+msgstr "Yoğun renkleri koyu yazı tipiyle çiz"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:188
@@ -4166,7 +4166,7 @@ msgctxt ""
 "Characters for drawing lines for a frame or box in TUI programs. Not a row "
 "of characters."
 msgid "Use the selected font for line characters instead of the builtin code"
-msgstr "Yerleşik kod yerine satır karakterleri için seçili yazıtipini kullan"
+msgstr "Yerleşik kod yerine satır karakterleri için seçili yazı tipini kullan"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:191
@@ -4184,7 +4184,7 @@ msgid ""
 "Use the selected font for unicode Braille characters instead of the builtin "
 "code"
 msgstr ""
-"Yerleşik kod yerine Unicode Braille karakterleri için seçili yazıtipini "
+"Yerleşik kod yerine Unicode Braille karakterleri için seçili yazı tipini "
 "kullan"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontBrailleCharactersButton)
@@ -4555,7 +4555,7 @@ msgstr "Yazı tipi piksel hizalaması"
 #: widgets/EditProfileAppearancePage.ui:983
 #, kde-format
 msgid "Emoji Font:"
-msgstr "Emoji yazıtipi:"
+msgstr "Emoji yazı tipi:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAppearancePage.ui:1009
@@ -4675,7 +4675,7 @@ msgid ""
 "and transparency.</small></p></body></html>"
 msgstr ""
 "<html><head/><body><p><small><b>Rozet yapılandırması:</b><br/>Bu sayfadaki "
-"profil ayarlarını kullanarak rozet metnini, rengini, yazıtipini, yalnızca "
+"profil ayarlarını kullanarak rozet metnini, rengini, yazı tipini, yalnızca "
 "metin kipini ve saydamlığını yapılandırabilirsiniz.</small></p></body></html>"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, badge_label_2)
@@ -4685,19 +4685,19 @@ msgstr ""
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Badge font family."
-msgstr "Rozet yazıtipi ailesi"
+msgstr "Rozet yazı tipi ailesi"
 
 #. i18n: ectx: property (text), widget (QLabel, badge_label_2)
 #: widgets/EditProfileAppearancePage.ui:1193
 #, kde-format
 msgid "Badge font family:"
-msgstr "Rozet yazıtipi ailesi:"
+msgstr "Rozet yazı tipi ailesi:"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeFontSizeLabel)
 #: widgets/EditProfileAppearancePage.ui:1226
 #, kde-format
 msgid "Badge font size:"
-msgstr "Rozet yazıtipi puntosu:"
+msgstr "Rozet yazı tipi puntosu:"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeColorLabel)
 #: widgets/EditProfileAppearancePage.ui:1256
@@ -5597,7 +5597,7 @@ msgstr ""
 #: widgets/EditProfileMousePage.ui:513
 #, kde-format
 msgid "Preview Colors on hover"
-msgstr "Üzerine gelindiğinde renkleri önizle"
+msgstr "Üzerine gelindiğinde renkleri ön izle"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, allowMouseTrackingButton)
 #: widgets/EditProfileMousePage.ui:533
@@ -5648,9 +5648,10 @@ msgstr "Gizli"
 
 #. i18n: ectx: property (text), widget (QLabel, labelMarkerSize)
 #: widgets/EditProfileScrollingPage.ui:84
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "<i>Percentage of scrollbar length.</i>"
 msgid "Size of each marker (as a percentage of scrollbar length):"
-msgstr "Her bir imleyicinin boyutu (sarma çubuğu uzunluğu yüzdesi):"
+msgstr "<i>Sarma çubuğu uzunluğu yüzdesi</i>"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: widgets/EditProfileScrollingPage.ui:97
@@ -6155,6 +6156,23 @@ msgctxt ""
 "name"
 msgid "%1: %2"
 msgstr "%1: %2"
+
+#~| msgid "Word characters:"
+#~ msgid "Characters:"
+#~ msgstr "Karakterler:"
+
+#~| msgctxt "A hortizonal line on the bottom edge"
+#~| msgid "Underline"
+#~ msgid "Rendering:"
+#~ msgstr "Çizim:"
+
+#~| msgid "System Bell"
+#~ msgctxt "Default emoji font placeholder"
+#~ msgid "System Default"
+#~ msgstr "Sistem Öntanımlısı"
+
+#~ msgid "Size of each marker:"
+#~ msgstr "Her bir imleyicinin boyutu:"
 
 #~ msgid "Distrobox: %1"
 #~ msgstr "Distrobox: %1"
