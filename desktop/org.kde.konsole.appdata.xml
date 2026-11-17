@@ -2,7 +2,7 @@
 <component type="desktop-application">
   <id>org.kde.konsole.desktop</id>
   <metadata_license>CC0-1.0</metadata_license>
-  <project_license>GPL-2.0+</project_license>
+  <project_license>GPL-2.0-or-later</project_license>
   <name>Konsole</name>
   <name xml:lang="ar">كونسول</name>
   <name xml:lang="ast">Konsole</name>
@@ -570,6 +570,7 @@
   <url type="help">https://docs.kde.org/?application=konsole</url>
   <url type="donation">https://www.kde.org/community/donations/?app=konsole&amp;source=appdata</url>
   <url type="vcs-browser">https://invent.kde.org/utilities/konsole</url>
+  <url type="contribute">https://community.kde.org/Get_Involved</url>
   <screenshots>
     <screenshot type="default">
       <image>https://cdn.kde.org/screenshots/konsole/konsole.png</image>
