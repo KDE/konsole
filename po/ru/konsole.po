@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-16 01:11+0000\n"
-"PO-Revision-Date: 2026-10-09 15:24+0200\n"
-"Last-Translator: Alexander Yavorskiy <kekcuha@gmail.com>\n"
+"PO-Revision-Date: 2026-11-16 07:30+0200\n"
+"Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -4506,10 +4506,9 @@ msgstr "Компоновка сложного текста"
 
 #. i18n: ectx: property (text), widget (QLabel, charactersLabel)
 #: widgets/EditProfileAppearancePage.ui:909
-#, fuzzy, kde-format
-#| msgid "Word characters:"
+#, kde-format
 msgid "Characters:"
-msgstr "Символы, входящие в слово:"
+msgstr "Символы:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:924
@@ -4601,11 +4600,9 @@ msgstr "Шрифт эмодзи:"
 
 #. i18n: ectx: property (text), widget (QLabel, renderingLabel)
 #: widgets/EditProfileAppearancePage.ui:1048
-#, fuzzy, kde-format
-#| msgctxt "A hortizonal line on the bottom edge"
-#| msgid "Underline"
+#, kde-format
 msgid "Rendering:"
-msgstr "Черта снизу"
+msgstr "Отрисовка:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAppearancePage.ui:1063
@@ -4971,11 +4968,10 @@ msgid "Get New..."
 msgstr "Загрузить…"
 
 #: widgets/EditProfileDialog.cpp:1422
-#, fuzzy, kde-format
-#| msgid "System Bell"
+#, kde-format
 msgctxt "Default emoji font placeholder"
 msgid "System Default"
-msgstr "Системный сигнал"
+msgstr "Системный шрифт"
 
 #: widgets/EditProfileDialog.cpp:1455
 #, kde-kuit-format
@@ -5807,7 +5803,7 @@ msgstr "Непрозрачность подсветки строки при по
 #: widgets/EditProfileScrollingPage.ui:305
 #, kde-format
 msgid "Size of each marker:"
-msgstr ""
+msgstr "Размер каждого маркера:"
 
 #. i18n: ectx: property (suffix), widget (QDoubleSpinBox, markerSizeWidget)
 #: widgets/EditProfileScrollingPage.ui:314
@@ -5817,10 +5813,9 @@ msgstr " %"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: widgets/EditProfileScrollingPage.ui:330
-#, fuzzy, kde-format
-#| msgid "Size of each marker (as a percentage of scrollbar length):"
+#, kde-format
 msgid "<i>Percentage of scrollbar length.</i>"
-msgstr "Размер каждого маркера (в процентах от длины полосы прокрутки):"
+msgstr "<i>В процентах от длины полосы прокрутки.</i>"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43

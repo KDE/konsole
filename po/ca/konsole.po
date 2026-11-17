@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-16 01:11+0000\n"
-"PO-Revision-Date: 2026-11-15 11:16+0100\n"
+"PO-Revision-Date: 2026-11-16 09:56+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -4517,10 +4517,9 @@ msgstr "Disposició complexa del text"
 
 #. i18n: ectx: property (text), widget (QLabel, charactersLabel)
 #: widgets/EditProfileAppearancePage.ui:909
-#, fuzzy, kde-format
-#| msgid "Word characters:"
+#, kde-format
 msgid "Characters:"
-msgstr "Caràcters de paraula:"
+msgstr "Caràcters:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:924
@@ -4616,11 +4615,9 @@ msgstr "Lletra dels emojis:"
 
 #. i18n: ectx: property (text), widget (QLabel, renderingLabel)
 #: widgets/EditProfileAppearancePage.ui:1048
-#, fuzzy, kde-format
-#| msgctxt "A hortizonal line on the bottom edge"
-#| msgid "Underline"
+#, kde-format
 msgid "Rendering:"
-msgstr "Subratllat"
+msgstr "Renderització:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAppearancePage.ui:1063
@@ -4981,11 +4978,10 @@ msgid "Get New..."
 msgstr "Obtén nous..."
 
 #: widgets/EditProfileDialog.cpp:1422
-#, fuzzy, kde-format
-#| msgid "System Bell"
+#, kde-format
 msgctxt "Default emoji font placeholder"
 msgid "System Default"
-msgstr "Timbre del sistema"
+msgstr "Predeterminat del sistema"
 
 #: widgets/EditProfileDialog.cpp:1455
 #, kde-kuit-format
@@ -5826,7 +5822,7 @@ msgstr "Opacitat de les línies ressaltades de cerca:"
 #: widgets/EditProfileScrollingPage.ui:305
 #, kde-format
 msgid "Size of each marker:"
-msgstr ""
+msgstr "Mida de cada marcador:"
 
 #. i18n: ectx: property (suffix), widget (QDoubleSpinBox, markerSizeWidget)
 #: widgets/EditProfileScrollingPage.ui:314
@@ -5836,12 +5832,9 @@ msgstr " %"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: widgets/EditProfileScrollingPage.ui:330
-#, fuzzy, kde-format
-#| msgid "Size of each marker (as a percentage of scrollbar length):"
+#, kde-format
 msgid "<i>Percentage of scrollbar length.</i>"
-msgstr ""
-"Mida de cada marcador (tant per cent de la longitud de la barra de "
-"desplaçament):"
+msgstr "<i>Tant per cent de la longitud de la barra de desplaçament.</i>"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43

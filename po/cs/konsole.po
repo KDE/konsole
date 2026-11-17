@@ -11,15 +11,15 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-16 01:11+0000\n"
-"PO-Revision-Date: 2026-09-21 15:09+0200\n"
-"Last-Translator: Libor Filipek <libor.filipek@gmail.com>\n"
+"PO-Revision-Date: 2026-11-16 12:24+0100\n"
+"Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 26.08.1\n"
+"X-Generator: Lokalize 26.08.3\n"
 "X-Language: cs_CZ\n"
 "X-Source-Language: en_US\n"
 
@@ -4478,10 +4478,9 @@ msgstr "Komplexní rozvržení textu"
 
 #. i18n: ectx: property (text), widget (QLabel, charactersLabel)
 #: widgets/EditProfileAppearancePage.ui:909
-#, fuzzy, kde-format
-#| msgid "Word characters:"
+#, kde-format
 msgid "Characters:"
-msgstr "Znaky slova:"
+msgstr "Znaky:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:924
@@ -4575,11 +4574,9 @@ msgstr "Písmo emotikonu:"
 
 #. i18n: ectx: property (text), widget (QLabel, renderingLabel)
 #: widgets/EditProfileAppearancePage.ui:1048
-#, fuzzy, kde-format
-#| msgctxt "A hortizonal line on the bottom edge"
-#| msgid "Underline"
+#, kde-format
 msgid "Rendering:"
-msgstr "Podtržítko"
+msgstr "Renderování:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAppearancePage.ui:1063
@@ -4941,11 +4938,10 @@ msgid "Get New..."
 msgstr "Získat nové..."
 
 #: widgets/EditProfileDialog.cpp:1422
-#, fuzzy, kde-format
-#| msgid "System Bell"
+#, kde-format
 msgctxt "Default emoji font placeholder"
 msgid "System Default"
-msgstr "Systémový zvonek"
+msgstr "Výchozí systémový"
 
 #: widgets/EditProfileDialog.cpp:1455
 #, kde-kuit-format
@@ -5769,7 +5765,7 @@ msgstr "Průhlednost zvýraznění řádku při vyhledávání:"
 #: widgets/EditProfileScrollingPage.ui:305
 #, kde-format
 msgid "Size of each marker:"
-msgstr ""
+msgstr "Velikost jednotlivých značek:"
 
 #. i18n: ectx: property (suffix), widget (QDoubleSpinBox, markerSizeWidget)
 #: widgets/EditProfileScrollingPage.ui:314
@@ -5779,10 +5775,9 @@ msgstr " %"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: widgets/EditProfileScrollingPage.ui:330
-#, fuzzy, kde-format
-#| msgid "Size of each marker (as a percentage of scrollbar length):"
+#, kde-format
 msgid "<i>Percentage of scrollbar length.</i>"
-msgstr "Velikost jednotlivých značek (jako procento délky posuvníku):"
+msgstr "<i>Procento délky posuvníku.</i>"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43

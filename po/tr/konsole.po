@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-16 01:11+0000\n"
-"PO-Revision-Date: 2026-11-15 19:37+0300\n"
+"PO-Revision-Date: 2026-11-16 18:49+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -756,7 +756,7 @@ msgstr "Rengi Kopyala"
 #, kde-format
 msgctxt "Caption of hover tooltip"
 msgid "Color Preview"
-msgstr "Renk Önizlemesi"
+msgstr "Renk Ön İzlemesi"
 
 #: filterHotSpots/EscapeSequenceUrlFilterHotSpot.cpp:63
 #: filterHotSpots/UrlFilterHotspot.cpp:92
@@ -4470,10 +4470,9 @@ msgstr "Karmaşık Metin Yerleşimi"
 
 #. i18n: ectx: property (text), widget (QLabel, charactersLabel)
 #: widgets/EditProfileAppearancePage.ui:909
-#, fuzzy, kde-format
-#| msgid "Word characters:"
+#, kde-format
 msgid "Characters:"
-msgstr "Sözcük karakterleri:"
+msgstr "Karakterler:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:924
@@ -4567,11 +4566,9 @@ msgstr "Emoji yazı tipi:"
 
 #. i18n: ectx: property (text), widget (QLabel, renderingLabel)
 #: widgets/EditProfileAppearancePage.ui:1048
-#, fuzzy, kde-format
-#| msgctxt "A hortizonal line on the bottom edge"
-#| msgid "Underline"
+#, kde-format
 msgid "Rendering:"
-msgstr "Altı çizili"
+msgstr "Çizim:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAppearancePage.ui:1063
@@ -4927,11 +4924,10 @@ msgid "Get New..."
 msgstr "Yeni Al…"
 
 #: widgets/EditProfileDialog.cpp:1422
-#, fuzzy, kde-format
-#| msgid "System Bell"
+#, kde-format
 msgctxt "Default emoji font placeholder"
 msgid "System Default"
-msgstr "Sistem Zili"
+msgstr "Sistem Öntanımlısı"
 
 #: widgets/EditProfileDialog.cpp:1455
 #, kde-kuit-format
@@ -5614,7 +5610,7 @@ msgstr ""
 #: widgets/EditProfileMousePage.ui:535
 #, kde-format
 msgid "Preview Colors on hover"
-msgstr "Üzerine gelindiğinde renkleri önizle"
+msgstr "Üzerine gelindiğinde renkleri ön izle"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableAlternateScrollingButton)
 #: widgets/EditProfileMousePage.ui:542
@@ -5753,7 +5749,7 @@ msgstr "Arama vurgusu çizgisi matlığı:"
 #: widgets/EditProfileScrollingPage.ui:305
 #, kde-format
 msgid "Size of each marker:"
-msgstr ""
+msgstr "Her bir imleyicinin boyutu:"
 
 #. i18n: ectx: property (suffix), widget (QDoubleSpinBox, markerSizeWidget)
 #: widgets/EditProfileScrollingPage.ui:314
@@ -5763,10 +5759,9 @@ msgstr "%"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: widgets/EditProfileScrollingPage.ui:330
-#, fuzzy, kde-format
-#| msgid "Size of each marker (as a percentage of scrollbar length):"
+#, kde-format
 msgid "<i>Percentage of scrollbar length.</i>"
-msgstr "Her bir imleyicinin boyutu (sarma çubuğu uzunluğu yüzdesi):"
+msgstr "<i>Sarma çubuğu uzunluğu yüzdesi</i>"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43

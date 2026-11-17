@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-16 01:11+0000\n"
-"PO-Revision-Date: 2026-10-07 11:45+0200\n"
+"PO-Revision-Date: 2026-11-16 12:41+0100\n"
 "Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr@ijekavianlatin\n"
@@ -4551,10 +4551,9 @@ msgstr "Složeni raspored teksta"
 
 #. i18n: ectx: property (text), widget (QLabel, charactersLabel)
 #: widgets/EditProfileAppearancePage.ui:909
-#, fuzzy, kde-format
-#| msgid "Word characters:"
+#, kde-format
 msgid "Characters:"
-msgstr "Znakovi riječi:"
+msgstr "Znakovi:"
 
 # >> @option:check
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
@@ -4651,11 +4650,9 @@ msgstr "Font za emodžije:"
 
 #. i18n: ectx: property (text), widget (QLabel, renderingLabel)
 #: widgets/EditProfileAppearancePage.ui:1048
-#, fuzzy, kde-format
-#| msgctxt "A hortizonal line on the bottom edge"
-#| msgid "Underline"
+#, kde-format
 msgid "Rendering:"
-msgstr "Podvlaka"
+msgstr "Renderovanje:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAppearancePage.ui:1063
@@ -5026,11 +5023,10 @@ msgid "Get New..."
 msgstr "Dobavi novu..."
 
 #: widgets/EditProfileDialog.cpp:1422
-#, fuzzy, kde-format
-#| msgid "System Bell"
+#, kde-format
 msgctxt "Default emoji font placeholder"
 msgid "System Default"
-msgstr "sistemsko zvono"
+msgstr "Sistemski podrazumijevani"
 
 #: widgets/EditProfileDialog.cpp:1455
 #, kde-kuit-format
@@ -5855,7 +5851,7 @@ msgstr "Neprozirnost linija isticanja pretrage:"
 #: widgets/EditProfileScrollingPage.ui:305
 #, kde-format
 msgid "Size of each marker:"
-msgstr ""
+msgstr "Veličina svakog markera:"
 
 #. i18n: ectx: property (suffix), widget (QDoubleSpinBox, markerSizeWidget)
 #: widgets/EditProfileScrollingPage.ui:314
@@ -5865,10 +5861,9 @@ msgstr " %"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: widgets/EditProfileScrollingPage.ui:330
-#, fuzzy, kde-format
-#| msgid "Size of each marker (as a percentage of scrollbar length):"
+#, kde-format
 msgid "<i>Percentage of scrollbar length.</i>"
-msgstr "Veličina svakog markera (u procentima dužine klizačke trake):"
+msgstr "<i>Procenat dužine klizačke trake.</i>"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43
@@ -6304,6 +6299,3 @@ msgctxt ""
 "name"
 msgid "%1: %2"
 msgstr "%1: %2"
-
-#~ msgid "Badge Overlay Options"
-#~ msgstr "Opcije sloja značke"
