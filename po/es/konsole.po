@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-16 01:11+0000\n"
-"PO-Revision-Date: 2026-09-21 23:20+0100\n"
+"PO-Revision-Date: 2026-11-17 19:42+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -29,7 +29,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "First-Translator: Boris Wesslowski <Boris@Wesslowski.com>\n"
-"X-Generator: Lokalize 26.08.1\n"
+"X-Generator: Lokalize 26.08.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -4524,10 +4524,9 @@ msgstr "Disposición de texto compleja"
 
 #. i18n: ectx: property (text), widget (QLabel, charactersLabel)
 #: widgets/EditProfileAppearancePage.ui:909
-#, fuzzy, kde-format
-#| msgid "Word characters:"
+#, kde-format
 msgid "Characters:"
-msgstr "Caracteres de palabra:"
+msgstr "Caracteres:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:924
@@ -4621,11 +4620,9 @@ msgstr "Tipo de letra para emojis:"
 
 #. i18n: ectx: property (text), widget (QLabel, renderingLabel)
 #: widgets/EditProfileAppearancePage.ui:1048
-#, fuzzy, kde-format
-#| msgctxt "A hortizonal line on the bottom edge"
-#| msgid "Underline"
+#, kde-format
 msgid "Rendering:"
-msgstr "Subrayado"
+msgstr "Representación:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAppearancePage.ui:1063
@@ -4985,11 +4982,10 @@ msgid "Get New..."
 msgstr "Obtener novedades…"
 
 #: widgets/EditProfileDialog.cpp:1422
-#, fuzzy, kde-format
-#| msgid "System Bell"
+#, kde-format
 msgctxt "Default emoji font placeholder"
 msgid "System Default"
-msgstr "Timbre del sistema"
+msgstr "Por omisión del sistema"
 
 #: widgets/EditProfileDialog.cpp:1455
 #, kde-kuit-format
@@ -5819,7 +5815,7 @@ msgstr "Opacidad de líneas resaltadas de búsqueda:"
 #: widgets/EditProfileScrollingPage.ui:305
 #, kde-format
 msgid "Size of each marker:"
-msgstr ""
+msgstr "Tamaño de cada marcador:"
 
 #. i18n: ectx: property (suffix), widget (QDoubleSpinBox, markerSizeWidget)
 #: widgets/EditProfileScrollingPage.ui:314
@@ -5829,12 +5825,9 @@ msgstr " %"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: widgets/EditProfileScrollingPage.ui:330
-#, fuzzy, kde-format
-#| msgid "Size of each marker (as a percentage of scrollbar length):"
+#, kde-format
 msgid "<i>Percentage of scrollbar length.</i>"
-msgstr ""
-"Tamaño de los marcadores (como porcentaje de la longitud de la barra de "
-"desplazamiento):"
+msgstr "<i>Porcentaje de la longitud de la barra de desplazamiento.</i>"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43
@@ -6247,6 +6240,3 @@ msgctxt ""
 "name"
 msgid "%1: %2"
 msgstr "%1: %2"
-
-#~ msgid "Badge Overlay Options"
-#~ msgstr "Opciones de superposición de placa"
