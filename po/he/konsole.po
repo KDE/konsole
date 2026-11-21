@@ -22,17 +22,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-16 01:11+0000\n"
-"PO-Revision-Date: 2026-09-21 23:02+0300\n"
+"POT-Creation-Date: 2026-11-21 01:15+0000\n"
+"PO-Revision-Date: 2026-11-19 09:48+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
-"Language-Team: צוות התרגום של KDE ישראל\n"
+"Language-Team: Hebrew <kde-l10n-he@kde.org>\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 26.08.0\n"
+"X-Generator: Lokalize 26.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -3521,7 +3521,7 @@ msgstr "Ctrl"
 msgid "Size: %1 x %2"
 msgstr "גודל: %1 על %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2448
+#: terminalDisplay/TerminalDisplay.cpp:2447
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
@@ -3530,83 +3530,83 @@ msgstr[1] "להדביק שני תווים?"
 msgstr[2] "להדביק %1 תווים?"
 msgstr[3] "להדביק %1 תווים?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2449
+#: terminalDisplay/TerminalDisplay.cpp:2448
 #, kde-format
 msgid "Confirm Paste"
 msgstr "אישור הדבקה"
 
-#: terminalDisplay/TerminalDisplay.cpp:2482
+#: terminalDisplay/TerminalDisplay.cpp:2481
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "סוף הטקסט/הפרעה: עשוי לצאת מהתהליך הנוכחי"
 
-#: terminalDisplay/TerminalDisplay.cpp:2483
+#: terminalDisplay/TerminalDisplay.cpp:2482
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "סוף ההעברה: עשוי לצאת מהתהליך הנוכחי"
 
-#: terminalDisplay/TerminalDisplay.cpp:2484
+#: terminalDisplay/TerminalDisplay.cpp:2483
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "פעמון: ינסה להזהיר באמצעות שמע"
 
-#: terminalDisplay/TerminalDisplay.cpp:2485
+#: terminalDisplay/TerminalDisplay.cpp:2484
 #, kde-format
 msgid "Backspace"
 msgstr "Backspace"
 
-#: terminalDisplay/TerminalDisplay.cpp:2486
+#: terminalDisplay/TerminalDisplay.cpp:2485
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "בקרת מכשיר שלוש/XOFF: משהה את הפלט"
 
-#: terminalDisplay/TerminalDisplay.cpp:2487
+#: terminalDisplay/TerminalDisplay.cpp:2486
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "החלפה/השהיה: עשוי להשהות את התהליך הנוכחי"
 
-#: terminalDisplay/TerminalDisplay.cpp:2488
+#: terminalDisplay/TerminalDisplay.cpp:2487
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Escape: משמש לתפעול מצב המסוף"
 
-#: terminalDisplay/TerminalDisplay.cpp:2489
+#: terminalDisplay/TerminalDisplay.cpp:2488
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "מפריד קובץ/יציאה: עשוי להשבית את התהליך הנוכחי"
 
-#: terminalDisplay/TerminalDisplay.cpp:2512
+#: terminalDisplay/TerminalDisplay.cpp:2511
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
 "want to filter them out?"
 msgstr "הטקסט שמיועד להדבקה מכיל תווי בקרה מוסתרים, לסנן אותם החוצה?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2515
+#: terminalDisplay/TerminalDisplay.cpp:2514
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "אישור הדבקה"
 
-#: terminalDisplay/TerminalDisplay.cpp:2516
+#: terminalDisplay/TerminalDisplay.cpp:2515
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "הדבקה &בלי תווי בקרה"
 
-#: terminalDisplay/TerminalDisplay.cpp:2517
+#: terminalDisplay/TerminalDisplay.cpp:2516
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "הדבקה של ה&כול"
 
-#: terminalDisplay/TerminalDisplay.cpp:2518
+#: terminalDisplay/TerminalDisplay.cpp:2517
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "&ביטול"
 
-#: terminalDisplay/TerminalDisplay.cpp:2752
+#: terminalDisplay/TerminalDisplay.cpp:2751
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3617,17 +3617,17 @@ msgstr ""
 "\">הושעה</a> על ידי לחיצה על Ctrl+S. יש ללחוץ על <b>Ctrl+Q</b> כדי להמשיך.</"
 "qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2807
+#: terminalDisplay/TerminalDisplay.cpp:2806
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "המסוף הזה הוא לקריאה בלבד."
 
-#: terminalDisplay/TerminalDisplay.cpp:3213
+#: terminalDisplay/TerminalDisplay.cpp:3212
 #, kde-format
 msgid "Change &Directory To"
 msgstr "מעבר ל&תיקייה"
 
-#: terminalDisplay/TerminalDisplay.cpp:3248
+#: terminalDisplay/TerminalDisplay.cpp:3247
 #, kde-format
 msgid "&Paste Location"
 msgstr "ה&דבקת מיקום"
@@ -4440,10 +4440,9 @@ msgstr "פריסת טקסט מורכבת"
 
 #. i18n: ectx: property (text), widget (QLabel, charactersLabel)
 #: widgets/EditProfileAppearancePage.ui:909
-#, fuzzy, kde-format
-#| msgid "Word characters:"
+#, kde-format
 msgid "Characters:"
-msgstr "תווי מילים:"
+msgstr "תווים:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:924
@@ -4537,11 +4536,9 @@ msgstr "גופן אמוג׳י:"
 
 #. i18n: ectx: property (text), widget (QLabel, renderingLabel)
 #: widgets/EditProfileAppearancePage.ui:1048
-#, fuzzy, kde-format
-#| msgctxt "A hortizonal line on the bottom edge"
-#| msgid "Underline"
+#, kde-format
 msgid "Rendering:"
-msgstr "קו &תחתי"
+msgstr "תיצוג:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAppearancePage.ui:1063
@@ -4901,11 +4898,10 @@ msgid "Get New..."
 msgstr "הורדת חדשה…"
 
 #: widgets/EditProfileDialog.cpp:1422
-#, fuzzy, kde-format
-#| msgid "System Bell"
+#, kde-format
 msgctxt "Default emoji font placeholder"
 msgid "System Default"
-msgstr "פעמון מערכת"
+msgstr "כמו המערכת"
 
 #: widgets/EditProfileDialog.cpp:1455
 #, kde-kuit-format
@@ -5706,7 +5702,7 @@ msgstr "אטימות הדגשת שורה בחיפוש:"
 #: widgets/EditProfileScrollingPage.ui:305
 #, kde-format
 msgid "Size of each marker:"
-msgstr ""
+msgstr "גודל של כל סמן:"
 
 #. i18n: ectx: property (suffix), widget (QDoubleSpinBox, markerSizeWidget)
 #: widgets/EditProfileScrollingPage.ui:314
@@ -5716,10 +5712,9 @@ msgstr " %"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: widgets/EditProfileScrollingPage.ui:330
-#, fuzzy, kde-format
-#| msgid "Size of each marker (as a percentage of scrollbar length):"
+#, kde-format
 msgid "<i>Percentage of scrollbar length.</i>"
-msgstr "הגודל של כל סמן (כאחוז מאורך פס הגלילה):"
+msgstr "<i>אחוז רוחב פס הגלילה.</i>"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43
