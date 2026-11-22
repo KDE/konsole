@@ -2,25 +2,26 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Martin Schlander <mschlander@opensuse.org>, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2020.
 # scootergrisen, 2017, 2019.
+# SPDX-FileCopyrightText: 2026 Peter N Andreasen <oz1ktx@pm.me>
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-21 01:15+0000\n"
-"PO-Revision-Date: 2020-08-01 09:45+0200\n"
-"Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
+"PO-Revision-Date: 2026-11-21 12:32+0100\n"
+"Last-Translator: Peter N Andreasen <oz1ktx@pm.me>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 20.04.2\n"
+"X-Generator: Lokalize 26.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Erik Kjær Pedersen,Martin Schlander"
+msgstr "Erik Kjær Pedersen,Martin Schlander, Peter N Andreasen"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
@@ -64,7 +65,7 @@ msgstr "Opsætning"
 #: ../desktop/konsoleui.rc:54
 #, kde-format
 msgid "Plugins"
-msgstr ""
+msgstr "Plugins"
 
 #. i18n: ectx: Menu (help)
 #: ../desktop/konsoleui.rc:57
@@ -76,7 +77,7 @@ msgstr "Hjælp"
 #: ../desktop/konsoleui.rc:61
 #, kde-format
 msgid "Main Toolbar"
-msgstr ""
+msgstr "Hovedværktøjslinje"
 
 #. i18n: ectx: Menu (history)
 #: ../desktop/partui.rc:20
@@ -86,10 +87,9 @@ msgstr "Til&bagerulning"
 
 #. i18n: ectx: ToolBar (sessionToolbar)
 #: ../desktop/sessionui.rc:80
-#, fuzzy, kde-format
-#| msgid "Session Number: %#"
+#, kde-format
 msgid "Session Toolbar"
-msgstr "Sessionsnummer: %#"
+msgstr "Sessionsværktøjslinje"
 
 #: Application.cpp:53
 #, kde-format
@@ -98,19 +98,16 @@ msgid "Name of profile to use for new Konsole instance"
 msgstr "Navn på profil der skal bruges til nye instanser af Konsole"
 
 #: Application.cpp:54
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "Name of profile to use for new Konsole instance"
+#, kde-format
 msgctxt "@info:shell"
 msgid "json layoutfile to be loaded to use for new Konsole instance"
-msgstr "Navn på profil der skal bruges til nye instanser af Konsole"
+msgstr "json-layoutfil der skal indlæses til brug for ny Konsole-instans"
 
 #: Application.cpp:55
-#, fuzzy, kde-format
-#| msgid "Create a new profile based upon the selected profile"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Use the built-in profile instead of the default profile"
-msgstr "Opret en ny profil baseret på den valgte profil"
+msgstr "Brug den indbyggede profil i stedet for standardprofilen"
 
 #: Application.cpp:56
 #, kde-format
@@ -125,16 +122,14 @@ msgid "Do not close the initial session automatically when it ends."
 msgstr "Luk ikke den indledningsvise session automatisk når den slutter."
 
 #: Application.cpp:61
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid ""
-#| "Create a new tab in an existing window rather than creating a new window"
+#, kde-format
 msgctxt "@info:shell"
 msgid ""
 "Create a new tab in an existing window rather than creating a new window "
 "('Run all Konsole windows in a single process' must be enabled)"
 msgstr ""
-"Opret nyt faneblad i eksisterende vindue frem for at oprette et nyt vindue"
+"Opret et nyt faneblad i et eksisterende vindue frem for at oprette et nyt "
+"vindue ('Kør alle Konsole-vinduer i en enkelt proces' skal være aktiveret)"
 
 #: Application.cpp:62
 #, kde-format
@@ -171,20 +166,16 @@ msgid "Hide the menubar, overriding the default setting"
 msgstr "Skjul menulinjen, hvilket tilsidesætter standardindstillingen"
 
 #: Application.cpp:68
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "Show the tabbar, overriding the default setting"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Show all the toolbars, overriding the default setting"
-msgstr "Vis fanebladslinjen, hvilket tilsidesætter standardindstillingen"
+msgstr "Vis alle værktøjslinjerne, og tilsidesæt standardindstillingen"
 
 #: Application.cpp:69
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "Hide the tabbar, overriding the default setting"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Hide all the toolbars, overriding the default setting"
-msgstr "Skjul fanebladslinjen, hvilket tilsidesætter standardindstillingen"
+msgstr "Skjul alle værktøjslinjerne, og tilsidesæt standardindstillingen"
 
 #: Application.cpp:70
 #, kde-format
@@ -246,6 +237,8 @@ msgid ""
 "Force re-using the existing instance even if it breaks functionality, e. g. "
 "--new-tab. Mostly for debugging."
 msgstr ""
+"Gennemtving genbrug af den eksisterende instans, selvom det ødelægger "
+"funktionalitet, f.eks. --new-tab. Mest til fejlretning."
 
 #: Application.cpp:88
 #, kde-format
@@ -538,10 +531,9 @@ msgstr "Slør baggrund"
 
 #. i18n: ectx: property (text), widget (QLabel, transparencyLabel)
 #: colorscheme/ColorSchemeEditor.ui:69
-#, fuzzy, kde-format
-#| msgid "Background transparency:"
+#, kde-format
 msgid "Background color transparency:"
-msgstr "Gennemsigtig baggrund:"
+msgstr "Baggrundsfarvens gennemsigtighed:"
 
 #. i18n: ectx: property (text), widget (QLabel, transparencyPercentLabel)
 #. i18n: ectx: property (text), widget (QLabel, wallpaperTransparencyPercentLabel)
@@ -552,10 +544,9 @@ msgstr "Procent"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperTransparencyLabel)
 #: colorscheme/ColorSchemeEditor.ui:103
-#, fuzzy, kde-format
-#| msgid "Background transparency:"
+#, kde-format
 msgid "Wallpaper transparency:"
-msgstr "Gennemsigtig baggrund:"
+msgstr "Baggrundsbilledets gennemsigtighed:"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperLabel)
 #: colorscheme/ColorSchemeEditor.ui:137
@@ -586,84 +577,79 @@ msgstr "..."
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperScalingLabel)
 #: colorscheme/ColorSchemeEditor.ui:165
-#, fuzzy, kde-format
-#| msgid "Wallpaper:"
+#, kde-format
 msgid "Wallpaper scaling:"
-msgstr "Baggrundsbillede:"
+msgstr "Skalering af baggrundsbillede:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
 #: colorscheme/ColorSchemeEditor.ui:173
 #, kde-format
 msgid "Tile"
-msgstr ""
+msgstr "Fliselæg"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
 #: colorscheme/ColorSchemeEditor.ui:178
 #, kde-format
 msgid "Stretch"
-msgstr ""
+msgstr "Stræk"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
 #: colorscheme/ColorSchemeEditor.ui:183
 #, kde-format
 msgid "Crop"
-msgstr ""
+msgstr "Beskær"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
 #: colorscheme/ColorSchemeEditor.ui:188
 #, kde-format
 msgid "Adapt"
-msgstr ""
+msgstr "Tilpas"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
 #: colorscheme/ColorSchemeEditor.ui:193
-#, fuzzy, kde-format
-#| msgid "Scrolling"
+#, kde-format
 msgid "NoScaling"
-msgstr "Rulning"
+msgstr "Ingen skalering"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperFlipLabel)
 #: colorscheme/ColorSchemeEditor.ui:205
-#, fuzzy, kde-format
-#| msgid "Wallpaper:"
+#, kde-format
 msgid "Wallpaper flip:"
-msgstr "Baggrundsbillede:"
+msgstr "Spejlvending af baggrundsbillede:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:213
 #, kde-format
 msgid "NoFlip"
-msgstr ""
+msgstr "Vend ikke"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:218
 #, kde-format
 msgid "Horizontal"
-msgstr ""
+msgstr "Vandret"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:223
 #, kde-format
 msgid "Vertical"
-msgstr ""
+msgstr "Lodret"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:228
 #, kde-format
 msgid "Both"
-msgstr ""
+msgstr "Begge"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperHorizontalAnchorLabel)
 #: colorscheme/ColorSchemeEditor.ui:240
 #, kde-format
 msgid "Horizontal Anchor:"
-msgstr ""
+msgstr "Vandret anker:"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperHorizontalAnchorPosition)
 #: colorscheme/ColorSchemeEditor.ui:266
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Show scrollbar on the left side"
-#| msgid "Left side"
+#, kde-format
 msgid "Left"
 msgstr "Venstre side"
 
@@ -671,13 +657,13 @@ msgstr "Venstre side"
 #: colorscheme/ColorSchemeEditor.ui:277
 #, kde-format
 msgid "Vertical Anchor:"
-msgstr ""
+msgstr "Lodret anker:"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperVerticalAnchorPosition)
 #: colorscheme/ColorSchemeEditor.ui:303
 #, kde-format
 msgid "Top"
-msgstr ""
+msgstr "Øverst"
 
 #: colorscheme/ColorSchemeViewDelegate.cpp:52
 #, kde-format
@@ -685,45 +671,42 @@ msgid "AaZz09..."
 msgstr "AaZz09..."
 
 #: containers/ContainerList.cpp:78
-#, fuzzy, kde-format
-#| msgid "Host:"
+#, kde-format
 msgctxt "@title:group section header in new-tab menu"
 msgid "Host"
-msgstr "Vært:"
+msgstr "Vært"
 
 #: containers/ContainerRegistry.cpp:43
 #, kde-format
 msgid ""
 "Container support is not available when Konsole is running inside Flatpak."
 msgstr ""
+"Container-understøttelse er ikke tilgængelig, når Konsole kører i Flatpak."
 
 #: containers/DistroboxDetector.cpp:124
 #, kde-format
 msgid "Distrobox"
-msgstr ""
+msgstr "Distrobox"
 
 #: containers/KapsuleDetector.cpp:36
 #, kde-format
 msgid "Kapsule"
-msgstr ""
+msgstr "Kapsule"
 
 #: containers/KapsuleDetector.cpp:61 containers/KapsuleDetector.cpp:64
-#, fuzzy, kde-format
-#| msgid "Maintainer"
+#, kde-format
 msgid "Kapsule Container"
-msgstr "Vedligeholder"
+msgstr "Kapsule-container"
 
 #: containers/KapsuleDetector.cpp:99
-#, fuzzy, kde-format
-#| msgctxt "Name of the default/builtin profile"
-#| msgid "Default"
+#, kde-format
 msgid " [default]"
-msgstr "&Sæt som standard"
+msgstr " [standard]"
 
 #: containers/ToolboxDetector.cpp:89
 #, kde-format
 msgid "Toolbox"
-msgstr ""
+msgstr "Værktøjskasse"
 
 #: CopyInputDialog.cpp:30
 #, kde-format
@@ -750,19 +733,16 @@ msgid "Deselect All"
 msgstr "Afmarkér alt"
 
 #: filterHotSpots/ColorFilterHotSpot.cpp:85
-#, fuzzy, kde-format
-#| msgctxt "@label:listbox Column header text for the actual colors"
-#| msgid "Color"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Color"
-msgstr "Farve"
+msgstr "Kopiér farve"
 
 #: filterHotSpots/ColorFilterHotSpot.cpp:148
-#, fuzzy, kde-format
-#| msgid "Preview:"
+#, kde-format
 msgctxt "Caption of hover tooltip"
 msgid "Color Preview"
-msgstr "Forhåndsvisning:"
+msgstr "Farveforhåndsvisning"
 
 #: filterHotSpots/EscapeSequenceUrlFilterHotSpot.cpp:63
 #: filterHotSpots/UrlFilterHotspot.cpp:92
@@ -782,6 +762,9 @@ msgid ""
 "Could not open file with the text editor specified in the profile settings;\n"
 "it will be opened with the system default editor."
 msgstr ""
+"Kunne ikke åbne filen med den teksteditor, der er angivet i "
+"profilindstillingerne;\n"
+"den vil blive åbnet med systemets standardeditor."
 
 #: filterHotSpots/FileFilterHotspot.cpp:175
 #, kde-format
@@ -922,12 +905,10 @@ msgid "Terminal emulator"
 msgstr "Terminalemulator"
 
 #: main.cpp:177
-#, fuzzy, kde-format
-#| msgctxt "@info:credit"
-#| msgid "(c) 1997-2020, The Konsole Developers"
+#, kde-format
 msgctxt "@info:credit"
 msgid "© 1997–%1, The Konsole Developers"
-msgstr "(c) 1997-2020, Konsole-udviklerne"
+msgstr "© 1997–%1, Konsole-udviklerne"
 
 #: main.cpp:353
 #, kde-format
@@ -969,39 +950,37 @@ msgstr "Oprindelige udvikler"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Ahmad Samir"
-msgstr ""
+msgstr "Ahmad Samir"
 
 #: main.cpp:363 main.cpp:366 main.cpp:369 main.cpp:372
-#, fuzzy, kde-format
-#| msgctxt "@info:credit"
-#| msgid "General maintainer, bug fixes and general improvements"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Major refactoring, bug fixes and major improvements"
-msgstr "Generel vedligeholder, fejlretning og generelle forbedringer"
+msgstr "Omfattende vedligeholdelse, fejlretning og generelle forbedringer"
 
 #: main.cpp:365
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carlos Alves"
-msgstr ""
+msgstr "Carlos Alves"
 
 #: main.cpp:368
 #, kde-format
 msgctxt "@info:credit"
 msgid "Tomaz Canabrava"
-msgstr ""
+msgstr "Tomaz Canabrava"
 
 #: main.cpp:371
 #, kde-format
 msgctxt "@info:credit"
 msgid "Gustavo Carneiro"
-msgstr ""
+msgstr "Gustavo Carneiro"
 
 #: main.cpp:374
 #, kde-format
 msgctxt "@info:credit"
 msgid "Edwin Pujols"
-msgstr ""
+msgstr "Edwin Pujols"
 
 #: main.cpp:375 main.cpp:378 main.cpp:380 main.cpp:385 main.cpp:387
 #: main.cpp:388 main.cpp:389
@@ -1014,32 +993,28 @@ msgstr "Fejlretning og generelle forbedringer"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Martin T. H. Sandsmark"
-msgstr ""
+msgstr "Martin T. H. Sandsmark"
 
 #: main.cpp:380
 #, kde-format
 msgctxt "@info:credit"
 msgid "Nate Graham"
-msgstr ""
+msgstr "Nate Graham"
 
 #: main.cpp:381
 #, kde-format
 msgctxt "@info:credit"
 msgid "Mariusz Glebocki"
-msgstr ""
+msgstr "Mariusz Glebocki"
 
 #: main.cpp:382
-#, fuzzy, kde-format
-#| msgctxt "@info:credit"
-#| msgid "Bug fixes and general improvements"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes and major improvements"
 msgstr "Fejlretning og generelle forbedringer"
 
 #: main.cpp:384
-#, fuzzy, kde-format
-#| msgctxt "@info:credit"
-#| msgid "Thomas Dreibholz"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Thomas Surrel"
 msgstr "Thomas Dreibholz"
@@ -1286,9 +1261,7 @@ msgid "&Bookmarks"
 msgstr "&Bogmærker"
 
 #: MainWindow.cpp:491
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "New Color Scheme"
+#, kde-format
 msgid "&Window Color Scheme"
 msgstr "Nyt farvetema"
 
@@ -1305,9 +1278,7 @@ msgid "Activate Menu"
 msgstr "Aktivér menu"
 
 #: MainWindow.cpp:515
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Move tab to the left"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Flyt faneblad til venstre"
@@ -1316,7 +1287,7 @@ msgstr "Flyt faneblad til venstre"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
-msgstr ""
+msgstr "Indlæs fanebladslayout..."
 
 #: MainWindow.cpp:879 MainWindow.cpp:896
 #, kde-format
@@ -1369,7 +1340,7 @@ msgstr "Generelt"
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
-msgstr ""
+msgstr "Hukommelse"
 
 #: MainWindow.cpp:1103
 #, kde-format
@@ -1399,37 +1370,31 @@ msgstr "Delinfo"
 #: plugins/QuickCommands/qcwidget.ui:14
 #, kde-format
 msgid "Form"
-msgstr ""
+msgstr "Formular"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/QuickCommands/qcwidget.ui:22
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut:"
-msgstr "Genvej"
+msgstr "Genvej:"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterLine)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterText)
 #: plugins/QuickCommands/qcwidget.ui:52 plugins/SSHManager/sshwidget.ui:33
-#, fuzzy, kde-format
-#| msgctxt "@title"
-#| msgid "Filter"
+#, kde-format
 msgid "Filter..."
-msgstr "Filtrér"
+msgstr "Filtrér..."
 
 #. i18n: ectx: property (text), widget (QCheckBox, invertFilter)
 #. i18n: ectx: property (text), widget (QCheckBox, btnInvertFilter)
 #: plugins/QuickCommands/qcwidget.ui:59 plugins/SSHManager/sshwidget.ui:46
 #, kde-format
 msgid "Invert"
-msgstr ""
+msgstr "Invertér"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: plugins/QuickCommands/qcwidget.ui:97
-#, fuzzy, kde-format
-#| msgctxt "@item:intable The session title"
-#| msgid "Title"
+#, kde-format
 msgid "Title"
 msgstr "Titel"
 
@@ -1437,124 +1402,113 @@ msgstr "Titel"
 #: plugins/QuickCommands/qcwidget.ui:107
 #, kde-format
 msgid "Tooltip"
-msgstr ""
+msgstr "Værktøjstip"
 
 #. i18n: ectx: property (text), widget (QLabel, labelGroup)
 #: plugins/QuickCommands/qcwidget.ui:117
 #, kde-format
 msgid "Group"
-msgstr ""
+msgstr "Gruppe"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, group)
 #. i18n: ectx: property (currentText), widget (QComboBox, folder)
 #: plugins/QuickCommands/qcwidget.ui:128 plugins/SSHManager/sshwidget.ui:213
-#, fuzzy, kde-format
-#| msgctxt "Name of the default/builtin profile"
-#| msgid "Default"
+#, kde-format
 msgid "Default"
-msgstr "&Sæt som standard"
+msgstr "Standard"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab)
 #: plugins/QuickCommands/qcwidget.ui:143
-#, fuzzy, kde-format
-#| msgid "Command:"
+#, kde-format
 msgid "Command"
-msgstr "Kommando:"
+msgstr "Kommando"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #: plugins/QuickCommands/qcwidget.ui:193
 #: plugins/QuickCommands/quickcommandswidget.cpp:336
-#, fuzzy, kde-format
-#| msgctxt "@info:shell Alert the user with red color text"
-#| msgid "Warning: "
+#, kde-format
 msgid "Warnings"
-msgstr "Advarsel: "
+msgstr "Advarsler"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnRun)
 #: plugins/QuickCommands/qcwidget.ui:236
 #, kde-format
 msgid "Run"
-msgstr ""
+msgstr "Kør"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnSave)
 #: plugins/QuickCommands/qcwidget.ui:256
-#, fuzzy, kde-format
-#| msgid "Open File"
+#, kde-format
 msgid "Save"
-msgstr "Åbn fil"
+msgstr "Gem"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnUpdate)
 #: plugins/QuickCommands/qcwidget.ui:266
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:273
 #, kde-format
 msgid "Update"
-msgstr ""
+msgstr "Opdatér"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnCancel)
 #: plugins/QuickCommands/qcwidget.ui:276 plugins/SSHManager/sshwidget.ui:320
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Cancel"
+#, kde-format
 msgid "Cancel"
-msgstr "&Annullér"
+msgstr "Annullér"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:47
 #: plugins/QuickCommands/quickcommandsplugin.cpp:130
-#, fuzzy, kde-format
-#| msgid "Command:"
+#, kde-format
 msgid "Quick Commands"
-msgstr "Kommando:"
+msgstr "Hurtigkommandoer"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:75
 #, kde-format
 msgid "Show Quick Access"
-msgstr ""
+msgstr "Vis hurtig adgang"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:123
 #, kde-format
 msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
 msgstr ""
+"Ingen hurtigkommandoer fundet. Du kan tilføje en under Udvidelsesmoduler -> "
+"Hurtigkommandoer"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
-#, fuzzy, kde-format
-#| msgid "Command:"
+#, kde-format
 msgid "Plugins - Quick Commands"
-msgstr "Kommando:"
+msgstr "Plugins - hurtigkommandoer"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:140
 #, kde-format
 msgid "Show Quick Commands"
-msgstr ""
+msgstr "Vis hurtigkommandoer"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:166
 #: plugins/QuickCommands/quickcommandswidget.cpp:177
 #, kde-format
 msgid "A duplicate item exists"
-msgstr ""
+msgstr "Der findes et duplikeret element"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:183
 #, kde-format
 msgid "Please fix all the warnings before trying to run this script"
-msgstr ""
+msgstr "Ret venligst alle advarslerne før du forsøger at køre dette script"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:215
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid ""
-#| "There are %1 open terminals in this window. Do you still want to quit?"
+#, kde-format
 msgid "There are some errors on the script, do you really want to run it?"
-msgstr "Der er %1 åbne terminaler i dette vindue. Vil du afslutte alligevel?"
+msgstr "Der er nogle fejl i scriptet, vil du virkelig køre det?"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:216
 #, kde-format
 msgid "Shell Errors"
-msgstr ""
+msgstr "Shell-fejl"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:217
 #, kde-format
 msgctxt "@action:button"
 msgid "Run"
-msgstr ""
+msgstr "Kør"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:242
 #, kde-format
@@ -1562,68 +1516,61 @@ msgid ""
 "You are about to delete the group %1,\n"
 " with multiple configurations, are you sure?"
 msgstr ""
+"Du er ved at slette gruppen %1,\n"
+" med flere konfigurationer. Er du sikker?"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:243
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:223
 #, kde-format
 msgid "You are about to delete %1, are you sure?"
-msgstr ""
+msgstr "Du er ved at slette %1. Er du sikker?"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:246
-#, fuzzy, kde-format
-#| msgid "Remote Connection"
+#, kde-format
 msgid "Delete Quick Commands Configurations"
-msgstr "Ekstern forbindelse"
+msgstr "Slet konfigurationer for hurtigkommandoer"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:276
 #, kde-format
 msgid "Title can not be empty or blank"
-msgstr ""
+msgstr "Titlen kan ikke være tom eller blank"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:280
-#, fuzzy, kde-format
-#| msgid "Command to execute"
+#, kde-format
 msgid "Command can not be empty"
-msgstr "Kommando at køre"
+msgstr "Kommando kan ikke være tom"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:300
-#, fuzzy, kde-format
-#| msgid "Rename Tab"
+#, kde-format
 msgid "Rename"
-msgstr "Omdøb faneblad"
+msgstr "Omdøb"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:304
 #, kde-format
 msgid "Delete"
-msgstr ""
+msgstr "Slet"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:338
-#, fuzzy, kde-format
-#| msgctxt "@info:shell Alert the user with red color text"
-#| msgid "Warning: "
+#, kde-format
 msgid "Warnings (*)"
-msgstr "Advarsel: "
+msgstr "Advarsler (*)"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:45
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Configure"
+#, kde-format
 msgctxt "@item:inlistbox Hosts from ssh/config file"
 msgid "SSH Config"
-msgstr "Indstil"
+msgstr "SSH konfiguration"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:48
-#, fuzzy, kde-format
-#| msgctxt "Name of the default/builtin profile"
-#| msgid "Default"
+#, kde-format
 msgctxt "@item:inlistbox The default list of ssh hosts"
 msgid "Default"
-msgstr "&Sæt som standard"
+msgstr "Standard"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:74
 #, kde-format
 msgid "%1 is a folder for SSH entries"
-msgstr ""
+msgstr "%1 er en mappe til SSH-poster"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:78
 #: plugins/SSHManager/sshmanagermodel.cpp:322
@@ -1631,85 +1578,86 @@ msgstr ""
 #: plugins/SSHManager/sshmanagermodel.cpp:424
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:93
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:426
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Configure"
+#, kde-format
 msgid "SSH Config"
-msgstr "Indstil"
+msgstr "SSH konfiguration"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:103
-#, fuzzy, kde-format
-#| msgid "Host:"
+#, kde-format
 msgid "Host: %1"
-msgstr "Vært:"
+msgstr "Vært: %1"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:66
 #, kde-format
 msgid "SSH Manager"
-msgstr ""
+msgstr "SSH-håndtering"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:96
-#, fuzzy, kde-format
-#| msgid "Show Header:"
+#, kde-format
 msgid "Show SSH Manager"
-msgstr "Vis overskrift:"
+msgstr "Vis SSH-håndtering"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:114
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
-msgstr ""
+msgstr "Vis hurtigadgang til SSH-handlinger"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:145
 #, kde-format
 msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
 msgstr ""
+"Ingen gemt SSH-konfiguration fundet. Du kan tilføje en under Plugins -> SSH-"
+"håndtering"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:146
-#, fuzzy, kde-format
-#| msgid "Open File Manager"
+#, kde-format
 msgid "Plugins - SSH Manager"
-msgstr "Åbn filhåndtering"
+msgstr "Plugins - SSH-håndtering"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:152
 #, kde-format
 msgid "SSH Entries"
-msgstr ""
+msgstr "SSH-poster"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:181
 #, kde-format
 msgid ""
 "Could not get the process name, assume that we can't request a connection"
 msgstr ""
+"Kunne ikke hente procesnavnet, antager at vi ikke kan anmode om en "
+"forbindelse"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:181
 #: plugins/SSHManager/sshmanagerplugin.cpp:193
 #, kde-format
 msgid "Error issuing SSH Command"
-msgstr ""
+msgstr "Fejl ved udstedelse af SSH-kommando"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:193
 #, kde-format
 msgid ""
 "Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"
 msgstr ""
+"Kan ikke udstede SSH-kommando uden for shell-programmet (f.eks. bash, zsh, "
+"sh)"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:69
 #: plugins/SSHManager/sshwidget.ui:133
 #, kde-format
 msgid "SSH Key"
-msgstr ""
+msgstr "SSH-nøgle"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:108
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete"
-msgstr ""
+msgstr "Slet"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:151
 #, kde-format
 msgid "Don't Change"
-msgstr ""
+msgstr "Ændr ikke"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:222
 #, kde-format
@@ -1717,84 +1665,80 @@ msgid ""
 "You are about to delete the folder %1,\n"
 " with multiple SSH Configurations, are you sure?"
 msgstr ""
+"Du er ved at slette mappen %1,\n"
+" med flere SSH-konfigurationer. Er du sikker?"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:230
-#, fuzzy, kde-format
-#| msgid "Remote Connection"
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
-msgstr "Ekstern forbindelse"
+msgstr "Slet SSH-konfigurationer"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:284
 #, kde-format
 msgid "Imported SSH Profile <br/> Some settings are read only."
-msgstr ""
+msgstr "Importeret SSH-profil <br/> Nogle indstillinger er skrivebeskyttede."
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:381
 #, kde-format
 msgid "Missing Hostname"
-msgstr ""
+msgstr "Manglende værtsnavn"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:386
 #, kde-format
 msgid "Missing Name"
-msgstr ""
+msgstr "Manglende navn"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:393
 #, kde-format
 msgid "If Use Ssh Config is set, do not specify sshkey or username."
 msgstr ""
+"Hvis Brug SSH-konfiguration er angivet, så angiv ikke ssh-nøgle eller "
+"brugernavn."
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:398
 #, kde-format
 msgid "At least Username or SSHKey must be set"
-msgstr ""
+msgstr "Mindst brugernavn eller SSH-nøgle skal være angivet"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:404
 #, kde-format
 msgid "Missing Folder"
-msgstr ""
+msgstr "Manglende mappe"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:409
 #, kde-format
 msgid "An SSH session must have a profile"
-msgstr ""
+msgstr "En SSH-session skal have en profil"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:428
 #, kde-format
 msgid "Cannot delete this folder"
-msgstr ""
+msgstr "Kan ikke slette denne mappe"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:431
 #, kde-format
 msgid "Delete folder and all of its contents"
-msgstr ""
+msgstr "Slet mappe og alt dens indhold"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:435
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Double click to change shortcut"
+#, kde-format
 msgid "Double click to change the folder name."
-msgstr "Dobbeltklik for at skifte genvej"
+msgstr "Dobbeltklik for at skifte navn på mappe"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:442
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "Do not close the initial session automatically when it ends."
+#, kde-format
 msgid "You can't delete an automatically added entry."
-msgstr "Luk ikke den indledningsvise session automatisk når den slutter."
+msgstr "Du kan ikke slette en automatisk tilføjet indgang."
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:442
-#, fuzzy, kde-format
-#| msgid "Edit the selected profile(s)"
+#, kde-format
 msgid "Delete selected entry"
-msgstr "Redigér valgt(e) profil(er)"
+msgstr "Slet valgt indgang"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: plugins/SSHManager/sshwidget.ui:19
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut"
 msgstr "Genvej"
 
@@ -1802,86 +1746,80 @@ msgstr "Genvej"
 #: plugins/SSHManager/sshwidget.ui:43
 #, kde-format
 msgid "Show entries that don't match the filter"
-msgstr ""
+msgstr "Vis poster, der ikke matcher filteret"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, btnManageProfile)
 #: plugins/SSHManager/sshwidget.ui:57
 #, kde-format
 msgid "Change profile on connect/disconnect"
-msgstr ""
+msgstr "Skift profil ved tilslutning/afbrydelse"
 
 #. i18n: ectx: property (text), widget (QCheckBox, btnManageProfile)
 #: plugins/SSHManager/sshwidget.ui:60
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Manage Profiles"
+#, kde-format
 msgid "Manage profile"
-msgstr "Håndtér profiler"
+msgstr "Håndtér profil"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/SSHManager/sshwidget.ui:82
 #, kde-format
 msgid "Identifier"
-msgstr ""
+msgstr "Identifikator"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, name)
 #: plugins/SSHManager/sshwidget.ui:89
-#, fuzzy, kde-format
-#| msgid "The number of pixels between two lines"
+#, kde-format
 msgid "A name for this ssh entry"
-msgstr "Antal pixel mellem to linjer"
+msgstr "Et navn til denne ssh-indgang"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, name)
 #: plugins/SSHManager/sshwidget.ui:92
-#, fuzzy, kde-format
-#| msgid "The number of pixels between two lines"
+#, kde-format
 msgid "The name of this entry on the list"
-msgstr "Antal pixel mellem to linjer"
+msgstr "Navnet på denne indgang på listen"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: plugins/SSHManager/sshwidget.ui:99
 #, kde-format
 msgid "SSH Hostname"
-msgstr ""
+msgstr "SSH-værtsnavn"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, hostname)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, hostname)
 #: plugins/SSHManager/sshwidget.ui:106 plugins/SSHManager/sshwidget.ui:109
-#, fuzzy, kde-format
-#| msgid "Change the shape of the cursor"
+#, kde-format
 msgid "The hostname of the server"
-msgstr "Ændr markørens form"
+msgstr "Serverens værtsnavn"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: plugins/SSHManager/sshwidget.ui:116
 #, kde-format
 msgid "Port"
-msgstr ""
+msgstr "Port"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, port)
 #: plugins/SSHManager/sshwidget.ui:123
 #, kde-format
 msgid "The port of the server, 22 is the default for ssh connections"
-msgstr ""
+msgstr "Serverens port, 22 er standard for ssh-forbindelser"
 
 #. i18n: ectx: property (text), widget (QLineEdit, port)
 #: plugins/SSHManager/sshwidget.ui:126
 #, kde-format
 msgid "22"
-msgstr ""
+msgstr "22"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, sshkey)
 #: plugins/SSHManager/sshwidget.ui:142
 #, kde-format
 msgid "The private key to be used for this connection"
-msgstr ""
+msgstr "Den private nøgle, der skal bruges til denne forbindelse"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, sshkey)
 #: plugins/SSHManager/sshwidget.ui:148
-#, fuzzy, kde-format
-#| msgid "&Terminate Task"
+#, kde-format
 msgid "The private key"
-msgstr "&Afslut opgave"
+msgstr "Den private nøgle"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useSshConfig)
 #: plugins/SSHManager/sshwidget.ui:167
@@ -1890,99 +1828,91 @@ msgid ""
 "If this is set, we don't rely on the SSH key set above, but on the "
 "configuration on ~/.ssh/config"
 msgstr ""
+"Hvis denne er angivet, afhænger vi ikke af SSH-nøglen angivet ovenfor, men "
+"af konfigurationen i ~/.ssh/config"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useSshConfig)
 #: plugins/SSHManager/sshwidget.ui:170
 #, kde-format
 msgid "Use ~/.ssh/config for key"
-msgstr ""
+msgstr "Brug ~/.ssh/config til nøgle"
 
 #. i18n: ectx: property (text), widget (QLabel, label_7)
 #: plugins/SSHManager/sshwidget.ui:177
-#, fuzzy, kde-format
-#| msgid "User Name: %u"
+#, kde-format
 msgid "Username"
-msgstr "Brugernavn: %u"
+msgstr "Brugernavn"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, username)
 #: plugins/SSHManager/sshwidget.ui:184
-#, fuzzy, kde-format
-#| msgid "New Remote Connection"
+#, kde-format
 msgid "The username for the connection"
-msgstr "Ny ekstern forbindelse"
+msgstr "Brugernavnet til forbindelsen"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, username)
 #: plugins/SSHManager/sshwidget.ui:187
-#, fuzzy, kde-format
-#| msgctxt "NAME OF TRANSLATORS"
-#| msgid "Your names"
+#, kde-format
 msgid "Your username"
-msgstr "Erik Kjær Pedersen,Martin Schlander"
+msgstr "Dit brugernavn"
 
 #. i18n: ectx: property (text), widget (QLabel, folderLabel)
 #: plugins/SSHManager/sshwidget.ui:194
 #, kde-format
 msgid "Folder"
-msgstr ""
+msgstr "Mappe"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, folder)
 #: plugins/SSHManager/sshwidget.ui:207
 #, kde-format
 msgid "For organizational purposes, this entry will be inside of this folder."
-msgstr ""
+msgstr "Af organisatoriske årsager vil denne post være inde i denne mappe."
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: plugins/SSHManager/sshwidget.ui:220
-#, fuzzy, kde-format
-#| msgctxt "@title Preferences page name"
-#| msgid "Profiles"
+#, kde-format
 msgid "Profile"
-msgstr "Profiler"
+msgstr "Profil"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, profile)
 #: plugins/SSHManager/sshwidget.ui:233
 #, kde-format
 msgid "The profile to be active when the ssh session starts"
-msgstr ""
+msgstr "Profilen, der skal være aktiv, når ssh-sessionen starter"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newSSHConfig)
 #: plugins/SSHManager/sshwidget.ui:271
 #, kde-format
 msgid "Add a new SSH Entry"
-msgstr ""
+msgstr "Tilføj en ny SSH-post"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnDelete)
 #: plugins/SSHManager/sshwidget.ui:284
-#, fuzzy, kde-format
-#| msgid "Edit the selected profile(s)"
+#, kde-format
 msgid "Delete selected SSH entry"
-msgstr "Redigér valgt(e) profil(er)"
+msgstr "Slet valgte SSH-post"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnEdit)
 #: plugins/SSHManager/sshwidget.ui:297
-#, fuzzy, kde-format
-#| msgid "Edit the selected profile(s)"
+#, kde-format
 msgid "Edit selected entry"
-msgstr "Redigér valgt(e) profil(er)"
+msgstr "Redigér valgte post"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnAdd)
 #: plugins/SSHManager/sshwidget.ui:307
-#, fuzzy, kde-format
-#| msgid "Remote Connection"
+#, kde-format
 msgid "Add new SSH Configuration"
-msgstr "Ekstern forbindelse"
+msgstr "Tilføj ny SSH-konfiguration"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnCancel)
 #: plugins/SSHManager/sshwidget.ui:317
 #, kde-format
 msgid "Cancel Add or Edit"
-msgstr ""
+msgstr "Annullér tilføjelse eller redigering"
 
 #: pluginsystem/PluginManager.cpp:70
-#, fuzzy, kde-format
-#| msgid "No profiles available"
+#, kde-format
 msgid "No plugins available"
-msgstr "Ingen tilgængelige profiler"
+msgstr "Ingen plugins tilgængelige"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, PrintOptions)
 #. i18n: ectx: property (title), widget (QGroupBox, OutputOptions)
@@ -2009,7 +1939,7 @@ msgstr "&Skalér output"
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
-msgstr ""
+msgstr "Indbygget"
 
 #: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:578
 #, kde-format
@@ -2017,12 +1947,10 @@ msgid "Default profile"
 msgstr "Standardprofil"
 
 #: profile/ProfileManager.cpp:349
-#, fuzzy, kde-format
-#| msgctxt "The default name of a profile"
-#| msgid "Profile #%1"
+#, kde-format
 msgctxt "New profile name, %1 is a number"
 msgid "Profile %1"
-msgstr "Profil #%1"
+msgstr "Profil %1"
 
 #: profile/ProfileManager.cpp:363
 #, kde-format
@@ -2042,40 +1970,36 @@ msgid "Shortcut"
 msgstr "Genvej"
 
 #: profile/ProfileModel.cpp:82
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu A read only (locked) session"
-#| msgid "Read-only"
+#, kde-format
 msgctxt ""
 "@label:textbox added to the name of the built-in profile, to point out it's "
 "read-only"
 msgid " [Read-only]"
-msgstr "Skrivebeskyttet"
+msgstr " [Skrivebeskyttet]"
 
 #: profile/ProfileModel.cpp:86
-#, fuzzy, kde-format
-#| msgctxt "Name of the default/builtin profile"
-#| msgid "Default"
+#, kde-format
 msgctxt "@label:textbox added to the name of the current default profile"
 msgid " [Default]"
-msgstr "&Sæt som standard"
+msgstr " [Standard]"
 
 #: profile/ProfileModel.cpp:91
 #, kde-format
 msgctxt "@label:textbox added to profile name when used for light system theme"
 msgid " [Light]"
-msgstr ""
+msgstr " [Lys]"
 
 #: profile/ProfileModel.cpp:94
 #, kde-format
 msgctxt "@label:textbox added to profile name when used for dark system theme"
 msgid " [Dark]"
-msgstr ""
+msgstr " [Mørk]"
 
 #: profile/ProfileModel.cpp:110
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Built-in profile is always available"
-msgstr ""
+msgstr "Indbygget profil er altid tilgængelig"
 
 #: profile/ProfileModel.cpp:122
 #, kde-format
@@ -2086,7 +2010,7 @@ msgstr "Dobbeltklik for at skifte genvej"
 #: RenameTabDialog.cpp:25
 #, kde-format
 msgid "Tab Properties"
-msgstr ""
+msgstr "Fanebladsegenskaber"
 
 #: SaveHistoryAutoTask.cpp:63 SaveHistoryTask.cpp:71
 #, kde-format
@@ -2101,23 +2025,26 @@ msgstr "%1 er en ugyldig URL, outputtet kunne ikke gemmes."
 #: SaveHistoryAutoTask.cpp:88
 #, kde-format
 msgid "Failed to create autosave file at %1."
-msgstr ""
+msgstr "Kunne ikke oprette fil til automatisk gemning på %1."
 
 #: SaveHistoryAutoTask.cpp:102
 #, kde-format
 msgid "Stopping autosave due to switching of screens."
-msgstr ""
+msgstr "Stopper automatisk gemning på grund af skift af skærme."
 
 #: SaveHistoryAutoTask.cpp:116
 #, kde-format
 msgid ""
 "Autosave file has been modified externally, preventing further autosaves."
 msgstr ""
+"Fil til automatisk gemning er blevet ændret udefra, hvilket forhindrer "
+"yderligere automatiske gemninger."
 
 #: SaveHistoryAutoTask.cpp:173
 #, kde-format
 msgid "Failed to update autosave state on output changes."
 msgstr ""
+"Kunne ikke opdatere tilstand for automatisk gemning ved ændringer i output."
 
 #: SaveHistoryTask.cpp:174
 #, kde-format
@@ -2156,7 +2083,7 @@ msgstr "Breeze"
 #: schemas.cpp:6
 #, kde-format
 msgid "Campbell"
-msgstr ""
+msgstr "Campbell"
 
 #: schemas.cpp:7
 #, kde-format
@@ -2206,7 +2133,7 @@ msgstr "Linux-konsol"
 #: schemas.cpp:16
 #, kde-format
 msgid "macOS"
-msgstr ""
+msgstr "macOS"
 
 #: schemas.cpp:17
 #, kde-format
@@ -2214,26 +2141,21 @@ msgid "Solaris console"
 msgstr "Solaris-konsol"
 
 #: searchtabs/SearchTabs.cpp:127
-#, fuzzy, kde-format
-#| msgctxt "@item:intext Search options"
-#| msgid "Search:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Search..."
-msgstr "Søg:"
+msgstr "Søg..."
 
 #: searchtabs/SearchTabs.cpp:128
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Enter the text to search for here"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"
-msgstr "Angiv teksten der skal søges efter her"
+msgstr "Angiv navnet der skal søges efter her"
 
 #: session/Session.cpp:133
-#, fuzzy, kde-format
-#| msgid "Bell in session '%1'"
+#, kde-format
 msgid "Bell in '%1' (Session '%2')"
-msgstr "Bip i sessionen \"%1\""
+msgstr "Bip i '%1' (Session '%2')"
 
 #: session/Session.cpp:436
 #, kde-format
@@ -2266,19 +2188,17 @@ msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Kunne ikke starte programmet \"%1\" med argumenterne \"%2\"."
 
 #: session/Session.cpp:818
-#, fuzzy, kde-format
-#| msgid "Silence in session '%1'"
+#, kde-format
 msgid "Silence in '%1' (Session '%2')"
-msgstr "Tavshed i sessionen \"%1\""
+msgstr "Tavshed i '%1' (Session '%2')"
 
 #: session/Session.cpp:819 session/Session.cpp:2355
 #: session/SessionController.cpp:382 session/SessionController.cpp:1932
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1281
 #: Vt102Emulation.cpp:1536
-#, fuzzy, kde-format
-#| msgid "&Close Session"
+#, kde-format
 msgid "Show session"
-msgstr "&Luk session"
+msgstr "Vis session"
 
 #: session/Session.cpp:1135
 #, kde-format
@@ -2302,15 +2222,14 @@ msgid "ZModem Progress"
 msgstr "ZModem fremgang"
 
 #: session/Session.cpp:2354
-#, fuzzy, kde-format
-#| msgid "Activity in session '%1'"
+#, kde-format
 msgid "Activity in '%1' (Session '%2')"
-msgstr "Aktivitet i sessionen \"%1\""
+msgstr "Aktivitet i '%1' (Session '%2')"
 
 #: session/Session.cpp:2637
 #, kde-format
 msgid "Security sensitive DBus API is disabled in the settings."
-msgstr ""
+msgstr "Sikkerhedsfølsom DBus-API er deaktiveret i indstillingerne."
 
 #: session/SessionController.cpp:144
 #, kde-format
@@ -2353,35 +2272,29 @@ msgid "Copy"
 msgstr "Kopiér"
 
 #: session/SessionController.cpp:699
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgid "Split View Left-Right"
 msgstr "Opdel visning venstre/højre"
 
 #: session/SessionController.cpp:704
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgid "Split View Top-Bottom"
 msgstr "Opdel visning top/bund"
 
 #: session/SessionController.cpp:708
 #, kde-format
 msgid "Copy except prompts"
-msgstr ""
+msgstr "Kopiér undtagen kommandoprompter"
 
 #: session/SessionController.cpp:714
-#, fuzzy, kde-format
-#| msgid "Copy Input"
+#, kde-format
 msgid "Copy user input"
 msgstr "Kopiér input"
 
 #: session/SessionController.cpp:720
-#, fuzzy, kde-format
-#| msgid "Copy Input"
+#, kde-format
 msgid "Copy command output"
-msgstr "Kopiér input"
+msgstr "Kopiér kommando-output"
 
 #: session/SessionController.cpp:735
 #, kde-format
@@ -2399,10 +2312,9 @@ msgid "&Select All"
 msgstr "&Markér alle"
 
 #: session/SessionController.cpp:752
-#, fuzzy, kde-format
-#| msgid "Select &Line"
+#, kde-format
 msgid "Select &Mode"
-msgstr "Vælg &linje"
+msgstr "Vælg &tilstand"
 
 #: session/SessionController.cpp:757
 #, kde-format
@@ -2415,15 +2327,14 @@ msgid "Save Output &As..."
 msgstr "Gem &output som..."
 
 #: session/SessionController.cpp:766
-#, fuzzy, kde-format
-#| msgid "Save Output &As..."
+#, kde-format
 msgid "Auto Save Output As..."
-msgstr "Gem &output som..."
+msgstr "Gem automatisk output som..."
 
 #: session/SessionController.cpp:770
 #, kde-format
 msgid "Stop Auto Save"
-msgstr ""
+msgstr "Stop automatisk gemning"
 
 #: session/SessionController.cpp:774
 #, kde-format
@@ -2446,16 +2357,14 @@ msgid "Clear Scrollback and Reset"
 msgstr "Ryd tilbagerulning og nulstil"
 
 #: session/SessionController.cpp:797
-#, fuzzy, kde-format
-#| msgid "Edit Profile"
+#, kde-format
 msgid "Next Profile"
-msgstr "Redigér profil"
+msgstr "Næste profil"
 
 #: session/SessionController.cpp:802
-#, fuzzy, kde-format
-#| msgid "Previous View"
+#, kde-format
 msgid "Previous Profile"
-msgstr "Forrige visning"
+msgstr "Forrige profil"
 
 #: session/SessionController.cpp:805
 #, kde-format
@@ -2471,21 +2380,18 @@ msgstr "Vælg &tegnsæt"
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow Mouse Tracking"
-msgstr ""
+msgstr "Tillad musesporing"
 
 #: session/SessionController.cpp:859
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu A read only (locked) session"
-#| msgid "Read-only"
+#, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
 msgstr "Skrivebeskyttet"
 
 #: session/SessionController.cpp:870
-#, fuzzy, kde-format
-#| msgid "&Rename Tab..."
+#, kde-format
 msgid "&Configure or Rename Tab..."
-msgstr "&Omdøb faneblad..."
+msgstr "&Indstil eller omdøb faneblad..."
 
 #: session/SessionController.cpp:876
 #, kde-format
@@ -2495,7 +2401,7 @@ msgstr "&Alle faneblade i det aktuelle vindue"
 #: session/SessionController.cpp:883
 #, kde-format
 msgid "&Select Tabs..."
-msgstr "&Markér faneblade..."
+msgstr "&Vælg faneblade..."
 
 #: session/SessionController.cpp:889
 #, kde-format
@@ -2516,13 +2422,12 @@ msgstr "&ZModem-upload..."
 #: session/SessionController.cpp:910
 #, kde-format
 msgid "One-Shot Monitors"
-msgstr ""
+msgstr "Engangsovervågninger"
 
 #: session/SessionController.cpp:915
-#, fuzzy, kde-format
-#| msgid "Monitor for &Activity"
+#, kde-format
 msgid "Monitor for &Prompt"
-msgstr "Overvåg for &aktivitet"
+msgstr "Overvåg for &prompt"
 
 #: session/SessionController.cpp:922
 #, kde-format
@@ -2572,7 +2477,7 @@ msgstr "&Fortsæt opgave"
 #: session/SessionController.cpp:974
 #, kde-format
 msgid "&Hangup"
-msgstr "&Hæng op"
+msgstr "&Læg på"
 
 #: session/SessionController.cpp:979
 #, kde-format
@@ -2600,11 +2505,9 @@ msgid "User Signal &2"
 msgstr "Brugersignal &2"
 
 #: session/SessionController.cpp:1017
-#, fuzzy, kde-format
-#| msgctxt "@item This will be used as part of the file name"
-#| msgid "New Profile"
+#, kde-format
 msgid "Create New Profile..."
-msgstr "Ny profil"
+msgstr "Opret ny profil..."
 
 #: session/SessionController.cpp:1019
 #, kde-format
@@ -2634,12 +2537,10 @@ msgid "Confirm Close"
 msgstr "Bekræft lukning"
 
 #: session/SessionController.cpp:1171
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Close Tab"
+#, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
-msgstr "Luk faneblad"
+msgstr "Luk program"
 
 #: session/SessionController.cpp:1194
 #, kde-format
@@ -2650,32 +2551,29 @@ msgstr ""
 "Et program i denne session ville ikke dø. Vil du virkelig dræbe det med magt?"
 
 #: session/SessionController.cpp:1198
-#, fuzzy, kde-format
-#| msgid ""
-#| "The program '%1' is in this session would not die.  Are you sure you want "
-#| "to kill it by force?"
+#, kde-format
 msgid ""
 "The program '%1' in this session would not die.  Are you sure you want to "
 "kill it by force?"
 msgstr ""
-"Programmet \"%1\" i denne session ville ikke dø. Vil du virkelig dræbe det "
-"med magt?"
+"Programmet '%1' i denne session ville ikke dø.  Er du sikker på, at du vil "
+"dræbe det med magt?"
 
 #: session/SessionController.cpp:1206
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
-msgstr ""
+msgstr "Dræb program"
 
 #: session/SessionController.cpp:1931
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
-msgstr ""
+msgstr "Skal-prompten vises i session '%1'"
 
 #: session/SessionController.cpp:2161
 #, kde-format
 msgid "Open Current Folder With"
-msgstr ""
+msgstr "Åbn aktuel mappe med"
 
 #: session/SessionController.cpp:2231
 #, kde-format
@@ -2790,40 +2688,39 @@ msgstr "Fjern vinduets titellinje og ramme"
 #: settings/GeneralSettings.ui:123 settings/konsole.kcfg:13
 #, kde-format
 msgid "Focus terminals when the mouse pointer is moved over them"
-msgstr ""
+msgstr "Bring terminaler i fokus, når musemarkøren flyttes hen over dem"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableSecuritySensitiveDBusAPI)
 #. i18n: ectx: label, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
 #: settings/GeneralSettings.ui:130 settings/konsole.kcfg:47
 #, kde-format
 msgid "Enable the security sensitive parts of the DBus API"
-msgstr ""
+msgstr "Aktivér de sikkerhedsfølsomme dele af DBus-API"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ListenForZModemTerminalCodes)
 #: settings/GeneralSettings.ui:137
 #, kde-format
 msgid "Listen for ZModem terminal codes"
-msgstr ""
+msgstr "Lyt efter ZModem-terminalkoder"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ForceNewTabs)
 #. i18n: ectx: label, entry (ForceNewTabs), group (KonsoleWindow)
 #: settings/GeneralSettings.ui:144 settings/konsole.kcfg:37
-#, fuzzy, kde-format
-#| msgid "Put new tabs:"
+#, kde-format
 msgid "Force new tabs"
-msgstr "Placér nye faneblade:"
+msgstr "Gennemtving nye faneblade"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowProgressInTaskBar)
 #: settings/GeneralSettings.ui:151
 #, kde-format
 msgid "Show progress in taskbar"
-msgstr ""
+msgstr "Vis fremgang på proceslinjen"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SyncProfileWithSystemTheme)
 #: settings/GeneralSettings.ui:158
 #, kde-format
 msgid "Automatically switch profile based on system theme"
-msgstr ""
+msgstr "Skift automatisk profil baseret på systemtema"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/GeneralSettings.ui:183
@@ -2850,7 +2747,7 @@ msgstr "Versalfølsom"
 #: settings/GeneralSettings.ui:214 settings/konsole.kcfg:89
 #, kde-format
 msgid "Match using regular expressions"
-msgstr "Match brugte regulære udtryk"
+msgstr "Match v.h.a. regulære udtryk"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchHighlightMatches)
 #: settings/GeneralSettings.ui:227
@@ -2875,22 +2772,21 @@ msgstr "Søg baglæns"
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchNoWrap)
 #. i18n: ectx: tooltip, entry (SearchNoWrap), group (SearchSettings)
 #: settings/GeneralSettings.ui:256 settings/konsole.kcfg:104
-#, fuzzy, kde-format
-#| msgid "Sets whether search should start from the bottom"
+#, kde-format
 msgid "Sets whether search should stop instead of wrapping"
-msgstr "Angiver om søgningen skal starte fra bunden"
+msgstr "Angiver om søgning skal stoppe i stedet for at starte forfra"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchNoWrap)
 #: settings/GeneralSettings.ui:259
 #, kde-format
 msgid "No wrap"
-msgstr ""
+msgstr "Ingen ombrydning"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/GeneralSettings.ui:284
 #, kde-format
 msgid "Notifications:"
-msgstr "Bekendtgørelser:"
+msgstr "Notifikationer:"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, enableAllMessagesButton)
 #: settings/GeneralSettings.ui:297
@@ -2908,7 +2804,7 @@ msgstr "Aktivér alle \"Spørg ikke igen\"-meddelelser"
 #: settings/konsole.kcfg:18
 #, kde-format
 msgid "Show window title set by escape sequence on the titlebar"
-msgstr "Vis vinduestitel med undvigesekvens i titellinjen"
+msgstr "Vis vinduestitel med escape-sekvens i titellinjen"
 
 #. i18n: ectx: tooltip, entry (AllowMenuAccelerators), group (KonsoleWindow)
 #: settings/konsole.kcfg:23
@@ -2930,42 +2826,44 @@ msgstr "Vinduesstørrelsen vil blive gemt ved afslutning af Konsole"
 
 #. i18n: ectx: tooltip, entry (ForceNewTabs), group (KonsoleWindow)
 #: settings/konsole.kcfg:38
-#, fuzzy, kde-format
-#| msgid "When launching Konsole re-use existing process if possible"
+#, kde-format
 msgid ""
 "When launching Konsole create a new tab instead of creating new windows if "
 "possible"
-msgstr "Genbrug så vidt muligt eksisterende proces når Konsole startes"
+msgstr ""
+"Opret et nyt faneblad i stedet for at oprette nye vinduer, hvis det er "
+"muligt, når Konsole startes"
 
 #. i18n: ectx: label, entry (ShowProgressInTaskBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:42
 #, kde-format
 msgid "Show progress in task bar"
-msgstr ""
+msgstr "Vis fremgang på proceslinjen"
 
 #. i18n: ectx: tooltip, entry (ShowProgressInTaskBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:43
 #, kde-format
 msgid "When a script reports its progress, it will be shown in the task bar"
 msgstr ""
+"Når et script rapporterer sin fremgang, vil den blive vist på proceslinjen"
 
 #. i18n: ectx: tooltip, entry (EnableSecuritySensitiveDBusAPI), group (KonsoleWindow)
 #: settings/konsole.kcfg:48
 #, kde-format
 msgid "DBus API like runCommand will be enabled"
-msgstr ""
+msgstr "DBus-API som runCommand vil blive aktiveret"
 
 #. i18n: ectx: label, entry (ListenForZModemTerminalCodes), group (KonsoleWindow)
 #: settings/konsole.kcfg:52
 #, kde-format
 msgid "Listen for ZModem Terminal codes"
-msgstr ""
+msgstr "Lyt efter ZModem-terminalkoder"
 
 #. i18n: ectx: tooltip, entry (ListenForZModemTerminalCodes), group (KonsoleWindow)
 #: settings/konsole.kcfg:53
 #, kde-format
 msgid "Automatic send/receive files over serial connections"
-msgstr ""
+msgstr "Send/modtag automatisk filer over serielle forbindelser"
 
 #. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:62
@@ -3022,13 +2920,13 @@ msgstr "Angiver hvorvidt matchende tekst skal fremhæves"
 #: settings/konsole.kcfg:103
 #, kde-format
 msgid "Search stops instead of wrapping"
-msgstr ""
+msgstr "Søgning stopper i stedet for at starte forfra"
 
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
 #: settings/konsole.kcfg:110
 #, kde-format
 msgid "Control whether child cgroups are created for individual tabs"
-msgstr ""
+msgstr "Styr om under-cgroups oprettes for individuelle faneblade"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
 #: settings/konsole.kcfg:114
@@ -3036,6 +2934,8 @@ msgstr ""
 msgid ""
 "Determines the memory consumption level above which throttling will start"
 msgstr ""
+"Bestemmer niveauet for hukommelsesforbrug, over hvilket neddrosling vil "
+"starte"
 
 #. i18n: ectx: label, entry (SplitViewVisibility), group (SplitView)
 #. i18n: ectx: label, entry (TabBarVisibility), group (TabBar)
@@ -3088,10 +2988,9 @@ msgstr "Styr synligheden af \"Nyt faneblad\"-knappen på fanebladslinjen"
 
 #. i18n: ectx: label, entry (SearchTabsButton), group (TabBar)
 #: settings/konsole.kcfg:179
-#, fuzzy, kde-format
-#| msgid "Control the visibility of 'New Tab' button on the tab bar"
+#, kde-format
 msgid "Control the visibility of 'Search Tabs' button on the tab bar"
-msgstr "Styr synligheden af \"Nyt faneblad\"-knappen på fanebladslinjen"
+msgstr "Styr synligheden af knappen 'Søg i faneblade' på fanebladslinjen"
 
 #. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
 #: settings/konsole.kcfg:187
@@ -3115,7 +3014,7 @@ msgstr "Udvid bredden på faneblade"
 #: settings/konsole.kcfg:208
 #, kde-format
 msgid "Color-code tab when running inside a container"
-msgstr ""
+msgstr "Farvekod faneblad når der køres i en container"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ShowContainerTabColor)
 #. i18n: ectx: tooltip, entry (ShowContainerTabColor), group (TabBar)
@@ -3125,13 +3024,15 @@ msgid ""
 "When running inside a container (e.g. Distrobox or Toolbox), color-code the "
 "tab with a container-specific color"
 msgstr ""
+"Når der køres i en container (f.eks. Distrobox eller Toolbox), farvekodes "
+"fanebladet med en containerspecifik farve"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowContainerStatusBar)
 #. i18n: ectx: label, entry (ShowContainerStatusBar), group (TabBar)
 #: settings/konsole.kcfg:213 settings/TabBarSettings.ui:335
 #, kde-format
 msgid "Show container label in terminal footer"
-msgstr ""
+msgstr "Vis containeretiket i terminalens sidefod"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ShowContainerStatusBar)
 #. i18n: ectx: tooltip, entry (ShowContainerStatusBar), group (TabBar)
@@ -3141,6 +3042,8 @@ msgid ""
 "When running inside a container (e.g. Distrobox or Toolbox), show a label "
 "with the container name at the bottom of the terminal"
 msgstr ""
+"Når der køres i en container (f.eks. Distrobox eller Toolbox), vises en "
+"etiket med containernavnet i bunden af terminalen"
 
 #. i18n: ectx: label, entry (scrollbackUseSystemLocation), group (FileLocation)
 #: settings/konsole.kcfg:230
@@ -3170,26 +3073,25 @@ msgstr "Brug denne mappe til tilbagerulningsfiler"
 #: settings/konsole.kcfg:248
 #, kde-format
 msgid "Sync profile with system theme"
-msgstr ""
+msgstr "Synkronisér profil med systemtema"
 
 #. i18n: ectx: label, entry (LightThemeProfile), group (LightDarkTheme)
 #: settings/konsole.kcfg:252
 #, kde-format
 msgid "Profile to use for light system theme"
-msgstr ""
+msgstr "Profil der skal bruges til lyst systemtema"
 
 #. i18n: ectx: label, entry (DarkThemeProfile), group (LightDarkTheme)
 #: settings/konsole.kcfg:256
 #, kde-format
 msgid "Profile to use for dark system theme"
-msgstr ""
+msgstr "Profil der skal bruges til mørkt systemtema"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableMemoryMonitoring)
 #: settings/MemorySettings.ui:17
-#, fuzzy, kde-format
-#| msgid "Tab Monitoring"
+#, kde-format
 msgid "Enable memory monitoring:"
-msgstr "Overvågning af faneblade"
+msgstr "Aktivér hukommelsesovervågning:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:24
@@ -3201,18 +3103,24 @@ msgid ""
 "enabling might cause greater slowdowns during high memory consumption and "
 "specifying excessively low values might still cause Konsole to be killed."
 msgstr ""
+"Ændringer træder i kraft ved genstart. Hvis aktiveret, vil vedvarende "
+"hukommelsesforbrug af Konsole, der overstiger den angivne værdi, få systemd-"
+"oomd til at eliminere fanebladet/fanebladene, der indeholder den/de "
+"hukommelseskrævende proces(ser). Bemærk: Aktivering kan forårsage større "
+"forsinkelser under højt hukommelsesforbrug, og angivelse af for lave værdier "
+"kan stadig medføre, at Konsole bliver dræbt."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:59
 #, kde-format
 msgid "Memory limit:"
-msgstr ""
+msgstr "Hukommelsesgrænse:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_MemoryLimitValue)
 #: settings/MemorySettings.ui:66
 #, kde-format
 msgid " MB"
-msgstr ""
+msgstr " MB"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/PartInfo.ui:17
@@ -3234,8 +3142,7 @@ msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newProfileButton)
 #: settings/ProfileSettings.ui:51
-#, fuzzy, kde-format
-#| msgid "Create a new profile based upon the selected profile"
+#, kde-format
 msgid "Create a new profile based on the selected profile"
 msgstr "Opret en ny profil baseret på den valgte profil"
 
@@ -3247,11 +3154,12 @@ msgstr "&Ny..."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, editProfileButton)
 #: settings/ProfileSettings.ui:64
-#, fuzzy, kde-format
-#| msgid "Set the selected profile as the default for new terminal sessions"
+#, kde-format
 msgid ""
 "Edit the selected profile (this button is disabled for read-only profiles)"
-msgstr "Sæt valgte profil som standard for nye terminalsessioner"
+msgstr ""
+"Redigér den valgte profil (denne knap er deaktiveret for skrivebeskyttede "
+"profiler)"
 
 #. i18n: ectx: property (text), widget (QPushButton, editProfileButton)
 #: settings/ProfileSettings.ui:67
@@ -3261,10 +3169,9 @@ msgstr "R&edigér..."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, deleteProfileButton)
 #: settings/ProfileSettings.ui:77
-#, fuzzy, kde-format
-#| msgid "Delete the selected profile(s)"
+#, kde-format
 msgid "Delete the selected profile"
-msgstr "Slet valgt(e) profil(er)"
+msgstr "Slet den valgte profil"
 
 #. i18n: ectx: property (text), widget (QPushButton, deleteProfileButton)
 #: settings/ProfileSettings.ui:80
@@ -3286,31 +3193,27 @@ msgstr "&Sæt som standard"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, setLightProfileButton)
 #: settings/ProfileSettings.ui:103
-#, fuzzy, kde-format
-#| msgid "Set the selected profile as the default for new terminal sessions"
+#, kde-format
 msgid "Set the selected profile as the light theme profile"
-msgstr "Sæt valgte profil som standard for nye terminalsessioner"
+msgstr "Sæt den valgte profil som profilen for lyst tema"
 
 #. i18n: ectx: property (text), widget (QPushButton, setLightProfileButton)
 #: settings/ProfileSettings.ui:106
-#, fuzzy, kde-format
-#| msgid "&Set as Default"
+#, kde-format
 msgid "&Set as Light"
-msgstr "&Sæt som standard"
+msgstr "&Sæt som lys"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, setDarkProfileButton)
 #: settings/ProfileSettings.ui:116
-#, fuzzy, kde-format
-#| msgid "Set the selected profile as the default for new terminal sessions"
+#, kde-format
 msgid "Set the selected profile as the dark theme profile"
-msgstr "Sæt valgte profil som standard for nye terminalsessioner"
+msgstr "Sæt den valgte profil som profilen for mørkt tema"
 
 #. i18n: ectx: property (text), widget (QPushButton, setDarkProfileButton)
 #: settings/ProfileSettings.ui:119
-#, fuzzy, kde-format
-#| msgid "&Set as Default"
+#, kde-format
 msgid "&Set as Dark"
-msgstr "&Sæt som standard"
+msgstr "&Sæt som mørk"
 
 #. i18n: ectx: attribute (title), widget (QWidget, appearanceTab)
 #: settings/TabBarSettings.ui:39
@@ -3363,17 +3266,15 @@ msgstr "&Under terminalområdet"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Left)
 #: settings/TabBarSettings.ui:148
-#, fuzzy, kde-format
-#| msgid "Be&low terminal area"
+#, kde-format
 msgid "To the left of terminal area"
-msgstr "&Under terminalområdet"
+msgstr "Til venstre for terminalområdet"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Right)
 #: settings/TabBarSettings.ui:158
-#, fuzzy, kde-format
-#| msgid "Be&low terminal area"
+#, kde-format
 msgid "To the &right of terminal area"
-msgstr "&Under terminalområdet"
+msgstr "Til &højre for terminalområdet"
 
 #. i18n: ectx: property (text), widget (QLabel, showCloseTabButtonLabel)
 #: settings/TabBarSettings.ui:186
@@ -3383,8 +3284,7 @@ msgstr "Vis knap til luk faneblad:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnEachTab)
 #: settings/TabBarSettings.ui:198
-#, fuzzy, kde-format
-#| msgid "&On each tab"
+#, kde-format
 msgid "On ea&ch tab"
 msgstr "&På hvert faneblad"
 
@@ -3403,24 +3303,19 @@ msgstr "Ingen"
 
 #. i18n: ectx: property (text), widget (QLabel, showSearchTabsButtonLabel)
 #: settings/TabBarSettings.ui:246
-#, fuzzy, kde-format
-#| msgid "Show Close Tab button:"
+#, kde-format
 msgid "Show Search Tabs button:"
-msgstr "Vis knap til luk faneblad:"
+msgstr "Vis knappen Søg i faner:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSearchTabsButton)
 #: settings/TabBarSettings.ui:258
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Always show the split header"
-#| msgid "Always"
+#, kde-format
 msgid "Always"
 msgstr "Altid"
 
 #. i18n: ectx: property (text), widget (QRadioButton, HideSearchTabsButton)
 #: settings/TabBarSettings.ui:268
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Never show the split header"
-#| msgid "Never"
+#, kde-format
 msgid "Never"
 msgstr "Aldrig"
 
@@ -3448,7 +3343,7 @@ msgstr "Udvid hvert enkelt faneblads bredde til fuldt vindue"
 #: settings/TabBarSettings.ui:325
 #, kde-format
 msgid "Color-code tab when inside a container"
-msgstr ""
+msgstr "Farvekod faneblad når det er inde i en container"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabBarUseUserStyleSheet)
 #: settings/TabBarSettings.ui:342
@@ -3585,10 +3480,9 @@ msgstr "Brugertilpasset:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableThumbnails)
 #: settings/ThumbnailsSettings.ui:19
-#, fuzzy, kde-format
-#| msgid "Enable menu accelerators"
+#, kde-format
 msgid "Enable thumbnails generation"
-msgstr "Aktivér menugenveje"
+msgstr "Aktivér generering af miniaturer"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/ThumbnailsSettings.ui:28
@@ -3598,6 +3492,9 @@ msgid ""
 "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline files</span> in your "
 "profile settings.</p></body></html>"
 msgstr ""
+"<html><head/><body><p>For at bruge denne funktion, aktivér <span style=\" "
+"font-weight:600;\">Mus-&gt;Diverse-&gt;Understreg filer</span> i dine "
+"profilindstillinger.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/ThumbnailsSettings.ui:46
@@ -3621,7 +3518,7 @@ msgstr "Aktivering:"
 #: settings/ThumbnailsSettings.ui:78
 #, kde-format
 msgid "Mouse hover plus"
-msgstr "Under mus plus"
+msgstr "Mus henover plus"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ThumbnailShift)
 #: settings/ThumbnailsSettings.ui:85
@@ -3755,11 +3652,10 @@ msgstr "Skift m&appe til"
 #: terminalDisplay/TerminalDisplay.cpp:3247
 #, kde-format
 msgid "&Paste Location"
-msgstr "Placering af &indsæt"
+msgstr "&Indsæt placering"
 
 #: ViewManager.cpp:125
-#, fuzzy, kde-format
-#| msgid "Split View"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View"
 msgstr "Opdel visning"
@@ -3777,54 +3673,46 @@ msgid "Split View Top/Bottom"
 msgstr "Opdel visning top/bund"
 
 #: ViewManager.cpp:148
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically"
-msgstr "Opdel visning top/bund"
+msgstr "Opdel visning automatisk"
 
 #: ViewManager.cpp:158
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
-msgstr "Opdel visning venstre/højre"
+msgstr "Opdel visning venstre/højre fra næste fane"
 
 #: ViewManager.cpp:166
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
-msgstr "Opdel visning top/bund"
+msgstr "Opdel visning top/bund fra næste fane"
 
 #: ViewManager.cpp:174
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
-msgstr "Opdel visning top/bund"
+msgstr "Opdel visning automatisk fra næste fane"
 
 #: ViewManager.cpp:184
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x2 terminals"
-msgstr ""
+msgstr "Indlæs et nyt faneblad med layout 2x2 terminaler"
 
 #: ViewManager.cpp:193
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x1 terminals"
-msgstr ""
+msgstr "Indlæs et nyt faneblad med layout 2x1 terminaler"
 
 #: ViewManager.cpp:202
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 1x2 terminals"
-msgstr ""
+msgstr "Indlæs et nyt faneblad med layout 1x2 terminaler"
 
 #: ViewManager.cpp:210
 #, kde-format
@@ -3887,20 +3775,16 @@ msgid "Focus Right Terminal"
 msgstr "Sæt terminalen til højre i fokus"
 
 #: ViewManager.cpp:287
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Focus Left Terminal"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Next Terminal"
-msgstr "Sæt terminalen til venstre i fokus"
+msgstr "Fokusér på næste terminal"
 
 #: ViewManager.cpp:293
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Focus Below Terminal"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Previous Terminal"
-msgstr "Sæt terminalen nedenunder i fokus"
+msgstr "Fokusér på forrige terminal"
 
 #: ViewManager.cpp:299
 #, kde-format
@@ -3939,20 +3823,16 @@ msgid "Toggle maximize current view"
 msgstr "Slå maksimering af aktuel visning til/fra"
 
 #: ViewManager.cpp:328
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Toggle maximize current view"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle zoom-maximize current view"
-msgstr "Slå maksimering af aktuel visning til/fra"
+msgstr "Slå zoom-maksimering af aktuel visning til/fra"
 
 #: ViewManager.cpp:329
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Toggle maximize current view"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle zoom-maximize current view"
-msgstr "Slå maksimering af aktuel visning til/fra"
+msgstr "Slå zoom-maksimering af aktuel visning til/fra"
 
 #: ViewManager.cpp:337
 #, kde-format
@@ -3970,25 +3850,25 @@ msgstr "Flyt faneblad til venstre"
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
-msgstr ""
+msgstr "Opsæt semantisk integration (bash)"
 
 #: ViewManager.cpp:357
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
-msgstr ""
+msgstr "Slå visning af semantiske hint til/fra"
 
 #: ViewManager.cpp:363
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
-msgstr ""
+msgstr "Slå visning af linjenumre til/fra"
 
 #: ViewManager.cpp:370
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
-msgstr ""
+msgstr "Samme størrelse til alle visninger"
 
 #: ViewManager.cpp:380
 #, kde-format
@@ -3997,62 +3877,52 @@ msgid "Switch to Tab %1"
 msgstr "Skift til %1. faneblad"
 
 #: ViewManager.cpp:603
-#, fuzzy, kde-format
-#| msgid "Text interaction"
+#, kde-format
 msgid "Semantic hints "
-msgstr "Tekstinteraktion"
+msgstr "Semantiske vink "
 
 #: ViewManager.cpp:619
-#, fuzzy, kde-format
-#| msgid "Fixed number of lines: "
+#, kde-format
 msgid "Line numbers "
-msgstr "Fast antal linjer: "
+msgstr "Linjenumre "
 
 #: ViewManager.cpp:1289
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Move tab to the left"
+#, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
-msgstr "Flyt faneblad til venstre"
+msgstr "Gem fanebladslayout"
 
 #: ViewManager.cpp:1291 ViewManager.cpp:1412
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
-msgstr ""
+msgstr "Konsole-visningslayout (*.json)"
 
 #: ViewManager.cpp:1307
-#, fuzzy, kde-format
-#| msgid ""
-#| "A problem occurred when saving the output.\n"
-#| "%1"
+#, kde-format
 msgctxt "@label:textbox"
 msgid ""
 "A problem occurred when saving the Layout.\n"
 "%1"
 msgstr ""
-"Et problem opstod under gemning af outputtet.\n"
+"Der opstod et problem under gemning af layoutet.\n"
 "%1"
 
 #: ViewManager.cpp:1399
-#, fuzzy, kde-format
-#| msgid ""
-#| "A problem occurred when saving the output.\n"
-#| "%1"
+#, kde-format
 msgctxt "@label:textbox"
 msgid ""
 "A problem occurred when loading the Layout.\n"
 "%1"
 msgstr ""
-"Et problem opstod under gemning af outputtet.\n"
+"Der opstod et problem under indlæsning af layoutet.\n"
 "%1"
 
 #: ViewManager.cpp:1410
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
-msgstr ""
+msgstr "Indlæs fanebladslayout"
 
 #: Vt102Emulation.cpp:3272
 #, kde-format
@@ -4147,17 +4017,18 @@ msgid ""
 "Allow terminal programs to use the Kitty keyboard protocol for enhanced "
 "keyboard input"
 msgstr ""
+"Tillad terminalprogrammer at bruge Kitty-tastaturprotokollen til forbedret "
+"tastaturinput"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableKittyKeyboardButton)
 #: widgets/EditProfileAdvancedPage.ui:217
 #, kde-format
 msgid "Kitty keyboard protocol"
-msgstr ""
+msgstr "Kitty-tastaturprotokol"
 
 #. i18n: ectx: property (text), widget (QLabel, label_14)
 #: widgets/EditProfileAdvancedPage.ui:242
-#, fuzzy, kde-format
-#| msgid "Default character encoding:"
+#, kde-format
 msgid "&Default character encoding:"
 msgstr "Standardtegnsæt:"
 
@@ -4165,48 +4036,43 @@ msgstr "Standardtegnsæt:"
 #: widgets/EditProfileAdvancedPage.ui:262
 #, kde-format
 msgid "Shortcut for peeking the primary screen:"
-msgstr ""
+msgstr "Genvej til at smugkigge på den primære skærm:"
 
 #. i18n: ectx: property (text), widget (QLabel, autoSaveIntervalLabel)
 #: widgets/EditProfileAdvancedPage.ui:282
 #, kde-format
 msgid "Set interval between autosaves:"
-msgstr ""
+msgstr "Indstil interval mellem automatiske gemninger:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, autoSaveIntervalWidget)
 #: widgets/EditProfileAdvancedPage.ui:289
 #, kde-format
 msgid " ms"
-msgstr ""
+msgstr " ms"
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
 #: widgets/EditProfileAdvancedPage.ui:302
-#, fuzzy, kde-format
-#| msgid "Fixed number of lines: "
+#, kde-format
 msgid "Line Numbers:"
-msgstr "Fast antal linjer: "
+msgstr "Linjenumre:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsNever)
 #: widgets/EditProfileAdvancedPage.ui:314
-#, fuzzy, kde-format
-#| msgid "&Never"
+#, kde-format
 msgctxt "Never"
 msgid "&Never"
 msgstr "&Aldrig"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsURL)
 #: widgets/EditProfileAdvancedPage.ui:324
-#, fuzzy, kde-format
-#| msgid "Enable URL hints"
+#, kde-format
 msgctxt "When showing URL hints"
 msgid "When &URL hints show"
-msgstr "Aktivér URL-fremhævning"
+msgstr "Når &URL-vink vises"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsAlways)
 #: widgets/EditProfileAdvancedPage.ui:334
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Always show the split header"
-#| msgid "Always"
+#, kde-format
 msgctxt "Always"
 msgid "A&lways"
 msgstr "Altid"
@@ -4294,9 +4160,7 @@ msgstr "Tegn intense farver med fed skrifttype"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:188
-#, fuzzy, kde-format
-#| msgid ""
-#| "Use the selected font for line characters instead of the builtin code"
+#, kde-format
 msgctxt ""
 "Characters for drawing lines for a frame or box in TUI programs. Not a row "
 "of characters."
@@ -4306,8 +4170,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:191
-#, fuzzy, kde-format
-#| msgid "Use line characters contained in font"
+#, kde-format
 msgctxt ""
 "Characters for drawing lines for a frame or box in TUI programs. Not a row "
 "of characters."
@@ -4316,21 +4179,19 @@ msgstr "Brug linjetegn indeholdt i skrifttypen"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:198
-#, fuzzy, kde-format
-#| msgid ""
-#| "Use the selected font for line characters instead of the builtin code"
+#, kde-format
 msgid ""
 "Use the selected font for unicode Braille characters instead of the builtin "
 "code"
 msgstr ""
-"Brug den valgte skrifttype til linjetegn i stedet for den indbyggede kode"
+"Brug den valgte skrifttype til Unicode Braille-tegn i stedet for den "
+"indbyggede kode"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:201
-#, fuzzy, kde-format
-#| msgid "Use line characters contained in font"
+#, kde-format
 msgid "Use unicode Braille characters contained in font"
-msgstr "Brug linjetegn indeholdt i skrifttypen"
+msgstr "Brug unicode Braille-tegn indeholdt i skrifttypen"
 
 #. i18n: ectx: attribute (title), widget (QWidget, cursorTab)
 #: widgets/EditProfileAppearancePage.ui:209
@@ -4444,17 +4305,15 @@ msgstr "Aktiveret"
 
 #. i18n: ectx: property (text), widget (QLabel, label_12)
 #: widgets/EditProfileAppearancePage.ui:449
-#, fuzzy, kde-format
-#| msgid "Activation:"
+#, kde-format
 msgid "Animation:"
-msgstr "Aktivering:"
+msgstr "Animation:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableAnimatingCursorButton)
 #: widgets/EditProfileAppearancePage.ui:465
-#, fuzzy, kde-format
-#| msgid "Make the cursor blink regularly"
+#, kde-format
 msgid "Make the cursor animate smoothly"
-msgstr "Lad markøren blinke regelmæssigt"
+msgstr "Få markøren til at animere glidende"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #. i18n: ectx: attribute (title), widget (QWidget, miscTab)
@@ -4532,14 +4391,13 @@ msgstr "Vis tip med terminalens størrelse efter størrelsesændring"
 #: widgets/EditProfileAppearancePage.ui:702
 #, kde-format
 msgid "Display Vertical line at column:"
-msgstr ""
+msgstr "Vis lodret linje ved kolonne:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_10)
 #: widgets/EditProfileAppearancePage.ui:733
-#, fuzzy, kde-format
-#| msgid "Initial terminal size:"
+#, kde-format
 msgid "Inactive Terminals:"
-msgstr "Indledende størrelse på terminalen:"
+msgstr "Inaktive terminaler:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dimWhenInactiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:745
@@ -4551,87 +4409,80 @@ msgstr "Indiker om vinduet er aktivt ved at nedtone farverne"
 #: widgets/EditProfileAppearancePage.ui:748
 #, kde-format
 msgid "Darken"
-msgstr ""
+msgstr "Gør mørkere"
 
 #. i18n: ectx: property (text), widget (QLabel, dimLabel)
 #: widgets/EditProfileAppearancePage.ui:757
 #, kde-format
 msgid "Darkening strength:"
-msgstr ""
+msgstr "Mørkningsstyrke:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_11)
 #: widgets/EditProfileAppearancePage.ui:784
-#, fuzzy, kde-format
-#| msgid "Initial terminal size:"
+#, kde-format
 msgid "Active Terminals:"
-msgstr "Indledende størrelse på terminalen:"
+msgstr "Aktive terminaler:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:796
-#, fuzzy, kde-format
-#| msgid "Indicate whether the window is active by dimming the colors"
+#, kde-format
 msgid "Indicate whether the window is active by drawing a border"
-msgstr "Indiker om vinduet er aktivt ved at nedtone farverne"
+msgstr "Angiv om vinduet er aktivt ved at tegne en kant"
 
 #. i18n: ectx: property (text), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:799
 #, kde-format
 msgid "Border"
-msgstr ""
+msgstr "Kant"
 
 #. i18n: ectx: property (text), widget (QLabel, borderLabel)
 #: widgets/EditProfileAppearancePage.ui:814
-#, fuzzy, kde-format
-#| msgctxt "Cursor color options"
-#| msgid "Color:"
+#, kde-format
 msgctxt "Border color options"
 msgid "Color:"
 msgstr "Farve:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, focusBorderColor)
 #: widgets/EditProfileAppearancePage.ui:830
-#, fuzzy, kde-format
-#| msgid "Select the color used to draw the cursor"
+#, kde-format
 msgid "Select the color used to draw the border"
-msgstr "Vælg farven der skal bruges til at tegne markøren"
+msgstr "Vælg den farve, der bruges til at tegne kanten"
 
 #. i18n: ectx: property (text), widget (QCheckBox, invertSelectionColorsCheckbox)
 #: widgets/EditProfileAppearancePage.ui:854
 #, kde-format
 msgid "Always invert the colors of selected text"
-msgstr ""
+msgstr "Invertér altid farverne for markeret tekst"
 
 #. i18n: ectx: property (toolTip), widget (QWidget, CTLtab)
 #: widgets/EditProfileAppearancePage.ui:882
 #, kde-format
 msgid "<html><head/><body><p>Complex Text Layout</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Komplekst tekstlayout</p></body></html>"
 
 #. i18n: ectx: attribute (title), widget (QWidget, CTLtab)
 #: widgets/EditProfileAppearancePage.ui:885
 #, kde-format
 msgid "Complex Text Layout"
-msgstr ""
+msgstr "Komplekst tekstlayout"
 
 #. i18n: ectx: property (text), widget (QLabel, charactersLabel)
 #: widgets/EditProfileAppearancePage.ui:909
-#, fuzzy, kde-format
-#| msgid "Word characters:"
+#, kde-format
 msgid "Characters:"
-msgstr "Ordtegn:"
+msgstr "Tegn:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:924
-#, fuzzy, kde-format
-#| msgid "Bi-Directional text rendering"
+#, kde-format
 msgid "Enable word mode text rendering"
-msgstr "Gengivelse af tekst i to retninger"
+msgstr "Aktivér tekstgengivelse i ordtilstand"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:927
 #, kde-format
 msgid "Word mode"
-msgstr ""
+msgstr "Ord-tilstand"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:940
@@ -4640,25 +4491,26 @@ msgid ""
 "Ignore attribute changes mid-word (otherwise, attribute changes break word "
 "when rendering)"
 msgstr ""
+"Ignorér attributændringer midt i ord (ellers vil attributændringer bryde "
+"ordet ved gengivelse)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:943
 #, kde-format
 msgid "Use the same attributes for whole word"
-msgstr ""
+msgstr "Brug de samme attributter for hele ordet"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:956
 #, kde-format
 msgid "Render words of ASCII characters together"
-msgstr ""
+msgstr "Gengiv ord af ASCII-tegn sammen"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:959
-#, fuzzy, kde-format
-#| msgid "Word characters:"
+#, kde-format
 msgid "ASCII characters "
-msgstr "Ordtegn:"
+msgstr "ASCII-tegn "
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeCoding)
 #: widgets/EditProfileAppearancePage.ui:972
@@ -4667,26 +4519,26 @@ msgid ""
 "Render words made of characters that usually appear in coding ligatures "
 "together."
 msgstr ""
+"Gengiv ord bestående af tegn, der normalt optræder i kodningsligaturer, "
+"sammen."
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeCoding)
 #: widgets/EditProfileAppearancePage.ui:975
-#, fuzzy, kde-format
-#| msgid "Word characters:"
+#, kde-format
 msgid "Coding ligatures characters"
-msgstr "Ordtegn:"
+msgstr "Tegn for kodningsligaturer"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:988
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
-msgstr ""
+msgstr "Gengiv ord af tegn fra brahmiske skrifter sammen"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:991
-#, fuzzy, kde-format
-#| msgid "Match current character"
+#, kde-format
 msgid "Brahmic scripts characters"
-msgstr "Match det nuværende tegn"
+msgstr "Tegn for brahmiske skrifter"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, fontHinting)
 #: widgets/EditProfileAppearancePage.ui:1004
@@ -4695,27 +4547,26 @@ msgid ""
 "Apply hinting to glyphs when rendering, which may improve the legibility of "
 "certain fonts with some displays"
 msgstr ""
+"Anvend hinting på glyffer ved gengivelse, hvilket kan forbedre læsbarheden "
+"af visse skrifttyper på nogle skærme"
 
 #. i18n: ectx: property (text), widget (QCheckBox, fontHinting)
 #: widgets/EditProfileAppearancePage.ui:1007
 #, kde-format
 msgid "Font hinting"
-msgstr ""
+msgstr "Skrifttype-hinting"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:1022
-#, fuzzy, kde-format
-#| msgid "Font:"
+#, kde-format
 msgid "Emoji Font:"
-msgstr "Skrifttype:"
+msgstr "Emoji-skrifttype:"
 
 #. i18n: ectx: property (text), widget (QLabel, renderingLabel)
 #: widgets/EditProfileAppearancePage.ui:1048
-#, fuzzy, kde-format
-#| msgctxt "A hortizonal line on the bottom edge"
-#| msgid "Underline"
+#, kde-format
 msgid "Rendering:"
-msgstr "Understreg"
+msgstr "Visning:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAppearancePage.ui:1063
@@ -4738,44 +4589,44 @@ msgstr "Gengivelse af tekst i to retninger"
 #, kde-format
 msgid "Lines are always LTR, rather than determined by first strong character"
 msgstr ""
+"Linjer er altid LTR, i stedet for at blive bestemt af det første stærke tegn"
 
 #. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
 #: widgets/EditProfileAppearancePage.ui:1082
 #, kde-format
 msgid "force LTR line direction"
-msgstr ""
+msgstr "gennemtving LTR-linjeretning"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
 #: widgets/EditProfileAppearancePage.ui:1095
 #, kde-format
 msgid "Treat table drawing characters as strong LTR."
-msgstr ""
+msgstr "Behandl tabeltegn som stærk LTR."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
 #: widgets/EditProfileAppearancePage.ui:1098
 #, kde-format
 msgid "Table characters BiDi mode override"
-msgstr ""
+msgstr "Tilsidesættelse af BiDi-tilstand for tabeltegn"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:1111
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Paste &without control characters"
+#, kde-format
 msgid "Ignore wcwidth of problematic characters"
-msgstr "Indsæt &uden kontroltegn"
+msgstr "Ignorér wcwidth for problematiske tegn"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:1114
 #, kde-format
 msgid "Override wcwidth"
-msgstr ""
+msgstr "Tilsidesæt wcwidth"
 
 #. i18n: ectx: property (toolTip), widget (QWidget, badgeTab)
 #: widgets/EditProfileAppearancePage.ui:1158
 #, kde-format
 msgid "<html><head/><body><p>Badge overlay options</p></body></html>"
 msgstr ""
+"<html><head/><body><p>Indstillinger for badge-overlejring</p></body></html>"
 
 #. i18n: ectx: attribute (title), widget (QWidget, badgeTab)
 #. i18n: ectx: property (text), widget (QCheckBox, badgeEnabled)
@@ -4783,7 +4634,7 @@ msgstr ""
 #: widgets/EditProfileAppearancePage.ui:1425
 #, kde-format
 msgid "Badge Overlay"
-msgstr ""
+msgstr "Badge-overlejring"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, badge_label_1)
 #. i18n: ectx: property (toolTip), widget (QLineEdit, badgeTextEdit)
@@ -4792,13 +4643,13 @@ msgstr ""
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Default text of badge."
-msgstr ""
+msgstr "Standardtekst for badge."
 
 #. i18n: ectx: property (text), widget (QLabel, badge_label_1)
 #: widgets/EditProfileAppearancePage.ui:1188
 #, kde-format
 msgid "Badge text:"
-msgstr ""
+msgstr "Badge-tekst:"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeVariablesHelpLabel)
 #: widgets/EditProfileAppearancePage.ui:1215
@@ -4809,6 +4660,10 @@ msgid ""
 "hostname), \\(session.process), \\(env.VARIABLE_NAME)</small></p></body></"
 "html>"
 msgstr ""
+"<html><head/><body><p><small><b>Tilgængelige variabler:</b> \\(session."
+"title), \\(session.name), \\(session.id), \\(session.directory), \\(session."
+"hostname), \\(session.process), \\(env.VARIABLE_NAME)</small></p></body></"
+"html>"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeEscapeSequenceHelpLabel)
 #: widgets/EditProfileAppearancePage.ui:1234
@@ -4818,6 +4673,9 @@ msgid ""
 "settings on this page to configure badge text, color, font, text-only mode "
 "and transparency.</small></p></body></html>"
 msgstr ""
+"<html><head/><body><p><small><b>Mærkatkonfiguration:</b><br/>Brug "
+"profilindstillingerne på denne side til at konfigurere mærkattekst, farve, "
+"skrifttype, kun-tekst-tilstand og gennemsigtighed.</small></p></body></html>"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, badge_label_2)
 #. i18n: ectx: property (toolTip), widget (QLineEdit, badgeFontEdit)
@@ -4826,72 +4684,68 @@ msgstr ""
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Badge font family."
-msgstr ""
+msgstr "Mærkatskrifttypefamilie."
 
 #. i18n: ectx: property (text), widget (QLabel, badge_label_2)
 #: widgets/EditProfileAppearancePage.ui:1258
 #, kde-format
 msgid "Badge font family:"
-msgstr ""
+msgstr "Mærkatskrifttypefamilie:"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeFontSizeLabel)
 #: widgets/EditProfileAppearancePage.ui:1289
 #, kde-format
 msgid "Badge font size:"
-msgstr ""
+msgstr "Mærkatskrifttypestørrelse:"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeColorLabel)
 #: widgets/EditProfileAppearancePage.ui:1318
-#, fuzzy, kde-format
-#| msgid "Background color:"
+#, kde-format
 msgid "Badge color:"
-msgstr "Baggrundsfarve:"
+msgstr "Badge-farve:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, badgeColorSelectButton)
 #: widgets/EditProfileAppearancePage.ui:1333
-#, fuzzy, kde-format
-#| msgid "Select the color used to draw the cursor"
+#, kde-format
 msgid "Select the color used to draw the badge"
-msgstr "Vælg farven der skal bruges til at tegne markøren"
+msgstr "Vælg den farve, der bruges til at tegne badget"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, badgeTextOnlyCheckBox)
 #: widgets/EditProfileAppearancePage.ui:1346
 #, kde-format
 msgid "Display badge as text only without background rectangle"
-msgstr ""
+msgstr "Vis mærkat kun som tekst uden baggrundsrektangel"
 
 #. i18n: ectx: property (text), widget (QCheckBox, badgeTextOnlyCheckBox)
 #: widgets/EditProfileAppearancePage.ui:1349
-#, fuzzy, kde-format
-#| msgid "Blur background"
+#, kde-format
 msgid "Text only (no background)"
-msgstr "Slør baggrund"
+msgstr "Kun tekst (ingen baggrund)"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeTransparencyLabel)
 #: widgets/EditProfileAppearancePage.ui:1364
-#, fuzzy, kde-format
-#| msgid "Background transparency:"
+#, kde-format
 msgid "Transparency:"
-msgstr "Gennemsigtig baggrund:"
+msgstr "Gennemsigtighed:"
 
 #. i18n: ectx: property (toolTip), widget (QSlider, badgeTransparencySlider)
 #: widgets/EditProfileAppearancePage.ui:1379
 #, kde-format
 msgid "Set badge transparency (0 = fully transparent, 255 = opaque)"
 msgstr ""
+"Angiv mærkatgennemsigtighed (0 = helt gennemsigtig, 255 = uigennemsigtig)"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeTransparencyValueLabel)
 #: widgets/EditProfileAppearancePage.ui:1404
 #, kde-format
 msgid "180"
-msgstr ""
+msgstr "180"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, badgeEnabled)
 #: widgets/EditProfileAppearancePage.ui:1422
-#, fuzzy, kde-format
-#| msgid "Bi-Directional text rendering"
+#, kde-format
 msgid "Enable badge overlay rendering"
-msgstr "Gengivelse af tekst i to retninger"
+msgstr "Aktivér gengivelse af badge-overlejring"
 
 #: widgets/EditProfileDialog.cpp:73
 #, kde-format
@@ -4941,47 +4795,42 @@ msgid "Advanced"
 msgstr "Avanceret"
 
 #: widgets/EditProfileDialog.cpp:297
-#, fuzzy, kde-kuit-format
-#| msgid ""
-#| "<p>Konsole does not have permission to save this profile to:<br /> "
-#| "\"%1\"</p><p>To be able to save settings you can either change the "
-#| "permissions of the profile configuration file or change the profile name "
-#| "to save the settings to a new profile.</p>"
+#, kde-kuit-format
 msgctxt "@info"
 msgid ""
 "Insufficient permissions to save settings to: <filename>%1</filename>.<nl/"
 ">Either change the permissions of that file or set a different name to save "
 "the settings to a new profile."
 msgstr ""
-"<p>Konsole har ikke rettigheder til at gemme denne profil til:<br /> \"%1\"</"
-"p><p>For at kunne gemme indstillinger skal du enten ændre rettighederne for "
-"profilens konfigurationsfil eller ændre profilnavnet for at gemme "
-"indstillinger til en ny profil.</p>"
+"Utilstrækkelige rettigheder til at gemme indstillinger til: <filename>%1</"
+"filename>.<nl/>Du skal enten ændre rettighederne for den fil eller angive et "
+"andet navn for at gemme indstillingerne til en ny profil."
 
 #: widgets/EditProfileDialog.cpp:314
 #, kde-format
 msgctxt "@info"
 msgid "Profile Name was empty; please set a name to be able to save settings."
 msgstr ""
+"Profilnavnet var tomt; angiv venligst et navn for at kunne gemme "
+"indstillingerne."
 
 #: widgets/EditProfileDialog.cpp:322
-#, fuzzy, kde-format
-#| msgid "<p>A profile with this name already exists.</p>"
+#, kde-format
 msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
-msgstr "<p>En profil med dette navn findes allerede.</p>"
+msgstr "En profil med navnet \"%1\" findes allerede."
 
 #: widgets/EditProfileDialog.cpp:352
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
-msgstr ""
+msgstr "Profilnavnet overskred den maksimalt tilladte længde (%1)."
 
 #: widgets/EditProfileDialog.cpp:390
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
-msgstr ""
+msgstr "De fremhævede tegn er ugyldige i profilnavne: %1."
 
 #: widgets/EditProfileDialog.cpp:426
 #, kde-format
@@ -4991,11 +4840,9 @@ msgstr[0] "Redigerer profil: %2"
 msgstr[1] "Redigerer %1 profiler: %2"
 
 #: widgets/EditProfileDialog.cpp:430
-#, fuzzy, kde-format
-#| msgctxt "@item This will be used as part of the file name"
-#| msgid "New Profile"
+#, kde-format
 msgid "Create New Profile"
-msgstr "Ny profil"
+msgstr "Opret ny profil"
 
 #: widgets/EditProfileDialog.cpp:433
 #, kde-format
@@ -5003,66 +4850,50 @@ msgid "Edit Profile \"%1\""
 msgstr "Redigér profil \"%1\""
 
 #: widgets/EditProfileDialog.cpp:535
-#, fuzzy, kde-format
-#| msgctxt "Do not show a close button"
-#| msgid "None"
+#, kde-format
 msgid "None"
 msgstr "Ingen"
 
 #: widgets/EditProfileDialog.cpp:554
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Suffix of the number of columns (N columns). The leading space is needed "
-#| "to separate it from the number value."
-#| msgid " column"
-#| msgid_plural " columns"
+#, kde-format
 msgctxt "@item number of columns"
 msgid "%v column"
 msgid_plural "%v columns"
-msgstr[0] " kolonne"
-msgstr[1] " kolonner"
+msgstr[0] "%v kolonne"
+msgstr[1] "%v kolonner"
 
 #: widgets/EditProfileDialog.cpp:555
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Suffix of the number of rows (N rows). The leading space is needed to "
-#| "separate it from the number value."
-#| msgid " row"
-#| msgid_plural " rows"
+#, kde-format
 msgctxt "@item number of rows"
 msgid "%v row"
 msgid_plural "%v rows"
-msgstr[0] " række"
-msgstr[1] " rækker"
+msgstr[0] "%v række"
+msgstr[1] "%v rækker"
 
 #: widgets/EditProfileDialog.cpp:567
 #, kde-format
 msgid "System Bell"
-msgstr ""
+msgstr "Systemklokke"
 
 #: widgets/EditProfileDialog.cpp:567
-#, fuzzy, kde-format
-#| msgid "Notifications:"
+#, kde-format
 msgid "System Notifications"
-msgstr "Bekendtgørelser:"
+msgstr "System-notifikationer"
 
 #: widgets/EditProfileDialog.cpp:567
-#, fuzzy, kde-format
-#| msgctxt "@info:credit"
-#| msgid "Visual effects"
+#, kde-format
 msgid "Visual Bell"
-msgstr "Visuelle effekter"
+msgstr "Visuelt bip"
 
 #: widgets/EditProfileDialog.cpp:567
 #, kde-format
 msgid "Ignore Bell Events"
-msgstr ""
+msgstr "Ignorér klokkehændelser"
 
 #: widgets/EditProfileDialog.cpp:576
-#, fuzzy, kde-format
-#| msgid "Set the selected profile as the default for new terminal sessions"
+#, kde-format
 msgid "Default profile for new terminal sessions in %1"
-msgstr "Sæt valgte profil som standard for nye terminalsessioner"
+msgstr "Standardprofil for nye terminalsessioner i %1"
 
 #: widgets/EditProfileDialog.cpp:683
 #, kde-format
@@ -5075,15 +4906,12 @@ msgid "One environment variable per line"
 msgstr "En miljøvariabel pr. linje"
 
 #: widgets/EditProfileDialog.cpp:717
-#, fuzzy, kde-format
-#| msgctxt "Unit of time"
-#| msgid " second"
-#| msgid_plural " seconds"
+#, kde-format
 msgctxt "@item number of seconds"
 msgid "%v second"
 msgid_plural "%v seconds"
-msgstr[0] " sekund"
-msgstr[1] " sekunder"
+msgstr[0] "%v sekund"
+msgstr[1] "%v sekunder"
 
 #: widgets/EditProfileDialog.cpp:847
 #, kde-format
@@ -5096,11 +4924,10 @@ msgid "Get New..."
 msgstr "Hent ny..."
 
 #: widgets/EditProfileDialog.cpp:1422
-#, fuzzy, kde-format
-#| msgid "&Set as Default"
+#, kde-format
 msgctxt "Default emoji font placeholder"
 msgid "System Default"
-msgstr "&Sæt som standard"
+msgstr "Systemstandard"
 
 #: widgets/EditProfileDialog.cpp:1455
 #, kde-kuit-format
@@ -5127,10 +4954,9 @@ msgstr ""
 "genstarte Konsole for at se gennemsigtig baggrund."
 
 #: widgets/EditProfileDialog.cpp:2055
-#, fuzzy, kde-format
-#| msgid "Default profile"
+#, kde-format
 msgid "Default for file type"
-msgstr "Standardprofil"
+msgstr "Standard for filtype"
 
 #: widgets/EditProfileDialog.cpp:2081
 #, kde-format
@@ -5148,18 +4974,29 @@ msgid ""
 "will be ignored and the file will be opened by the default text\n"
 "editor."
 msgstr ""
+"Formatet er f.eks. 'editorExec STI:LINJE:KOLONNE'\n"
+"\n"
+"STI      vil blive erstattet af stien til tekstfilen\n"
+"LINJE    vil blive erstattet af linjenummeret\n"
+"KOLONNE  (valgfri) vil blive erstattet af kolonnenummeret\n"
+"Bemærk: du skal erstatte 'STI:LINJE:KOLONNE' med den faktiske\n"
+"syntaks, som den editor, du vil bruge, understøtter; f.eks.:\n"
+"gedit +LINJE:KOLONNE STI\n"
+"\n"
+"Hvis STI eller LINJE ikke er til stede i kommandoen, vil denne\n"
+"indstilling blive ignoreret, og filen vil blive åbnet af "
+"standardteksteditoren."
 
 #: widgets/EditProfileDialog.cpp:2094
 #, kde-format
 msgid "Text Editor Custom Command"
-msgstr ""
+msgstr "Brugerdefineret kommando til teksteditor"
 
 #. i18n: ectx: attribute (title), widget (QWidget, general)
 #: widgets/EditProfileGeneralPage.ui:42
-#, fuzzy, kde-format
-#| msgid "Current Tab Settings"
+#, kde-format
 msgid "General Settings"
-msgstr "Aktuelle fanebladsindstillinger"
+msgstr "Generelle indstillinger"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: widgets/EditProfileGeneralPage.ui:85
@@ -5185,10 +5022,9 @@ msgstr "/bin/sh"
 
 #. i18n: ectx: property (text), widget (QLabel, label_9)
 #: widgets/EditProfileGeneralPage.ui:117
-#, fuzzy, kde-format
-#| msgid "Initial directory:"
+#, kde-format
 msgid "I&nitial directory:"
-msgstr "Begyndelsesmappe:"
+msgstr "Startmappe:"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, initialDirEdit)
 #: widgets/EditProfileGeneralPage.ui:134
@@ -5224,19 +5060,20 @@ msgid ""
 "When opening a new tab or split, automatically enter the same container "
 "(Toolbox, Distrobox) as the current session"
 msgstr ""
+"Når et nyt faneblad eller en opdeling åbnes, tilgås automatisk den samme "
+"container (Toolbox, Distrobox) som den aktuelle session"
 
 #. i18n: ectx: property (text), widget (QCheckBox, inheritContainerButton)
 #: widgets/EditProfileGeneralPage.ui:169
-#, fuzzy, kde-format
-#| msgid "Start in same directory as current session"
+#, kde-format
 msgid "Enter same container as current session"
-msgstr "Start i samme mappe som nuværende session"
+msgstr "Gå ind i samme container som nuværende session"
 
 #. i18n: ectx: property (text), widget (QLabel, containerLabel)
 #: widgets/EditProfileGeneralPage.ui:184
 #, kde-format
 msgid "Always start in container:"
-msgstr ""
+msgstr "Start altid i container:"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, containerCombo)
 #: widgets/EditProfileGeneralPage.ui:197
@@ -5244,6 +5081,8 @@ msgstr ""
 msgid ""
 "Always start new sessions using this profile inside the selected container"
 msgstr ""
+"Start altid nye sessioner, der bruger denne profil, inde i den valgte "
+"container"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/EditProfileGeneralPage.ui:210
@@ -5259,8 +5098,7 @@ msgstr "Redigér listen over miljøvariable og relaterede værdier"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: widgets/EditProfileGeneralPage.ui:259
-#, fuzzy, kde-format
-#| msgid "Initial terminal size:"
+#, kde-format
 msgid "Initial terminal si&ze:"
 msgstr "Indledende størrelse på terminalen:"
 
@@ -5279,17 +5117,15 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, terminalBellLabel)
 #: widgets/EditProfileGeneralPage.ui:354
-#, fuzzy, kde-format
-#| msgctxt "@title"
-#| msgid "Terminal emulator"
+#, kde-format
 msgid "&Terminal bell mode:"
-msgstr "Terminalemulator"
+msgstr "&Terminalens biptilstand:"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, iconSelectButton)
 #: widgets/EditProfileGeneralPage.ui:389
 #, kde-format
 msgid "Select the icon displayed on tabs using this profile"
-msgstr "Vælg det ikon som vises på faneblade under brug af denne profil"
+msgstr "Vælg det ikon som vises på faneblade ved brug af denne profil"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, profileNameEdit)
 #: widgets/EditProfileGeneralPage.ui:407
@@ -5306,35 +5142,33 @@ msgstr "Profilnavn"
 
 #. i18n: ectx: property (text), widget (QCheckBox, setAsDefaultButton)
 #: widgets/EditProfileGeneralPage.ui:417
-#, fuzzy, kde-format
-#| msgid "Default profile"
+#, kde-format
 msgid "Default Profile"
 msgstr "Standardprofil"
 
 #. i18n: ectx: attribute (title), widget (QWidget, semantic)
 #: widgets/EditProfileGeneralPage.ui:461
-#, fuzzy, kde-format
-#| msgid "Text interaction"
+#, kde-format
 msgid "Semantic Integration"
-msgstr "Tekstinteraktion"
+msgstr "Semantisk integration"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticUpDown)
 #: widgets/EditProfileGeneralPage.ui:491
 #, kde-format
 msgid "Up/Down Arrows emulation"
-msgstr ""
+msgstr "Emulering af op/ned-pile"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticInputClick)
 #: widgets/EditProfileGeneralPage.ui:498
 #, kde-format
 msgid "Mouse click in input line moves cursor"
-msgstr ""
+msgstr "Museklik i inputlinjen flytter markøren"
 
 #. i18n: ectx: property (text), widget (QLabel, label_8)
 #: widgets/EditProfileGeneralPage.ui:513
 #, kde-format
 msgid "Semantic hints:"
-msgstr ""
+msgstr "Semantiske vink:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsNever)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsNever)
@@ -5344,9 +5178,7 @@ msgstr ""
 #: widgets/EditProfileGeneralPage.ui:525 widgets/EditProfileGeneralPage.ui:575
 #: widgets/EditProfileGeneralPage.ui:625 widgets/EditProfileGeneralPage.ui:675
 #: widgets/EditProfileGeneralPage.ui:725
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Never show the split header"
-#| msgid "Never"
+#, kde-format
 msgctxt "Never"
 msgid "Never"
 msgstr "Aldrig"
@@ -5359,11 +5191,10 @@ msgstr "Aldrig"
 #: widgets/EditProfileGeneralPage.ui:535 widgets/EditProfileGeneralPage.ui:585
 #: widgets/EditProfileGeneralPage.ui:635 widgets/EditProfileGeneralPage.ui:685
 #: widgets/EditProfileGeneralPage.ui:735
-#, fuzzy, kde-format
-#| msgid "Enable URL hints"
+#, kde-format
 msgctxt "When showing URL hints"
 msgid "When URL hints show"
-msgstr "Aktivér URL-fremhævning"
+msgstr "Når URL-tip vises"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsAlways)
@@ -5373,9 +5204,7 @@ msgstr "Aktivér URL-fremhævning"
 #: widgets/EditProfileGeneralPage.ui:545 widgets/EditProfileGeneralPage.ui:595
 #: widgets/EditProfileGeneralPage.ui:645 widgets/EditProfileGeneralPage.ui:695
 #: widgets/EditProfileGeneralPage.ui:745
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Always show the split header"
-#| msgid "Always"
+#, kde-format
 msgctxt "Always"
 msgid "Always"
 msgstr "Altid"
@@ -5384,27 +5213,25 @@ msgstr "Altid"
 #: widgets/EditProfileGeneralPage.ui:563
 #, kde-format
 msgid "Red error bars:"
-msgstr ""
+msgstr "Røde fejlbjælker:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_30)
 #: widgets/EditProfileGeneralPage.ui:613
-#, fuzzy, kde-format
-#| msgid "Blur background"
+#, kde-format
 msgid "Red error background:"
-msgstr "Slør baggrund"
+msgstr "Rød fejlbaggrund:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_40)
 #: widgets/EditProfileGeneralPage.ui:663
 #, kde-format
 msgid "Alternating bars:"
-msgstr ""
+msgstr "Skiftende bjælker:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
 #: widgets/EditProfileGeneralPage.ui:713
-#, fuzzy, kde-format
-#| msgid "Blur background"
+#, kde-format
 msgid "Alternating background:"
-msgstr "Slør baggrund"
+msgstr "Skiftende baggrund:"
 
 #. i18n: ectx: property (text), widget (QLabel, note)
 #: widgets/EditProfileKeyboardPage.ui:17
@@ -5484,15 +5311,13 @@ msgstr "Tripleklik vælger:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, tripleClickSelectsTheWholeLine)
 #: widgets/EditProfileMousePage.ui:109
-#, fuzzy, kde-format
-#| msgid "The whole line"
+#, kde-format
 msgid "&The whole line"
 msgstr "Hele linjen"
 
 #. i18n: ectx: property (text), widget (QRadioButton, tripleClickSelectsFromMousePosition)
 #: widgets/EditProfileMousePage.ui:119
-#, fuzzy, kde-format
-#| msgid "From mouse position to the end of line"
+#, kde-format
 msgid "From mouse position to the end of &line"
 msgstr "Fra musepositionen til linjens slutning"
 
@@ -5518,20 +5343,20 @@ msgstr "Fra markering"
 #: widgets/EditProfileMousePage.ui:197
 #, kde-format
 msgid "Right-click:"
-msgstr ""
+msgstr "Højreklik:"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, rightClickPasteDisabledButton)
 #: widgets/EditProfileMousePage.ui:209
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Right-click shows context menu"
-msgstr ""
+msgstr "Højreklik viser kontekstmenu"
 
 #. i18n: ectx: property (text), widget (QRadioButton, rightClickPasteDisabledButton)
 #: widgets/EditProfileMousePage.ui:212
 #, kde-format
 msgid "Opens context menu"
-msgstr ""
+msgstr "Åbner kontekstmenu"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, rightClickPasteFromClipboardButton)
 #. i18n: ectx: property (toolTip), widget (QRadioButton, rightClickPasteFromX11SelectionButton)
@@ -5539,21 +5364,19 @@ msgstr ""
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Control+right-click shows context menu"
-msgstr ""
+msgstr "Ctrl+højreklik viser kontekstmenu"
 
 #. i18n: ectx: property (text), widget (QRadioButton, rightClickPasteFromClipboardButton)
 #: widgets/EditProfileMousePage.ui:225
-#, fuzzy, kde-format
-#| msgid "From clipboard"
+#, kde-format
 msgid "Pastes from clipboard"
-msgstr "Fra udklipsholder"
+msgstr "Indsætter fra udklipsholder"
 
 #. i18n: ectx: property (text), widget (QRadioButton, rightClickPasteFromX11SelectionButton)
 #: widgets/EditProfileMousePage.ui:238
-#, fuzzy, kde-format
-#| msgid "Paste Selection"
+#, kde-format
 msgid "Pastes from selection"
-msgstr "Indsæt markering"
+msgstr "Indsætter fra markering"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: widgets/EditProfileMousePage.ui:266
@@ -5615,14 +5438,13 @@ msgstr "Trim efterstillede mellemrum"
 #: widgets/EditProfileMousePage.ui:318
 #, kde-format
 msgid "Clear selection after copying"
-msgstr ""
+msgstr "Ryd markering efter kopiering"
 
 #. i18n: ectx: property (text), widget (QCheckBox, clearSelectionButton)
 #: widgets/EditProfileMousePage.ui:321
-#, fuzzy, kde-format
-#| msgid "From selection"
+#, kde-format
 msgid "Clear selection"
-msgstr "Fra markering"
+msgstr "Ryd markering"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, underlineLinksButton)
 #: widgets/EditProfileMousePage.ui:360
@@ -5668,10 +5490,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, openLinksByDirectClickButton)
 #: widgets/EditProfileMousePage.ui:389
-#, fuzzy, kde-format
-#| msgid "Open by direct click"
+#, kde-format
 msgid "Open underlined files/links by direct click"
-msgstr "Åbn via direkte klik"
+msgstr "Åbn understregede filer/links med direkte klik"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, textEditorCommandLabel)
 #. i18n: ectx: property (toolTip), widget (QComboBox, textEditorCombo)
@@ -5680,18 +5501,20 @@ msgstr "Åbn via direkte klik"
 msgctxt "@info:tooltip"
 msgid "Text editor to use when opening text file URLs at a given line/column."
 msgstr ""
+"Teksteditor der skal bruges ved åbning af tekstfil-URL'er på en given linje/"
+"kolonne."
 
 #. i18n: ectx: property (text), widget (QLabel, textEditorCommandLabel)
 #: widgets/EditProfileMousePage.ui:401
 #, kde-format
 msgid "Text Editor Command: "
-msgstr ""
+msgstr "Teksteditor-kommando: "
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowLinkEscapeSequenceButton)
 #: widgets/EditProfileMousePage.ui:446
 #, kde-format
 msgid "Allow escape sequences for links"
-msgstr ""
+msgstr "Tillad escape-sekvenser for links"
 
 #. i18n: ectx: property (text), widget (QLabel, allowLinkEscapeSequenceButtonWarning)
 #: widgets/EditProfileMousePage.ui:453
@@ -5701,19 +5524,21 @@ msgid ""
 "to be shown as another URL or hidden.<br>Make sure you understand the "
 "implications before turning this on."
 msgstr ""
+"<b>ADVARSEL</b>: Dette har sikkerhedsmæssige konsekvenser, da det tillader "
+"ondsindede URL'er at blive vist som en anden URL eller skjult.<br>Sørg for, "
+"at du forstår konsekvenserne, før du slår dette til."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: widgets/EditProfileMousePage.ui:471
-#, fuzzy, kde-format
-#| msgid "Allow blinking text"
+#, kde-format
 msgid "Allowed link formats: "
-msgstr "Tillad blinkende tekst"
+msgstr "Tilladte linkformater: "
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, linkEscapeSequenceTexts)
 #: widgets/EditProfileMousePage.ui:481
 #, kde-format
 msgid "The formats of possible links, like http://, https:// and file://"
-msgstr ""
+msgstr "Formaterne for mulige links, såsom http://, https:// og file://"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, allowMouseTrackingButton)
 #: widgets/EditProfileMousePage.ui:492
@@ -5722,12 +5547,14 @@ msgid ""
 "Some terminal applications have mouse support, this allows them to get it by "
 "default. It can be toggled on/off while running as well."
 msgstr ""
+"Nogle terminalprogrammer har understøttelse af mus, dette lader dem få det "
+"som standard. Det kan også slås til/fra under kørsel."
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowMouseTrackingButton)
 #: widgets/EditProfileMousePage.ui:495
 #, kde-format
 msgid "Allow terminal applications to handle clicks and drags"
-msgstr ""
+msgstr "Tillad terminalprogrammer at håndtere klik og træk"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ctrlRequiredForDragButton)
 #: widgets/EditProfileMousePage.ui:502
@@ -5776,12 +5603,14 @@ msgid ""
 "When positioning the mouse over a hexadecimal color it will be displayed in "
 "a frame next to the mouse pointer"
 msgstr ""
+"Når musen placeres over en heksadecimal farve, vil den blive vist i en ramme "
+"ved siden af musemarkøren"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowColorFilters)
 #: widgets/EditProfileMousePage.ui:535
 #, kde-format
 msgid "Preview Colors on hover"
-msgstr ""
+msgstr "Forhåndsvis farver ved at holde musen over"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableAlternateScrollingButton)
 #: widgets/EditProfileMousePage.ui:542
@@ -5809,7 +5638,7 @@ msgstr "Tilbagerulning:"
 #: widgets/EditProfileScrollingPage.ui:58
 #, kde-format
 msgid "Scroll Page Up/Down:"
-msgstr "Page Up/Down-rulning:"
+msgstr "Rul side op/ned:"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollHalfPage)
 #: widgets/EditProfileScrollingPage.ui:76
@@ -5819,8 +5648,7 @@ msgstr "Rul siden halvdelen af vinduets højde"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollHalfPage)
 #: widgets/EditProfileScrollingPage.ui:79
-#, fuzzy, kde-format
-#| msgid "Half screen height"
+#, kde-format
 msgid "Half screen heigh&t"
 msgstr "Halv skærmhøjde"
 
@@ -5832,8 +5660,7 @@ msgstr "Rul siden hele vinduets højde"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollFullPage)
 #: widgets/EditProfileScrollingPage.ui:92
-#, fuzzy, kde-format
-#| msgid "Full screen height"
+#, kde-format
 msgid "F&ull screen height"
 msgstr "Fuld skærmhøjde"
 
@@ -5851,9 +5678,7 @@ msgstr "Vis rullebjælken i højre side af terminalvinduet"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarRightButton)
 #: widgets/EditProfileScrollingPage.ui:141
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Show scrollbar on the right side"
-#| msgid "Right side"
+#, kde-format
 msgctxt "@option:radio Show scrollbar on the right side"
 msgid "Ri&ght side"
 msgstr "Højde side"
@@ -5866,9 +5691,7 @@ msgstr "Vis rullebjælken i venstre side af terminalvinduet"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarLeftButton)
 #: widgets/EditProfileScrollingPage.ui:154
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Show scrollbar on the left side"
-#| msgid "Left side"
+#, kde-format
 msgctxt "@option:radio Show scrollbar on the left side"
 msgid "&Left side"
 msgstr "Venstre side"
@@ -5896,49 +5719,49 @@ msgstr "Fremhæv linjer der bliver synlige"
 #: widgets/EditProfileScrollingPage.ui:221
 #, kde-format
 msgid "Reflow Lines:"
-msgstr ""
+msgstr "Ombryd linjer:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, reflowLinesButton)
 #: widgets/EditProfileScrollingPage.ui:231
 #, kde-format
 msgid "Reflow lines when terminal resizes"
-msgstr ""
+msgstr "Ombryd linjer når terminalens størrelse ændres"
 
 #. i18n: ectx: property (text), widget (QLabel, labelMarkerColor)
 #: widgets/EditProfileScrollingPage.ui:254
 #, kde-format
 msgid "Color of scrollbar markers:"
-msgstr ""
+msgstr "Farve på rullebjælkens markører:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelSearhcHighlighterColor)
 #: widgets/EditProfileScrollingPage.ui:264
 #, kde-format
 msgid "Color of scrollbar search highlighting lines:"
-msgstr ""
+msgstr "Farve på rullebjælkens søgefremhævningslinjer:"
 
 #. i18n: ectx: property (text), widget (QLabel, lableSearchHighlighterOpacity)
 #: widgets/EditProfileScrollingPage.ui:282
 #, kde-format
 msgid "Search highlighting line opacity:"
-msgstr ""
+msgstr "Uigennemsigtighed for søgefremhævningslinjer:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelMarkerSize)
 #: widgets/EditProfileScrollingPage.ui:305
 #, kde-format
 msgid "Size of each marker:"
-msgstr ""
+msgstr "Størrelse af hver markør:"
 
 #. i18n: ectx: property (suffix), widget (QDoubleSpinBox, markerSizeWidget)
 #: widgets/EditProfileScrollingPage.ui:314
 #, no-c-format, kde-format
 msgid " %"
-msgstr ""
+msgstr " %"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: widgets/EditProfileScrollingPage.ui:330
 #, kde-format
 msgid "<i>Percentage of scrollbar length.</i>"
-msgstr ""
+msgstr "<i>Procentdel af rullebjælkens længde.</i>"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43
@@ -5965,15 +5788,12 @@ msgid "The threshold for continuous silence to be detected by Konsole"
 msgstr "Tærskel for at vedvarende tavshed detekteres af Konsole"
 
 #: widgets/HistorySizeWidget.cpp:41
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox Unit of scrollback"
-#| msgid " line"
-#| msgid_plural " lines"
+#, kde-format
 msgctxt "@item number of lines"
 msgid "%v line"
 msgid_plural "%v lines"
-msgstr[0] " linje"
-msgstr[1] " linjer"
+msgstr[0] "%v linje"
+msgstr[1] "%v linjer"
 
 #: widgets/HistorySizeWidget.cpp:56
 #, kde-format
@@ -5988,14 +5808,7 @@ msgstr ""
 "alvorlige problemer med dit system."
 
 #: widgets/HistorySizeWidget.cpp:68
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info:tooltip"
-#| msgid ""
-#| "When using this option, the scrollback data will be written unencrypted "
-#| "to temporary files. Those temporary files will be deleted automatically "
-#| "when Konsole is closed in a normal manner.<nl/>Use <emphasis>Settings → "
-#| "Configure Konsole → File Location</emphasis> to select the location of "
-#| "the temporary files."
+#, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
 "When using this option, the scrollback data will be written unencrypted to "
@@ -6007,8 +5820,8 @@ msgstr ""
 "Når denne indstilling bruges, bliver tilbagerulningsdata skrevet ukrypteret "
 "til midlertidige filer. Disse midlertidige filer vil automatisk blive "
 "slettet, når Konsole lukkes på normal vis.<nl/>Brug <emphasis>Indstillinger "
-"→ Indstil Konsole → Filplacering</emphasis> til at vælge placeringen af de "
-"midlertidige filer."
+"→ Indstil Konsole → Midlertidige filer</emphasis> til at vælge placeringen "
+"af de midlertidige filer."
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, fixedSizeHistoryButton)
 #: widgets/HistorySizeWidget.ui:60
@@ -6018,8 +5831,7 @@ msgstr "Begræns det huskede output til et fast antal linjer"
 
 #. i18n: ectx: property (text), widget (QRadioButton, fixedSizeHistoryButton)
 #: widgets/HistorySizeWidget.ui:63
-#, fuzzy, kde-format
-#| msgid "Fixed size:"
+#, kde-format
 msgid "Fi&xed size:"
 msgstr "Fast størrelse:"
 
@@ -6037,12 +5849,10 @@ msgstr "Husk al output produceret af terminalen"
 
 #. i18n: ectx: property (text), widget (QRadioButton, unlimitedHistoryButton)
 #: widgets/HistorySizeWidget.ui:137
-#, fuzzy, kde-format
-#| msgctxt "Save all lines to the scrollback history"
-#| msgid "Unlimited"
+#, kde-format
 msgctxt "Save all lines to the scrollback history"
 msgid "&Unlimited"
-msgstr "Ubegrænset"
+msgstr "&Ubegrænset"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, noHistoryButton)
 #: widgets/HistorySizeWidget.ui:172
@@ -6052,9 +5862,7 @@ msgstr "Husk ikke tidligere output"
 
 #. i18n: ectx: property (text), widget (QRadioButton, noHistoryButton)
 #: widgets/HistorySizeWidget.ui:175
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu Do not select any tabs"
-#| msgid "&None"
+#, kde-format
 msgctxt "Do not save any lines to the scrollback history"
 msgid "&None"
 msgstr "&Ingen"
@@ -6096,8 +5904,7 @@ msgid "Find the previous match for the current search phrase"
 msgstr "Find forrige match for det aktuelle søgeudtryk"
 
 #: widgets/IncrementalSearchBar.cpp:103
-#, fuzzy, kde-format
-#| msgid "Case sensitive"
+#, kde-format
 msgctxt "@action:button"
 msgid "Case sensitive"
 msgstr "Versalfølsom"
@@ -6154,14 +5961,13 @@ msgstr "Angiver om søgningen skal starte fra bunden"
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "No wrap"
-msgstr ""
+msgstr "Ingen ombrydning"
 
 #: widgets/IncrementalSearchBar.cpp:150
-#, fuzzy, kde-format
-#| msgid "Sets whether search should start from the bottom"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should stop instead of wrapping"
-msgstr "Angiver om søgningen skal starte fra bunden"
+msgstr "Angiver om søgning skal stoppe i stedet for at starte forfra"
 
 #: widgets/IncrementalSearchBar.cpp:185
 #, kde-format
@@ -6173,7 +5979,7 @@ msgstr "Søg efter det aktuelle søgeudtryk fra bunden"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the top"
-msgstr "Søg efter det aktuelle søgeudtryk fra oven"
+msgstr "Søg efter det aktuelle søgeudtryk fra toppen"
 
 #: widgets/KonsolePrintManager.cpp:50
 #, kde-format
@@ -6181,9 +5987,7 @@ msgid "Print Shell"
 msgstr "Udskriv skal"
 
 #: widgets/RenameTabWidget.cpp:37 widgets/RenameTabWidget.cpp:40
-#, fuzzy, kde-format
-#| msgctxt "Do not show a close button"
-#| msgid "None"
+#, kde-format
 msgctxt "@label:listbox No color selected"
 msgid "None"
 msgstr "Ingen"
@@ -6206,8 +6010,7 @@ msgstr "Format af ekstern fanebladstitel:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: widgets/RenameTabWidget.ui:79
-#, fuzzy, kde-format
-#| msgid "Tab title format:"
+#, kde-format
 msgid "&Tab title format:"
 msgstr "Format af fanebladstitel:"
 
@@ -6219,17 +6022,15 @@ msgstr "Normalt format af fanebladstitel"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: widgets/RenameTabWidget.ui:105
-#, fuzzy, kde-format
-#| msgid "Tab Color:"
+#, kde-format
 msgid "Tab Co&lor:"
 msgstr "Fanebladsfarve:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/RenameTabWidget.ui:128
-#, fuzzy, kde-format
-#| msgid "Select &Tab Color"
+#, kde-format
 msgid "&Activity Tab Color:"
-msgstr "Vælg &fanebladsfarve"
+msgstr "Farve på faneblad ved &aktivitet:"
 
 #: widgets/TabTitleFormatButton.cpp:21
 #, c-format
@@ -6307,11 +6108,10 @@ msgid "Maximize terminal"
 msgstr "Maksimér terminal"
 
 #: widgets/TerminalHeaderBar.cpp:91
-#, fuzzy, kde-format
-#| msgid "Above terminal area"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Move terminal to new tab"
-msgstr "Over terminalområdet"
+msgstr "Flyt terminal til nyt faneblad"
 
 #: widgets/TerminalHeaderBar.cpp:101
 #, kde-format
@@ -6320,32 +6120,25 @@ msgid "Close terminal"
 msgstr "Luk terminal"
 
 #: widgets/TerminalHeaderBar.cpp:186
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Close terminal"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Restore terminal"
-msgstr "Luk terminal"
+msgstr "Gendan terminal"
 
 #: widgets/ViewContainer.cpp:87
-#, fuzzy, kde-format
-#| msgid "&On each tab"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Open a new tab"
-msgstr "&På hvert faneblad"
+msgstr "Åbn et nyt faneblad"
 
 #: widgets/ViewContainer.cpp:92
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Detach Tab"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Search Tabs"
-msgstr "&Frigør faneblad"
+msgstr "Søg i faneblade"
 
 #: widgets/ViewContainer.cpp:97
-#, fuzzy, kde-format
-#| msgctxt "@info:whatsthis"
-#| msgid "Close the active tab"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Close this tab"
 msgstr "Luk det aktive faneblad"
@@ -6357,11 +6150,10 @@ msgid "&Detach Tab"
 msgstr "&Frigør faneblad"
 
 #: widgets/ViewContainer.cpp:139
-#, fuzzy, kde-format
-#| msgid "&Rename Tab..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&Configure or Rename Tab..."
-msgstr "&Omdøb faneblad..."
+msgstr "&Indstil eller omdøb faneblad..."
 
 #: widgets/ViewContainer.cpp:144
 #, kde-format
@@ -6370,11 +6162,10 @@ msgid "Close Tab"
 msgstr "Luk faneblad"
 
 #: widgets/ViewContainer.cpp:990 widgets/ViewContainer.cpp:999
-#, fuzzy, kde-format
-#| msgid "Maintainer"
+#, kde-format
 msgctxt "As in Distrobox, Toolbox, Kapsule etc."
 msgid "Container"
-msgstr "Vedligeholder"
+msgstr "Container"
 
 #: widgets/ViewContainer.cpp:1009
 #, kde-format
@@ -6382,7 +6173,7 @@ msgctxt ""
 "%1 is the type of container (e.g. Distrobox, Toolbox, Kapsule etc.), %2 its "
 "name"
 msgid "%1: %2"
-msgstr ""
+msgstr "%1: %2"
 
 #~ msgid ""
 #~ "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -6411,13 +6202,11 @@ msgstr ""
 #~ msgstr "test/css"
 
 #, fuzzy
-#~| msgid "Open File"
 #~ msgctxt "@title:window"
 #~ msgid "Save File"
 #~ msgstr "Åbn fil"
 
 #, fuzzy
-#~| msgid "Open File"
 #~ msgctxt "@title:window"
 #~ msgid "Open File"
 #~ msgstr "Åbn fil"
@@ -6434,15 +6223,11 @@ msgstr ""
 #~ msgstr "&Sæt som standard"
 
 #, fuzzy
-#~| msgctxt "@item:intable Default list item's name suffix (with separator)"
-#~| msgid " (default)"
 #~ msgctxt "@label:textbox added to the name of the current default profile"
 #~ msgid " (default)"
 #~ msgstr "(standard)"
 
 #, fuzzy
-#~| msgctxt "@info:credit"
-#~| msgid "SGI port"
 #~ msgid "Import"
 #~ msgstr "SGI-portering"
 
@@ -6460,8 +6245,6 @@ msgstr ""
 #~ msgstr "<p>Hver profil skal have et navn før den kan gemmes på disken.</p>"
 
 #, fuzzy
-#~| msgctxt "Name of the default/builtin profile"
-#~| msgid "Default"
 #~ msgctxt "@label:textbox Name of the current default profile"
 #~ msgid " (Default)"
 #~ msgstr "&Sæt som standard"
@@ -6757,14 +6540,11 @@ msgstr ""
 #~ msgstr "Klik for at omdøbe profilen"
 
 #, fuzzy
-#~| msgctxt "@title"
-#~| msgid "Konsole"
 #~ msgctxt "@title"
 #~ msgid "Demo KonsolePart"
 #~ msgstr "Konsole"
 
 #, fuzzy
-#~| msgid "(c) 1997-2015, The Konsole Developers"
 #~ msgctxt "@info:credit"
 #~ msgid "(c) 2017, The Konsole Developers"
 #~ msgstr "(c) 1997-2015, Konsole-udviklerne"
@@ -6936,7 +6716,6 @@ msgstr ""
 #~ msgstr "Ord-tegn til markering med dobbeltklik:"
 
 #, fuzzy
-#~| msgid "Clear && Reset"
 #~ msgid "Clear and Reset"
 #~ msgstr "Ryd og nulstil"
 
@@ -6981,3 +6760,6 @@ msgstr ""
 
 #~ msgid "TextLabel"
 #~ msgstr "TextLabel"
+
+#~ msgid "Badge Overlay Options"
+#~ msgstr "Indstillinger for badge-overlejring"
