@@ -8,6 +8,7 @@
 #ifndef EDITPROFILEDIALOG_H
 #define EDITPROFILEDIALOG_H
 
+#include <QMap>
 #include <QtGlobal>
 // KF
 #include <KPageDialog>

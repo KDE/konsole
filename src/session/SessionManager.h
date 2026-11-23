@@ -13,6 +13,7 @@
 #include <QExplicitlySharedDataPointer>
 #include <QHash>
 #include <QList>
+#include <QObject>
 
 // TODO: Move the Property away from Profile.h
 #include "profile/Profile.h"

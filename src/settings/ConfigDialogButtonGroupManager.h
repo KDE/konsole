@@ -13,6 +13,7 @@
 #define CONFIGDIALOGBUTTONGROUPMANAGER_H
 
 // Qt
+#include <QMap>
 #include <QObject>
 
 // KF

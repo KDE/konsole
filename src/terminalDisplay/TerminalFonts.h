@@ -9,6 +9,7 @@
 #ifndef TERMINALFONTS_H
 #define TERMINALFONTS_H
 
+#include <QMap>
 #include <QWidget>
 
 #include "konsoleprivate_export.h"

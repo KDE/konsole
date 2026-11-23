@@ -129,6 +129,10 @@ file(GLOB ICONS_SRCS "data/icons/*.png")
 option(ENABLE_PLUGIN_SSHMANAGER "Build the SSHManager plugin" ON)
 option(ENABLE_PLUGIN_QUICKCOMMANDS "Build the Quick Commands plugin" ON)
 
+if(ECM_VERSION VERSION_GREATER_EQUAL "6.33.0")
+    add_definitions(-DQT_LEAN_HEADERS=2)
+endif()
+
 add_subdirectory( src )
 add_subdirectory( desktop )
 

@@ -14,6 +14,7 @@
 #include <QDir>
 #include <QFileInfo>
 #include <QGuiApplication>
+#include <QMap>
 #include <QString>
 #include <QStyleHints>
 #include <QUrl>

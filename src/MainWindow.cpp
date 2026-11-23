@@ -17,6 +17,7 @@
 #include <QMouseEvent>
 #include <QScreen>
 #include <QStyleHints>
+#include <QVariantMap>
 #include <QWindow>
 #if HAVE_DBUS
 #include <QDBusConnection>

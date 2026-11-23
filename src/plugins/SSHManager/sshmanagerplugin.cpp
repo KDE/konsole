@@ -16,6 +16,7 @@
 #include <QDockWidget>
 #include <QListView>
 #include <QMainWindow>
+#include <QMap>
 #include <QMenuBar>
 #include <QSortFilterProxyModel>
 #include <QStandardItemModel>

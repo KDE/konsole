@@ -9,6 +9,8 @@
 
 #include "filterHotSpots/UrlFilter.h"
 
+#include <QObject>
+
 class HotSpotFilterTest : public QObject
 {
     Q_OBJECT

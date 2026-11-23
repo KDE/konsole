@@ -10,6 +10,7 @@
 #include <KActionCollection>
 #include <KCommandBar>
 #include <QMainWindow>
+#include <QMap>
 #include <QSettings>
 
 #include "MainWindow.h"

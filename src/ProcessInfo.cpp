@@ -31,6 +31,7 @@
 #include <QHostInfo>
 #include <QStringList>
 #include <QTextStream>
+#include <QVarLengthArray>
 #include <QtGlobal>
 
 // KF
