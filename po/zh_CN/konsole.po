@@ -897,12 +897,10 @@ msgid "Terminal emulator"
 msgstr "终端模拟器"
 
 #: main.cpp:177
-#, fuzzy, kde-format
-#| msgctxt "@info:credit"
-#| msgid "(c) 1997-2022, The Konsole Developers"
+#, kde-format
 msgctxt "@info:credit"
 msgid "© 1997–%1, The Konsole Developers"
-msgstr "(c) 1997-2022, The Konsole Developers"
+msgstr "© 1997–%1, The Konsole Developers"
 
 #: main.cpp:353
 #, kde-format
@@ -4412,10 +4410,9 @@ msgstr "复杂文本布局"
 
 #. i18n: ectx: property (text), widget (QLabel, charactersLabel)
 #: widgets/EditProfileAppearancePage.ui:909
-#, fuzzy, kde-format
-#| msgid "Word characters:"
+#, kde-format
 msgid "Characters:"
-msgstr "单词字符："
+msgstr "字符："
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:924
@@ -4505,11 +4502,9 @@ msgstr "表情符号字体："
 
 #. i18n: ectx: property (text), widget (QLabel, renderingLabel)
 #: widgets/EditProfileAppearancePage.ui:1048
-#, fuzzy, kde-format
-#| msgctxt "A hortizonal line on the bottom edge"
-#| msgid "Underline"
+#, kde-format
 msgid "Rendering:"
-msgstr "下划线"
+msgstr "渲染："
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAppearancePage.ui:1063
@@ -4853,11 +4848,10 @@ msgid "Get New..."
 msgstr "获取新方案…"
 
 #: widgets/EditProfileDialog.cpp:1422
-#, fuzzy, kde-format
-#| msgid "System Bell"
+#, kde-format
 msgctxt "Default emoji font placeholder"
 msgid "System Default"
-msgstr "系统提示"
+msgstr "系统默认"
 
 #: widgets/EditProfileDialog.cpp:1455
 #, kde-kuit-format
@@ -5647,7 +5641,7 @@ msgstr "查找高亮行不透明度："
 #: widgets/EditProfileScrollingPage.ui:305
 #, kde-format
 msgid "Size of each marker:"
-msgstr ""
+msgstr "每个标记的大小："
 
 #. i18n: ectx: property (suffix), widget (QDoubleSpinBox, markerSizeWidget)
 #: widgets/EditProfileScrollingPage.ui:314
@@ -5657,10 +5651,9 @@ msgstr " %"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: widgets/EditProfileScrollingPage.ui:330
-#, fuzzy, kde-format
-#| msgid "Size of each marker (as a percentage of scrollbar length):"
+#, kde-format
 msgid "<i>Percentage of scrollbar length.</i>"
-msgstr "每个标记的大小 (滚动条长度的百分比)："
+msgstr "<i>滚动条长度的百分比。</i>"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43
@@ -6067,6 +6060,3 @@ msgctxt ""
 "name"
 msgid "%1: %2"
 msgstr "%1：%2"
-
-#~ msgid "Badge Overlay Options"
-#~ msgstr "徽标叠加选项"
