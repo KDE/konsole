@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-21 01:15+0000\n"
-"PO-Revision-Date: 2026-11-19 18:59+0300\n"
+"PO-Revision-Date: 2026-11-23 18:14+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -120,7 +120,7 @@ msgstr "json layoutfile, yeni Konsole örneği için kullanılmak üzere yüklen
 #, kde-format
 msgctxt "@info:shell"
 msgid "Use the built-in profile instead of the default profile"
-msgstr "Öntanımlı profil yerine gömülü gelen profili kullanın"
+msgstr "Varsayılan profil yerine gömülü gelen profili kullanın"
 
 #: Application.cpp:56
 #, kde-format
@@ -159,7 +159,7 @@ msgid ""
 "(by default) is pressed"
 msgstr ""
 "Konsole uygulamasını arka planda başlat ve Kontrol+Üst Karakter+F12 "
-"(öntanımlı) düğmelerine basılınca ön plana getir"
+"(varsayılan) düğmelerine basılınca ön plana getir"
 
 #: Application.cpp:65
 #, kde-format
@@ -171,37 +171,37 @@ msgstr "Ayrı bir süreçte çalıştır"
 #, kde-format
 msgctxt "@info:shell"
 msgid "Show the menubar, overriding the default setting"
-msgstr "Öntanımlı ayarı geçersiz kılarak menü çubuğunu göster"
+msgstr "Varsayılan ayarı geçersiz kılarak menü çubuğunu göster"
 
 #: Application.cpp:67
 #, kde-format
 msgctxt "@info:shell"
 msgid "Hide the menubar, overriding the default setting"
-msgstr "Öntanımlı ayarı geçersiz kılarak menü çubuğunu gizle"
+msgstr "Varsayılan ayarı geçersiz kılarak menü çubuğunu gizle"
 
 #: Application.cpp:68
 #, kde-format
 msgctxt "@info:shell"
 msgid "Show all the toolbars, overriding the default setting"
-msgstr "Öntanımlı ayarı geçersiz kılarak tüm araç çubuklarını göster"
+msgstr "Varsayılan ayarı geçersiz kılarak tüm araç çubuklarını göster"
 
 #: Application.cpp:69
 #, kde-format
 msgctxt "@info:shell"
 msgid "Hide all the toolbars, overriding the default setting"
-msgstr "Öntanımlı ayarı geçersiz kılarak tüm araç çubuklarını gizle"
+msgstr "Varsayılan ayarı geçersiz kılarak tüm araç çubuklarını gizle"
 
 #: Application.cpp:70
 #, kde-format
 msgctxt "@info:shell"
 msgid "Show the tabbar, overriding the default setting"
-msgstr "Öntanımlı ayarı geçersiz kılarak sekme çubuğunu göster"
+msgstr "Varsayılan ayarı geçersiz kılarak sekme çubuğunu göster"
 
 #: Application.cpp:71
 #, kde-format
 msgctxt "@info:shell"
 msgid "Hide the tabbar, overriding the default setting"
-msgstr "Öntanımlı ayarı geçersiz kılarak sekme çubuğunu gizle"
+msgstr "Varsayılan ayarı geçersiz kılarak sekme çubuğunu gizle"
 
 #: Application.cpp:72
 #, kde-format
@@ -526,8 +526,8 @@ msgid ""
 "settings.\n"
 "To see any effect, set colors with saturation value greater than 0."
 msgstr ""
-"Öntanımlı ön plan ve arka plan renklerinin ton ve doygunluk değerleri "
-"öntanımlı olarak rastgele seçilir. Bazı renk şemaları farklı "
+"Varsayılan ön plan ve arka plan renklerinin ton ve doygunluk değerleri "
+"varsayılan olarak rastgele seçilir. Bazı renk şemaları farklı "
 "rastgeleleştirme ayarları kullanabilir.\n"
 "Herhangi bir efekti görmek için renkleri doygunluk değeri 0’dan büyük olacak "
 "şekilde ayarlayın."
@@ -715,7 +715,7 @@ msgstr "Kapsül Kapsayıcısı"
 #: containers/KapsuleDetector.cpp:99
 #, kde-format
 msgid " [default]"
-msgstr " [Öntanımlı]"
+msgstr " [Varsayılan]"
 
 #: containers/ToolboxDetector.cpp:89
 #, kde-format
@@ -1427,7 +1427,7 @@ msgstr "Grup"
 #: plugins/QuickCommands/qcwidget.ui:128 plugins/SSHManager/sshwidget.ui:213
 #, kde-format
 msgid "Default"
-msgstr "Öntanımlı"
+msgstr "Varsayılan"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab)
 #: plugins/QuickCommands/qcwidget.ui:143
@@ -1577,7 +1577,7 @@ msgstr "SSH Yapılandırması"
 #, kde-format
 msgctxt "@item:inlistbox The default list of ssh hosts"
 msgid "Default"
-msgstr "Öntanımlı"
+msgstr "Varsayılan"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:74
 #, kde-format
@@ -1808,7 +1808,7 @@ msgstr "Kapı"
 #: plugins/SSHManager/sshwidget.ui:123
 #, kde-format
 msgid "The port of the server, 22 is the default for ssh connections"
-msgstr "Sunucunun kapısı, SSH bağlantıları için öntanımlı kapı 22’dir"
+msgstr "Sunucunun kapısı, SSH bağlantıları için varsayılan kapı 22’dir"
 
 #. i18n: ectx: property (text), widget (QLineEdit, port)
 #: plugins/SSHManager/sshwidget.ui:126
@@ -1951,7 +1951,7 @@ msgstr "Yerleşik"
 #: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:578
 #, kde-format
 msgid "Default profile"
-msgstr "Öntanımlı profil"
+msgstr "Varsayılan profil"
 
 #: profile/ProfileManager.cpp:349
 #, kde-format
@@ -1988,7 +1988,7 @@ msgstr " [Saltokunur]"
 #, kde-format
 msgctxt "@label:textbox added to the name of the current default profile"
 msgid " [Default]"
-msgstr " [Öntanımlı]"
+msgstr " [Varsayılan]"
 
 #: profile/ProfileModel.cpp:91
 #, kde-format
@@ -2129,7 +2129,7 @@ msgstr "Siyah üzerine Beyaz"
 #: schemas.cpp:14
 #, kde-format
 msgid "Default (XFree 4)"
-msgstr "Öntanımlı (XFree 4)"
+msgstr "Varsayılan (XFree 4)"
 
 #: schemas.cpp:15
 #, kde-format
@@ -3137,9 +3137,9 @@ msgid ""
 msgstr ""
 "<html><head/><body><p>KonsolePart paylaşım profillerini kullanan uygulamalar."
 "</p><p>Konsole veya başka uygulamalarla şunları paylaşmazlar:"
-"<ul><li>Öntanımlı profil</li><li>Menüde göster</li><li>Kısayollar</li></ul></"
-"p><p>Bunların nasıl işlendiği ile ilgili bir değişiklik arzu ederseniz bir "
-"<a href=\"https://bugs.kde.org/enter_bug.cgi?"
+"<ul><li>Varsayılan profil</li><li>Menüde göster</li><li>Kısayollar</li></"
+"ul></p><p>Bunların nasıl işlendiği ile ilgili bir değişiklik arzu ederseniz "
+"bir <a href=\"https://bugs.kde.org/enter_bug.cgi?"
 "format=guided&product=konsole&component=kpart\">hata kaydı</a> açmaktan "
 "çekinmeyin.</body></html>"
 
@@ -3185,13 +3185,13 @@ msgstr "&Kaldır"
 #: settings/ProfileSettings.ui:90
 #, kde-format
 msgid "Set the selected profile as the default for new terminal sessions"
-msgstr "Yeni uçbirim oturumları için seçilen profili öntanımlı olarak ayarla"
+msgstr "Yeni uçbirim oturumları için seçilen profili varsayılan olarak ayarla"
 
 #. i18n: ectx: property (text), widget (QPushButton, setAsDefaultButton)
 #: settings/ProfileSettings.ui:93
 #, kde-format
 msgid "&Set as Default"
-msgstr "Ö&ntanımlı Olarak Ayarla"
+msgstr "&Varsayılan Olarak Ayarla"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, setLightProfileButton)
 #: settings/ProfileSettings.ui:103
@@ -4032,7 +4032,7 @@ msgstr "Kitty klavye protokolü"
 #: widgets/EditProfileAdvancedPage.ui:242
 #, kde-format
 msgid "&Default character encoding:"
-msgstr "Ö&ntanımlı karakter kodlaması:"
+msgstr "&Varsayılan karakter kodlaması:"
 
 #. i18n: ectx: property (text), widget (QLabel, peekPrimaryLabel)
 #: widgets/EditProfileAdvancedPage.ui:262
@@ -4125,7 +4125,7 @@ msgstr "Seçilen renk şemasını sil"
 #: widgets/EditProfileAppearancePage.ui:99
 #, kde-format
 msgid "Reset the selected color scheme settings to the default values"
-msgstr "Seçili renk şeması ayarlarını öntanımlı değerlere sıfırla"
+msgstr "Seçili renk şeması ayarlarını varsayılan değerlere sıfırla"
 
 #. i18n: ectx: property (text), widget (QPushButton, resetKeyBindingsButton)
 #. i18n: ectx: property (text), widget (QPushButton, resetColorSchemeButton)
@@ -4133,7 +4133,7 @@ msgstr "Seçili renk şeması ayarlarını öntanımlı değerlere sıfırla"
 #: widgets/EditProfileKeyboardPage.ui:93
 #, kde-format
 msgid "Defaults"
-msgstr "Öntanımlılar"
+msgstr "Varsayılanlar"
 
 #. i18n: ectx: property (text), widget (QLabel, label_7)
 #: widgets/EditProfileAppearancePage.ui:135
@@ -4645,7 +4645,7 @@ msgstr "Rozet Bildirme"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Default text of badge."
-msgstr "Rozetin öntanımlı metni"
+msgstr "Rozetin varsayılan metni"
 
 #. i18n: ectx: property (text), widget (QLabel, badge_label_1)
 #: widgets/EditProfileAppearancePage.ui:1188
@@ -4893,7 +4893,7 @@ msgstr "Zil Olaylarını Yok Say"
 #: widgets/EditProfileDialog.cpp:576
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
-msgstr "%1 içindeki yeni uçbirim oturumları için öntanımlı profil"
+msgstr "%1 içindeki yeni uçbirim oturumları için varsayılan profil"
 
 #: widgets/EditProfileDialog.cpp:683
 #, kde-format
@@ -4927,7 +4927,7 @@ msgstr "Yeni Al…"
 #, kde-format
 msgctxt "Default emoji font placeholder"
 msgid "System Default"
-msgstr "Sistem Öntanımlısı"
+msgstr "Sistem Varsayılansı"
 
 #: widgets/EditProfileDialog.cpp:1455
 #, kde-kuit-format
@@ -4956,7 +4956,7 @@ msgstr ""
 #: widgets/EditProfileDialog.cpp:2055
 #, kde-format
 msgid "Default for file type"
-msgstr "Dosya türü için öntanımlı"
+msgstr "Dosya türü için varsayılan"
 
 #: widgets/EditProfileDialog.cpp:2081
 #, kde-format
@@ -4984,7 +4984,7 @@ msgstr ""
 "gedit +SATIR:SÜTUN YOL\n"
 "\n"
 "Komutta YOL veya SATIR yoksa bu ayar yok sayılır\n"
-"ve dosya öntanımlı metin düzenleyicisi tarafından\n"
+"ve dosya varsayılan metin düzenleyicisi tarafından\n"
 "açılır."
 
 #: widgets/EditProfileDialog.cpp:2094
@@ -5144,7 +5144,7 @@ msgstr "Profil adı"
 #: widgets/EditProfileGeneralPage.ui:417
 #, kde-format
 msgid "Default Profile"
-msgstr "Öntanımlı Profil"
+msgstr "Varsayılan Profil"
 
 #. i18n: ectx: attribute (title), widget (QWidget, semantic)
 #: widgets/EditProfileGeneralPage.ui:461
@@ -5277,7 +5277,7 @@ msgstr "Seçili düğme bağıntıları şemasını sil"
 #: widgets/EditProfileKeyboardPage.ui:90
 #, kde-format
 msgid "Reset the selected key bindings scheme to its default values"
-msgstr "Seçili düğme bağıntıları şemasını öntanımlı değerlerine sıfırla"
+msgstr "Seçili düğme bağıntıları şemasını varsayılan değerlerine sıfırla"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab)
 #: widgets/EditProfileMousePage.ui:36
@@ -5546,7 +5546,7 @@ msgid ""
 "Some terminal applications have mouse support, this allows them to get it by "
 "default. It can be toggled on/off while running as well."
 msgstr ""
-"Kimi uçbirim uygulamalarında fare desteği vardır, bu seçenek bunu öntanımlı "
+"Kimi uçbirim uygulamalarında fare desteği vardır, bu seçenek bunu varsayılan "
 "olarak alabilmelerine izin verir. Çalışma sırasında açılabilir/kapatılabilir."
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowMouseTrackingButton)
