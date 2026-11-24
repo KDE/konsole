@@ -167,7 +167,7 @@
 >Geçmiş</title>
 
 <para
->&konsole;, kullanıcıların daha önce görüntülenen çıktıyı görüntülemesine olanak sağlamak için geçmiş kavramını kullanır. Öntanımlı olarak geri sarma açıktır ve ekranda görüntülenene ek olarak 10.000 satırlık çıktıyı kaydedecek şekilde ayarlanmıştır. </para>
+>&konsole;, kullanıcıların daha önce görüntülenen çıktıyı görüntülemesine olanak sağlamak için geçmiş kavramını kullanır. Varsayılan olarak geri sarma açıktır ve ekranda görüntülenene ek olarak 10.000 satırlık çıktıyı kaydedecek şekilde ayarlanmıştır. </para>
 <para
 >Metin satırları ekranın yukarısından sarıldıkça; sarma çubuğunu yukarı taşıyarak, fare tekerleği kullanılarak veya <keycombo action="simul"
 >&Shift;<keycap
@@ -210,7 +210,7 @@
 >&konsole;’de bir klavyeyle seçim kipi vardır. Bu kipte, geçmişte serbestçe dolanılabilir ve fare olmadan metin seçilebilir.</para>
 
 <para
->Bu kipe giriş yapıp çıkmak için klavye kısayolunu kullanın (öntanımlı olarak <keycombo action="simul"
+>Bu kipe giriş yapıp çıkmak için klavye kısayolunu kullanın (varsayılan olarak <keycombo action="simul"
 >&Ctrl;&Shift;<keycap
 >D</keycap
 ></keycombo
@@ -235,7 +235,7 @@
 <para
 >İmleci <application
 >vi</application
-> biçeminde hareket ettirmek: Bir karakter gitmek için h,j,k,l; sayfa yukarı/aşağı veya yarım sayfa yukarı/aşağı için <keycap
+> stilinde hareket ettirmek: Bir karakter gitmek için h,j,k,l; sayfa yukarı/aşağı veya yarım sayfa yukarı/aşağı için <keycap
 >Kontrol</keycap
 >+b,f,u,d.</para>
 
@@ -316,7 +316,7 @@
 ><para
 >İlk girişi bir adla doldurun. Bu, menüde görünecek addır ve bu tür bir oturum başlattığınızda <guilabel
 >Kabuk</guilabel
-> yerine öntanımlı etiket olacaktır. </para
+> yerine varsayılan etiket olacaktır. </para
 ></listitem>
 
 <listitem
@@ -332,7 +332,7 @@
 
 <listitem
 ><para
->İletişim kutusunun diğer sekmelerinde bu oturumun görünüşünü yapılandırın. Her oturum için farklı bir yazıtipi, renk şeması, $<envar
+>İletişim kutusunun diğer sekmelerinde bu oturumun görünüşünü yapılandırın. Her oturum için farklı bir yazı tipi, renk şeması, $<envar
 >TERM</envar
 > türü ve diğer birçok ayarı yapılandırabilirsiniz.</para
 ></listitem>
@@ -622,7 +622,7 @@
 >Sürükle ve bırak işlemi sırasında &LMB;’ni bırakmadan önce kısayollara basarsanız herhangi bir bağlam menüsü görünmez ve eylemler hemen yürütülür. </para>
 
 <para
->&URL;’leri öntanımlı olarak metin olarak eklemek üzere sürükleyip bırakmak için &Ctrl; düğmesini kullanmak veya bağlam menüsünü devre dışı bırakmak istiyorsanız profil ayarları iletişim kutusundaki <guilabel
+>&URL;’leri varsayılan olarak metin olarak eklemek üzere sürükleyip bırakmak için &Ctrl; düğmesini kullanmak veya bağlam menüsünü devre dışı bırakmak istiyorsanız profil ayarları iletişim kutusundaki <guilabel
 >Fare</guilabel
 > sekmesinde ilgili seçenekleri etkinleştirin. </para>
 
@@ -753,32 +753,32 @@
 ><para
 ><guilabel
 >ASCII karakterler</guilabel
-> — ASCII karakterlerini yukarıda açıklandığı gibi sözcükler halinde gruplayın. Bu seçeneğin en göze çarpan etkisi, bunun etkinleştirilmesinin programlama bitişik harflerini (bunları destekleyen yazıtipleri için) göstermesidir. Örneğin. &lt;= dizesi ⩽ olarak görüntülenebilir. </para
+> — ASCII karakterlerini yukarıda açıklandığı gibi sözcükler halinde gruplayın. Bu seçeneğin en göze çarpan etkisi, bunun etkinleştirilmesinin programlama bitişik harflerini (bunları destekleyen yazı tipleri için) göstermesidir. Örneğin. &lt;= dizisi ⩽ olarak görüntülenebilir. </para
 ></listitem>
 
 <listitem
 ><para
 ><guilabel
 >Brahmi yazısı karakterleri</guilabel
-> — Brahmi karakterlerini yukarıda açıklandığı gibi gruplandırın. Bu seçenek olmadan (yazıtipine bağlı olarak) bazı sözcükler olması gerektiği gibi bağlanmayabilir. Bu etkinleştirildiğinde Brahmi karakterleri konumlarının dışında görünebilir. Örneğin, ikinci satırdaki üçüncü karakter doğrudan birinci satırdaki üçüncü karakterin altında görünmeyebilir. </para
+> — Brahmi karakterlerini yukarıda açıklandığı gibi gruplandırın. Bu seçenek olmadan (yazı tipine bağlı olarak) bazı sözcükler olması gerektiği gibi bağlanmayabilir. Bu etkinleştirildiğinde Brahmi karakterleri konumlarının dışında görünebilir. Örneğin, ikinci satırdaki üçüncü karakter doğrudan birinci satırdaki üçüncü karakterin altında görünmeyebilir. </para
 ></listitem>
 
 <listitem
 ><para
 ><guilabel
->Yazıtipi piksel hizalama:</guilabel
+>Yazı tipi piksel hizalama:</guilabel
 > — Bu, glifleri sunarken onlara <ulink url="https://en.wikipedia.org/wiki/Font_hinting"
 >piksel hizalaması</ulink
-> uygulamaya olanak tanır. Belirli yazıtiplerini veya ekranları kullanırken okunabilirliği iyileştirmeye yardımcı olacaktır. Karakterlerin düzgün yükseklik veya genişlik ile çizilmediği bazı durumları çözmeye de yardımcı olabilir; özellikle sözcük kipi etkinken. Ayarlıysa <ulink url="https://doc.qt.io/qt-6/qfont.html#HintingPreference-enum"
+> uygulamaya olanak tanır. Belirli yazı tiplerini veya ekranları kullanırken okunabilirliği iyileştirmeye yardımcı olacaktır. Karakterlerin düzgün yükseklik veya genişlik ile çizilmediği bazı durumları çözmeye de yardımcı olabilir; özellikle sözcük kipi etkinken. Ayarlıysa <ulink url="https://doc.qt.io/qt-6/qfont.html#HintingPreference-enum"
 >tam piksel hizalama</ulink
-> kullanılır; aksi takdirde, öntanımlı hizalama düzeyine geçilir. </para
+> kullanılır; aksi takdirde, varsayılan hizalama düzeyine geçilir. </para
 ></listitem>
 
 <listitem
 ><para
 ><guilabel
 >Emoji yazısı:</guilabel
-> — Bu, Unicode Emoji karakterleri için kullanılacak yazıtipinin belirlenmesine olanak tanır. Ayarlanmazsa öntanımlı profil yazıtipi kullanılır veya bu yazıtipinde glifler eksikse sistem tarafından bazı yedek yazıtipleri kullanılabilir. </para
+> — Bu, Unicode Emoji karakterleri için kullanılacak yazı tipinin belirlenmesine olanak tanır. Ayarlanmazsa varsayılan profil yazı tipi kullanılır veya bu yazı tipinde glifler eksikse sistem tarafından bazı yedek yazı tipleri kullanılabilir. </para
 ></listitem>
 
 <listitem
@@ -837,7 +837,7 @@
 >Profili Düzenle</guilabel
 > iletişim kutusunun <guilabel
 >Gelişmiş</guilabel
-> sekmesinde yapılandırılabilir. Görüntülenen üç kip arasında geçiş ise bir klavye kısayoluyla sağlanabilir. Öntanımlı kısayol: <keycombo
+> sekmesinde yapılandırılabilir. Görüntülenen üç kip arasında geçiş ise bir klavye kısayoluyla sağlanabilir. Varsayılan kısayol: <keycombo
 >&Ctrl;&Alt;<keycap
 >\</keycap
 ></keycombo
@@ -900,13 +900,13 @@
 ><para
 ><guilabel
 >Kapsayıcı içindeyken sekmeyi renklerle kodla</guilabel
-> — Sekme renklendirmesini açar/kapatır. Öntanımlı olarak açık gelir. </para
+> — Sekme renklendirmesini açar/kapatır. Varsayılan olarak açık gelir. </para
 ></listitem>
 <listitem
 ><para
 ><guilabel
 >Kapsayıcı etiketini uçbirim alt bilgisinde göster</guilabel
-> — Alt bilgi etiketini açar/kapatır. Öntanımlı olarak açık gelir. </para
+> — Alt bilgi etiketini açar/kapatır. Varsayılan olarak açık gelir. </para
 ></listitem>
 </itemizedlist>
 </sect2>
@@ -920,7 +920,7 @@
 >Dosya</guimenu
 > menüsü ve <guibutton
 >Yeni Sekme</guibutton
-> düğmesi, kullanılabilir tüm kapsayıcıları gösteren bir alt menü sunar. Bir kapsayıcı seçmek, o kapsayıcıyı yeni bir sekmede açar ve ona geçiş yapar. Herhangi bir profil öntanımlı değerinden bağımsız olarak ana makinede bir sekme açmak için bir <guilabel
+> düğmesi, kullanılabilir tüm kapsayıcıları gösteren bir alt menü sunar. Bir kapsayıcı seçmek, o kapsayıcıyı yeni bir sekmede açar ve ona geçiş yapar. Herhangi bir profil varsayılan değerinden bağımsız olarak ana makinede bir sekme açmak için bir <guilabel
 >Makine</guilabel
 > girdisi de ayrı olarak bulunur. </para>
 </sect2>
@@ -969,7 +969,7 @@
 >Menü Çubuğunu Göster</guimenuitem
 > ögesine pencerede <mousebutton
 >sağ</mousebutton
-> tıklayarak ulaşılabilir (o pencerede vi, minicom vb. gibi tam ekran bir uygulama çalışmadığı sürece). Öntanımlı kısayol her menü ögesinin ardından listelenir. </para>
+> tıklayarak ulaşılabilir (o pencerede vi, minicom vb. gibi tam ekran bir uygulama çalışmadığı sürece). Varsayılan kısayol her menü ögesinin ardından listelenir. </para>
 <para
 >Alternatif olarak, menü çubuğunu göstermek veya gizlemek için <keycombo action="simul"
 >&Ctrl;&Shift;<keycap
@@ -999,7 +999,7 @@
 <listitem
 ><para
 ><action
->Öntanımlı profili kullanan yeni bir &konsole; penceresi açar</action>
+>Varsayılan profili kullanan yeni bir &konsole; penceresi açar</action>
 </para
 ></listitem
 ></varlistentry>
@@ -1022,10 +1022,10 @@
 <listitem
 ><para
 ><action
->Öntanımlı profili kullanan yeni bir sekme açar</action>
+>Varsayılan profili kullanan yeni bir sekme açar</action>
 <note
 ><para
->Alt menüdeki ilk profil her zaman yerleşik profil olan "Öntanımlı" olacaktır. Diğer tüm profiller aşağıda abecesel sıraya göre listelenecektir. Kullanıcı tarafından belirlenen öntanımlı profil kalın yazıtipinde gösterilir. </para
+>Alt menüdeki ilk profil her zaman yerleşik profil olan "Varsayılan" olacaktır. Diğer tüm profiller aşağıda abecesel sıraya göre listelenecektir. Kullanıcı tarafından belirlenen varsayılan profil kalın yazı tipinde gösterilir. </para
 ></note>
 </para
 ></listitem
@@ -1090,7 +1090,7 @@
 ><para
 ><action
 >Geçerli ekranı yazdırın.</action
-> Öntanımlı olarak çıktı, üzerine yazdırılan kağıdın boyutuna uyacak şekilde siyah metin rengiyle ve arka plan olmadan ölçeklendirilir. Yazdırma iletişim kutusunda bu seçenekler <guilabel
+> Varsayılan olarak çıktı, üzerine yazdırılan kağıdın boyutuna uyacak şekilde siyah metin rengiyle ve arka plan olmadan ölçeklendirilir. Yazdırma iletişim kutusunda bu seçenekler <guilabel
 >Çıktı Seçenekleri</guilabel
 > sekmesinde değiştirilebilir.</para
 ></listitem>
@@ -1109,7 +1109,7 @@
 ><para
 ><action
 >Geçerli dizinde &kde; dosya yöneticisini açar</action
->. Öntanımlı olarak bu <ulink url="help:/dolphin/index.html"
+>. Varsayılan olarak bu <ulink url="help:/dolphin/index.html"
 >&dolphin;</ulink
 >’dir. </para
 ></listitem>
@@ -1798,7 +1798,7 @@ Various search improvements
 >Sekme Yerleşimini Dosyaya Kaydet</guimenuitem
 ></menuchoice
 > kullanılarak kaydedilen yerleşim dosyasından sık kullanılan görünüm yerleşimlerinizden birini yüklemenize olanak tanır.</action
-> Öntanımlı yerleşimler (2 × 2, 2 × 1 ve 1 × 2) araç çubuğu aracılığıyla yüklenebilir. </para
+> Varsayılan yerleşimler (2 × 2, 2 × 1 ve 1 × 2) araç çubuğu aracılığıyla yüklenebilir. </para
 ></listitem>
 </varlistentry>
 
@@ -1865,7 +1865,7 @@ Various search improvements
 >Etkinlik eksikliği durumu için geçerli sekmenin izlenmesini açar/kapatır</action>
 </para
 ><para
->Öntanımlı olarak, 10 saniye boyunca herhangi bir işlem yapılmadığında oturumun sekmesinde bir bilgi simgesi görünür. Uyarıların türü <menuchoice
+>Varsayılan olarak, 10 saniye boyunca herhangi bir işlem yapılmadığında oturumun sekmesinde bir bilgi simgesi görünür. Uyarıların türü <menuchoice
 ><guimenu
 >Ayarlar</guimenu
 ><guimenuitem
@@ -1964,13 +1964,13 @@ Various search improvements
 > <guimenu
 >Görünüm</guimenu
 ><guimenuitem
->Yazıtipi Boyutunu Büyüt</guimenuitem
+>Yazı Tipi Puntosunu Büyüt</guimenuitem
 ></menuchoice
 ></term>
 <listitem
 ><para
 ><action
->Metnin yazıtipi puntosunu artırır</action
+>Metnin yazı tipi puntosunu artırır</action
 ></para
 ></listitem>
 </varlistentry>
@@ -1987,13 +1987,13 @@ Various search improvements
 > <guimenu
 >Görünüm</guimenu
 ><guimenuitem
->Yazıtipi Puntosunu Sıfırla</guimenuitem
+>Yazı Tipi Puntosunu Sıfırla</guimenuitem
 ></menuchoice
 ></term>
 <listitem
 ><para
 ><action
->Metnin yazıtipi puntosunu profil öntanımlısına sıfırlar</action
+>Metnin yazı tipi puntosunu profil varsayılanına sıfırlar</action
 ></para
 ></listitem>
 </varlistentry>
@@ -2011,13 +2011,13 @@ Various search improvements
 > <guimenu
 >Görünüm</guimenu
 ><guimenuitem
->Yazıtipi Boyutunu Küçült</guimenuitem
+>Yazı Tipi Puntosunu Küçült</guimenuitem
 ></menuchoice
 ></term>
 <listitem
 ><para
 ><action
->Metnin yazıtipi puntosunu azaltır</action
+>Metnin yazı tipi puntosunu azaltır</action
 ></para
 ></listitem>
 </varlistentry>
@@ -2511,7 +2511,7 @@ Various search improvements
 >General</guilabel
 > sayfası; menü bar görünürlüğünü, &konsole; penceresi boyutunu anımsamayı, tüm &konsole; pencerelerini tek bir süreçte çalıştırmayı, menü ivmelendiricileri etkinleştirmeyi, başlık çubuğunda pencere başlığını göstermeyi, pencere çerçevesini ve başlık çubuğunu kaldırmayı ve fare işaretçisi üzerilerine geldiğinde uçbirimlere odaklanmayı denetleyen ayarları içerir. Ayrıca harf biçimi duyarlılığını, düzenli ifade kullanımını, tüm eşleşmeleri vurgulamayı ve arama yönünü (<guilabel
 >Geriye doğru ara</guilabel
-> öntanımlıdır) de yapılandırabilirsiniz. <guilabel
+> varsayılandır) de yapılandırabilirsiniz. <guilabel
 >General</guilabel
 > sayfası, ayrıca daha önce kapatılmışlarsa <guibutton
 >Tüm "Bir Daha Sorma" İletilerini Etkinleştir</guibutton
@@ -2534,7 +2534,7 @@ Various search improvements
 > ve <guilabel
 >Bireysel sekme genişliklerini tam pencereye genişlet</guilabel
 > arasında seçim yapabilir veya <guilabel
->Kullanıcı tanımlı biçem sayfası kullan</guilabel
+>Kullanıcı tanımlı stil sayfası kullan</guilabel
 > yapılandırmasını yapabilirsiniz. <guilabel
 >Davranış</guilabel
 > sekmesinde yeni sekmelerin konumunu (<guilabel
@@ -2545,13 +2545,13 @@ Various search improvements
         <para
 >Bölünmüş başlıkların görünürlüğünü (<guilabel
 >Gerektiğinde</guilabel
-> (öntanımlı), <guilabel
+> (varsayılan), <guilabel
 >Her zaman</guilabel
 > veya <guilabel
 >Asla</guilabel
 >) ve bölünmüş görünümlerin sürükleme tutacı boyutunu (<guilabel
 >Küçük</guilabel
-> (öntanımlı), <guilabel
+> (varsayılan), <guilabel
 >Orta</guilabel
 > veya <guilabel
 >Büyük</guilabel
@@ -2791,7 +2791,7 @@ Various search improvements
 ></term>
 <listitem
 ><para
->Öntanımlı profil yerine belirtilen profili kullanarak <action
+>Varsayılan profil yerine belirtilen profili kullanarak <action
 >&konsole;’u başlat</action
 >.</para
 ></listitem>
@@ -2821,7 +2821,7 @@ Various search improvements
 ></term>
 <listitem
 ><para
->Geçerli öntanımlı profil yerine yerleşik profili kullan.</para
+>Geçerli varsayılan profil yerine yerleşik profili kullan.</para
 ></listitem>
 </varlistentry>
 
@@ -2898,7 +2898,7 @@ Various search improvements
 <member
 ><userinput
 >title:</userinput
-> Bu sekme için bir ad, boşsa veya belirtilmemişse öntanımlı sekme</member>
+> Bu sekme için bir ad, boşsa veya belirtilmemişse varsayılan sekme</member>
 <member
 ><userinput
 >workdir:</userinput
@@ -2908,7 +2908,7 @@ Various search improvements
 <member
 ><userinput
 >profile:</userinput
-> Kullanılacak olan &konsole; profili, boşsa veya belirtilmemişse öntanımlı profil kullanılır</member>
+> Kullanılacak olan &konsole; profili, boşsa veya belirtilmemişse varsayılan profil kullanılır</member>
 <member
 ><userinput
 >command:</userinput
@@ -2941,7 +2941,7 @@ Various search improvements
 >&Ctrl;&Shift;<keycap
 >F12</keycap
 ></keycombo
-> düğmelerine basıldığında (öntanımlı) ön plana getir. </para
+> düğmelerine basıldığında (varsayılan) ön plana getir. </para
 ></listitem>
 </varlistentry>
 
@@ -2969,7 +2969,7 @@ Various search improvements
 ></term>
 <listitem
 ><para
->Öntanımlı ayarı geçersiz kılarak menü çubuğunu <action
+>Varsayılan ayarı geçersiz kılarak menü çubuğunu <action
 >göster</action
 >. </para
 ></listitem>
@@ -2982,7 +2982,7 @@ Various search improvements
 ></term>
 <listitem
 ><para
->Öntanımlı ayarı geçersiz kılarak menü çubuğunu <action
+>Varsayılan ayarı geçersiz kılarak menü çubuğunu <action
 >gizle</action
 >. </para
 ></listitem>
@@ -2995,7 +2995,7 @@ Various search improvements
 ></term>
 <listitem
 ><para
->Öntanımlı ayarı geçersiz kılarak sekme çubuğunu <action
+>Varsayılan ayarı geçersiz kılarak sekme çubuğunu <action
 >göster</action
 >. </para
 ></listitem>
@@ -3008,7 +3008,7 @@ Various search improvements
 ></term>
 <listitem
 ><para
->Öntanımlı ayarı geçersiz kılarak sekme çubuğunu <action
+>Varsayılan ayarı geçersiz kılarak sekme çubuğunu <action
 >gizle</action
 >. </para
 ></listitem>
@@ -3380,7 +3380,7 @@ Boşluk+Kontrol
 <itemizedlist>
 <listitem>
 <para
->Normal Ekran arabelleği (öntanımlı): Önceki çıktı satırlarını görüntülemek için geçmişi görmenize olanak tanır; bu, genellikle komutları yürütmek için kullandığınız öntanımlı arabellektir.</para>
+>Normal Ekran arabelleği (varsayılan): Önceki çıktı satırlarını görüntülemek için geçmişi görmenize olanak tanır; bu, genellikle komutları yürütmek için kullandığınız varsayılan arabellektir.</para>
 </listitem>
 <listitem>
 <para
@@ -3436,7 +3436,7 @@ Boşluk+Kontrol
 >Sol</keycap
 >) gönderdiği kaçış dizilerini denetler.</para>
 <para
->Öntanımlı olarak &konsole;, DECCKM ile ilgili olarak <keycap
+>Varsayılan olarak &konsole;, DECCKM ile ilgili olarak <keycap
 >Baş</keycap
 > ve <keycap
 >Son</keycap
@@ -3645,18 +3645,18 @@ Boşluk+Kontrol
 
 <chapter id="tabbarstylsheet">
 <title
->Sekme Çubuğu için Biçem Sayfası Kullanımı</title>
+>Sekme Çubuğu için Stil Sayfası Kullanımı</title>
 <para
->Sekme çubuğunun öntanımlı biçem sayfası, en küçük ve büyük sekme genişliklerini ayarlar. Kullanıcı bir <filename role="extension"
+>Sekme çubuğunun varsayılan stil sayfası, en küçük ve büyük sekme genişliklerini ayarlar. Kullanıcı bir <filename role="extension"
 >.css</filename
-> dosyası oluşturabilir ve &konsole; bunu sekme çubuğu için biçem sayfası olarak kullanır. <filename role="extension"
+> dosyası oluşturabilir ve &konsole; bunu sekme çubuğu için stil sayfası olarak kullanır. <filename role="extension"
 >.css</filename
 > dosyasında onu kullanacak araç takımı <userinput
 >QTabBar::tab</userinput
 >’dır. </para>
 <para
 >Daha fazla bilgi için <ulink url="https://doc.qt.io/qt-5/stylesheet.html"
->&Qt; Biçem Sayfaları</ulink
+>&Qt; Stil Sayfaları</ulink
 > belgelendirmesini okuyun. </para>
 
 <para
@@ -3839,10 +3839,10 @@ CommonDirNames=ad1,ad2,ad3…
 
 <listitem>
 <para
->Bazı yazıtipleri, diğer uygulamalarda kullanılabilir olmasına rağmen &konsole;’de kullanılamayabilir. Bu, &konsole;’de bir hata olduğu anlamına gelmez. &konsole;, en iyi görsel sonucu sağlamak eş aralıklı yazıtiplerini gerektirir, bu nedenle &Qt;’den yalnızca eş aralıklı yazıtiplerini listelemesini ister.</para>
+>Bazı yazı tipleri, diğer uygulamalarda kullanılabilir olmasına rağmen &konsole;’de kullanılamayabilir. Bu, &konsole;’de bir hata olduğu anlamına gelmez. &konsole;, en iyi görsel sonucu sağlamak eş aralıklı yazı tiplerini gerektirir, bu nedenle &Qt;’den yalnızca eş aralıklı yazı tiplerini listelemesini ister.</para>
 
 <para
->16.08 sürümünden (Ağustos 2016) itibaren &konsole;, ekranın doğru görüntülenemeyebileceği uyarısıyla herhangi bir yazıtipinin seçilmesine izin verecek biçimde yapılandırılabilir.</para>
+>16.08 sürümünden (Ağustos 2016) itibaren &konsole;, ekranın doğru görüntülenemeyebileceği uyarısıyla herhangi bir yazı tipinin seçilmesine izin verecek biçimde yapılandırılabilir.</para>
 </listitem>
 
 <listitem
