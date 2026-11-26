@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-21 03:25+0000\n"
-"PO-Revision-Date: 2026-11-15 11:16+0100\n"
+"PO-Revision-Date: 2026-11-20 16:41+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -4741,13 +4741,13 @@ msgstr ""
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Badge font family."
-msgstr "Família de lletra del distintiu."
+msgstr "Família de lletres del distintiu."
 
 #. i18n: ectx: property (text), widget (QLabel, badge_label_2)
 #: widgets/EditProfileAppearancePage.ui:1193
 #, kde-format
 msgid "Badge font family:"
-msgstr "Família de lletra del distintiu:"
+msgstr "Família de lletres del distintiu:"
 
 #. i18n: ectx: property (text), widget (QLabel, badgeFontSizeLabel)
 #: widgets/EditProfileAppearancePage.ui:1226
@@ -6043,7 +6043,7 @@ msgstr "Busca la frase de busca actual des de dalt"
 #: widgets/KonsolePrintManager.cpp:50
 #, kde-format
 msgid "Print Shell"
-msgstr "Impressió de l'intèrpret d'ordres"
+msgstr "Imprimiu l'intèrpret d'ordres"
 
 #: widgets/RenameTabWidget.cpp:37 widgets/RenameTabWidget.cpp:40
 #, kde-format
